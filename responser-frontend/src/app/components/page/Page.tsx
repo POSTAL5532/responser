@@ -19,7 +19,7 @@ export const Page: React.FC<PropsWithChildren<PageProps>> = (props: PropsWithChi
     return (
         <div className={resultClassName}>
             <Helmet>
-                <title>Spyker{tabTitle ? `- ${tabTitle}` : ""}</title>
+                <title>Responser{tabTitle ? `- ${tabTitle}` : ""}</title>
             </Helmet>
 
             {children}

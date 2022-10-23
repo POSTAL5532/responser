@@ -17,7 +17,7 @@ export class App extends Component {
         return (
             <GlobalAppStoreContext.Provider value={this.globalAppStore}>
                 <div className="app">
-                    <AppHeader title="SPYKER"/>
+                    <AppHeader title="responser"/>
 
                     <Switch>
                         <UnauthorizedRoute path={LOGIN_PAGE_URL} exact component={LoginPage}/>
