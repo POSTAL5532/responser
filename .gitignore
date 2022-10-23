@@ -1,0 +1,12 @@
+.gradle
+.idea/
+.local/
+node_modules/
+.webpack/
+build/
+out/
+
+.env
+.env.test
+
+*.yml

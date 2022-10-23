@@ -1,0 +1,42 @@
+@import "globalsLess";
+
+.auth-page {
+  display: flex;
+  justify-content: center;
+
+  .login-form-panel {
+    width: 720px;
+    background-color: @white-color;
+    padding: 40px 68px;
+    border-radius: 8px;
+    .bigBoxShadow();
+
+    .login-header {
+      .fontMulishBold();
+      text-align: center;
+      margin-bottom: 36px;
+    }
+
+    .login-form {
+      .field-block {
+        margin-bottom: 18px;
+      }
+
+      .credentials-error {
+        margin-left: 0;
+        width: 100%;
+        display: block;
+        text-align: center;
+      }
+
+      .button {
+        width: 100%;
+
+        &:not(:last-child) {
+          margin-top: 20px;
+          margin-bottom: 18px;
+        }
+      }
+    }
+  }
+}

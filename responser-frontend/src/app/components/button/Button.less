@@ -1,0 +1,29 @@
+@import "globalsLess";
+
+.button {
+  background-color: @primary-color;
+  padding-left: 16px;
+  padding-right: 16px;
+  height: 48px;
+  .fontMulishBold();
+  font-size: 16px;
+  color: @white-color;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+
+  &:hover {
+    background-color: multiply(@primary-color, @color-multiplier);
+
+    &.outlined {
+      border: 2px solid multiply(@primary-color, @color-multiplier);
+      color: multiply(@primary-color, @color-multiplier);
+    }
+  }
+
+  &.outlined {
+    background-color: transparent;
+    border: 2px solid @primary-color;
+    color: @primary-color;
+  }
+}

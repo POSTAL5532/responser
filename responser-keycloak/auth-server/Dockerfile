@@ -1,0 +1,9 @@
+FROM jboss/keycloak
+ENV KEYCLOAK_USER=admin
+ENV KEYCLOAK_PASSWORD=admin
+ENV DB_VENDOR=postgres
+ENV DB_ADDR=responser_keycloak_db:5432
+ENV DB_DATABASE=keycloak
+ENV DB_USER=postgres
+ENV DB_PASSWORD=root
+EXPOSE 8080

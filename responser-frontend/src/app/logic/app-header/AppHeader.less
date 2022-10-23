@@ -1,0 +1,55 @@
+@import "globalsLess";
+
+.app-header {
+  display: flex;
+  background-color: #FFFFFF;
+  height: 68px;
+  align-items: center;
+  padding: 0 24px;
+  box-shadow: 0 12px 13px rgb(178 183 219 / 20%);
+
+  .header-title {
+    .fontMulishBold();
+    font-size: 26px;
+  }
+
+  .navigation {
+    margin-left: 25px;
+
+    a {
+      .fontMulishBold();
+      text-decoration: none;
+      margin-right: 10px;
+      color: @text-color-secondary;
+
+      &.active {
+        color: @text-color;
+      }
+    }
+  }
+
+  .user-block {
+    margin-left: auto;
+    display: flex;
+    cursor: pointer;
+
+    .user-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: end;
+      padding-right: 16px;
+
+      .user-full-name {
+        .fontMulishBold();
+        color: @text-color;
+        font-size: 20px;
+      }
+
+      .user-email {
+        .fontMulishRegular();
+        color: @text-color-secondary;
+      }
+    }
+  }
+}
