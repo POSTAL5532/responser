@@ -1,5 +1,8 @@
 package com.responser.backend.model;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 
 /**
@@ -9,6 +12,8 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "domains")
+@Data
+@EqualsAndHashCode(callSuper = true)
 public class Domain extends AbstractEntity {
 
     private String domain;
@@ -16,4 +21,7 @@ public class Domain extends AbstractEntity {
     private String name;
 
     private String description;
+
+    @Column(name = "has_ssl")
+    private Boolean hasSsl;
 }

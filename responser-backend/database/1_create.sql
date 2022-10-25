@@ -6,6 +6,7 @@ CREATE TABLE domains
     domain        TEXT        NOT NULL,
     name          TEXT        NOT NULL,
     description   TEXT,
+    has_ssl       boolean     NOT NULL,
     creation_date TIMESTAMP   NOT NULL,
     update_date   TIMESTAMP,
     PRIMARY KEY (id)

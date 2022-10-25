@@ -1,5 +1,8 @@
 package com.responser.backend.model;
 
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+
 import javax.persistence.*;
 
 /**
@@ -9,6 +12,8 @@ import javax.persistence.*;
  */
 @Entity
 @Table(name = "responses")
+@Data
+@EqualsAndHashCode(callSuper = true)
 public class Response extends AbstractEntity{
 
     @Column(name = "user_id")
