@@ -1,4 +1,4 @@
-package com.responser.backend.model;
+package com.responser.backend.controller.user.payload;
 
 import com.responser.backend.utils.ValidationUtils;
 import com.responser.backend.validator.EmailUniqueness;
@@ -18,7 +18,7 @@ import javax.validation.constraints.Size;
  */
 @Data
 @NoArgsConstructor
-public class UserAccountDataPayload {
+public class CreateUserProfilePayload {
 
     @NotBlank(message = "Username must be specified")
     @Size(min = 2, max = 255, message = "Username must be from 2 to 255 characters")
@@ -28,7 +28,7 @@ public class UserAccountDataPayload {
     @NotBlank(message = "Email must be specified")
     @Email(message = "Email is incorrect")
     @EmailUniqueness(message = "User with this email is already registered")
-    private String emailId;
+    private String email;
 
     @NotBlank(message = "Password must be specified")
     @Pattern(

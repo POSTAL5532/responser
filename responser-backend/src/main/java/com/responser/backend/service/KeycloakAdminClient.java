@@ -1,15 +1,16 @@
 package com.responser.backend.service;
 
 import com.responser.backend.config.KeycloakAdminClientConfig;
-import com.responser.backend.model.UserAccountDataPayload;
 import lombok.RequiredArgsConstructor;
 import org.keycloak.admin.client.Keycloak;
+import org.keycloak.admin.client.resource.UserResource;
 import org.keycloak.admin.client.resource.UsersResource;
-import org.keycloak.representations.idm.CredentialRepresentation;
 import org.keycloak.representations.idm.UserRepresentation;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
+import javax.ws.rs.core.Response;
+import java.util.List;
+import java.util.Optional;
 
 /**
  * KeycloakAdminClient
@@ -24,35 +25,25 @@ public class KeycloakAdminClient {
 
     private final KeycloakAdminClientConfig keycloakAdminClientConfig;
 
-    public void createUser(UserAccountDataPayload newUser) {
-        UserRepresentation userRepresentation = new UserRepresentation();
-        userRepresentation.setUsername(newUser.getUserName());
-        userRepresentation.setEmail(newUser.getEmailId());
-        userRepresentation.setFirstName(newUser.getFirstName());
-        userRepresentation.setLastName(newUser.getLastName());
-
-        CredentialRepresentation credential = new CredentialRepresentation();
-        credential.setTemporary(false);
-        credential.setType(CredentialRepresentation.PASSWORD);
-        credential.setValue(newUser.getPassword());
-
-        userRepresentation.setCredentials(Collections.singletonList(credential));
-
-        this.getUserResource().create(userRepresentation);
+    public Response createUser(UserRepresentation newUser) {
+        return this.getUserResource().create(newUser);
     }
 
-    public void updateUser(String userId, UserAccountDataPayload user) {
-        UserRepresentation userRepresentation = new UserRepresentation();
-        userRepresentation.setUsername(user.getUserName());
-        userRepresentation.setEmail(user.getEmailId());
-        userRepresentation.setFirstName(user.getFirstName());
-        userRepresentation.setLastName(user.getLastName());
-
-        this.getUserResource().get(userId).update(userRepresentation);
+    public void updateUser(String userId, UserRepresentation user) {
+        this.getUserResource().get(userId).update(user);
     }
 
-    public UserRepresentation getUser(String userId) {
-        return this.getUserResource().get(userId).toRepresentation();
+    public Optional<UserRepresentation> getUser(String userId) {
+        UserResource userResource = this.getUserResource().get(userId);
+
+        return userResource == null
+                ? Optional.empty()
+                : Optional.of(userResource.toRepresentation());
+    }
+
+    public Optional<UserRepresentation> getUserByUserName(String userName) {
+        List<UserRepresentation> list = getUserResource().search(userName, true);
+        return Optional.ofNullable(list.get(0));
     }
 
     public boolean userWithEmailExist(String email) {

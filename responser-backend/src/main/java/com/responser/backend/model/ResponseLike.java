@@ -1,7 +1,6 @@
 package com.responser.backend.model;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.*;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,10 +11,12 @@ import javax.persistence.Table;
  *
  * @author SIE
  */
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = true)
+@RequiredArgsConstructor
 @Entity
 @Table(name = "responses_likes")
-@Data
-@EqualsAndHashCode(callSuper = true)
 public class ResponseLike extends AbstractEntity {
 
     @Column(name = "user_id")

@@ -1,8 +1,21 @@
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
 
+CREATE TABLE users
+(
+    id             VARCHAR(36)  NOT NULL UNIQUE,
+    user_name      VARCHAR(255) NOT NULL UNIQUE,
+    email          VARCHAR(255) NOT NULL UNIQUE,
+    password       VARCHAR(255) NOT NULL,
+    first_name     VARCHAR(255) NOT NULL,
+    last_name      VARCHAR(255) NOT NULL,
+    creation_date  TIMESTAMP    NOT NULL,
+    update_date    TIMESTAMP,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE domains
 (
-    id            VARCHAR(36) NOT NULL,
+    id            VARCHAR(36) NOT NULL UNIQUE,
     domain        TEXT        NOT NULL,
     name          TEXT        NOT NULL,
     description   TEXT,
@@ -14,7 +27,7 @@ CREATE TABLE domains
 
 CREATE TABLE resources
 (
-    id            VARCHAR(36) NOT NULL,
+    id            VARCHAR(36) NOT NULL UNIQUE,
     domain_id     VARCHAR(36) NOT NULL REFERENCES domains (id) ON DELETE CASCADE,
     url           TEXT        NOT NULL,
     name          TEXT        NOT NULL,
@@ -26,8 +39,8 @@ CREATE TABLE resources
 
 CREATE TABLE responses
 (
-    id            VARCHAR(36) NOT NULL,
-    user_id       VARCHAR(36) NOT NULL,
+    id            VARCHAR(36) NOT NULL UNIQUE,
+    user_id       VARCHAR(36) NOT NULL /*REFERENCES users (id) ON DELETE CASCADE*/,
     resource_id   VARCHAR(36) NOT NULL REFERENCES resources (id) ON DELETE CASCADE,
     response_id   VARCHAR(36) REFERENCES responses (id) ON DELETE CASCADE,
     rating        SMALLINT    NOT NULL,
@@ -39,12 +52,11 @@ CREATE TABLE responses
 
 CREATE TABLE responses_likes
 (
-    id            VARCHAR(36) NOT NULL,
-    user_id       VARCHAR(36) NOT NULL,
-    response_id   VARCHAR(36),
+    id            VARCHAR(36) NOT NULL UNIQUE,
+    user_id       VARCHAR(36) NOT NULL NOT NULL /*REFERENCES users (id) ON DELETE CASCADE*/,
+    response_id   VARCHAR(36) NOT NULL REFERENCES responses (id) ON DELETE CASCADE,
     positive      BOOLEAN     NOT NULL,
     creation_date TIMESTAMP   NOT NULL,
     update_date   TIMESTAMP,
-    PRIMARY KEY (id),
-    FOREIGN KEY (response_id) REFERENCES responses (id)
+    PRIMARY KEY (id)
 );

@@ -1,14 +1,16 @@
-package com.responser.backend.controller;
+package com.responser.backend.controller.user;
 
+import com.responser.backend.controller.user.payload.CreateUserProfilePayload;
+import com.responser.backend.controller.user.payload.UpdateUserPayload;
+import com.responser.backend.controller.user.payload.UserInfoPayload;
+import com.responser.backend.converter.UserConverter;
 import com.responser.backend.model.User;
-import com.responser.backend.model.UserAccountDataPayload;
 import com.responser.backend.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import java.security.Principal;
 
@@ -24,31 +26,33 @@ public class UserController {
 
     private final UserService userService;
 
+    private final UserConverter userConverter;
+
     @PreAuthorize("permitAll()")
     @PostMapping("/register")
-    public ResponseEntity<Void> registerUser(@Valid @RequestBody UserAccountDataPayload userDTO) {
-        userService.registerUser(userDTO);
+    public ResponseEntity<Void> registerUser(@Valid @RequestBody CreateUserProfilePayload newUser) {
+        userService.registerUser(userConverter.toUser(newUser));
 
         return ResponseEntity.ok().build();
     }
 
     @PreAuthorize("isAuthenticated()")
     @PutMapping("/updatecurrent")
-    public ResponseEntity<Void> updateUser(Principal principal, @Valid @RequestBody UserAccountDataPayload userDTO) {
-        userService.updateUser(principal.getName(), userDTO);
-
+    public ResponseEntity<Void> updateUser(Principal principal, @Valid @RequestBody UpdateUserPayload user) {
+        userService.updateUser(principal.getName(), userConverter.toUser(user));
         return ResponseEntity.ok().build();
     }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/current")
-    public ResponseEntity<User> getCurrentUser(Principal principal) {
-        return ResponseEntity.ok(userService.getUser(principal.getName()));
+    public ResponseEntity<UserInfoPayload> getCurrentUser(Principal principal) {
+        User user = userService.getUser(principal.getName());
+        return ResponseEntity.ok(userConverter.toUserInfoPayload(user));
     }
 
     @PreAuthorize("permitAll()")
     @GetMapping("/debug")
-    public ResponseEntity<String> debug(HttpServletRequest request) {
+    public ResponseEntity<String> debug() {
         return ResponseEntity.ok("Users-Service debug - OK!");
     }
 }

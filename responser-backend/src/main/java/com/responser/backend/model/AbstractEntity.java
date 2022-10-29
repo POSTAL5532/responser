@@ -1,6 +1,6 @@
 package com.responser.backend.model;
 
-import lombok.Data;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -15,8 +15,11 @@ import java.time.LocalDateTime;
  *
  * @author SIE
  */
+@Getter
+@Setter
+@EqualsAndHashCode
+@RequiredArgsConstructor
 @MappedSuperclass
-@Data
 public abstract class AbstractEntity {
 
     @Id

@@ -1,5 +1,6 @@
 package com.responser.backend.validator;
 
+import com.responser.backend.service.KeycloakUserService;
 import com.responser.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 

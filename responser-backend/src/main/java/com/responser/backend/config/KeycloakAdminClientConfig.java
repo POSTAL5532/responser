@@ -27,8 +27,6 @@ public class KeycloakAdminClientConfig {
     @Value("${keycloak.realm}")
     private String realmName;
 
-    public static final String REALM = "responser";
-
     @Bean
     public Keycloak keycloak() {
         return KeycloakBuilder.builder()
