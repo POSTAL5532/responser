@@ -17,8 +17,9 @@ import javax.persistence.*;
 @Table(name = "responses")
 public class Response extends AbstractEntity{
 
-    @Column(name = "user_id")
-    private String userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @Column(name = "resource_id")
     private String resourceId;

@@ -1,6 +1,7 @@
-package com.responser.backend.controller.responses;
+package com.responser.backend.controller.responses.payload;
 
-import org.hibernate.validator.constraints.URL;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.*;
 
@@ -9,16 +10,17 @@ import javax.validation.constraints.*;
  *
  * @author SIE
  */
+@Data
+@NoArgsConstructor
 public class CreateResponsePayload {
 
     @NotBlank
-    @URL
-    private String url;
+    private String resourceId;
 
     @NotNull
     @Min(1)
     @Max(5)
-    private Integer rating;
+    private Byte rating;
 
     @NotBlank
     @Size(min = 1, max = 450)

@@ -2,6 +2,7 @@ package com.responser.backend.service;
 
 import com.responser.backend.model.Resource;
 import com.responser.backend.model.Response;
+import com.responser.backend.model.User;
 import com.responser.backend.repository.ResponseRepository;
 import com.responser.backend.utils.UrlUtils;
 import lombok.AllArgsConstructor;
@@ -23,19 +24,16 @@ public class ResponsesService {
 
     private final ResponseRepository responseRepository;
 
-    private final ResourcesService resourcesService;
+    private final UserService userService;
 
-    public List<Response> getAllForResource(String url) {
-        String formattedUrl = UrlUtils.prepareUrl(url);
-        Resource resource = resourcesService.getByUrl(formattedUrl);
-        return responseRepository.findAllByResourceId(resource.getId());
+    public List<Response> getAllForResource(String resourceId) {
+        return responseRepository.findAllByResourceId(resourceId);
     }
 
-    public void createResponse() {
-
-    }
-
-    public void updateResponse() {
-
+    @Transactional
+    public Response createResponse(Response newResponse) {
+        User referenceUser = userService.getUser(newResponse.getUser().getId());
+        newResponse.setUser(referenceUser);
+        return responseRepository.save(newResponse);
     }
 }
