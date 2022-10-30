@@ -19,6 +19,7 @@ spring:
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
       ddl-auto: none
     show-sql: 'true'
+    open-in-view: false
   database:
     driverClassName: org.postgresql.Driver
   datasource:

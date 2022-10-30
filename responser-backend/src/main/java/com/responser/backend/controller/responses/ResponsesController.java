@@ -26,13 +26,12 @@ public class ResponsesController {
     private final ResponsesService responsesService;
 
     @GetMapping
-    @PreAuthorize("permitAll()")
     public ResponseEntity<List<Response>> getResponsesForResource(@Valid @NotBlank @URL @RequestParam String url) {
         return ResponseEntity.ok(responsesService.getAllForResource(url));
     }
 
     @PostMapping
-    @PreAuthorize("permitAll()")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<String> createResponse(@Valid CreateResponsePayload newResponse, Principal principal) {
 
         return null;

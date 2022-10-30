@@ -14,5 +14,5 @@ import java.util.Optional;
 @Repository
 public interface ResourceRepository extends JpaRepository<Resource, String> {
 
-    Optional<Resource> findByDomainIdAndUrl(String domainId, String url);
+    Optional<Resource> findByUrl(String url);
 }

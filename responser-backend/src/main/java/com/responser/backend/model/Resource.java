@@ -17,12 +17,13 @@ import javax.persistence.*;
 @Table(name = "resources")
 public class Resource extends AbstractEntity {
 
-    @Column(name = "domain_id")
-    private String domainId;
-
     private String url;
 
     private String name;
 
     private String description;
+
+    @ManyToOne
+    @JoinColumn(name = "domain_id", nullable = false)
+    private Domain domain;
 }

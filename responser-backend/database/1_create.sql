@@ -29,7 +29,7 @@ CREATE TABLE resources
 (
     id            VARCHAR(36) NOT NULL UNIQUE,
     domain_id     VARCHAR(36) NOT NULL REFERENCES domains (id) ON DELETE CASCADE,
-    url           TEXT        NOT NULL,
+    url           TEXT        NOT NULL UNIQUE,
     name          TEXT        NOT NULL,
     description   TEXT,
     creation_date TIMESTAMP   NOT NULL,

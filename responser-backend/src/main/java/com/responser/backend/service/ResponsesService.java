@@ -30,4 +30,12 @@ public class ResponsesService {
         Resource resource = resourcesService.getByUrl(formattedUrl);
         return responseRepository.findAllByResourceId(resource.getId());
     }
+
+    public void createResponse() {
+
+    }
+
+    public void updateResponse() {
+
+    }
 }

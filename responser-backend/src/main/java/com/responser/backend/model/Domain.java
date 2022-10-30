@@ -3,6 +3,7 @@ package com.responser.backend.model;
 import lombok.*;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Domain
@@ -25,4 +26,7 @@ public class Domain extends AbstractEntity {
 
     @Column(name = "has_ssl")
     private Boolean hasSsl;
+
+    @OneToMany(mappedBy = "domain", fetch = FetchType.LAZY)
+    private Set<Resource> resources;
 }

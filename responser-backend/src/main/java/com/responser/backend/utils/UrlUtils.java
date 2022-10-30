@@ -25,4 +25,8 @@ public class UrlUtils {
         formattedUrl = StringUtils.removeEnd(formattedUrl, "/");
         return formattedUrl;
     }
+
+    public static boolean haveSsl(URL url) {
+        return url.getProtocol().equals("https");
+    }
 }
