@@ -34,8 +34,7 @@ public class SecurityConfig extends KeycloakWebSecurityConfigurerAdapter {
 //                .antMatchers(HttpMethod.POST, "/api/users/register").permitAll()
 //                .anyRequest()
 //                .authenticated()
-                .and()
-                .csrf().disable();
+                .and().csrf().disable().cors();
     }
 
     @Bean

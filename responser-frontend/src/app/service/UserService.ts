@@ -2,7 +2,7 @@ import {ApiClient} from "app/service/ApiClient";
 import {UserAccountDataPayload} from "app/model/UserAccountDataPayload";
 import {User} from "app/model/User";
 
-const BASE_USER_REQUEST = "/user-service/api/users"
+const BASE_USER_REQUEST = "/users"
 
 /**
  * User service.
