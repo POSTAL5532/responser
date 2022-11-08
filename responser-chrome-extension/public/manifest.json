@@ -3,10 +3,33 @@
   "description": "Chrome extensions which helps to leve the rating and responses about the web site experience.",
   "version": "1.0",
   "manifest_version": 3,
+  "permissions": [
+    "activeTab",
+    "storage"
+  ],
   "action": {
     "default_popup": "index.html",
     "default_title": "Responser"
   },
+  "background": {
+    "service_worker": "./background.js"
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://localhost:3000/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "./content.js"
+      ]
+    }
+  ],
   "icons": {
     "16": "logo192.png",
     "48": "logo192.png",

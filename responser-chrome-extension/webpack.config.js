@@ -93,6 +93,8 @@ module.exports = () => ({
         new CopyPlugin({
             patterns: [
                 path.resolve(__dirname, "public", "manifest.json"),
+                path.resolve(__dirname, "public", "content.js"),
+                path.resolve(__dirname, "public", "background.js"),
                 path.resolve(__dirname, "public", "logo192.png")
             ],
         })

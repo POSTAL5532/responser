@@ -8,7 +8,6 @@ import "styles/common.less"
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
 root.render(
-    //@ts-ignore
     <Router history={browserHistory}>
         <App/>
     </Router>

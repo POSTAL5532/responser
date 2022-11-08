@@ -22,7 +22,8 @@
         "jsx": "react",
         "baseUrl": "./src",
         "types": [
-            "node"
+            "node",
+            "chrome"
         ]
     },
     "include": [

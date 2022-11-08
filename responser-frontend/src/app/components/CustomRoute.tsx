@@ -7,17 +7,21 @@ import {LOGIN_PAGE_URL} from "app/logic/login/LoginPage";
 /**
  * Custom route builder. Create a router with condition for render or redirecting.
  */
-const CustomRoute = (canActivate: () => boolean, redirect: string) => {
+const CustomRoute = (canActivate?: () => boolean, redirect?: string) => {
     return ({component: Component, ...other}: RouteProps) => {
         return (
             <Route {...other}
-                render={
-                    (props) => {
-                        return canActivate()
-                            ? <Component {...props}/>
-                            : <Redirect to={{pathname: redirect, state: {from: props.location}}}/>
-                    }
-                }
+                   render={
+                       (props) => {
+                           if (!canActivate && !redirect) {
+                               return <Component {...props}/>;
+                           }
+
+                           return canActivate()
+                               ? <Component {...props}/>
+                               : <Redirect to={{pathname: redirect, state: {from: props.location}}}/>
+                       }
+                   }
             />
         );
     }
@@ -32,3 +36,8 @@ export const AuthorizedRoute = CustomRoute(() => TokenStore.isAccessTokenExist, 
  * Route for unauthorized scope only.
  */
 export const UnauthorizedRoute = CustomRoute(() => !TokenStore.isAccessTokenExist, MAIN_PAGE_URL);
+
+/**
+ * Route for unauthorized scope only.
+ */
+export const PermitAllRoute = CustomRoute();

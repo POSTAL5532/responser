@@ -15,10 +15,6 @@ class ApplicationProperties {
     get clientSecret(): string {
         return process.env.CLIENT_SECRET;
     }
-
-    get chromeExtensionId(): string {
-        return process.env.CHROME_EXTENSION_ID;
-    }
 }
 
 export default new ApplicationProperties();
