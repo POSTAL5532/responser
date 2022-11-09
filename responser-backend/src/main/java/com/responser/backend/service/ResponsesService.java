@@ -1,15 +1,12 @@
 package com.responser.backend.service;
 
-import com.responser.backend.model.Resource;
 import com.responser.backend.model.Response;
 import com.responser.backend.model.User;
 import com.responser.backend.repository.ResponseRepository;
-import com.responser.backend.utils.UrlUtils;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.Collections;
 import java.util.List;
 
 /**

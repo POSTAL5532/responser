@@ -28,7 +28,6 @@ public class UserController {
 
     private final UserConverter userConverter;
 
-    @PreAuthorize("permitAll()")
     @PostMapping("/register")
     public ResponseEntity<Void> registerUser(@Valid @RequestBody CreateUserProfilePayload newUser) {
         userService.registerUser(userConverter.toUser(newUser));
@@ -46,13 +45,7 @@ public class UserController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/current")
     public ResponseEntity<UserInfoPayload> getCurrentUser(Principal principal) {
-        User user = userService.getUser(principal.getName());
+        User user = userService.getUserByUserName(principal.getName());
         return ResponseEntity.ok(userConverter.toUserInfoPayload(user));
-    }
-
-    @PreAuthorize("permitAll()")
-    @GetMapping("/debug")
-    public ResponseEntity<String> debug() {
-        return ResponseEntity.ok("Users-Service debug - OK!");
     }
 }

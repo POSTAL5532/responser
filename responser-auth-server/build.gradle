@@ -29,7 +29,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation'
     implementation "org.springframework.boot:spring-boot-configuration-processor"
     implementation 'org.springframework.boot:spring-boot-starter-security'
-    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    implementation 'org.springframework.security:spring-security-oauth2-authorization-server:0.3.1'
     implementation 'org.modelmapper:modelmapper:3.1.0'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
 

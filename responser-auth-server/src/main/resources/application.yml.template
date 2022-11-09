@@ -1,5 +1,5 @@
 server:
-  port: 8080
+  port: 8081
   error:
     include-binding-errors: always
     include-message: always
@@ -31,8 +31,9 @@ spring:
   sql:
     init:
       platform: postgres
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: http://localhost:8081
+responser:
+  auth:
+    clientCredentials:
+      -
+        clientId: responser-web-client
+        clientSecret: responser-web-client-secret

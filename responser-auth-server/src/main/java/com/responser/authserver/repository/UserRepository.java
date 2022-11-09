@@ -1,6 +1,6 @@
-package com.responser.backend.repository;
+package com.responser.authserver.repository;
 
-import com.responser.backend.model.User;
+import com.responser.authserver.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +16,5 @@ public interface UserRepository extends JpaRepository<User, String> {
 
     Optional<User> findByUserName(String userName);
 
-    Boolean existsByEmail(String email);
-
-    Boolean existsByUserName(String userName);
+    Optional<User> findByEmail(String email);
 }

@@ -1,6 +1,5 @@
 package com.responser.backend.service;
 
-import com.responser.backend.controller.resource.payload.CreateResourcePayload;
 import com.responser.backend.exceptions.ResourceNotFoundException;
 import com.responser.backend.model.Domain;
 import com.responser.backend.model.Resource;
@@ -10,10 +9,7 @@ import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
-import java.net.URL;
 import java.text.MessageFormat;
-import java.util.NoSuchElementException;
 
 /**
  * ResourcesService
