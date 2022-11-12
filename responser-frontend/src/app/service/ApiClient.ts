@@ -2,8 +2,9 @@ import {TokenInfo} from "app/model/TokenInfo";
 import axios, {AxiosRequestConfig} from 'axios';
 import ApplicationPropertiesService from "app/service/ApplicationProperties";
 import TokenStore from "app/service/authorization/LocalTokenStorageService";
-import {navigateToLoginPage} from "app/logic/login/LoginPage";
 import AuthorizationService from "app/service/authorization/AuthorizationService";
+import {navigateTo} from "../utils/NavigationUtils";
+import {WELCOME_PAGE_URL} from "../logic/welcome-page/WelcomePage";
 
 const refreshTokenIfNeeded = (): Promise<TokenInfo> => {
     if (!AuthorizationService.refreshAccessTokenPromise) {
@@ -11,7 +12,7 @@ const refreshTokenIfNeeded = (): Promise<TokenInfo> => {
             .then(TokenStore.setToken)
             .catch(() => {
                 TokenStore.removeAllTokens();
-                navigateToLoginPage();
+                navigateTo(WELCOME_PAGE_URL)
             });
     }
 

@@ -20,6 +20,7 @@ import org.springframework.security.oauth2.server.authorization.client.Registere
 import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
 import org.springframework.security.oauth2.server.authorization.config.TokenSettings;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -40,11 +41,15 @@ public class AuthServerConfig {
 
     private final AuthServerApplicationProperties authServerApplicationProperties;
 
+    private final CorsConfigurationSource corsConfigurationSource;
+
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain authServerSecurityFilterChain(HttpSecurity http) throws Exception {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
-        return http.formLogin().and().build();
+        return http.formLogin()
+                .and().cors().configurationSource(corsConfigurationSource)
+                .and().build();
     }
 
     @Bean
@@ -59,7 +64,7 @@ public class AuthServerConfig {
                     .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                     .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                     .scope(OidcScopes.OPENID)
-                    .redirectUri("https://spring.io/auth")
+                    .redirectUri(cc.getRedirectUri())
                     .tokenSettings(
                             TokenSettings.builder()
                                     .accessTokenTimeToLive(Duration.ofMinutes(10))

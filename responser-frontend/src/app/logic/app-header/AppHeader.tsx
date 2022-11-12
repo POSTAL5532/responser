@@ -1,10 +1,7 @@
 import React, {useContext} from "react";
 import {observer} from "mobx-react";
-import {NavLink } from "react-router-dom";
 import {Button} from "app/components/button/Button";
 import {GlobalAppStore, GlobalAppStoreContext} from "app/GlobalAppStore";
-import {MAIN_PAGE_URL} from "app/logic/main-page/MainPage";
-import {FACEBOOK_PAGE_URL} from "app/logic/facebook-page/FacebookPage";
 import "app/logic/app-header/AppHeader.less";
 
 type PageHeaderProps = {
@@ -26,13 +23,6 @@ export const AppHeader: React.FC<PageHeaderProps> = observer((props: PageHeaderP
     return (
         <div className="app-header">
             <div className="header-title">{props.title}</div>
-            {
-                context.isAuthorized &&
-                <div className="navigation">
-                    <NavLink to={MAIN_PAGE_URL}>Main page</NavLink>
-                    <NavLink to={FACEBOOK_PAGE_URL}>Facebook</NavLink>
-                </div>
-            }
             {
                 context.isAuthorized &&
                 <div className="user-block">

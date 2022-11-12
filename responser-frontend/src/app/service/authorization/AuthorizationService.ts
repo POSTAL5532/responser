@@ -1,10 +1,7 @@
 import axios, {AxiosRequestConfig} from "axios";
-import {LoginPayload} from "app/service/authorization/LoginPayload";
 import ApplicationProperties from "app/service/ApplicationProperties";
 import {TokenInfo} from "app/model/TokenInfo";
 import TokenStore from "app/service/authorization/LocalTokenStorageService";
-
-const AUTH_TOKEN_PATH = "/token";
 
 /**
  * Authorization service.
@@ -21,13 +18,8 @@ class AuthorizationService {
      */
     refreshAccessTokenPromise: Promise<TokenInfo> = null;
 
-    /**
-     * Returns access token from auth-server.
-     *
-     * @param loginPayload
-     */
-    getAccessToken = (loginPayload: LoginPayload): Promise<TokenInfo> => {
-        this.accessTokenPromise = this.accessTokenRequest(loginPayload)
+    exchangeAuthCode = (authCode: string): Promise<TokenInfo> => {
+        this.accessTokenPromise = this.exchangeAuthCodeRequest(authCode)
             .finally(() => {
                 this.accessTokenPromise = null;
             });
@@ -47,21 +39,28 @@ class AuthorizationService {
         return this.refreshAccessTokenPromise;
     }
 
-    private accessTokenRequest = async (loginPayload: LoginPayload): Promise<TokenInfo> => {
-        const payload = `username=${loginPayload.email}&password=${loginPayload.password}&grant_type=password`;
-        const data = await this.executePostRequest(AUTH_TOKEN_PATH, payload);
+    requestLoginPage = (): void => {
+        const url = new URL(ApplicationProperties.authLoginPageUrl);
+        url.searchParams.set("response_type", "code");
+        url.searchParams.set("client_id", ApplicationProperties.clientId);
+        url.searchParams.set("redirect_uri", ApplicationProperties.authRedirectUri);
+        window.location.href = url.toString();
+    }
+
+    private exchangeAuthCodeRequest = async (code: string): Promise<TokenInfo> => {
+        const payload = `redirect_uri=${ApplicationProperties.authRedirectUri}&code=${code}&grant_type=authorization_code`;
+        const data = await this.executePostRequest(ApplicationProperties.authTokenUrl, payload);
         return TokenInfo.deserialize(data);
     }
 
     private refreshAccessTokenRequest = async (): Promise<TokenInfo> => {
         const payload = `refresh_token=${TokenStore.refreshToken}&grant_type=refresh_token`;
-        const data = await this.executePostRequest(AUTH_TOKEN_PATH, payload);
+        const data = await this.executePostRequest(ApplicationProperties.authTokenUrl, payload);
         return TokenInfo.deserialize(data);
     }
 
     private executePostRequest = async (url: string, body: string): Promise<any> => {
         const options: AxiosRequestConfig = {
-            baseURL: ApplicationProperties.authServerUrl,
             headers: {
                 "Content-type": "application/x-www-form-urlencoded",
                 ...TokenStore.basicAuthorizationHeader

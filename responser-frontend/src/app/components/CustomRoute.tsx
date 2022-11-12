@@ -2,7 +2,7 @@ import {MAIN_PAGE_URL} from "app/logic/main-page/MainPage";
 import React from "react";
 import {Redirect, Route, RouteProps} from "react-router";
 import TokenStore from "app/service/authorization/LocalTokenStorageService";
-import {LOGIN_PAGE_URL} from "app/logic/login/LoginPage";
+import {WELCOME_PAGE_URL} from "../logic/welcome-page/WelcomePage";
 
 /**
  * Custom route builder. Create a router with condition for render or redirecting.
@@ -30,7 +30,7 @@ const CustomRoute = (canActivate?: () => boolean, redirect?: string) => {
 /**
  * Route for authorized scope only.
  */
-export const AuthorizedRoute = CustomRoute(() => TokenStore.isAccessTokenExist, LOGIN_PAGE_URL);
+export const AuthorizedRoute = CustomRoute(() => TokenStore.isAccessTokenExist, WELCOME_PAGE_URL);
 
 /**
  * Route for unauthorized scope only.

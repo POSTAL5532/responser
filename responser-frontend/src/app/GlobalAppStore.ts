@@ -17,7 +17,7 @@ export class GlobalAppStore {
 
         if (LocalTokenStorageService.isAccessTokenExist && LocalTokenStorageService.isRefreshTokenExist) {
             this.isLoading = true;
-            this.updateCurrentUser().finally(() => this.isLoading = false);
+            this.refreshCurrentUser().finally(() => this.isLoading = false);
         }
     }
 
@@ -27,7 +27,7 @@ export class GlobalAppStore {
     }
 
     @action
-    updateCurrentUser = async () => {
+    refreshCurrentUser = async () => {
         this.currentUser = await this.userService.getCurrentUser();
     }
 

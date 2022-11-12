@@ -2,7 +2,6 @@ import React from "react";
 import {observer} from "mobx-react";
 import {Formik, Form, FieldValidator} from "formik";
 import * as Yup from "yup";
-import {navigateToLoginPage} from "app/logic/login/LoginPage";
 import {UserAccountDataPayload} from "app/model/UserAccountDataPayload";
 import {FIRST_NAME_VALIDATION_SCHEMA, FirstNameField} from "app/logic/sign-up/FirstNameField";
 import {LAST_NAME_VALIDATION_SCHEMA, LastNameField} from "app/logic/sign-up/LastNameField";
@@ -13,6 +12,7 @@ import {EMAIL_VALIDATION_SCHEMA, EmailField} from "app/logic/sign-up/EmailField"
 import {FieldBlock} from "app/components/form/FieldBlock";
 import {Label} from "app/components/form/Label";
 import {FieldMessage} from "app/components/form/FieldMessage";
+import AuthorizationService from "../../service/authorization/AuthorizationService";
 
 type SignUpFormProps = {
     signUpPayload: UserAccountDataPayload,
@@ -85,7 +85,7 @@ const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) => {
                     </div>
 
                     <Button type="submit">Signup</Button>
-                    <Button type="button" outlined={true} onClick={navigateToLoginPage}>Login</Button>
+                    <Button type="button" outlined={true} onClick={AuthorizationService.requestLoginPage}>Login</Button>
                 </Form>
             </Formik>
         </div>

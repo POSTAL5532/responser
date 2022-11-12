@@ -4,8 +4,16 @@ class ApplicationProperties {
         return process.env.API_URL;
     }
 
-    get authServerUrl(): string {
-        return process.env.AUTH_API_URL;
+    get authLoginPageUrl(): string {
+        return process.env.AUTH_LOGIN_PAGE_URL;
+    }
+
+    get authTokenUrl(): string {
+        return process.env.AUTH_TOKEN_URL;
+    }
+
+    get authRedirectUri(): string {
+        return process.env.AUTH_REDIRECT_URI;
     }
 
     get clientId(): string {

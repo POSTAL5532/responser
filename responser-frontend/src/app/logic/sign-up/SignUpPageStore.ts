@@ -1,8 +1,8 @@
 import {makeAutoObservable} from "mobx";
 import {UserAccountDataPayload} from "app/model/UserAccountDataPayload";
 import {UserService} from "app/service/UserService";
-import {browserHistory} from "router";
-import {LOGIN_PAGE_URL} from "app/logic/login/LoginPage";
+import {WELCOME_PAGE_URL} from "../welcome-page/WelcomePage";
+import {navigateTo} from "../../utils/NavigationUtils";
 
 /**
  * Sign up page store.
@@ -28,7 +28,7 @@ export class SignUpPageStore {
     signUp = (): Promise<void> => {
         return this.userService.signUp(this.signUpPayload)
             .then(() => {
-                browserHistory.push(LOGIN_PAGE_URL)
+                navigateTo(WELCOME_PAGE_URL)
             })
             .catch(error => {
                 console.log("ERROR", error)
