@@ -7,23 +7,9 @@ export class App extends Component {
 
     apiClient: ApiClient = new ApiClient();
 
-    /*componentDidMount() {
-        console.log("Popup ID:", chrome.runtime.id)
-        chrome.runtime.sendMessage(
-            {
-                type: "ACCESS_TOKEN",
-                token: "asdasdasdadadsa",
-                expiredIn: "05/09/1991"
-            },
-            response => {
-                if (!response.success) {
-                    console.log('error sending message', response);
-                    return response;
-                }
-                console.log('Sucesss ::: ', response.message)
-            }
-        );
-    }*/
+    componentDidMount() {
+        console.log(Date.now().toString())
+    }
 
     render(): React.ReactNode {
         let responses = [];

@@ -19,6 +19,8 @@ public class AuthServerApplicationProperties {
 
     private List<ClientCredentials> clientCredentials;
 
+    private List<String> allowedOrigins;
+
     @Getter
     @Setter
     @ToString

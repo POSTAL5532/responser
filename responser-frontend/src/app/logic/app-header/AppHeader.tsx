@@ -2,6 +2,7 @@ import React, {useContext} from "react";
 import {observer} from "mobx-react";
 import {Button} from "app/components/button/Button";
 import {GlobalAppStore, GlobalAppStoreContext} from "app/GlobalAppStore";
+import {useExtensionService} from "../../service/extension/ExtensionService";
 import "app/logic/app-header/AppHeader.less";
 
 type PageHeaderProps = {
@@ -10,9 +11,11 @@ type PageHeaderProps = {
 
 export const AppHeader: React.FC<PageHeaderProps> = observer((props: PageHeaderProps) => {
     const context = useContext<GlobalAppStore>(GlobalAppStoreContext);
+    const extensionService = useExtensionService();
 
     const onLogOut = () => {
         context.logoutAndClearCurrentUser();
+        extensionService.removeToken();
         window.location.reload();
     }
 
