@@ -1,3 +1,3 @@
-import {createBrowserHistory} from "history";
+import {createMemoryHistory} from "history";
 
-export const browserHistory = createBrowserHistory();
+export const appRouteHistory = createMemoryHistory();

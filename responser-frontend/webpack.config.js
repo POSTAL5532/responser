@@ -15,7 +15,8 @@ module.exports = () => ({
         port: 3000,
         compress: true,
         hot: true,
-        historyApiFallback: true
+        historyApiFallback: true,
+        host: "127.0.0.1"
     },
 
     module: {

@@ -1,10 +1,13 @@
 import React from "react";
-import {User} from "app/model/User";
 import {action, computed, makeAutoObservable} from "mobx";
-import LocalTokenStorageService from "app/service/authorization/LocalTokenStorageService";
-import {UserService} from "app/service/UserService";
+import {UserService} from "./service/UserService";
+import {User} from "./model/User";
+import LocalTokenStorageService from "./service/authorization/LocalTokenStorageService";
+import {ExtensionService} from "./service/extension/ExtensionService";
 
 export class GlobalAppStore {
+
+    extensionService: ExtensionService = new ExtensionService();
 
     userService: UserService = new UserService();
 
@@ -14,11 +17,20 @@ export class GlobalAppStore {
 
     constructor() {
         makeAutoObservable(this);
+        this.init();
+    }
+
+    private init = async () => {
+        this.isLoading = true;
+
+        const tokenInfoResponse = await this.extensionService.getToken();
+        LocalTokenStorageService.setTokenInfo(tokenInfoResponse.data);
 
         if (LocalTokenStorageService.isAccessTokenExist && LocalTokenStorageService.isRefreshTokenExist) {
-            this.isLoading = true;
-            this.updateCurrentUser().finally(() => this.isLoading = false);
+            await this.updateCurrentUser();
         }
+
+        this.isLoading = false;
     }
 
     @computed

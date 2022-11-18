@@ -4,8 +4,8 @@ class ApplicationProperties {
         return process.env.API_URL;
     }
 
-    get authServerUrl(): string {
-        return process.env.AUTH_API_URL;
+    get tokenApiUrl(): string {
+        return process.env.TOKEN_API_URL;
     }
 
     get clientId(): string {
@@ -14,6 +14,14 @@ class ApplicationProperties {
 
     get clientSecret(): string {
         return process.env.CLIENT_SECRET;
+    }
+
+    get loginExtensionPage(): string {
+        return process.env.LOGIN_EXTENSION_PAGE;
+    }
+
+    get logoutExtensionPage(): string {
+        return process.env.LOGOUT_EXTENSION_PAGE;
     }
 }
 

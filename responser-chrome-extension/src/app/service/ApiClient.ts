@@ -1,37 +1,36 @@
-// import {TokenInfo} from "app/model/TokenInfo";
+import {TokenInfo} from "app/model/TokenInfo";
 import axios, {AxiosRequestConfig} from 'axios';
-import ApplicationPropertiesService from "app/service/ApplicationProperties";
-import TokenStore from "app/service/authorization/LocalTokenStorageService";
-// import {navigateToLoginPage} from "app/logic/login/LoginPage";
-// import AuthorizationService from "app/service/authorization/AuthorizationService";
+import LocalTokenStorageService from "./authorization/LocalTokenStorageService";
+import AuthorizationService from "./authorization/AuthorizationService";
+import ApplicationProperties from "./ApplicationProperties";
 
-/*const refreshTokenIfNeeded = (): Promise<TokenInfo> => {
+const refreshTokenIfNeeded = (): Promise<TokenInfo> => {
     if (!AuthorizationService.refreshAccessTokenPromise) {
         AuthorizationService.refreshAccessToken()
-            .then(TokenStore.setToken)
+            .then(tokenInfo => {
+                LocalTokenStorageService.setTokenInfo(tokenInfo);
+            })
             .catch(() => {
-                TokenStore.removeAllTokens();
-                navigateToLoginPage();
+                LocalTokenStorageService.removeAllTokens();
+                window.location.reload()
             });
     }
 
     return AuthorizationService.refreshAccessTokenPromise;
-}*/
+}
 
-/*const errorInterceptor = (error: any): Promise<any> => {
+const errorInterceptor = (error: any): Promise<any> => {
     const {status} = error.response;
 
-    console.error(`The server responded with a status code ${status}`);
+    console.error(`[ApiClient]: The server responded with a status code ${status}`);
 
-    if (status === 401 &&
-        error.config &&
-        error.config.repeatableRequest !== false) {
+    if (status === 401 && error.config && error.config.repeatableRequest !== false) {
         return refreshTokenIfNeeded()
             .then(() => {
                 error.config.repeatableRequest = false;
                 error.config.headers = {
                     ...error.config.headers,
-                    ...TokenStore.authorizationHeader
+                    ...LocalTokenStorageService.authorizationHeader
                 };
 
                 return axios.request(error.config);
@@ -41,7 +40,7 @@ import TokenStore from "app/service/authorization/LocalTokenStorageService";
     return Promise.reject(error);
 }
 
-axios.interceptors.response.use(undefined, errorInterceptor);*/
+axios.interceptors.response.use(undefined, errorInterceptor);
 
 /**
  * Api client. Executes api requests to gateway.
@@ -51,12 +50,12 @@ export class ApiClient {
     getRequestConfig = (requestOptions: AxiosRequestConfig = {}): AxiosRequestConfig => {
         let headers: any = {"Content-type": "application/json"}
 
-        if (TokenStore.isAccessTokenExist) {
-            headers = {...headers, ...TokenStore.authorizationHeader}
+        if (LocalTokenStorageService.isAccessTokenExist) {
+            headers = {...headers, ...LocalTokenStorageService.authorizationHeader}
         }
 
         return {
-            baseURL: ApplicationPropertiesService.gatewayApiUrl,
+            baseURL: ApplicationProperties.gatewayApiUrl,
             headers: {
                 ...headers
             },

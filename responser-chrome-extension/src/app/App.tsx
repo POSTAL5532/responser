@@ -1,51 +1,35 @@
 import React, {Component} from 'react';
-import {ApiClient} from "./service/ApiClient";
+import {Redirect, Switch} from "react-router";
+import ResponsesPage, {RESPONSES_PAGE_URL} from "./logic/responses/ResponsesPage";
+import {PermitAllRoute} from "./components/CustomRoute";
+import {GlobalAppStore, GlobalAppStoreContext} from "./GlobalAppStore";
+import {AppHeader} from "./logic/app-header/AppHeader";
 import "app/App.less";
 
 
 export class App extends Component {
 
-    apiClient: ApiClient = new ApiClient();
+    globalAppStore: GlobalAppStore = new GlobalAppStore();
 
     componentDidMount() {
         console.log(Date.now().toString())
     }
 
     render(): React.ReactNode {
-        let responses = [];
-
-        for (let i = 0; i < 10; i++) {
-            responses.push(<Response key={i}/>);
-        }
-
         return (
-            <div className="app">
-                <div className="header">
-                    <div className="domain">
-                        <div className="name">some-domain.com</div>
-                        <div className="description">Some domain description</div>
-                    </div>
-                    <div className="resource">
-                        <div className="name">Som name of resource</div>
-                    </div>
+            <GlobalAppStoreContext.Provider value={this.globalAppStore}>
+                <div className="app">
+                    <AppHeader/>
+
+                    <Switch>
+                        <PermitAllRoute path={RESPONSES_PAGE_URL} exact component={ResponsesPage}/>
+
+                        <Redirect from="*" to={RESPONSES_PAGE_URL}/>
+                    </Switch>
                 </div>
-                <div className="responses">
-                    {responses}
-                </div>
-            </div>
+            </GlobalAppStoreContext.Provider>
         );
     }
-}
-
-const Response: React.FC = () => {
-    return (
-        <div className="response">
-            <div className="user-name">Some User</div>
-            <div className="rating">***</div>
-            <div className="text">Som respoooonse of this resource</div>
-            <div className="published">05-09-1991</div>
-        </div>
-    );
 }
 
 export default App;

@@ -3,11 +3,12 @@ import {Redirect, Switch} from "react-router";
 import WelcomePage, {WELCOME_PAGE_URL} from "./logic/welcome-page/WelcomePage";
 import {AUTH_CODE_PAGE_URL, AuthCodePage} from "./logic/auth-code-page/AuthCodePage";
 import {GlobalAppStore, GlobalAppStoreContext} from "./GlobalAppStore";
-import {AppHeader} from "./logic/app-header/AppHeader";
-import {AuthorizedRoute, UnauthorizedRoute} from "./components/CustomRoute";
+import AppHeader from "./logic/app-header/AppHeader";
+import {AuthorizedRoute, PermitAllRoute, UnauthorizedRoute} from "./components/CustomRoute";
 import {SIGN_UP_PAGE_URL, SignUpPage} from "./logic/sign-up/SignUpPage";
 import {MAIN_PAGE_URL, MainPage} from "./logic/main-page/MainPage";
 import LoginExtension, {LOGIN_EXTENSION} from "./logic/login-extension/LoginExtension";
+import LogoutExtension, {LOGOUT_EXTENSION} from "./logic/logout-extension/LogoutExtension";
 import "app/App.less";
 
 export class App extends Component {
@@ -27,6 +28,7 @@ export class App extends Component {
 
                         <AuthorizedRoute path={MAIN_PAGE_URL} exact component={MainPage}/>
                         <AuthorizedRoute path={LOGIN_EXTENSION} exact component={LoginExtension}/>
+                        <PermitAllRoute path={LOGOUT_EXTENSION} exact component={LogoutExtension}/>
 
                         <Redirect from="*" to={MAIN_PAGE_URL}/>
                     </Switch>

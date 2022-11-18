@@ -9,7 +9,7 @@ type PageHeaderProps = {
     title: string;
 }
 
-export const AppHeader: React.FC<PageHeaderProps> = observer((props: PageHeaderProps) => {
+const AppHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {
     const context = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const extensionService = useExtensionService();
 
@@ -40,4 +40,6 @@ export const AppHeader: React.FC<PageHeaderProps> = observer((props: PageHeaderP
             }
         </div>
     );
-});
+}
+
+export default observer(AppHeader);
