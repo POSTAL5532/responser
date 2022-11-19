@@ -2,6 +2,7 @@ import axios, {AxiosRequestConfig} from "axios";
 import ApplicationProperties from "app/service/ApplicationProperties";
 import {TokenInfo} from "app/model/TokenInfo";
 import TokenStore from "app/service/authorization/LocalTokenStorageService";
+import {navigateTo} from "../../utils/NavigationUtils";
 
 /**
  * Authorization service.
@@ -44,7 +45,7 @@ class AuthorizationService {
         url.searchParams.set("response_type", "code");
         url.searchParams.set("client_id", ApplicationProperties.clientId);
         url.searchParams.set("redirect_uri", ApplicationProperties.authRedirectUri);
-        window.location.href = url.toString();
+        navigateTo(url.toString(), true);
     }
 
     private exchangeAuthCodeRequest = async (code: string): Promise<TokenInfo> => {

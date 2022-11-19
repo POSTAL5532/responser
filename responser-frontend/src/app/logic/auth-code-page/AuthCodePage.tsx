@@ -4,6 +4,7 @@ import AuthorizationService from "../../service/authorization/AuthorizationServi
 import LocalTokenStorageService from "../../service/authorization/LocalTokenStorageService";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {useExtensionService} from "../../service/extension/ExtensionService";
+import {reloadPage} from "../../utils/NavigationUtils";
 
 export const AUTH_CODE_PAGE_URL = "/auth-code";
 
@@ -20,11 +21,11 @@ export const AuthCodePage: React.FC = () => {
                     .catch(reason => {
                         console.warn(reason);
                     })
-                    .finally(() => window.location.reload())
+                    .finally(() => reloadPage())
             })
             .catch(() => {
                 context.logoutAndClearCurrentUser();
-                window.location.reload()
+                reloadPage();
             })
     }, []);
 

@@ -1,9 +1,10 @@
 import React, {useContext} from "react";
 import {observer} from "mobx-react";
 import {Button} from "app/components/button/Button";
-import {GlobalAppStore, GlobalAppStoreContext} from "app/GlobalAppStore";
 import {useExtensionService} from "../../service/extension/ExtensionService";
-import "app/logic/app-header/AppHeader.less";
+import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
+import "./AppHeader.less";
+import {reloadPage} from "../../utils/NavigationUtils";
 
 type PageHeaderProps = {
     title: string;
@@ -11,12 +12,13 @@ type PageHeaderProps = {
 
 const AppHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {
     const context = useContext<GlobalAppStore>(GlobalAppStoreContext);
+    console.log("HEADER", context.currentUser)
     const extensionService = useExtensionService();
 
     const onLogOut = () => {
         context.logoutAndClearCurrentUser();
         extensionService.removeToken();
-        window.location.reload();
+        reloadPage();
     }
 
     const onUserInfoClick = () => {
@@ -27,7 +29,7 @@ const AppHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {
         <div className="app-header">
             <div className="header-title">{props.title}</div>
             {
-                context.isAuthorized &&
+                context.currentUser &&
                 <div className="user-block">
                     <div className="user-info" onClick={onUserInfoClick}>
                         <span className="user-full-name">

@@ -3,6 +3,7 @@ import axios, {AxiosRequestConfig} from 'axios';
 import LocalTokenStorageService from "./authorization/LocalTokenStorageService";
 import AuthorizationService from "./authorization/AuthorizationService";
 import ApplicationProperties from "./ApplicationProperties";
+import {reloadPage} from "../utils/NavigationUtils";
 
 const refreshTokenIfNeeded = (): Promise<TokenInfo> => {
     if (!AuthorizationService.refreshAccessTokenPromise) {
@@ -12,7 +13,7 @@ const refreshTokenIfNeeded = (): Promise<TokenInfo> => {
             })
             .catch(() => {
                 LocalTokenStorageService.removeAllTokens();
-                window.location.reload()
+                reloadPage();
             });
     }
 

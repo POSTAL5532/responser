@@ -1,9 +1,13 @@
 import {browserHistory} from "router";
 
-export const navigateTo = (path: string) => {
-    if (!path || !path.startsWith("/")) {
-        throw Error(`Bad navigate path: ${path}`);
+export const navigateTo = (url: string, native: boolean = false) => {
+    if (native) {
+        window.location.href = url;
+    } else {
+        browserHistory.push(url);
     }
+}
 
-    browserHistory.push(path);
+export const reloadPage = () => {
+    window.location.reload();
 }

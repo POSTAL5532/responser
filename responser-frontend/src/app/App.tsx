@@ -6,7 +6,7 @@ import {GlobalAppStore, GlobalAppStoreContext} from "./GlobalAppStore";
 import AppHeader from "./logic/app-header/AppHeader";
 import {AuthorizedRoute, PermitAllRoute, UnauthorizedRoute} from "./components/CustomRoute";
 import {SIGN_UP_PAGE_URL, SignUpPage} from "./logic/sign-up/SignUpPage";
-import {MAIN_PAGE_URL, MainPage} from "./logic/main-page/MainPage";
+import MainPage, {MAIN_PAGE_URL} from "./logic/main-page/MainPage";
 import LoginExtension, {LOGIN_EXTENSION} from "./logic/login-extension/LoginExtension";
 import LogoutExtension, {LOGOUT_EXTENSION} from "./logic/logout-extension/LogoutExtension";
 import "app/App.less";

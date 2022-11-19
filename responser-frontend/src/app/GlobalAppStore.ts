@@ -1,6 +1,6 @@
 import React from "react";
 import {User} from "app/model/User";
-import {action, computed, makeAutoObservable} from "mobx";
+import {action, computed, makeAutoObservable, runInAction} from "mobx";
 import LocalTokenStorageService from "app/service/authorization/LocalTokenStorageService";
 import {UserService} from "app/service/UserService";
 
@@ -26,9 +26,9 @@ export class GlobalAppStore {
         return !!this.currentUser;
     }
 
-    @action
     refreshCurrentUser = async () => {
-        this.currentUser = await this.userService.getCurrentUser();
+        const user = await this.userService.getCurrentUser();
+        runInAction(() => this.currentUser = user);
     }
 
     @action
