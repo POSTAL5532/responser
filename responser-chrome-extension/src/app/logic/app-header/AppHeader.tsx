@@ -2,8 +2,9 @@ import React, {useContext} from "react";
 import {observer} from "mobx-react";
 import {Button} from "../../components/button/Button";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
-import "./AppHeader.less";
 import {useExtensionService} from "../../service/extension/ExtensionService";
+import {User} from "../../model/User";
+import "./AppHeader.less";
 
 export const AppHeader: React.FC = observer(() => {
     const context = useContext<GlobalAppStore>(GlobalAppStoreContext);
@@ -26,17 +27,31 @@ export const AppHeader: React.FC = observer(() => {
             <div className="header-title">Responser</div>
             {
                 context.isAuthorized
-                    ? <div className="user-block">
-                        <div className="user-info" onClick={onUserInfoClick}>
-                        <span className="user-full-name">
-                            {context.currentUser.firstName} {context.currentUser.lastName}
-                        </span>
-                            <span className="user-email">{context.currentUser.email}</span>
-                        </div>
-                        <Button outlined={true} onClick={onLogOut}>Logout</Button>
-                    </div>
-                    : <Button outlined={true} onClick={onLoginClick}>Login</Button>
+                    ? <UserInfo user={context.currentUser} onLogOutClick={onLogOut} onUserInfoClick={onUserInfoClick}/>
+                    : <Button className="logout-button" outlined={true} onClick={onLoginClick}>Login</Button>
             }
         </div>
     );
 });
+
+type UserInfoProps = {
+    user: User;
+    onUserInfoClick: () => void;
+    onLogOutClick: () => void;
+}
+
+const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
+    const {user, onUserInfoClick, onLogOutClick} = props;
+
+    return (
+        <div className="user-block">
+            <div className="user-info" onClick={onUserInfoClick}>
+                        <span className="user-full-name">
+                            {user.firstName} {user.lastName}
+                        </span>
+                <span className="user-email">{user.email}</span>
+            </div>
+            <Button outlined={true} onClick={onLogOutClick}>Logout</Button>
+        </div>
+    );
+}
