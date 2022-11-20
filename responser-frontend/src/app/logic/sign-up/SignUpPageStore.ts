@@ -31,7 +31,6 @@ export class SignUpPageStore {
                 navigateTo(WELCOME_PAGE_URL)
             })
             .catch(error => {
-                console.log("ERROR", error)
                 this.signUpErrors = error.response.data.errors.map((e: any) => e.defaultMessage)
             });
     }

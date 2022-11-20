@@ -2,8 +2,6 @@ package com.responser.backend.controller.errorhandling;
 
 import com.responser.backend.controller.payload.ApiError;
 import com.responser.backend.controller.payload.ApiErrorType;
-import com.responser.backend.controller.payload.ApiResponse;
-import com.responser.backend.controller.payload.ApiResponseStatus;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +22,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({NoSuchElementException.class})
     public ResponseEntity<Object> handleNoSuchElementException(NoSuchElementException ex, WebRequest request) {
-        ApiResponse<ApiError> response = new ApiResponse<>(
-                ApiResponseStatus.ERROR,
-                new ApiError(ex.getMessage(), "Entity not found", ApiErrorType.ENTITY_NOT_FOUND)
-        );
+        ApiError response = new ApiError(ex.getMessage(), "Entity not found", ApiErrorType.ENTITY_NOT_FOUND);
         return handleExceptionInternal(ex, response, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
     }
 }

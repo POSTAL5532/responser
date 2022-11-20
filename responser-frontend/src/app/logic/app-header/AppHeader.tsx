@@ -12,7 +12,6 @@ type PageHeaderProps = {
 
 const AppHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {
     const context = useContext<GlobalAppStore>(GlobalAppStoreContext);
-    console.log("HEADER", context.currentUser)
     const extensionService = useExtensionService();
 
     const onLogOut = () => {

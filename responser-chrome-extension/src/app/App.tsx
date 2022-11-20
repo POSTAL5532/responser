@@ -11,10 +11,6 @@ export class App extends Component {
 
     globalAppStore: GlobalAppStore = new GlobalAppStore();
 
-    componentDidMount() {
-        console.log(Date.now().toString())
-    }
-
     render(): React.ReactNode {
         return (
             <GlobalAppStoreContext.Provider value={this.globalAppStore}>

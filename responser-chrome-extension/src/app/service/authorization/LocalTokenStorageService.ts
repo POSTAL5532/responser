@@ -15,9 +15,11 @@ class LocalTokenStorageService {
         return this.tokenInfo;
     }
 
-    setTokenInfo = (tokenInfo: TokenInfo) => {
+    setTokenInfo = (tokenInfo: TokenInfo, setBackgroundToken: boolean = false) => {
         this.tokenInfo = tokenInfo;
-        this.extensionService.setToken(tokenInfo);
+        if (setBackgroundToken) {
+            this.extensionService.setToken(tokenInfo);
+        }
     }
 
     get accessToken(): string {

@@ -36,7 +36,6 @@ const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) => {
     const {onFinish, signUpPayload, signUpErrors} = props;
 
     const onSubmit = () => {
-        console.log("SUBMIT", JSON.stringify(signUpPayload));
         onFinish();
     }
 

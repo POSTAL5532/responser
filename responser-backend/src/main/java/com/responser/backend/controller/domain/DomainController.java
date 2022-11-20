@@ -3,6 +3,7 @@ package com.responser.backend.controller.domain;
 import com.responser.backend.controller.domain.payload.CreateDomainPayload;
 import com.responser.backend.controller.domain.payload.DomainPayload;
 import com.responser.backend.converter.DomainConverter;
+import com.responser.backend.model.Domain;
 import com.responser.backend.service.DomainService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -33,8 +34,8 @@ public class DomainController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> createDomain(@Valid @NotNull @RequestBody CreateDomainPayload newDomain) {
-        domainService.createDomain(domainConverter.toDomain(newDomain));
-        return ResponseEntity.ok().build();
+    public ResponseEntity<DomainPayload> createDomain(@Valid @NotNull @RequestBody CreateDomainPayload newDomain) {
+        Domain createdDomain = domainService.createDomain(domainConverter.toDomain(newDomain));
+        return ResponseEntity.ok(domainConverter.toDomainPayload(createdDomain));
     }
 }

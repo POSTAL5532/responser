@@ -4,12 +4,13 @@ import LocalTokenStorageService from "./authorization/LocalTokenStorageService";
 import AuthorizationService from "./authorization/AuthorizationService";
 import ApplicationProperties from "./ApplicationProperties";
 import {reloadPage} from "../utils/NavigationUtils";
+import {ApiError} from "../model/ApiError";
 
 const refreshTokenIfNeeded = (): Promise<TokenInfo> => {
     if (!AuthorizationService.refreshAccessTokenPromise) {
         AuthorizationService.refreshAccessToken()
             .then(tokenInfo => {
-                LocalTokenStorageService.setTokenInfo(tokenInfo);
+                LocalTokenStorageService.setTokenInfo(tokenInfo, true);
             })
             .catch(() => {
                 LocalTokenStorageService.removeAllTokens();
@@ -21,7 +22,7 @@ const refreshTokenIfNeeded = (): Promise<TokenInfo> => {
 }
 
 const errorInterceptor = (error: any): Promise<any> => {
-    const {status} = error.response;
+    const {response: {status, data}} = error;
 
     console.error(`[ApiClient]: The server responded with a status code ${status}`);
 
@@ -36,6 +37,8 @@ const errorInterceptor = (error: any): Promise<any> => {
 
                 return axios.request(error.config);
             });
+    } else if (data?.apiError) {
+        return Promise.reject(data as ApiError);
     }
 
     return Promise.reject(error);

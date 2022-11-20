@@ -9,15 +9,22 @@ import lombok.NoArgsConstructor;
  *
  * @author SIE
  */
-@AllArgsConstructor
 @NoArgsConstructor
 @Data
 public class ApiError {
+
+    private Boolean apiError = true;
 
     private String message;
 
     private String clientFriendlyMessage;
 
-    private ApiErrorType type;
+    private ApiErrorType errorType;
+
+    public ApiError(String message, String clientFriendlyMessage, ApiErrorType errorType) {
+        this.message = message;
+        this.clientFriendlyMessage = clientFriendlyMessage;
+        this.errorType = errorType;
+    }
 }
 
