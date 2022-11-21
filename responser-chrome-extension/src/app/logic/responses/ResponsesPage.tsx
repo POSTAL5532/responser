@@ -12,7 +12,7 @@ const ResponsesPage: React.FC = () => {
     const {domain, resource, responses, init} = responsesPageStore;
 
     useEffect(() => {
-        init("https://gidonline.io/film/robot-po-imeni-chappi")
+        init();
     }, []);
 
     return (
@@ -66,7 +66,7 @@ type ResponseCardProps = {
 }
 
 const ResponseCard: React.FC<ResponseCardProps> = (props: ResponseCardProps) => {
-    const {response: {user, rating, text, creationDate, updateDate}} = props;
+    const {response: {user, rating, text, creationDate}} = props;
 
     return (
         <div className="response">

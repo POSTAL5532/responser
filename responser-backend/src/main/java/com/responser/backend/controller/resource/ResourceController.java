@@ -33,7 +33,7 @@ public class ResourceController {
     }
 
     @PostMapping
-    public ResponseEntity<ResourcePayload> createResource(@RequestBody CreateResourcePayload newResourcePayload) {
+    public ResponseEntity<ResourcePayload> createResource(@Valid @RequestBody CreateResourcePayload newResourcePayload) {
         Resource newResource = resourceConverter.toResource(newResourcePayload);
         Resource createdResource = resourcesService.createResource(newResource);
         return ResponseEntity.ok(resourceConverter.toResourcePayload(createdResource));

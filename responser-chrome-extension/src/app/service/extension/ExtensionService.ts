@@ -1,8 +1,8 @@
 import {useState} from "react";
 import {ExtensionMessage, ExtensionMessageType, ExtensionResponse} from "./ExtensionDataTypes";
 import {TokenInfo} from "../../model/TokenInfo";
-import LocalTokenStorageService from "../authorization/LocalTokenStorageService";
 import ApplicationProperties from "../ApplicationProperties";
+import {PageInfo} from "../../model/PageInfo";
 
 export class ExtensionService {
 
@@ -17,8 +17,19 @@ export class ExtensionService {
     }
 
     removeToken = (): Promise<ExtensionResponse> => {
-        const message = new ExtensionMessage<TokenInfo>(ExtensionMessageType.REMOVE_TOKEN);
+        const message = new ExtensionMessage(ExtensionMessageType.REMOVE_TOKEN);
         return this.sendMessage(message);
+    }
+
+    getCurrentPageInfo = async (): Promise<ExtensionResponse<PageInfo>> => {
+        const message = new ExtensionMessage(ExtensionMessageType.GET_CURRENT_PAGE_INFO);
+        let data;
+        try {
+            data = await this.sendMessage(message);
+        }catch (error) {
+            console.error(error)
+        }
+        return data;
     }
 
     openLoginPage = (): Promise<ExtensionResponse> => {

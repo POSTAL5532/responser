@@ -10,14 +10,20 @@ import {ResourceService} from "../../service/ResourceService";
 import {ApiErrorType} from "../../model/ApiError";
 import {CreateDomainPayload} from "../../model/CreateDomainPayload";
 import {CreateResourcePayload} from "../../model/CreateResourcePayload";
+import {ExtensionService} from "../../service/extension/ExtensionService";
+import {PageInfo} from "../../model/PageInfo";
 
 export class ResponsesPageStore extends LoadingStore {
+
+    extensionService: ExtensionService = new ExtensionService();
 
     domainService: DomainService = new DomainService();
 
     resourceService: ResourceService = new ResourceService();
 
     responseService: ResponseService = new ResponseService();
+
+    currentPageInfo: PageInfo;
 
     domain: Domain;
 
@@ -30,42 +36,41 @@ export class ResponsesPageStore extends LoadingStore {
         makeAutoObservable(this);
     }
 
-    init = async (url: string) => {
-        await this.initDomain(url);
-        await this.initResource(url);
-        await this.loadResponses(this.resource.id);
+    init = async () => {
+        this.currentPageInfo = (await this.extensionService.getCurrentPageInfo()).data;
+        await this.initDomain();
+        await this.initResource();
+        await this.loadResponses();
     }
 
-    initDomain = async (url: string) => {
+    initDomain = async () => {
+        const {url} = this.currentPageInfo;
+
         try {
             this.domain = await this.domainService.getDomainByUrl(url);
         } catch (error: any) {
             if (error.errorType === ApiErrorType.ENTITY_NOT_FOUND) {
-                const newDomainPayload = new CreateDomainPayload(url, `test dom name ${Date.now().toString()}`);
+                const newDomainPayload = new CreateDomainPayload(url, "NO_DESCRIPTION");
                 this.domain = await this.domainService.createDomain(newDomainPayload);
             }
         }
     }
 
-    initResource = async (url: string) => {
+    initResource = async () => {
+        const {url, description, title} = this.currentPageInfo;
+
         try {
             this.resource = await this.resourceService.getResourceByUrl(url);
         } catch (error: any) {
             if (error.errorType === ApiErrorType.ENTITY_NOT_FOUND) {
-                const testttt = Date.now().toString();
-                const newResourcePayload = new CreateResourcePayload(
-                    this.domain.id,
-                    url,
-                    `test res name ${testttt}`,
-                    `test res description ${testttt}`
-                );
+                const newResourcePayload = new CreateResourcePayload(this.domain.id, url, title, description);
                 this.resource = await this.resourceService.createResource(newResourcePayload);
             }
         }
     }
 
-    loadResponses = async (resourceId: string) => {
-        this.responses = await this.responseService.getResponses(resourceId);
+    loadResponses = async () => {
+        this.responses = await this.responseService.getResponses(this.resource.id);
     }
 }
 

@@ -1,9 +1,3 @@
-chrome.storage.local.onChanged.addListener((changes) => {
-    console.log("STORAGE CHANGED!")
-    console.log("CHANGES:", changes)
-    console.log("\n")
-})
-
 chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => {
     console.debug("Background listener [external]", sender, request);
 
@@ -11,17 +5,17 @@ chrome.runtime.onMessageExternal.addListener((request, sender, sendResponse) => 
         case "SET_TOKEN":
             setTokens(request.data)
                 .then(() => sendResponse({success: true, message: "Tokens successfully stored"}))
-                .catch((cause) => sendResponse({success: false, message: cause}));
+                .catch(cause => sendResponse({success: false, message: cause}));
             break;
         case "REMOVE_TOKEN":
             removeTokens()
                 .then(() => sendResponse({success: true, message: "Tokens successfully removed"}))
-                .catch((cause) => sendResponse({success: false, message: cause}));
+                .catch(cause => sendResponse({success: false, message: cause}));
             break;
         case "GET_TOKEN":
             getTokens()
-                .then((tokenData) => sendResponse({success: true, data: tokenData}))
-                .catch((cause) => sendResponse({success: false, message: cause}));
+                .then(tokenData => sendResponse({success: true, data: tokenData}))
+                .catch(cause => sendResponse({success: false, message: cause}));
             break;
         default:
             sendResponse({success: false, message: "Invalid action type"});
@@ -38,17 +32,22 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         case "SET_TOKEN":
             setTokens(request.data)
                 .then(() => sendResponse({success: true, message: "Tokens successfully stored"}))
-                .catch((cause) => sendResponse({success: false, message: cause}));
+                .catch(cause => sendResponse({success: false, message: cause}));
             break;
         case "GET_TOKEN":
             getTokens()
-                .then((tokenData) => sendResponse({success: true, data: tokenData}))
-                .catch((cause) => sendResponse({success: false, message: cause}));
+                .then(tokenData => sendResponse({success: true, data: tokenData}))
+                .catch(cause => sendResponse({success: false, message: cause}));
             break;
         case "OPEN_EXTERNAL_PAGE":
             openExternalPage(request.data)
                 .then(() => sendResponse({success: true}))
-                .catch((cause) => sendResponse({success: false, message: cause}));
+                .catch(cause => sendResponse({success: false, message: cause}));
+            break;
+        case "GET_CURRENT_PAGE_INFO":
+            sendMessageToContent(request.type)
+                .then(pageInfo => sendResponse({success: true, data: pageInfo.data}))
+                .catch(cause => sendResponse({success: false, message: cause}))
             break;
         default:
             sendResponse({success: false, message: "Invalid action type"});
@@ -57,6 +56,12 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
     return true;
 });
+
+const sendMessageToContent = async (message) => {
+    let queryOptions = {active: true};
+    let tab = (await chrome.tabs.query(queryOptions))[0];
+    return chrome.tabs.sendMessage(tab.id, message);
+}
 
 const getTokens = async () => {
     return await chrome.storage.local.get({

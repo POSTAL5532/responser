@@ -3,6 +3,7 @@ export enum ExtensionMessageType {
     REMOVE_TOKEN = "REMOVE_TOKEN",
     GET_TOKEN = "GET_TOKEN",
     OPEN_EXTERNAL_PAGE = "OPEN_EXTERNAL_PAGE",
+    GET_CURRENT_PAGE_INFO = "GET_CURRENT_PAGE_INFO",
 }
 
 export class ExtensionMessage<T = any> {
