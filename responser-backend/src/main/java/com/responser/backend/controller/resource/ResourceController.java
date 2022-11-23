@@ -5,6 +5,7 @@ import com.responser.backend.controller.resource.payload.ResourcePayload;
 import com.responser.backend.converter.ResourceConverter;
 import com.responser.backend.model.Resource;
 import com.responser.backend.service.ResourcesService;
+import com.responser.backend.utils.UrlUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,8 @@ public class ResourceController {
 
     @GetMapping
     public ResponseEntity<ResourcePayload> getResourceByUrl(@Valid @NotBlank @RequestParam String url) {
-        ResourcePayload resourcePayload = resourceConverter.toResourcePayload(resourcesService.getByUrl(url));
+        String preparedUrl = UrlUtils.prepareUrl(url);
+        ResourcePayload resourcePayload = resourceConverter.toResourcePayload(resourcesService.getByUrl(preparedUrl));
         return ResponseEntity.ok(resourcePayload);
     }
 

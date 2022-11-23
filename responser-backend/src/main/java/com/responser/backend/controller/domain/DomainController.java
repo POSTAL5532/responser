@@ -5,6 +5,7 @@ import com.responser.backend.controller.domain.payload.DomainPayload;
 import com.responser.backend.converter.DomainConverter;
 import com.responser.backend.model.Domain;
 import com.responser.backend.service.DomainService;
+import com.responser.backend.utils.UrlUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,8 @@ public class DomainController {
 
     @GetMapping
     public ResponseEntity<DomainPayload> getDomainByUrl(@Valid @NotBlank @RequestParam String url) {
-        DomainPayload domainPayload = domainConverter.toDomainPayload(domainService.getByUrl(url));
+        String preparedUrl = UrlUtils.prepareUrl(url);
+        DomainPayload domainPayload = domainConverter.toDomainPayload(domainService.getByUrl(preparedUrl));
         return ResponseEntity.ok(domainPayload);
     }
 

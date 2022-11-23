@@ -17,7 +17,7 @@ import java.net.URL;
 public class DomainConverter {
 
     public Domain toDomain(CreateDomainPayload domainPayload) {
-        URL url = UrlUtils.convertToURL(domainPayload.getUrl());
+        URL url = UrlUtils.convertToURL(UrlUtils.prepareUrl(domainPayload.getUrl()));
 
         Domain domain = new Domain();
         domain.setDomain(url.getHost());

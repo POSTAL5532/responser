@@ -4,6 +4,7 @@ import com.responser.backend.controller.resource.payload.CreateResourcePayload;
 import com.responser.backend.controller.resource.payload.ResourcePayload;
 import com.responser.backend.model.Domain;
 import com.responser.backend.model.Resource;
+import com.responser.backend.utils.UrlUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class ResourceConverter {
 
     public Resource toResource(CreateResourcePayload createResourcePayload) {
         Resource resource = new Resource();
-        resource.setUrl(createResourcePayload.getUrl());
+        resource.setUrl(UrlUtils.prepareUrl(createResourcePayload.getUrl()));
         resource.setName(createResourcePayload.getName());
         resource.setDescription(createResourcePayload.getDescription());
 
