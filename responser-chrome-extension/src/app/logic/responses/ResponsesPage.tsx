@@ -3,13 +3,13 @@ import {observer} from "mobx-react";
 import {useResponsesPageStore} from "./ResponsesPageStore";
 import {Response} from "../../model/Response";
 import {Domain} from "../../model/Domain";
-import {Resource} from "../../model/Resource";
+import "./ResponsesPage.less"
 
 export const RESPONSES_PAGE_URL = "/responses"
 
 const ResponsesPage: React.FC = () => {
     const responsesPageStore = useResponsesPageStore();
-    const {domain, resource, responses, init} = responsesPageStore;
+    const {domain, responses, init} = responsesPageStore;
 
     useEffect(() => {
         init();
@@ -19,7 +19,6 @@ const ResponsesPage: React.FC = () => {
         <div className="responses-page">
             <div className="header">
                 {domain ? <DomainCard domain={domain}/> : "LOADING..."}
-                {resource ? <ResourceCard resource={resource}/> : "LOADING..."}
             </div>
             <div className="responses">
                 {responses.map(response => <ResponseCard response={response}/>)}
@@ -37,22 +36,7 @@ type DomainCardProps = {
 const DomainCard: React.FC<DomainCardProps> = (props: DomainCardProps) => {
 
     return (
-        <div className="domain">
-            <div className="domain">{props.domain.domain}</div>
-        </div>
-    );
-}
-
-type ResourceCardProps = {
-    resource: Resource;
-}
-
-const ResourceCard: React.FC<ResourceCardProps> = (props: ResourceCardProps) => {
-    return (
-        <div className="resource">
-            <div className="page">Page:</div>
-            <div className="description">{props.resource.description}</div>
-        </div>
+        <div className="domain">{props.domain.domain}</div>
     );
 }
 
