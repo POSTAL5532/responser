@@ -1,4 +1,4 @@
-// console.log("IM HERE")
+console.log("Injected")
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.debug("Content listener [external]", sender, request);

@@ -35,13 +35,10 @@ type DomainCardProps = {
 }
 
 const DomainCard: React.FC<DomainCardProps> = (props: DomainCardProps) => {
-    const {domain: {domain, name, description}} = props;
 
     return (
         <div className="domain">
-            <div className="name">{name}</div>
-            <div className="domain">{domain}</div>
-            <div className="description">{description}</div>
+            <div className="domain">{props.domain.domain}</div>
         </div>
     );
 }
@@ -51,12 +48,10 @@ type ResourceCardProps = {
 }
 
 const ResourceCard: React.FC<ResourceCardProps> = (props: ResourceCardProps) => {
-    const {resource: {name, description}} = props;
-
     return (
         <div className="resource">
-            <div className="name">{name}</div>
-            <div className="description">{description}</div>
+            <div className="page">Page:</div>
+            <div className="description">{props.resource.description}</div>
         </div>
     );
 }
