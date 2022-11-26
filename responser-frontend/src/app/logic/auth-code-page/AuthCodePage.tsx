@@ -19,7 +19,7 @@ export const AuthCodePage: React.FC = () => {
                 LocalTokenStorageService.setToken(tokenInfo);
                 extensionService.setToken(tokenInfo)
                     .catch(reason => {
-                        console.warn(reason);
+                        console.error(reason);
                     })
                     .finally(() => reloadPage())
             })

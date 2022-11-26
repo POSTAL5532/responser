@@ -1,8 +1,8 @@
 import React, {useEffect} from "react";
 import {observer} from "mobx-react";
 import {useResponsesPageStore} from "./ResponsesPageStore";
-import {Response} from "../../model/Response";
 import {Domain} from "../../model/Domain";
+import ResponsesList from "./ResponsesList";
 import "./ResponsesPage.less"
 
 export const RESPONSES_PAGE_URL = "/responses"
@@ -20,9 +20,7 @@ const ResponsesPage: React.FC = () => {
             <div className="header">
                 {domain ? <DomainCard domain={domain}/> : "LOADING..."}
             </div>
-            <div className="responses">
-                {responses.map(response => <ResponseCard response={response}/>)}
-            </div>
+            <ResponsesList responses={responses}/>
         </div>
     );
 }
@@ -33,26 +31,6 @@ type DomainCardProps = {
     domain: Domain;
 }
 
-const DomainCard: React.FC<DomainCardProps> = (props: DomainCardProps) => {
-
-    return (
-        <div className="domain">{props.domain.domain}</div>
-    );
-}
-
-type ResponseCardProps = {
-    response: Response;
-}
-
-const ResponseCard: React.FC<ResponseCardProps> = (props: ResponseCardProps) => {
-    const {response: {user, rating, text, creationDate}} = props;
-
-    return (
-        <div className="response">
-            <div className="user-name">{user.firstName} {user.lastName}</div>
-            <div className="rating">{rating}</div>
-            <div className="text">{text}</div>
-            <div className="published">{creationDate.toString()}</div>
-        </div>
-    );
-}
+const DomainCard: React.FC<DomainCardProps> = (props: DomainCardProps) => (
+    <div className="domain">{props.domain.domain}</div>
+);

@@ -6,7 +6,7 @@ plugins {
 
 group = 'com.responser'
 version = '0.0.1'
-sourceCompatibility = '11'
+sourceCompatibility = '17'
 
 configurations {
     compileOnly {

@@ -11,10 +11,6 @@ class LocalTokenStorageService {
 
     private extensionService: ExtensionService = new ExtensionService();
 
-    getTokenInfo = () => {
-        return this.tokenInfo;
-    }
-
     setTokenInfo = (tokenInfo: TokenInfo, setBackgroundToken: boolean = false) => {
         this.tokenInfo = tokenInfo;
         if (setBackgroundToken) {

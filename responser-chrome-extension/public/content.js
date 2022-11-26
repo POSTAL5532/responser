@@ -1,7 +1,7 @@
 console.log("Injected")
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    console.debug("Content listener [external]", sender, request);
+    console.debug("Content listener [content]", sender, request);
 
     switch (request.type) {
         case "GET_CURRENT_PAGE_INFO":

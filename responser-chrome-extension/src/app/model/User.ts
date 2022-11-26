@@ -1,6 +1,7 @@
 import moment, {Moment} from "moment";
 
 export class User {
+
     id: string;
 
     userName: string;

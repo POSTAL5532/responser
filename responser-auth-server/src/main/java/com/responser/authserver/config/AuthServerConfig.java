@@ -65,12 +65,10 @@ public class AuthServerConfig {
                     .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                     .scope(OidcScopes.OPENID)
                     .redirectUri(cc.getRedirectUri())
-                    .tokenSettings(
-                            TokenSettings.builder()
-                                    .accessTokenTimeToLive(Duration.ofMinutes(10))
-                                    .refreshTokenTimeToLive(Duration.ofMinutes(20))
-                                    .build()
-                    )
+                    .tokenSettings(TokenSettings.builder()
+                            .accessTokenTimeToLive(Duration.ofMinutes(10))
+                            .refreshTokenTimeToLive(Duration.ofMinutes(20))
+                            .build())
                     .build();
             clients.add(webClient);
         });
@@ -94,10 +92,7 @@ public class AuthServerConfig {
         KeyPair keyPair = generateRsaKey();
         RSAPublicKey publicKey = (RSAPublicKey) keyPair.getPublic();
         RSAPrivateKey privateKey = (RSAPrivateKey) keyPair.getPrivate();
-        return new RSAKey.Builder(publicKey)
-                .privateKey(privateKey)
-                .keyID(UUID.randomUUID().toString())
-                .build();
+        return new RSAKey.Builder(publicKey).privateKey(privateKey).keyID(UUID.randomUUID().toString()).build();
     }
 
     private static KeyPair generateRsaKey() throws NoSuchAlgorithmException {

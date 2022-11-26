@@ -44,12 +44,6 @@ export class GlobalAppStore {
     }
 
     @action
-    logoutAndClearCurrentUser = () => {
-        LocalTokenStorageService.removeAllTokens();
-        this.clearCurrentUser();
-    }
-
-    @action
     clearCurrentUser = () => {
         this.currentUser = null;
     }

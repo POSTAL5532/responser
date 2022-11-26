@@ -50,6 +50,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 .then(tokenData => sendResponse({success: true, data: tokenData}))
                 .catch(cause => sendResponse({success: false, message: cause}));
             break;
+        case "REMOVE_TOKEN":
+            removeTokens()
+                .then(() => sendResponse({success: true, message: "Tokens successfully removed"}))
+                .catch(cause => sendResponse({success: false, message: cause}));
+            break;
         case "OPEN_EXTERNAL_PAGE":
             openExternalPage(request.data)
                 .then(() => sendResponse({success: true}))
