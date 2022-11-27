@@ -9,18 +9,21 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
+import org.springframework.security.config.annotation.web.configurers.oauth2.server.resource.OAuth2ResourceServerConfigurer;
 import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
 import org.springframework.security.oauth2.core.oidc.OidcScopes;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
 import org.springframework.security.oauth2.server.authorization.client.InMemoryRegisteredClientRepository;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClient;
 import org.springframework.security.oauth2.server.authorization.client.RegisteredClientRepository;
-import org.springframework.security.oauth2.server.authorization.config.ProviderSettings;
-import org.springframework.security.oauth2.server.authorization.config.TokenSettings;
+import org.springframework.security.oauth2.server.authorization.config.annotation.web.configuration.OAuth2AuthorizationServerConfiguration;
+import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
+import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
+import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.security.KeyPair;
 import java.security.KeyPairGenerator;
@@ -39,16 +42,20 @@ import java.util.*;
 @Configuration
 public class AuthServerConfig {
 
-    private final AuthServerApplicationProperties authServerApplicationProperties;
+    private final CORSCustomizer corsCustomizer;
 
-    private final CorsConfigurationSource corsConfigurationSource;
+    private final AuthServerApplicationProperties authServerApplicationProperties;
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
     public SecurityFilterChain authServerSecurityFilterChain(HttpSecurity http) throws Exception {
         OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
-        return http.formLogin()
-                .and().cors().configurationSource(corsConfigurationSource)
+        corsCustomizer.corsCustomizer(http);
+
+        return http
+                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+                .formLogin()
+                .and().getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(Customizer.withDefaults())
                 .and().build();
     }
 
@@ -60,14 +67,17 @@ public class AuthServerConfig {
             RegisteredClient webClient = RegisteredClient.withId(UUID.randomUUID().toString())
                     .clientId(cc.getClientId())
                     .clientSecret(cc.getClientSecret())
+                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                     .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                     .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                    .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
                     .scope(OidcScopes.OPENID)
                     .redirectUri(cc.getRedirectUri())
                     .tokenSettings(TokenSettings.builder()
-                            .accessTokenTimeToLive(Duration.ofMinutes(10))
-                            .refreshTokenTimeToLive(Duration.ofMinutes(20))
+                            // TODO: access_token expires like refresh_token instead access_token_lifetime
+                            // TODO: use properties for lifetime configuration
+                            .accessTokenTimeToLive(Duration.ofHours(12))
+                            .refreshTokenTimeToLive(Duration.ofHours(12))
                             .build())
                     .build();
             clients.add(webClient);
@@ -77,8 +87,13 @@ public class AuthServerConfig {
     }
 
     @Bean
-    public ProviderSettings providerSettings() {
-        return ProviderSettings.builder().build();
+    public AuthorizationServerSettings authorizationServerSettings() {
+        return AuthorizationServerSettings.builder().build();
+    }
+
+    @Bean
+    public JwtDecoder jwtDecoder(JWKSource<SecurityContext> jwkSource) {
+        return OAuth2AuthorizationServerConfiguration.jwtDecoder(jwkSource);
     }
 
     @Bean

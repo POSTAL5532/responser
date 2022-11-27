@@ -4,11 +4,11 @@ import com.responser.backend.exceptions.DomainNotFoundException;
 import com.responser.backend.model.Domain;
 import com.responser.backend.repository.DomainRepository;
 import com.responser.backend.utils.UrlUtils;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.EntityNotFoundException;
 import java.net.URL;
 import java.text.MessageFormat;
 

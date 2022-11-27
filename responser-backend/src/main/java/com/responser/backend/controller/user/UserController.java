@@ -6,12 +6,12 @@ import com.responser.backend.controller.user.payload.UserInfoPayload;
 import com.responser.backend.converter.UserConverter;
 import com.responser.backend.model.User;
 import com.responser.backend.service.UserService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.security.Principal;
 
 /**

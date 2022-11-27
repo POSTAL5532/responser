@@ -3,7 +3,7 @@ package com.responser.backend.controller.responses.payload;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.*;
+import jakarta.validation.constraints.*;
 
 /**
  * CreateResponsePayload
