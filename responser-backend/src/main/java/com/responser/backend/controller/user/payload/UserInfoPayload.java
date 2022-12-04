@@ -16,6 +16,8 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class UserInfoPayload {
 
+    private String id;
+
     private String userName;
 
     private String email;

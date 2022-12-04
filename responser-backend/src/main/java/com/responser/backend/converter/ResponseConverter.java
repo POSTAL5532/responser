@@ -19,6 +19,8 @@ import java.util.stream.Collectors;
 @Service
 public class ResponseConverter {
 
+    private final UserConverter userConverter;
+
     public Response toResponse(String responseId, ResponseDataPayload responsePayload, String userId) {
         User fakeUser = new User();
         fakeUser.setId(userId);
@@ -41,7 +43,7 @@ public class ResponseConverter {
         return ResponsePayload.builder()
                 .id(response.getId())
                 .resourceId(response.getResourceId())
-                .user(response.getUser())
+                .user(userConverter.toUserInfoPayload(response.getUser()))
                 .text(response.getText())
                 .rating(response.getRating())
                 .creationDate(response.getCreationDate())

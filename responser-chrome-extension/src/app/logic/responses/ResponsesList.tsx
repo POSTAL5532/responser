@@ -39,7 +39,7 @@ const ResponseCard: React.FC<ResponseCardProps> = (props: ResponseCardProps) => 
 
     return (
         <div className={className}>
-            <div className="user-name">{user.firstName} {user.lastName}</div>
+            <div className="user-name">{user.firstName} {user.lastName} {isCurrentUserResponse ? "(you)" : null}</div>
             <div className="rating-container"><Rating value={rating} readonly={true}/></div>
             <div className="text">{text}</div>
             <div className="published">{creationDate.toString()}</div>

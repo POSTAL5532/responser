@@ -1,6 +1,6 @@
 package com.responser.backend.controller.responses.payload;
 
-import com.responser.backend.model.User;
+import com.responser.backend.controller.user.payload.UserInfoPayload;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -21,7 +21,7 @@ public class ResponsePayload {
 
     private String id;
 
-    private User user;
+    private UserInfoPayload user;
 
     private String resourceId;
 
