@@ -1,6 +1,6 @@
 import {ApiClient} from "./ApiClient";
 import {Response} from "../model/Response";
-import {CreateResponsePayload} from "../model/CreateResponsePayload";
+import {ResponseData} from "../model/ResponseData";
 
 const BASE_RESPONSES_URL = "/responses";
 
@@ -17,8 +17,18 @@ export class ResponseService {
         return data.map((el: any) => Response.deserialize(el));
     }
 
-    createResponse = async (payload: CreateResponsePayload): Promise<Response> => {
+    getResponse = async (responseId: string): Promise<Response> => {
+        const data = await this.client.executeGetRequest(`${BASE_RESPONSES_URL}/${responseId}`);
+        return Response.deserialize(data);
+    }
+
+    createResponse = async (payload: ResponseData): Promise<Response> => {
         const createdResponse = await this.client.executePostRequest(BASE_RESPONSES_URL, payload);
+        return Response.deserialize(createdResponse);
+    }
+
+    updateResponse = async (responseId: string, payload: ResponseData): Promise<Response> => {
+        const createdResponse = await this.client.executePutRequest(`${BASE_RESPONSES_URL}/${responseId}`, payload);
         return Response.deserialize(createdResponse);
     }
 }

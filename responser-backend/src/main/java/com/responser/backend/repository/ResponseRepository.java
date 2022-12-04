@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 /**
  * ResponseRepository
@@ -15,4 +16,6 @@ import java.util.List;
 public interface ResponseRepository extends JpaRepository<Response, String> {
 
     List<Response> findAllByResourceId(String resourceId);
+
+    Optional<Response> findByIdAndUserId(String responseId, String userId);
 }

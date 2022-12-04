@@ -3,7 +3,7 @@ version: '3'
 services:
   responser_db:
     container_name: responser_db
-    build: ./responser-backend/database
+    build: ./database
     ports:
       - "5432:5432"
     volumes:

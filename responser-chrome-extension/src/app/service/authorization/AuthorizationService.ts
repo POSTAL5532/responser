@@ -27,20 +27,19 @@ class AuthorizationService {
 
     private refreshAccessTokenRequest = async (): Promise<TokenInfo> => {
         const payload = `refresh_token=${TokenStore.refreshToken}&grant_type=refresh_token`;
-        const data = await this.executePostRequest(payload);
+        const data = await this.executePostRequest(ApplicationProperties.tokenApiUrl, payload);
         return TokenInfo.deserialize(data);
     }
 
-    private executePostRequest = async (body: string): Promise<any> => {
+    private executePostRequest = async (url: string, body: string): Promise<any> => {
         const options: AxiosRequestConfig = {
-            baseURL: ApplicationProperties.tokenApiUrl,
             headers: {
                 "Content-type": "application/x-www-form-urlencoded",
                 ...TokenStore.basicAuthorizationHeader
             }
         };
 
-        const response = await axios.post("/", body, options);
+        const response = await axios.post(url, body, options);
         return response.data;
     }
 }

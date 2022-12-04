@@ -38,12 +38,6 @@ public class UserService {
         );
     }
 
-    public User getUserByUserName(String userName) {
-        return userRepository.findByUserName(userName).orElseThrow(() ->
-                new NoSuchElementException(MessageFormat.format("User with id ''{0}'' doesn't exist", userName))
-        );
-    }
-
     public boolean existByEmail(String email) {
         return userRepository.existsByEmail(email);
     }

@@ -1,19 +1,31 @@
 @import "globalsLess";
 
-.header {
-  height: 40px;
-  padding: 0 14px;
+.responses-page {
   display: flex;
-  align-items: center;
-  background-color: @white-color;
+  flex-direction: column;
 
-  .domain {
-    .fontMulishRegular();
-    font-size: 20px;
+  .header {
+    padding: 10px 14px;
+    display: flex;
+    align-items: center;
+    background-color: @white-color;
+
+    .domain {
+      .fontMulishRegular();
+      font-size: 20px;
+    }
   }
-}
 
-.responses {
-  height: 334px;
-  overflow-y: scroll;
+  .responses {
+    height: 334px;
+    overflow-y: scroll;
+  }
+
+  .leave-response-container {
+    padding: 5px;
+
+    .button {
+      width: 100%;
+    }
+  }
 }

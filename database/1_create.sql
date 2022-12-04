@@ -40,7 +40,7 @@ CREATE TABLE resources
 CREATE TABLE responses
 (
     id            VARCHAR(36) NOT NULL UNIQUE,
-    user_id       VARCHAR(36) NOT NULL /*REFERENCES users (id) ON DELETE CASCADE*/,
+    user_id       VARCHAR(36) NOT NULL REFERENCES users (id) ON DELETE CASCADE,
     resource_id   VARCHAR(36) NOT NULL REFERENCES resources (id) ON DELETE CASCADE,
     response_id   VARCHAR(36) REFERENCES responses (id) ON DELETE CASCADE,
     rating        SMALLINT    NOT NULL,

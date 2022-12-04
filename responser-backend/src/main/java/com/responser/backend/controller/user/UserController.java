@@ -45,7 +45,7 @@ public class UserController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/current")
     public ResponseEntity<UserInfoPayload> getCurrentUser(Principal principal) {
-        User user = userService.getUserByUserName(principal.getName());
+        User user = userService.getUser(principal.getName());
         return ResponseEntity.ok(userConverter.toUserInfoPayload(user));
     }
 }

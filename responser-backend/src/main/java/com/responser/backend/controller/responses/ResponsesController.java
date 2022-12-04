@@ -1,6 +1,6 @@
 package com.responser.backend.controller.responses;
 
-import com.responser.backend.controller.responses.payload.CreateResponsePayload;
+import com.responser.backend.controller.responses.payload.ResponseDataPayload;
 import com.responser.backend.controller.responses.payload.ResponsePayload;
 import com.responser.backend.converter.ResponseConverter;
 import com.responser.backend.model.Response;
@@ -36,10 +36,28 @@ public class ResponsesController {
         return ResponseEntity.ok(responseConverter.toResponsePayloadList(responses));
     }
 
+    @GetMapping("/{responseId}")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<ResponsePayload> getResponse(@Valid @NotBlank @PathVariable String responseId, Principal principal) {
+        Response response = responsesService.getResponseByIdAndUser(responseId, principal.getName());
+        return ResponseEntity.ok(responseConverter.toResponsePayload(response));
+    }
+
     @PostMapping
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Response> createResponse(@Valid @NotNull @RequestBody CreateResponsePayload response, Principal principal) {
+    public ResponseEntity<Response> createResponse(@Valid @NotNull @RequestBody ResponseDataPayload response, Principal principal) {
         Response newResponse = responseConverter.toResponse(response, principal.getName());
         return ResponseEntity.ok(responsesService.createResponse(newResponse));
+    }
+
+    @PutMapping("/{responseId}")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<Response> updateResponse(
+            @Valid @NotNull @PathVariable String responseId,
+            @Valid @NotNull @RequestBody ResponseDataPayload responseDTO,
+            Principal principal
+    ) {
+        Response response = responseConverter.toResponse(responseId, responseDTO, principal.getName());
+        return ResponseEntity.ok(responsesService.updateResponse(response));
     }
 }

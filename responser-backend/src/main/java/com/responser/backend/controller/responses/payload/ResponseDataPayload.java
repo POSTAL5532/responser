@@ -12,7 +12,7 @@ import jakarta.validation.constraints.*;
  */
 @Data
 @NoArgsConstructor
-public class CreateResponsePayload {
+public class ResponseDataPayload {
 
     @NotBlank
     private String resourceId;
