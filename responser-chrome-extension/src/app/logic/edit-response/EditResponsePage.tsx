@@ -1,12 +1,12 @@
 import React, {useEffect} from "react";
 import {observer} from "mobx-react";
 import {useEditResponsePageStore} from "./EditResponsePageStore";
-import {Button} from "../../components/button/Button";
 import {navigateTo} from "../../utils/NavigationUtils";
 import {RESPONSES_PAGE_URL} from "../responses/ResponsesPage";
 import EditResponseForm from "./EditResponseForm";
 import {useQuery} from "../../../router";
 import "./EditResponsePage.less";
+import {Page} from "../../components/page/Page";
 
 type EditResponsePageProps = {
     responseId: string;
@@ -32,10 +32,10 @@ const EditResponsePage: React.FC<EditResponsePageProps> = observer((props: EditR
     }
 
     return (
-        <div className="create-response-page">
-            <Button onClick={onCancelClick}>Cancel</Button>
-            <EditResponseForm responseData={responseData} onSubmit={onSubmit}/>
-        </div>
+        <Page className="create-response-page">
+            <div className="header">Create new response</div>
+            <EditResponseForm responseData={responseData} onSubmit={onSubmit} onCancel={onCancelClick}/>
+        </Page>
     );
 });
 

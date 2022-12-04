@@ -1,14 +1,19 @@
 @import "globalsLess";
 
-.field {
-  height: 56px;
+.textarea {
+  resize: none;
   width: 100%;
+  height: 100%;
   border-radius: 8px;
   border: 1px solid @primary-color;
   padding: 16px;
   .fontMulishRegular();
   font-size: 16px;
   color: @text-color;
+
+  .resizable {
+    resize: both;
+  }
 
   &, &:focus, &:active {
     outline: none;

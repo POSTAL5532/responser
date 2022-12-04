@@ -7,7 +7,7 @@ import {Button} from "../../components/button/Button";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {Page} from "../../components/page/Page";
 import {navigateTo} from "../../utils/NavigationUtils";
-import {getEditResponsePageUrl, getNewResponsePageUrl} from "../edit-response/EditResponsePage";
+import {getNewResponsePageUrl} from "../edit-response/EditResponsePage";
 import "./ResponsesPage.less";
 
 export const RESPONSES_PAGE_URL = "/responses";

@@ -1,5 +1,6 @@
 import React, {PropsWithChildren} from "react";
 import classNames from "classnames";
+import "./Page.less";
 
 type Page = {
     className?: string;
