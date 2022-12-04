@@ -3,6 +3,7 @@ import React, {useContext} from "react";
 import {observer} from "mobx-react";
 import classNames from "classnames";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
+import {Rating} from "../../components/rating/Rating";
 import "./ResponsesList.less";
 
 type ResponsesListProps = {
@@ -39,7 +40,7 @@ const ResponseCard: React.FC<ResponseCardProps> = (props: ResponseCardProps) => 
     return (
         <div className={className}>
             <div className="user-name">{user.firstName} {user.lastName}</div>
-            <div className="rating">{rating}</div>
+            <div className="rating-container"><Rating value={rating} readonly={true}/></div>
             <div className="text">{text}</div>
             <div className="published">{creationDate.toString()}</div>
         </div>

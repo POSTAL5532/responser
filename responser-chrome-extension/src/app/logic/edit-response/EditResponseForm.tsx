@@ -1,7 +1,8 @@
 import React, {ChangeEvent} from "react";
-import {Button} from "../../components/button/Button";
 import {observer} from "mobx-react";
+import {Button} from "../../components/button/Button";
 import {ResponseData} from "../../model/ResponseData";
+import {Rating} from "../../components/rating/Rating";
 
 type EditResponseFormProps = {
     responseData: ResponseData;
@@ -11,18 +12,18 @@ type EditResponseFormProps = {
 const EditResponseForm: React.FC<EditResponseFormProps> = (props: EditResponseFormProps) => {
     const {responseData, onSubmit} = props;
 
-    const onRatingChange = (event: ChangeEvent<HTMLInputElement>) => {
-        responseData.rating = Number.parseInt(event.target.value);
+    const onRatingChange = (rating: number) => {
+        responseData.rating = rating;
     }
 
     const onTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
         responseData.text = event.target.value;
     }
 
-    return(
+    return (
         <div>
             <div className="rating-container">
-                <input type="number" min={1} max={5} step={1} value={responseData?.rating} onChange={onRatingChange}/>
+                <Rating value={responseData?.rating} onChange={onRatingChange}/>
             </div>
             <div className="text-container">
                 <textarea name="response" value={responseData?.text} onChange={onTextChange}/>

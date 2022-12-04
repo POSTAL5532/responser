@@ -43,6 +43,10 @@ module.exports = () => ({
                 loader: "html-loader"
             },
             {
+                test: /\.svg$/,
+                use: [{ loader: '@svgr/webpack', options: { icon: true } }],
+            },
+            {
                 test: /\.(png|jpg|svg|gif|webp)$/,
                 use: [
                     {
