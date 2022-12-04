@@ -3,6 +3,7 @@ import {User} from "app/model/User";
 import {action, computed, makeAutoObservable, runInAction} from "mobx";
 import LocalTokenStorageService from "app/service/authorization/LocalTokenStorageService";
 import {UserService} from "app/service/UserService";
+import {reloadPage} from "./utils/NavigationUtils";
 
 export class GlobalAppStore {
 
@@ -27,8 +28,13 @@ export class GlobalAppStore {
     }
 
     refreshCurrentUser = async () => {
-        const user = await this.userService.getCurrentUser();
-        runInAction(() => this.currentUser = user);
+        try {
+            const user = await this.userService.getCurrentUser();
+            runInAction(() => this.currentUser = user);
+        } catch (error: any) {
+            LocalTokenStorageService.removeAllTokens();
+            reloadPage();
+        }
     }
 
     @action

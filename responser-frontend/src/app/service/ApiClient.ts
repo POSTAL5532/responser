@@ -1,17 +1,18 @@
 import {TokenInfo} from "app/model/TokenInfo";
 import axios, {AxiosRequestConfig} from 'axios';
 import ApplicationPropertiesService from "app/service/ApplicationProperties";
-import TokenStore from "app/service/authorization/LocalTokenStorageService";
+import LocalTokenStorageService from "app/service/authorization/LocalTokenStorageService";
 import AuthorizationService from "app/service/authorization/AuthorizationService";
 import {navigateTo} from "../utils/NavigationUtils";
 import {WELCOME_PAGE_URL} from "../logic/welcome-page/WelcomePage";
+import {ApiError} from "../model/ApiError";
 
 const refreshTokenIfNeeded = (): Promise<TokenInfo> => {
     if (!AuthorizationService.refreshAccessTokenPromise) {
         AuthorizationService.refreshAccessToken()
-            .then(TokenStore.setToken)
+            .then(LocalTokenStorageService.setToken)
             .catch(() => {
-                TokenStore.removeAllTokens();
+                LocalTokenStorageService.removeAllTokens();
                 navigateTo(WELCOME_PAGE_URL)
             });
     }
@@ -20,23 +21,23 @@ const refreshTokenIfNeeded = (): Promise<TokenInfo> => {
 }
 
 const errorInterceptor = (error: any): Promise<any> => {
-    const {status} = error.response;
+    const {response: {status, data}} = error;
 
     console.error(`The server responded with a status code ${status}`);
 
-    if (status === 401 &&
-        error.config &&
-        error.config.repeatableRequest !== false) {
+    if (status === 401 && error.config && error.config.repeatableRequest !== false) {
         return refreshTokenIfNeeded()
             .then(() => {
                 error.config.repeatableRequest = false;
                 error.config.headers = {
                     ...error.config.headers,
-                    ...TokenStore.authorizationHeader
+                    ...LocalTokenStorageService.authorizationHeader
                 };
 
                 return axios.request(error.config);
             });
+    } else if (data?.apiError) {
+        return Promise.reject(data as ApiError);
     }
 
     return Promise.reject(error);
@@ -52,8 +53,8 @@ export class ApiClient {
     getRequestConfig = (requestOptions: AxiosRequestConfig = {}): AxiosRequestConfig => {
         let headers: any = {"Content-type": "application/json"}
 
-        if (TokenStore.isAccessTokenExist) {
-            headers = {...headers, ...TokenStore.authorizationHeader}
+        if (LocalTokenStorageService.isAccessTokenExist) {
+            headers = {...headers, ...LocalTokenStorageService.authorizationHeader}
         }
 
         return {

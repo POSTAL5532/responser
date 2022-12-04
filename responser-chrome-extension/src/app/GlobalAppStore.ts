@@ -4,6 +4,7 @@ import {UserService} from "./service/UserService";
 import {User} from "./model/User";
 import LocalTokenStorageService from "./service/authorization/LocalTokenStorageService";
 import {ExtensionService} from "./service/extension/ExtensionService";
+import {reloadPage} from "./utils/NavigationUtils";
 
 export class GlobalAppStore {
 
@@ -40,7 +41,12 @@ export class GlobalAppStore {
 
     @action
     updateCurrentUser = async () => {
-        this.currentUser = await this.userService.getCurrentUser();
+        try {
+            this.currentUser = await this.userService.getCurrentUser();
+        } catch (error: any) {
+            LocalTokenStorageService.removeAllTokens();
+            reloadPage();
+        }
     }
 
     @action
