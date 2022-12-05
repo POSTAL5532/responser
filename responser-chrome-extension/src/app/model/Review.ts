@@ -1,7 +1,7 @@
 import {User} from "./User";
 import moment, {Moment} from "moment";
 
-export class Response {
+export class Review {
 
     id: string;
 
@@ -9,7 +9,7 @@ export class Response {
 
     resourceId: string;
 
-    responseId: string;
+    reviewId: string;
 
     rating: number;
 
@@ -19,8 +19,8 @@ export class Response {
 
     updateDate: Moment;
 
-    public static deserialize(data: any): Response {
-        return Object.assign(new Response(), data, {
+    public static deserialize(data: any): Review {
+        return Object.assign(new Review(), data, {
             user: User.deserialize(data.user),
             createdTimestamp: moment(data.createdTimestamp),
             updateDate: moment(data.updateDate)

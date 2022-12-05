@@ -1,6 +1,6 @@
 import {makeAutoObservable} from "mobx";
 
-export class ResponseData {
+export class ReviewData {
 
     resourceId: string;
 

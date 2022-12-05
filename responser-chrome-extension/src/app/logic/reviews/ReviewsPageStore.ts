@@ -1,7 +1,7 @@
 import {makeAutoObservable} from "mobx";
-import {Response} from "../../model/Response";
+import {Review} from "../../model/Review";
 import {LoadingStore} from "../../utils/LoadingStore";
-import {ResponseService} from "../../service/ResponseService";
+import {ReviewService} from "../../service/ReviewService";
 import {useState} from "react";
 import {Domain} from "../../model/Domain";
 import {Resource} from "../../model/Resource";
@@ -13,7 +13,7 @@ import {CreateResourcePayload} from "../../model/CreateResourcePayload";
 import {ExtensionService} from "../../service/extension/ExtensionService";
 import {PageInfo} from "../../model/PageInfo";
 
-export class ResponsesPageStore extends LoadingStore {
+export class ReviewsPageStore extends LoadingStore {
 
     extensionService: ExtensionService = new ExtensionService();
 
@@ -21,7 +21,7 @@ export class ResponsesPageStore extends LoadingStore {
 
     resourceService: ResourceService = new ResourceService();
 
-    responseService: ResponseService = new ResponseService();
+    reviewService: ReviewService = new ReviewService();
 
     currentPageInfo: PageInfo;
 
@@ -29,7 +29,7 @@ export class ResponsesPageStore extends LoadingStore {
 
     resource: Resource;
 
-    responses: Response[] = [];
+    reviews: Review[] = [];
 
     constructor() {
         super();
@@ -40,7 +40,7 @@ export class ResponsesPageStore extends LoadingStore {
         this.currentPageInfo = (await this.extensionService.getCurrentPageInfo()).data;
         await this.initDomain();
         await this.initResource();
-        await this.loadResponses();
+        await this.loadReviews();
     }
 
     initDomain = async () => {
@@ -69,12 +69,12 @@ export class ResponsesPageStore extends LoadingStore {
         }
     }
 
-    loadResponses = async () => {
-        this.responses = await this.responseService.getResponses(this.resource.id);
+    loadReviews = async () => {
+        this.reviews = await this.reviewService.getReviews(this.resource.id);
     }
 }
 
-export const useResponsesPageStore = (): ResponsesPageStore => {
-    const [responsesPageStore] = useState(new ResponsesPageStore());
-    return responsesPageStore;
+export const useReviewsPageStore = (): ReviewsPageStore => {
+    const [reviewsPageStore] = useState(new ReviewsPageStore());
+    return reviewsPageStore;
 }
