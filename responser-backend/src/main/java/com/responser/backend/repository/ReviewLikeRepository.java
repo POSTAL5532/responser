@@ -5,10 +5,10 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 /**
- * ResponseLike
+ * ReviewLikeRepository
  *
  * @author SIE
  */
 @Repository
-public interface ResponseLikeRepository extends JpaRepository<ResponseLike, String> {
+public interface ReviewLikeRepository extends JpaRepository<ResponseLike, String> {
 }

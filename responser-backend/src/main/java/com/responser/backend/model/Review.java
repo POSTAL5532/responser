@@ -13,8 +13,8 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 @RequiredArgsConstructor
 @Entity
-@Table(name = "responses")
-public class Response extends AbstractEntity{
+@Table(name = "reviews")
+public class Review extends AbstractEntity{
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
@@ -23,8 +23,8 @@ public class Response extends AbstractEntity{
     @Column(name = "resource_id")
     private String resourceId;
 
-    @Column(name = "response_id")
-    private String responseId;
+    @Column(name = "review_id")
+    private String reviewId;
 
     private Byte rating;
 

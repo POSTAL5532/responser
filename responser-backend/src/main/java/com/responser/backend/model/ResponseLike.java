@@ -15,14 +15,14 @@ import lombok.*;
 @EqualsAndHashCode(callSuper = true)
 @RequiredArgsConstructor
 @Entity
-@Table(name = "responses_likes")
+@Table(name = "reviews_likes")
 public class ResponseLike extends AbstractEntity {
 
     @Column(name = "user_id")
     private String userId;
 
-    @Column(name = "response_id")
-    private String responseId;
+    @Column(name = "review_id")
+    private String reviewId;
 
     private Boolean positive;
 }

@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 /**
- * ResponsePayload
+ * ReviewPayload
  *
  * @author SIE
  */
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ResponsePayload {
+public class ReviewPayload {
 
     private String id;
 
@@ -25,7 +25,7 @@ public class ResponsePayload {
 
     private String resourceId;
 
-    private String responseId;
+    private String reviewId;
 
     private Byte rating;
 

@@ -6,13 +6,13 @@ import lombok.NoArgsConstructor;
 import jakarta.validation.constraints.*;
 
 /**
- * CreateResponsePayload
+ * ReviewDataPayload
  *
  * @author SIE
  */
 @Data
 @NoArgsConstructor
-public class ResponseDataPayload {
+public class ReviewDataPayload {
 
     @NotBlank
     private String resourceId;

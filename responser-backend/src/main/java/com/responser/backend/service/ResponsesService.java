@@ -1,8 +1,8 @@
 package com.responser.backend.service;
 
-import com.responser.backend.model.Response;
+import com.responser.backend.model.Review;
 import com.responser.backend.model.User;
-import com.responser.backend.repository.ResponseRepository;
+import com.responser.backend.repository.ReviewRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,12 +21,12 @@ import java.util.NoSuchElementException;
 @Transactional(readOnly = true)
 public class ResponsesService {
 
-    private final ResponseRepository responseRepository;
+    private final ReviewRepository reviewRepository;
 
     private final UserService userService;
 
-    public Response getResponseByIdAndUser(String responseId, String userId) {
-        return responseRepository.findByIdAndUserId(responseId, userId).orElseThrow(() ->
+    public Review getResponseByIdAndUser(String responseId, String userId) {
+        return reviewRepository.findByIdAndUserId(responseId, userId).orElseThrow(() ->
                 new NoSuchElementException(MessageFormat.format(
                         "Response with id ''{0}'' and user id ''{1}'' doesn't exist",
                         responseId,
@@ -35,23 +35,23 @@ public class ResponsesService {
         );
     }
 
-    public List<Response> getAllForResource(String resourceId) {
-        return responseRepository.findAllByResourceId(resourceId);
+    public List<Review> getAllForResource(String resourceId) {
+        return reviewRepository.findAllByResourceId(resourceId);
     }
 
     @Transactional
-    public Response createResponse(Response newResponse) {
-        User referenceUser = userService.getUser(newResponse.getUser().getId());
-        newResponse.setUser(referenceUser);
-        return responseRepository.save(newResponse);
+    public Review createResponse(Review newReview) {
+        User referenceUser = userService.getUser(newReview.getUser().getId());
+        newReview.setUser(referenceUser);
+        return reviewRepository.save(newReview);
     }
 
     @Transactional
-    public Response updateResponse(Response response) {
-        Response oldResponse = this.getResponseByIdAndUser(response.getId(), response.getUser().getId());
-        oldResponse.setText(response.getText());
-        oldResponse.setRating(response.getRating());
+    public Review updateResponse(Review review) {
+        Review oldReview = this.getResponseByIdAndUser(review.getId(), review.getUser().getId());
+        oldReview.setText(review.getText());
+        oldReview.setRating(review.getRating());
 
-        return responseRepository.save(oldResponse);
+        return reviewRepository.save(oldReview);
     }
 }

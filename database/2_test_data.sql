@@ -44,7 +44,7 @@ VALUES ('10123065-67e6-4a4d-9e43-23fe464fc017',
         '2022-10-25 23:15:37.997198+00',
         NULL);
 
-INSERT INTO responses (id, user_id, resource_id, response_id, rating, text, creation_date, update_date)
+INSERT INTO reviews (id, user_id, resource_id, review_id, rating, text, creation_date, update_date)
 VALUES ('10123123-67e6-4a4d-9e43-23fe464fc017', '0d7bc62f-7381-4a7a-969c-12c510ac887e',
         '10123065-67e6-4a4d-9e43-23fe464fc017',
         NULL, 3, 'Woooooow!', '2022-10-25 23:15:37.997198+00', NULL),
