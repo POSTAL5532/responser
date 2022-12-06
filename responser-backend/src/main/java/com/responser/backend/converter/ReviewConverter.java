@@ -1,7 +1,7 @@
 package com.responser.backend.converter;
 
-import com.responser.backend.controller.responses.payload.ReviewDataPayload;
-import com.responser.backend.controller.responses.payload.ReviewPayload;
+import com.responser.backend.controller.reviews.payload.ReviewDataPayload;
+import com.responser.backend.controller.reviews.payload.ReviewPayload;
 import com.responser.backend.model.Review;
 import com.responser.backend.model.User;
 import lombok.RequiredArgsConstructor;

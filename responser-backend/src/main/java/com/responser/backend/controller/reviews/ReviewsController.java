@@ -1,7 +1,7 @@
-package com.responser.backend.controller.responses;
+package com.responser.backend.controller.reviews;
 
-import com.responser.backend.controller.responses.payload.ReviewDataPayload;
-import com.responser.backend.controller.responses.payload.ReviewPayload;
+import com.responser.backend.controller.reviews.payload.ReviewDataPayload;
+import com.responser.backend.controller.reviews.payload.ReviewPayload;
 import com.responser.backend.converter.ReviewConverter;
 import com.responser.backend.model.Review;
 import com.responser.backend.service.ResponsesService;

@@ -1,4 +1,4 @@
-package com.responser.backend.controller.responses.payload;
+package com.responser.backend.controller.reviews.payload;
 
 import com.responser.backend.controller.user.payload.UserInfoPayload;
 import lombok.AllArgsConstructor;
