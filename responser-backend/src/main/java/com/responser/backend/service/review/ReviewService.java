@@ -1,8 +1,10 @@
-package com.responser.backend.service;
+package com.responser.backend.service.review;
 
+import com.responser.backend.model.ReviewsCriteria;
 import com.responser.backend.model.Review;
 import com.responser.backend.model.User;
 import com.responser.backend.repository.ReviewRepository;
+import com.responser.backend.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -19,7 +21,7 @@ import java.util.NoSuchElementException;
 @AllArgsConstructor
 @Service
 @Transactional(readOnly = true)
-public class ResponsesService {
+public class ReviewService {
 
     private final ReviewRepository reviewRepository;
 
@@ -35,19 +37,19 @@ public class ResponsesService {
         );
     }
 
-    public List<Review> getAllForResource(String resourceId) {
-        return reviewRepository.findAllByResourceId(resourceId);
+    public List<Review> getReviews(ReviewsCriteria criteria) {
+        return reviewRepository.findAll(ReviewSpecifications.getAll(criteria));
     }
 
     @Transactional
-    public Review createResponse(Review newReview) {
+    public Review createReview(Review newReview) {
         User referenceUser = userService.getUser(newReview.getUser().getId());
         newReview.setUser(referenceUser);
         return reviewRepository.save(newReview);
     }
 
     @Transactional
-    public Review updateResponse(Review review) {
+    public Review updateReview(Review review) {
         Review oldReview = this.getResponseByIdAndUser(review.getId(), review.getUser().getId());
         oldReview.setText(review.getText());
         oldReview.setRating(review.getRating());

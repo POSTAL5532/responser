@@ -2,10 +2,14 @@ package com.responser.backend.controller.reviews;
 
 import com.responser.backend.controller.reviews.payload.ReviewDataPayload;
 import com.responser.backend.controller.reviews.payload.ReviewPayload;
+import com.responser.backend.controller.reviews.payload.ReviewsRequestCriteria;
+import com.responser.backend.converter.ReviewsCriteriaConverter;
 import com.responser.backend.converter.ReviewConverter;
 import com.responser.backend.model.Review;
-import com.responser.backend.service.ResponsesService;
+import com.responser.backend.service.review.ReviewService;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -13,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+
 import java.security.Principal;
 import java.util.List;
 
@@ -26,20 +31,28 @@ import java.util.List;
 @RequestMapping("/api/reviews")
 public class ReviewsController {
 
-    private final ResponsesService responsesService;
+    private final ReviewService reviewService;
 
     private final ReviewConverter reviewConverter;
 
+    private final ReviewsCriteriaConverter reviewsCriteriaConverter;
+
     @GetMapping
-    public ResponseEntity<List<ReviewPayload>> getReviewsForResource(@Valid @NotBlank @RequestParam String resourceId) {
-        List<Review> reviews = responsesService.getAllForResource(resourceId);
+    public ResponseEntity<List<ReviewPayload>> getReviews(@Valid @NotNull ReviewsRequestCriteria criteria, Principal principal) {
+        if (ObjectUtils.isNotEmpty(criteria.getForUserId())) {
+            if (ObjectUtils.isEmpty(principal) || !principal.getName().equals(criteria.getForUserId())) {
+                return ResponseEntity.status(HttpStatusCode.valueOf(401)).build();
+            }
+        }
+
+        List<Review> reviews = reviewService.getReviews(reviewsCriteriaConverter.toReviewsCriteria(criteria));
         return ResponseEntity.ok(reviewConverter.toReviewPayloadList(reviews));
     }
 
     @GetMapping("/{reviewId}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<ReviewPayload> getReview(@Valid @NotBlank @PathVariable String reviewId, Principal principal) {
-        Review review = responsesService.getResponseByIdAndUser(reviewId, principal.getName());
+        Review review = reviewService.getResponseByIdAndUser(reviewId, principal.getName());
         return ResponseEntity.ok(reviewConverter.toResponsePayload(review));
     }
 
@@ -47,7 +60,7 @@ public class ReviewsController {
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Review> createReview(@Valid @NotNull @RequestBody ReviewDataPayload review, Principal principal) {
         Review newReview = reviewConverter.toReview(review, principal.getName());
-        return ResponseEntity.ok(responsesService.createResponse(newReview));
+        return ResponseEntity.ok(reviewService.createReview(newReview));
     }
 
     @PutMapping("/{reviewId}")
@@ -58,6 +71,6 @@ public class ReviewsController {
             Principal principal
     ) {
         Review review = reviewConverter.toReview(reviewId, responseDTO, principal.getName());
-        return ResponseEntity.ok(responsesService.updateResponse(review));
+        return ResponseEntity.ok(reviewService.updateReview(review));
     }
 }

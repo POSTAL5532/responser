@@ -30,15 +30,31 @@ dependencies {
     implementation "org.springframework.boot:spring-boot-configuration-processor"
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
-//    implementation 'org.modelmapper:modelmapper:3.1.0'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
+
+    annotationProcessor 'org.projectlombok:lombok'
+    annotationProcessor 'org.hibernate.orm:hibernate-jpamodelgen:6.1.5.Final'
 
     compileOnly 'org.projectlombok:lombok'
     runtimeOnly 'org.postgresql:postgresql'
-    annotationProcessor 'org.projectlombok:lombok'
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
     useJUnitPlatform()
+}
+
+ext {
+    // Directory for generated main Java sources
+    generatedMainJava = 'src/main/generated'
+}
+
+sourceSets {
+    // Add generated sources directory.
+    main.java.srcDir generatedMainJava
+}
+
+compileJava	{
+    options.compilerArgs += ['-AaddGenerationDate=true'] // Specific to Hibernate JPA meta model generation processor.
+    options.annotationProcessorGeneratedSourcesDirectory = file(generatedMainJava)
 }
