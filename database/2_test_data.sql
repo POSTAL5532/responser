@@ -45,10 +45,7 @@ VALUES ('10123065-67e6-4a4d-9e43-23fe464fc017',
         NULL);
 
 INSERT INTO reviews (id, user_id, resource_id, review_id, rating, text, creation_date, update_date)
-VALUES ('10123123-67e6-4a4d-9e43-23fe464fc017', '0d7bc62f-7381-4a7a-969c-12c510ac887e',
-        '10123065-67e6-4a4d-9e43-23fe464fc017',
-        NULL, 3, 'Woooooow!', '2022-10-25 23:15:37.997198+00', NULL),
-       ('10123123-67e6-4a4d-9e43-23fe464fc018', '0d7bc62f-7381-4a7a-969c-12c510ac888e',
+VALUES ('10123123-67e6-4a4d-9e43-23fe464fc018', '0d7bc62f-7381-4a7a-969c-12c510ac888e',
         '10123065-67e6-4a4d-9e43-23fe464fc017',
         NULL, 4, 'Lorem Ipsum is simply dummy text of the printing and typesetting industry.!',
         '2022-10-26 23:15:37.997198+00', NULL),
@@ -56,6 +53,9 @@ VALUES ('10123123-67e6-4a4d-9e43-23fe464fc017', '0d7bc62f-7381-4a7a-969c-12c510a
         '10123065-67e6-4a4d-9e43-23fe464fc017',
         NULL, 1, 'Lorem Ipsum has been the industry''s standard dummy text ever since the 1500s!',
         '2022-10-27 23:15:37.997198+00', '2022-10-27 23:20:37.997198+00'),
+       ('10123123-67e6-4a4d-9e43-23fe464fc017', '0d7bc62f-7381-4a7a-969c-12c510ac887e',
+        '10123065-67e6-4a4d-9e43-23fe464fc017',
+        NULL, 3, 'Woooooow!', '2022-10-25 23:15:37.997198+00', NULL),
        ('10123123-67e6-4a4d-9e43-23fe464fc020', '0d7bc62f-7381-4a7a-969c-12c510ac890e',
         '10123065-67e6-4a4d-9e43-23fe464fc017',
         NULL, 2, 'when an unknown printer took a galley of type and scrambled it to make a type specimen book.!',

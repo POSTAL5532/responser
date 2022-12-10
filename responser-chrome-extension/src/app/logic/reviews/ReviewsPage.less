@@ -2,19 +2,29 @@
 
 .reviews-page {
   .header {
-    padding: 10px 14px;
     display: flex;
-    align-items: center;
+    flex-direction: column;
     background-color: @white-color;
 
-    .domain {
+    .domain, .resource {
       .fontMulishRegular();
-      font-size: 20px;
+      padding: 6px 14px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .domain {
+      font-size: 18px;
+    }
+
+    .resource {
+      font-size: 14px;
     }
   }
 
   .reviews {
-    overflow-y: scroll;
+    overflow-y: auto;
   }
 
   .leave-review-container {

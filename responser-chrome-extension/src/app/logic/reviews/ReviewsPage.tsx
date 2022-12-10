@@ -13,12 +13,12 @@ import "./ReviewsPage.less";
 export const REVIEWS_PAGE_URL = "/reviews";
 
 const ReviewsPage: React.FC = () => {
-    const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
+    const {currentUser, isLoading} = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const {domain, resource, reviews, init} = useReviewsPageStore();
 
     useEffect(() => {
-        init();
-    }, []);
+        if (!isLoading) init(currentUser?.id);
+    }, [isLoading]);
 
     const onLeaveReviewClick = () => {
         navigateTo(getNewReviewPageUrl(resource.id));
@@ -27,8 +27,10 @@ const ReviewsPage: React.FC = () => {
     return (
         <Page className="reviews-page">
             <div className="header">
-                {domain ? <DomainCard domain={domain}/> : "LOADING..."}
+                {domain ? <div className="domain">{domain.domain}</div> : "LOADING..."}
+                {resource ? <div className="resource">{resource.name}</div> : "LOADING..."}
             </div>
+
             <ReviewsList reviews={reviews}/>
 
             <div className="leave-review-container">

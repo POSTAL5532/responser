@@ -12,6 +12,7 @@ import {CreateDomainPayload} from "../../model/CreateDomainPayload";
 import {CreateResourcePayload} from "../../model/CreateResourcePayload";
 import {ExtensionService} from "../../service/extension/ExtensionService";
 import {PageInfo} from "../../model/PageInfo";
+import {ReviewsRequestCriteria} from "../../model/ReviewsRequestCriteria";
 
 export class ReviewsPageStore extends LoadingStore {
 
@@ -36,11 +37,15 @@ export class ReviewsPageStore extends LoadingStore {
         makeAutoObservable(this);
     }
 
-    init = async () => {
+    init = async (currentUserId?: string) => {
         this.currentPageInfo = (await this.extensionService.getCurrentPageInfo()).data;
         await this.initDomain();
         await this.initResource();
-        await this.loadReviews();
+        await this.loadReviews(currentUserId);
+
+        if (currentUserId) {
+            await this.loadCurrenUserReview(currentUserId);
+        }
     }
 
     initDomain = async () => {
@@ -69,8 +74,27 @@ export class ReviewsPageStore extends LoadingStore {
         }
     }
 
-    loadReviews = async () => {
-        this.reviews = await this.reviewService.getReviews(this.resource.id);
+    loadCurrenUserReview = async (currentUserId: string) => {
+        const criteria = new ReviewsRequestCriteria();
+        criteria.resourceId = this.resource.id;
+        criteria.forUserId = currentUserId;
+
+        const reviews = await this.reviewService.getReviews(criteria);
+
+        if (reviews.length > 0) {
+            this.reviews.unshift(reviews[0]);
+        }
+    }
+
+    loadReviews = async (currentUserId: string) => {
+        const criteria = new ReviewsRequestCriteria();
+        criteria.resourceId = this.resource.id;
+
+        if (!!currentUserId) {
+            criteria.excludeUserId = currentUserId;
+        }
+
+        this.reviews = await this.reviewService.getReviews(criteria);
     }
 }
 

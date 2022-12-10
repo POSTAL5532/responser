@@ -14,7 +14,7 @@ export class GlobalAppStore {
 
     currentUser: User = null;
 
-    isLoading: boolean = false;
+    isLoading: boolean = true;
 
     constructor() {
         makeAutoObservable(this);
@@ -22,8 +22,6 @@ export class GlobalAppStore {
     }
 
     private init = async () => {
-        this.isLoading = true;
-
         const tokenInfoResponse = await this.extensionService.getToken();
         LocalTokenStorageService.setTokenInfo(tokenInfoResponse.data);
 

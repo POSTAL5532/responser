@@ -1,6 +1,7 @@
 import {ApiClient} from "./ApiClient";
 import {Review} from "../model/Review";
 import {ReviewData} from "../model/ReviewData";
+import {ReviewsRequestCriteria} from "../model/ReviewsRequestCriteria";
 
 const BASE_REVIEWS_URL = "/reviews";
 
@@ -8,10 +9,10 @@ export class ReviewService {
 
     client: ApiClient = new ApiClient();
 
-    getReviews = async (resourceId: string): Promise<Review[]> => {
+    getReviews = async (reviewsRequestCriteria: ReviewsRequestCriteria): Promise<Review[]> => {
         const data: any[] = await this.client.executeGetRequest(
             BASE_REVIEWS_URL,
-            {params: {resourceId}}
+            {params: reviewsRequestCriteria}
         );
 
         return data.map((el: any) => Review.deserialize(el));
