@@ -1,28 +1,47 @@
 import React, {useContext, useEffect} from "react";
 import {observer} from "mobx-react";
 import {useReviewsPageStore} from "./ReviewsPageStore";
-import {Domain} from "../../model/Domain";
 import ReviewsList from "./ReviewsList";
 import {Button} from "../../components/button/Button";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {Page} from "../../components/page/Page";
 import {navigateTo} from "../../utils/NavigationUtils";
-import {getNewReviewPageUrl} from "../edit-review/EditReviewPage";
+import {getEditReviewPageUrl, getNewReviewPageUrl} from "../edit-review/EditReviewPage";
 import "./ReviewsPage.less";
 
 export const REVIEWS_PAGE_URL = "/reviews";
 
 const ReviewsPage: React.FC = () => {
     const {currentUser, isLoading} = useContext<GlobalAppStore>(GlobalAppStoreContext);
-    const {domain, resource, reviews, init} = useReviewsPageStore();
+    const {domain, resource, reviews, currentUserReview, init} = useReviewsPageStore();
 
     useEffect(() => {
         if (!isLoading) init(currentUser?.id);
     }, [isLoading]);
 
-    const onLeaveReviewClick = () => {
+    const navigateToLeaveNewReview = () => {
         navigateTo(getNewReviewPageUrl(resource.id));
     }
+
+    const navigateToEditReview = () => {
+        navigateTo(getEditReviewPageUrl(currentUserReview.id));
+    }
+
+    const onButtonClick = () => {
+        if (!currentUser) return;
+
+        if (currentUserReview) {
+            navigateToEditReview();
+        } else {
+            navigateToLeaveNewReview();
+        }
+    }
+
+    const getButtonText = (): string => {
+        if (!currentUser) return "SignIn for review";
+
+        return currentUserReview ? "Edit you review" : "Leave review";
+    };
 
     return (
         <Page className="reviews-page">
@@ -31,23 +50,13 @@ const ReviewsPage: React.FC = () => {
                 {resource ? <div className="resource">{resource.name}</div> : "LOADING..."}
             </div>
 
-            <ReviewsList reviews={reviews}/>
+            <ReviewsList reviews={reviews} currentUserReview={currentUserReview}/>
 
             <div className="leave-review-container">
-                <Button disabled={!currentUser} onClick={currentUser ? onLeaveReviewClick : undefined}>
-                    {currentUser ? "Leave review" : "SignIn for review"}
-                </Button>
+                <Button disabled={!currentUser} onClick={onButtonClick}>{getButtonText()}</Button>
             </div>
         </Page>
     );
 }
 
 export default observer(ReviewsPage);
-
-type DomainCardProps = {
-    domain: Domain;
-}
-
-const DomainCard: React.FC<DomainCardProps> = (props: DomainCardProps) => (
-    <div className="domain">{props.domain.domain}</div>
-);

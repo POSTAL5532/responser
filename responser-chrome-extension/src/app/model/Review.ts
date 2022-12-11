@@ -22,7 +22,7 @@ export class Review {
     public static deserialize(data: any): Review {
         return Object.assign(new Review(), data, {
             user: User.deserialize(data.user),
-            createdTimestamp: moment(data.createdTimestamp),
+            creationDate: moment(data.creationDate),
             updateDate: moment(data.updateDate)
         });
     }

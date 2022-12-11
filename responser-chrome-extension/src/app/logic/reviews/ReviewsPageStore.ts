@@ -30,6 +30,8 @@ export class ReviewsPageStore extends LoadingStore {
 
     resource: Resource;
 
+    currentUserReview: Review;
+
     reviews: Review[] = [];
 
     constructor() {
@@ -41,11 +43,12 @@ export class ReviewsPageStore extends LoadingStore {
         this.currentPageInfo = (await this.extensionService.getCurrentPageInfo()).data;
         await this.initDomain();
         await this.initResource();
-        await this.loadReviews(currentUserId);
 
         if (currentUserId) {
             await this.loadCurrenUserReview(currentUserId);
         }
+
+        await this.loadReviews(currentUserId);
     }
 
     initDomain = async () => {
@@ -82,7 +85,7 @@ export class ReviewsPageStore extends LoadingStore {
         const reviews = await this.reviewService.getReviews(criteria);
 
         if (reviews.length > 0) {
-            this.reviews.unshift(reviews[0]);
+            this.currentUserReview = reviews[0];
         }
     }
 
