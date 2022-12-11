@@ -1,6 +1,5 @@
 package com.responser.backend.service;
 
-import com.responser.backend.exceptions.ResourceNotFoundException;
 import com.responser.backend.model.Domain;
 import com.responser.backend.model.Resource;
 import com.responser.backend.repository.ResourceRepository;
@@ -10,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.text.MessageFormat;
+import java.util.NoSuchElementException;
 
 /**
  * ResourcesService
@@ -28,7 +28,7 @@ public class ResourcesService {
     public Resource getByUrl(String rawUrl) {
         return resourceRepository
                 .findByUrl(rawUrl)
-                .orElseThrow(() -> new ResourceNotFoundException(
+                .orElseThrow(() -> new NoSuchElementException(
                         MessageFormat.format("Resource with url \"{0}\" doesn't exist", rawUrl)
                 ));
     }

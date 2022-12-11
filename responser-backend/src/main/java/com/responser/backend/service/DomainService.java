@@ -1,6 +1,5 @@
 package com.responser.backend.service;
 
-import com.responser.backend.exceptions.DomainNotFoundException;
 import com.responser.backend.model.Domain;
 import com.responser.backend.repository.DomainRepository;
 import com.responser.backend.utils.UrlUtils;
@@ -11,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.net.URL;
 import java.text.MessageFormat;
+import java.util.NoSuchElementException;
 
 /**
  * DomainService
@@ -25,7 +25,7 @@ public class DomainService {
     private final DomainRepository domainRepository;
 
     public Domain getById(String id) {
-        return domainRepository.findById(id).orElseThrow(() -> new DomainNotFoundException(
+        return domainRepository.findById(id).orElseThrow(() -> new NoSuchElementException(
                 MessageFormat.format("Domain with id \"{0}\" doesn't exist", id)
         ));
     }
@@ -37,7 +37,7 @@ public class DomainService {
     public Domain getByUrl(URL url) {
         return domainRepository
                 .findByDomain(url.getHost())
-                .orElseThrow(() -> new DomainNotFoundException(
+                .orElseThrow(() -> new NoSuchElementException(
                         MessageFormat.format("Domain for url \"{0}\" doesn't exist", url.toString())
                 ));
     }
@@ -51,7 +51,7 @@ public class DomainService {
         try {
             return domainRepository.getReferenceById(id);
         } catch (EntityNotFoundException exception) {
-            throw new DomainNotFoundException(MessageFormat.format("Domain with id \"{0}\" doesn't exist", id));
+            throw new NoSuchElementException(MessageFormat.format("Domain with id \"{0}\" doesn't exist", id));
         }
     }
 }

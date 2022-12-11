@@ -1,5 +1,6 @@
 package com.responser.backend.service.review;
 
+import com.responser.backend.exceptions.EntityAlreadyExistException;
 import com.responser.backend.model.ReviewsCriteria;
 import com.responser.backend.model.Review;
 import com.responser.backend.model.User;
@@ -27,11 +28,11 @@ public class ReviewService {
 
     private final UserService userService;
 
-    public Review getResponseByIdAndUser(String responseId, String userId) {
-        return reviewRepository.findByIdAndUserId(responseId, userId).orElseThrow(() ->
+    public Review getResponseByIdAndUser(String reviewId, String userId) {
+        return reviewRepository.findByIdAndUserId(reviewId, userId).orElseThrow(() ->
                 new NoSuchElementException(MessageFormat.format(
-                        "Response with id ''{0}'' and user id ''{1}'' doesn't exist",
-                        responseId,
+                        "Review with id ''{0}'' and user id ''{1}'' doesn't exist",
+                        reviewId,
                         userId
                 ))
         );
@@ -41,9 +42,24 @@ public class ReviewService {
         return reviewRepository.findAll(ReviewSpecifications.getAll(criteria));
     }
 
+    public Boolean existsByResourceIdAndUserId(String resourceId, String userId) {
+        return reviewRepository.existsByResourceIdAndUserId(resourceId, userId);
+    }
+
     @Transactional
     public Review createReview(Review newReview) {
-        User referenceUser = userService.getUser(newReview.getUser().getId());
+        String resourceId = newReview.getResourceId();
+        String userId = newReview.getUser().getId();
+
+        if (existsByResourceIdAndUserId(resourceId, userId)) {
+            throw new EntityAlreadyExistException(MessageFormat.format(
+                    "User with id ''{0}'' already leve review for resource with id ''{1}''",
+                    userId,
+                    resourceId
+            ));
+        }
+
+        User referenceUser = userService.getUser(userId);
         newReview.setUser(referenceUser);
         return reviewRepository.save(newReview);
     }

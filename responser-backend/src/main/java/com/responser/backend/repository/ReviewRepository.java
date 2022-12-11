@@ -16,4 +16,6 @@ import java.util.Optional;
 public interface ReviewRepository extends JpaRepository<Review, String>, JpaSpecificationExecutor<Review> {
 
     Optional<Review> findByIdAndUserId(String reviewId, String userId);
+
+    Boolean existsByResourceIdAndUserId(String resourceId, String userId);
 }

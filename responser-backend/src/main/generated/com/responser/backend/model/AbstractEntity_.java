@@ -5,7 +5,7 @@ import jakarta.persistence.metamodel.StaticMetamodel;
 import java.time.LocalDateTime;
 import javax.annotation.processing.Generated;
 
-@Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor", date = "2022-12-10T15:05:48.119+0300")
+@Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor", date = "2022-12-11T21:39:08.971+0300")
 @StaticMetamodel(AbstractEntity.class)
 public abstract class AbstractEntity_ {
 
