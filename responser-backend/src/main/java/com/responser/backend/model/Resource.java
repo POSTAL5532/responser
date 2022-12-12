@@ -13,7 +13,6 @@ import lombok.*;
  */
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = true)
 @RequiredArgsConstructor
 @Entity
 @Table(name = "resources")

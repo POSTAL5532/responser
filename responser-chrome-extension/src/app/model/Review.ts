@@ -1,5 +1,6 @@
 import {User} from "./User";
 import moment, {Moment} from "moment";
+import {ReviewLike} from "./ReviewLike";
 
 export class Review {
 
@@ -15,6 +16,8 @@ export class Review {
 
     text: string;
 
+    reviewLikes: ReviewLike[];
+
     creationDate: Moment;
 
     updateDate: Moment;
@@ -23,7 +26,8 @@ export class Review {
         return Object.assign(new Review(), data, {
             user: User.deserialize(data.user),
             creationDate: moment(data.creationDate),
-            updateDate: moment(data.updateDate)
+            updateDate: moment(data.updateDate),
+            reviewLikes: data.reviewLikes.map((like: any) => ReviewLike.deserialize(like))
         });
     }
 }

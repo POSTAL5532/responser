@@ -94,3 +94,13 @@ VALUES ('10123123-67e6-4a4d-9e43-23fe464fc018', '0d7bc62f-7381-4a7a-969c-12c510a
         NULL, 4,
         'the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the!',
         '2022-11-06 23:15:37', NULL);
+
+INSERT INTO reviews_likes (id, user_id, review_id, positive, creation_date, update_date)
+VALUES ('11123123-67e6-4a4d-9e43-23fe464fc026', '0d7bc62f-7381-4a7a-969c-12c510ac887e',
+        '10123123-67e6-4a4d-9e43-23fe464fc018', true, '2022-11-03 23:15:37', '2022-11-03 23:31:37'),
+       ('12123123-67e6-4a4d-9e43-23fe464fc026', '0d7bc62f-7381-4a7a-969c-12c510ac888e',
+        '10123123-67e6-4a4d-9e43-23fe464fc018', true, '2022-11-03 23:15:37', '2022-11-03 23:31:37'),
+       ('13123123-67e6-4a4d-9e43-23fe464fc026', '0d7bc62f-7381-4a7a-969c-12c510ac889e',
+        '10123123-67e6-4a4d-9e43-23fe464fc018', false, '2022-11-03 23:15:37', '2022-11-03 23:31:37'),
+       ('14123123-67e6-4a4d-9e43-23fe464fc026', '0d7bc62f-7381-4a7a-969c-12c510ac889e',
+        '10123123-67e6-4a4d-9e43-23fe464fc019', false, '2022-11-03 23:15:37', '2022-11-03 23:31:37');

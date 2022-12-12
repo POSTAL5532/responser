@@ -21,6 +21,8 @@ public class ReviewConverter {
 
     private final UserConverter userConverter;
 
+    private final ReviewLikeConverter reviewLikeConverter;
+
     public Review toReview(String reviewId, ReviewDataPayload reviewDataPayload, String userId) {
         User fakeUser = new User();
         fakeUser.setId(userId);
@@ -44,8 +46,9 @@ public class ReviewConverter {
                 .id(review.getId())
                 .resourceId(review.getResourceId())
                 .user(userConverter.toUserInfoPayload(review.getUser()))
-                .text(review.getText())
                 .rating(review.getRating())
+                .text(review.getText())
+                .reviewLikes(reviewLikeConverter.toReviewLikePayloads(review.getLikes()))
                 .creationDate(review.getCreationDate())
                 .updateDate(review.getUpdateDate())
                 .build();

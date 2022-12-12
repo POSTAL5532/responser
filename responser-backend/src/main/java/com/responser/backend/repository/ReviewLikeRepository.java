@@ -1,6 +1,6 @@
 package com.responser.backend.repository;
 
-import com.responser.backend.model.ResponseLike;
+import com.responser.backend.model.ReviewLike;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -10,5 +10,5 @@ import org.springframework.stereotype.Repository;
  * @author SIE
  */
 @Repository
-public interface ReviewLikeRepository extends JpaRepository<ResponseLike, String> {
+public interface ReviewLikeRepository extends JpaRepository<ReviewLike, String> {
 }

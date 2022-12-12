@@ -33,8 +33,19 @@ type ReviewsCardProps = {
 }
 
 const ReviewsCard: React.FC<ReviewsCardProps> = (props: ReviewsCardProps) => {
-    const {review: {user, rating, text, creationDate, updateDate}, isCurrentUserReview} = props;
+    const {review: {user, rating, text, creationDate, reviewLikes}, isCurrentUserReview} = props;
     const className = classNames("review", {"current-user": isCurrentUserReview});
+
+    const positives = [];
+    const negatives = [];
+
+    reviewLikes.forEach(rl => {
+        if (rl.positive) {
+            positives.push(rl)
+        } else {
+            negatives.push(rl)
+        }
+    })
 
     return (
         <div className={className}>
@@ -44,6 +55,10 @@ const ReviewsCard: React.FC<ReviewsCardProps> = (props: ReviewsCardProps) => {
             <div className="rating-container"><Rating value={rating} readonly={true}/></div>
             <div className="text">{text}</div>
             <div className="published">{creationDate.format("MMM Do YY, h:mm a")}</div>
+            <div className="reactions">
+                <div className="positive">+ {positives.length}</div>
+                <div className="negative">- {negatives.length}</div>
+            </div>
         </div>
     );
 }

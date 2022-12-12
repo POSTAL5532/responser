@@ -3,6 +3,8 @@ package com.responser.backend.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Set;
+
 /**
  * Response
  *
@@ -10,7 +12,6 @@ import lombok.*;
  */
 @Getter
 @Setter
-@EqualsAndHashCode(callSuper = true)
 @RequiredArgsConstructor
 @Entity
 @Table(name = "reviews")
@@ -29,4 +30,7 @@ public class Review extends AbstractEntity{
     private Byte rating;
 
     private String text;
+
+    @OneToMany(mappedBy = "review", fetch = FetchType.EAGER)
+    private Set<ReviewLike> likes;
 }

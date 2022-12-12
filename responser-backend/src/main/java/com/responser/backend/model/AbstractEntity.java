@@ -9,6 +9,7 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 /**
  * AbstractEntity
@@ -17,7 +18,6 @@ import java.time.LocalDateTime;
  */
 @Getter
 @Setter
-@EqualsAndHashCode
 @RequiredArgsConstructor
 @MappedSuperclass
 public abstract class AbstractEntity {
@@ -35,4 +35,17 @@ public abstract class AbstractEntity {
     @Column(name = "update_date")
     @CreationTimestamp
     private LocalDateTime updateDate;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        AbstractEntity that = (AbstractEntity) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

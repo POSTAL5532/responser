@@ -58,19 +58,23 @@ public class ReviewsController {
 
     @PostMapping
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Review> createReview(@Valid @NotNull @RequestBody ReviewDataPayload review, Principal principal) {
+    public ResponseEntity<ReviewPayload> createReview(@Valid @NotNull @RequestBody ReviewDataPayload review, Principal principal) {
         Review newReview = reviewConverter.toReview(review, principal.getName());
-        return ResponseEntity.ok(reviewService.createReview(newReview));
+        ReviewPayload newReviewPayload = reviewConverter.toResponsePayload(reviewService.createReview(newReview));
+
+        return ResponseEntity.ok(newReviewPayload);
     }
 
     @PutMapping("/{reviewId}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Review> updateReview(
+    public ResponseEntity<ReviewPayload> updateReview(
             @Valid @NotNull @PathVariable String reviewId,
             @Valid @NotNull @RequestBody ReviewDataPayload responseDTO,
             Principal principal
     ) {
         Review review = reviewConverter.toReview(reviewId, responseDTO, principal.getName());
-        return ResponseEntity.ok(reviewService.updateReview(review));
+        ReviewPayload updatedReviewPayload = reviewConverter.toResponsePayload(reviewService.updateReview(review));
+
+        return ResponseEntity.ok(updatedReviewPayload);
     }
 }
