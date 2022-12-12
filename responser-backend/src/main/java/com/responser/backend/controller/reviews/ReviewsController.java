@@ -8,7 +8,7 @@ import com.responser.backend.converter.ReviewConverter;
 import com.responser.backend.model.Review;
 import com.responser.backend.service.review.ReviewService;
 import lombok.RequiredArgsConstructor;
-import org.apache.commons.lang3.ObjectUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -20,6 +20,7 @@ import jakarta.validation.constraints.NotNull;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * ResponsesController
@@ -39,8 +40,8 @@ public class ReviewsController {
 
     @GetMapping
     public ResponseEntity<List<ReviewPayload>> getReviews(@Valid @NotNull ReviewsRequestCriteria criteria, Principal principal) {
-        if (ObjectUtils.isNotEmpty(criteria.getForUserId())) {
-            if (ObjectUtils.isEmpty(principal) || !principal.getName().equals(criteria.getForUserId())) {
+        if (StringUtils.isNotEmpty(criteria.getForUserId())) {
+            if (Objects.isNull(principal) || !principal.getName().equals(criteria.getForUserId())) {
                 return ResponseEntity.status(HttpStatusCode.valueOf(401)).build();
             }
         }

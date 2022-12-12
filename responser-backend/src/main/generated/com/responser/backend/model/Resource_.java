@@ -4,7 +4,7 @@ import jakarta.persistence.metamodel.SingularAttribute;
 import jakarta.persistence.metamodel.StaticMetamodel;
 import javax.annotation.processing.Generated;
 
-@Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor", date = "2022-12-12T14:40:43.307+0300")
+@Generated(value = "org.hibernate.jpamodelgen.JPAMetaModelEntityProcessor", date = "2022-12-13T00:58:36.219+0300")
 @StaticMetamodel(Resource.class)
 public abstract class Resource_ extends com.responser.backend.model.AbstractEntity_ {
 

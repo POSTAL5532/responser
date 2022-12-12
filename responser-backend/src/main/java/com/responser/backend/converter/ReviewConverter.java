@@ -1,5 +1,6 @@
 package com.responser.backend.converter;
 
+import com.responser.backend.controller.reviewlike.payload.ReviewLikePayload;
 import com.responser.backend.controller.reviews.payload.ReviewDataPayload;
 import com.responser.backend.controller.reviews.payload.ReviewPayload;
 import com.responser.backend.model.Review;
@@ -7,7 +8,7 @@ import com.responser.backend.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -42,13 +43,17 @@ public class ReviewConverter {
     }
 
     public ReviewPayload toResponsePayload(Review review) {
+        Collection<ReviewLikePayload> reviewLikes = Objects.isNull(review.getLikes())
+                ? Collections.emptyList()
+                : reviewLikeConverter.toReviewLikePayloads(review.getLikes());
+
         return ReviewPayload.builder()
                 .id(review.getId())
                 .resourceId(review.getResourceId())
                 .user(userConverter.toUserInfoPayload(review.getUser()))
                 .rating(review.getRating())
                 .text(review.getText())
-                .reviewLikes(reviewLikeConverter.toReviewLikePayloads(review.getLikes()))
+                .reviewLikes(reviewLikes)
                 .creationDate(review.getCreationDate())
                 .updateDate(review.getUpdateDate())
                 .build();
