@@ -13,7 +13,16 @@ export const REVIEWS_PAGE_URL = "/reviews";
 
 const ReviewsPage: React.FC = () => {
     const {currentUser, isLoading} = useContext<GlobalAppStore>(GlobalAppStoreContext);
-    const {domain, resource, reviews, currentUserReview, init} = useReviewsPageStore();
+    const {
+        domain,
+        resource,
+        reviews,
+        currentUserReview,
+        init,
+        createReviewLike,
+        updateReviewLike,
+        removeReviewLike
+    } = useReviewsPageStore();
 
     useEffect(() => {
         if (!isLoading) init(currentUser?.id);
@@ -43,6 +52,8 @@ const ReviewsPage: React.FC = () => {
         return currentUserReview ? "Edit you review" : "Leave review";
     };
 
+    const reviewsList = currentUserReview ? [currentUserReview, ...reviews] : reviews;
+
     return (
         <Page className="reviews-page">
             <div className="header">
@@ -50,7 +61,10 @@ const ReviewsPage: React.FC = () => {
                 {resource ? <div className="resource">{resource.name}</div> : "LOADING..."}
             </div>
 
-            <ReviewsList reviews={reviews} currentUserReview={currentUserReview}/>
+            <ReviewsList reviews={reviewsList}
+                         createLike={createReviewLike}
+                         updateLike={updateReviewLike}
+                         removeLike={removeReviewLike}/>
 
             <div className="leave-review-container">
                 <Button disabled={!currentUser} onClick={onButtonClick}>{getButtonText()}</Button>

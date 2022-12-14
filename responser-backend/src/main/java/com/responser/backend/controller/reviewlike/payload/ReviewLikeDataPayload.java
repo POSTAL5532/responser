@@ -10,9 +10,6 @@ import lombok.NoArgsConstructor;
 public class ReviewLikeDataPayload {
 
     @NotBlank
-    private String userId;
-
-    @NotBlank
     private String reviewId;
 
     @NotNull

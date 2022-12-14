@@ -14,16 +14,21 @@ import java.util.stream.Collectors;
 @Service
 public class ReviewLikeConverter {
 
-    public ReviewLike toReviewLike(ReviewLikeDataPayload dataPayload, String userId) {
+    public ReviewLike toReviewLike(String likeId, ReviewLikeDataPayload dataPayload, String userId) {
         Review fakeReview = new Review();
         fakeReview.setId(dataPayload.getReviewId());
 
         ReviewLike reviewLike = new ReviewLike();
+        reviewLike.setId(likeId);
         reviewLike.setReview(fakeReview);
         reviewLike.setUserId(userId);
         reviewLike.setPositive(dataPayload.getPositive());
 
         return reviewLike;
+    }
+
+    public ReviewLike toReviewLike(ReviewLikeDataPayload dataPayload, String userId) {
+        return toReviewLike(null, dataPayload, userId);
     }
 
     public Collection<ReviewLikePayload> toReviewLikePayloads(Collection<ReviewLike> reviewLikes) {

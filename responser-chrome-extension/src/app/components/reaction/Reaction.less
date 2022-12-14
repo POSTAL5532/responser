@@ -1,0 +1,30 @@
+@import "globalsLess";
+
+.reaction {
+  display: flex;
+  align-items: center;
+  margin-right: 6px;
+  cursor: pointer;
+  border-radius: 4px;
+  padding: 4px;
+
+  &:hover {
+    background-color: @primary-color-light;
+  }
+
+  .count {
+    .fontMulishRegular();
+    font-size: 16px;
+    margin-right: 4px;
+  }
+
+  .reaction-icon {
+    display: flex;
+    color: @primary-color;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}

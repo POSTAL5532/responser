@@ -13,6 +13,9 @@ import {CreateResourcePayload} from "../../model/CreateResourcePayload";
 import {ExtensionService} from "../../service/extension/ExtensionService";
 import {PageInfo} from "../../model/PageInfo";
 import {ReviewsRequestCriteria} from "../../model/ReviewsRequestCriteria";
+import {ReviewLike} from "../../model/ReviewLike";
+import {ReviewLikeData} from "../../model/ReviewLikeData";
+import {ReviewLikeService} from "../../service/ReviewLikeService";
 
 export class ReviewsPageStore extends LoadingStore {
 
@@ -23,6 +26,8 @@ export class ReviewsPageStore extends LoadingStore {
     resourceService: ResourceService = new ResourceService();
 
     reviewService: ReviewService = new ReviewService();
+
+    reviewLikeService: ReviewLikeService = new ReviewLikeService();
 
     currentPageInfo: PageInfo;
 
@@ -98,6 +103,32 @@ export class ReviewsPageStore extends LoadingStore {
         }
 
         this.reviews = await this.reviewService.getReviews(criteria);
+    }
+
+    createReviewLike = async (review: Review, positive: boolean): Promise<void> => {
+        await this.reviewLikeService.createLike(new ReviewLikeData(review.id, positive));
+        await this.refreshReviewInArray(review.id);
+    }
+
+    updateReviewLike = async (reviewLike: ReviewLike, positive: boolean): Promise<void> => {
+        await this.reviewLikeService.updateLike(new ReviewLikeData(reviewLike.reviewId, positive), reviewLike.id);
+        await this.refreshReviewInArray(reviewLike.reviewId);
+    }
+
+    removeReviewLike = async (reviewLike: ReviewLike): Promise<void> => {
+        await this.reviewLikeService.deleteLike(reviewLike.id);
+        await this.refreshReviewInArray(reviewLike.reviewId);
+    }
+
+    private refreshReviewInArray = async (reviewId: string): Promise<void> => {
+        const updatedReview = await this.reviewService.getReview(reviewId);
+
+        if (updatedReview.id === this.currentUserReview.id) {
+            this.currentUserReview = updatedReview;
+        } else {
+            const updatedIndex = this.reviews.findIndex(r => r.id === updatedReview.id);
+            this.reviews.splice(updatedIndex, 1, updatedReview);
+        }
     }
 }
 

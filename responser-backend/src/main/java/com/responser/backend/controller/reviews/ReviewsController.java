@@ -51,9 +51,8 @@ public class ReviewsController {
     }
 
     @GetMapping("/{reviewId}")
-    @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<ReviewPayload> getReview(@Valid @NotBlank @PathVariable String reviewId, Principal principal) {
-        Review review = reviewService.getResponseByIdAndUser(reviewId, principal.getName());
+    public ResponseEntity<ReviewPayload> getReview(@Valid @NotBlank @PathVariable String reviewId) {
+        Review review = reviewService.getReview(reviewId);
         return ResponseEntity.ok(reviewConverter.toResponsePayload(review));
     }
 

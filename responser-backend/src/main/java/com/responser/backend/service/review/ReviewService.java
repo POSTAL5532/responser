@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * ResponsesService
+ * ReviewService
  *
  * @author SIE
  */
@@ -28,13 +28,17 @@ public class ReviewService {
 
     private final UserService userService;
 
-    public Review getResponseByIdAndUser(String reviewId, String userId) {
+    public Review getReviewByIdAndUser(String reviewId, String userId) {
         return reviewRepository.findByIdAndUserId(reviewId, userId).orElseThrow(() ->
                 new NoSuchElementException(MessageFormat.format(
-                        "Review with id ''{0}'' and user id ''{1}'' doesn't exist",
-                        reviewId,
-                        userId
+                        "Review with id ''{0}'' and user id ''{1}'' doesn't exist", reviewId, userId
                 ))
+        );
+    }
+
+    public Review getReview(String reviewId) {
+        return reviewRepository.findById(reviewId).orElseThrow(() ->
+                new NoSuchElementException(MessageFormat.format("Review ''{0}'' doesn't exist", reviewId))
         );
     }
 
@@ -66,7 +70,7 @@ public class ReviewService {
 
     @Transactional
     public Review updateReview(Review review) {
-        Review oldReview = this.getResponseByIdAndUser(review.getId(), review.getUser().getId());
+        Review oldReview = this.getReviewByIdAndUser(review.getId(), review.getUser().getId());
         oldReview.setText(review.getText());
         oldReview.setRating(review.getRating());
 
