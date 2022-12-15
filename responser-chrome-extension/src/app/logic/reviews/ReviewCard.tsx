@@ -1,13 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
+import {observer} from "mobx-react";
 import {Review} from "../../model/Review";
 import {User} from "../../model/User";
 import classNames from "classnames";
 import {Rating} from "../../components/rating/Rating";
 import {Reaction} from "../../components/reaction/Reaction";
-import {observer} from "mobx-react";
 import {ReviewLike} from "../../model/ReviewLike";
 import {Remove} from "../../components/remove/Remove";
 import {ConditionShow} from "../../components/ConditionShow";
+import {useIsOverflow} from "../../utils/LayoutUtils";
+import "./ReviewCard.less";
 
 type ReviewCardProps = {
     review: Review;
@@ -18,12 +20,18 @@ type ReviewCardProps = {
     onRemove?: (review: Review) => void;
 }
 
-
 const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
     const {review, currentUser, createLike, updateLike, removeLike, onRemove} = props;
     const {user, rating, text, creationDate, reviewLikes} = review;
     const isCurrentUserReview = currentUser && currentUser.id === user.id;
-    const className = classNames("review", {"current-user": isCurrentUserReview});
+    const className = classNames("review-card", {"current-user": isCurrentUserReview});
+
+    const [expanded, setExpanded] = useState<boolean>(false);
+    const [wasOverflowed, setWasOverflowed] = useState<boolean>(false);
+    const textRef = React.useRef<HTMLDivElement>();
+    useIsOverflow(textRef, (hasOverflow) => {
+        if (hasOverflow) setWasOverflowed(true)
+    });
 
     const positives = [];
     const negatives = [];
@@ -65,9 +73,18 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
                     <Remove onClick={() => onRemove?.(review)}/>
                 </ConditionShow>
             </div>
+
             <div className="rating-container"><Rating value={rating} readonly={true}/></div>
-            <div className="text">{text}</div>
+            <div className={classNames("text", {"expanded": expanded})} ref={textRef}>{text}</div>
+
+            <ConditionShow condition={wasOverflowed}>
+                <div className="show-more" onClick={() => setExpanded(!expanded)}>
+                    {expanded ? "show less" : "show more"}
+                </div>
+            </ConditionShow>
+
             <div className="published">{creationDate.format("MMM Do YY, h:mm a")}</div>
+
             <div className="reactions">
                 <Reaction count={positives.length}
                           positive={true}

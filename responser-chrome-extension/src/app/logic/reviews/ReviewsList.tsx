@@ -19,7 +19,8 @@ const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
     const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
 
     const mapReviewCard = (review: Review) => {
-        return <ReviewCard review={review}
+        return <ReviewCard key={review.id}
+                           review={review}
                            currentUser={currentUser}
                            createLike={createLike}
                            updateLike={updateLike}
