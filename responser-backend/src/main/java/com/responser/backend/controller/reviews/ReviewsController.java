@@ -77,4 +77,11 @@ public class ReviewsController {
 
         return ResponseEntity.ok(updatedReviewPayload);
     }
+
+    @DeleteMapping("/{reviewId}")
+    @PreAuthorize("isAuthenticated()")
+    public ResponseEntity<Void> removeReview(@Valid @NotNull @PathVariable String reviewId, Principal principal) {
+        reviewService.removeReview(reviewId, principal.getName());
+        return ResponseEntity.ok().build();
+    }
 }

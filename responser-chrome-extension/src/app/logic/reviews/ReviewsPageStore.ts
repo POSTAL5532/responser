@@ -105,6 +105,11 @@ export class ReviewsPageStore extends LoadingStore {
         this.reviews = await this.reviewService.getReviews(criteria);
     }
 
+    removeReview = async (review: Review): Promise<void> => {
+        await this.reviewService.deleteReview(review.id);
+        this.currentUserReview = null;
+    }
+
     createReviewLike = async (review: Review, positive: boolean): Promise<void> => {
         await this.reviewLikeService.createLike(new ReviewLikeData(review.id, positive));
         await this.refreshReviewInArray(review.id);
@@ -123,7 +128,7 @@ export class ReviewsPageStore extends LoadingStore {
     private refreshReviewInArray = async (reviewId: string): Promise<void> => {
         const updatedReview = await this.reviewService.getReview(reviewId);
 
-        if (updatedReview.id === this.currentUserReview.id) {
+        if (updatedReview.id === this.currentUserReview?.id) {
             this.currentUserReview = updatedReview;
         } else {
             const updatedIndex = this.reviews.findIndex(r => r.id === updatedReview.id);

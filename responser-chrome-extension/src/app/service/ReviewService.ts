@@ -32,4 +32,8 @@ export class ReviewService {
         const updatedReview = await this.client.executePutRequest(`${BASE_REVIEWS_URL}/${reviewId}`, payload);
         return Review.deserialize(updatedReview);
     }
+
+    deleteReview = async (reviewId: string): Promise<void> => {
+        await this.client.executeDeleteRequest(`${BASE_REVIEWS_URL}/${reviewId}`);
+    }
 }

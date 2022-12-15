@@ -6,6 +6,8 @@ import {Rating} from "../../components/rating/Rating";
 import {Reaction} from "../../components/reaction/Reaction";
 import {observer} from "mobx-react";
 import {ReviewLike} from "../../model/ReviewLike";
+import {Remove} from "../../components/remove/Remove";
+import {ConditionShow} from "../../components/ConditionShow";
 
 type ReviewCardProps = {
     review: Review;
@@ -13,10 +15,12 @@ type ReviewCardProps = {
     createLike: (review: Review, positive: boolean) => void;
     updateLike: (reviewLike: ReviewLike, positive: boolean) => void;
     removeLike: (reviewLike: ReviewLike) => void;
+    onRemove?: (review: Review) => void;
 }
 
+
 const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
-    const {review, currentUser, createLike, updateLike, removeLike} = props;
+    const {review, currentUser, createLike, updateLike, removeLike, onRemove} = props;
     const {user, rating, text, creationDate, reviewLikes} = review;
     const isCurrentUserReview = currentUser && currentUser.id === user.id;
     const className = classNames("review", {"current-user": isCurrentUserReview});
@@ -53,8 +57,13 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
 
     return (
         <div className={className}>
-            <div className="user-name">
-                {user.firstName} {user.lastName} <span className="you">{isCurrentUserReview ? "(you)" : null}</span>
+            <div className="card-header">
+                <div className="user-name">
+                    {user.firstName} {user.lastName} <span className="you">{isCurrentUserReview ? "(you)" : null}</span>
+                </div>
+                <ConditionShow condition={isCurrentUserReview}>
+                    <Remove onClick={() => onRemove?.(review)}/>
+                </ConditionShow>
             </div>
             <div className="rating-container"><Rating value={rating} readonly={true}/></div>
             <div className="text">{text}</div>

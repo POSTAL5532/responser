@@ -11,10 +11,11 @@ type ReviewsListProps = {
     createLike: (review: Review, positive: boolean) => void;
     updateLike: (reviewLike: ReviewLike, positive: boolean) => void;
     removeLike: (reviewLike: ReviewLike) => void;
+    onRemove?: (review: Review) => void;
 }
 
 const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
-    const {reviews, createLike, updateLike, removeLike} = props;
+    const {reviews, createLike, updateLike, removeLike, onRemove} = props;
     const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
 
     const mapReviewCard = (review: Review) => {
@@ -22,7 +23,8 @@ const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
                            currentUser={currentUser}
                            createLike={createLike}
                            updateLike={updateLike}
-                           removeLike={removeLike}/>;
+                           removeLike={removeLike}
+                           onRemove={onRemove}/>;
     }
 
     return (

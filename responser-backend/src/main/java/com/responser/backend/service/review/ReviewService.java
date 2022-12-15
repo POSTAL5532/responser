@@ -50,6 +50,10 @@ public class ReviewService {
         return reviewRepository.existsByResourceIdAndUserId(resourceId, userId);
     }
 
+    public Boolean existsByIdAndUserId(String id, String userId) {
+        return reviewRepository.existsByIdAndUserId(id, userId);
+    }
+
     @Transactional
     public Review createReview(Review newReview) {
         String resourceId = newReview.getResourceId();
@@ -75,5 +79,16 @@ public class ReviewService {
         oldReview.setRating(review.getRating());
 
         return reviewRepository.save(oldReview);
+    }
+
+    @Transactional
+    public void removeReview(String reviewId, String userId) {
+        if (!existsByIdAndUserId(reviewId, userId)) {
+            throw new NoSuchElementException(MessageFormat.format(
+                    "Review ''{0}'' from user ''{1}'' doesn't exist.", reviewId, userId
+            ));
+        }
+
+        reviewRepository.deleteById(reviewId);
     }
 }

@@ -21,7 +21,8 @@ const ReviewsPage: React.FC = () => {
         init,
         createReviewLike,
         updateReviewLike,
-        removeReviewLike
+        removeReviewLike,
+        removeReview
     } = useReviewsPageStore();
 
     useEffect(() => {
@@ -64,7 +65,8 @@ const ReviewsPage: React.FC = () => {
             <ReviewsList reviews={reviewsList}
                          createLike={createReviewLike}
                          updateLike={updateReviewLike}
-                         removeLike={removeReviewLike}/>
+                         removeLike={removeReviewLike}
+                         onRemove={removeReview}/>
 
             <div className="leave-review-container">
                 <Button disabled={!currentUser} onClick={onButtonClick}>{getButtonText()}</Button>

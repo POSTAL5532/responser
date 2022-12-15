@@ -18,4 +18,6 @@ public interface ReviewRepository extends JpaRepository<Review, String>, JpaSpec
     Optional<Review> findByIdAndUserId(String reviewId, String userId);
 
     Boolean existsByResourceIdAndUserId(String resourceId, String userId);
+
+    Boolean existsByIdAndUserId(String id, String userId);
 }
