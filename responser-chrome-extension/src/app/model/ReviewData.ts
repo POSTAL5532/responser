@@ -8,7 +8,6 @@ export class ReviewData {
 
     text: string;
 
-
     constructor(resourceId: string, rating: number, text: string) {
         makeAutoObservable(this);
         this.resourceId = resourceId;

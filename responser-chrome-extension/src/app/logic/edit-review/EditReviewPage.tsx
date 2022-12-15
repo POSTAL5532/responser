@@ -34,7 +34,7 @@ const EditReviewPage: React.FC<EditReviewPageProps> = observer((props: EditRevie
     return (
         <Page className="edit-review-page">
             <div className="header">Create new review</div>
-            <EditReviewForm reviewData={reviewData} onSubmit={onSubmit} onCancel={onCancelClick}/>
+            <EditReviewForm reviewData={reviewData} onSubmit={onSubmit} onCancel={onCancelClick} isEdit={!!reviewId}/>
         </Page>
     );
 });

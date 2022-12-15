@@ -9,10 +9,11 @@ type EditReviewFormProps = {
     reviewData: ReviewData;
     onSubmit: () => void;
     onCancel: () => void;
+    isEdit?: boolean;
 }
 
 const EditReviewForm: React.FC<EditReviewFormProps> = (props: EditReviewFormProps) => {
-    const {reviewData, onSubmit, onCancel} = props;
+    const {reviewData, onSubmit, onCancel, isEdit} = props;
 
     const onRatingChange = (rating: number) => {
         reviewData.rating = rating;
@@ -32,7 +33,7 @@ const EditReviewForm: React.FC<EditReviewFormProps> = (props: EditReviewFormProp
                 <Textarea name="review" value={reviewData?.text} onChange={onTextChange}/>
             </div>
             <div className="leave-review-container">
-                <Button onClick={onSubmit} disabled={!reviewData?.text}>Leave response</Button>
+                <Button onClick={onSubmit} disabled={!reviewData?.text}>{isEdit ? "Save" : "Leave"} review</Button>
             </div>
         </>
     )

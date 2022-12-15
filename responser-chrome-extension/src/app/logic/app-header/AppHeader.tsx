@@ -46,10 +46,9 @@ const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
     return (
         <div className="user-block">
             <div className="user-info" onClick={onUserInfoClick}>
-                        <span className="user-full-name">
-                            {user.firstName} {user.lastName}
-                        </span>
-                <span className="user-email">{user.email}</span>
+                <span className="user-full-name">
+                    {user.firstName} {user.lastName}
+                </span>
             </div>
             <Button outlined={true} onClick={onLogOutClick}>Logout</Button>
         </div>
