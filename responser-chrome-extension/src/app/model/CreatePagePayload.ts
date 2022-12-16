@@ -1,4 +1,4 @@
-export class CreateResourcePayload {
+export class CreatePagePayload {
 
     domainId: string;
 

@@ -1,18 +1,18 @@
 package com.responser.backend.repository;
 
-import com.responser.backend.model.Resource;
+import com.responser.backend.model.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 /**
- * ResourceRepository
+ * PagesRepository
  *
  * @author SIE
  */
 @Repository
-public interface ResourceRepository extends JpaRepository<Resource, String> {
+public interface PagesRepository extends JpaRepository<Page, String> {
 
-    Optional<Resource> findByUrl(String url);
+    Optional<Page> findByUrl(String url);
 }

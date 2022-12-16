@@ -27,5 +27,5 @@ public class Domain extends AbstractEntity {
     private Boolean hasSsl;
 
     @OneToMany(mappedBy = "domain", fetch = FetchType.LAZY)
-    private Set<Resource> resources;
+    private Set<Page> pages;
 }

@@ -1,4 +1,4 @@
-package com.responser.backend.controller.resource.payload;
+package com.responser.backend.controller.page.payload;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,14 +7,14 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 /**
- * CreateResourcePayload
+ * CreatePagePayload
  *
  * @author SIE
  */
 //TODO: Need validation upgrading
 @Data
 @NoArgsConstructor
-public class CreateResourcePayload {
+public class CreatePagePayload {
 
     @NotBlank(message = "Domain id must be specified")
     private String domainId;

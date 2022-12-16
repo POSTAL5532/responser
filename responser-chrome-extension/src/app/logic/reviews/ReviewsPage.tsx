@@ -15,7 +15,7 @@ const ReviewsPage: React.FC = () => {
     const {currentUser, isLoading} = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const {
         domain,
-        resource,
+        page,
         reviews,
         currentUserReview,
         init,
@@ -30,7 +30,7 @@ const ReviewsPage: React.FC = () => {
     }, [isLoading]);
 
     const navigateToLeaveNewReview = () => {
-        navigateTo(getNewReviewPageUrl(resource.id));
+        navigateTo(getNewReviewPageUrl(page.id));
     }
 
     const navigateToEditReview = () => {
@@ -58,8 +58,8 @@ const ReviewsPage: React.FC = () => {
     return (
         <Page className="reviews-page">
             <div className="header">
-                {domain ? <div className="domain">{domain.domain}</div> : "LOADING..."}
-                {resource ? <div className="resource">{resource.name}</div> : "LOADING..."}
+                {domain ? <div className="domain-info">{domain.domain}</div> : "LOADING..."}
+                {page ? <div className="page-info">{page.name}</div> : "LOADING..."}
             </div>
 
             <ReviewsList reviews={reviewsList}

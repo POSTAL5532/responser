@@ -4,12 +4,12 @@ import {LoadingStore} from "../../utils/LoadingStore";
 import {ReviewService} from "../../service/ReviewService";
 import {useState} from "react";
 import {Domain} from "../../model/Domain";
-import {Resource} from "../../model/Resource";
+import {Page} from "../../model/Page";
 import {DomainService} from "../../service/DomainService";
-import {ResourceService} from "../../service/ResourceService";
+import {PagesService} from "../../service/PagesService";
 import {ApiErrorType} from "../../model/ApiError";
 import {CreateDomainPayload} from "../../model/CreateDomainPayload";
-import {CreateResourcePayload} from "../../model/CreateResourcePayload";
+import {CreatePagePayload} from "../../model/CreatePagePayload";
 import {ExtensionService} from "../../service/extension/ExtensionService";
 import {PageInfo} from "../../model/PageInfo";
 import {ReviewsRequestCriteria} from "../../model/ReviewsRequestCriteria";
@@ -23,7 +23,7 @@ export class ReviewsPageStore extends LoadingStore {
 
     domainService: DomainService = new DomainService();
 
-    resourceService: ResourceService = new ResourceService();
+    pagesService: PagesService = new PagesService();
 
     reviewService: ReviewService = new ReviewService();
 
@@ -33,7 +33,7 @@ export class ReviewsPageStore extends LoadingStore {
 
     domain: Domain;
 
-    resource: Resource;
+    page: Page;
 
     currentUserReview: Review;
 
@@ -47,7 +47,7 @@ export class ReviewsPageStore extends LoadingStore {
     init = async (currentUserId?: string) => {
         this.currentPageInfo = (await this.extensionService.getCurrentPageInfo()).data;
         await this.initDomain();
-        await this.initResource();
+        await this.initPage();
 
         if (currentUserId) {
             await this.loadCurrenUserReview(currentUserId);
@@ -69,22 +69,22 @@ export class ReviewsPageStore extends LoadingStore {
         }
     }
 
-    initResource = async () => {
+    initPage = async () => {
         const {url, description, title} = this.currentPageInfo;
 
         try {
-            this.resource = await this.resourceService.getResourceByUrl(url);
+            this.page = await this.pagesService.getPageByUrl(url);
         } catch (error: any) {
             if (error.errorType === ApiErrorType.ENTITY_NOT_FOUND) {
-                const newResourcePayload = new CreateResourcePayload(this.domain.id, url, title, description);
-                this.resource = await this.resourceService.createResource(newResourcePayload);
+                const createPagePayload = new CreatePagePayload(this.domain.id, url, title, description);
+                this.page = await this.pagesService.createPage(createPagePayload);
             }
         }
     }
 
     loadCurrenUserReview = async (currentUserId: string) => {
         const criteria = new ReviewsRequestCriteria();
-        criteria.resourceId = this.resource.id;
+        criteria.resourceId = this.page.id;
         criteria.forUserId = currentUserId;
 
         const reviews = await this.reviewService.getReviews(criteria);
@@ -96,7 +96,7 @@ export class ReviewsPageStore extends LoadingStore {
 
     loadReviews = async (currentUserId: string) => {
         const criteria = new ReviewsRequestCriteria();
-        criteria.resourceId = this.resource.id;
+        criteria.resourceId = this.page.id;
 
         if (!!currentUserId) {
             criteria.excludeUserId = currentUserId;

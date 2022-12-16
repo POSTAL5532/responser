@@ -1,7 +1,7 @@
 import moment, {Moment} from "moment";
 import {Domain} from "./Domain";
 
-export class Resource {
+export class Page {
 
     id: string;
 
@@ -17,8 +17,8 @@ export class Resource {
 
     updateDate: Moment;
 
-    public static deserialize(data: any): Resource {
-        return Object.assign(new Resource(), data, {
+    public static deserialize(data: any): Page {
+        return Object.assign(new Page(), data, {
             domain: Domain.deserialize(data.domain),
             createdTimestamp: moment(data.createdTimestamp),
             updateDate: moment(data.updateDate)

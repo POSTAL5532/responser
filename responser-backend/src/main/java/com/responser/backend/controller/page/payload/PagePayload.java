@@ -1,4 +1,4 @@
-package com.responser.backend.controller.resource.payload;
+package com.responser.backend.controller.page.payload;
 
 import com.responser.backend.controller.domain.payload.DomainPayload;
 import lombok.AllArgsConstructor;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 /**
- * ResourcePayload
+ * PagePayload
  *
  * @author SIE
  */
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ResourcePayload {
+public class PagePayload {
 
     private String id;
 

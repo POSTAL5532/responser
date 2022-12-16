@@ -7,7 +7,7 @@ import jakarta.persistence.Table;
 import lombok.*;
 
 /**
- * Resource
+ * Page
  *
  * @author SIE
  */
@@ -15,8 +15,8 @@ import lombok.*;
 @Setter
 @RequiredArgsConstructor
 @Entity
-@Table(name = "resources")
-public class Resource extends AbstractEntity {
+@Table(name = "pages")
+public class Page extends AbstractEntity {
 
     private String url;
 

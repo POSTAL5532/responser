@@ -25,7 +25,7 @@ CREATE TABLE domains
     PRIMARY KEY (id)
 );
 
-CREATE TABLE resources
+CREATE TABLE pages
 (
     id            VARCHAR(36) NOT NULL UNIQUE,
     domain_id     VARCHAR(36) NOT NULL REFERENCES domains (id) ON DELETE CASCADE,
@@ -41,7 +41,7 @@ CREATE TABLE reviews
 (
     id            VARCHAR(36) NOT NULL UNIQUE,
     user_id       VARCHAR(36) NOT NULL REFERENCES users (id) ON DELETE CASCADE,
-    resource_id   VARCHAR(36) NOT NULL REFERENCES resources (id) ON DELETE CASCADE,
+    resource_id   VARCHAR(36) NOT NULL REFERENCES pages (id) ON DELETE CASCADE,
     review_id     VARCHAR(36) REFERENCES reviews (id) ON DELETE CASCADE,
     rating        SMALLINT    NOT NULL,
     text          TEXT,

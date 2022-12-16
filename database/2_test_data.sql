@@ -28,7 +28,7 @@ INSERT INTO domains (id, domain, has_ssl, name, description, creation_date, upda
 VALUES ('10b7a065-67e6-4a4d-9e43-23fe464fc017', 'gidonline.io', true, 'gidonline', 'Some description',
         '2022-10-25 22:13:37', NULL);
 
-INSERT INTO resources (id, domain_id, url, name, description, creation_date, update_date)
+INSERT INTO pages (id, domain_id, url, name, description, creation_date, update_date)
 VALUES ('10123065-67e6-4a4d-9e43-23fe464fc017',
         '10b7a065-67e6-4a4d-9e43-23fe464fc017',
         'https://gidonline.io/film/robot-po-imeni-chappi',
