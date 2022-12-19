@@ -36,3 +36,7 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://localhost:8081
+responser:
+  api:
+    allowedOrigins:
+      - http://127.0.0.1:3000

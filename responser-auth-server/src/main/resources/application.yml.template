@@ -37,3 +37,6 @@ responser:
       -
         clientId: responser-web-client
         clientSecret: responser-web-client-secret
+        redirectUri: http://127.0.0.1:3000/auth-code
+    allowedOrigins:
+      - http://127.0.0.1:3000
