@@ -4,6 +4,7 @@ import com.responser.backend.model.*;
 import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Predicate;
+import org.apache.commons.lang3.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -26,6 +27,10 @@ public class ReviewSpecifications {
 
             if (StringUtils.isNotBlank(criteria.getExcludeUserId())) {
                 predicates.add(criteriaBuilder.notEqual(userRoot.get(User_.ID), criteria.getExcludeUserId()));
+            }
+
+            if (ObjectUtils.isNotEmpty(criteria.getResourceType())) {
+                predicates.add(criteriaBuilder.equal(root.get(Review_.RESOURCE_TYPE), criteria.getResourceType()));
             }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));

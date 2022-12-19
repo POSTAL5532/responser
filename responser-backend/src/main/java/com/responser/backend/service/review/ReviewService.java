@@ -1,16 +1,20 @@
 package com.responser.backend.service.review;
 
 import com.responser.backend.exceptions.EntityAlreadyExistException;
+import com.responser.backend.model.ResourceType;
 import com.responser.backend.model.ReviewsCriteria;
 import com.responser.backend.model.Review;
 import com.responser.backend.model.User;
 import com.responser.backend.repository.ReviewRepository;
+import com.responser.backend.service.DomainService;
+import com.responser.backend.service.PagesService;
 import com.responser.backend.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.MessageFormat;
+import static java.text.MessageFormat.*;
+
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -26,11 +30,15 @@ public class ReviewService {
 
     private final ReviewRepository reviewRepository;
 
+    private final DomainService domainService;
+
+    private final PagesService pagesService;
+
     private final UserService userService;
 
     public Review getReviewByIdAndUser(String reviewId, String userId) {
         return reviewRepository.findByIdAndUserId(reviewId, userId).orElseThrow(() ->
-                new NoSuchElementException(MessageFormat.format(
+                new NoSuchElementException(format(
                         "Review with id ''{0}'' and user id ''{1}'' doesn't exist", reviewId, userId
                 ))
         );
@@ -38,7 +46,7 @@ public class ReviewService {
 
     public Review getReview(String reviewId) {
         return reviewRepository.findById(reviewId).orElseThrow(() ->
-                new NoSuchElementException(MessageFormat.format("Review ''{0}'' doesn't exist", reviewId))
+                new NoSuchElementException(format("Review ''{0}'' doesn't exist", reviewId))
         );
     }
 
@@ -54,16 +62,26 @@ public class ReviewService {
         return reviewRepository.existsByIdAndUserId(id, userId);
     }
 
+    public Boolean isResourceExists(String resourceId, ResourceType resourceType) {
+        return switch (resourceType) {
+            case PAGE -> pagesService.existsById(resourceId);
+            case SITE -> domainService.existsById(resourceId);
+            default -> throw new IllegalArgumentException("Bad resource type: " + resourceType);
+        };
+    }
+
     @Transactional
     public Review createReview(Review newReview) {
         String resourceId = newReview.getResourceId();
         String userId = newReview.getUser().getId();
 
+        if (!isResourceExists(resourceId, newReview.getResourceType())) {
+            throw new NoSuchElementException(format("Resource ''{0}'' ({1}) doesn't exist.", userId, resourceId));
+        }
+
         if (existsByResourceIdAndUserId(resourceId, userId)) {
-            throw new EntityAlreadyExistException(MessageFormat.format(
-                    "User with id ''{0}'' already leve review for resource with id ''{1}''",
-                    userId,
-                    resourceId
+            throw new EntityAlreadyExistException(format(
+                    "User ''{0}'' already left review for resource ''{1}''", userId, resourceId
             ));
         }
 
@@ -84,7 +102,7 @@ public class ReviewService {
     @Transactional
     public void removeReview(String reviewId, String userId) {
         if (!existsByIdAndUserId(reviewId, userId)) {
-            throw new NoSuchElementException(MessageFormat.format(
+            throw new NoSuchElementException(format(
                     "Review ''{0}'' from user ''{1}'' doesn't exist.", reviewId, userId
             ));
         }

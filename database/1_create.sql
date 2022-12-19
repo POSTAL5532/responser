@@ -1,4 +1,5 @@
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE
+EXTENSION IF NOT EXISTS "uuid-ossp";
 
 CREATE TABLE users
 (
@@ -39,13 +40,14 @@ CREATE TABLE pages
 
 CREATE TABLE reviews
 (
-    id            VARCHAR(36) NOT NULL UNIQUE,
-    user_id       VARCHAR(36) NOT NULL REFERENCES users (id) ON DELETE CASCADE,
-    resource_id   VARCHAR(36) NOT NULL REFERENCES pages (id) ON DELETE CASCADE,
+    id            VARCHAR(36)   NOT NULL UNIQUE,
+    user_id       VARCHAR(36)   NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+    resource_type VARCHAR(36)   NOT NULL,
+    resource_id   VARCHAR(36)   NOT NULL,
     review_id     VARCHAR(36) REFERENCES reviews (id) ON DELETE CASCADE,
-    rating        SMALLINT    NOT NULL,
+    rating        SMALLINT      NOT NULL,
     text          TEXT,
-    creation_date TIMESTAMP   NOT NULL,
+    creation_date TIMESTAMP     NOT NULL,
     update_date   TIMESTAMP,
     PRIMARY KEY (id)
 );

@@ -47,11 +47,7 @@ public class DomainService {
         return domainRepository.save(newDomain);
     }
 
-    public Domain getDomainProxy(String id) {
-        try {
-            return domainRepository.getReferenceById(id);
-        } catch (EntityNotFoundException exception) {
-            throw new NoSuchElementException(MessageFormat.format("Domain with id \"{0}\" doesn't exist", id));
-        }
+    public Boolean existsById(String id) {
+        return domainRepository.existsById(id);
     }
 }

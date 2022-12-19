@@ -15,11 +15,11 @@ import java.util.Set;
 @RequiredArgsConstructor
 @Entity
 @Table(name = "reviews")
-public class Review extends AbstractEntity{
+public class Review extends AbstractEntity {
 
-    @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
-    private User user;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "resource_type")
+    private ResourceType resourceType;
 
     @Column(name = "resource_id")
     private String resourceId;
@@ -30,6 +30,10 @@ public class Review extends AbstractEntity{
     private Byte rating;
 
     private String text;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     @OneToMany(mappedBy = "review", fetch = FetchType.EAGER)
     private Set<ReviewLike> likes;

@@ -3,6 +3,7 @@ package com.responser.backend.converter;
 import com.responser.backend.controller.reviewlike.payload.ReviewLikePayload;
 import com.responser.backend.controller.reviews.payload.ReviewDataPayload;
 import com.responser.backend.controller.reviews.payload.ReviewPayload;
+import com.responser.backend.model.ResourceType;
 import com.responser.backend.model.Review;
 import com.responser.backend.model.User;
 import lombok.RequiredArgsConstructor;
@@ -30,6 +31,7 @@ public class ReviewConverter {
 
         Review review = new Review();
         review.setId(reviewId);
+        review.setResourceType(ResourceType.valueOf(reviewDataPayload.getResourceType()));
         review.setResourceId(reviewDataPayload.getResourceId());
         review.setRating(reviewDataPayload.getRating());
         review.setText(reviewDataPayload.getText());

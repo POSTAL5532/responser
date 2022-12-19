@@ -25,4 +25,7 @@ public class ReviewDataPayload {
     @NotBlank
     @Size(min = 1, max = 450)
     private String text;
+
+    @NotBlank
+    private String resourceType;
 }

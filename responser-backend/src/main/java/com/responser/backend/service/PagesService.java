@@ -55,4 +55,8 @@ public class PagesService {
         String pageDomain = UrlUtils.convertToURL(page.getUrl()).getHost();
         return pageDomain.equals(domain.getDomain());
     }
+
+    public Boolean existsById(String id) {
+        return pagesRepository.existsById(id);
+    }
 }

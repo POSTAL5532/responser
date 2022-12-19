@@ -12,4 +12,6 @@ public class ReviewsRequestCriteria {
     private String excludeUserId;
 
     private String forUserId;
+
+    private String resourceType;
 }
