@@ -18,7 +18,7 @@
   }
 
   &:not(.disabled) {
-    &:hover {
+    &:hover, &.active {
       background-color: multiply(@primary-color, @color-multiplier);
     }
   }
@@ -34,9 +34,9 @@
     }
 
     &:not(.disabled) {
-      background-color: transparent;
-      border: 2px solid multiply(@primary-color, @color-multiplier);
-      color: multiply(@primary-color, @color-multiplier);
+      &:hover, &.active {
+        background-color: @primary-color-light;
+      }
     }
   }
 }

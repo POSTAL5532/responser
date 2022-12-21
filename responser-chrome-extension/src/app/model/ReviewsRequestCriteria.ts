@@ -1,4 +1,5 @@
 import {makeAutoObservable} from "mobx";
+import {ResourceType} from "./ResourceType";
 
 export class ReviewsRequestCriteria {
 
@@ -7,6 +8,8 @@ export class ReviewsRequestCriteria {
     excludeUserId: string;
 
     forUserId: string;
+
+    resourceType: ResourceType;
 
     constructor() {
         makeAutoObservable(this);
