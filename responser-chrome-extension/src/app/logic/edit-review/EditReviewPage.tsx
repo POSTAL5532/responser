@@ -1,6 +1,6 @@
 import React, {useEffect} from "react";
 import {observer} from "mobx-react";
-import { useLocation} from "react-router";
+import {useLocation} from "react-router";
 import {useEditReviewPageStore} from "./EditReviewPageStore";
 import {navigateTo} from "../../utils/NavigationUtils";
 import {navigateToReviewsPage} from "../reviews/ReviewsPage";
@@ -8,6 +8,7 @@ import EditReviewForm from "./EditReviewForm";
 import {Page} from "../../components/page/Page";
 import {ConditionShow} from "../../components/ConditionShow";
 import {ResourceType} from "../../model/ResourceType";
+import {Button} from "../../components/button/Button";
 import "./EditReviewPage.less";
 
 const EditReviewPage: React.FC = () => {
@@ -19,7 +20,7 @@ const EditReviewPage: React.FC = () => {
         init(reviewId, pageId, domainId);
     }, [reviewId, pageId, domainId]);
 
-    const onCancelClick = () => {
+    const onCancel = () => {
         navigateToReviewsPage({resourceType: previousResourceType});
     }
 
@@ -28,14 +29,30 @@ const EditReviewPage: React.FC = () => {
         navigateToReviewsPage({resourceType: reviewData.resourceType});
     }
 
+    const getHeaderText = () => {
+        if (!reviewData) return;
+
+        let text: string[] = [isNewReview ? "Create" : "Edit"];
+
+        if (reviewData.resourceType === ResourceType.SITE) {
+            text.push("site");
+        } else if (reviewData.resourceType === ResourceType.PAGE) {
+            text.push("page")
+        }
+
+        text.push("review");
+
+        return text.join(" ");
+    }
+
     return (
         <Page className="edit-review-page">
-            <div className="header">{isNewReview ? "Create" : "Edit your"} review</div>
+            <div className="header">
+                <div>{getHeaderText()}</div>
+                <Button onClick={onCancel} outlined={true}>Cancel</Button>
+            </div>
             <ConditionShow condition={!!reviewData}>
-                <EditReviewForm reviewData={reviewData}
-                                onSubmit={onSubmit}
-                                onCancel={onCancelClick}
-                                isNewReview={isNewReview}/>
+                <EditReviewForm reviewData={reviewData} onSubmit={onSubmit} isNewReview={isNewReview}/>
             </ConditionShow>
         </Page>
     );

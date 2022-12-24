@@ -71,8 +71,8 @@ const ReviewsPage: React.FC = () => {
 
                 <ConditionShow condition={!isLoading && !!reviewsResourceType}>
                     <ButtonRadioGroup<ResourceType> values={[
-                        {value: ResourceType.SITE, label: "Site"},
-                        {value: ResourceType.PAGE, label: "Page"}
+                        {value: ResourceType.SITE, label: "Site reviews"},
+                        {value: ResourceType.PAGE, label: "Page reviews"}
                     ]} currentValue={reviewsResourceType} onChange={changeResourceType}/>
                 </ConditionShow>
             </div>

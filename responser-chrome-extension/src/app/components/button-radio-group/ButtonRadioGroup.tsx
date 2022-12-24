@@ -27,9 +27,8 @@ export const ButtonRadioGroup = <T extends any>(props: ButtonRadioGroup<T>): Rea
     const getValuesButtons = () => {
         return values.map((value, index) => (
             <Button key={index}
-                    outlined={true}
+                    outlined={value.value !== currentValue}
                     disabled={disabled}
-                    active={value.value === currentValue}
                     onClick={() => onButtonClick(value.value)}>
                 {value.label}
             </Button>

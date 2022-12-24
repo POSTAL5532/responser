@@ -3,25 +3,28 @@
 .edit-review-page {
   padding: 10px 14px;
 
-  .header {
-    .fontMulishRegular();
-    font-size: 20px;
+  .header, .button-radio-group, .rating-container, .text-container {
     margin-bottom: 14px;
-    margin-top: 4px;
   }
 
-  .rating-container {
+  .header {
     display: flex;
-    margin-bottom: 14px;
+    .fontMulishRegular();
+    font-size: 18px;
+    margin-top: 4px;
 
     .button {
       margin-left: auto;
     }
   }
 
+  .rating-container {
+    display: flex;
+    justify-content: center;
+  }
+
   .text-container {
     height: 100%;
-    margin-bottom: 14px;
 
     textarea {
       width: 100%;

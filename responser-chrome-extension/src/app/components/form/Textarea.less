@@ -23,12 +23,10 @@
     border-color: @secondary-color;
   }
 
-  &:hover {
-    box-shadow: 0 0 11px 0 fade(@primary-color, 20%);
-  }
-
-  &:focus, &:active {
-    box-shadow: 0 0 11px 3px fade(@primary-color, 20%);
+  &:not(.disabled) {
+    &:focus, &:hover {
+      box-shadow: 0 0 11px 3px fade(@primary-color, 20%);
+    }
   }
 
   &.invalid {
@@ -39,12 +37,10 @@
       color: fade(@error-color, 70%)
     }
 
-    &:hover {
-      box-shadow: 0 0 11px 0 fade(@error-color, 20%);
-    }
-
-    &:focus, &:active {
-      box-shadow: 0 0 11px 3px fade(@error-color, 20%);
+    &:not(.disabled) {
+      &:focus, &:hover {
+        box-shadow: 0 0 11px 3px fade(@error-color, 20%);
+      }
     }
   }
 }

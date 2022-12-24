@@ -68,7 +68,7 @@ export class EditReviewPageStore {
     private initReactions = () => {
         reaction(
             () => this.reviewData.resourceType,
-            (newValue, previousValue) => {
+            (newValue) => {
                 if (newValue == ResourceType.PAGE) {
                     this.reviewData.resourceId = this.pageId;
                 } else if (newValue == ResourceType.SITE) {
@@ -76,8 +76,6 @@ export class EditReviewPageStore {
                 } else {
                     throw new Error(`Bad reviews resource type ${newValue}`);
                 }
-
-                console.log("REACTION:", newValue, previousValue, this.reviewData);
             });
     }
 }

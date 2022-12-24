@@ -11,12 +11,11 @@ import {ConditionShow} from "../../components/ConditionShow";
 type EditReviewFormProps = {
     reviewData: ReviewData;
     onSubmit: () => void;
-    onCancel: () => void;
     isNewReview?: boolean;
 }
 
 const EditReviewForm: React.FC<EditReviewFormProps> = (props: EditReviewFormProps) => {
-    const {reviewData, onSubmit, onCancel, isNewReview} = props;
+    const {reviewData, onSubmit, isNewReview} = props;
     const {rating, text, resourceType} = reviewData;
 
     const changeResourceType = (resourceType: ResourceType) => {
@@ -41,7 +40,6 @@ const EditReviewForm: React.FC<EditReviewFormProps> = (props: EditReviewFormProp
 
             <div className="rating-container">
                 <Rating value={rating} onChange={onRatingChange} disabled={!resourceType}/>
-                <Button onClick={onCancel} outlined={true}>Cancel</Button>
             </div>
 
             <div className="text-container">

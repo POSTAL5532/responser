@@ -13,8 +13,7 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
         "button",
         {
             "outlined": outlined,
-            "disabled": disabled,
-            "active": active
+            "disabled": disabled
         },
         className
     );
