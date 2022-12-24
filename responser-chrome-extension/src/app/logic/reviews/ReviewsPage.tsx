@@ -1,26 +1,20 @@
 import React, {useContext, useEffect} from "react";
+import {useLocation} from "react-router";
 import {observer} from "mobx-react";
 import {useReviewsPageStore} from "./ReviewsPageStore";
 import ReviewsList from "./ReviewsList";
 import {Button} from "../../components/button/Button";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {Page} from "../../components/page/Page";
-import {navigateTo} from "../../utils/NavigationUtils";
-import {getEditReviewPageUrl, getNewReviewPageUrl} from "../edit-review/EditReviewPage";
+import {navigateToEditReviewPage} from "../edit-review/EditReviewPage";
 import {ResourceType} from "../../model/ResourceType";
-import {useQuery} from "../../../router";
 import {ConditionShow} from "../../components/ConditionShow";
+import {navigateTo} from "../../utils/NavigationUtils";
+import {ButtonRadioGroup} from "../../components/button-radio-group/ButtonRadioGroup";
 import "./ReviewsPage.less";
 
-export const REVIEWS_PAGE_URL = "/reviews";
-
-
-type ReviewsPageProps = {
-    resourceType: ResourceType;
-}
-
-const ReviewsPage: React.FC<ReviewsPageProps> = observer((props: ReviewsPageProps) => {
-    const {resourceType} = props;
+const ReviewsPage: React.FC = () => {
+    const locationState = useLocation<NavigateStateProps>().state;
     const {currentUser, isLoading} = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const {
         domain,
@@ -36,24 +30,25 @@ const ReviewsPage: React.FC<ReviewsPageProps> = observer((props: ReviewsPageProp
     } = useReviewsPageStore();
 
     useEffect(() => {
-        if (!isLoading) init(resourceType, currentUser?.id);
+        if (!isLoading) init(locationState?.resourceType, currentUser?.id);
     }, [isLoading]);
-
-    const navigateToLeaveNewReview = () => {
-        navigateTo(getNewReviewPageUrl(page.id));
-    }
-
-    const navigateToEditReview = () => {
-        navigateTo(getEditReviewPageUrl(currentUserReview.id));
-    }
 
     const onButtonClick = () => {
         if (!currentUser) return;
 
         if (currentUserReview) {
-            navigateToEditReview();
+            navigateToEditReviewPage({
+                reviewId: currentUserReview.id,
+                pageId: page.id,
+                domainId: domain.id,
+                previousResourceType: reviewsResourceType
+            });
         } else {
-            navigateToLeaveNewReview();
+            navigateToEditReviewPage({
+                pageId: page.id,
+                domainId: domain.id,
+                previousResourceType: reviewsResourceType
+            });
         }
     }
 
@@ -75,14 +70,10 @@ const ReviewsPage: React.FC<ReviewsPageProps> = observer((props: ReviewsPageProp
                 {!isLoading && page ? <div className="page-info">{page.name}</div> : "LOADING..."}
 
                 <ConditionShow condition={!isLoading && !!reviewsResourceType}>
-                    <div className="resource-type-buttons">
-                        <Button outlined={true} onClick={() => changeResourceType(ResourceType.SITE)} active={reviewsResourceType === ResourceType.SITE}>
-                            Site reviews
-                        </Button>
-                        <Button outlined={true} onClick={() => changeResourceType(ResourceType.PAGE)} active={reviewsResourceType === ResourceType.PAGE}>
-                            Page reviews
-                        </Button>
-                    </div>
+                    <ButtonRadioGroup<ResourceType> values={[
+                        {value: ResourceType.SITE, label: "Site"},
+                        {value: ResourceType.PAGE, label: "Page"}
+                    ]} currentValue={reviewsResourceType} onChange={changeResourceType}/>
                 </ConditionShow>
             </div>
 
@@ -97,14 +88,15 @@ const ReviewsPage: React.FC<ReviewsPageProps> = observer((props: ReviewsPageProp
             </div>
         </Page>
     );
-});
+}
 
-export const getReviewsPageUrl = (resourceType: ResourceType = ResourceType.PAGE) => {
-    return `${REVIEWS_PAGE_URL}?resourceType=${resourceType}`;
-};
+export default observer(ReviewsPage);
 
-export const reviewsPageRender = () => {
-    const rawResourceType = useQuery().get("resourceType") || ResourceType.PAGE;
-    const resourceType: ResourceType = ResourceType[rawResourceType as keyof typeof ResourceType];
-    return <ReviewsPage resourceType={resourceType}/>;
+export const REVIEWS_PAGE_URL = "/reviews";
+
+type NavigateStateProps = {
+    resourceType?: ResourceType;
+}
+export const navigateToReviewsPage = (props?: NavigateStateProps) => {
+    navigateTo(REVIEWS_PAGE_URL, props);
 }

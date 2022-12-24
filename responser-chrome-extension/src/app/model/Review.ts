@@ -30,7 +30,8 @@ export class Review {
             user: User.deserialize(data.user),
             creationDate: moment(data.creationDate),
             updateDate: moment(data.updateDate),
-            reviewLikes: data.reviewLikes.map((like: any) => ReviewLike.deserialize(like))
+            reviewLikes: data.reviewLikes.map((like: any) => ReviewLike.deserialize(like)),
+            resourceType: ResourceType[data.resourceType as keyof typeof ResourceType]
         });
     }
 }

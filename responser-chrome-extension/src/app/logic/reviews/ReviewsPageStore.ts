@@ -48,7 +48,7 @@ export class ReviewsPageStore extends LoadingStore {
     }
 
     init = async (reviewsResourceType: ResourceType, currentUserId: string) => {
-        this.reviewsResourceType = reviewsResourceType;
+        this.reviewsResourceType = reviewsResourceType || ResourceType.SITE;
         this.currentPageInfo = (await this.extensionService.getCurrentPageInfo()).data;
 
         await this.initDomain();
@@ -90,10 +90,7 @@ export class ReviewsPageStore extends LoadingStore {
         criteria.forUserId = currentUserId;
 
         const reviews = await this.reviewService.getReviews(criteria);
-
-        // if (reviews.length > 0) {
-            this.currentUserReview = reviews[0];
-        // }
+        this.currentUserReview = reviews[0];
     }
 
     loadReviews = async (currentUserId: string) => {

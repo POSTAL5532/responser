@@ -52,6 +52,7 @@ public class ReviewConverter {
         return ReviewPayload.builder()
                 .id(review.getId())
                 .resourceId(review.getResourceId())
+                .resourceType(review.getResourceType())
                 .user(userConverter.toUserInfoPayload(review.getUser()))
                 .rating(review.getRating())
                 .text(review.getText())

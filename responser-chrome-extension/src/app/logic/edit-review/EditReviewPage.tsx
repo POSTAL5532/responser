@@ -1,55 +1,56 @@
 import React, {useEffect} from "react";
 import {observer} from "mobx-react";
+import { useLocation} from "react-router";
 import {useEditReviewPageStore} from "./EditReviewPageStore";
 import {navigateTo} from "../../utils/NavigationUtils";
-import {REVIEWS_PAGE_URL} from "../reviews/ReviewsPage";
+import {navigateToReviewsPage} from "../reviews/ReviewsPage";
 import EditReviewForm from "./EditReviewForm";
-import {useQuery} from "../../../router";
 import {Page} from "../../components/page/Page";
+import {ConditionShow} from "../../components/ConditionShow";
+import {ResourceType} from "../../model/ResourceType";
 import "./EditReviewPage.less";
 
-type EditReviewPageProps = {
-    reviewId: string;
-    resourceId: string;
-}
-
-const EditReviewPage: React.FC<EditReviewPageProps> = observer((props: EditReviewPageProps) => {
-    const {reviewId, resourceId} = props;
+const EditReviewPage: React.FC = () => {
+    const {reviewId, pageId, domainId, previousResourceType} = useLocation<NavigateStateProps>().state;
     const store = useEditReviewPageStore();
-    const {init, reviewData, saveReview} = store;
+    const {init, reviewData, saveReview, isNewReview} = store;
 
     useEffect(() => {
-        init(reviewId, resourceId);
-    }, [reviewId]);
+        init(reviewId, pageId, domainId);
+    }, [reviewId, pageId, domainId]);
 
     const onCancelClick = () => {
-        navigateTo(REVIEWS_PAGE_URL);
+        navigateToReviewsPage({resourceType: previousResourceType});
     }
 
     const onSubmit = async () => {
         await saveReview();
-        navigateTo(REVIEWS_PAGE_URL);
+        navigateToReviewsPage({resourceType: reviewData.resourceType});
     }
 
     return (
         <Page className="edit-review-page">
-            <div className="header">Create new review</div>
-            <EditReviewForm reviewData={reviewData} onSubmit={onSubmit} onCancel={onCancelClick} isEdit={!!reviewId}/>
+            <div className="header">{isNewReview ? "Create" : "Edit your"} review</div>
+            <ConditionShow condition={!!reviewData}>
+                <EditReviewForm reviewData={reviewData}
+                                onSubmit={onSubmit}
+                                onCancel={onCancelClick}
+                                isNewReview={isNewReview}/>
+            </ConditionShow>
         </Page>
     );
-});
+}
+
+export default observer(EditReviewPage);
 
 export const EDIT_REVIEW_PAGE_URL = "/edit-review";
 
-export const getEditReviewPageUrl = (reviewId: string) => {
-    return `${EDIT_REVIEW_PAGE_URL}?reviewId=${reviewId}`;
-};
-
-export const getNewReviewPageUrl = (resourceId: string) => {
-    return `${EDIT_REVIEW_PAGE_URL}?resourceId=${resourceId}`;
-};
-
-export const editReviewPageRender = () => {
-    const query = useQuery();
-    return <EditReviewPage reviewId={query.get("reviewId")} resourceId={query.get("resourceId")}/>;
+type NavigateStateProps = {
+    reviewId?: string;
+    pageId: string;
+    domainId: string;
+    previousResourceType?: ResourceType;
+}
+export const navigateToEditReviewPage = (props: NavigateStateProps) => {
+    navigateTo(EDIT_REVIEW_PAGE_URL, props);
 }

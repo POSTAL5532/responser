@@ -19,7 +19,12 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
         className
     );
 
+    // TODO: Redundant?
+    /*const onButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
+        if (!disabled) onClick(event);
+    }*/
+
     return (
-        <button {...otherProps} className={resultClassName}>{children}</button>
+        <button {...otherProps} className={resultClassName} disabled={disabled}>{children}</button>
     );
 }

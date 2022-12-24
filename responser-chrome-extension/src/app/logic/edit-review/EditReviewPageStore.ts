@@ -1,7 +1,8 @@
-import {makeAutoObservable} from "mobx";
-import {ReviewService} from "../../service/ReviewService";
 import {useState} from "react";
+import {makeAutoObservable, reaction} from "mobx";
+import {ReviewService} from "../../service/ReviewService";
 import {ReviewData} from "../../model/ReviewData";
+import {ResourceType} from "../../model/ResourceType";
 
 export class EditReviewPageStore {
 
@@ -9,18 +10,29 @@ export class EditReviewPageStore {
 
     reviewId: string;
 
+    pageId: string;
+
+    domainId: string;
+
     reviewData: ReviewData;
+
+    isNewReview: boolean;
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    public init = async (reviewId: string, resourceId: string) => {
+    public init = async (reviewId: string, pageId: string, domainId: string) => {
+        this.pageId = pageId;
+        this.domainId = domainId;
+
         if (!!reviewId) {
             await this.initReviewById(reviewId);
         } else {
-            this.initNewReview(resourceId);
+            this.initNewReview();
         }
+
+        this.initReactions();
     }
 
     public saveReview = async () => {
@@ -34,17 +46,39 @@ export class EditReviewPageStore {
     private initReviewById = async (reviewId: string) => {
         const review = await this.reviewService.getReview(reviewId);
 
-        this.reviewData = new ReviewData(
-            review.resourceId,
-            review.rating,
-            review.text
-        );
+        this.reviewData = new ReviewData();
+
+        this.reviewData.resourceId = review.resourceId;
+        this.reviewData.rating = review.rating;
+        this.reviewData.text = review.text;
+        this.reviewData.resourceType = review.resourceType;
 
         this.reviewId = review.id;
+        this.isNewReview = false;
     }
 
-    private initNewReview = (resourceId: string) => {
-        this.reviewData = new ReviewData(resourceId, 1, "");
+    private initNewReview = () => {
+        this.reviewData = new ReviewData();
+        this.reviewData.rating = 1;
+        this.reviewData.text = "";
+
+        this.isNewReview = true;
+    }
+
+    private initReactions = () => {
+        reaction(
+            () => this.reviewData.resourceType,
+            (newValue, previousValue) => {
+                if (newValue == ResourceType.PAGE) {
+                    this.reviewData.resourceId = this.pageId;
+                } else if (newValue == ResourceType.SITE) {
+                    this.reviewData.resourceId = this.domainId;
+                } else {
+                    throw new Error(`Bad reviews resource type ${newValue}`);
+                }
+
+                console.log("REACTION:", newValue, previousValue, this.reviewData);
+            });
     }
 }
 

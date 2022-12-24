@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {Redirect, Switch} from "react-router";
-import {REVIEWS_PAGE_URL, reviewsPageRender} from "./logic/reviews/ReviewsPage";
+import ReviewsPage, {REVIEWS_PAGE_URL} from "./logic/reviews/ReviewsPage";
 import {AuthorizedRoute, PermitAllRoute} from "./components/CustomRoute";
 import {GlobalAppStore, GlobalAppStoreContext} from "./GlobalAppStore";
 import {AppHeader} from "./logic/app-header/AppHeader";
-import {EDIT_REVIEW_PAGE_URL, editReviewPageRender} from "./logic/edit-review/EditReviewPage";
+import EditReviewPage, {EDIT_REVIEW_PAGE_URL} from "./logic/edit-review/EditReviewPage";
 import "app/App.less";
 
 
@@ -19,8 +19,8 @@ export class App extends Component {
                     <AppHeader/>
 
                     <Switch>
-                        <PermitAllRoute path={REVIEWS_PAGE_URL} exact component={reviewsPageRender}/>
-                        <AuthorizedRoute path={EDIT_REVIEW_PAGE_URL} exact component={editReviewPageRender}/>
+                        <PermitAllRoute path={REVIEWS_PAGE_URL} exact component={ReviewsPage}/>
+                        <AuthorizedRoute path={EDIT_REVIEW_PAGE_URL} exact component={EditReviewPage}/>
                         <Redirect from="*" to={REVIEWS_PAGE_URL}/>
                     </Switch>
                 </div>

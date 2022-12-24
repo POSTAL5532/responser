@@ -2,6 +2,7 @@ package com.responser.backend.controller.reviews.payload;
 
 import com.responser.backend.controller.reviewlike.payload.ReviewLikePayload;
 import com.responser.backend.controller.user.payload.UserInfoPayload;
+import com.responser.backend.model.ResourceType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -26,6 +27,8 @@ public class ReviewPayload {
     private UserInfoPayload user;
 
     private String resourceId;
+
+    private ResourceType resourceType;
 
     private String reviewId;
 

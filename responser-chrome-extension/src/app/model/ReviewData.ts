@@ -1,4 +1,5 @@
 import {makeAutoObservable} from "mobx";
+import {ResourceType} from "./ResourceType";
 
 export class ReviewData {
 
@@ -8,10 +9,9 @@ export class ReviewData {
 
     text: string;
 
-    constructor(resourceId: string, rating: number, text: string) {
+    resourceType: ResourceType;
+
+    constructor() {
         makeAutoObservable(this);
-        this.resourceId = resourceId;
-        this.rating = rating;
-        this.text = text;
     }
 }
