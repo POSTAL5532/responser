@@ -3,20 +3,21 @@ import classNames from "classnames";
 import {Button} from "../button/Button";
 import "./ButtonRadioGroup.less";
 
-export type ButtonRadioGroupValue<T> = {
+export type ButtonRadioGroupOption<T> = {
     value: T,
     label: string;
+    disabled?: boolean;
 }
 
 type ButtonRadioGroup<T> = {
-    values: ButtonRadioGroupValue<T>[];
+    options: ButtonRadioGroupOption<T>[];
     currentValue?: T;
     onChange?: (value: T) => void;
     className?: string;
     disabled?: boolean;
 }
 export const ButtonRadioGroup = <T extends any>(props: ButtonRadioGroup<T>): ReactElement => {
-    const {values, currentValue, onChange, className, disabled} = props;
+    const {options, currentValue, onChange, className, disabled} = props;
 
     const onButtonClick = (value: T) => {
         if (onChange && !disabled) {
@@ -25,12 +26,12 @@ export const ButtonRadioGroup = <T extends any>(props: ButtonRadioGroup<T>): Rea
     }
 
     const getValuesButtons = () => {
-        return values.map((value, index) => (
+        return options.map((option, index) => (
             <Button key={index}
-                    outlined={value.value !== currentValue}
-                    disabled={disabled}
-                    onClick={() => onButtonClick(value.value)}>
-                {value.label}
+                    outlined={option.value !== currentValue}
+                    disabled={disabled || option.disabled}
+                    onClick={() => onButtonClick(option.value)}>
+                {option.label}
             </Button>
         ));
     }

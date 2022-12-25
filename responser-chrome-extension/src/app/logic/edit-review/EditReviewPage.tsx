@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React, {useContext, useEffect} from "react";
 import {observer} from "mobx-react";
 import {useLocation} from "react-router";
 import {useEditReviewPageStore} from "./EditReviewPageStore";
@@ -9,15 +9,17 @@ import {Page} from "../../components/page/Page";
 import {ConditionShow} from "../../components/ConditionShow";
 import {ResourceType} from "../../model/ResourceType";
 import {Button} from "../../components/button/Button";
+import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import "./EditReviewPage.less";
 
 const EditReviewPage: React.FC = () => {
+    const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const {reviewId, pageId, domainId, previousResourceType} = useLocation<NavigateStateProps>().state;
     const store = useEditReviewPageStore();
-    const {init, reviewData, saveReview, isNewReview} = store;
+    const {init, reviewData, saveReview, isNewReview, userLeftSiteReview, userLeftPageReview} = store;
 
     useEffect(() => {
-        init(reviewId, pageId, domainId);
+        init(currentUser.id, reviewId, pageId, domainId);
     }, [reviewId, pageId, domainId]);
 
     const onCancel = () => {
@@ -52,7 +54,11 @@ const EditReviewPage: React.FC = () => {
                 <Button onClick={onCancel} outlined={true}>Cancel</Button>
             </div>
             <ConditionShow condition={!!reviewData}>
-                <EditReviewForm reviewData={reviewData} onSubmit={onSubmit} isNewReview={isNewReview}/>
+                <EditReviewForm reviewData={reviewData}
+                                onSubmit={onSubmit}
+                                isNewReview={isNewReview}
+                                userLeftSiteReview={userLeftSiteReview}
+                                userLeftPageReview={userLeftPageReview}/>
             </ConditionShow>
         </Page>
     );

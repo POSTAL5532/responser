@@ -11,11 +11,13 @@ import {ConditionShow} from "../../components/ConditionShow";
 type EditReviewFormProps = {
     reviewData: ReviewData;
     onSubmit: () => void;
+    userLeftPageReview: boolean;
+    userLeftSiteReview:boolean;
     isNewReview?: boolean;
 }
 
 const EditReviewForm: React.FC<EditReviewFormProps> = (props: EditReviewFormProps) => {
-    const {reviewData, onSubmit, isNewReview} = props;
+    const {reviewData, onSubmit, userLeftPageReview, userLeftSiteReview, isNewReview} = props;
     const {rating, text, resourceType} = reviewData;
 
     const changeResourceType = (resourceType: ResourceType) => {
@@ -32,9 +34,9 @@ const EditReviewForm: React.FC<EditReviewFormProps> = (props: EditReviewFormProp
     return (
         <>
             <ConditionShow condition={isNewReview}>
-                <ButtonRadioGroup<ResourceType> values={[
-                    {value: ResourceType.SITE, label: "Site"},
-                    {value: ResourceType.PAGE, label: "Page"}
+                <ButtonRadioGroup<ResourceType> options={[
+                    {value: ResourceType.SITE, label: "Site", disabled: userLeftSiteReview},
+                    {value: ResourceType.PAGE, label: "Page", disabled: userLeftPageReview}
                 ]} currentValue={resourceType} onChange={changeResourceType}/>
             </ConditionShow>
 
