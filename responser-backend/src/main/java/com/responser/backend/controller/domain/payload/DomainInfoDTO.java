@@ -11,7 +11,6 @@ import jakarta.validation.constraints.Size;
  *
  * @author SIE
  */
-//TODO: Validation
 @Data
 @NoArgsConstructor
 public class DomainInfoDTO {

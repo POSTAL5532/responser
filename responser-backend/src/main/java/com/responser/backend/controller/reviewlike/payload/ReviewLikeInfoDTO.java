@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class ReviewLikeInfoDTO {
 
-    @NotBlank
+    @NotBlank(message = "reviewId must be specified")
     private String reviewId;
 
-    @NotNull
+    @NotNull(message = "positive must be specified")
     private Boolean positive;
 }

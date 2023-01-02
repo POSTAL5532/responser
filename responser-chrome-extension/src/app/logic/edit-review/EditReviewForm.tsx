@@ -12,13 +12,14 @@ type EditReviewFormProps = {
     reviewData: ReviewData;
     onSubmit: () => void;
     userLeftPageReview: boolean;
-    userLeftSiteReview:boolean;
+    userLeftSiteReview: boolean;
     isNewReview?: boolean;
 }
 
 const EditReviewForm: React.FC<EditReviewFormProps> = (props: EditReviewFormProps) => {
     const {reviewData, onSubmit, userLeftPageReview, userLeftSiteReview, isNewReview} = props;
     const {rating, text, resourceType} = reviewData;
+    const textSize = 460;
 
     const changeResourceType = (resourceType: ResourceType) => {
         reviewData.resourceType = resourceType;
@@ -28,6 +29,7 @@ const EditReviewForm: React.FC<EditReviewFormProps> = (props: EditReviewFormProp
     }
 
     const onTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
+        if (event.target.value.length > textSize) return;
         reviewData.text = event.target.value;
     }
 
@@ -45,7 +47,9 @@ const EditReviewForm: React.FC<EditReviewFormProps> = (props: EditReviewFormProp
             </div>
 
             <div className="text-container">
-                <Textarea name="review" value={text} onChange={onTextChange} disabled={!resourceType}/>
+                <Textarea name="review" value={text} onChange={onTextChange}
+                          disabled={!resourceType}/>
+                <span>{text ? textSize - text.length : textSize}</span>
             </div>
 
             <div className="leave-review-container">

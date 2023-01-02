@@ -11,7 +11,6 @@ import jakarta.validation.constraints.Size;
  *
  * @author SIE
  */
-//TODO: Need validation upgrading
 @Data
 @NoArgsConstructor
 public class PageInfoDTO {

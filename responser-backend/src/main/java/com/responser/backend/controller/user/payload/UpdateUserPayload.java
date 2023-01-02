@@ -1,7 +1,7 @@
 package com.responser.backend.controller.user.payload;
 
-import com.responser.backend.validator.EmailUniqueness;
-import com.responser.backend.validator.UsernameUniqueness;
+import com.responser.backend.controller.user.validation.EmailUniqueness;
+import com.responser.backend.controller.user.validation.UsernameUniqueness;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

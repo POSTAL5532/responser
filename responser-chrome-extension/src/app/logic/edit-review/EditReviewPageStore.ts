@@ -93,8 +93,10 @@ export class EditReviewPageStore {
 
         if (this.userLeftSiteReview) {
             this.reviewData.resourceType = ResourceType.PAGE;
+            this.reviewData.resourceId = this.pageId;
         } else if (this.userLeftPageReview) {
             this.reviewData.resourceType = ResourceType.SITE;
+            this.reviewData.resourceId = this.domainId;
         }
 
         this.isNewReview = true;

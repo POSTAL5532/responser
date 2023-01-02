@@ -1,4 +1,4 @@
-package com.responser.backend.validator;
+package com.responser.backend.controller.user.validation;
 
 import com.responser.backend.service.UserService;
 import jakarta.validation.Constraint;
