@@ -1,6 +1,5 @@
 package com.responser.backend.controller.payload;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,20 +10,24 @@ import lombok.NoArgsConstructor;
  */
 @NoArgsConstructor
 @Data
-public class ApiError {
+public class ApiError<T> {
 
     private Boolean apiError = true;
 
     private String message;
 
-    private String clientFriendlyMessage;
-
     private ApiErrorType errorType;
 
-    public ApiError(String message, String clientFriendlyMessage, ApiErrorType errorType) {
+    private T data;
+
+    public ApiError(String message,ApiErrorType errorType) {
+        this(message, errorType, null);
+    }
+
+    public ApiError(String message, ApiErrorType errorType, T data) {
         this.message = message;
-        this.clientFriendlyMessage = clientFriendlyMessage;
         this.errorType = errorType;
+        this.data = data;
     }
 }
 
