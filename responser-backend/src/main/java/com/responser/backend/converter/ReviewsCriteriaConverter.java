@@ -6,19 +6,24 @@ import com.responser.backend.model.ReviewsCriteria;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
+/**
+ * {@link ReviewsCriteria}, {@link ReviewsRequestCriteria} converter.
+ *
+ * @author Shcherbachenya Igor
+ */
 @Service
 public class ReviewsCriteriaConverter {
 
     public ReviewsCriteria toReviewsCriteria(ReviewsRequestCriteria requestCriteria) {
         return ReviewsCriteria.builder()
-                .resourceId(requestCriteria.getResourceId())
-                .excludeUserId(requestCriteria.getExcludeUserId())
-                .forUserId(requestCriteria.getForUserId())
-                .resourceType(
-                        StringUtils.isNotBlank(requestCriteria.getResourceType())
-                                ? ResourceType.valueOf(requestCriteria.getResourceType())
-                                : null
-                )
-                .build();
+            .resourceId(requestCriteria.getResourceId())
+            .excludeUserId(requestCriteria.getExcludeUserId())
+            .forUserId(requestCriteria.getForUserId())
+            .resourceType(
+                StringUtils.isNotBlank(requestCriteria.getResourceType())
+                    ? ResourceType.valueOf(requestCriteria.getResourceType())
+                    : null
+            )
+            .build();
     }
 }

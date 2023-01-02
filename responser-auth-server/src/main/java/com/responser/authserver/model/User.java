@@ -15,9 +15,8 @@ import java.time.LocalDateTime;
 /**
  * User
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
-
 @RequiredArgsConstructor
 @Getter
 @Setter

@@ -3,16 +3,16 @@ package com.responser.backend.exceptions;
 import java.util.NoSuchElementException;
 
 /**
- * EntityAlreadyExistException
+ * Entity already exist exception
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 public class EntityAlreadyExistException extends NoSuchElementException {
 
     public EntityAlreadyExistException() {
     }
 
-    public EntityAlreadyExistException(String s) {
-        super(s);
+    public EntityAlreadyExistException(String message) {
+        super(message);
     }
 }

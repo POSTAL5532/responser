@@ -8,7 +8,7 @@ import lombok.*;
 /**
  * User
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Getter
 @Setter

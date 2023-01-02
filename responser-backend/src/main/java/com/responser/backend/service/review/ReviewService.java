@@ -19,9 +19,9 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 /**
- * ReviewService
+ * Review service
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @AllArgsConstructor
 @Service
@@ -62,6 +62,13 @@ public class ReviewService {
         return reviewRepository.existsByIdAndUserId(id, userId);
     }
 
+    /**
+     * Check existence of resource by {@link ResourceType} and resource ID.
+     *
+     * @param resourceId resource ID
+     * @param resourceType resource type
+     * @return existence flag
+     */
     public Boolean isResourceExists(String resourceId, ResourceType resourceType) {
         return switch (resourceType) {
             case PAGE -> pagesService.existsById(resourceId);
@@ -70,6 +77,12 @@ public class ReviewService {
         };
     }
 
+    /**
+     * Create review for resource, if user didn't leave review yet.
+     *
+     * @param newReview new review model
+     * @return initialized review model
+     */
     @Transactional
     public Review createReview(Review newReview) {
         String resourceId = newReview.getResourceId();
@@ -99,6 +112,12 @@ public class ReviewService {
         return reviewRepository.save(oldReview);
     }
 
+    /**
+     * Remove review, which was left by user.
+     *
+     * @param reviewId review ID
+     * @param userId user ID
+     */
     @Transactional
     public void removeReview(String reviewId, String userId) {
         if (!existsByIdAndUserId(reviewId, userId)) {

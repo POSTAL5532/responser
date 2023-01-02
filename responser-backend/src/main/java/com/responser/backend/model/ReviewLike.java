@@ -4,9 +4,9 @@ import jakarta.persistence.*;
 import lombok.*;
 
 /**
- * ResponseLike
+ * Response like
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Getter
 @Setter

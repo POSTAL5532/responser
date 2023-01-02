@@ -9,9 +9,9 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 /**
- * PagePayload
+ * Page DTO payload.
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Data
 @NoArgsConstructor

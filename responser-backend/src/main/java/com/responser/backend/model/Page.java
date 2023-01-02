@@ -9,7 +9,7 @@ import lombok.*;
 /**
  * Page
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Getter
 @Setter

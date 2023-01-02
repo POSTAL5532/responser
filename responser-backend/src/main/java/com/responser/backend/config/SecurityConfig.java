@@ -10,9 +10,9 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfigurationSource;
 
 /**
- * SecurityConfig
+ * Security config
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @RequiredArgsConstructor
 @EnableWebSecurity

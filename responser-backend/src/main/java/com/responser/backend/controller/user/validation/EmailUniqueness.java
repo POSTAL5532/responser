@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Email uniqueness validation
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Documented
 @Constraint(validatedBy = EmailUniqueness.EmailUniquenessValidator.class)

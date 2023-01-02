@@ -3,7 +3,6 @@ package com.responser.backend.service;
 import com.responser.backend.model.Domain;
 import com.responser.backend.repository.DomainRepository;
 import com.responser.backend.utils.UrlUtils;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,9 +12,9 @@ import java.text.MessageFormat;
 import java.util.NoSuchElementException;
 
 /**
- * DomainService
+ * Domain service
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @AllArgsConstructor
 @Service
@@ -26,7 +25,7 @@ public class DomainService {
 
     public Domain getById(String id) {
         return domainRepository.findById(id).orElseThrow(() -> new NoSuchElementException(
-                MessageFormat.format("Domain with id \"{0}\" doesn't exist", id)
+            MessageFormat.format("Domain with id \"{0}\" doesn't exist", id)
         ));
     }
 
@@ -36,10 +35,10 @@ public class DomainService {
 
     public Domain getByUrl(URL url) {
         return domainRepository
-                .findByDomain(url.getHost())
-                .orElseThrow(() -> new NoSuchElementException(
-                        MessageFormat.format("Domain for url \"{0}\" doesn't exist", url.toString())
-                ));
+            .findByDomain(url.getHost())
+            .orElseThrow(() -> new NoSuchElementException(
+                MessageFormat.format("Domain for url \"{0}\" doesn't exist", url.toString())
+            ));
     }
 
     @Transactional

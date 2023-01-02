@@ -13,7 +13,7 @@ import jakarta.validation.constraints.Size;
 /**
  * UserDTO
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Data
 @NoArgsConstructor

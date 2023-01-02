@@ -12,9 +12,9 @@ import org.springframework.stereotype.Service;
 import java.text.MessageFormat;
 
 /**
- * CustomUserDetailsService
+ * Custom user details service.
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @RequiredArgsConstructor
 @Service
@@ -22,6 +22,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
+    /**
+     * Load user by login or email.
+     *
+     * @param username the username identifying the user whose data is required.
+     * @return user details instance
+     * @throws UsernameNotFoundException user not found exception
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user;

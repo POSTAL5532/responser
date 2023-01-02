@@ -16,25 +16,16 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Collections;
 
 /**
- * WebSecurityConfig
+ * Auth server web security configuration. Install login form.
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
-
 @RequiredArgsConstructor
 @EnableWebSecurity
 @Configuration
 public class WebSecurityConfig {
 
     private final CORSCustomizer corsCustomizer;
-
-    /*@Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        return http.formLogin()
-                .and().cors().configurationSource(corsConfigurationSource())
-                .and().authorizeHttpRequests().anyRequest().authenticated()
-                .and().build();
-    }*/
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {

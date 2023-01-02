@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
  * Username uniqueness validation
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Documented
 @Constraint(validatedBy = UsernameUniqueness.UsernameUniquenessValidator.class)

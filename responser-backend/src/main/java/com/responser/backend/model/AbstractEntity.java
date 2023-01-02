@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 import java.util.Objects;
 
 /**
- * AbstractEntity
+ * Abstract entity
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Getter
 @Setter

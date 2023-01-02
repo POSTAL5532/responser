@@ -8,6 +8,9 @@ import org.springframework.web.cors.CorsConfigurationSource;
 
 import java.util.Collections;
 
+/**
+ * CORS config class. Allow to include custom cors configuration. Uses for cors configs from app properties.
+ */
 @RequiredArgsConstructor
 @Component
 public class CORSCustomizer {

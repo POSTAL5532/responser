@@ -13,7 +13,7 @@ import java.util.NoSuchElementException;
 /**
  * ReviewLikeService
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @AllArgsConstructor
 @Service

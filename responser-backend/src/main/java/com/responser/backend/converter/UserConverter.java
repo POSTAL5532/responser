@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 /**
  * UserConverter
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Service
 public class UserConverter {

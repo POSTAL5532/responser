@@ -8,7 +8,7 @@ import java.util.Set;
 /**
  * Domain
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Getter
 @Setter

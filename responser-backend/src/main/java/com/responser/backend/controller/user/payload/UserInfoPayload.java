@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 /**
  * UserInfoPayload
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Data
 @NoArgsConstructor

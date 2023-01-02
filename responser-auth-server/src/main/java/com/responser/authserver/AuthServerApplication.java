@@ -7,7 +7,7 @@ import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 /**
  * AuthServerApplication
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @SpringBootApplication
 @ConfigurationPropertiesScan

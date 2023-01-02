@@ -34,9 +34,9 @@ import java.time.Duration;
 import java.util.*;
 
 /**
- * AuthServerConfig
+ * Authorization server configuration.
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @RequiredArgsConstructor
 @Configuration
@@ -53,10 +53,10 @@ public class AuthServerConfig {
         corsCustomizer.corsCustomizer(http);
 
         return http
-                .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
-                .formLogin()
-                .and().getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(Customizer.withDefaults())
-                .and().build();
+            .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
+            .formLogin()
+            .and().getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(Customizer.withDefaults())
+            .and().build();
     }
 
     @Bean
@@ -65,21 +65,21 @@ public class AuthServerConfig {
 
         authServerApplicationProperties.getClientCredentials().forEach(cc -> {
             RegisteredClient webClient = RegisteredClient.withId(UUID.randomUUID().toString())
-                    .clientId(cc.getClientId())
-                    .clientSecret(cc.getClientSecret())
-                    .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
-                    .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                    .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                    .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                    .scope(OidcScopes.OPENID)
-                    .redirectUri(cc.getRedirectUri())
-                    .tokenSettings(TokenSettings.builder()
-                            // TODO: access_token expires like refresh_token instead access_token_lifetime
-                            // TODO: use properties for lifetime configuration
-                            .accessTokenTimeToLive(Duration.ofHours(12))
-                            .refreshTokenTimeToLive(Duration.ofHours(12))
-                            .build())
-                    .build();
+                .clientId(cc.getClientId())
+                .clientSecret(cc.getClientSecret())
+                .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
+                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
+                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                .authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
+                .scope(OidcScopes.OPENID)
+                .redirectUri(cc.getRedirectUri())
+                .tokenSettings(TokenSettings.builder()
+                    // TODO: access_token expires like refresh_token instead access_token_lifetime
+                    // TODO: use properties for lifetime configuration
+                    .accessTokenTimeToLive(Duration.ofHours(12))
+                    .refreshTokenTimeToLive(Duration.ofHours(12))
+                    .build())
+                .build();
             clients.add(webClient);
         });
 

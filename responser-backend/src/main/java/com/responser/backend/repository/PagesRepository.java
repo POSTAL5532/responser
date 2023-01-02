@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * PagesRepository
+ * Pages repository
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Repository
 public interface PagesRepository extends JpaRepository<Page, String> {

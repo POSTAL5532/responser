@@ -9,9 +9,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 /**
- * PageConverter
+ * {@link Page}, {@link PageDTO}, {@link PageInfoDTO} converter.
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @RequiredArgsConstructor
 @Service
@@ -36,11 +36,11 @@ public class PageConverter {
 
     public PageDTO toPagePayload(Page page) {
         return PageDTO.builder()
-                .id(page.getId())
-                .url(page.getUrl())
-                .name(page.getName())
-                .description(page.getDescription())
-                .domain(domainConverter.toDomainPayload(page.getDomain()))
-                .build();
+            .id(page.getId())
+            .url(page.getUrl())
+            .name(page.getName())
+            .description(page.getDescription())
+            .domain(domainConverter.toDomainPayload(page.getDomain()))
+            .build();
     }
 }

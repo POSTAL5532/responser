@@ -4,9 +4,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * ApiError
+ * Api error model
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @NoArgsConstructor
 @Data

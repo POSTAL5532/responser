@@ -7,9 +7,9 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 import java.util.List;
 
 /**
- * AuthServerApplicationProperties
+ * Custom API application properties.
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Getter
 @Setter

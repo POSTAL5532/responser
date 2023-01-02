@@ -7,9 +7,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
 /**
- * CreateDomainPayload
+ * Domain info DTO. Uses for creation and updating {@link com.responser.backend.model.Domain} by API
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Data
 @NoArgsConstructor

@@ -10,6 +10,11 @@ import org.springframework.stereotype.Service;
 import java.util.Collection;
 import java.util.stream.Collectors;
 
+/**
+ * {@link ReviewLike}, {@link ReviewLikeDTO}, {@link ReviewLikeInfoDTO} converter.
+ *
+ * @author Shcherbachenya Igor
+ */
 @AllArgsConstructor
 @Service
 public class ReviewLikeConverter {
@@ -37,12 +42,12 @@ public class ReviewLikeConverter {
 
     public ReviewLikeDTO toReviewLikePayload(ReviewLike reviewLike) {
         return ReviewLikeDTO.builder()
-                .id(reviewLike.getId())
-                .reviewId(reviewLike.getReview().getId())
-                .userId(reviewLike.getUserId())
-                .creationDate(reviewLike.getCreationDate())
-                .updateDate(reviewLike.getUpdateDate())
-                .positive(reviewLike.getPositive())
-                .build();
+            .id(reviewLike.getId())
+            .reviewId(reviewLike.getReview().getId())
+            .userId(reviewLike.getUserId())
+            .creationDate(reviewLike.getCreationDate())
+            .updateDate(reviewLike.getUpdateDate())
+            .positive(reviewLike.getPositive())
+            .build();
     }
 }

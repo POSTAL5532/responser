@@ -9,9 +9,9 @@ import org.springframework.stereotype.Service;
 import java.net.URL;
 
 /**
- * DomainConverter
+ * {@link Domain}, {@link DomainDTO}, {@link DomainInfoDTO} converter.
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Service
 public class DomainConverter {
@@ -30,13 +30,13 @@ public class DomainConverter {
 
     public DomainDTO toDomainPayload(Domain domain) {
         return DomainDTO.builder()
-                .id(domain.getId())
-                .domain(domain.getDomain())
-                .name(domain.getName())
-                .description(domain.getDescription())
-                .hasSsl(domain.getHasSsl())
-                .creationDate(domain.getCreationDate())
-                .updateDate(domain.getUpdateDate())
-                .build();
+            .id(domain.getId())
+            .domain(domain.getDomain())
+            .name(domain.getName())
+            .description(domain.getDescription())
+            .hasSsl(domain.getHasSsl())
+            .creationDate(domain.getCreationDate())
+            .updateDate(domain.getUpdateDate())
+            .build();
     }
 }

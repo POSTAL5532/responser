@@ -12,6 +12,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+/**
+ * Util class for creating a {@link Specification} for {@link Review} entities selection.
+ */
 public class ReviewSpecifications {
 
     public static Specification<Review> getAll(ReviewsCriteria criteria) {

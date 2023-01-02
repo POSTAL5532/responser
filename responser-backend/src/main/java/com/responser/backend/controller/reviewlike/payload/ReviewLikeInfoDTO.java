@@ -5,6 +5,11 @@ import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Review like info DTO. Uses for creation and updating {@link com.responser.backend.model.Page} by API
+ *
+ * @author Shcherbachenya Igor
+ */
 @Data
 @NoArgsConstructor
 public class ReviewLikeInfoDTO {

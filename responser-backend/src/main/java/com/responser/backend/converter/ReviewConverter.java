@@ -13,9 +13,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 /**
- * ResponseConverter
+ * {@link Review}, {@link ReviewDTO}, {@link ReviewInfoDTO} converter.
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @RequiredArgsConstructor
 @Service
@@ -46,20 +46,20 @@ public class ReviewConverter {
 
     public ReviewDTO toResponsePayload(Review review) {
         Collection<ReviewLikeDTO> reviewLikes = Objects.isNull(review.getLikes())
-                ? Collections.emptyList()
-                : reviewLikeConverter.toReviewLikePayloads(review.getLikes());
+            ? Collections.emptyList()
+            : reviewLikeConverter.toReviewLikePayloads(review.getLikes());
 
         return ReviewDTO.builder()
-                .id(review.getId())
-                .resourceId(review.getResourceId())
-                .resourceType(review.getResourceType())
-                .user(userConverter.toUserInfoPayload(review.getUser()))
-                .rating(review.getRating())
-                .text(review.getText())
-                .reviewLikes(reviewLikes)
-                .creationDate(review.getCreationDate())
-                .updateDate(review.getUpdateDate())
-                .build();
+            .id(review.getId())
+            .resourceId(review.getResourceId())
+            .resourceType(review.getResourceType())
+            .user(userConverter.toUserInfoPayload(review.getUser()))
+            .rating(review.getRating())
+            .text(review.getText())
+            .reviewLikes(reviewLikes)
+            .creationDate(review.getCreationDate())
+            .updateDate(review.getUpdateDate())
+            .build();
     }
 
     public List<ReviewDTO> toReviewPayloadList(List<Review> reviews) {

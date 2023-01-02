@@ -12,9 +12,9 @@ import java.text.MessageFormat;
 import java.util.NoSuchElementException;
 
 /**
- * PagesService
+ * Pages service.
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @AllArgsConstructor
 @Service
@@ -27,33 +27,33 @@ public class PagesService {
 
     public Page getByUrl(String rawUrl) {
         return pagesRepository
-                .findByUrl(rawUrl)
-                .orElseThrow(() -> new NoSuchElementException(
-                        MessageFormat.format("Page with url \"{0}\" doesn't exist", rawUrl)
-                ));
+            .findByUrl(rawUrl)
+            .orElseThrow(() -> new NoSuchElementException(
+                MessageFormat.format("Page with url \"{0}\" doesn't exist", rawUrl)
+            ));
     }
 
+    /**
+     * Check relationship between the page and domain and create new {@link Page} entity.
+     *
+     * @param newPage new page model
+     * @return initialized page model
+     */
     @Transactional
     public Page createPage(Page newPage) {
         Domain domain = domainService.getById(newPage.getDomain().getId());
+        String pageDomain = UrlUtils.convertToURL(newPage.getUrl()).getHost();
 
-        if (!pageUrlEqualsDomain(newPage, domain)) {
+        if (!pageDomain.equals(domain.getDomain())) {
             throw new IllegalArgumentException(
-                    MessageFormat.format(
-                            "Page host {0} and domain host {1} doesn't equals.",
-                            newPage.getUrl(),
-                            domain.getDomain()
-                    )
+                MessageFormat.format(
+                    "Page host {0} and domain host {1} doesn't equals.", newPage.getUrl(), domain.getDomain()
+                )
             );
         }
 
         newPage.setDomain(domain);
         return pagesRepository.save(newPage);
-    }
-
-    public static boolean pageUrlEqualsDomain(Page page, Domain domain) {
-        String pageDomain = UrlUtils.convertToURL(page.getUrl()).getHost();
-        return pageDomain.equals(domain.getDomain());
     }
 
     public Boolean existsById(String id) {

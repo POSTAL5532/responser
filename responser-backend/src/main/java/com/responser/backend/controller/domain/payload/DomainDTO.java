@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 /**
- * DomainPayload
+ * Domain DTO payload.
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Data
 @NoArgsConstructor

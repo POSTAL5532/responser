@@ -27,13 +27,19 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import java.util.NoSuchElementException;
 
 /**
- * RestExceptionHandler
+ * Application global errors handler.
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
+    /**
+     * Handle {@link NoSuchElementException} and respond with 404 code
+     *
+     * @param ex NoSuchElementException
+     * @return {@link ApiError} with {@link ApiErrorType#ENTITY_NOT_FOUND} error type
+     */
     @ExceptionHandler({NoSuchElementException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
@@ -41,6 +47,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ApiError<>(ex.getMessage(), ApiErrorType.ENTITY_NOT_FOUND);
     }
 
+    /**
+     * Handle {@link EntityAlreadyExistException} and respond with 400 code
+     *
+     * @param ex EntityAlreadyExistException
+     * @return {@link ApiError} with {@link ApiErrorType#VALIDATION_ERROR} error type
+     */
     @ExceptionHandler({EntityAlreadyExistException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
@@ -48,6 +60,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return new ApiError<>(ex.getMessage(), ApiErrorType.VALIDATION_ERROR);
     }
 
+    /**
+     * Handle {@link ConstraintViolationException} from spring validation logic for request body and respond with 400 code and list of fields errors.
+     *
+     * @param exception ConstraintViolationException
+     * @return {@link ApiError} with {@link ApiErrorType#VALIDATION_ERROR} error type and list of fields errors
+     */
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
@@ -66,6 +84,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         return response;
     }
 
+    /**
+     * Handle {@link MethodArgumentNotValidException} from spring validation logic for request params and respond with 400 code and list of fields errors.
+     *
+     * @param exception MethodArgumentNotValidException
+     * @return {@link ApiError} with {@link ApiErrorType#VALIDATION_ERROR} error type and list of fields errors
+     */
     @Override
     protected ResponseEntity<Object> handleMethodArgumentNotValid(
         @NonNull MethodArgumentNotValidException exception,

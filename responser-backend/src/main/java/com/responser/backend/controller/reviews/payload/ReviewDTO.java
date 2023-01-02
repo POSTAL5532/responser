@@ -12,9 +12,9 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 
 /**
- * ReviewPayload
+ * Review like DTO payload.
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Data
 @NoArgsConstructor

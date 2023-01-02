@@ -14,9 +14,9 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 
 /**
- * PageController
+ * Domain controller for operations with page entities.
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @RequiredArgsConstructor
 @RestController
@@ -27,6 +27,12 @@ public class PageController {
 
     private final PageConverter pageConverter;
 
+    /**
+     * Returns {@link PageDTO} by raw url string.
+     *
+     * @param url raw url string
+     * @return {@link PageDTO}
+     */
     @GetMapping
     public ResponseEntity<PageDTO> getPageByUrl(@Valid @NotBlank @RequestParam String url) {
         String preparedUrl = UrlUtils.prepareUrl(url);
@@ -34,9 +40,15 @@ public class PageController {
         return ResponseEntity.ok(pageDTO);
     }
 
+    /**
+     * Creates new {@link Page} by {@link PageDTO}.
+     *
+     * @param newPageDTO new page DTO
+     * @return {@link PageDTO}
+     */
     @PostMapping
-    public ResponseEntity<PageDTO> createPage(@Valid @RequestBody PageInfoDTO newPagePayload) {
-        Page newPage = pageConverter.toPage(newPagePayload);
+    public ResponseEntity<PageDTO> createPage(@Valid @RequestBody PageInfoDTO newPageDTO) {
+        Page newPage = pageConverter.toPage(newPageDTO);
         Page createdPage = pagesService.createPage(newPage);
         return ResponseEntity.ok(pageConverter.toPagePayload(createdPage));
     }

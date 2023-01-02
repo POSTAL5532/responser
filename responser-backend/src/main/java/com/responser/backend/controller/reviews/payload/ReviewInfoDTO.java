@@ -6,9 +6,9 @@ import lombok.NoArgsConstructor;
 import jakarta.validation.constraints.*;
 
 /**
- * ReviewDataPayload
+ * Review like info DTO. Uses for creation and updating {@link com.responser.backend.model.Review} by API
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Data
 @NoArgsConstructor

@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * DomainRepository
+ * Domain repository
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Repository
 public interface DomainRepository extends JpaRepository<Domain, String> {

@@ -7,6 +7,11 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 
+/**
+ * Review like DTO payload.
+ *
+ * @author Shcherbachenya Igor
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor

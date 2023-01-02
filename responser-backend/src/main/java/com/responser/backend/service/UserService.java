@@ -10,9 +10,9 @@ import java.text.MessageFormat;
 import java.util.NoSuchElementException;
 
 /**
- * UserService
+ * User service.
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @RequiredArgsConstructor
 @Service

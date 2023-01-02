@@ -10,9 +10,9 @@ import java.util.Collection;
 import java.util.Collections;
 
 /**
- * User
+ * User details
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Getter
 @Setter

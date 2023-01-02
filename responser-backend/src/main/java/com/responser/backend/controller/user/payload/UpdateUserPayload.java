@@ -12,7 +12,7 @@ import jakarta.validation.constraints.Size;
 /**
  * UpdateUserPayload
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Data
 @NoArgsConstructor

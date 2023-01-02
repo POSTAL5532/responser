@@ -7,9 +7,9 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 /**
- * ReviewLikeRepository
+ * Review like repository
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Repository
 public interface ReviewLikeRepository extends JpaRepository<ReviewLike, String> {

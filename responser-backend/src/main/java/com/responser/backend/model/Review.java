@@ -6,9 +6,9 @@ import lombok.*;
 import java.util.Set;
 
 /**
- * Response
+ * Review
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @Getter
 @Setter

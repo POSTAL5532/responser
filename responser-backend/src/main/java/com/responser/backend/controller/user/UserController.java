@@ -17,7 +17,7 @@ import java.security.Principal;
 /**
  * UserController
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @RequiredArgsConstructor
 @RestController

@@ -1,9 +1,9 @@
 package com.responser.backend.controller.payload;
 
 /**
- * ApiErrorType
+ * Api error type
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 public enum ApiErrorType {
 

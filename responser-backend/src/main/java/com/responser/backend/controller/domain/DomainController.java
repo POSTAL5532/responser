@@ -15,9 +15,9 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
 /**
- * DomainController
+ * Domain controller for operations with domain entities.
  *
- * @author SIE
+ * @author Shcherbachenya Igor
  */
 @RequiredArgsConstructor
 @RestController
@@ -28,6 +28,12 @@ public class DomainController {
 
     private final DomainConverter domainConverter;
 
+    /**
+     * Return domain by raw url string.
+     *
+     * @param url raw url string
+     * @return {@link DomainDTO}
+     */
     @GetMapping
     public ResponseEntity<DomainDTO> getDomainByUrl(@Valid @NotBlank @RequestParam String url) {
         String preparedUrl = UrlUtils.prepareUrl(url);
@@ -35,6 +41,12 @@ public class DomainController {
         return ResponseEntity.ok(domainDTO);
     }
 
+    /**
+     * Creates new domain entity.
+     *
+     * @param newDomain new domain info
+     * @return initialized {@link DomainDTO}
+     */
     @PostMapping
     public ResponseEntity<DomainDTO> createDomain(@Valid @NotNull @RequestBody DomainInfoDTO newDomain) {
         Domain createdDomain = domainService.createDomain(domainConverter.toDomain(newDomain));
