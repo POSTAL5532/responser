@@ -1,7 +1,7 @@
 package com.responser.backend.controller.reviewlike;
 
-import com.responser.backend.controller.reviewlike.payload.ReviewLikeDataPayload;
-import com.responser.backend.controller.reviewlike.payload.ReviewLikePayload;
+import com.responser.backend.controller.reviewlike.payload.ReviewLikeInfoDTO;
+import com.responser.backend.controller.reviewlike.payload.ReviewLikeDTO;
 import com.responser.backend.converter.ReviewLikeConverter;
 import com.responser.backend.model.ReviewLike;
 import com.responser.backend.service.ReviewLikeService;
@@ -33,8 +33,8 @@ public class ReviewLikeController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping
-    public ResponseEntity<ReviewLikePayload> createLike(
-            @Valid @NotNull @RequestBody ReviewLikeDataPayload newLikePayload, Principal principal
+    public ResponseEntity<ReviewLikeDTO> createLike(
+        @Valid @NotNull @RequestBody ReviewLikeInfoDTO newLikePayload, Principal principal
     ) {
         ReviewLike newLike = reviewLikeConverter.toReviewLike(newLikePayload, principal.getName());
         ReviewLike createdLike = reviewLikeService.createLike(newLike);
@@ -43,9 +43,9 @@ public class ReviewLikeController {
 
     @PreAuthorize("isAuthenticated()")
     @PutMapping("/{likeId}")
-    public ResponseEntity<ReviewLikePayload> updateLike(
+    public ResponseEntity<ReviewLikeDTO> updateLike(
             @Valid @NotBlank @PathVariable String likeId,
-            @Valid @NotNull @RequestBody ReviewLikeDataPayload likePayload,
+            @Valid @NotNull @RequestBody ReviewLikeInfoDTO likePayload,
             Principal principal
     ) {
         ReviewLike reviewLike = reviewLikeConverter.toReviewLike(likeId, likePayload, principal.getName());

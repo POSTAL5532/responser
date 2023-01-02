@@ -1,7 +1,7 @@
 package com.responser.backend.converter;
 
-import com.responser.backend.controller.reviewlike.payload.ReviewLikeDataPayload;
-import com.responser.backend.controller.reviewlike.payload.ReviewLikePayload;
+import com.responser.backend.controller.reviewlike.payload.ReviewLikeInfoDTO;
+import com.responser.backend.controller.reviewlike.payload.ReviewLikeDTO;
 import com.responser.backend.model.Review;
 import com.responser.backend.model.ReviewLike;
 import lombok.AllArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.stream.Collectors;
 @Service
 public class ReviewLikeConverter {
 
-    public ReviewLike toReviewLike(String likeId, ReviewLikeDataPayload dataPayload, String userId) {
+    public ReviewLike toReviewLike(String likeId, ReviewLikeInfoDTO dataPayload, String userId) {
         Review fakeReview = new Review();
         fakeReview.setId(dataPayload.getReviewId());
 
@@ -27,16 +27,16 @@ public class ReviewLikeConverter {
         return reviewLike;
     }
 
-    public ReviewLike toReviewLike(ReviewLikeDataPayload dataPayload, String userId) {
+    public ReviewLike toReviewLike(ReviewLikeInfoDTO dataPayload, String userId) {
         return toReviewLike(null, dataPayload, userId);
     }
 
-    public Collection<ReviewLikePayload> toReviewLikePayloads(Collection<ReviewLike> reviewLikes) {
+    public Collection<ReviewLikeDTO> toReviewLikePayloads(Collection<ReviewLike> reviewLikes) {
         return reviewLikes.stream().map(this::toReviewLikePayload).collect(Collectors.toList());
     }
 
-    public ReviewLikePayload toReviewLikePayload(ReviewLike reviewLike) {
-        return ReviewLikePayload.builder()
+    public ReviewLikeDTO toReviewLikePayload(ReviewLike reviewLike) {
+        return ReviewLikeDTO.builder()
                 .id(reviewLike.getId())
                 .reviewId(reviewLike.getReview().getId())
                 .userId(reviewLike.getUserId())

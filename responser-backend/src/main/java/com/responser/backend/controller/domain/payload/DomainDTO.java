@@ -1,6 +1,5 @@
-package com.responser.backend.controller.page.payload;
+package com.responser.backend.controller.domain.payload;
 
-import com.responser.backend.controller.domain.payload.DomainPayload;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -9,7 +8,7 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 /**
- * PagePayload
+ * DomainPayload
  *
  * @author SIE
  */
@@ -17,17 +16,17 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PagePayload {
+public class DomainDTO {
 
     private String id;
 
-    private DomainPayload domain;
-
-    private String url;
+    private String domain;
 
     private String name;
 
     private String description;
+
+    private Boolean hasSsl;
 
     private LocalDateTime creationDate;
 

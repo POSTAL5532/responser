@@ -12,7 +12,7 @@ import jakarta.validation.constraints.*;
  */
 @Data
 @NoArgsConstructor
-public class ReviewDataPayload {
+public class ReviewInfoDTO {
 
     @NotBlank
     private String resourceId;

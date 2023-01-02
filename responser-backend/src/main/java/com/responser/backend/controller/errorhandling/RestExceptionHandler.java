@@ -35,15 +35,17 @@ import java.util.NoSuchElementException;
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     @ExceptionHandler({NoSuchElementException.class})
-    public ResponseEntity<Object> handleNoSuchElementException(NoSuchElementException ex, WebRequest request) {
-        ApiError<?> response = new ApiError<>(ex.getMessage(), ApiErrorType.ENTITY_NOT_FOUND);
-        return handleExceptionInternal(ex, response, new HttpHeaders(), HttpStatus.NOT_FOUND, request);
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    @ResponseBody
+    public ApiError<?> handleNoSuchElementException(NoSuchElementException ex) {
+        return new ApiError<>(ex.getMessage(), ApiErrorType.ENTITY_NOT_FOUND);
     }
 
     @ExceptionHandler({EntityAlreadyExistException.class})
-    public ResponseEntity<Object> handleEntityAlreadyExistException(EntityAlreadyExistException ex, WebRequest request) {
-        ApiError<?> response = new ApiError<>(ex.getMessage(), ApiErrorType.VALIDATION_ERROR);
-        return handleExceptionInternal(ex, response, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    public ApiError<?> handleEntityAlreadyExistException(EntityAlreadyExistException ex) {
+        return new ApiError<>(ex.getMessage(), ApiErrorType.VALIDATION_ERROR);
     }
 
     @ExceptionHandler(ConstraintViolationException.class)

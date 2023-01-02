@@ -1,7 +1,7 @@
 package com.responser.backend.converter;
 
-import com.responser.backend.controller.domain.payload.CreateDomainPayload;
-import com.responser.backend.controller.domain.payload.DomainPayload;
+import com.responser.backend.controller.domain.payload.DomainInfoDTO;
+import com.responser.backend.controller.domain.payload.DomainDTO;
 import com.responser.backend.model.Domain;
 import com.responser.backend.utils.UrlUtils;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ import java.net.URL;
 @Service
 public class DomainConverter {
 
-    public Domain toDomain(CreateDomainPayload domainPayload) {
+    public Domain toDomain(DomainInfoDTO domainPayload) {
         URL url = UrlUtils.convertToURL(UrlUtils.prepareUrl(domainPayload.getUrl()));
 
         Domain domain = new Domain();
@@ -28,8 +28,8 @@ public class DomainConverter {
         return domain;
     }
 
-    public DomainPayload toDomainPayload(Domain domain) {
-        return DomainPayload.builder()
+    public DomainDTO toDomainPayload(Domain domain) {
+        return DomainDTO.builder()
                 .id(domain.getId())
                 .domain(domain.getDomain())
                 .name(domain.getName())

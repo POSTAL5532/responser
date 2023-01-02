@@ -1,8 +1,8 @@
 package com.responser.backend.converter;
 
-import com.responser.backend.controller.reviewlike.payload.ReviewLikePayload;
-import com.responser.backend.controller.reviews.payload.ReviewDataPayload;
-import com.responser.backend.controller.reviews.payload.ReviewPayload;
+import com.responser.backend.controller.reviewlike.payload.ReviewLikeDTO;
+import com.responser.backend.controller.reviews.payload.ReviewInfoDTO;
+import com.responser.backend.controller.reviews.payload.ReviewDTO;
 import com.responser.backend.model.ResourceType;
 import com.responser.backend.model.Review;
 import com.responser.backend.model.User;
@@ -25,31 +25,31 @@ public class ReviewConverter {
 
     private final ReviewLikeConverter reviewLikeConverter;
 
-    public Review toReview(String reviewId, ReviewDataPayload reviewDataPayload, String userId) {
+    public Review toReview(String reviewId, ReviewInfoDTO reviewInfoDTO, String userId) {
         User fakeUser = new User();
         fakeUser.setId(userId);
 
         Review review = new Review();
         review.setId(reviewId);
-        review.setResourceType(ResourceType.valueOf(reviewDataPayload.getResourceType()));
-        review.setResourceId(reviewDataPayload.getResourceId());
-        review.setRating(reviewDataPayload.getRating());
-        review.setText(reviewDataPayload.getText());
+        review.setResourceType(ResourceType.valueOf(reviewInfoDTO.getResourceType()));
+        review.setResourceId(reviewInfoDTO.getResourceId());
+        review.setRating(reviewInfoDTO.getRating());
+        review.setText(reviewInfoDTO.getText());
         review.setUser(fakeUser);
 
         return review;
     }
 
-    public Review toReview(ReviewDataPayload reviewDataPayload, String userId) {
-        return toReview(null, reviewDataPayload, userId);
+    public Review toReview(ReviewInfoDTO reviewInfoDTO, String userId) {
+        return toReview(null, reviewInfoDTO, userId);
     }
 
-    public ReviewPayload toResponsePayload(Review review) {
-        Collection<ReviewLikePayload> reviewLikes = Objects.isNull(review.getLikes())
+    public ReviewDTO toResponsePayload(Review review) {
+        Collection<ReviewLikeDTO> reviewLikes = Objects.isNull(review.getLikes())
                 ? Collections.emptyList()
                 : reviewLikeConverter.toReviewLikePayloads(review.getLikes());
 
-        return ReviewPayload.builder()
+        return ReviewDTO.builder()
                 .id(review.getId())
                 .resourceId(review.getResourceId())
                 .resourceType(review.getResourceType())
@@ -62,7 +62,7 @@ public class ReviewConverter {
                 .build();
     }
 
-    public List<ReviewPayload> toReviewPayloadList(List<Review> reviews) {
+    public List<ReviewDTO> toReviewPayloadList(List<Review> reviews) {
         return reviews.stream().map(this::toResponsePayload).collect(Collectors.toList());
     }
 }

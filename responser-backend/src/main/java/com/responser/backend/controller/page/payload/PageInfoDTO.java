@@ -14,7 +14,7 @@ import jakarta.validation.constraints.Size;
 //TODO: Need validation upgrading
 @Data
 @NoArgsConstructor
-public class CreatePagePayload {
+public class PageInfoDTO {
 
     @NotBlank(message = "Domain id must be specified")
     private String domainId;

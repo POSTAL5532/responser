@@ -1,8 +1,12 @@
 package com.responser.backend.validator;
 
+import com.responser.backend.service.UserService;
 import jakarta.validation.Constraint;
+import jakarta.validation.ConstraintValidator;
+import jakarta.validation.ConstraintValidatorContext;
 import jakarta.validation.Payload;
 import java.lang.annotation.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Username uniqueness validation
@@ -10,7 +14,7 @@ import java.lang.annotation.*;
  * @author SIE
  */
 @Documented
-@Constraint(validatedBy = UsernameUniquenessValidator.class)
+@Constraint(validatedBy = UsernameUniqueness.UsernameUniquenessValidator.class)
 @Target( { ElementType.METHOD, ElementType.FIELD })
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UsernameUniqueness {
@@ -20,4 +24,15 @@ public @interface UsernameUniqueness {
     Class<?>[] groups() default {};
 
     Class<? extends Payload>[] payload() default {};
+
+    class UsernameUniquenessValidator implements ConstraintValidator<UsernameUniqueness, String> {
+
+        @Autowired
+        private UserService userService;
+
+        @Override
+        public boolean isValid(String username, ConstraintValidatorContext cxt) {
+            return !userService.existByUserName(username);
+        }
+    }
 }

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class ReviewLikeDataPayload {
+public class ReviewLikeInfoDTO {
 
     @NotBlank
     private String reviewId;

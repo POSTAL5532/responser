@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ReviewLikePayload {
+public class ReviewLikeDTO {
 
     private String id;
 

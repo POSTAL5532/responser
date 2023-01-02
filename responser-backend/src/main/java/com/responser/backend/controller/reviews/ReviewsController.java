@@ -1,7 +1,7 @@
 package com.responser.backend.controller.reviews;
 
-import com.responser.backend.controller.reviews.payload.ReviewDataPayload;
-import com.responser.backend.controller.reviews.payload.ReviewPayload;
+import com.responser.backend.controller.reviews.payload.ReviewInfoDTO;
+import com.responser.backend.controller.reviews.payload.ReviewDTO;
 import com.responser.backend.controller.reviews.payload.ReviewsRequestCriteria;
 import com.responser.backend.converter.ReviewsCriteriaConverter;
 import com.responser.backend.converter.ReviewConverter;
@@ -39,7 +39,7 @@ public class ReviewsController {
     private final ReviewsCriteriaConverter reviewsCriteriaConverter;
 
     @GetMapping
-    public ResponseEntity<List<ReviewPayload>> getReviews(@Valid @NotNull ReviewsRequestCriteria criteria, Principal principal) {
+    public ResponseEntity<List<ReviewDTO>> getReviews(@Valid @NotNull ReviewsRequestCriteria criteria, Principal principal) {
         if (StringUtils.isNotEmpty(criteria.getForUserId())) {
             if (Objects.isNull(principal) || !principal.getName().equals(criteria.getForUserId())) {
                 return ResponseEntity.status(HttpStatusCode.valueOf(401)).build();
@@ -51,31 +51,31 @@ public class ReviewsController {
     }
 
     @GetMapping("/{reviewId}")
-    public ResponseEntity<ReviewPayload> getReview(@Valid @NotBlank @PathVariable String reviewId) {
+    public ResponseEntity<ReviewDTO> getReview(@Valid @NotBlank @PathVariable String reviewId) {
         Review review = reviewService.getReview(reviewId);
         return ResponseEntity.ok(reviewConverter.toResponsePayload(review));
     }
 
     @PostMapping
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<ReviewPayload> createReview(@Valid @NotNull @RequestBody ReviewDataPayload review, Principal principal) {
+    public ResponseEntity<ReviewDTO> createReview(@Valid @NotNull @RequestBody ReviewInfoDTO review, Principal principal) {
         Review newReview = reviewConverter.toReview(review, principal.getName());
-        ReviewPayload newReviewPayload = reviewConverter.toResponsePayload(reviewService.createReview(newReview));
+        ReviewDTO newReviewDTO = reviewConverter.toResponsePayload(reviewService.createReview(newReview));
 
-        return ResponseEntity.ok(newReviewPayload);
+        return ResponseEntity.ok(newReviewDTO);
     }
 
     @PutMapping("/{reviewId}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<ReviewPayload> updateReview(
+    public ResponseEntity<ReviewDTO> updateReview(
             @Valid @NotNull @PathVariable String reviewId,
-            @Valid @NotNull @RequestBody ReviewDataPayload responseDTO,
+            @Valid @NotNull @RequestBody ReviewInfoDTO responseDTO,
             Principal principal
     ) {
         Review review = reviewConverter.toReview(reviewId, responseDTO, principal.getName());
-        ReviewPayload updatedReviewPayload = reviewConverter.toResponsePayload(reviewService.updateReview(review));
+        ReviewDTO updatedReviewDTO = reviewConverter.toResponsePayload(reviewService.updateReview(review));
 
-        return ResponseEntity.ok(updatedReviewPayload);
+        return ResponseEntity.ok(updatedReviewDTO);
     }
 
     @DeleteMapping("/{reviewId}")

@@ -1,7 +1,7 @@
 package com.responser.backend.converter;
 
-import com.responser.backend.controller.page.payload.CreatePagePayload;
-import com.responser.backend.controller.page.payload.PagePayload;
+import com.responser.backend.controller.page.payload.PageInfoDTO;
+import com.responser.backend.controller.page.payload.PageDTO;
 import com.responser.backend.model.Domain;
 import com.responser.backend.model.Page;
 import com.responser.backend.utils.UrlUtils;
@@ -19,23 +19,23 @@ public class PageConverter {
 
     private final DomainConverter domainConverter;
 
-    public Page toPage(CreatePagePayload createPagePayload) {
+    public Page toPage(PageInfoDTO pageInfoDTO) {
         Page page = new Page();
-        page.setUrl(UrlUtils.prepareUrl(createPagePayload.getUrl()));
-        page.setName(createPagePayload.getName());
-        page.setDescription(createPagePayload.getDescription());
+        page.setUrl(UrlUtils.prepareUrl(pageInfoDTO.getUrl()));
+        page.setName(pageInfoDTO.getName());
+        page.setDescription(pageInfoDTO.getDescription());
 
         //TODO: review of this workaround!
         Domain proxyDomain = new Domain();
-        proxyDomain.setId(createPagePayload.getDomainId());
+        proxyDomain.setId(pageInfoDTO.getDomainId());
 
         page.setDomain(proxyDomain);
 
         return page;
     }
 
-    public PagePayload toPagePayload(Page page) {
-        return PagePayload.builder()
+    public PageDTO toPagePayload(Page page) {
+        return PageDTO.builder()
                 .id(page.getId())
                 .url(page.getUrl())
                 .name(page.getName())

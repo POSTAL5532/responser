@@ -1,7 +1,7 @@
 package com.responser.backend.controller.domain;
 
-import com.responser.backend.controller.domain.payload.CreateDomainPayload;
-import com.responser.backend.controller.domain.payload.DomainPayload;
+import com.responser.backend.controller.domain.payload.DomainInfoDTO;
+import com.responser.backend.controller.domain.payload.DomainDTO;
 import com.responser.backend.converter.DomainConverter;
 import com.responser.backend.model.Domain;
 import com.responser.backend.service.DomainService;
@@ -29,14 +29,14 @@ public class DomainController {
     private final DomainConverter domainConverter;
 
     @GetMapping
-    public ResponseEntity<DomainPayload> getDomainByUrl(@Valid @NotBlank @RequestParam String url) {
+    public ResponseEntity<DomainDTO> getDomainByUrl(@Valid @NotBlank @RequestParam String url) {
         String preparedUrl = UrlUtils.prepareUrl(url);
-        DomainPayload domainPayload = domainConverter.toDomainPayload(domainService.getByUrl(preparedUrl));
-        return ResponseEntity.ok(domainPayload);
+        DomainDTO domainDTO = domainConverter.toDomainPayload(domainService.getByUrl(preparedUrl));
+        return ResponseEntity.ok(domainDTO);
     }
 
     @PostMapping
-    public ResponseEntity<DomainPayload> createDomain(@Valid @NotNull @RequestBody CreateDomainPayload newDomain) {
+    public ResponseEntity<DomainDTO> createDomain(@Valid @NotNull @RequestBody DomainInfoDTO newDomain) {
         Domain createdDomain = domainService.createDomain(domainConverter.toDomain(newDomain));
         return ResponseEntity.ok(domainConverter.toDomainPayload(createdDomain));
     }

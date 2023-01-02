@@ -1,7 +1,7 @@
 package com.responser.backend.controller.page;
 
-import com.responser.backend.controller.page.payload.CreatePagePayload;
-import com.responser.backend.controller.page.payload.PagePayload;
+import com.responser.backend.controller.page.payload.PageInfoDTO;
+import com.responser.backend.controller.page.payload.PageDTO;
 import com.responser.backend.converter.PageConverter;
 import com.responser.backend.model.Page;
 import com.responser.backend.service.PagesService;
@@ -28,14 +28,14 @@ public class PageController {
     private final PageConverter pageConverter;
 
     @GetMapping
-    public ResponseEntity<PagePayload> getPageByUrl(@Valid @NotBlank @RequestParam String url) {
+    public ResponseEntity<PageDTO> getPageByUrl(@Valid @NotBlank @RequestParam String url) {
         String preparedUrl = UrlUtils.prepareUrl(url);
-        PagePayload pagePayload = pageConverter.toPagePayload(pagesService.getByUrl(preparedUrl));
-        return ResponseEntity.ok(pagePayload);
+        PageDTO pageDTO = pageConverter.toPagePayload(pagesService.getByUrl(preparedUrl));
+        return ResponseEntity.ok(pageDTO);
     }
 
     @PostMapping
-    public ResponseEntity<PagePayload> createPage(@Valid @RequestBody CreatePagePayload newPagePayload) {
+    public ResponseEntity<PageDTO> createPage(@Valid @RequestBody PageInfoDTO newPagePayload) {
         Page newPage = pageConverter.toPage(newPagePayload);
         Page createdPage = pagesService.createPage(newPage);
         return ResponseEntity.ok(pageConverter.toPagePayload(createdPage));

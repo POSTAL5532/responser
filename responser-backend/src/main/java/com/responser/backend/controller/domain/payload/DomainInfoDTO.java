@@ -14,7 +14,7 @@ import jakarta.validation.constraints.Size;
 //TODO: Validation
 @Data
 @NoArgsConstructor
-public class CreateDomainPayload {
+public class DomainInfoDTO {
 
     @NotBlank(message = "URL must be specified")
     @Size(min = 10, message = "URL must be from 5 characters")
