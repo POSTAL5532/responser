@@ -66,8 +66,18 @@ const ReviewsPage: React.FC = () => {
     return (
         <Page className="reviews-page">
             <div className="header">
-                {!isLoading && domain ? <div className="domain-info">{domain.domain}</div> : "LOADING..."}
-                {!isLoading && page ? <div className="page-info">{page.name}</div> : "LOADING..."}
+
+                {!isLoading && domain
+                    ? <div className="domain-info">
+                        {domain.rating && domain.rating.toPrecision(2)} {domain.domain}
+                    </div>
+                    : "LOADING..."}
+
+                {!isLoading && page
+                    ? <div className="page-info">
+                        {page.rating && page.rating.toPrecision(2)} {page.name}
+                    </div>
+                    : "LOADING..."}
 
                 <ConditionShow condition={!isLoading && !!reviewsResourceType}>
                     <ButtonRadioGroup<ResourceType> options={[

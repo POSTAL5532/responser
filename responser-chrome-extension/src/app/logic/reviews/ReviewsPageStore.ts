@@ -32,6 +32,9 @@ export class ReviewsPageStore extends LoadingStore {
 
     reviewsResourceType: ResourceType;
 
+    /**
+     * Current view page info from content layer.
+     */
     currentPageInfo: PageInfo;
 
     domain: Domain;

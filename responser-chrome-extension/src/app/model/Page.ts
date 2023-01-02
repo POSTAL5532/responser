@@ -13,6 +13,8 @@ export class Page {
 
     description: string;
 
+    rating: number;
+
     creationDate: Moment;
 
     updateDate: Moment;

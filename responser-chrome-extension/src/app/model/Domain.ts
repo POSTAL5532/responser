@@ -10,6 +10,8 @@ export class Domain {
 
     description: string;
 
+    rating: number;
+
     hasSsl: boolean;
 
     creationDate: Moment;

@@ -38,6 +38,7 @@ public class DomainController {
     public ResponseEntity<DomainDTO> getDomainByUrl(@Valid @NotBlank @RequestParam String url) {
         String preparedUrl = UrlUtils.prepareUrl(url);
         DomainDTO domainDTO = domainConverter.toDomainPayload(domainService.getByUrl(preparedUrl));
+        domainDTO.setRating(domainService.getDomainRating(domainDTO.getId()));
         return ResponseEntity.ok(domainDTO);
     }
 

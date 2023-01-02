@@ -37,6 +37,7 @@ public class PageController {
     public ResponseEntity<PageDTO> getPageByUrl(@Valid @NotBlank @RequestParam String url) {
         String preparedUrl = UrlUtils.prepareUrl(url);
         PageDTO pageDTO = pageConverter.toPagePayload(pagesService.getByUrl(preparedUrl));
+        pageDTO.setRating(pagesService.getPageRating(pageDTO.getId()));
         return ResponseEntity.ok(pageDTO);
     }
 

@@ -26,6 +26,8 @@ public class DomainDTO {
 
     private String description;
 
+    private Double rating;
+
     private Boolean hasSsl;
 
     private LocalDateTime creationDate;

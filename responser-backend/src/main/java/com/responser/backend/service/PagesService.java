@@ -59,4 +59,8 @@ public class PagesService {
     public Boolean existsById(String id) {
         return pagesRepository.existsById(id);
     }
+
+    public Double getPageRating(String domainId) {
+        return pagesRepository.commonRating(domainId);
+    }
 }

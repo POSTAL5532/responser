@@ -49,4 +49,8 @@ public class DomainService {
     public Boolean existsById(String id) {
         return domainRepository.existsById(id);
     }
+
+    public Double getDomainRating(String domainId) {
+        return domainRepository.commonRating(domainId);
+    }
 }
