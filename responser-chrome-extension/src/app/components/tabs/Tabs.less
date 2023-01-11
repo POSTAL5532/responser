@@ -1,0 +1,25 @@
+@import "globalsLess";
+
+.tabs {
+  display: flex;
+  height: 36px;
+
+  .tab {
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    .fontInterSemiBold();
+    font-size: 14px;
+    color: @system-color-dark-300;
+
+    &.active, &:hover {
+      color: @primary-color-lighter;
+    }
+
+    &.active {
+      box-shadow: inset 0 -4px @primary-color-lighter;
+    }
+  }
+}

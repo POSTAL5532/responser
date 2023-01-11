@@ -8,9 +8,8 @@ import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {Page} from "../../components/page/Page";
 import {navigateToEditReviewPage} from "../edit-review/EditReviewPage";
 import {ResourceType} from "../../model/ResourceType";
-import {ConditionShow} from "../../components/ConditionShow";
 import {navigateTo} from "../../utils/NavigationUtils";
-import {ButtonRadioGroup} from "../../components/button-radio-group/ButtonRadioGroup";
+import {ReviewsHeader} from "./header/ReviewsHeader";
 import "./ReviewsPage.less";
 
 const ReviewsPage: React.FC = () => {
@@ -65,27 +64,10 @@ const ReviewsPage: React.FC = () => {
 
     return (
         <Page className="reviews-page">
-            <div className="header">
-
-                {!isLoading && domain
-                    ? <div className="domain-info">
-                        {domain.rating && domain.rating.toPrecision(2)} {domain.domain}
-                    </div>
-                    : "LOADING..."}
-
-                {!isLoading && page
-                    ? <div className="page-info">
-                        {page.rating && page.rating.toPrecision(2)} {page.name}
-                    </div>
-                    : "LOADING..."}
-
-                <ConditionShow condition={!isLoading && !!reviewsResourceType}>
-                    <ButtonRadioGroup<ResourceType> options={[
-                        {value: ResourceType.SITE, label: "Site reviews"},
-                        {value: ResourceType.PAGE, label: "Page reviews"}
-                    ]} currentValue={reviewsResourceType} onChange={changeResourceType}/>
-                </ConditionShow>
-            </div>
+            <ReviewsHeader reviewsResourceType={reviewsResourceType}
+                           resource={reviewsResourceType === ResourceType.PAGE ? page : domain}
+                           isLoading={isLoading || !domain || !page}
+                           onResourceTypeChange={changeResourceType}/>
 
             <ReviewsList reviews={reviewsList}
                          createLike={createReviewLike}
