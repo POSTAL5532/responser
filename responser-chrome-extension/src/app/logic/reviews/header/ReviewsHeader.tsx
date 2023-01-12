@@ -54,15 +54,22 @@ type ResourceInfoProps = {
 }
 
 const ResourceInfo: React.FC<ResourceInfoProps> = (props: ResourceInfoProps) => {
-    if (props.isLoading) {
+    const {resourceIcon, resourceLabel, resourceRating, isLoading} = props;
+
+    if (isLoading) {
         return <>LOADING</>
     }
 
     return (
         <div className="resource-info">
-            {props.resourceIcon}
-            <div className="label">{props.resourceLabel}</div>
-            <div className="rating"><span>{props.resourceRating.toPrecision(2)} / 5</span></div>
+            {resourceIcon}
+            <div className="label">{resourceLabel}</div>
+            {
+                !!resourceRating &&
+                <div className="rating">
+                    <span>{resourceRating.toPrecision(2)} / 5</span>
+                </div>
+            }
         </div>
     );
 }

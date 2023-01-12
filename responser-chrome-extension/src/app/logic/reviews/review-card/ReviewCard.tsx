@@ -1,14 +1,15 @@
 import React, {useState} from "react";
 import {observer} from "mobx-react";
-import {Review} from "../../model/Review";
-import {User} from "../../model/User";
+import {ReactComponent as UserIcon} from './user.svg';
+import {Review} from "../../../model/Review";
+import {User} from "../../../model/User";
 import classNames from "classnames";
-import {Rating} from "../../components/rating/Rating";
-import {Reaction} from "../../components/reaction/Reaction";
-import {ReviewLike} from "../../model/ReviewLike";
-import {Remove} from "../../components/remove/Remove";
-import {ConditionShow} from "../../components/ConditionShow";
-import {useIsOverflow} from "../../utils/LayoutUtils";
+import {Rating} from "../../../components/rating/Rating";
+import {Reaction} from "../../../components/reaction/Reaction";
+import {ReviewLike} from "../../../model/ReviewLike";
+import {Remove} from "../../../components/remove/Remove";
+import {ConditionShow} from "../../../components/ConditionShow";
+import {useIsOverflow} from "../../../utils/LayoutUtils";
 import "./ReviewCard.less";
 
 type ReviewCardProps = {
@@ -66,26 +67,20 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
     return (
         <div className={className}>
             <div className="card-header">
-                <div className="user-name">
-                    {user.firstName} {user.lastName} <span className="you">{isCurrentUserReview ? "(you)" : null}</span>
-                </div>
+                <div className="user-name">{user.firstName} {user.lastName}</div>
                 <ConditionShow condition={isCurrentUserReview}>
-                    <Remove onClick={() => onRemove?.(review)}/>
+                    <UserIcon className="user-icon"/>
                 </ConditionShow>
+                <div className="published">{creationDate.format("MMM Do YY")}</div>
+                <Rating value={rating} readonly={true}/>
+                {/*<ConditionShow condition={isCurrentUserReview}>
+                    <Remove onClick={() => onRemove?.(review)}/>
+                </ConditionShow>*/}
             </div>
 
-            <div className="rating-container"><Rating value={rating} readonly={true}/></div>
             <div className={classNames("text", {"expanded": expanded})} ref={textRef}>{text}</div>
 
-            <ConditionShow condition={wasOverflowed}>
-                <div className="show-more" onClick={() => setExpanded(!expanded)}>
-                    {expanded ? "show less" : "show more"}
-                </div>
-            </ConditionShow>
-
-            <div className="published">{creationDate.format("MMM Do YY, h:mm a")}</div>
-
-            <div className="reactions">
+            <div className="card-footer">
                 <Reaction count={positives.length}
                           positive={true}
                           currentUserReacted={currentUserReviewLike?.positive}
@@ -96,6 +91,12 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
                           currentUserReacted={currentUserReviewLike && !currentUserReviewLike.positive}
                           disabled={!currentUser}
                           onClick={onReaction}/>
+
+                <ConditionShow condition={wasOverflowed}>
+                    <div className="show-more" onClick={() => setExpanded(!expanded)}>
+                        {expanded ? "show less" : "show more"}
+                    </div>
+                </ConditionShow>
             </div>
         </div>
     );

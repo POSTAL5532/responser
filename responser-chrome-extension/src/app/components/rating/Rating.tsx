@@ -2,7 +2,7 @@ import React from "react";
 import classNames from "classnames";
 import {default as ReactRating} from "react-rating";
 import {ReactComponent as Star} from './star.svg';
-import {ReactComponent as FilledStar} from './star-fill.svg';
+import {ReactComponent as FilledStar} from './star-filled.svg';
 import "./Rating.less";
 
 type RatingProps = {

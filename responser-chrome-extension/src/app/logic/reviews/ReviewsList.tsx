@@ -1,7 +1,7 @@
 import React, {useContext} from "react";
 import {observer} from "mobx-react";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
-import ReviewCard from "./ReviewCard";
+import ReviewCard from "./review-card/ReviewCard";
 import {Review} from "../../model/Review";
 import {ReviewLike} from "../../model/ReviewLike";
 import "./ReviewsList.less";

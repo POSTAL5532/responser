@@ -1,0 +1,85 @@
+@import "globalsLess";
+
+.review-card {
+  background-color: @system-color-light-100;
+  padding: 8px 12px;
+  .stackShadow2();
+  border-radius: 8px;
+  position: relative;
+
+  .card-header {
+    display: flex;
+    align-items: center;
+
+    .user-name {
+      .fontInterRegular();
+      color: @system-color-dark-200;
+      font-size: 14px;
+      line-height: 14px;
+    }
+
+    .user-icon {
+      margin-left: 4px;
+    }
+
+    .published {
+      .fontMulishRegular();
+      color: @system-color-dark-100;
+      font-size: 12px;
+      line-height: 12px;
+      margin-left: 8px;
+    }
+
+    .rating {
+      margin-left: auto;
+
+      .star {
+        width: 16px;
+        height: 16px;
+        margin-right: 4px;
+      }
+    }
+
+    .remove {
+      margin-left: auto;
+    }
+  }
+
+  .text {
+    position: relative;
+    .fontMulishRegular();
+    font-size: 14px;
+    margin-bottom: 6px;
+    word-wrap: break-word;
+
+    &:not(.expanded) {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+  }
+
+  .card-footer {
+    display: flex;
+
+    .reaction {
+      margin-right: 10px;
+    }
+  }
+
+  .show-more {
+    .fontInterMedium();
+    font-size: 12px;
+    cursor: pointer;
+    color: @system-color-dark-300;
+    margin-left: auto;
+    margin-right: 16px;
+
+    &:hover {
+      color: @primary-color-lighter;
+    }
+  }
+}

@@ -1,8 +1,6 @@
 import React from "react";
 import {ReactComponent as ReactionIcon} from './reaction.svg';
-import {ReactComponent as ReactionFilledIcon} from './reaction-filled.svg';
 import {ReactComponent as ReactionNegativeIcon} from './reaction-negative.svg';
-import {ReactComponent as ReactionNegativeFilledIcon} from './reaction-negative-filled.svg';
 import classNames from "classnames";
 import "./Reaction.less"
 
@@ -17,15 +15,11 @@ type ReactionProps = {
 
 export const Reaction: React.FC<ReactionProps> = (props: ReactionProps) => {
     const {count, positive, currentUserReacted, disabled, onClick, className} = props;
-    const resultClassName = classNames("reaction", {"positive": positive, "current-user-reacted": currentUserReacted, "disabled": disabled}, className);
-
-    const getIcon = () => {
-        if (positive) {
-            return currentUserReacted ? <ReactionFilledIcon/> : <ReactionIcon/>;
-        } else {
-            return currentUserReacted ? <ReactionNegativeFilledIcon/> : <ReactionNegativeIcon/>;
-        }
-    }
+    const resultClassName = classNames("reaction", {
+        "positive": positive,
+        "current-user-reacted": currentUserReacted,
+        "disabled": disabled
+    }, className);
 
     const onReactionClick = () => {
         if (!disabled) onClick(positive)
@@ -33,8 +27,10 @@ export const Reaction: React.FC<ReactionProps> = (props: ReactionProps) => {
 
     return (
         <div className={resultClassName} onClick={onReactionClick}>
+            <span className="reaction-icon">
+                {positive ? <ReactionIcon/> : <ReactionNegativeIcon/>}
+            </span>
             <span className="count">{count}</span>
-            <span className="reaction-icon">{getIcon()}</span>
         </div>
     );
 }
