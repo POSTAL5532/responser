@@ -1,20 +1,24 @@
 @import "globalsLess";
 
 .edit-review-page {
-  padding: 10px 14px;
-
-  .header, .button-radio-group, .rating-container, .text-container {
-    margin-bottom: 14px;
-  }
-
   .header {
     display: flex;
-    .fontMulishRegular();
-    font-size: 18px;
-    margin-top: 4px;
+    align-items: center;
+    justify-content: center;
+    .fontInterSemiBold();
+    font-size: 16px;
+    height: 36px;
+    .stackShadow3();
+    background-color: @system-color-light-100;
+    color: @system-color-dark-300;
+  }
 
-    .button {
-      margin-left: auto;
+  .form-container {
+    padding: 12px;
+    flex: 1;
+
+    .form {
+      flex: 1;
     }
   }
 

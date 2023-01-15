@@ -8,13 +8,11 @@ export enum ButtonType {
 }
 
 type ButtonProps = {
-    outlined?: boolean;
     styleType?: ButtonType;
 } & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
 export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
     const {
-        outlined,
         className,
         disabled,
         children,

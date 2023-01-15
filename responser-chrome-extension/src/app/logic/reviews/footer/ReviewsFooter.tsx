@@ -2,6 +2,7 @@ import React from "react";
 import {Button, ButtonType} from "../../../components/button/Button";
 import {ResourceType} from "../../../model/ResourceType";
 import {Icon, IconType} from "../../../components/icon/Icon";
+import "./ReviewsFooter.less";
 
 type ReviewsFooterProps = {
     reviewsResourceType: ResourceType;
@@ -35,7 +36,7 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
         : "Site review";
 
     return (
-        <div className="footer">
+        <div className="reviews-footer">
             {
                 userAuthorized && !hasUserReview && onAddReviewClick &&
                 <Button className="add-review"

@@ -4,15 +4,32 @@
 
 .rating {
   .star {
-    color: @primary-color-lighter;
     width: @star-size;
     height: @star-size;
     margin-right: 10px;
+
+    path {
+      stroke: @primary-color-lighter;
+    }
+
+    &.filled {
+      path{
+        fill: @primary-color-lighter;
+      }
+    }
   }
 
   &.disabled {
     .star {
-      color: @system-color-dark-100;
+      path {
+        stroke: @system-color-dark-100;
+      }
+
+      &.filled {
+        path{
+          fill: @system-color-dark-100;
+        }
+      }
     }
   }
 }

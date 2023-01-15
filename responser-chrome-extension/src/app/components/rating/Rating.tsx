@@ -28,6 +28,6 @@ export const Rating: React.FC<RatingProps> = (props: RatingProps) => {
                      onChange={onRatingChange}
                      readonly={readonly || disabled}
                      emptySymbol={<Star className="star"/>}
-                     fullSymbol={<FilledStar className="star"/>}/>
+                     fullSymbol={<FilledStar className="star filled"/>}/>
     );
 }

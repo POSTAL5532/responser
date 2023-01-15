@@ -4,19 +4,31 @@ import {useLocation} from "react-router";
 import {useEditReviewPageStore} from "./EditReviewPageStore";
 import {navigateTo} from "../../utils/NavigationUtils";
 import {navigateToReviewsPage} from "../reviews/ReviewsPage";
-import EditReviewForm from "./EditReviewForm";
+import EditReviewForm from "./form/EditReviewForm";
 import {Page} from "../../components/page/Page";
 import {ConditionShow} from "../../components/ConditionShow";
 import {ResourceType} from "../../model/ResourceType";
-import {Button} from "../../components/button/Button";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
+import {EditReviewFooter} from "./footer/EditReviewFooter";
 import "./EditReviewPage.less";
 
 const EditReviewPage: React.FC = () => {
     const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
-    const {reviewId, pageId, domainId, previousResourceType} = useLocation<NavigateStateProps>().state;
+    const {
+        reviewId,
+        pageId,
+        domainId,
+        previousResourceType
+    } = useLocation<NavigateStateProps>().state;
     const store = useEditReviewPageStore();
-    const {init, reviewData, saveReview, isNewReview, userLeftSiteReview, userLeftPageReview} = store;
+    const {
+        init,
+        reviewData,
+        saveReview,
+        isNewReview,
+        userLeftSiteReview,
+        userLeftPageReview
+    } = store;
 
     useEffect(() => {
         init(currentUser.id, reviewId, pageId, domainId);
@@ -50,16 +62,20 @@ const EditReviewPage: React.FC = () => {
     return (
         <Page className="edit-review-page">
             <div className="header">
-                <div>{getHeaderText()}</div>
-                <Button onClick={onCancel} outlined={true}>Cancel</Button>
+                <span>{getHeaderText()}</span>
             </div>
-            <ConditionShow condition={!!reviewData}>
-                <EditReviewForm reviewData={reviewData}
-                                onSubmit={onSubmit}
-                                isNewReview={isNewReview}
-                                userLeftSiteReview={userLeftSiteReview}
-                                userLeftPageReview={userLeftPageReview}/>
-            </ConditionShow>
+            <div className="form-container">
+                <ConditionShow condition={!!reviewData}>
+                    <EditReviewForm reviewData={reviewData}
+                                    isNewReview={isNewReview}
+                                    userLeftSiteReview={userLeftSiteReview}
+                                    userLeftPageReview={userLeftPageReview}/>
+                </ConditionShow>
+            </div>
+            <EditReviewFooter onSubmit={onSubmit}
+                              onCancel={onCancel}
+                              isNewReview={isNewReview}
+                              submitDisabled={!reviewData?.text || !reviewData?.resourceType}/>
         </Page>
     );
 }
