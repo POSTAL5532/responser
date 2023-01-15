@@ -7,7 +7,6 @@ import classNames from "classnames";
 import {Rating} from "../../../components/rating/Rating";
 import {Reaction} from "../../../components/reaction/Reaction";
 import {ReviewLike} from "../../../model/ReviewLike";
-import {Remove} from "../../../components/remove/Remove";
 import {ConditionShow} from "../../../components/ConditionShow";
 import {useIsOverflow} from "../../../utils/LayoutUtils";
 import "./ReviewCard.less";
@@ -18,11 +17,10 @@ type ReviewCardProps = {
     createLike: (review: Review, positive: boolean) => void;
     updateLike: (reviewLike: ReviewLike, positive: boolean) => void;
     removeLike: (reviewLike: ReviewLike) => void;
-    onRemove?: (review: Review) => void;
 }
 
 const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
-    const {review, currentUser, createLike, updateLike, removeLike, onRemove} = props;
+    const {review, currentUser, createLike, updateLike, removeLike} = props;
     const {user, rating, text, creationDate, reviewLikes} = review;
     const isCurrentUserReview = currentUser && currentUser.id === user.id;
     const className = classNames("review-card", {"current-user": isCurrentUserReview});
@@ -73,9 +71,6 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
                 </ConditionShow>
                 <div className="published">{creationDate.format("MMM Do YY")}</div>
                 <Rating value={rating} readonly={true}/>
-                {/*<ConditionShow condition={isCurrentUserReview}>
-                    <Remove onClick={() => onRemove?.(review)}/>
-                </ConditionShow>*/}
             </div>
 
             <div className={classNames("text", {"expanded": expanded})} ref={textRef}>{text}</div>

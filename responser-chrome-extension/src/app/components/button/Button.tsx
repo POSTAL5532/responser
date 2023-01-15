@@ -2,28 +2,36 @@ import React from "react";
 import classNames from "classnames";
 import "./Button.less";
 
+export enum ButtonType {
+    PRIMARY = "PRIMARY",
+    SECONDARY = "SECONDARY",
+}
+
 type ButtonProps = {
     outlined?: boolean;
-    active?: boolean;
+    styleType?: ButtonType;
 } & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
 export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
-    const {outlined, className, disabled, children, active, ...otherProps} = props;
+    const {
+        outlined,
+        className,
+        disabled,
+        children,
+        styleType = ButtonType.PRIMARY,
+        ...otherProps
+    } = props;
+
     const resultClassName = classNames(
         "button",
-        {
-            "outlined": outlined,
-            "disabled": disabled
-        },
+        styleType.toLowerCase(),
+        {"disabled": disabled},
         className
     );
 
-    // TODO: Redundant?
-    /*const onButtonClick = (event: MouseEvent<HTMLButtonElement>) => {
-        if (!disabled) onClick(event);
-    }*/
-
     return (
-        <button {...otherProps} className={resultClassName} disabled={disabled}>{children}</button>
+        <button {...otherProps} className={resultClassName} disabled={disabled}>
+            {children}
+        </button>
     );
 }

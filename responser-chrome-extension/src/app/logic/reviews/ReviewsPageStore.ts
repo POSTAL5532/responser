@@ -124,8 +124,13 @@ export class ReviewsPageStore extends LoadingStore {
         return criteria;
     }
 
-    removeReview = async (review: Review): Promise<void> => {
+    /*removeReview = async (review: Review): Promise<void> => {
         await this.reviewService.deleteReview(review.id);
+        this.currentUserReview = null;
+    }*/
+
+    removeUserReview = async (): Promise<void> => {
+        await this.reviewService.deleteReview(this.currentUserReview?.id);
         this.currentUserReview = null;
     }
 

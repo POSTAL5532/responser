@@ -3,17 +3,19 @@ import {useLocation} from "react-router";
 import {observer} from "mobx-react";
 import {useReviewsPageStore} from "./ReviewsPageStore";
 import ReviewsList from "./ReviewsList";
-import {Button} from "../../components/button/Button";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {Page} from "../../components/page/Page";
 import {navigateToEditReviewPage} from "../edit-review/EditReviewPage";
 import {ResourceType} from "../../model/ResourceType";
 import {navigateTo} from "../../utils/NavigationUtils";
 import {ReviewsHeader} from "./header/ReviewsHeader";
+import {ReviewsFooter} from "./footer/ReviewsFooter";
+import {useExtensionService} from "../../service/extension/ExtensionService";
 import "./ReviewsPage.less";
 
 const ReviewsPage: React.FC = () => {
     const locationState = useLocation<NavigateStateProps>().state;
+    const extensionService = useExtensionService();
     const {currentUser, isLoading} = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const {
         domain,
@@ -25,30 +27,28 @@ const ReviewsPage: React.FC = () => {
         createReviewLike,
         updateReviewLike,
         removeReviewLike,
-        removeReview
+        removeUserReview
     } = useReviewsPageStore();
 
     useEffect(() => {
         if (!isLoading) init(locationState?.resourceType, currentUser?.id);
     }, [isLoading]);
 
-    const onButtonClick = () => {
-        if (!currentUser) return;
+    const onEditReviewClick = () => {
+        navigateToEditReviewPage({
+            reviewId: currentUserReview.id,
+            pageId: page.id,
+            domainId: domain.id,
+            previousResourceType: reviewsResourceType
+        });
+    }
 
-        if (currentUserReview) {
-            navigateToEditReviewPage({
-                reviewId: currentUserReview.id,
-                pageId: page.id,
-                domainId: domain.id,
-                previousResourceType: reviewsResourceType
-            });
-        } else {
-            navigateToEditReviewPage({
-                pageId: page.id,
-                domainId: domain.id,
-                previousResourceType: reviewsResourceType
-            });
-        }
+    const onAddReviewClick = () => {
+        navigateToEditReviewPage({
+            pageId: page.id,
+            domainId: domain.id,
+            previousResourceType: reviewsResourceType
+        });
     }
 
     const changeResourceType = (resourceType: ResourceType) => {
@@ -72,12 +72,16 @@ const ReviewsPage: React.FC = () => {
             <ReviewsList reviews={reviewsList}
                          createLike={createReviewLike}
                          updateLike={updateReviewLike}
-                         removeLike={removeReviewLike}
-                         onRemove={removeReview}/>
+                         removeLike={removeReviewLike}/>
 
-            <div className="leave-review-container">
-                <Button disabled={!currentUser} onClick={onButtonClick}>{getButtonText()}</Button>
-            </div>
+            <ReviewsFooter reviewsResourceType={reviewsResourceType}
+                           userAuthorized={!!currentUser}
+                           hasUserReview={!!currentUserReview}
+                           onEditReviewClick={onEditReviewClick}
+                           onAddReviewClick={onAddReviewClick}
+                           onDeleteReviewClick={removeUserReview}
+                           onLoginClick={extensionService.openLoginPage}
+                           onLogOutClick={extensionService.openLogoutPage}/>
         </Page>
     );
 }
