@@ -3,7 +3,6 @@
 .reaction {
   display: flex;
   align-items: center;
-  cursor: pointer;
 
   .count {
     .fontInterMedium();
@@ -32,13 +31,17 @@
     }
   }
 
-  &:hover {
-    .count {
-      color: @primary-color-lighter;
-    }
+  &:not(.disabled) {
+    cursor: pointer;
 
-    .reaction-icon svg path {
-      stroke: @primary-color-lighter;
+    &:hover {
+      .count {
+        color: @primary-color-lighter;
+      }
+
+      .reaction-icon svg path {
+        stroke: @primary-color-lighter;
+      }
     }
   }
 }

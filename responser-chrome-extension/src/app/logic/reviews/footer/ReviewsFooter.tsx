@@ -65,8 +65,7 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
 
             {
                 !userAuthorized && onLoginClick &&
-                <Button styleType={ButtonType.SECONDARY}
-                        className="login"
+                <Button className="login"
                         onClick={onLoginClick}>
                     <Icon type={IconType.LOGIN}/>
                     Sign in for review
