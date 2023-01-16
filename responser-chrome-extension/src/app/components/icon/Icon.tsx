@@ -6,6 +6,7 @@ import {ReactComponent as Login} from './login.svg';
 import {ReactComponent as Plus} from './plus.svg';
 import {ReactComponent as Sandwich} from './sandwich.svg';
 import {ReactComponent as Check} from './check.svg';
+import {ReactComponent as Empty} from './empty.svg';
 import "./Icon.less";
 import classNames from "classnames";
 
@@ -17,7 +18,8 @@ export enum IconType {
     LOGOUT = "LOGOUT",
     PLUS = "PLUS",
     SANDWICH = "SANDWICH",
-    CHECK = "CHECK"
+    CHECK = "CHECK",
+    EMPTY = "EMPTY",
 }
 
 type IconProps = {
@@ -46,6 +48,8 @@ export const Icon: React.FC<IconProps> = (props: IconProps) => {
             return <Sandwich className={resultClassName}/>
         case IconType.CHECK:
             return <Check className={resultClassName}/>
+        case IconType.EMPTY:
+            return <Empty className={resultClassName}/>
         default:
             return null;
     }

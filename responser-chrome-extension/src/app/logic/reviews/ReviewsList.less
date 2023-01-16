@@ -21,4 +21,28 @@
   .review-card {
     margin-bottom: 8px;
   }
+
+  .no-reviews {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    .fontInterRegular();
+    font-size: 14px;
+    color: @system-color-dark-200;
+
+    svg {
+      height: 28px;
+      width: 28px;
+      margin-bottom: 10px;
+
+      path {
+        stroke: @system-color-dark-200;
+      }
+    }
+  }
 }

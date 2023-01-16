@@ -4,6 +4,8 @@ import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import ReviewCard from "./review-card/ReviewCard";
 import {Review} from "../../model/Review";
 import {ReviewLike} from "../../model/ReviewLike";
+import {Icon, IconType} from "../../components/icon/Icon";
+import {ConditionShow} from "../../components/ConditionShow";
 import "./ReviewsList.less";
 
 type ReviewsListProps = {
@@ -29,8 +31,20 @@ const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
     return (
         <div className="reviews">
             {reviews.map(mapReviewCard)}
+            <ConditionShow condition={reviews.length < 1}>
+                <NoReviews/>
+            </ConditionShow>
         </div>
     );
 }
 
-export default observer(ReviewsList)
+export default observer(ReviewsList);
+
+const NoReviews: React.FC = () => {
+    return (
+        <div className="no-reviews">
+            <Icon type={IconType.EMPTY}/>
+            <span className="label">Create a first review.</span>
+        </div>
+    );
+}
