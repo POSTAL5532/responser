@@ -55,11 +55,6 @@ const ReviewsPage: React.FC = () => {
         init(resourceType, currentUser?.id);
     }
 
-    const getButtonText = (): string => {
-        if (!currentUser) return "SignIn for review";
-        return currentUserReview ? "Edit you review" : "Leave review";
-    };
-
     const reviewsList = currentUserReview ? [currentUserReview, ...reviews] : reviews;
 
     return (

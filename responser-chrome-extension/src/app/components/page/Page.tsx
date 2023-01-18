@@ -11,8 +11,6 @@ export const Page: React.FC<PropsWithChildren<Page>> = (props: PropsWithChildren
     const resultClassName = classNames("page", className);
 
     return (
-        <div className={resultClassName}>
-            {children}
-        </div>
+        <div className={resultClassName}>{children}</div>
     );
 }

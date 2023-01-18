@@ -9,18 +9,17 @@ import {REVIEWS_PAGE_URL} from "../logic/reviews/ReviewsPage";
 const CustomRoute = (canActivate?: () => boolean, redirect?: string) => {
     return ({component: Component, ...other}: RouteProps) => {
         return (
-            <Route {...other}
-                   render={
-                       (props) => {
-                           if (!canActivate && !redirect) {
-                               return <Component {...props}/>;
-                           }
+            <Route {...other} render={
+                (props) => {
+                    if (!canActivate && !redirect) {
+                        return <Component {...props}/>;
+                    }
 
-                           return canActivate()
-                               ? <Component {...props}/>
-                               : <Redirect to={{pathname: redirect, state: {from: props.location}}}/>
-                       }
-                   }
+                    return canActivate()
+                        ? <Component {...props}/>
+                        : <Redirect to={{pathname: redirect, state: {from: props.location}}}/>
+                }
+            }
             />
         );
     }

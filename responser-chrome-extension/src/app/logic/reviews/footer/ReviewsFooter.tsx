@@ -39,19 +39,15 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
         <div className="reviews-footer">
             {
                 userAuthorized && !hasUserReview && onAddReviewClick &&
-                <Button className="add-review"
-                        onClick={onAddReviewClick}>
-                    <Icon type={IconType.PLUS}/>
-                    {addReviewButtonText}
+                <Button className="add-review" onClick={onAddReviewClick}>
+                    <Icon type={IconType.PLUS}/> {addReviewButtonText}
                 </Button>
             }
 
             {
                 userAuthorized && hasUserReview && onEditReviewClick &&
-                <Button className="edit-review"
-                        onClick={onEditReviewClick}>
-                    <Icon type={IconType.EDIT}/>
-                    {editReviewButtonText}
+                <Button className="edit-review" onClick={onEditReviewClick}>
+                    <Icon type={IconType.EDIT}/> {editReviewButtonText}
                 </Button>
             }
 
@@ -66,10 +62,8 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
 
             {
                 !userAuthorized && onLoginClick &&
-                <Button className="login"
-                        onClick={onLoginClick}>
-                    <Icon type={IconType.LOGIN}/>
-                    Sign in for review
+                <Button className="login" onClick={onLoginClick}>
+                    <Icon type={IconType.LOGIN}/> Sign in for review
                 </Button>
             }
 

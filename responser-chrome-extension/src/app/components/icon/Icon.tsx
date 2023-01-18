@@ -1,4 +1,5 @@
 import React from "react";
+import classNames from "classnames";
 import {ReactComponent as Cancel} from './cancel.svg';
 import {ReactComponent as Delete} from './delete.svg';
 import {ReactComponent as Edit} from './edit.svg';
@@ -8,7 +9,6 @@ import {ReactComponent as Sandwich} from './sandwich.svg';
 import {ReactComponent as Check} from './check.svg';
 import {ReactComponent as Empty} from './empty.svg';
 import "./Icon.less";
-import classNames from "classnames";
 
 export enum IconType {
     CANCEL = "CANCEL",
