@@ -74,7 +74,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 const sendMessageToContent = async (message) => {
-    let queryOptions = {active: true};
+    let queryOptions = {active: true, lastFocusedWindow: true};
     let tab = (await chrome.tabs.query(queryOptions))[0];
     return chrome.tabs.sendMessage(tab.id, message);
 }
