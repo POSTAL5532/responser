@@ -5,6 +5,37 @@ const CopyPlugin = require("copy-webpack-plugin");
 const webpack = require("webpack");
 const dotenv = require('dotenv');
 
+const ENV_FILE_PROPERTIES = dotenv.config().parsed;
+
+const convertTpProcessEnvProperties = (object) => {
+    if (!object) {
+        return {};
+    }
+
+    return Object.keys(object).reduce((prev, next) => {
+        prev[`process.env.${next}`] = JSON.stringify(object[next]);
+        return prev;
+    }, {});
+}
+
+/**
+ * Populate the env properties in input.
+ *
+ * @param input input content {@link Buffer} (required)
+ * @param absoluteFilename absolute filename (optional)
+ * @returns {string} transformed content string
+ */
+const populateEnvProperties = (input, absoluteFilename) => {
+    let fileContent = input.toString();
+    const set = new Set([...fileContent.matchAll(/(?<={{)[A-Z\d_]+(?=}})/g)]);
+
+    for (const property of set.keys()) {
+        fileContent = fileContent.replaceAll(`{{${property}}}`, ENV_FILE_PROPERTIES[property]);
+    }
+
+    return fileContent;
+}
+
 module.exports = () => ({
     mode: "none",
     entry: {
@@ -93,27 +124,17 @@ module.exports = () => ({
             template: "./public/index.html",
             filename: "./index.html"
         }),
-        new webpack.DefinePlugin(getEnvVariables()),
+        new webpack.DefinePlugin(convertTpProcessEnvProperties(ENV_FILE_PROPERTIES)),
         new CopyPlugin({
             patterns: [
                 path.resolve(__dirname, "public", "manifest.json"),
                 path.resolve(__dirname, "public", "content.js"),
-                path.resolve(__dirname, "public", "background.js"),
-                path.resolve(__dirname, "public", "logo192.png")
+                path.resolve(__dirname, "public", "logo192.png"),
+                {
+                    from: path.resolve(__dirname, "public", "background.js"),
+                    transform: populateEnvProperties
+                }
             ],
         })
     ]
 });
-
-const getEnvVariables = () => {
-    const env = dotenv.config().parsed;
-
-    if (!env) {
-        return {};
-    }
-
-    return Object.keys(env).reduce((prev, next) => {
-        prev[`process.env.${next}`] = JSON.stringify(env[next]);
-        return prev;
-    }, {});
-}

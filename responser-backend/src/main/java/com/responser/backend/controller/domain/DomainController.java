@@ -43,6 +43,20 @@ public class DomainController {
     }
 
     /**
+     * Returns rating.
+     *
+     * @param url url
+     * @return domain rating
+     */
+    @CrossOrigin(origins = "*", allowedHeaders = "*")
+    @GetMapping("/rating")
+    public ResponseEntity<Double> getDomainRating(@Valid @NotBlank @RequestParam String url) {
+        String preparedUrl = UrlUtils.prepareUrl(url);
+        Double rating = domainService.getDomainRatingByUrl(preparedUrl);
+        return ResponseEntity.ok(rating);
+    }
+
+    /**
      * Creates new domain entity.
      *
      * @param newDomain new domain info

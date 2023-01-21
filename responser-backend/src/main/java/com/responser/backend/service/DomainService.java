@@ -53,4 +53,9 @@ public class DomainService {
     public Double getDomainRating(String domainId) {
         return domainRepository.commonRating(domainId);
     }
+
+    public Double getDomainRatingByUrl(String url) {
+        Domain domain = getByUrl(UrlUtils.convertToURL(url));
+        return domainRepository.commonRating(domain.getId());
+    }
 }
