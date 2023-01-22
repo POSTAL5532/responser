@@ -19,7 +19,7 @@ export class App extends Component {
         return (
             <GlobalAppStoreContext.Provider value={this.globalAppStore}>
                 <div className="app">
-                    <AppHeader title="responser"/>
+                    <AppHeader title="Reviewly"/>
 
                     <Switch>
                         <UnauthorizedRoute path={WELCOME_PAGE_URL} exact component={WelcomePage}/>

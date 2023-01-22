@@ -3,8 +3,8 @@ import {observer} from "mobx-react";
 import {Button} from "app/components/button/Button";
 import {useExtensionService} from "../../service/extension/ExtensionService";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
-import "./AppHeader.less";
 import {reloadPage} from "../../utils/NavigationUtils";
+import "./AppHeader.less";
 
 type PageHeaderProps = {
     title: string;

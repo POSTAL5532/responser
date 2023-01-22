@@ -5,7 +5,7 @@ import {Button} from "app/components/button/Button";
 import AuthorizationService from "../../service/authorization/AuthorizationService";
 import "./WelcomePage.less"
 
-export const WELCOME_PAGE_URL: string = "/welcome";
+export const WELCOME_PAGE_URL: string = "/index";
 
 const WelcomePage: React.FC = () => {
     return (
