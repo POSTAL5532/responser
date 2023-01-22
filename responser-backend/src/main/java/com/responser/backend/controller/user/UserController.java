@@ -8,6 +8,7 @@ import com.responser.backend.model.User;
 import com.responser.backend.service.UserService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -19,6 +20,7 @@ import java.security.Principal;
  *
  * @author Shcherbachenya Igor
  */
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/users")
@@ -28,16 +30,17 @@ public class UserController {
 
     private final UserConverter userConverter;
 
-    @PostMapping("/register")
+    @PostMapping
     public ResponseEntity<Void> registerUser(@Valid @RequestBody CreateUserProfilePayload newUser) {
+        log.info("Register new user.");
         userService.registerUser(userConverter.toUser(newUser));
-
         return ResponseEntity.ok().build();
     }
 
     @PreAuthorize("isAuthenticated()")
-    @PutMapping("/updatecurrent")
+    @PutMapping
     public ResponseEntity<Void> updateUser(Principal principal, @Valid @RequestBody UpdateUserPayload user) {
+        log.info("Update current {} user.", principal.getName());
         userService.updateUser(principal.getName(), userConverter.toUser(user));
         return ResponseEntity.ok().build();
     }
@@ -45,6 +48,7 @@ public class UserController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/current")
     public ResponseEntity<UserInfoPayload> getCurrentUser(Principal principal) {
+        log.info("Get current {} user.", principal.getName());
         User user = userService.getUser(principal.getName());
         return ResponseEntity.ok(userConverter.toUserInfoPayload(user));
     }

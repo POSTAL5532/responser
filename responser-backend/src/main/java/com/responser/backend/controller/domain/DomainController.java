@@ -7,6 +7,7 @@ import com.responser.backend.model.Domain;
 import com.responser.backend.service.DomainService;
 import com.responser.backend.utils.UrlUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ import jakarta.validation.constraints.NotNull;
  *
  * @author Shcherbachenya Igor
  */
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/domains")
@@ -36,6 +38,7 @@ public class DomainController {
      */
     @GetMapping
     public ResponseEntity<DomainDTO> getDomainByUrl(@Valid @NotBlank @RequestParam String url) {
+        log.info("Get domain {}.", url);
         String preparedUrl = UrlUtils.prepareUrl(url);
         DomainDTO domainDTO = domainConverter.toDomainPayload(domainService.getByUrl(preparedUrl));
         domainDTO.setRating(domainService.getDomainRating(domainDTO.getId()));
@@ -51,6 +54,7 @@ public class DomainController {
     @CrossOrigin(origins = "*", allowedHeaders = "*")
     @GetMapping("/rating")
     public ResponseEntity<Double> getDomainRating(@Valid @NotBlank @RequestParam String url) {
+        log.info("Get domain rating {}.", url);
         String preparedUrl = UrlUtils.prepareUrl(url);
         Double rating = domainService.getDomainRatingByUrl(preparedUrl);
         return ResponseEntity.ok(rating);
@@ -64,6 +68,7 @@ public class DomainController {
      */
     @PostMapping
     public ResponseEntity<DomainDTO> createDomain(@Valid @NotNull @RequestBody DomainInfoDTO newDomain) {
+        log.info("Create domain {}.", newDomain);
         Domain createdDomain = domainService.createDomain(domainConverter.toDomain(newDomain));
         return ResponseEntity.ok(domainConverter.toDomainPayload(createdDomain));
     }

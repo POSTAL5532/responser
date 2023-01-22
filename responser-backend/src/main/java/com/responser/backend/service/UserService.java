@@ -3,10 +3,11 @@ package com.responser.backend.service;
 import com.responser.backend.model.User;
 import com.responser.backend.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.MessageFormat;
+import static java.text.MessageFormat.format;
 import java.util.NoSuchElementException;
 
 /**
@@ -14,6 +15,7 @@ import java.util.NoSuchElementException;
  *
  * @author Shcherbachenya Igor
  */
+@Slf4j
 @RequiredArgsConstructor
 @Service
 @Transactional(readOnly = true)
@@ -33,9 +35,10 @@ public class UserService {
     }
 
     public User getUser(String userId) {
-        return userRepository.findById(userId).orElseThrow(() ->
-                new NoSuchElementException(MessageFormat.format("User with id ''{0}'' doesn't exist", userId))
-        );
+        return userRepository.findById(userId).orElseThrow(() -> {
+            log.error("User with id {} doesn't exist", userId);
+            return new NoSuchElementException(format("User with id ''{0}'' doesn't exist", userId));
+        });
     }
 
     public boolean existByEmail(String email) {

@@ -4,10 +4,11 @@ import com.responser.backend.exceptions.EntityAlreadyExistException;
 import com.responser.backend.model.ReviewLike;
 import com.responser.backend.repository.ReviewLikeRepository;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.text.MessageFormat;
+import static java.text.MessageFormat.format;
 import java.util.NoSuchElementException;
 
 /**
@@ -15,6 +16,7 @@ import java.util.NoSuchElementException;
  *
  * @author Shcherbachenya Igor
  */
+@Slf4j
 @AllArgsConstructor
 @Service
 @Transactional(readOnly = true)
@@ -36,9 +38,8 @@ public class ReviewLikeService {
         String userId = newLike.getUserId();
 
         if (existsByReviewIdAndUserId(reviewId, userId)) {
-            throw new EntityAlreadyExistException(MessageFormat.format(
-                    "User ''{0}'' already leve reaction for review ''{1}''", userId, reviewId
-            ));
+            log.error("User {} already leve reaction for review {}", userId, reviewId);
+            throw new EntityAlreadyExistException(format("User ''{0}'' already leve reaction for review ''{1}''", userId, reviewId));
         }
 
         return reviewLikeRepository.save(newLike);
@@ -51,9 +52,10 @@ public class ReviewLikeService {
 
         ReviewLike like = reviewLikeRepository
                 .findByIdAndUserId(likeId, userId)
-                .orElseThrow(() -> new NoSuchElementException(MessageFormat.format(
-                        "Like ''{0}'' from user ''{1}'' doesn't exist.", likeId, userId
-                )));
+                .orElseThrow(() -> {
+                    log.error("Like {} from user {} doesn't exist.", likeId, userId);
+                    return new NoSuchElementException(format("Like ''{0}'' from user ''{1}'' doesn't exist.", likeId, userId));
+                });
 
         like.setPositive(updatedLike.getPositive());
 
@@ -63,9 +65,8 @@ public class ReviewLikeService {
     @Transactional
     public void removeLike(String likeId, String userId) {
         if (!existsByIdAndUserId(likeId, userId)) {
-            throw new NoSuchElementException(MessageFormat.format(
-                    "Like ''{0}'' from user ''{1}'' doesn't exist.", likeId, userId
-            ));
+            log.error("Like {} from user {} doesn't exist.", likeId, userId);
+            throw new NoSuchElementException(format("Like ''{0}'' from user ''{1}'' doesn't exist.", likeId, userId));
         }
 
         reviewLikeRepository.deleteById(likeId);

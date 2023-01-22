@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 import lombok.NonNull;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.HttpStatusCode;
@@ -31,33 +32,36 @@ import java.util.NoSuchElementException;
  *
  * @author Shcherbachenya Igor
  */
+@Slf4j
 @ControllerAdvice
 public class RestExceptionHandler extends ResponseEntityExceptionHandler {
 
     /**
      * Handle {@link NoSuchElementException} and respond with 404 code
      *
-     * @param ex NoSuchElementException
+     * @param exception NoSuchElementException
      * @return {@link ApiError} with {@link ApiErrorType#ENTITY_NOT_FOUND} error type
      */
     @ExceptionHandler({NoSuchElementException.class})
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ResponseBody
-    public ApiError<?> handleNoSuchElementException(NoSuchElementException ex) {
-        return new ApiError<>(ex.getMessage(), ApiErrorType.ENTITY_NOT_FOUND);
+    public ApiError<?> handleNoSuchElementException(NoSuchElementException exception) {
+        log.error("Handle 'NoSuchElementException' {}", exception.getMessage());
+        return new ApiError<>(exception.getMessage(), ApiErrorType.ENTITY_NOT_FOUND);
     }
 
     /**
      * Handle {@link EntityAlreadyExistException} and respond with 400 code
      *
-     * @param ex EntityAlreadyExistException
+     * @param exception EntityAlreadyExistException
      * @return {@link ApiError} with {@link ApiErrorType#VALIDATION_ERROR} error type
      */
     @ExceptionHandler({EntityAlreadyExistException.class})
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ApiError<?> handleEntityAlreadyExistException(EntityAlreadyExistException ex) {
-        return new ApiError<>(ex.getMessage(), ApiErrorType.VALIDATION_ERROR);
+    public ApiError<?> handleEntityAlreadyExistException(EntityAlreadyExistException exception) {
+        log.error("Handle 'EntityAlreadyExistException' {}", exception.getMessage());
+        return new ApiError<>(exception.getMessage(), ApiErrorType.VALIDATION_ERROR);
     }
 
     /**
@@ -70,6 +74,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
     public ApiError<List<Violation>> onConstraintValidationException(ConstraintViolationException exception) {
+        log.error("Handle 'ConstraintViolationException' {}", exception.getMessage());
         ApiError<List<Violation>> response = new ApiError<>(exception.getMessage(), ApiErrorType.VALIDATION_ERROR, new ArrayList<>());
 
         for (ConstraintViolation<?> violation : exception.getConstraintViolations()) {
@@ -97,6 +102,7 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         @NonNull HttpStatusCode status,
         @NonNull WebRequest request
     ) {
+        log.error("Handle 'MethodArgumentNotValidException' {}", exception.getMessage());
         ApiError<List<Violation>> response = new ApiError<>(exception.getMessage(), ApiErrorType.VALIDATION_ERROR, new ArrayList<>());
 
         for (FieldError fieldError : exception.getBindingResult().getFieldErrors()) {

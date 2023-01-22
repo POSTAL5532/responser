@@ -7,6 +7,7 @@ import com.responser.backend.model.Page;
 import com.responser.backend.service.PagesService;
 import com.responser.backend.utils.UrlUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ import jakarta.validation.constraints.NotBlank;
  *
  * @author Shcherbachenya Igor
  */
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/pages")
@@ -35,6 +37,7 @@ public class PageController {
      */
     @GetMapping
     public ResponseEntity<PageDTO> getPageByUrl(@Valid @NotBlank @RequestParam String url) {
+        log.info("Get page {}.", url);
         String preparedUrl = UrlUtils.prepareUrl(url);
         PageDTO pageDTO = pageConverter.toPagePayload(pagesService.getByUrl(preparedUrl));
         pageDTO.setRating(pagesService.getPageRating(pageDTO.getId()));
@@ -49,6 +52,7 @@ public class PageController {
      */
     @PostMapping
     public ResponseEntity<PageDTO> createPage(@Valid @RequestBody PageInfoDTO newPageDTO) {
+        log.info("Create page {}.", newPageDTO);
         Page newPage = pageConverter.toPage(newPageDTO);
         Page createdPage = pagesService.createPage(newPage);
         return ResponseEntity.ok(pageConverter.toPagePayload(createdPage));

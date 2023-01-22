@@ -8,6 +8,7 @@ import com.responser.backend.converter.ReviewConverter;
 import com.responser.backend.model.Review;
 import com.responser.backend.service.review.ReviewService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +28,7 @@ import java.util.Objects;
  *
  * @author Shcherbachenya Igor
  */
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/reviews")
@@ -46,8 +48,10 @@ public class ReviewsController {
      */
     @GetMapping
     public ResponseEntity<List<ReviewDTO>> getReviews(@Valid @NotNull ReviewsRequestCriteria criteria, Principal principal) {
+        log.info("Get all reviews. Reviews request criteria {}.", criteria);
         if (StringUtils.isNotEmpty(criteria.getForUserId())) {
             if (Objects.isNull(principal) || !principal.getName().equals(criteria.getForUserId())) {
+                log.error("Reviews request criteria with parameter 'forUserId' without authorization.");
                 return ResponseEntity.status(HttpStatusCode.valueOf(401)).build();
             }
         }
@@ -64,6 +68,7 @@ public class ReviewsController {
      */
     @GetMapping("/{reviewId}")
     public ResponseEntity<ReviewDTO> getReview(@Valid @NotBlank @PathVariable String reviewId) {
+        log.info("Get review {}.", reviewId);
         Review review = reviewService.getReview(reviewId);
         return ResponseEntity.ok(reviewConverter.toResponsePayload(review));
     }
@@ -77,6 +82,7 @@ public class ReviewsController {
     @PostMapping
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<ReviewDTO> createReview(@Valid @NotNull @RequestBody ReviewInfoDTO reviewInfoDTO, Principal principal) {
+        log.info("Create review {}.", reviewInfoDTO);
         Review newReview = reviewConverter.toReview(reviewInfoDTO, principal.getName());
         ReviewDTO newReviewDTO = reviewConverter.toResponsePayload(reviewService.createReview(newReview));
 
@@ -97,6 +103,7 @@ public class ReviewsController {
             @Valid @NotNull @RequestBody ReviewInfoDTO reviewInfoDTO,
             Principal principal
     ) {
+        log.info("Update review {} with data {}.",reviewId, reviewInfoDTO);
         Review review = reviewConverter.toReview(reviewId, reviewInfoDTO, principal.getName());
         ReviewDTO updatedReviewDTO = reviewConverter.toResponsePayload(reviewService.updateReview(review));
 
@@ -111,6 +118,7 @@ public class ReviewsController {
     @DeleteMapping("/{reviewId}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> removeReview(@Valid @NotNull @PathVariable String reviewId, Principal principal) {
+        log.info("Remove review {} by user {}.",reviewId, principal.getName());
         reviewService.removeReview(reviewId, principal.getName());
         return ResponseEntity.ok().build();
     }

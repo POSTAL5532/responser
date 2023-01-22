@@ -10,6 +10,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ import java.security.Principal;
  *
  * @author Shcherbachenya Igor
  */
+@Slf4j
 @AllArgsConstructor
 @RestController
 @RequestMapping("/api/review-likes")
@@ -38,9 +40,8 @@ public class ReviewLikeController {
      */
     @PreAuthorize("isAuthenticated()")
     @PostMapping
-    public ResponseEntity<ReviewLikeDTO> createLike(
-        @Valid @NotNull @RequestBody ReviewLikeInfoDTO likeInfoDTO, Principal principal
-    ) {
+    public ResponseEntity<ReviewLikeDTO> createLike(@Valid @NotNull @RequestBody ReviewLikeInfoDTO likeInfoDTO, Principal principal) {
+        log.info("Create like {} by user {}.", likeInfoDTO, principal.getName());
         ReviewLike newLike = reviewLikeConverter.toReviewLike(likeInfoDTO, principal.getName());
         ReviewLike createdLike = reviewLikeService.createLike(newLike);
         return ResponseEntity.ok(reviewLikeConverter.toReviewLikePayload(createdLike));
@@ -60,6 +61,7 @@ public class ReviewLikeController {
         @Valid @NotNull @RequestBody ReviewLikeInfoDTO likeInfoDTO,
         Principal principal
     ) {
+        log.info("Update like {} with data {} by user {}.", likeId, likeInfoDTO, principal.getName());
         ReviewLike reviewLike = reviewLikeConverter.toReviewLike(likeId, likeInfoDTO, principal.getName());
         ReviewLike updatedLike = reviewLikeService.updateLike(reviewLike);
         return ResponseEntity.ok(reviewLikeConverter.toReviewLikePayload(updatedLike));
@@ -73,6 +75,7 @@ public class ReviewLikeController {
     @DeleteMapping("/{likeId}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> removeLike(@Valid @NotEmpty @PathVariable String likeId, Principal principal) {
+        log.info("Remove like {} by user {}.", likeId, principal.getName());
         reviewLikeService.removeLike(likeId, principal.getName());
         return ResponseEntity.ok().build();
     }
