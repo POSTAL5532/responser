@@ -31,8 +31,6 @@ CREATE TABLE pages
     id            VARCHAR(36) NOT NULL UNIQUE,
     domain_id     VARCHAR(36) NOT NULL REFERENCES domains (id) ON DELETE CASCADE,
     url           TEXT        NOT NULL UNIQUE,
-    name          TEXT        NOT NULL,
-    description   TEXT,
     creation_date TIMESTAMP   NOT NULL,
     update_date   TIMESTAMP,
     PRIMARY KEY (id)
@@ -40,14 +38,14 @@ CREATE TABLE pages
 
 CREATE TABLE reviews
 (
-    id            VARCHAR(36)   NOT NULL UNIQUE,
-    user_id       VARCHAR(36)   NOT NULL REFERENCES users (id) ON DELETE CASCADE,
-    resource_type VARCHAR(36)   NOT NULL,
-    resource_id   VARCHAR(36)   NOT NULL,
+    id            VARCHAR(36) NOT NULL UNIQUE,
+    user_id       VARCHAR(36) NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+    resource_type VARCHAR(36) NOT NULL,
+    resource_id   VARCHAR(36) NOT NULL,
     review_id     VARCHAR(36) REFERENCES reviews (id) ON DELETE CASCADE,
-    rating        SMALLINT      NOT NULL,
+    rating        SMALLINT    NOT NULL,
     text          TEXT,
-    creation_date TIMESTAMP     NOT NULL,
+    creation_date TIMESTAMP   NOT NULL,
     update_date   TIMESTAMP,
     PRIMARY KEY (id)
 );

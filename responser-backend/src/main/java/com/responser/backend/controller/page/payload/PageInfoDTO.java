@@ -18,13 +18,9 @@ public class PageInfoDTO {
     @NotBlank(message = "Domain id must be specified")
     private String domainId;
 
-    @NotBlank(message = "Domain must be specified")
-    @Size(min = 10, message = "Domain must be from 10 characters")
+    @NotBlank(message = "Url must be specified")
+    @Size(min = 10, message = "Url must be from 10 characters")
     private String url;
-
-    @NotBlank(message = "Name must be specified")
-    @Size(min = 2, max = 255, message = "Name must be from 2 to 255 characters")
-    private String name;
 
     private String description;
 }

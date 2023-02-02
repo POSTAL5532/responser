@@ -27,7 +27,8 @@ const ReviewsPage: React.FC = () => {
         createReviewLike,
         updateReviewLike,
         removeReviewLike,
-        removeUserReview
+        removeUserReview,
+        currentPageInfo
     } = useReviewsPageStore();
 
     useEffect(() => {
@@ -62,7 +63,8 @@ const ReviewsPage: React.FC = () => {
             <ReviewsHeader reviewsResourceType={reviewsResourceType}
                            resource={reviewsResourceType === ResourceType.PAGE ? page : domain}
                            isLoading={isLoading || !domain || !page}
-                           onResourceTypeChange={changeResourceType}/>
+                           onResourceTypeChange={changeResourceType}
+                           pageInfo={currentPageInfo}/>
 
             <ReviewsList reviews={reviewsList}
                          createLike={createReviewLike}

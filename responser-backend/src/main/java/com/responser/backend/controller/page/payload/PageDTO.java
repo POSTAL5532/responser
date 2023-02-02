@@ -25,8 +25,6 @@ public class PageDTO {
 
     private String url;
 
-    private String name;
-
     private String description;
 
     private Double rating;

@@ -5,6 +5,7 @@ import {ResourceType} from "../../../model/ResourceType";
 import {Domain} from "../../../model/Domain";
 import {Page} from "../../../model/Page";
 import {TabOption, Tabs} from "../../../components/tabs/Tabs";
+import {PageInfo} from "../../../model/PageInfo";
 import "./ReviewsHeader.less";
 
 type ReviewsHeaderProps = {
@@ -12,19 +13,23 @@ type ReviewsHeaderProps = {
     onResourceTypeChange: (resourceType: ResourceType) => void;
     resource: Domain | Page;
     isLoading: boolean;
+    pageInfo: PageInfo;
 }
 
 export const ReviewsHeader: React.FC<ReviewsHeaderProps> = (props: ReviewsHeaderProps) => {
-    const {reviewsResourceType, resource, isLoading, onResourceTypeChange} = props;
+    const {reviewsResourceType, resource, isLoading, onResourceTypeChange, pageInfo} = props;
 
-    let resourceIcon: JSX.Element, resourceLabel: string, resourceRating: number;
+    let resourceIcon: JSX.Element;
+    let resourceLabel: string;
+    let resourceRating: number;
+
     if (!isLoading && reviewsResourceType === ResourceType.SITE) {
         resourceIcon = <SiteIcon className="icon"/>;
         resourceLabel = (resource as Domain).domain;
         resourceRating = resource.rating;
     } else if (!isLoading && reviewsResourceType === ResourceType.PAGE) {
         resourceIcon = <PageIcon className="icon"/>;
-        resourceLabel = resource.name;
+        resourceLabel = pageInfo.title || pageInfo.url;
         resourceRating = resource.rating;
     }
 

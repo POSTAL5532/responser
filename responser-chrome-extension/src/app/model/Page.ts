@@ -9,10 +9,6 @@ export class Page {
 
     url: string;
 
-    name: string;
-
-    description: string;
-
     rating: number;
 
     creationDate: Moment;
