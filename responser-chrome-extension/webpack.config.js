@@ -5,7 +5,33 @@ const CopyPlugin = require("copy-webpack-plugin");
 const webpack = require("webpack");
 const dotenv = require('dotenv');
 
-const ENV_FILE_PROPERTIES = dotenv.config().parsed;
+const LOCAL_BUILD_MODE = "local";
+const DEV_TEST_BUILD_MODE = "dev-test";
+const PRODUCTION_BUILD_MODE = "production";
+
+let ENV_FILE_PROPERTIES;
+let CURRENT_BUILD_MODE;
+
+/**
+ * Init ENV_FILE_PROPERTIES
+ */
+const initEnvFileProperties = () => {
+    const envDir = "env";
+
+    switch (CURRENT_BUILD_MODE) {
+        case LOCAL_BUILD_MODE:
+            ENV_FILE_PROPERTIES = dotenv.config({path: path.resolve(__dirname, envDir, "local.env")}).parsed;
+            break;
+        case DEV_TEST_BUILD_MODE:
+            ENV_FILE_PROPERTIES = dotenv.config({path: path.resolve(__dirname, envDir, "dev.env")}).parsed;
+            break;
+        case PRODUCTION_BUILD_MODE:
+            ENV_FILE_PROPERTIES = dotenv.config({path: path.resolve(__dirname, envDir, "prod.env")}).parsed;
+            break;
+        default:
+            throw new Error("Bad buildMode:", buildMode);
+    }
+}
 
 const convertTpProcessEnvProperties = (object) => {
     if (!object) {
@@ -16,6 +42,28 @@ const convertTpProcessEnvProperties = (object) => {
         prev[`process.env.${next}`] = JSON.stringify(object[next]);
         return prev;
     }, {});
+}
+
+const generateFileNameFromBuildMode = (fileName) => {
+    const fileParts = fileName.split(".");
+    let resultFileName = fileParts[0];
+    let format = fileParts[1];
+
+    switch (CURRENT_BUILD_MODE) {
+        case LOCAL_BUILD_MODE:
+            resultFileName = resultFileName.concat("-local");
+            break;
+        case DEV_TEST_BUILD_MODE:
+            resultFileName = resultFileName.concat("-dev");
+            break;
+        case PRODUCTION_BUILD_MODE:
+            resultFileName = resultFileName.concat("-prod");
+            break;
+        default:
+            throw new Error("Bad buildMode:", buildMode);
+    }
+
+    return format ? resultFileName.concat(".", format) : resultFileName;
 }
 
 /**
@@ -36,105 +84,98 @@ const populateEnvProperties = (input, absoluteFilename) => {
     return fileContent;
 }
 
-module.exports = () => ({
-    mode: "none",
-    entry: {
-        app: path.join(__dirname, "src", "index.tsx")
-    },
-    target: "web",
-    devtool: "source-map",
-    devServer: {
-        port: 3001,
-        compress: true,
-        hot: true,
-        historyApiFallback: true
-    },
+module.exports = (env, args) => {
+    console.log("ENV:", env);
+    console.log("ARGS:", args);
 
-    module: {
-        rules: [
-            {
-                test: /\.(ts|js)x?$/,
-                exclude: /node_modules|test/,
-                use: "babel-loader",
-            },
-            {
-                test: /\.css$/i,
-                use: ["style-loader", "css-loader"],
-            },
-            {
-                test: /\.less$/,
-                use: [
-                    "style-loader",
-                    "css-loader",
-                    "less-loader"
-                ]
-            },
-            {
-                test: /\.html$/,
-                loader: "html-loader"
-            },
-            {
-                test: /\.svg$/,
-                use: [{loader: '@svgr/webpack', options: {icon: true}}],
-            },
-            {
-                test: /\.(png|jpg|svg|gif|webp)$/,
-                use: [
-                    {
-                        loader: "file-loader",
-                        options: {
-                            outputPath: 'images',
-                            publicPath: 'images',
-                            esModule: false
-                        }
-                    }
-                ]
-            },
-            {
-                test: /\.(woff|woff2|eot)$/,
-                use: [
-                    {
-                        loader: "file-loader",
-                        options: {
-                            outputPath: 'fonts',
-                            publicPath: 'fonts',
-                            esModule: false
-                        }
-                    }
-                ]
-            }
-        ],
-    },
-    resolve: {
-        modules: [
-            path.resolve(__dirname, "node_modules"),
-            path.resolve(__dirname, "src/")
-        ],
-        alias: {"globalsLess": path.resolve("src/styles/globals.less")},
-        extensions: [".js", ".ts", ".jsx", ".tsx", ".css", ".less"]
-    },
-    output: {
-        filename: '[name].js',
-        path: path.resolve(__dirname, "build"),
-        publicPath: "/"
-    },
-    plugins: [
-        new CleanWebpackPlugin(),
-        new HtmlWebPackPlugin({
-            template: "./public/index.html",
-            filename: "./index.html"
-        }),
-        new webpack.DefinePlugin(convertTpProcessEnvProperties(ENV_FILE_PROPERTIES)),
-        new CopyPlugin({
-            patterns: [
-                path.resolve(__dirname, "public", "manifest.json"),
-                path.resolve(__dirname, "public", "content.js"),
-                path.resolve(__dirname, "public", "logo192.png"),
+    CURRENT_BUILD_MODE = env.buildMode;
+    initEnvFileProperties();
+
+    return {
+        mode: "none",
+        entry: {app: path.join(__dirname, "src", "index.tsx")},
+        target: "web",
+        devtool: "source-map",
+
+        module: {
+            rules: [
+                {test: /\.(ts|js)x?$/, exclude: /node_modules|test/, use: "babel-loader",},
+                {test: /\.css$/i, use: ["style-loader", "css-loader"],},
                 {
-                    from: path.resolve(__dirname, "public", "background.js"),
-                    transform: populateEnvProperties
+                    test: /\.less$/,
+                    use: [
+                        "style-loader",
+                        "css-loader",
+                        "less-loader"
+                    ]
+                },
+                {test: /\.html$/, loader: "html-loader"},
+                {test: /\.svg$/, use: [{loader: '@svgr/webpack', options: {icon: true}}]},
+                {
+                    test: /\.(png|jpg|svg|gif|webp)$/,
+                    use: [
+                        {
+                            loader: "file-loader",
+                            options: {
+                                outputPath: 'images',
+                                publicPath: 'images',
+                                esModule: false
+                            }
+                        }
+                    ]
+                },
+                {
+                    test: /\.(woff|woff2|eot)$/,
+                    use: [
+                        {
+                            loader: "file-loader",
+                            options: {
+                                outputPath: 'fonts',
+                                publicPath: 'fonts',
+                                esModule: false
+                            }
+                        }
+                    ]
                 }
             ],
-        })
-    ]
-});
+        },
+        resolve: {
+            modules: [
+                path.resolve(__dirname, "node_modules"),
+                path.resolve(__dirname, "src/")
+            ],
+            alias: {"globalsLess": path.resolve("src/styles/globals.less")},
+            extensions: [".js", ".ts", ".jsx", ".tsx", ".css", ".less"]
+        },
+        output: {
+            filename: '[name].js',
+            path: path.resolve(__dirname, "build"),
+            publicPath: "/"
+        },
+        plugins: [
+            new CleanWebpackPlugin(),
+            new HtmlWebPackPlugin({
+                template: "./public/index.html",
+                filename: "./index.html"
+            }),
+            new webpack.DefinePlugin(convertTpProcessEnvProperties(ENV_FILE_PROPERTIES)),
+            new CopyPlugin({
+                patterns: [
+                    path.resolve(__dirname, "public", "logo192.png"),
+                    {
+                        from: path.resolve(__dirname, "manifest", generateFileNameFromBuildMode("manifest.json")),
+                        to: "manifest.json"
+                    },
+                    {
+                        from: path.resolve(__dirname, "public", "background.js"),
+                        transform: populateEnvProperties
+                    },
+                    {
+                        from: path.resolve(__dirname, "public", "content.js"),
+                        transform: populateEnvProperties
+                    }
+                ],
+            })
+        ]
+    }
+};

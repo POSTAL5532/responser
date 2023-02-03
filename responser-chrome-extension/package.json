@@ -17,10 +17,10 @@
     "extends": "react-app"
   },
   "scripts": {
-    "start": "webpack serve --open --mode development",
-    "build": "webpack --mode production",
-    "clean": "npx rimraf build",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build:local": "webpack --mode production --env buildMode=local",
+    "build:dev": "webpack --mode production --env buildMode=dev-test",
+    "build:prod": "webpack --mode production --env buildMode=production",
+    "clean": "npx rimraf build"
   },
   "dependencies": {
     "axios": "^0.27.2",
