@@ -10,19 +10,22 @@
   font-size: 14px;
   color: @system-color-dark-400;
   border: 1px solid @system-color-dark-100;
-  background-color: @system-color-light-200;
+  background-color: @system-color-light-100;
+
+  .placeholderColor(@system-color-dark-200);
 
   &:hover {
     border-color: lighten(@primary-color-lighter, 20%);;
   }
 
   &:focus {
-    background-color: @system-color-light-100;
     border-color: @primary-color-lighter;
   }
 
   &.disabled {
     pointer-events: none;
+    background-color: @system-color-light-200;
+    .placeholderColor(@system-color-light-500);
   }
 
   .resizable {

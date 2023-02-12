@@ -47,23 +47,21 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
                 <Button styleType={ButtonType.SECONDARY}
                         className="delete-review"
                         onClick={onDeleteReviewClick}>
-                    <Icon type={IconType.DELETE}/>
+                    <Icon type={IconType.DELETE}/>Delete review
                 </Button>
             }
 
             {
                 !isLoading && !userAuthorized && onLoginClick &&
                 <Button className="login" onClick={onLoginClick}>
-                    <Icon type={IconType.LOGIN}/> Sign in for review
+                    <Icon type={IconType.LOGIN}/>Sign in for review
                 </Button>
             }
 
             {
                 userAuthorized && onLogOutClick &&
-                <Button styleType={ButtonType.SECONDARY}
-                        className="logout"
-                        onClick={onLogOutClick}>
-                    <Icon type={IconType.LOGOUT}/>
+                <Button styleType={ButtonType.SECONDARY} className="logout" onClick={onLogOutClick}>
+                    <Icon type={IconType.LOGOUT}/>Logout
                 </Button>
             }
         </div>

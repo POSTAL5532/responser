@@ -57,7 +57,10 @@ const EditReviewForm: React.FC<EditReviewFormProps> = (props: EditReviewFormProp
             </FieldLayout>
 
             <FieldLayout label="Review text:" disabled={!resourceType} className="review-text">
-                <Textarea value={text} onChange={onTextChange} disabled={!resourceType}/>
+                <Textarea value={text}
+                          onChange={onTextChange}
+                          disabled={!resourceType}
+                          placeholder={`Enter review`}/>
             </FieldLayout>
 
             <span className="characters-counter">{text?.length || 0} / {textSize}</span>
