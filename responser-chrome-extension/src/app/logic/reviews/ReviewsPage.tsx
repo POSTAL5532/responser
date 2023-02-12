@@ -16,7 +16,7 @@ import "./ReviewsPage.less";
 const ReviewsPage: React.FC = () => {
     const locationState = useLocation<NavigateStateProps>().state;
     const extensionService = useExtensionService();
-    const {currentUser, isLoading} = useContext<GlobalAppStore>(GlobalAppStoreContext);
+    const {currentUser, userDataLoading} = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const {
         domain,
         page,
@@ -28,12 +28,20 @@ const ReviewsPage: React.FC = () => {
         updateReviewLike,
         removeReviewLike,
         removeUserReview,
-        currentPageInfo
+        currentPageInfo,
+        loadingState
     } = useReviewsPageStore();
 
+    const {
+        isDomainLoading,
+        isPageLoading,
+        isReviewRemoving,
+        isReviewsLoading
+    } = loadingState;
+
     useEffect(() => {
-        if (!isLoading) init(locationState?.resourceType, currentUser?.id);
-    }, [isLoading]);
+        if (!userDataLoading) init(locationState?.resourceType, currentUser?.id);
+    }, [userDataLoading]);
 
     const onEditReviewClick = () => {
         navigateToEditReviewPage({
@@ -62,23 +70,25 @@ const ReviewsPage: React.FC = () => {
         <Page className="reviews-page">
             <ReviewsHeader reviewsResourceType={reviewsResourceType}
                            resource={reviewsResourceType === ResourceType.PAGE ? page : domain}
-                           isLoading={isLoading || !domain || !page}
+                           isLoading={(!page && !domain) || isDomainLoading || isPageLoading}
+                           isReviewsLoading={(!page && !domain) || isDomainLoading || isPageLoading || isReviewsLoading}
                            onResourceTypeChange={changeResourceType}
                            pageInfo={currentPageInfo}/>
 
             <ReviewsList reviews={reviewsList}
                          createLike={createReviewLike}
                          updateLike={updateReviewLike}
-                         removeLike={removeReviewLike}/>
+                         removeLike={removeReviewLike}
+                         isLoading={(!page && !domain) || isReviewsLoading || isDomainLoading || isPageLoading}/>
 
-            <ReviewsFooter reviewsResourceType={reviewsResourceType}
-                           userAuthorized={!!currentUser}
+            <ReviewsFooter userAuthorized={!!currentUser}
                            hasUserReview={!!currentUserReview}
                            onEditReviewClick={onEditReviewClick}
                            onAddReviewClick={onAddReviewClick}
                            onDeleteReviewClick={removeUserReview}
                            onLoginClick={extensionService.openLoginPage}
-                           onLogOutClick={extensionService.openLogoutPage}/>
+                           onLogOutClick={extensionService.openLogoutPage}
+                           isLoading={(!page && !domain) || isReviewsLoading || isDomainLoading || isPageLoading}/>
         </Page>
     );
 }

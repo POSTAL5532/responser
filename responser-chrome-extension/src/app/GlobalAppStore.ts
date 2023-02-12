@@ -14,7 +14,7 @@ export class GlobalAppStore {
 
     currentUser: User = null;
 
-    isLoading: boolean = true;
+    userDataLoading: boolean = true;
 
     constructor() {
         makeAutoObservable(this);
@@ -29,7 +29,7 @@ export class GlobalAppStore {
             await this.updateCurrentUser();
         }
 
-        this.isLoading = false;
+        this.userDataLoading = false;
     }
 
     @computed

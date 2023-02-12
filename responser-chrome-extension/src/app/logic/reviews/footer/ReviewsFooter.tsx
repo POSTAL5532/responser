@@ -1,11 +1,9 @@
 import React from "react";
 import {Button, ButtonType} from "../../../components/button/Button";
-import {ResourceType} from "../../../model/ResourceType";
 import {Icon, IconType} from "../../../components/icon/Icon";
 import "./ReviewsFooter.less";
 
 type ReviewsFooterProps = {
-    reviewsResourceType: ResourceType;
     userAuthorized: boolean;
     hasUserReview: boolean;
     onEditReviewClick: () => void;
@@ -13,46 +11,39 @@ type ReviewsFooterProps = {
     onDeleteReviewClick: () => void;
     onLoginClick: () => void;
     onLogOutClick: () => void;
+    isLoading: boolean;
 }
 
 export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooterProps) => {
     const {
-        reviewsResourceType,
         userAuthorized,
         hasUserReview,
         onEditReviewClick,
         onAddReviewClick,
         onDeleteReviewClick,
         onLoginClick,
-        onLogOutClick
+        onLogOutClick,
+        isLoading
     } = props;
-
-    const addReviewButtonText = reviewsResourceType === ResourceType.PAGE
-        ? "Page review"
-        : "Site review";
-
-    const editReviewButtonText = reviewsResourceType === ResourceType.PAGE
-        ? "Page review"
-        : "Site review";
 
     return (
         <div className="reviews-footer">
             {
-                userAuthorized && !hasUserReview && onAddReviewClick &&
+                !isLoading && userAuthorized && !hasUserReview && onAddReviewClick &&
                 <Button className="add-review" onClick={onAddReviewClick}>
-                    <Icon type={IconType.PLUS}/> {addReviewButtonText}
+                    <Icon type={IconType.PLUS}/>Add review
                 </Button>
             }
 
             {
-                userAuthorized && hasUserReview && onEditReviewClick &&
+                !isLoading && userAuthorized && hasUserReview && onEditReviewClick &&
                 <Button className="edit-review" onClick={onEditReviewClick}>
-                    <Icon type={IconType.EDIT}/> {editReviewButtonText}
+                    <Icon type={IconType.EDIT}/>Edit review
                 </Button>
             }
 
             {
-                userAuthorized && hasUserReview && onDeleteReviewClick &&
+                !isLoading && userAuthorized && hasUserReview && onDeleteReviewClick &&
                 <Button styleType={ButtonType.SECONDARY}
                         className="delete-review"
                         onClick={onDeleteReviewClick}>
@@ -61,7 +52,7 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
             }
 
             {
-                !userAuthorized && onLoginClick &&
+                !isLoading && !userAuthorized && onLoginClick &&
                 <Button className="login" onClick={onLoginClick}>
                     <Icon type={IconType.LOGIN}/> Sign in for review
                 </Button>

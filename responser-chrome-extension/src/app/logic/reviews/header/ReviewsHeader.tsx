@@ -6,6 +6,7 @@ import {Domain} from "../../../model/Domain";
 import {Page} from "../../../model/Page";
 import {TabOption, Tabs} from "../../../components/tabs/Tabs";
 import {PageInfo} from "../../../model/PageInfo";
+import {Spinner} from "../../../components/spinner/Spinner";
 import "./ReviewsHeader.less";
 
 type ReviewsHeaderProps = {
@@ -13,11 +14,19 @@ type ReviewsHeaderProps = {
     onResourceTypeChange: (resourceType: ResourceType) => void;
     resource: Domain | Page;
     isLoading: boolean;
+    isReviewsLoading: boolean;
     pageInfo: PageInfo;
 }
 
 export const ReviewsHeader: React.FC<ReviewsHeaderProps> = (props: ReviewsHeaderProps) => {
-    const {reviewsResourceType, resource, isLoading, onResourceTypeChange, pageInfo} = props;
+    const {
+        reviewsResourceType,
+        resource,
+        isLoading,
+        isReviewsLoading,
+        onResourceTypeChange,
+        pageInfo
+    } = props;
 
     let resourceIcon: JSX.Element;
     let resourceLabel: string;
@@ -44,9 +53,11 @@ export const ReviewsHeader: React.FC<ReviewsHeaderProps> = (props: ReviewsHeader
                           resourceLabel={resourceLabel}
                           resourceRating={resourceRating}
                           isLoading={isLoading}/>
+
             <Tabs<ResourceType> onChange={onResourceTypeChange}
                                 options={resourceTypeOptions}
-                                currentValue={reviewsResourceType}/>
+                                currentValue={reviewsResourceType}
+                                disabled={isReviewsLoading || isLoading}/>
         </div>
     )
 }
@@ -60,13 +71,18 @@ type ResourceInfoProps = {
 
 const ResourceInfo: React.FC<ResourceInfoProps> = (props: ResourceInfoProps) => {
     const {resourceIcon, resourceLabel, resourceRating, isLoading} = props;
+    const className = "resource-info";
 
     if (isLoading) {
-        return <>LOADING</>
+        return (
+            <div className={className}>
+                <Spinner size={26}/>
+            </div>
+        );
     }
 
     return (
-        <div className="resource-info">
+        <div className={className}>
             {resourceIcon}
             <div className="label">{resourceLabel}</div>
             {

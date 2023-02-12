@@ -4,6 +4,7 @@ import ReviewsPage, {REVIEWS_PAGE_URL} from "./logic/reviews/ReviewsPage";
 import {AuthorizedRoute, PermitAllRoute} from "./components/CustomRoute";
 import {GlobalAppStore, GlobalAppStoreContext} from "./GlobalAppStore";
 import EditReviewPage, {EDIT_REVIEW_PAGE_URL} from "./logic/edit-review/EditReviewPage";
+import 'react-loading-skeleton/dist/skeleton.css'
 import "app/App.less";
 
 

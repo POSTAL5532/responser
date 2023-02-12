@@ -1,6 +1,5 @@
 import {makeAutoObservable} from "mobx";
 import {Review} from "../../model/Review";
-import {LoadingStore} from "../../utils/LoadingStore";
 import {ReviewService} from "../../service/ReviewService";
 import {useState} from "react";
 import {Domain} from "../../model/Domain";
@@ -18,7 +17,7 @@ import {ReviewLikeData} from "../../model/ReviewLikeData";
 import {ReviewLikeService} from "../../service/ReviewLikeService";
 import {ResourceType} from "../../model/ResourceType";
 
-export class ReviewsPageStore extends LoadingStore {
+export class ReviewsPageStore {
 
     extensionService: ExtensionService = new ExtensionService();
 
@@ -45,14 +44,19 @@ export class ReviewsPageStore extends LoadingStore {
 
     reviews: Review[] = [];
 
+    loadingState: ReviewsPageStoreLoadingState = new ReviewsPageStoreLoadingState();
+
     constructor() {
-        super();
         makeAutoObservable(this);
     }
 
     init = async (reviewsResourceType: ResourceType, currentUserId: string) => {
         this.reviewsResourceType = reviewsResourceType || ResourceType.SITE;
-        this.currentPageInfo = (await this.extensionService.getCurrentPageInfo()).data;
+        this.loadingState.isPageInfoLoading = true;
+        const pageInfo = await this.extensionService.getCurrentPageInfo().finally(
+            () => this.loadingState.isPageInfoLoading = false
+        );
+        this.currentPageInfo = pageInfo.data;
 
         await this.initDomain();
         await this.initPage();
@@ -64,6 +68,7 @@ export class ReviewsPageStore extends LoadingStore {
 
     initDomain = async () => {
         const {url} = this.currentPageInfo;
+        this.loadingState.isDomainLoading = true;
 
         try {
             this.domain = await this.domainService.getDomainByUrl(url);
@@ -72,11 +77,14 @@ export class ReviewsPageStore extends LoadingStore {
                 const newDomainPayload = new CreateDomainPayload(url, "NO_DESCRIPTION");
                 this.domain = await this.domainService.createDomain(newDomainPayload);
             }
+        } finally {
+            this.loadingState.isDomainLoading = false;
         }
     }
 
     initPage = async () => {
         const {url, description, title} = this.currentPageInfo;
+        this.loadingState.isPageLoading = true;
 
         try {
             this.page = await this.pagesService.getPageByUrl(url);
@@ -85,14 +93,19 @@ export class ReviewsPageStore extends LoadingStore {
                 const createPagePayload = new CreatePagePayload(this.domain.id, url, title, description);
                 this.page = await this.pagesService.createPage(createPagePayload);
             }
+        } finally {
+            this.loadingState.isPageLoading = false;
         }
     }
 
     loadCurrenUserReview = async (currentUserId: string) => {
         const criteria = this.initDefaultReviewsRequestCriteria();
         criteria.forUserId = currentUserId;
+        this.loadingState.isReviewsLoading = true;
+        const reviews = await this.reviewService.getReviews(criteria).finally(
+            () => this.loadingState.isReviewsLoading = false
+        );
 
-        const reviews = await this.reviewService.getReviews(criteria);
         this.currentUserReview = reviews[0];
     }
 
@@ -103,7 +116,10 @@ export class ReviewsPageStore extends LoadingStore {
             criteria.excludeUserId = currentUserId;
         }
 
-        this.reviews = await this.reviewService.getReviews(criteria);
+        this.loadingState.isReviewsLoading = true;
+        this.reviews = await this.reviewService.getReviews(criteria).finally(
+            () => this.loadingState.isReviewsLoading = false
+        );
     }
 
     initDefaultReviewsRequestCriteria = (): ReviewsRequestCriteria => {
@@ -125,7 +141,15 @@ export class ReviewsPageStore extends LoadingStore {
     }
 
     removeUserReview = async (): Promise<void> => {
-        await this.reviewService.deleteReview(this.currentUserReview?.id);
+        if (!this.currentUserReview) {
+            return;
+        }
+
+        this.loadingState.isReviewRemoving = true;
+        await this.reviewService.deleteReview(this.currentUserReview.id).finally(
+            () => this.loadingState.isReviewRemoving = false
+        );
+
         this.currentUserReview = null;
     }
 
@@ -159,4 +183,21 @@ export class ReviewsPageStore extends LoadingStore {
 export const useReviewsPageStore = (): ReviewsPageStore => {
     const [reviewsPageStore] = useState(new ReviewsPageStore());
     return reviewsPageStore;
+}
+
+export class ReviewsPageStoreLoadingState {
+
+    isPageInfoLoading: boolean = false;
+
+    isDomainLoading: boolean = false;
+
+    isPageLoading: boolean = false;
+
+    isReviewsLoading: boolean = false;
+
+    isReviewRemoving: boolean = false;
+
+    constructor() {
+        makeAutoObservable(this);
+    }
 }

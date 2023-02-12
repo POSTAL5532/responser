@@ -1,5 +1,6 @@
 import React, {useContext} from "react";
 import {observer} from "mobx-react";
+import Skeleton from "react-loading-skeleton";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import ReviewCard from "./review-card/ReviewCard";
 import {Review} from "../../model/Review";
@@ -13,11 +14,21 @@ type ReviewsListProps = {
     createLike: (review: Review, positive: boolean) => void;
     updateLike: (reviewLike: ReviewLike, positive: boolean) => void;
     removeLike: (reviewLike: ReviewLike) => void;
+    isLoading?: boolean;
 }
 
 const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
-    const {reviews, createLike, updateLike, removeLike} = props;
+    const {reviews, createLike, updateLike, removeLike, isLoading} = props;
     const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
+    const className = "reviews";
+
+    if (isLoading) {
+        return(
+            <div className={className}>
+                <Skeleton height={90} count={3} className="cards-skeleton"/>
+            </div>
+        );
+    }
 
     const mapReviewCard = (review: Review) => {
         return <ReviewCard key={review.id}
@@ -29,7 +40,7 @@ const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
     }
 
     return (
-        <div className="reviews">
+        <div className={className}>
             {reviews.map(mapReviewCard)}
             <ConditionShow condition={reviews.length < 1}>
                 <NoReviews/>

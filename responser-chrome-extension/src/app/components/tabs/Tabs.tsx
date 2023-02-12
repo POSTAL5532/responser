@@ -13,9 +13,10 @@ type TabsProps<T> = {
     currentValue?: T;
     onChange?: (value: T) => void;
     className?: string;
+    disabled?: boolean;
 }
 export const Tabs = <T extends any>(props: TabsProps<T>): ReactElement => {
-    const {options, currentValue, onChange, className} = props;
+    const {options, currentValue, onChange, className, disabled} = props;
 
     const onButtonClick = (value: T) => {
         onChange(value);
@@ -23,13 +24,15 @@ export const Tabs = <T extends any>(props: TabsProps<T>): ReactElement => {
 
     const getOptionsTabs = () => {
         return options.map((option, index) => (
-            <Tab label={option.label}
+            <Tab key={index}
+                 label={option.label}
                  onClick={() => onButtonClick(option.value)}
-                 active={option.value === currentValue}/>
+                 active={option.value === currentValue}
+                 disabled={option.disabled || disabled}/>
         ))
     }
 
-    const resultClassName = classNames("tabs", className);
+    const resultClassName = classNames("tabs", {"disabled": disabled}, className);
 
     return (<div className={resultClassName}>{getOptionsTabs()}</div>);
 }
@@ -39,11 +42,12 @@ type TabProps = {
     onClick: () => void;
     active: boolean;
     clickDuplication?: boolean;
+    disabled?: boolean;
 }
 
 const Tab: React.FC<TabProps> = (props: TabProps) => {
-    const {label, onClick, active, clickDuplication} = props;
-    const className = classNames("tab", {"active": active});
+    const {label, onClick, active, clickDuplication, disabled} = props;
+    const className = classNames("tab", {"active": active}, {"disabled": disabled});
 
     const onTabClick = () => {
         if (clickDuplication || !active) onClick();

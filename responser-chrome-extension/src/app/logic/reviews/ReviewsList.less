@@ -18,8 +18,15 @@
     background-clip: content-box;
   }
 
-  .review-card {
+  .review-card, .cards-skeleton {
     margin-bottom: 8px;
+  }
+
+  .cards-skeleton {
+    .stackShadow2();
+    border-radius: 8px;
+    --base-color: @system-color-light-100;
+    --highlight-color: @system-color-light-300;
   }
 
   .no-reviews {
