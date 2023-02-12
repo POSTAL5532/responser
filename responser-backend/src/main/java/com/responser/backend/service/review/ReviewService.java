@@ -89,7 +89,7 @@ public class ReviewService {
         String userId = newReview.getUser().getId();
 
         if (!isResourceExists(resourceId, newReview.getResourceType())) {
-            throw new NoSuchElementException(format("Resource ''{0}'' ({1}) doesn't exist.", userId, resourceId));
+            throw new NoSuchElementException(format("Resource ''{0}'' ({1}) doesn't exist.", userId, newReview.getResourceType()));
         }
 
         if (existsByResourceIdAndUserId(resourceId, userId)) {

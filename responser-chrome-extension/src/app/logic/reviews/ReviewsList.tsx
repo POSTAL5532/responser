@@ -7,6 +7,7 @@ import {Review} from "../../model/Review";
 import {ReviewLike} from "../../model/ReviewLike";
 import {Icon, IconType} from "../../components/icon/Icon";
 import {ConditionShow} from "../../components/ConditionShow";
+import {useBottomScrollListener} from "react-bottom-scroll-listener";
 import "./ReviewsList.less";
 
 type ReviewsListProps = {
@@ -20,6 +21,7 @@ type ReviewsListProps = {
 const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
     const {reviews, createLike, updateLike, removeLike, isLoading} = props;
     const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
+    const scrollRef = useBottomScrollListener<HTMLDivElement>(() => console.log("SCROLLED!"));
     const className = "reviews";
 
     if (isLoading) {
@@ -40,7 +42,7 @@ const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
     }
 
     return (
-        <div className={className}>
+        <div className={className} ref={scrollRef}>
             {reviews.map(mapReviewCard)}
             <ConditionShow condition={reviews.length < 1}>
                 <NoReviews/>
