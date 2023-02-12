@@ -10,4 +10,4 @@ manifest-*.json
 
 *.env
 *.yml
-*.log
+*.log*
