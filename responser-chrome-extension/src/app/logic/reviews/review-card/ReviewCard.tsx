@@ -9,14 +9,15 @@ import {Reaction} from "../../../components/reaction/Reaction";
 import {ReviewLike} from "../../../model/ReviewLike";
 import {ConditionShow} from "../../../components/ConditionShow";
 import {useIsOverflow} from "../../../utils/LayoutUtils";
+import {Spinner} from "../../../components/spinner/Spinner";
 import "./ReviewCard.less";
 
 type ReviewCardProps = {
     review: Review;
     currentUser?: User;
-    createLike: (review: Review, positive: boolean) => void;
-    updateLike: (reviewLike: ReviewLike, positive: boolean) => void;
-    removeLike: (reviewLike: ReviewLike) => void;
+    createLike: (review: Review, positive: boolean) => Promise<void>;
+    updateLike: (reviewLike: ReviewLike, positive: boolean) => Promise<void>;
+    removeLike: (reviewLike: ReviewLike) => Promise<void>;
 }
 
 const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
@@ -27,7 +28,9 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
 
     const [expanded, setExpanded] = useState<boolean>(false);
     const [wasOverflowed, setWasOverflowed] = useState<boolean>(false);
+    const [likeInProcess, setLikeInProcess] = useState<boolean>(false);
     const textRef = React.useRef<HTMLDivElement>();
+
     useIsOverflow(textRef, (hasOverflow) => {
         if (hasOverflow) setWasOverflowed(true)
     });
@@ -49,17 +52,19 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
     });
 
     const onReaction = (positive: boolean) => {
+        setLikeInProcess(true);
+
         if (!currentUserReviewLike) {
-            createLike(review, positive);
+            createLike(review, positive).finally(() => setLikeInProcess(false));
             return;
         }
 
         if (currentUserReviewLike.positive === positive) {
-            removeLike(currentUserReviewLike);
+            removeLike(currentUserReviewLike).finally(() => setLikeInProcess(false));
             return;
         }
 
-        updateLike(currentUserReviewLike, positive);
+        updateLike(currentUserReviewLike, positive).finally(() => setLikeInProcess(false));
     }
 
     return (
@@ -79,13 +84,17 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
                 <Reaction count={positives.length}
                           positive={true}
                           currentUserReacted={currentUserReviewLike?.positive}
-                          disabled={!currentUser}
+                          disabled={likeInProcess || !currentUser}
                           onClick={onReaction}/>
                 <Reaction count={negatives.length}
                           positive={false}
                           currentUserReacted={currentUserReviewLike && !currentUserReviewLike.positive}
-                          disabled={!currentUser}
+                          disabled={likeInProcess || !currentUser}
                           onClick={onReaction}/>
+
+                <ConditionShow condition={likeInProcess}>
+                    <Spinner size={14} color="#555770"/>
+                </ConditionShow>
 
                 <ConditionShow condition={wasOverflowed}>
                     <div className="show-more" onClick={() => setExpanded(!expanded)}>

@@ -25,6 +25,8 @@ export class EditReviewPageStore {
 
     userLeftPageReview: boolean;
 
+    loadingState: EditReviewPageStoreLoadingState = new EditReviewPageStoreLoadingState();
+
     constructor() {
         makeAutoObservable(this);
     }
@@ -34,23 +36,33 @@ export class EditReviewPageStore {
         this.pageId = pageId;
         this.domainId = domainId;
 
-        await this.initUserLeftSiteReview();
-        await this.initUserLeftPageReview();
+        this.loadingState.isDataInitialization = true;
+
+        await Promise.all([
+            this.initUserLeftSiteReview(),
+            this.initUserLeftPageReview()
+        ]);
 
         if (!!reviewId) {
             await this.initReviewById(reviewId);
         } else {
-            await this.initNewReview();
+            this.initNewReview();
         }
+
+        this.loadingState.isDataInitialization = false;
 
         this.initReactions();
     }
 
     public saveReview = async () => {
+        this.loadingState.isDataSubmitting = true;
+
         if (this.reviewId) {
-            await this.reviewService.updateReview(this.reviewId, this.reviewData);
+            await this.reviewService.updateReview(this.reviewId, this.reviewData)
+            .finally(() => this.loadingState.isDataSubmitting = false);
         } else {
-            await this.reviewService.createReview(this.reviewData);
+            await this.reviewService.createReview(this.reviewData)
+            .finally(() => this.loadingState.isDataSubmitting = false);
         }
     }
 
@@ -86,7 +98,7 @@ export class EditReviewPageStore {
         this.userLeftPageReview = (await this.reviewService.getReviews(criteria)).length > 0;
     }
 
-    private initNewReview = async (): Promise<void> => {
+    private initNewReview = () => {
         this.reviewData = new ReviewData();
         this.reviewData.rating = 1;
         this.reviewData.text = "";
@@ -120,4 +132,15 @@ export class EditReviewPageStore {
 export const useEditReviewPageStore = (): EditReviewPageStore => {
     const [editReviewPageStore] = useState<EditReviewPageStore>(new EditReviewPageStore());
     return editReviewPageStore;
+}
+
+export class EditReviewPageStoreLoadingState {
+
+    isDataInitialization: boolean = false;
+
+    isDataSubmitting: boolean = false;
+
+    constructor() {
+        makeAutoObservable(this);
+    }
 }

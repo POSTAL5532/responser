@@ -6,7 +6,6 @@ import {navigateTo} from "../../utils/NavigationUtils";
 import {navigateToReviewsPage} from "../reviews/ReviewsPage";
 import EditReviewForm from "./form/EditReviewForm";
 import {Page} from "../../components/page/Page";
-import {ConditionShow} from "../../components/ConditionShow";
 import {ResourceType} from "../../model/ResourceType";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {EditReviewFooter} from "./footer/EditReviewFooter";
@@ -20,15 +19,15 @@ const EditReviewPage: React.FC = () => {
         domainId,
         previousResourceType
     } = useLocation<NavigateStateProps>().state;
-    const store = useEditReviewPageStore();
     const {
         init,
         reviewData,
         saveReview,
         isNewReview,
         userLeftSiteReview,
-        userLeftPageReview
-    } = store;
+        userLeftPageReview,
+        loadingState
+    } = useEditReviewPageStore();
 
     useEffect(() => {
         init(currentUser.id, reviewId, pageId, domainId);
@@ -64,18 +63,19 @@ const EditReviewPage: React.FC = () => {
             <div className="header">
                 <span>{getHeaderText()}</span>
             </div>
-            <div className="form-container">
-                <ConditionShow condition={!!reviewData}>
-                    <EditReviewForm reviewData={reviewData}
-                                    isNewReview={isNewReview}
-                                    userLeftSiteReview={userLeftSiteReview}
-                                    userLeftPageReview={userLeftPageReview}/>
-                </ConditionShow>
-            </div>
+
+            <EditReviewForm reviewData={reviewData}
+                            isNewReview={isNewReview}
+                            userLeftSiteReview={userLeftSiteReview}
+                            userLeftPageReview={userLeftPageReview}
+                            isLoading={!reviewData || loadingState.isDataInitialization}
+                            isDataSubmitting={loadingState.isDataSubmitting}/>
+
             <EditReviewFooter onSubmit={onSubmit}
                               onCancel={onCancel}
                               isNewReview={isNewReview}
-                              submitDisabled={!reviewData?.text || !reviewData?.resourceType}/>
+                              submitDisabled={!reviewData?.text || !reviewData?.resourceType}
+                              isDataSubmitting={loadingState.isDataSubmitting}/>
         </Page>
     );
 }

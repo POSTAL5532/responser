@@ -1,13 +1,14 @@
 @import "globalsLess";
 
-.form {
+.edit-review-form {
   background-color: @system-color-light-100;
   padding: 8px 12px;
   .stackShadow2();
   border-radius: 8px;
-  height: 100%;
   display: flex;
   flex-direction: column;
+  margin: 12px;
+  flex: 1;
 
   .field-layout {
     &:not(:last-child) {
@@ -24,5 +25,16 @@
     .fontInterRegular();
     font-size: 12px;
     color: @system-color-dark-300;
+  }
+}
+
+span[aria-live="polite"] {
+  .edit-form-skeleton {
+    .stackShadow2();
+    border-radius: 8px;
+    margin: 12px;
+    flex: 1;
+    --base-color: @system-color-light-100;
+    --highlight-color: @system-color-light-300;
   }
 }

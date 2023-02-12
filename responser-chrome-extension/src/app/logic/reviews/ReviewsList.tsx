@@ -11,9 +11,9 @@ import "./ReviewsList.less";
 
 type ReviewsListProps = {
     reviews: Review[];
-    createLike: (review: Review, positive: boolean) => void;
-    updateLike: (reviewLike: ReviewLike, positive: boolean) => void;
-    removeLike: (reviewLike: ReviewLike) => void;
+    createLike: (review: Review, positive: boolean) => Promise<void>;
+    updateLike: (reviewLike: ReviewLike, positive: boolean) => Promise<void>;
+    removeLike: (reviewLike: ReviewLike) => Promise<void>;
     isLoading?: boolean;
 }
 
@@ -23,7 +23,7 @@ const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
     const className = "reviews";
 
     if (isLoading) {
-        return(
+        return (
             <div className={className}>
                 <Skeleton height={90} count={3} className="cards-skeleton"/>
             </div>

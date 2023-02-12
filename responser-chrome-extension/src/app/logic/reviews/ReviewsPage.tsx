@@ -88,7 +88,8 @@ const ReviewsPage: React.FC = () => {
                            onDeleteReviewClick={removeUserReview}
                            onLoginClick={extensionService.openLoginPage}
                            onLogOutClick={extensionService.openLogoutPage}
-                           isLoading={(!page && !domain) || isReviewsLoading || isDomainLoading || isPageLoading}/>
+                           isLoading={(!page && !domain) || isReviewsLoading || isDomainLoading || isPageLoading}
+                           isReviewRemoving={isReviewRemoving}/>
         </Page>
     );
 }
