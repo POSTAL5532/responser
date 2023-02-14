@@ -1,4 +1,4 @@
-import React, {useContext} from "react";
+import React, {useContext, UIEvent} from "react";
 import {observer} from "mobx-react";
 import Skeleton from "react-loading-skeleton";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
@@ -7,7 +7,6 @@ import {Review} from "../../model/Review";
 import {ReviewLike} from "../../model/ReviewLike";
 import {Icon, IconType} from "../../components/icon/Icon";
 import {ConditionShow} from "../../components/ConditionShow";
-import {useBottomScrollListener} from "react-bottom-scroll-listener";
 import "./ReviewsList.less";
 
 type ReviewsListProps = {
@@ -15,13 +14,22 @@ type ReviewsListProps = {
     createLike: (review: Review, positive: boolean) => Promise<void>;
     updateLike: (reviewLike: ReviewLike, positive: boolean) => Promise<void>;
     removeLike: (reviewLike: ReviewLike) => Promise<void>;
-    isLoading?: boolean;
+    loadNextReviews: () => Promise<void>;
+    isLoading: boolean;
+    isNextReviewsLoading: boolean;
 }
 
 const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
-    const {reviews, createLike, updateLike, removeLike, isLoading} = props;
+    const {
+        reviews,
+        createLike,
+        updateLike,
+        removeLike,
+        isLoading,
+        loadNextReviews,
+        isNextReviewsLoading
+    } = props;
     const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
-    const scrollRef = useBottomScrollListener<HTMLDivElement>(() => console.log("SCROLLED!"));
     const className = "reviews";
 
     if (isLoading) {
@@ -30,6 +38,16 @@ const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
                 <Skeleton height={90} count={3} className="cards-skeleton"/>
             </div>
         );
+    }
+
+    const onScroll = (event: UIEvent<HTMLDivElement>) => {
+        const targetElement = event.target as HTMLDivElement;
+        const result = targetElement.scrollHeight - targetElement.scrollTop;
+        const isBottom = Math.floor(result) === targetElement.clientHeight;
+
+        if (isBottom) {
+            loadNextReviews();
+        }
     }
 
     const mapReviewCard = (review: Review) => {
@@ -42,8 +60,9 @@ const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
     }
 
     return (
-        <div className={className} ref={scrollRef}>
+        <div className={className} onScroll={onScroll}>
             {reviews.map(mapReviewCard)}
+            {isNextReviewsLoading && <Skeleton height={90} count={3} className="cards-skeleton"/>}
             <ConditionShow condition={reviews.length < 1}>
                 <NoReviews/>
             </ConditionShow>

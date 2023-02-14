@@ -16,6 +16,9 @@ import {ReviewLike} from "../../model/ReviewLike";
 import {ReviewLikeData} from "../../model/ReviewLikeData";
 import {ReviewLikeService} from "../../service/ReviewLikeService";
 import {ResourceType} from "../../model/ResourceType";
+import {Pagination} from "../../model/Pagination";
+
+const PAGE_ELEMENTS_COUNT = 5;
 
 export class ReviewsPageStore {
 
@@ -46,11 +49,21 @@ export class ReviewsPageStore {
 
     loadingState: ReviewsPageStoreLoadingState = new ReviewsPageStoreLoadingState();
 
+    currentPageNumber: number;
+
+    hasNextReviews: boolean;
+
+    currentUserId: string;
+
     constructor() {
         makeAutoObservable(this);
     }
 
     init = async (reviewsResourceType: ResourceType, currentUserId: string) => {
+        this.currentUserId = currentUserId;
+        this.currentPageNumber = 0;
+        this.hasNextReviews = false;
+
         this.reviewsResourceType = reviewsResourceType || ResourceType.SITE;
         this.loadingState.isPageInfoLoading = true;
         const pageInfo = await this.extensionService.getCurrentPageInfo().finally(
@@ -61,9 +74,8 @@ export class ReviewsPageStore {
         await this.initDomain();
         await this.initPage();
 
-        if (currentUserId) await this.loadCurrenUserReview(currentUserId);
-
-        await this.loadReviews(currentUserId);
+        await this.loadCurrenUserReview();
+        await this.loadReviews();
     }
 
     initDomain = async () => {
@@ -98,31 +110,53 @@ export class ReviewsPageStore {
         }
     }
 
-    loadCurrenUserReview = async (currentUserId: string) => {
-        const criteria = this.initDefaultReviewsRequestCriteria();
-        criteria.forUserId = currentUserId;
+    loadCurrenUserReview = async () => {
+        if (!this.currentUserId) return;
+
+        const criteria = this.getReviewsRequestCriteria(undefined, this.currentUserId);
         this.loadingState.isReviewsLoading = true;
-        const reviews = await this.reviewService.getReviews(criteria).finally(
+        const reviews = await this.reviewService.getReviews(criteria, Pagination.SINGLE_ELEMENT).finally(
             () => this.loadingState.isReviewsLoading = false
         );
 
-        this.currentUserReview = reviews[0];
+        this.currentUserReview = reviews.data[0];
     }
 
-    loadReviews = async (currentUserId: string) => {
-        const criteria = this.initDefaultReviewsRequestCriteria();
+    loadReviews = async () => {
+        const pagination = new Pagination(this.currentPageNumber, PAGE_ELEMENTS_COUNT);
+        const criteria = this.getReviewsRequestCriteria(this.currentUserId);
 
-        if (!!currentUserId) {
-            criteria.excludeUserId = currentUserId;
+        this.loadingState.isReviewsLoading = true;
+        const reviewsResponse = await this.reviewService.getReviews(criteria, pagination).finally(
+            () => this.loadingState.isReviewsLoading = false
+        );
+
+        this.reviews = reviewsResponse.data;
+        this.hasNextReviews = !reviewsResponse.isLast;
+    }
+
+    loadNextReviews = async () => {
+        if (!this.hasNextReviews || this.loadingState.isNextReviewsLoading) {
+            return;
         }
 
-        this.loadingState.isReviewsLoading = true;
-        this.reviews = await this.reviewService.getReviews(criteria).finally(
-            () => this.loadingState.isReviewsLoading = false
+        const criteria = this.getReviewsRequestCriteria(this.currentUserId);
+        const pagination = new Pagination(
+            this.currentPageNumber + 1,
+            PAGE_ELEMENTS_COUNT
         );
+
+        this.loadingState.isNextReviewsLoading = true;
+        const reviewsResponse = await this.reviewService.getReviews(criteria, pagination).finally(
+            () => this.loadingState.isNextReviewsLoading = false
+        );
+
+        this.reviews.push(...reviewsResponse.data);
+        this.currentPageNumber += 1;
+        this.hasNextReviews = !reviewsResponse.isLast;
     }
 
-    initDefaultReviewsRequestCriteria = (): ReviewsRequestCriteria => {
+    getReviewsRequestCriteria = (excludeUserId?: string, forUserId?: string): ReviewsRequestCriteria => {
         const criteria = new ReviewsRequestCriteria();
         criteria.resourceType = this.reviewsResourceType;
 
@@ -135,6 +169,14 @@ export class ReviewsPageStore {
                 break
             default:
                 throw new Error(`Bad reviews resource type ${this.reviewsResourceType}`);
+        }
+
+        if (!!excludeUserId) {
+            criteria.excludeUserId = excludeUserId;
+        }
+
+        if (!!forUserId) {
+            criteria.forUserId = forUserId;
         }
 
         return criteria;
@@ -196,6 +238,8 @@ export class ReviewsPageStoreLoadingState {
     isReviewsLoading: boolean = false;
 
     isReviewRemoving: boolean = false;
+
+    isNextReviewsLoading: boolean = false;
 
     constructor() {
         makeAutoObservable(this);

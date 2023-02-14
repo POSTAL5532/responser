@@ -1,5 +1,6 @@
 package com.responser.backend.converter;
 
+import com.responser.backend.controller.payload.PageableResponse;
 import com.responser.backend.controller.reviewlike.payload.ReviewLikeDTO;
 import com.responser.backend.controller.reviews.payload.ReviewInfoDTO;
 import com.responser.backend.controller.reviews.payload.ReviewDTO;
@@ -7,6 +8,7 @@ import com.responser.backend.model.ResourceType;
 import com.responser.backend.model.Review;
 import com.responser.backend.model.User;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -64,5 +66,18 @@ public class ReviewConverter {
 
     public List<ReviewDTO> toReviewPayloadList(List<Review> reviews) {
         return reviews.stream().map(this::toResponsePayload).collect(Collectors.toList());
+    }
+
+    public PageableResponse<ReviewDTO> toPageableReviewPayloadList(Page<Review> reviewsPage) {
+        List<ReviewDTO> reviewList = reviewsPage.get().map(this::toResponsePayload).collect(Collectors.toList());
+        PageableResponse<ReviewDTO> pageable = new PageableResponse<>(
+            reviewsPage.getTotalElements(),
+            reviewsPage.getTotalPages(),
+            reviewsPage.getNumber(),
+            reviewsPage.getNumberOfElements(),
+            reviewsPage.isLast(),
+            reviewList
+        );
+        return pageable;
     }
 }

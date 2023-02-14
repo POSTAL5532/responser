@@ -4,6 +4,7 @@ import {ReviewService} from "../../service/ReviewService";
 import {ReviewData} from "../../model/ReviewData";
 import {ResourceType} from "../../model/ResourceType";
 import {ReviewsRequestCriteria} from "../../model/ReviewsRequestCriteria";
+import {Pagination} from "../../model/Pagination";
 
 export class EditReviewPageStore {
 
@@ -86,7 +87,8 @@ export class EditReviewPageStore {
         criteria.forUserId = this.currentUserId;
         criteria.resourceId = this.domainId;
 
-        this.userLeftSiteReview = (await this.reviewService.getReviews(criteria)).length > 0;
+        const response = await this.reviewService.getReviews(criteria, Pagination.SINGLE_ELEMENT);
+        this.userLeftSiteReview = response.data.length > 0;
     }
 
     private initUserLeftPageReview = async (): Promise<void> => {
@@ -95,7 +97,8 @@ export class EditReviewPageStore {
         criteria.forUserId = this.currentUserId;
         criteria.resourceId = this.pageId;
 
-        this.userLeftPageReview = (await this.reviewService.getReviews(criteria)).length > 0;
+        const response = await this.reviewService.getReviews(criteria, Pagination.SINGLE_ELEMENT);
+        this.userLeftPageReview = response.data.length > 0;
     }
 
     private initNewReview = () => {

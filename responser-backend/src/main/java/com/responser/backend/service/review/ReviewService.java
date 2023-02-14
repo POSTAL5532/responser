@@ -10,6 +10,8 @@ import com.responser.backend.service.DomainService;
 import com.responser.backend.service.PagesService;
 import com.responser.backend.service.UserService;
 import lombok.AllArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -50,8 +52,8 @@ public class ReviewService {
         );
     }
 
-    public List<Review> getReviews(ReviewsCriteria criteria) {
-        return reviewRepository.findAll(ReviewSpecifications.getAll(criteria));
+    public Page<Review> getReviews(ReviewsCriteria criteria, Pageable pageable) {
+        return reviewRepository.findAll(ReviewSpecifications.getAll(criteria), pageable);
     }
 
     public Boolean existsByResourceIdAndUserId(String resourceId, String userId) {

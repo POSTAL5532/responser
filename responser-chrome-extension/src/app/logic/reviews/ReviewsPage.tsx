@@ -28,6 +28,7 @@ const ReviewsPage: React.FC = () => {
         updateReviewLike,
         removeReviewLike,
         removeUserReview,
+        loadNextReviews,
         currentPageInfo,
         loadingState
     } = useReviewsPageStore();
@@ -36,7 +37,8 @@ const ReviewsPage: React.FC = () => {
         isDomainLoading,
         isPageLoading,
         isReviewRemoving,
-        isReviewsLoading
+        isReviewsLoading,
+        isNextReviewsLoading
     } = loadingState;
 
     useEffect(() => {
@@ -79,6 +81,8 @@ const ReviewsPage: React.FC = () => {
                          createLike={createReviewLike}
                          updateLike={updateReviewLike}
                          removeLike={removeReviewLike}
+                         loadNextReviews={loadNextReviews}
+                         isNextReviewsLoading={isNextReviewsLoading}
                          isLoading={(!page && !domain) || isReviewsLoading || isDomainLoading || isPageLoading}/>
 
             <ReviewsFooter userAuthorized={!!currentUser}

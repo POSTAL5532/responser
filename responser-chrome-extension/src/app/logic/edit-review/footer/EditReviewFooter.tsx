@@ -15,8 +15,6 @@ type EditReviewFooterProps = {
 export const EditReviewFooter: React.FC<EditReviewFooterProps> = (props: EditReviewFooterProps) => {
     const {onSubmit, isNewReview, submitDisabled, isDataSubmitting, onCancel} = props;
 
-    console.log("isDataSubmitting", isDataSubmitting);
-
     return (
         <div className="footer">
             <Button onClick={onSubmit} disabled={isDataSubmitting || submitDisabled}>
