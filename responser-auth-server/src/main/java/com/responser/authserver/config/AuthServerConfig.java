@@ -54,7 +54,8 @@ public class AuthServerConfig {
 
         return http
             .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
-            .formLogin()
+            .csrf().disable()
+            .formLogin().loginPage("/login").failureUrl("/login?error=true")
             .and().getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(Customizer.withDefaults())
             .and().build();
     }
