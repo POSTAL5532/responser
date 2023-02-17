@@ -1,3 +1,5 @@
+const LOCAL_DEV_MODE = JSON.parse("{{LOCAL_DEV_MODE}}".toLowerCase())
+
 chrome.runtime.onInstalled.addListener(async () => {
     for (const cs of chrome.runtime.getManifest().content_scripts) {
         for (const tab of await chrome.tabs.query({url: cs.matches})) {
@@ -114,7 +116,7 @@ const setSiteRatingBadge = async (pageUrl, tabId) => {
 }
 
 const sendMessageToContent = async (message) => {
-    let queryOptions = {active: true, lastFocusedWindow: true};
+    let queryOptions = {active: true, lastFocusedWindow: !LOCAL_DEV_MODE};
     let tab = (await chrome.tabs.query(queryOptions))[0];
     return chrome.tabs.sendMessage(tab.id, message);
 }
