@@ -4,6 +4,7 @@ import com.nimbusds.jose.jwk.JWKSet;
 import com.nimbusds.jose.jwk.RSAKey;
 import com.nimbusds.jose.jwk.source.JWKSource;
 import com.nimbusds.jose.proc.SecurityContext;
+import com.responser.authserver.controller.CommonController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -44,7 +45,7 @@ public class AuthServerConfig {
 
     private final CORSCustomizer corsCustomizer;
 
-    private final AuthServerApplicationProperties authServerApplicationProperties;
+    private final AuthServerApplicationProperties properties;
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -55,7 +56,8 @@ public class AuthServerConfig {
         return http
             .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
             .csrf().disable()
-            .formLogin().loginPage("/login").failureUrl("/login?error=true")
+            .formLogin().loginPage(CommonController.LOGIN_URL).failureUrl(CommonController.LOGIN_URL + "?error=true")
+            .and().logout().logoutUrl(CommonController.LOGOUT_URL).logoutSuccessUrl(properties.getAfterLogoutUrl())
             .and().getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(Customizer.withDefaults())
             .and().build();
     }
@@ -64,7 +66,7 @@ public class AuthServerConfig {
     public RegisteredClientRepository registeredClientRepository() {
         List<RegisteredClient> clients = new ArrayList<>();
 
-        authServerApplicationProperties.getClientCredentials().forEach(cc -> {
+        properties.getClientCredentials().forEach(cc -> {
             RegisteredClient webClient = RegisteredClient.withId(UUID.randomUUID().toString())
                 .clientId(cc.getClientId())
                 .clientSecret(cc.getClientSecret())

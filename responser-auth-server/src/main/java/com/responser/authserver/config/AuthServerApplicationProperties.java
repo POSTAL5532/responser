@@ -1,5 +1,6 @@
 package com.responser.authserver.config;
 
+import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -20,6 +21,12 @@ public class AuthServerApplicationProperties {
     private List<ClientCredentials> clientCredentials;
 
     private List<String> allowedOrigins;
+
+    @NotEmpty
+    private String registrationPageUrl;
+
+    @NotEmpty
+    private String afterLogoutUrl;
 
     @Getter
     @Setter

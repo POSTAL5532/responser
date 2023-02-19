@@ -1,5 +1,6 @@
 package com.responser.authserver.config;
 
+import com.responser.authserver.controller.CommonController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -22,6 +23,8 @@ public class WebSecurityConfig {
 
     private final CORSCustomizer corsCustomizer;
 
+    private final AuthServerApplicationProperties properties;
+
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
         corsCustomizer.corsCustomizer(http);
@@ -29,9 +32,10 @@ public class WebSecurityConfig {
         return http
             .csrf().disable()
             .formLogin()
-            .loginPage("/login").failureUrl("/login?error=true")
+            .loginPage(CommonController.LOGIN_URL).failureUrl(CommonController.LOGIN_URL + "?error=true")
+            .and().logout().logoutUrl(CommonController.LOGOUT_URL).logoutSuccessUrl(properties.getAfterLogoutUrl())
             .and().authorizeHttpRequests()
-            .requestMatchers("/", "/login").permitAll()
+            .requestMatchers("/", CommonController.LOGIN_URL, CommonController.LOGOUT_URL).permitAll()
             .anyRequest().authenticated()
             .and().build();
     }

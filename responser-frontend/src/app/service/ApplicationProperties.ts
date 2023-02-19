@@ -8,6 +8,10 @@ class ApplicationProperties {
         return process.env.AUTH_LOGIN_PAGE_URL;
     }
 
+    get authLogoutPageUrl(): string {
+        return process.env.AUTH_LOGOUT_PAGE_URL;
+    }
+
     get authTokenUrl(): string {
         return process.env.AUTH_TOKEN_URL;
     }

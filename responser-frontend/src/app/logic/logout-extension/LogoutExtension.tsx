@@ -2,6 +2,8 @@ import React, {useContext} from "react";
 import {observer} from "mobx-react";
 import {useExtensionService} from "../../service/extension/ExtensionService";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
+import {navigateTo} from "../../utils/NavigationUtils";
+import ApplicationProperties from "../../service/ApplicationProperties";
 
 export const LOGOUT_EXTENSION: string = "/logout-extension";
 
@@ -12,7 +14,7 @@ const LogoutExtension: React.FC = () => {
     context.logoutAndClearCurrentUser();
 
     extensionService.removeToken().finally(() => {
-        window.close();
+        navigateTo(ApplicationProperties.authLogoutPageUrl, true);
     });
     return null;
 }
