@@ -7,8 +7,7 @@ CREATE TABLE users
     user_name     VARCHAR(255) NOT NULL UNIQUE,
     email         VARCHAR(255) NOT NULL UNIQUE,
     password      VARCHAR(255) NOT NULL,
-    first_name    VARCHAR(255) NOT NULL,
-    last_name     VARCHAR(255) NOT NULL,
+    full_name     VARCHAR(255) NOT NULL,
     creation_date TIMESTAMP    NOT NULL,
     update_date   TIMESTAMP,
     PRIMARY KEY (id)

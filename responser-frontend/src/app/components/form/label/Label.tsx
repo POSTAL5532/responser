@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import "app/components/form/Label.less";
+import "app/components/form/label/Label.less";
 
 export const Label: React.FC<React.DetailedHTMLProps<React.LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>> = (
     props: React.DetailedHTMLProps<React.LabelHTMLAttributes<HTMLLabelElement>, HTMLLabelElement>

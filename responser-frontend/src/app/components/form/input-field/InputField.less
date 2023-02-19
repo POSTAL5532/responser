@@ -1,0 +1,42 @@
+@import "globalsLess";
+
+.field {
+  height: 40px;
+  width: 100%;
+  border-radius: 8px;
+  padding: 10px;
+  .fontInterRegular();
+  font-size: 16px;
+  color: @system-color-dark-400;
+  border: 1px solid @system-color-dark-100;
+  background-color: @system-color-light-100;
+
+  .placeholderColor(@system-color-dark-200);
+
+  &, &:focus, &:active {
+    outline: none;
+  }
+
+  &:hover {
+    border-color: @primary-color-lighter;
+  }
+
+  &:focus {
+    border-color: @primary-color-main;
+  }
+
+  &.invalid {
+    border-color: @system-color-danger-300;
+    color: @system-color-danger-600;
+
+    .placeholderColor(@system-color-danger-300);
+
+    &:hover {
+      border-color: @system-color-danger-500;
+    }
+
+    &:focus {
+      border-color: @system-color-danger-600;
+    }
+  }
+}

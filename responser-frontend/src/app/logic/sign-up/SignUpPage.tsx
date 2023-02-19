@@ -2,16 +2,11 @@ import React, {Component} from "react";
 import {Page} from "app/components/page/Page";
 import {observer} from "mobx-react";
 import {SignUpPageStore} from "app/logic/sign-up/SignUpPageStore";
-import {navigateTo} from "app/utils/NavigationUtils";
-import SignUpForm from "app/logic/sign-up/SignUpForm";
-import "app/logic/sign-up/SignUpPage.less";
+import SignUpForm from "app/logic/sign-up/form/SignUpForm";
 import {GlobalAppStoreContext} from "app/GlobalAppStore";
+import "app/logic/sign-up/SignUpPage.less";
 
 export const SIGN_UP_PAGE_URL = "/sign-up";
-
-export const navigateToSignUpPage = () => {
-    navigateTo(SIGN_UP_PAGE_URL);
-}
 
 /**
  * Sign up page.

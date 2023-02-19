@@ -1,8 +1,8 @@
 import React, {ChangeEvent} from "react";
 import {Field, FieldProps} from "formik";
 import * as Yup from 'yup';
-import {InputField} from "app/components/form/InputField";
-import {FieldMessage} from "app/components/form/FieldMessage";
+import {InputField} from "app/components/form/input-field/InputField";
+import {FieldMessage} from "app/components/form/field-message/FieldMessage";
 
 type LastNameFieldFieldProps = {
     onLastNameFieldChange: (value: string) => void;

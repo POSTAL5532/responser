@@ -1,0 +1,58 @@
+@import "globalsLess";
+
+.sign-up-form {
+  .field-layout {
+    margin-bottom: 12px;
+  }
+
+  .passwords {
+    display: flex;
+    gap: 20px;
+
+    .field-layout {
+      width: 100%;
+    }
+  }
+
+  .sign-up-errors {
+    .error-message {
+      margin-left: 0;
+      width: 100%;
+      display: block;
+      text-align: center;
+    }
+  }
+
+  .button {
+    width: 100%;
+
+    &:not(:last-child) {
+      margin-bottom: 18px;
+    }
+  }
+
+  .login-offer {
+    span {
+      .fontInterMedium();
+      font-size: 14px;
+      justify-content: center;
+      align-items: center;
+      display: flex;
+
+      &:first-child {
+        margin-bottom: 6px;
+      }
+
+      &.login-link {
+        .fontInterSemiBold();
+        font-size: 18px;
+        color: @primary-color-lighter;
+        cursor: pointer;
+
+        &:hover {
+          color: @primary-color-main;
+        }
+      }
+    }
+  }
+}

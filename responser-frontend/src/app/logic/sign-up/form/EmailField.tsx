@@ -1,25 +1,25 @@
 import React, {ChangeEvent} from "react";
 import {Field, FieldProps} from "formik";
 import * as Yup from 'yup';
-import {InputField} from "app/components/form/InputField";
-import {FieldMessage} from "app/components/form/FieldMessage";
+import {InputField} from "app/components/form/input-field/InputField";
+import {FieldMessage} from "app/components/form/field-message/FieldMessage";
 
 type EmailFieldProps = {
-    onEmailChange: (value: string) => void;
+    onChange: (value: string) => void;
 };
 
 export const EMAIL_VALIDATION_SCHEMA = {
-    emailId: Yup.string().required("Email is required").email("Invalid email")
+    email: Yup.string().required("Email is required").email("Invalid email")
 }
 
 export const EmailField: React.FC<EmailFieldProps> = (props: EmailFieldProps) => {
 
     return (
-        <Field name="emailId">
+        <Field name="email">
             {({field: {onChange, ...other}, meta: {touched, error}}: FieldProps) => {
                 const onEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
                     onChange(event);
-                    props.onEmailChange(event.target.value)
+                    props.onChange(event.target.value)
                 }
 
                 return (
@@ -27,7 +27,7 @@ export const EmailField: React.FC<EmailFieldProps> = (props: EmailFieldProps) =>
                         <InputField
                             {...other}
                             invalid={touched && !!error}
-                            placeholder="input your email"
+                            placeholder="Enter email"
                             onChange={onEmailChange}/>
                         <FieldMessage isError={true} visible={touched && !!error}>{error}</FieldMessage>
                     </>

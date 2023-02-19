@@ -1,11 +1,11 @@
 import React, {ChangeEvent} from "react";
 import {Field, FieldProps, FieldValidator} from "formik";
 import * as Yup from 'yup';
-import {InputField} from "app/components/form/InputField";
-import {FieldMessage} from "app/components/form/FieldMessage";
+import {InputField} from "app/components/form/input-field/InputField";
+import {FieldMessage} from "app/components/form/field-message/FieldMessage";
 
 type PasswordFieldProps = {
-    onPasswordChange: (value: string) => void;
+    onChange: (value: string) => void;
     name: string;
     placeholder: string;
     validator?: FieldValidator;
@@ -27,7 +27,7 @@ export const PasswordField: React.FC<PasswordFieldProps> = (props: PasswordField
             {({field: {onChange, ...other}, meta: {touched, error}}: FieldProps) => {
                 const onPasswordChange = (event: ChangeEvent<HTMLInputElement>) => {
                     onChange(event);
-                    props.onPasswordChange(event.target.value)
+                    props.onChange(event.target.value)
                 }
 
                 return (

@@ -1,42 +1,65 @@
 @import "globalsLess";
 
 .button {
-  padding-left: 16px;
-  padding-right: 16px;
-  height: 48px;
-  .fontMulishBold();
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  padding-left: 12px;
+  padding-right: 12px;
+  height: 40px;
+  .fontInterMedium();
   font-size: 16px;
   border-radius: 8px;
   border: none;
   cursor: pointer;
-  color: @white-color;
-  background-color: @primary-color;
+
+  .icon {
+    height: 14px;
+  }
+
+  &.primary {
+    color: @system-color-light-100;
+    background-color: @primary-color-lighter;
+
+    svg path {
+      stroke: @system-color-light-100;
+    }
+
+    &:hover {
+      background-color: darken(@primary-color-lighter, 4%);
+    }
+
+    &:active {
+      background-color: darken(@primary-color-lighter, 6%);
+    }
+  }
+
+  &.secondary {
+    color: @system-color-dark-300;
+    background-color: @system-color-light-300;
+    border: solid 1px @system-color-dark-100;
+
+    svg path {
+      stroke: @system-color-dark-300;
+    }
+
+    &:hover {
+      background-color: darken(@system-color-light-300, 4%);
+    }
+
+    &:active {
+      background-color: darken(@system-color-light-300, 6%);
+    }
+  }
 
   &.disabled {
-    background-color: @secondary-color;
+    color: @system-color-light-100;
+    background-color: @system-color-light-500;
     pointer-events: none;
-  }
 
-  &:not(.disabled) {
-    &:hover {
-      background-color: multiply(@primary-color, @color-multiplier);
-    }
-  }
-
-  &.outlined {
-    background-color: transparent;
-    border: 2px solid @primary-color;
-    color: @primary-color;
-
-    &.disabled {
-      border-color: @secondary-color;
-      color: @secondary-color;
-    }
-
-    &:not(.disabled) {
-      background-color: transparent;
-      border: 2px solid multiply(@primary-color, @color-multiplier);
-      color: multiply(@primary-color, @color-multiplier);
+    svg path {
+      stroke: @system-color-light-100;
     }
   }
 }

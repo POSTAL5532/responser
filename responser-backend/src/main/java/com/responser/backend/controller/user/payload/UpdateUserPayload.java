@@ -28,11 +28,7 @@ public class UpdateUserPayload {
     @EmailUniqueness(message = "User with this email is already registered")
     private String email;
 
-    @NotBlank(message = "First name must be specified")
-    @Size(min = 2, max = 255, message = "First name must be from 2 to 255 characters")
-    private String firstName;
-
-    @NotBlank(message = "Last name must be specified")
-    @Size(min = 2, max = 255, message = "Last name must be from 2 to 255 characters")
-    private String lastName;
+    @NotBlank(message = "Full name must be specified")
+    @Size(min = 2, max = 255, message = "Full name must be from 2 to 255 characters")
+    private String fullName;
 }

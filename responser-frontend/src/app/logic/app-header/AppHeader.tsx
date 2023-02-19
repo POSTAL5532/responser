@@ -32,12 +32,10 @@ const AppHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {
                 context.currentUser &&
                 <div className="user-block">
                     <div className="user-info" onClick={onUserInfoClick}>
-                        <span className="user-full-name">
-                            {context.currentUser.firstName} {context.currentUser.lastName}
-                        </span>
+                        <span className="user-full-name">{context.currentUser.fullName}</span>
                         <span className="user-email">{context.currentUser.email}</span>
                     </div>
-                    <Button outlined={true} onClick={onLogOut}>Logout</Button>
+                    <Button onClick={onLogOut}>Logout</Button>
                 </div>
             }
         </div>

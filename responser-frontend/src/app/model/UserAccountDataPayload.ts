@@ -2,11 +2,9 @@ export class UserAccountDataPayload {
 
     userName: string = "";
 
-    emailId: string = "";
+    email: string = "";
 
-    firstName: string = "";
-
-    lastName: string = "";
+    fullName: string = "";
 
     password: string = "";
 

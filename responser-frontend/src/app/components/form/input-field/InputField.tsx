@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import "app/components/form/InputField.less";
+import "app/components/form/input-field/InputField.less";
 
 type InputFieldProps = {
     invalid?: boolean;

@@ -1,6 +1,6 @@
 import React, {PropsWithChildren} from "react";
 import classNames from "classnames";
-import "app/components/form/FieldMessage.less";
+import "./FieldMessage.less";
 
 type FieldMessageProps = {
     isError?: boolean;

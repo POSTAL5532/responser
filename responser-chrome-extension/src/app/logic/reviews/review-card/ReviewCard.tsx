@@ -70,7 +70,7 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
     return (
         <div className={className}>
             <div className="card-header">
-                <div className="user-name">{user.firstName} {user.lastName}</div>
+                <div className="user-name">{user.fullName}</div>
                 <ConditionShow condition={isCurrentUserReview}>
                     <UserIcon className="user-icon"/>
                 </ConditionShow>

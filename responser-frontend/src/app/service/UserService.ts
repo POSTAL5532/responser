@@ -12,7 +12,7 @@ export class UserService {
     client: ApiClient = new ApiClient();
 
     signUp = async (signUpPayload: UserAccountDataPayload): Promise<void> => {
-        await this.client.executePostRequest(`${BASE_USER_REQUEST}/register`, signUpPayload);
+        await this.client.executePostRequest(`${BASE_USER_REQUEST}`, signUpPayload);
     }
 
     getCurrentUser = async (): Promise<User> => {

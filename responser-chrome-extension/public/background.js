@@ -116,7 +116,9 @@ const setSiteRatingBadge = async (pageUrl, tabId) => {
 }
 
 const sendMessageToContent = async (message) => {
-    let queryOptions = {active: true, lastFocusedWindow: !LOCAL_DEV_MODE};
+    let queryOptions = LOCAL_DEV_MODE
+        ? {active: true}
+        : {active: true, lastFocusedWindow: !LOCAL_DEV_MODE};
     let tab = (await chrome.tabs.query(queryOptions))[0];
     return chrome.tabs.sendMessage(tab.id, message);
 }

@@ -19,8 +19,7 @@ public class UserConverter {
         user.setUserName(newUserPayload.getUserName());
         user.setEmail(newUserPayload.getEmail());
         user.setPassword(newUserPayload.getPassword());
-        user.setFirstName(newUserPayload.getFirstName());
-        user.setLastName(newUserPayload.getLastName());
+        user.setFullName(newUserPayload.getFullName());
 
         return user;
     }
@@ -29,8 +28,7 @@ public class UserConverter {
         User user = new User();
         user.setUserName(updateUser.getUserName());
         user.setEmail(updateUser.getEmail());
-        user.setFirstName(updateUser.getFirstName());
-        user.setLastName(updateUser.getLastName());
+        user.setFullName(updateUser.getFullName());
 
         return user;
     }
@@ -40,8 +38,7 @@ public class UserConverter {
         userPayload.setId(user.getId());
         userPayload.setUserName(user.getUserName());
         userPayload.setEmail(user.getEmail());
-        userPayload.setFirstName(user.getFirstName());
-        userPayload.setLastName(user.getLastName());
+        userPayload.setFullName(user.getFullName());
         userPayload.setCreationDate(user.getCreationDate());
         userPayload.setUpdateDate(user.getUpdateDate());
 
