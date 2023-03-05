@@ -55,6 +55,6 @@ sourceSets {
 }
 
 compileJava	{
-    options.compilerArgs += ['-AaddGenerationDate=true'] // Specific to Hibernate JPA meta model generation processor.
+    options.compilerArgs += ['-AaddGenerationDate=false']
     options.annotationProcessorGeneratedSourcesDirectory = file(generatedMainJava)
 }
