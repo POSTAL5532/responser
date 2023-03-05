@@ -1,0 +1,68 @@
+.sign-in-page {
+  display: flex;
+  justify-content: center;
+  position: relative;
+  padding: 30px 50px;
+}
+
+.sign-in-form-panel {
+  width: 720px;
+  background-color: #ffffff;
+  padding: 28px 48px;
+  border-radius: 8px;
+  box-shadow: 0 0 2px rgb(40 41 61 / 4%), 0 4px 8px rgb(96 97 112 / 16%);
+}
+
+.sign-in-page .sign-in-form-panel .sign-in-header {
+  font-family: "Inter-Regular";
+  font-size: 28px;
+  color: #555770;
+  text-align: center;
+  margin-top: 0;
+  margin-bottom: 12px;
+}
+
+.sign-in-form .field-layout {
+  margin-bottom: 12px;
+}
+
+.sign-in-form .button:not(:last-child) {
+  margin-bottom: 18px;
+}
+
+.sign-in-form .button {
+  width: 100%;
+}
+
+.sign-up-offer, .sign-up-link {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+}
+
+.sign-up-offer{
+  margin-bottom: 6px;
+  font-family: "Inter-Medium";
+  font-size: 14px;
+}
+
+.sign-up-link {
+  font-family: "Inter-SemiBold";
+  font-size: 18px;
+  text-decoration: none;
+  color: #6690FF;
+  cursor: pointer;
+}
+
+.sign-up-link:hover {
+  color: #3366FF
+}
+
+.error {
+  font-family: "Inter-Regular";
+  font-size: 14px;
+  color: #DB2A30;
+  display: block;
+  text-align: center;
+  margin-bottom: 12px;
+}

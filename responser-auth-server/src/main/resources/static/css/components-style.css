@@ -61,8 +61,13 @@
   font-weight: 900;
 }
 
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  background-color: #F2F2F5;
 }
 
 .app-header {
@@ -80,3 +85,61 @@ body {
   font-size: 38px;
   color: #28293D;
 }
+
+/* ============ FIELD ============ */
+.field-layout {
+  display: flex;
+}
+
+.field-layout.column {
+  flex-direction: column;
+}
+
+.field-layout .label {
+  font-family: "Inter-Regular";
+  font-size: 14px;
+  color: #555770;
+}
+
+.field-layout.column .label {
+  margin-bottom: 6px;
+}
+
+.field {
+  height: 40px;
+  width: 100%;
+  border-radius: 8px;
+  padding: 10px;
+  font-family: "Inter-Regular";
+  font-size: 16px;
+  color: #28293D;
+  border: 1px solid #C7C8D9;
+  background-color: #FFFFFF;
+}
+
+.field, .field:focus, .field:active {
+  outline: none;
+}
+/* ============ FIELD END ============ */
+
+/* ============ BUTTON END ============ */
+.button {
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  padding-left: 12px;
+  padding-right: 12px;
+  height: 40px;
+  font-family: "Inter-Medium";
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+}
+
+.button.primary {
+  color: #FFFFFF;
+  background-color: #6690FF;
+}
+/* ============ BUTTON ============ */
