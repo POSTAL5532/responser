@@ -3,4 +3,5 @@ include 'responser-frontend'
 include 'responser-chrome-extension'
 include 'responser-backend'
 include 'responser-auth-server'
+include 'responser-landing'
 
