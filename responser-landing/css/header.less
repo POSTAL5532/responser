@@ -1,0 +1,29 @@
+@import "mixins.less";
+@import "colors.less";
+
+.header {
+  padding-left: 112px;
+  padding-right: 112px;
+  display: flex;
+  gap: 70px;
+  align-items: center;
+  height: 88px;
+  border-bottom: solid 1px @primary-color-main;
+
+  .logo {
+    margin: 0;
+    font-size: 28px;
+    .fontInterBold();
+    color: @system-color-dark-400;
+  }
+
+  .navigation {
+    display: flex;
+    gap: 28px;
+  }
+
+  .login-link {
+    margin-left: auto;
+    line-height: 21px;
+  }
+}

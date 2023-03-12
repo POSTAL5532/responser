@@ -57,16 +57,10 @@ const htmlProcessor = () => {
     );
 }
 
-const styleProcessor = () => {
-    readFilesInDirectoryAndProcess(resolvePath(CSS_DIR), async (file, fileName) => {
-        const cssFileName = fileName.split(".")[0] + ".css";
-
-        if (fileName.startsWith("i_")) {
-            return;
-        }
-
-        await exec(`lessc ${file} ${resolvePath(BUILD_CSS_DIR, cssFileName)}`);
-    })
+const styleProcessor = async () => {
+    const {stdout, stderr} = await exec(
+        `lessc ${resolvePath(CSS_DIR, "styles.less")} ${resolvePath(BUILD_CSS_DIR, "styles.css")}`
+    );
 }
 
 const fontsProcessor = () => {

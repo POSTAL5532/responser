@@ -1,0 +1,23 @@
+@import "mixins.less";
+@import "colors.less";
+
+.main-description {
+  padding: 96px 112px;
+
+  .slogan-block {
+    max-width: 840px;
+    padding-bottom: 36px;
+
+    .slogan {
+      margin: 0;
+      .fontInterBold();
+      font-size: 58px;
+      color: @system-color-dark-400;
+    }
+  }
+
+  .actions {
+    display: flex;
+    gap: 32px;
+  }
+}

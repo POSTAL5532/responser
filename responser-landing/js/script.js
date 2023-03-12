@@ -1,1 +1,5 @@
-console.log("Landing loaded!");
+$(function () {
+    $(".instruction-header").click(function () {
+        $(this).closest('.instruction-item').toggleClass("active")
+    });
+});

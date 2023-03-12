@@ -1,0 +1,68 @@
+@import "mixins.less";
+@import "colors.less";
+
+.link, .link-button {
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+
+  .icon {
+    margin-left: 8px;
+  }
+}
+
+.link {
+  .fontInterMedium();
+  font-size: 18px;
+  color: @primary-color-main;
+
+  .icon {
+    background-color: @primary-color-main;
+  }
+
+  &:hover {
+    color: @primary-color-darker;
+
+    .icon {
+      background-color: @primary-color-darker;
+    }
+  }
+}
+
+.button, .link-button {
+  height: 58px;
+  padding: 20px 22px;
+  border-radius: 8px;
+  background-color: @primary-color-main;
+  color: @system-color-light-100;
+  .fontInterMedium();
+  font-size: 16px;
+  border: solid 1px @primary-color-main;
+
+  .icon {
+    background-color: @system-color-light-100;
+  }
+
+  &.outline {
+    background-color: transparent;
+    color: @primary-color-main;
+
+    .icon {
+      background-color: @primary-color-main;
+    }
+
+    &:hover {
+      background-color: transparent;
+      color: @primary-color-darker;
+
+      .icon {
+        background-color: @primary-color-darker;
+      }
+    }
+  }
+
+  &:hover {
+    background-color: @primary-color-darker;
+    border-color: @primary-color-darker;
+  }
+}

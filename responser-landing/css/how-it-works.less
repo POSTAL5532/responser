@@ -1,0 +1,113 @@
+@import "mixins.less";
+@import "colors.less";
+
+.how-it-works {
+  position: relative;
+  padding: 0 96px 112px;
+
+  .reviewler {
+    position: absolute;
+    z-index: -1;
+    right: 96px;
+    top: -390px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    padding: 58px 86px;
+    background: @primary-color-lighter;
+    background: linear-gradient(to right, #8DD1FE, #205BB5);
+    border-radius: 28px;
+
+    .card-header {
+      width: 100%;
+      margin-bottom: 40px;
+
+      h2 {
+        .fontInterMedium();
+        font-size: 48px;
+        font-weight: normal;
+        margin: 0;
+        text-align: center;
+        color: @system-color-light-100;
+      }
+    }
+
+    .card-body {
+      display: flex;
+
+      .instructions {
+        width: 516px;
+
+        .instruction-item {
+          position: relative;
+          height: 40px;
+          padding-right: 16px;
+          padding-left: 60px;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          border-radius: 18px;
+
+          .icon {
+            position: absolute;
+            top: 50%;
+            left: 22px;
+            transform: translate(-50%, -50%);
+            background-color: @system-color-dark-400;
+          }
+
+          .instruction-header, .instruction-description {
+            margin: 0;
+            .fontInterMedium();
+            font-weight: normal;
+            color: @system-color-dark-400;
+          }
+
+          .instruction-header {
+            font-size: 32px;
+            cursor: pointer;
+
+            &:hover {
+              color: @system-color-light-100;
+            }
+          }
+
+          .instruction-description {
+            font-size: 18px;
+          }
+
+          &:hover, &.active {
+            .icon {
+              background-color: @system-color-light-100;
+            }
+
+            .instruction-header {
+              color: @system-color-light-100;
+            }
+
+            .instruction-description {
+              color: @system-color-light-100;
+            }
+          }
+
+          &.active {
+            height: auto;
+            border: solid 1px @system-color-light-100;
+            padding-top: 16px;
+            padding-bottom: 16px;
+
+            .icon {
+              background-color: @system-color-light-100;
+              transform: rotate(90deg);
+            }
+          }
+        }
+      }
+
+      .laptop {
+
+      }
+    }
+  }
+}
