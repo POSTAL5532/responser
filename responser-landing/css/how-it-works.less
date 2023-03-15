@@ -42,19 +42,17 @@
 
         .instruction-item {
           position: relative;
-          height: 40px;
-          padding-right: 16px;
-          padding-left: 60px;
-          overflow: hidden;
-          text-overflow: ellipsis;
+          padding: 14px 16px 14px 42px;
           border-radius: 18px;
 
           .icon {
             position: absolute;
-            top: 50%;
-            left: 22px;
-            transform: translate(-50%, -50%);
+            top: 16px;
+            left: 10px;
+            padding: 14px;
+            transform-origin: center;
             background-color: @system-color-dark-400;
+            cursor: pointer;
           }
 
           .instruction-header, .instruction-description {
@@ -65,8 +63,9 @@
           }
 
           .instruction-header {
-            font-size: 32px;
+            font-size: 30px;
             cursor: pointer;
+            line-height: 32px;
 
             &:hover {
               color: @system-color-light-100;
@@ -75,6 +74,7 @@
 
           .instruction-description {
             font-size: 18px;
+            display: none;
           }
 
           &:hover, &.active {
@@ -82,24 +82,31 @@
               background-color: @system-color-light-100;
             }
 
-            .instruction-header {
-              color: @system-color-light-100;
-            }
-
-            .instruction-description {
+            .instruction-header, .instruction-description {
               color: @system-color-light-100;
             }
           }
 
           &.active {
             height: auto;
-            border: solid 1px @system-color-light-100;
-            padding-top: 16px;
-            padding-bottom: 16px;
+            //border: solid 1px @system-color-light-100;
+            box-shadow: 0 0 0 1px @system-color-light-100;
+
+            &:not(:last-child) {
+              margin-bottom: 14px;
+            }
 
             .icon {
               background-color: @system-color-light-100;
               transform: rotate(90deg);
+            }
+
+            .instruction-header {
+              margin-bottom: 8px;
+            }
+
+            .instruction-description {
+              display: block;
             }
           }
         }

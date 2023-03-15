@@ -1,3 +1,5 @@
+nodemon --exec npm run build:local --ext "*"
+
 Test users:
 
 login: `testUser`\
