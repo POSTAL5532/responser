@@ -8,13 +8,36 @@
   gap: 70px;
   align-items: center;
   height: 88px;
-  border-bottom: solid 1px @primary-color-main;
+  .stackShadow3();
 
   .logo {
-    margin: 0;
-    font-size: 28px;
-    .fontInterBold();
-    color: @system-color-dark-400;
+    position: relative;
+    width: 172px;
+    height: 42px;
+
+    .logo-name {
+      position: absolute;
+      margin: 0;
+      font-size: 28px;
+      .fontInterExtraBold();
+      color: @system-color-dark-400;
+    }
+
+    .logo-slogan {
+      position: absolute;
+      margin: 0;
+      font-size: 8px;
+      top: 30px;
+      left: 36px;
+      .fontInterExtraBold();
+      color: @system-color-dark-400;
+    }
+
+    .logo-icon {
+      width: 42px;
+      position: absolute;
+      left: 148px;
+    }
   }
 
   .navigation {

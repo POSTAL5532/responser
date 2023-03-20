@@ -3,7 +3,7 @@
 
 .how-it-works {
   position: relative;
-  padding: 0 96px 112px;
+  padding: 0 0 112px;
 
   .reviewler {
     position: absolute;
@@ -15,10 +15,9 @@
   .card {
     display: flex;
     flex-direction: column;
-    padding: 58px 86px;
-    background: @primary-color-lighter;
-    background: linear-gradient(to right, #8DD1FE, #205BB5);
-    border-radius: 28px;
+    padding: 46px 180px;
+    background: linear-gradient(to right, @primary-color-lighter, @primary-color-darker);
+    .stackShadow3();
 
     .card-header {
       width: 100%;
@@ -36,9 +35,15 @@
 
     .card-body {
       display: flex;
+      gap: 10px;
+      align-items: center;
 
       .instructions {
-        width: 516px;
+        display: flex;
+        flex-direction: column;
+        max-width: 440px;
+        flex-grow: 1;
+        gap: 14px;
 
         .instruction-item {
           position: relative;
@@ -63,7 +68,7 @@
           }
 
           .instruction-header {
-            font-size: 30px;
+            font-size: 22px;
             cursor: pointer;
             line-height: 32px;
 
@@ -73,7 +78,7 @@
           }
 
           .instruction-description {
-            font-size: 18px;
+            font-size: 16px;
             display: none;
           }
 
@@ -89,12 +94,7 @@
 
           &.active {
             height: auto;
-            //border: solid 1px @system-color-light-100;
             box-shadow: 0 0 0 1px @system-color-light-100;
-
-            &:not(:last-child) {
-              margin-bottom: 14px;
-            }
 
             .icon {
               background-color: @system-color-light-100;
@@ -112,8 +112,20 @@
         }
       }
 
-      .laptop {
+      .instruction-image {
+        display: flex;
+        flex-grow: 2;
+        align-items: center;
+        justify-content: center;
 
+        .how-it-works-img {
+          display: none;
+          height: 410px;
+
+          &.active {
+            display: block;
+          }
+        }
       }
     }
   }

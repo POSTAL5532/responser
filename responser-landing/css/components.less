@@ -14,17 +14,17 @@
 .link {
   .fontInterMedium();
   font-size: 18px;
-  color: @primary-color-main;
+  color: @primary-color-lighter;
 
   .icon {
-    background-color: @primary-color-main;
+    background-color: @primary-color-lighter;
   }
 
   &:hover {
-    color: @primary-color-darker;
+    color: @primary-color-main;
 
     .icon {
-      background-color: @primary-color-darker;
+      background-color: @primary-color-main;
     }
   }
 }
@@ -33,11 +33,11 @@
   height: 58px;
   padding: 20px 22px;
   border-radius: 8px;
-  background-color: @primary-color-main;
+  background-color: @primary-color-lighter;
   color: @system-color-light-100;
   .fontInterMedium();
   font-size: 16px;
-  border: solid 1px @primary-color-main;
+  border: solid 1px @primary-color-lighter;
 
   .icon {
     background-color: @system-color-light-100;
@@ -45,24 +45,24 @@
 
   &.outline {
     background-color: transparent;
-    color: @primary-color-main;
+    color: @primary-color-lighter;
 
     .icon {
-      background-color: @primary-color-main;
+      background-color: @primary-color-lighter;
     }
 
     &:hover {
       background-color: transparent;
-      color: @primary-color-darker;
+      color: @primary-color-main;
 
       .icon {
-        background-color: @primary-color-darker;
+        background-color: @primary-color-main;
       }
     }
   }
 
   &:hover {
-    background-color: @primary-color-darker;
-    border-color: @primary-color-darker;
+    background-color: @primary-color-main;
+    border-color: @primary-color-main;
   }
 }

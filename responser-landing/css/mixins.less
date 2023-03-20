@@ -1,3 +1,4 @@
+// Fonts mixins
 .fontInterThin() {
   font-family: "Inter-Thin";
 }
@@ -35,6 +36,7 @@
 }
 
 
+// Box shadow mixins
 .stackShadow3() {
   box-shadow: 0 0 2px rgba(40, 41, 61, 0.04), 0 4px 8px rgba(96, 97, 112, 0.16);
 }
@@ -52,3 +54,36 @@
   -webkit-mask: url(@svgPath) center/@width @height no-repeat;
   mask: url(@svgPath) center/@width @height no-repeat;
 }
+
+
+// Adaptation mixins
+.adaptationMobile(@rules) {
+  @media screen and (min-width: 1px) and (max-width: 1023px) {
+    @rules();
+  }
+}
+
+.adaptationTablet(@rules) {
+  @media screen and (min-width: 1024px) and (max-width: 1439px) {
+    @rules();
+  }
+}
+
+.adaptationSpecIOS(@rules) {
+  @media screen and (min-width: 1440px) and (max-width: 1919px) {
+    @rules();
+  }
+}
+
+.adaptationDesktop(@rules) {
+  @media screen and (min-width: 1920px) {
+    @rules();
+  }
+}
+
+.doubleDPI(@rules) {
+  @media only screen and (-webkit-min-device-pixel-ratio: 2) {
+    @rules();
+  }
+}
+
