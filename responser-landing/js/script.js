@@ -13,3 +13,16 @@ $(function () {
     $(".instruction-header").click(toggleInstructionItem);
     $(".instruction-item .arrow-icon").click(toggleInstructionItem);
 });
+
+var slider = tns({
+    loop: false,
+    container: '.feedbacks-gallery',
+    startIndex: 1,
+    items: 2,
+    autoplay: false,
+    nav: false,
+    controlsContainer: ".feedbacks-gallery-controls",
+    swipeAngle: false,
+    center: true,
+    mouseDrag: true,
+});

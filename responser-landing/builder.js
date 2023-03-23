@@ -18,9 +18,16 @@ const resolvePath = (...paths) => {
     return path.resolve(__dirname, ...paths);
 }
 
-const copyFileToDirectory = (filePath, dirPath) => {
+// Filetype format is 'type', without dot.
+const copyFileToDirectory = (filePath, dirPath, fileType) => {
     const fileNameParts = filePath.split(path.sep);
     const fileName = fileNameParts[fileNameParts.length - 1];
+
+    if (!!fileType && !fileName.endsWith(`.${fileType}`)) {
+        console.info(`Skip file ${fileName} - filetype is not matching with '${fileType}'.`);
+        return;
+    }
+
     console.info("Copy file\nfrom:", filePath, "\nto:", resolvePath(dirPath, fileName), "\n");
     fileSystem.copyFileSync(filePath, resolvePath(dirPath, fileName));
 }
@@ -31,8 +38,8 @@ const readFilesInDirectoryAndProcess = (directory, processor) => {
     });
 }
 
-const copyFilesFromDirectoryToDirectory = (directory, targetDirectory) => {
-    readFilesInDirectoryAndProcess(directory, file => copyFileToDirectory(file, targetDirectory));
+const copyFilesFromDirectoryToDirectory = (directory, targetDirectory, fileType) => {
+    readFilesInDirectoryAndProcess(directory, file => copyFileToDirectory(file, targetDirectory, fileType));
 }
 
 const prepareBuildDir = () => {
@@ -57,10 +64,8 @@ const htmlProcessor = () => {
     );
 }
 
-const styleProcessor = async () => {
-    const {stdout, stderr} = await exec(
-        `lessc ${resolvePath(CSS_DIR, "styles.less")} ${resolvePath(BUILD_CSS_DIR, "styles.css")}`
-    );
+const lessProcessor = async () => {
+    await exec(`lessc ${resolvePath(CSS_DIR, "styles.less")} ${resolvePath(BUILD_CSS_DIR, "styles.css")}`);
 }
 
 const fontsProcessor = () => {
@@ -81,19 +86,25 @@ const jsProcessor = () => {
     copyFilesFromDirectoryToDirectory(resolvePath(JS_DIR), resolvePath(BUILD_JS_DIR));
 }
 
+const cssProcessor = () => {
+    copyFilesFromDirectoryToDirectory(resolvePath(CSS_DIR), resolvePath(BUILD_CSS_DIR), "css");
+}
+
 const build = () => {
     console.info("\n=========== Prepare build directory ===========");
     prepareBuildDir();
     console.info("\n=========== Process index.html file ===========");
     htmlProcessor();
     console.info("\n=========== Process css files ===========");
-    styleProcessor();
+    lessProcessor();
     console.info("\n=========== Process fonts files ===========");
     fontsProcessor();
     console.info("\n=========== Process img files ===========");
     imgProcessor();
     console.info("\n=========== Process js files ===========");
     jsProcessor();
+    console.info("\n=========== Process separated css files ===========");
+    cssProcessor();
 }
 
 build();
