@@ -2,10 +2,19 @@
 @import "colors.less";
 
 .faq {
+  padding: 0 260px;
+  position: relative;
+
+  .faq-img {
+    position: absolute;
+    z-index: -1;
+    top: -26px;
+  }
+
   .faq-header-container {
-    padding: 0 260px;
     display: flex;
     justify-content: end;
+    margin-bottom: 74px;
 
     .faq-header {
       .header-text, .header-description {
@@ -25,9 +34,84 @@
         font-size: 18px;
         margin-bottom: 32px;
       }
+    }
+  }
 
-      .download-extension {
+  .card {
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(to right, @primary-color-lighter, @primary-color-darker);
+    border-radius: 30px;
+    .stackShadow3();
+    padding: 46px 0;
 
+    .card-header {
+      width: 100%;
+      margin-bottom: 40px;
+
+      h2 {
+        .fontInterMedium();
+        font-size: 48px;
+        font-weight: normal;
+        margin: 0;
+        text-align: center;
+        color: @system-color-light-100;
+      }
+    }
+
+    .card-body {
+      .question-item {
+        position: relative;
+        padding: 30px 38px;
+
+        &:not(:last-child) {
+          border-bottom: solid 1px #B2E4FD;
+        }
+
+        .question-header, .question-answer {
+          margin: 0;
+          .fontInterMedium();
+          font-weight: normal;
+          color: @system-color-light-100;
+        }
+
+        .question-header {
+          font-size: 22px;
+          cursor: pointer;
+          line-height: 32px;
+        }
+
+        .question-answer {
+          font-size: 16px;
+          display: none;
+        }
+
+        .icon {
+          transform: rotate(180deg);
+          position: absolute;
+          top: 34px;
+          right: 30px;
+          padding: 14px;
+          transform-origin: center;
+          background-color: @system-color-light-100;
+          cursor: pointer;
+        }
+
+        &.active {
+          background-color: @primary-color-lighter;
+
+          .icon {
+            transform: rotate(90deg);
+          }
+
+          .question-header {
+            margin-bottom: 8px;
+          }
+
+          .question-answer {
+            display: block;
+          }
+        }
       }
     }
   }
