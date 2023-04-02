@@ -1,0 +1,85 @@
+@import "mixins.less";
+@import "colors.less";
+
+.coming-soon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .coming-soon-header {
+    color: @primary-color-main;
+    .fontInterMedium();
+    font-size: 48px;
+    font-weight: normal;
+    margin: 0;
+    text-align: center;
+    margin-bottom: 54px;
+  }
+
+  .coming-soon-items {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-between;
+    justify-content: center;
+    gap: 26px;
+
+    .coming-soon-item {
+      position: relative;
+      display: flex;
+      border: solid 1px @primary-color-darker;
+      border-radius: 18px;
+      padding: 32px 40px;
+      width: 540px;
+
+      &:last-child {
+        flex-direction: column;
+        background: linear-gradient(to right, @primary-color-lighter, @primary-color-darker);
+
+        .coming-soon-item-header, .coming-soon-item-text {
+          color: @system-color-light-100;
+        }
+      }
+
+      .coming-soon-item-info {
+        width: 200px;
+      }
+
+      .coming-soon-item-header, .coming-soon-item-text {
+        color: @primary-color-main;
+        font-weight: normal;
+      }
+
+      .coming-soon-item-header {
+        .fontInterMedium();
+        font-size: 22px;
+      }
+
+      .coming-soon-item-text {
+        .fontInterRegular();
+        font-size: 18px;
+      }
+
+      .feature-img {
+        position: absolute;
+
+        &.catalog-feature {
+          top: 38px;
+          right: 26px;
+          width: 241px;
+        }
+
+        &.favourite-websites {
+          top: 28px;
+          right: 32px;
+          width: 224px;
+        }
+
+        &.product-search {
+          top: 28px;
+          right: 42px;
+          width: 168px;
+        }
+      }
+    }
+  }
+}
