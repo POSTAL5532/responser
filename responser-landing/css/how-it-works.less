@@ -3,13 +3,47 @@
 
 .how-it-works {
   position: relative;
-  padding: 0 96px 136px;
+
+  .adaptationDesktop({
+    padding: 0 200px 136px;
+  });
+
+  .adaptationSmallDesktop({
+    padding: 0 96px 136px;
+  });
+
+  .adaptationTablet({
+    padding: 0 0 68px;
+  });
+
+  .adaptationMobile({
+    padding: 0 0 68px;
+  });
 
   .reviewler {
     position: absolute;
     z-index: -1;
-    right: 96px;
     top: -390px;
+
+    .adaptationDesktop({
+      right: 200px;
+    });
+
+    .adaptationSmallDesktop({
+      right: 96px;
+    });
+
+    .adaptationTablet({
+      top: -444px;
+      width: 469px;
+      right: 28px;
+    });
+
+    .adaptationMobile({
+      top: -444px;
+      width: 469px;
+      right: 28px;
+    });
   }
 
   .card {
@@ -19,6 +53,16 @@
     background: linear-gradient(102.22deg, #8DD1FE 0%, #205BB5 103.82%);
     border-radius: 30px;
     .stackShadow3();
+
+    .adaptationTablet({
+      padding: 46px 54px;
+      border-radius: 0;
+    });
+
+    .adaptationMobile({
+      padding: 46px 54px;
+      border-radius: 0;
+    });
 
     .card-header {
       width: 100%;
@@ -45,6 +89,14 @@
         max-width: 440px;
         flex-grow: 1;
         gap: 14px;
+
+        .adaptationTablet({
+          max-width: 340px;
+        });
+
+        .adaptationMobile({
+          max-width: 280px;
+        });
 
         .instruction-item {
           position: relative;

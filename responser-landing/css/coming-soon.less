@@ -22,7 +22,26 @@
     flex-wrap: wrap;
     align-content: space-between;
     justify-content: center;
-    gap: 26px;
+
+    .adaptationDesktop({
+      padding: 0 130px;
+      gap: 86px;
+    });
+
+    .adaptationSmallDesktop({
+      padding: 0 130px;
+      gap: 44px;
+    });
+
+    .adaptationTablet({
+      padding: 0 40px;
+      gap: 20px;
+    });
+
+    .adaptationMobile({
+      padding: 0 32px;
+      gap: 20px;
+    });
 
     .coming-soon-item {
       position: relative;
@@ -31,6 +50,16 @@
       border-radius: 18px;
       padding: 32px 40px;
       width: 540px;
+
+      .adaptationTablet({
+        padding: 18px 20px;
+        width: 456px;
+      });
+
+      .adaptationMobile({
+        padding: 18px 20px;
+        width: 436px;
+      });
 
       &:last-child {
         flex-direction: column;
@@ -67,18 +96,49 @@
           top: 38px;
           right: 26px;
           width: 241px;
+
+          .adaptationTablet({
+            top: 26px;
+            width: 218px;
+          });
+
+          .adaptationMobile({
+            top: 38px;
+            right: 8px;
+            width: 204px;
+          });
         }
 
         &.favourite-websites {
           top: 28px;
           right: 32px;
           width: 224px;
+
+          .adaptationTablet({
+            top: 22px;
+            right: 26px;
+            width: 198px;
+          });
+
+          .adaptationMobile({
+            top: 22px;
+            right: 26px;
+            width: 198px;
+          });
         }
 
         &.product-search {
           top: 34px;
           right: 42px;
           width: 200px;
+
+          .adaptationTablet({
+            width: 173px;
+          });
+
+          .adaptationMobile({
+            width: 173px;
+          });
         }
       }
 

@@ -2,11 +2,33 @@
 @import "colors.less";
 
 .main-description {
-  padding: 96px 112px;
+  .adaptationDesktop({
+    padding: 96px 200px;
+  });
+
+  .adaptationSmallDesktop({
+    padding: 96px 112px;
+  });
+
+  .adaptationTablet({
+    padding: 76px 38px;
+  });
+
+  .adaptationMobile({
+    padding: 52px 38px;
+  });
 
   .slogan-block {
     max-width: 840px;
     padding-bottom: 36px;
+
+    .adaptationTablet({
+      max-width: 630px;
+    });
+
+    .adaptationMobile({
+      max-width: 500px;
+    });
 
     .slogan {
       margin: 0;
