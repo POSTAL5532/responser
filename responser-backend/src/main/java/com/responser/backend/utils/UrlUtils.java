@@ -14,6 +14,8 @@ import java.net.URL;
 @Slf4j
 public class UrlUtils {
 
+    public static final String SSL_FLAG = "https";
+
     public static URL convertToURL(String rawUrl) {
         try {
             return new URL(rawUrl);
@@ -31,7 +33,7 @@ public class UrlUtils {
      */
     public static String prepareUrl(String url) {
         String formattedUrl = StringUtils.trim(url);
-        formattedUrl = StringUtils.removeEnd(formattedUrl, "/");
+        formattedUrl = StringUtils.removeEnd(formattedUrl, "/").split("#")[0];
         return formattedUrl;
     }
 
@@ -42,6 +44,6 @@ public class UrlUtils {
      * @return boolean flag
      */
     public static boolean haveSsl(URL url) {
-        return url.getProtocol().equals("https");
+        return url.getProtocol().equals(SSL_FLAG);
     }
 }

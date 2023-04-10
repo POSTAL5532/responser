@@ -25,13 +25,13 @@ VALUES ('0d7bc62f-7381-4a7a-969c-12c510ac887e', 'testUser', 'testUser@email.em',
         '2021-10-23 22:13:37', '2021-10-23 22:13:37');
 
 INSERT INTO domains (id, domain, has_ssl, name, description, creation_date, update_date)
-VALUES ('10b7a065-67e6-4a4d-9e43-23fe464fc017', 'gidonline.io', true, 'gidonline', 'Some description',
+VALUES ('10b7a065-67e6-4a4d-9e43-23fe464fc017', 'www.google.com', true, 'google', 'Some description',
         '2022-10-25 22:13:37', NULL);
 
 INSERT INTO pages (id, domain_id, url, creation_date, update_date)
 VALUES ('10123065-67e6-4a4d-9e43-23fe464fc017',
         '10b7a065-67e6-4a4d-9e43-23fe464fc017',
-        'https://gidonline.io/film/robot-po-imeni-chappi',
+        'https://www.google.com',
         '2022-10-25 22:13:37',
         NULL),
        ('10321065-67e6-4a4d-9e43-23fe464fc018',
