@@ -1,6 +1,11 @@
 const fileSystem = require("fs");
 const path = require("path");
+const {initializeVariables} = require("./env.js");
 const {exec} = require("child_process");
+
+// TODO: refactor this bullshit
+
+initializeVariables();
 
 const BUILD_DIR = "build";
 
@@ -14,8 +19,26 @@ const BUILD_JS_DIR = path.resolve(BUILD_DIR, JS_DIR);
 const BUILD_IMG_DIR = path.resolve(BUILD_DIR, IMG_DIR);
 const BUILD_FONTS_DIR = path.resolve(BUILD_DIR, FONTS_DIR);
 
-const resolvePath = (...paths) => {
+const resolveLocalModulePath = (...paths) => {
     return path.resolve(__dirname, ...paths);
+}
+
+/**
+ * Populate the env properties in input.
+ *
+ * @param input input content {@link Buffer} (required)
+ * @param absoluteFilename absolute filename (optional)
+ * @returns {string} transformed content string
+ */
+const populateEnvProperties = (input, absoluteFilename = null) => {
+    let fileContent = input.toString();
+    const set = new Set([...fileContent.matchAll(/(?<={{)[A-Z\d_]+(?=}})/g)]);
+
+    for (const property of set.keys()) {
+        fileContent = fileContent.replaceAll(`{{${property}}}`, process.env[property]);
+    }
+
+    return fileContent;
 }
 
 // Filetype format is 'type', without dot.
@@ -28,13 +51,13 @@ const copyFileToDirectory = (filePath, dirPath, fileType) => {
         return;
     }
 
-    console.info("Copy file\nfrom:", filePath, "\nto:", resolvePath(dirPath, fileName), "\n");
-    fileSystem.copyFileSync(filePath, resolvePath(dirPath, fileName));
+    console.info("Copy file\nfrom:", filePath, "\nto:", resolveLocalModulePath(dirPath, fileName), "\n");
+    fileSystem.copyFileSync(filePath, resolveLocalModulePath(dirPath, fileName));
 }
 
 const readFilesInDirectoryAndProcess = (directory, processor) => {
     fileSystem.readdirSync(directory).forEach(file => {
-        processor(resolvePath(directory, file), file);
+        processor(resolveLocalModulePath(directory, file), file);
     });
 }
 
@@ -43,51 +66,71 @@ const copyFilesFromDirectoryToDirectory = (directory, targetDirectory, fileType)
 }
 
 const prepareBuildDir = () => {
-    if (fileSystem.existsSync(resolvePath(BUILD_DIR))) {
+    if (fileSystem.existsSync(resolveLocalModulePath(BUILD_DIR))) {
         console.info("Remove existing build directory.");
-        fileSystem.rmSync(resolvePath(BUILD_DIR), {recursive: true, force: true});
+        fileSystem.rmSync(resolveLocalModulePath(BUILD_DIR), {recursive: true, force: true});
     }
 
     console.info("Create project directories.");
 
-    fileSystem.mkdirSync(resolvePath(BUILD_DIR));
-    fileSystem.mkdirSync(resolvePath(BUILD_CSS_DIR));
-    fileSystem.mkdirSync(resolvePath(BUILD_JS_DIR));
-    fileSystem.mkdirSync(resolvePath(BUILD_IMG_DIR));
-    fileSystem.mkdirSync(resolvePath(BUILD_FONTS_DIR));
+    fileSystem.mkdirSync(resolveLocalModulePath(BUILD_DIR));
+    fileSystem.mkdirSync(resolveLocalModulePath(BUILD_CSS_DIR));
+    fileSystem.mkdirSync(resolveLocalModulePath(BUILD_JS_DIR));
+    fileSystem.mkdirSync(resolveLocalModulePath(BUILD_IMG_DIR));
+    fileSystem.mkdirSync(resolveLocalModulePath(BUILD_FONTS_DIR));
 }
 
 const htmlProcessor = () => {
-    fileSystem.copyFileSync(
+    const processor = (file) => {
+        let result;
+
+        try {
+            const data = fileSystem.readFileSync(resolveLocalModulePath("index.html"), "utf8");
+            result = populateEnvProperties(data);
+            console.log(file, data);
+        } catch (err) {
+            console.error("ERROR", err);
+        }
+
+        try {
+            fileSystem.writeFileSync(resolveLocalModulePath(BUILD_DIR, "index.html"), result);
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+    readFilesInDirectoryAndProcess("./", processor);
+
+    /*fileSystem.copyFileSync(
         resolvePath("index.html"),
         resolvePath(BUILD_DIR, "index.html")
-    );
+    );*/
 }
 
 const lessProcessor = async () => {
-    await exec(`lessc ${resolvePath(CSS_DIR, "styles.less")} ${resolvePath(BUILD_CSS_DIR, "styles.css")}`);
+    await exec(`lessc ${resolveLocalModulePath(CSS_DIR, "styles.less")} ${resolveLocalModulePath(BUILD_CSS_DIR, "styles.css")}`);
 }
 
 const fontsProcessor = () => {
     copyFilesFromDirectoryToDirectory(
-        resolvePath(FONTS_DIR),
-        resolvePath(BUILD_FONTS_DIR)
+        resolveLocalModulePath(FONTS_DIR),
+        resolveLocalModulePath(BUILD_FONTS_DIR)
     );
 }
 
 const imgProcessor = () => {
     copyFilesFromDirectoryToDirectory(
-        resolvePath(IMG_DIR),
-        resolvePath(BUILD_IMG_DIR)
+        resolveLocalModulePath(IMG_DIR),
+        resolveLocalModulePath(BUILD_IMG_DIR)
     );
 }
 
 const jsProcessor = () => {
-    copyFilesFromDirectoryToDirectory(resolvePath(JS_DIR), resolvePath(BUILD_JS_DIR));
+    copyFilesFromDirectoryToDirectory(resolveLocalModulePath(JS_DIR), resolveLocalModulePath(BUILD_JS_DIR));
 }
 
 const cssProcessor = () => {
-    copyFilesFromDirectoryToDirectory(resolvePath(CSS_DIR), resolvePath(BUILD_CSS_DIR), "css");
+    copyFilesFromDirectoryToDirectory(resolveLocalModulePath(CSS_DIR), resolveLocalModulePath(BUILD_CSS_DIR), "css");
 }
 
 const build = () => {
@@ -108,3 +151,5 @@ const build = () => {
 }
 
 build();
+
+console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", process.env.QWERTY);
