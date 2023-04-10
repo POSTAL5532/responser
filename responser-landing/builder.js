@@ -35,7 +35,17 @@ const populateEnvProperties = (input, absoluteFilename = null) => {
     const set = new Set([...fileContent.matchAll(/(?<={{)[A-Z\d_]+(?=}})/g)]);
 
     for (const property of set.keys()) {
-        fileContent = fileContent.replaceAll(`{{${property}}}`, process.env[property]);
+        let propertyValue = process.env[property];
+
+        if (property.toString() === "AUTH_LOGIN_PAGE_URL") {
+            const url = new URL(propertyValue);
+            url.searchParams.set("response_type", "code");
+            url.searchParams.set("client_id", process.env["CLIENT_ID"]);
+            url.searchParams.set("redirect_uri", process.env["AUTH_REDIRECT_URI"]);
+            propertyValue = url.toString();
+        }
+
+        fileContent = fileContent.replaceAll(`{{${property}}}`, propertyValue);
     }
 
     return fileContent;
@@ -87,7 +97,6 @@ const htmlProcessor = () => {
         try {
             const data = fileSystem.readFileSync(resolveLocalModulePath("index.html"), "utf8");
             result = populateEnvProperties(data);
-            console.log(file, data);
         } catch (err) {
             console.error("ERROR", err);
         }
@@ -100,11 +109,6 @@ const htmlProcessor = () => {
     }
 
     readFilesInDirectoryAndProcess("./", processor);
-
-    /*fileSystem.copyFileSync(
-        resolvePath("index.html"),
-        resolvePath(BUILD_DIR, "index.html")
-    );*/
 }
 
 const lessProcessor = async () => {
@@ -151,5 +155,3 @@ const build = () => {
 }
 
 build();
-
-console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", process.env.QWERTY);

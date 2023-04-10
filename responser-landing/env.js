@@ -79,7 +79,7 @@ const readVariables = (path, constants = {}) => {
 };
 
 exports.initializeVariables = (constants = null) => {
-    const variables = readVariables(IS_PRODUCTION_MODE ? "prod.env" : "dev.env", constants);
+    const variables = readVariables(IS_PRODUCTION_MODE ? "env/prod.env" : "env/dev.env", constants);
     const keys = Object.keys(variables);
 
     for (const key of keys) {

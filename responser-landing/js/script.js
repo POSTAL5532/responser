@@ -30,7 +30,7 @@ $(function () {
     $(".question-item .arrow-icon").click(toggleQuestionItem);
 });
 
-var slider = tns({
+let slider = tns({
     loop: false,
     container: '.feedbacks-gallery',
     startIndex: 1,
