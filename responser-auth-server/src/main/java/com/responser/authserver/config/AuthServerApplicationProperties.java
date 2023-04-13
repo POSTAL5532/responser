@@ -28,6 +28,9 @@ public class AuthServerApplicationProperties {
     @NotEmpty
     private String afterLogoutUrl;
 
+    @NotEmpty
+    private String noSessionRedirectUrl;
+
     @Getter
     @Setter
     @ToString
