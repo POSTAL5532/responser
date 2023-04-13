@@ -1,11 +1,11 @@
 import {browserHistory} from "router";
 
-export const navigateTo = (url: string, native: boolean = false) => {
-    if (native) {
-        window.location.href = url;
-    } else {
-        browserHistory.push(url);
-    }
+export const navigateTo = (url: string) => {
+    browserHistory.push(url);
+}
+
+export const nativeNavigateTo = (url: string) => {
+    window.location.href = url;
 }
 
 export const reloadPage = () => {

@@ -1,8 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import {UserAccountDataPayload} from "app/model/UserAccountDataPayload";
 import {UserService} from "app/service/UserService";
-import {WELCOME_PAGE_URL} from "../welcome-page/WelcomePage";
-import {navigateTo} from "../../utils/NavigationUtils";
+import {navigateToWelcomePage} from "../welcome-page/WelcomePage";
 
 /**
  * Sign up page store.
@@ -27,11 +26,11 @@ export class SignUpPageStore {
      */
     signUp = (): Promise<void> => {
         return this.userService.signUp(this.signUpPayload)
-            .then(() => {
-                navigateTo(WELCOME_PAGE_URL)
-            })
-            .catch(error => {
-                this.signUpErrors = error.response.data.errors.map((e: any) => e.defaultMessage)
-            });
+        .then(() => {
+            navigateToWelcomePage();
+        })
+        .catch(error => {
+            this.signUpErrors = error.response.data.errors.map((e: any) => e.defaultMessage)
+        });
     }
 }

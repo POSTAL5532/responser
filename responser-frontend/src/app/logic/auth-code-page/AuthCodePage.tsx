@@ -4,7 +4,10 @@ import AuthorizationService from "../../service/authorization/AuthorizationServi
 import LocalTokenStorageService from "../../service/authorization/LocalTokenStorageService";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {useExtensionService} from "../../service/extension/ExtensionService";
-import {reloadPage} from "../../utils/NavigationUtils";
+import {Spinner} from "../../components/spinner/Spinner";
+import {navigateToWelcomePage} from "../welcome-page/WelcomePage";
+import {navigateToMainPage} from "../main-page/MainPage";
+import "./AuthCodePage.less";
 
 export const AUTH_CODE_PAGE_URL = "/auth-code";
 
@@ -12,24 +15,33 @@ export const AuthCodePage: React.FC = () => {
     const query = useQuery();
     const context = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const extensionService = useExtensionService();
+    const authCode = query.get("code");
+
+    if (!authCode) {
+        navigateToWelcomePage();
+    }
 
     useEffect(() => {
-        AuthorizationService.exchangeAuthCode(query.get("code"))
-            .then(tokenInfo => {
-                LocalTokenStorageService.setToken(tokenInfo);
-                extensionService.setToken(tokenInfo)
-                    .catch(reason => {
-                        console.error(reason);
-                    })
-                    .finally(() => reloadPage())
+        AuthorizationService.exchangeAuthCode(authCode)
+        .then(tokenInfo => {
+            LocalTokenStorageService.setToken(tokenInfo);
+            extensionService.setToken(tokenInfo)
+            .then(() => navigateToMainPage)
+            .catch(reason => {
+                console.error(reason);
+                navigateToWelcomePage()
             })
-            .catch(() => {
-                context.logoutAndClearCurrentUser();
-                reloadPage();
-            })
+        })
+        .catch(() => {
+            context.logoutAndClearCurrentUser();
+            navigateToWelcomePage();
+        })
     }, []);
 
     return (
-        <h1>DONE</h1>
+        <div className="auth-code">
+            <Spinner/>
+            <span>Wait for a moment</span>
+        </div>
     );
 }

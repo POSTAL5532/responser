@@ -3,7 +3,7 @@ import {observer} from "mobx-react";
 import {Button} from "app/components/button/Button";
 import {useExtensionService} from "../../service/extension/ExtensionService";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
-import {navigateTo} from "../../utils/NavigationUtils";
+import {nativeNavigateTo} from "../../utils/NavigationUtils";
 import ApplicationProperties from "../../service/ApplicationProperties";
 import "./AppHeader.less";
 
@@ -18,7 +18,7 @@ const AppHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {
     const onLogOut = () => {
         context.logoutAndClearCurrentUser();
         extensionService.removeToken();
-        navigateTo(ApplicationProperties.authLogoutPageUrl, true);
+        nativeNavigateTo(ApplicationProperties.authLogoutPageUrl);
     }
 
     const onUserInfoClick = () => {
