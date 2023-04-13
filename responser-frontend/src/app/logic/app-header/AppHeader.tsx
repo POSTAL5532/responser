@@ -5,6 +5,7 @@ import {useExtensionService} from "../../service/extension/ExtensionService";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {nativeNavigateTo} from "../../utils/NavigationUtils";
 import ApplicationProperties from "../../service/ApplicationProperties";
+import LocalTokenStorageService from "../../service/authorization/LocalTokenStorageService";
 import "./AppHeader.less";
 
 type PageHeaderProps = {
@@ -16,7 +17,7 @@ const AppHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {
     const extensionService = useExtensionService();
 
     const onLogOut = () => {
-        context.logoutAndClearCurrentUser();
+        LocalTokenStorageService.removeAllTokens()
         extensionService.removeToken().finally(() => {
             nativeNavigateTo(ApplicationProperties.authLogoutPageUrl);
         });

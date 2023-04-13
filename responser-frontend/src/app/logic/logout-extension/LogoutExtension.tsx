@@ -1,21 +1,21 @@
-import React, {useContext} from "react";
+import React from "react";
 import {observer} from "mobx-react";
 import {useExtensionService} from "../../service/extension/ExtensionService";
-import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {nativeNavigateTo} from "../../utils/NavigationUtils";
 import ApplicationProperties from "../../service/ApplicationProperties";
+import LocalTokenStorageService from "../../service/authorization/LocalTokenStorageService";
 
 export const LOGOUT_EXTENSION: string = "/logout-extension";
 
 const LogoutExtension: React.FC = () => {
-    const context = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const extensionService = useExtensionService();
 
-    context.logoutAndClearCurrentUser();
+    LocalTokenStorageService.removeAllTokens();
 
     extensionService.removeToken().finally(() => {
         nativeNavigateTo(ApplicationProperties.authLogoutPageUrl);
     });
+
     return null;
 }
 

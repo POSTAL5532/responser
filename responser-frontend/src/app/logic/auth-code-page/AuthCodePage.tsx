@@ -1,8 +1,7 @@
-import React, {useContext, useEffect} from "react";
+import React, {useEffect} from "react";
 import {useQuery} from "../../../router";
 import AuthorizationService from "../../service/authorization/AuthorizationService";
 import LocalTokenStorageService from "../../service/authorization/LocalTokenStorageService";
-import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {useExtensionService} from "../../service/extension/ExtensionService";
 import {Spinner} from "../../components/spinner/Spinner";
 import {navigateToWelcomePage} from "../welcome-page/WelcomePage";
@@ -13,7 +12,6 @@ export const AUTH_CODE_PAGE_URL = "/auth-code";
 
 export const AuthCodePage: React.FC = () => {
     const query = useQuery();
-    const context = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const extensionService = useExtensionService();
     const authCode = query.get("code");
 
@@ -33,7 +31,7 @@ export const AuthCodePage: React.FC = () => {
             })
         })
         .catch(() => {
-            context.logoutAndClearCurrentUser();
+            LocalTokenStorageService.removeAllTokens();
             navigateToWelcomePage();
         })
     }, []);

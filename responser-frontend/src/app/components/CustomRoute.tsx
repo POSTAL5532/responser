@@ -1,8 +1,10 @@
 import {MAIN_PAGE_URL} from "app/logic/main-page/MainPage";
 import React from "react";
-import {Redirect, Route, RouteProps} from "react-router";
+import {Route, RouteProps} from "react-router";
 import TokenStore from "app/service/authorization/LocalTokenStorageService";
 import {WELCOME_PAGE_URL} from "../logic/welcome-page/WelcomePage";
+import {nativeNavigateTo} from "../utils/NavigationUtils";
+import ApplicationProperties from "../service/ApplicationProperties";
 
 /**
  * Custom route builder. Create a router with condition for render or redirecting.
@@ -17,9 +19,12 @@ const CustomRoute = (canActivate?: () => boolean, redirect?: string) => {
                                return <Component {...props}/>;
                            }
 
-                           return canActivate()
-                               ? <Component {...props}/>
-                               : <Redirect to={{pathname: redirect, state: {from: props.location}}}/>
+                           if (!canActivate()) {
+                               nativeNavigateTo(ApplicationProperties.unauthorizedPageUrl);
+                               return null;
+                           }
+
+                           return <Component {...props}/>
                        }
                    }
             />

@@ -20,6 +20,10 @@ class ApplicationProperties {
         return process.env.AUTH_REDIRECT_URI;
     }
 
+    get unauthorizedPageUrl(): string {
+        return process.env.UNAUTHORIZED_PAGE_URL;
+    }
+
     get clientId(): string {
         return process.env.CLIENT_ID;
     }

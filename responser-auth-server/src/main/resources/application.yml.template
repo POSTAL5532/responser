@@ -33,9 +33,9 @@ spring:
       platform: postgres
 responser:
   auth:
-    registrationPageUrl: http://localhost:3000/sign-up
-    afterLogoutUrl: http://localhost:3000
-    noSessionRedirectUrl: http://localhost:3000
+    registrationPageUrl: http://127.0.0.1:3000/sign-up
+    afterLogoutUrl: http://127.0.0.1:3000
+    noSessionRedirectUrl: http://127.0.0.1:3000
     clientCredentials:
       -
         clientId: responser-web-client
