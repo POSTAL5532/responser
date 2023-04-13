@@ -50,6 +50,6 @@ public class UserController {
     public ResponseEntity<UserInfoPayload> getCurrentUser(Principal principal) {
         log.info("Get current {} user.", principal.getName());
         User user = userService.getUser(principal.getName());
-        return ResponseEntity.ok(userConverter.toUserInfoPayload(user));
+        return ResponseEntity.ok(userConverter.toFullUserInfoPayload(user));
     }
 }

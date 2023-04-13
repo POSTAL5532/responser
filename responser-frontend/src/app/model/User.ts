@@ -13,7 +13,7 @@ export class User {
 
     public static deserialize(data: any): User {
         return Object.assign(new User(), data, {
-            createdTimestamp: moment(data.createdTimestamp),
+            createdTimestamp: data.createdTimestamp ? moment(data.createdTimestamp) : null,
         })
     }
 }

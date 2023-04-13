@@ -17,8 +17,9 @@ const AppHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {
 
     const onLogOut = () => {
         context.logoutAndClearCurrentUser();
-        extensionService.removeToken();
-        nativeNavigateTo(ApplicationProperties.authLogoutPageUrl);
+        extensionService.removeToken().finally(() => {
+            nativeNavigateTo(ApplicationProperties.authLogoutPageUrl);
+        });
     }
 
     const onUserInfoClick = () => {
@@ -33,7 +34,7 @@ const AppHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {
                 <div className="user-block">
                     <div className="user-info" onClick={onUserInfoClick}>
                         <span className="user-full-name">{context.currentUser.fullName}</span>
-                        <span className="user-email">{context.currentUser.email}</span>
+                        <span className="user-email">{context.currentUser.userName}</span>
                     </div>
                     <Button onClick={onLogOut}>Logout</Button>
                 </div>

@@ -36,6 +36,14 @@ public class UserConverter {
     public UserInfoPayload toUserInfoPayload(User user) {
         UserInfoPayload userPayload = new UserInfoPayload();
         userPayload.setId(user.getId());
+        userPayload.setFullName(user.getFullName());
+
+        return userPayload;
+    }
+
+    public UserInfoPayload toFullUserInfoPayload(User user) {
+        UserInfoPayload userPayload = new UserInfoPayload();
+        userPayload.setId(user.getId());
         userPayload.setUserName(user.getUserName());
         userPayload.setEmail(user.getEmail());
         userPayload.setFullName(user.getFullName());

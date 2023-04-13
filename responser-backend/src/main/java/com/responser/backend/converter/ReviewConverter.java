@@ -46,7 +46,7 @@ public class ReviewConverter {
         return toReview(null, reviewInfoDTO, userId);
     }
 
-    public ReviewDTO toResponsePayload(Review review) {
+    public ReviewDTO toReviewPayload(Review review) {
         Collection<ReviewLikeDTO> reviewLikes = Objects.isNull(review.getLikes())
             ? Collections.emptyList()
             : reviewLikeConverter.toReviewLikePayloads(review.getLikes());
@@ -64,12 +64,8 @@ public class ReviewConverter {
             .build();
     }
 
-    public List<ReviewDTO> toReviewPayloadList(List<Review> reviews) {
-        return reviews.stream().map(this::toResponsePayload).collect(Collectors.toList());
-    }
-
     public PageableResponse<ReviewDTO> toPageableReviewPayloadList(Page<Review> reviewsPage) {
-        List<ReviewDTO> reviewList = reviewsPage.get().map(this::toResponsePayload).collect(Collectors.toList());
+        List<ReviewDTO> reviewList = reviewsPage.get().map(this::toReviewPayload).collect(Collectors.toList());
         PageableResponse<ReviewDTO> pageable = new PageableResponse<>(
             reviewsPage.getTotalElements(),
             reviewsPage.getTotalPages(),

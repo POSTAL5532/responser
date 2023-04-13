@@ -86,7 +86,7 @@ public class ReviewsController {
     public ResponseEntity<ReviewDTO> getReview(@Valid @NotBlank @PathVariable String reviewId) {
         log.info("Get review {}.", reviewId);
         Review review = reviewService.getReview(reviewId);
-        return ResponseEntity.ok(reviewConverter.toResponsePayload(review));
+        return ResponseEntity.ok(reviewConverter.toReviewPayload(review));
     }
 
     /**
@@ -100,7 +100,7 @@ public class ReviewsController {
     public ResponseEntity<ReviewDTO> createReview(@Valid @NotNull @RequestBody ReviewInfoDTO reviewInfoDTO, Principal principal) {
         log.info("Create review {}.", reviewInfoDTO);
         Review newReview = reviewConverter.toReview(reviewInfoDTO, principal.getName());
-        ReviewDTO newReviewDTO = reviewConverter.toResponsePayload(reviewService.createReview(newReview));
+        ReviewDTO newReviewDTO = reviewConverter.toReviewPayload(reviewService.createReview(newReview));
 
         return ResponseEntity.ok(newReviewDTO);
     }
@@ -121,7 +121,7 @@ public class ReviewsController {
     ) {
         log.info("Update review {} with data {}.", reviewId, reviewInfoDTO);
         Review review = reviewConverter.toReview(reviewId, reviewInfoDTO, principal.getName());
-        ReviewDTO updatedReviewDTO = reviewConverter.toResponsePayload(reviewService.updateReview(review));
+        ReviewDTO updatedReviewDTO = reviewConverter.toReviewPayload(reviewService.updateReview(review));
 
         return ResponseEntity.ok(updatedReviewDTO);
     }

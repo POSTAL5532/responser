@@ -26,7 +26,7 @@ export const AuthCodePage: React.FC = () => {
         .then(tokenInfo => {
             LocalTokenStorageService.setToken(tokenInfo);
             extensionService.setToken(tokenInfo)
-            .then(() => navigateToMainPage)
+            .then(() => navigateToMainPage())
             .catch(reason => {
                 console.error(reason);
                 navigateToWelcomePage()
