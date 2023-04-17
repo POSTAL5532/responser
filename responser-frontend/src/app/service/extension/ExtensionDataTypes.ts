@@ -1,6 +1,7 @@
 export enum ExtensionMessageType {
     SET_TOKEN = "SET_TOKEN",
     REMOVE_TOKEN = "REMOVE_TOKEN",
+    CHECK_EXTENSION = "CHECK_EXTENSION",
 }
 
 export class ExtensionMessage<T = any> {

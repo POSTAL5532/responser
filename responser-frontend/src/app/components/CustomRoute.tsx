@@ -1,30 +1,42 @@
-import {MAIN_PAGE_URL} from "app/logic/main-page/MainPage";
 import React from "react";
-import {Route, RouteProps} from "react-router";
+import {Redirect, Route, RouteProps} from "react-router";
+import {MAIN_PAGE_URL} from "app/logic/main-page/MainPage";
 import TokenStore from "app/service/authorization/LocalTokenStorageService";
-import {WELCOME_PAGE_URL} from "../logic/welcome-page/WelcomePage";
 import {nativeNavigateTo} from "../utils/NavigationUtils";
 import ApplicationProperties from "../service/ApplicationProperties";
+
+type CustomRouteComponentProps = {
+    redirectLogic?: () => void;
+} & RouteProps;
 
 /**
  * Custom route builder. Create a router with condition for render or redirecting.
  */
-const CustomRoute = (canActivate?: () => boolean, redirect?: string) => {
-    return ({component: Component, ...other}: RouteProps) => {
+const CustomRoute = (canActivate?: () => boolean, redirectPath?: string, isNativeRedirect: boolean = false) => {
+    return ({component: Component, redirectLogic, ...other}: CustomRouteComponentProps) => {
         return (
             <Route {...other}
                    render={
                        (props) => {
-                           if (!canActivate && !redirect) {
+                           if (!canActivate && !redirectPath) {
                                return <Component {...props}/>;
                            }
 
                            if (!canActivate()) {
-                               nativeNavigateTo(ApplicationProperties.unauthorizedPageUrl);
-                               return null;
+                               if (redirectLogic) {
+                                   redirectLogic();
+                                   return null;
+                               }
+
+                               if (isNativeRedirect) {
+                                   nativeNavigateTo(redirectPath);
+                                   return null;
+                               }
+
+                               return <Redirect to={{pathname: redirectPath, state: {from: props.location}}}/>;
                            }
 
-                           return <Component {...props}/>
+                           return <Component {...props}/>;
                        }
                    }
             />
@@ -35,7 +47,11 @@ const CustomRoute = (canActivate?: () => boolean, redirect?: string) => {
 /**
  * Route for authorized scope only.
  */
-export const AuthorizedRoute = CustomRoute(() => TokenStore.isAccessTokenExist, WELCOME_PAGE_URL);
+export const AuthorizedRoute = CustomRoute(
+    () => TokenStore.isAccessTokenExist,
+    ApplicationProperties.unauthorizedPageUrl,
+    true
+);
 
 /**
  * Route for unauthorized scope only.

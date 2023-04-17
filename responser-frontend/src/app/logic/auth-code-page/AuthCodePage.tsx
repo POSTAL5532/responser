@@ -4,8 +4,8 @@ import AuthorizationService from "../../service/authorization/AuthorizationServi
 import LocalTokenStorageService from "../../service/authorization/LocalTokenStorageService";
 import {useExtensionService} from "../../service/extension/ExtensionService";
 import {Spinner} from "../../components/spinner/Spinner";
-import {navigateToWelcomePage} from "../welcome-page/WelcomePage";
 import {navigateToMainPage} from "../main-page/MainPage";
+import {nativeNavigateToUnauthorizedPage} from "../../utils/NavigationUtils";
 import "./AuthCodePage.less";
 
 export const AUTH_CODE_PAGE_URL = "/auth-code";
@@ -16,7 +16,7 @@ export const AuthCodePage: React.FC = () => {
     const authCode = query.get("code");
 
     if (!authCode) {
-        navigateToWelcomePage();
+        nativeNavigateToUnauthorizedPage();
     }
 
     useEffect(() => {
@@ -24,15 +24,11 @@ export const AuthCodePage: React.FC = () => {
         .then(tokenInfo => {
             LocalTokenStorageService.setToken(tokenInfo);
             extensionService.setToken(tokenInfo)
-            .then(() => navigateToMainPage())
-            .catch(reason => {
-                console.error(reason);
-                navigateToWelcomePage()
-            })
+            .finally(navigateToMainPage)
         })
         .catch(() => {
             LocalTokenStorageService.removeAllTokens();
-            navigateToWelcomePage();
+            nativeNavigateToUnauthorizedPage();
         })
     }, []);
 

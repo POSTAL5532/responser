@@ -32,6 +32,10 @@ class ApplicationProperties {
         return process.env.CLIENT_SECRET;
     }
 
+    get downloadExtensionChrome(): string {
+        return process.env.DOWNLOAD_EXTENSION_CHROME;
+    }
+
     get chromeExtensionId(): string {
         return process.env.CHROME_EXTENSION_ID;
     }

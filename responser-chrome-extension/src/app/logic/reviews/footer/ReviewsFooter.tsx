@@ -1,8 +1,8 @@
 import React from "react";
 import {Button, ButtonType} from "../../../components/button/Button";
 import {Icon, IconType} from "../../../components/icon/Icon";
-import "./ReviewsFooter.less";
 import {Spinner} from "../../../components/spinner/Spinner";
+import "./ReviewsFooter.less";
 
 type ReviewsFooterProps = {
     userAuthorized: boolean;

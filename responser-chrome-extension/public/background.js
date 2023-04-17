@@ -16,6 +16,9 @@ chrome.runtime.onMessageExternal.addListener(
         console.debug("Background listener [external]", sender, request);
 
         switch (request.type) {
+            case "CHECK_EXTENSION":
+                sendResponse({success: true, message: "Extension is here"});
+                break;
             case "SET_TOKEN":
                 setTokens(request.data)
                 .then(() => sendResponse({success: true, message: "Tokens successfully stored"}))

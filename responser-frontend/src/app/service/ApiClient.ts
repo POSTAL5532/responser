@@ -3,8 +3,8 @@ import axios, {AxiosRequestConfig} from 'axios';
 import ApplicationPropertiesService from "app/service/ApplicationProperties";
 import LocalTokenStorageService from "app/service/authorization/LocalTokenStorageService";
 import AuthorizationService from "app/service/authorization/AuthorizationService";
-import {navigateToWelcomePage, WELCOME_PAGE_URL} from "../logic/welcome-page/WelcomePage";
 import {ApiError} from "../model/ApiError";
+import {nativeNavigateToUnauthorizedPage} from "../utils/NavigationUtils";
 
 const refreshTokenIfNeeded = (): Promise<TokenInfo> => {
     if (!AuthorizationService.refreshAccessTokenPromise) {
@@ -12,7 +12,7 @@ const refreshTokenIfNeeded = (): Promise<TokenInfo> => {
             .then(LocalTokenStorageService.setToken)
             .catch(() => {
                 LocalTokenStorageService.removeAllTokens();
-                navigateToWelcomePage();
+                nativeNavigateToUnauthorizedPage();
             });
     }
 

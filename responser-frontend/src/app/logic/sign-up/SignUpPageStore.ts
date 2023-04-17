@@ -1,7 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import {UserAccountDataPayload} from "app/model/UserAccountDataPayload";
 import {UserService} from "app/service/UserService";
-import {navigateToWelcomePage} from "../welcome-page/WelcomePage";
+import AuthorizationService from "../../service/authorization/AuthorizationService";
 
 /**
  * Sign up page store.
@@ -26,9 +26,7 @@ export class SignUpPageStore {
      */
     signUp = (): Promise<void> => {
         return this.userService.signUp(this.signUpPayload)
-        .then(() => {
-            navigateToWelcomePage();
-        })
+        .then(AuthorizationService.requestLoginPage)
         .catch(error => {
             this.signUpErrors = error.response.data.errors.map((e: any) => e.defaultMessage)
         });

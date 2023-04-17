@@ -7,8 +7,13 @@ export enum ButtonType {
     SECONDARY = "SECONDARY",
 }
 
+export enum ButtonSize {
+    SMALL = "small"
+}
+
 type ButtonProps = {
     styleType?: ButtonType;
+    size?: ButtonSize;
 } & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
 export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
@@ -17,6 +22,7 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
         disabled,
         children,
         styleType = ButtonType.PRIMARY,
+        size,
         ...otherProps
     } = props;
 
@@ -24,6 +30,7 @@ export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
         "button",
         styleType.toLowerCase(),
         {"disabled": disabled},
+        size,
         className
     );
 

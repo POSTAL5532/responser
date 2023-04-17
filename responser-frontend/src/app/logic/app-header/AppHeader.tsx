@@ -35,7 +35,6 @@ const AppHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {
                 <div className="user-block">
                     <div className="user-info" onClick={onUserInfoClick}>
                         <span className="user-full-name">{context.currentUser.fullName}</span>
-                        <span className="user-email">{context.currentUser.userName}</span>
                     </div>
                     <Button onClick={onLogOut}>Logout</Button>
                 </div>
