@@ -4,7 +4,6 @@
     <title>Login</title>
     <link th:href="@{/css/components-style.css}" rel="stylesheet"/>
     <link th:href="@{/css/sign-in-style.css}" rel="stylesheet"/>
-    <script type="text/javascript" th:src="@{/js/test.js}"></script>
 </head>
 <body>
 
@@ -20,24 +19,27 @@
             <form th:action="@{/login}" method="POST" class="form-sign-in">
                 <div class="field-layout column">
                     <span class="label">Username or email</span>
-                    <input type="text" name="username" placeholder="Username or email" class="field">
+                    <input type="text" name="username" placeholder="Username or email" class="field" id="username">
                 </div>
                 <div class="field-layout column">
                     <span class="label">Password</span>
-                    <input type="password" name="password" placeholder="Password" class="field">
+                    <input type="password" name="password" placeholder="Password" class="field" id="password">
                 </div>
 
-                <button type="Submit" class="button primary" th:text="Login"></button>
+                <button type="Submit" class="button primary" id="submit" th:text="Login"></button>
 
                 <span th:if="${param.error}" class="error">Email or Password is invalid.</span>
 
                 <div>
                     <span class="sign-up-offer">Still don't have an account?</span>
-                    <a th:href="${registrationPageUrl}" class="sign-up-link">Sign up</a>
+                    <a th:href="${registrationPageUrl}" class="sign-up-link" id="sign-up-link">Sign up</a>
                 </div>
             </form>
         </div>
     </div>
 </div>
+
+<script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/js/script.js}"></script>
 </body>
 </html>

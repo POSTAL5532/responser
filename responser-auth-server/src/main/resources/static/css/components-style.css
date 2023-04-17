@@ -120,6 +120,11 @@ body {
 .field, .field:focus, .field:active {
   outline: none;
 }
+
+.field.disabled {
+  background-color: #E3E4EB;
+  pointer-events: none;
+}
 /* ============ FIELD END ============ */
 
 /* ============ BUTTON END ============ */
@@ -141,5 +146,11 @@ body {
 .button.primary {
   color: #FFFFFF;
   background-color: #6690FF;
+}
+
+.button.disabled {
+  background-color: #E3E4EB;
+  color: #28293D;
+  pointer-events: none;
 }
 /* ============ BUTTON ============ */

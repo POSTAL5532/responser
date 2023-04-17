@@ -41,8 +41,8 @@
 }
 
 .sign-up-offer{
-  margin-bottom: 6px;
   font-family: "Inter-Medium";
+  margin-bottom: 6px;
   font-size: 14px;
 }
 
@@ -56,6 +56,11 @@
 
 .sign-up-link:hover {
   color: #3366FF
+}
+
+.sign-up-link.disabled {
+  color: #28293D;
+  pointer-events: none;
 }
 
 .error {
