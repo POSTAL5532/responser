@@ -6,6 +6,7 @@ import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {nativeNavigateTo} from "../../utils/NavigationUtils";
 import ApplicationProperties from "../../service/ApplicationProperties";
 import LocalTokenStorageService from "../../service/authorization/LocalTokenStorageService";
+import {Icon, IconType} from "../../components/icon/Icon";
 import "./AppHeader.less";
 
 type PageHeaderProps = {
@@ -36,7 +37,7 @@ const AppHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {
                     <div className="user-info" onClick={onUserInfoClick}>
                         <span className="user-full-name">{context.currentUser.fullName}</span>
                     </div>
-                    <Button onClick={onLogOut}>Logout</Button>
+                    <Button onClick={onLogOut}>Logout <Icon type={IconType.LOGOUT}/></Button>
                 </div>
             }
         </div>

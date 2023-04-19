@@ -5,6 +5,7 @@ import {Page} from "../../components/page/Page";
 import {useExtensionService} from "../../service/extension/ExtensionService";
 import {Button, ButtonSize} from "../../components/button/Button";
 import applicationProperties from "../../service/ApplicationProperties";
+import {Icon, IconType} from "../../components/icon/Icon";
 import "./MainPage.less";
 
 export const MAIN_PAGE_URL: string = "/main";
@@ -30,7 +31,10 @@ const MainPage: React.FC = () => {
 
     return (
         <Page className="main-page">
+            <Icon type={IconType.CIRCLE_CHECK}/>
+
             {!extensionChecking ? <ExtensionExistCheck exist={extensionExist}/> : null}
+
 
             <p className="success-text">
                 Well done! Now you can start to discover websites rating or leave your feedback by browser extension.
