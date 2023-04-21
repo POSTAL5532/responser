@@ -1,3 +1,28 @@
-group 'org.example'
-version '1.0-SNAPSHOT'
+plugins {
+    id "com.github.node-gradle.node" version "3.5.1"
+}
 
+node {
+    download = true
+    version = "18.12.1"
+    workDir = file("${rootProject.projectDir}/.gradle/nodejs")
+    npmWorkDir = file("${rootProject.projectDir}/.gradle/npm")
+}
+
+task install(type: NpmTask) {
+    // TODO: GRADLE build error workaround. NPM processes log warning-level logs that gradle defines like error-level logs.
+    args = ['install', '--loglevel', 'error']
+}
+
+task clean(type: NpmTask) {
+    println "Clean build directory."
+    args = ['run', 'clean']
+}
+
+task build(type: NpmTask) {
+    def buildMode = System.getProperty("buildMode");
+    println "Build frontend with build mode='" + buildMode + "'"
+
+    dependsOn install
+    args = ['run', "build:${buildMode}"]
+}

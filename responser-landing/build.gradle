@@ -1,19 +1,21 @@
 plugins {
-    id 'java'
+    id "com.github.node-gradle.node" version "3.5.1"
 }
 
-group 'org.example'
-version '1.0-SNAPSHOT'
-
-repositories {
-    mavenCentral()
+node {
+    download = true
+    version = "18.12.1"
+    workDir = file("${rootProject.projectDir}/.gradle/nodejs")
 }
 
-dependencies {
-    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.1'
-    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.1'
+task clean(type: NodeTask) {
+    println "Clean build directory."
+    script = file('cleaner.js')
 }
 
-test {
-    useJUnitPlatform()
+task build(type: NodeTask) {
+    def buildMode = System.getProperty("buildMode");
+    println "Build landing with build mode='" + buildMode + "'."
+    script = file('builder.js')
+    args = [buildMode]
 }
