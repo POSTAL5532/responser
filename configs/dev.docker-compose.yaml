@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  responser-db:
+    container_name: responser-db
+    build: ./database
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./database/volume:/var/lib/postgresql/data
+    deploy:
+      resources:
+        limits:
+          memory: 55M
+  responser-auth:
+    container_name: responser-auth
+    build: ./auth-server
+    ports:
+      - "8081:8081"
+    volumes:
+      - ./auth-server/application:/application
+    deploy:
+      resources:
+        limits:
+          memory: 250M
+  responser-backend:
+    container_name: responser-backend
+    build: ./backend
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./backend/application:/application
+    deploy:
+      resources:
+        limits:
+          memory: 300M

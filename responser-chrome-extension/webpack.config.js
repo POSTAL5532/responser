@@ -5,35 +5,17 @@ const CopyPlugin = require("copy-webpack-plugin");
 const webpack = require("webpack");
 const dotenv = require('dotenv');
 
-const LOCAL_BUILD_MODE = "local";
-const DEV_TEST_BUILD_MODE = "dev-test";
-const PRODUCTION_BUILD_MODE = "production";
-
 let ENV_FILE_PROPERTIES;
-let CURRENT_BUILD_MODE;
+let CONFIGS_PATH;
 
 /**
  * Init ENV_FILE_PROPERTIES
  */
 const initEnvFileProperties = () => {
-    const envDir = "env";
-
-    switch (CURRENT_BUILD_MODE) {
-        case LOCAL_BUILD_MODE:
-            ENV_FILE_PROPERTIES = dotenv.config({path: path.resolve(__dirname, envDir, "local.env")}).parsed;
-            break;
-        case DEV_TEST_BUILD_MODE:
-            ENV_FILE_PROPERTIES = dotenv.config({path: path.resolve(__dirname, envDir, "dev.env")}).parsed;
-            break;
-        case PRODUCTION_BUILD_MODE:
-            ENV_FILE_PROPERTIES = dotenv.config({path: path.resolve(__dirname, envDir, "prod.env")}).parsed;
-            break;
-        default:
-            throw new Error("Bad buildMode:", buildMode);
-    }
+    ENV_FILE_PROPERTIES = dotenv.config({path: path.resolve(`${CONFIGS_PATH}/.env`)}).parsed;
 }
 
-const convertTpProcessEnvProperties = (object) => {
+const convertToProcessEnvProperties = (object) => {
     if (!object) {
         return {};
     }
@@ -42,28 +24,6 @@ const convertTpProcessEnvProperties = (object) => {
         prev[`process.env.${next}`] = JSON.stringify(object[next]);
         return prev;
     }, {});
-}
-
-const generateFileNameFromBuildMode = (fileName) => {
-    const fileParts = fileName.split(".");
-    let resultFileName = fileParts[0];
-    let format = fileParts[1];
-
-    switch (CURRENT_BUILD_MODE) {
-        case LOCAL_BUILD_MODE:
-            resultFileName = resultFileName.concat("-local");
-            break;
-        case DEV_TEST_BUILD_MODE:
-            resultFileName = resultFileName.concat("-dev");
-            break;
-        case PRODUCTION_BUILD_MODE:
-            resultFileName = resultFileName.concat("-prod");
-            break;
-        default:
-            throw new Error("Bad buildMode:", buildMode);
-    }
-
-    return format ? resultFileName.concat(".", format) : resultFileName;
 }
 
 /**
@@ -88,7 +48,7 @@ module.exports = (env, args) => {
     console.log("ENV:", env);
     console.log("ARGS:", args);
 
-    CURRENT_BUILD_MODE = env.buildMode;
+    CONFIGS_PATH = `../configs/responser-chrome-extension/${env.buildMode}`;
     initEnvFileProperties();
 
     return {
@@ -158,12 +118,12 @@ module.exports = (env, args) => {
                 template: "./public/index.html",
                 filename: "./index.html"
             }),
-            new webpack.DefinePlugin(convertTpProcessEnvProperties(ENV_FILE_PROPERTIES)),
+            new webpack.DefinePlugin(convertToProcessEnvProperties(ENV_FILE_PROPERTIES)),
             new CopyPlugin({
                 patterns: [
                     path.resolve(__dirname, "public", "logo192.png"),
                     {
-                        from: path.resolve(__dirname, "manifest", generateFileNameFromBuildMode("manifest.json")),
+                        from: path.resolve(`${CONFIGS_PATH}/manifest.json`),
                         to: "manifest.json"
                     },
                     {

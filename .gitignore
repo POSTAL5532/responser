@@ -11,3 +11,7 @@ manifest-*.json
 *.env
 *.yml
 *.log*
+
+!configs/**/*.yml
+!configs/**/*.env
+!configs/**/manifest-*.json

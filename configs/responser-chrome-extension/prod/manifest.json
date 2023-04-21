@@ -1,0 +1,44 @@
+{
+  "manifest_version": 3,
+  "name": "Reviewly",
+  "version": "1.0",
+  "description": "Chrome extensions which helps to leve the rating and reviews about the web site experience.",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Reviewly"
+  },
+  "background": {
+    "service_worker": "./background.js"
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://app.reviewly.space/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "./content.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "logo192.png",
+    "48": "logo192.png",
+    "128": "logo192.png"
+  }
+}

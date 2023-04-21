@@ -1,0 +1,51 @@
+server:
+  port: 8080
+logging:
+  level:
+    root: info
+    sql: warn
+    web: info
+  file:
+    name: /application/logs/reviewly-logs.log
+  logback:
+    rollingpolicy:
+      max-file-size: 10MB
+      max-history: 10
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+    enabled-by-default: 'true'
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    database: POSTGRESQL
+    hibernate:
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      ddl-auto: none
+    show-sql: 'true'
+    open-in-view: false
+  database:
+    driverClassName: org.postgresql.Driver
+  datasource:
+    url: jdbc:postgresql://responser-db:5432/responser
+    username: postgres
+    password: root
+    testWhileIdle: 'true'
+    validationQuery: SELECT 1
+  sql:
+    init:
+      platform: postgres
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: http://auth.reviewly.space
+responser:
+  api:
+    allowedOrigins:
+      - http://app.reviewly.space
+      - chrome-extension://bcgepbhdoibfdnpmemhdjifmjdmfacml

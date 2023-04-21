@@ -1,0 +1,46 @@
+server:
+  port: 8081
+  error:
+    include-binding-errors: always
+    include-message: always
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+    enabled-by-default: 'true'
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    database: POSTGRESQL
+    hibernate:
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      ddl-auto: none
+    show-sql: 'true'
+    open-in-view: false
+  database:
+    driverClassName: org.postgresql.Driver
+  datasource:
+    url: jdbc:postgresql://responser-db:5432/responser
+    username: postgres
+    password: root
+    testWhileIdle: 'true'
+    validationQuery: SELECT 1
+  sql:
+    init:
+      platform: postgres
+responser:
+  auth:
+    registrationPageUrl: http://dev-app.reviewly.space/sign-up
+    afterLogoutUrl: http://dev-app.reviewly.space
+    noSessionRedirectUrl: http://dev.reviewly.space
+    clientCredentials:
+      -
+        clientId: responser-web-client
+        clientSecret: responser-web-client-secret
+        redirectUri: http://dev-app.reviewly.space/auth-code
+    allowedOrigins:
+      - http://dev-app.reviewly.space
+      - http://dev-auth.reviewly.space

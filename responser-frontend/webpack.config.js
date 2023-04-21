@@ -4,32 +4,14 @@ const HtmlWebPackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
 const dotenv = require('dotenv');
 
-const LOCAL_BUILD_MODE = "local";
-const DEV_TEST_BUILD_MODE = "dev-test";
-const PRODUCTION_BUILD_MODE = "production";
-
 let ENV_FILE_PROPERTIES;
-let CURRENT_BUILD_MODE;
+let CONFIGS_PATH;
 
 /**
  * Init ENV_FILE_PROPERTIES
  */
 const initEnvFileProperties = () => {
-    const envDir = "env";
-
-    switch (CURRENT_BUILD_MODE) {
-        case LOCAL_BUILD_MODE:
-            ENV_FILE_PROPERTIES = dotenv.config({path: path.resolve(__dirname, envDir, "local.env")}).parsed;
-            break;
-        case DEV_TEST_BUILD_MODE:
-            ENV_FILE_PROPERTIES = dotenv.config({path: path.resolve(__dirname, envDir, "dev.env")}).parsed;
-            break;
-        case PRODUCTION_BUILD_MODE:
-            ENV_FILE_PROPERTIES = dotenv.config({path: path.resolve(__dirname, envDir, "prod.env")}).parsed;
-            break;
-        default:
-            throw new Error("Bad buildMode:", buildMode);
-    }
+    ENV_FILE_PROPERTIES = dotenv.config({path: path.resolve(`${CONFIGS_PATH}/.env`)}).parsed;
 }
 
 const convertTpProcessEnvProperties = (object) => {
@@ -47,7 +29,7 @@ module.exports = (env, args) => {
     console.log("ENV:", env);
     console.log("ARGS:", args);
 
-    CURRENT_BUILD_MODE = env.buildMode;
+    CONFIGS_PATH = `../configs/responser-frontend/${env.buildMode}`;
     initEnvFileProperties();
 
     return {

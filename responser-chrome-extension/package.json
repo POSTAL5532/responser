@@ -18,8 +18,8 @@
   },
   "scripts": {
     "build:local": "webpack --mode production --env buildMode=local",
-    "build:dev": "webpack --mode production --env buildMode=dev-test",
-    "build:prod": "webpack --mode production --env buildMode=production",
+    "build:dev": "webpack --mode production --env buildMode=dev",
+    "build:prod": "webpack --mode production --env buildMode=prod",
     "clean": "npx rimraf build"
   },
   "dependencies": {

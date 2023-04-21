@@ -1,0 +1,45 @@
+{
+  "manifest_version": 3,
+  "name": "Reviewly DEV",
+  "version": "1.0",
+  "description": "Chrome extensions which helps to leve the rating and reviews about the web site experience.",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0o9/s6UEA6jOzhS+V8ed2IbWkq7LsLJJQuItpTdV7JNH15Qcohfvp4YjOg7cTaPMKYJQuHdxNK2PTwPkF5lsLf3I2wHxRHQ4XSIHCyPweIAN3zYvBDaba/N2bzNhk1i3hauf6AI4jiYW/y5BF2suSmEXa13Apz7WT9C/th04cAcpsROaY/ENfMOWRfw0zstvajKsTFyHNmKy5O+rCmqqAcr/FwhWIiutjrMjUP2DpKO4Q/ldd/TywHYtZaAkIgJgXzgrl1tG0gxDN7gqHcvV/BaUeKtVfe+DmtNQd6Jn8dxbdJOX+X5u0dR5PnlUxqKNvwwQJu0T3ppXFlH7wU0TPQIDAQAB",
+  "permissions": [
+    "tabs",
+    "activeTab",
+    "storage",
+    "scripting"
+  ],
+  "host_permissions": [
+    "http://*/*",
+    "https://*/*"
+  ],
+  "action": {
+    "default_popup": "index.html",
+    "default_title": "Reviewly DEV"
+  },
+  "background": {
+    "service_worker": "./background.js"
+  },
+  "externally_connectable": {
+    "matches": [
+      "http://dev-app.reviewly.space/*"
+    ]
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "./content.js"
+      ]
+    }
+  ],
+  "icons": {
+    "16": "logo192.png",
+    "48": "logo192.png",
+    "128": "logo192.png"
+  }
+}

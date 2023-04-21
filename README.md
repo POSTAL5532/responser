@@ -2,8 +2,12 @@
 `docker-compose up responser_db`
 
 ## Run auth-server
+* Add to IDEA program arguments `--spring.config.location=file:configs/responser-auth-server/local/application.yml`
+* Run application
 
 ## Run backend application
+* Add to IDEA program arguments `--spring.config.location=file:configs/responser-backend/local/application.yml`
+* Run application
 
 ## Run frontend application
 * Setup `env/<mode>.env` file from `env/.env.template`
