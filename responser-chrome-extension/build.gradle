@@ -21,7 +21,6 @@ task clean(type: NpmTask) {
 
 task build(type: NpmTask) {
     def buildMode = System.getProperty("buildMode")
-
     println "Build extension with build mode='" + buildMode + "'"
 
     dependsOn install
