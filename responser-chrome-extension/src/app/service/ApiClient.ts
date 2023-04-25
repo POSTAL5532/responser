@@ -5,15 +5,21 @@ import AuthorizationService from "./authorization/AuthorizationService";
 import ApplicationProperties from "./ApplicationProperties";
 import {reloadPage} from "../utils/NavigationUtils";
 import {ApiError} from "../model/ApiError";
+import {Logger} from "../utils/Logger";
+
+const apiClientLogger: Logger = new Logger("ApiClient");
 
 const refreshTokenIfNeeded = (): Promise<TokenInfo> => {
     if (!AuthorizationService.refreshAccessTokenPromise) {
+        apiClientLogger.debug("Try to refresh token.");
         AuthorizationService.refreshAccessToken()
             .then(tokenInfo => {
+                apiClientLogger.debug("Token refreshed");
                 LocalTokenStorageService.setTokenInfo(tokenInfo, true);
             })
             .catch(() => {
                 LocalTokenStorageService.removeAllTokens();
+                apiClientLogger.warning("Refresh token error - remove tokens and refresh frame.");
                 reloadPage();
             });
     }
@@ -24,7 +30,7 @@ const refreshTokenIfNeeded = (): Promise<TokenInfo> => {
 const errorInterceptor = (error: any): Promise<any> => {
     const {response: {status, data}} = error;
 
-    console.error(`[ApiClient]: The server responded with a status code ${status}`);
+    apiClientLogger.error(`The server respond with a status code ${status}`);
 
     if (status === 401 && error.config && error.config.repeatableRequest !== false) {
         return refreshTokenIfNeeded()
@@ -38,9 +44,12 @@ const errorInterceptor = (error: any): Promise<any> => {
                 return axios.request(error.config);
             });
     } else if (data?.apiError) {
-        return Promise.reject(data as ApiError);
+        const apiError = data as ApiError;
+        apiClientLogger.error("Api request error", apiError.message, apiError.errorType);
+        return Promise.reject(apiError);
     }
 
+    apiClientLogger.error("Request error", data);
     return Promise.reject(error);
 }
 

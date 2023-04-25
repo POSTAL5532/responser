@@ -5,8 +5,11 @@ import {ReviewData} from "../../model/ReviewData";
 import {ResourceType} from "../../model/ResourceType";
 import {ReviewsRequestCriteria} from "../../model/ReviewsRequestCriteria";
 import {Pagination} from "../../model/Pagination";
+import {Logger} from "../../utils/Logger";
 
 export class EditReviewPageStore {
+
+    logger: Logger = new Logger("EditReviewPageStore");
 
     reviewService: ReviewService = new ReviewService();
 
@@ -33,6 +36,17 @@ export class EditReviewPageStore {
     }
 
     public init = async (currentUserId: string, reviewId: string, pageId: string, domainId: string) => {
+        this.logger.debug(
+            "Init store: currentUserId=",
+            currentUserId,
+            ", reviewId=",
+            reviewId,
+            ", pageId=",
+            pageId,
+            ", domainId=",
+            domainId
+        );
+
         this.currentUserId = currentUserId;
         this.pageId = pageId;
         this.domainId = domainId;
@@ -45,26 +59,33 @@ export class EditReviewPageStore {
         ]);
 
         if (!!reviewId) {
+            this.logger.debug("Init by review ID");
             await this.initReviewById(reviewId);
         } else {
+            this.logger.debug("Init for new review");
             this.initNewReview();
         }
 
         this.loadingState.isDataInitialization = false;
 
         this.initReactions();
+        this.logger.debug("Initialization complete");
     }
 
     public saveReview = async () => {
         this.loadingState.isDataSubmitting = true;
 
         if (this.reviewId) {
+            this.logger.debug("Save edited review");
             await this.reviewService.updateReview(this.reviewId, this.reviewData)
             .finally(() => this.loadingState.isDataSubmitting = false);
         } else {
+            this.logger.debug("Save new review");
             await this.reviewService.createReview(this.reviewData)
             .finally(() => this.loadingState.isDataSubmitting = false);
         }
+
+        this.logger.debug("Review saved");
     }
 
     private initReviewById = async (reviewId: string): Promise<void> => {

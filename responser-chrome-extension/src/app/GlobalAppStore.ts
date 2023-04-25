@@ -5,8 +5,11 @@ import {User} from "./model/User";
 import LocalTokenStorageService from "./service/authorization/LocalTokenStorageService";
 import {ExtensionService} from "./service/extension/ExtensionService";
 import {reloadPage} from "./utils/NavigationUtils";
+import {Logger} from "./utils/Logger";
 
 export class GlobalAppStore {
+
+    logger: Logger = new Logger("GlobalAppStore");
 
     extensionService: ExtensionService = new ExtensionService();
 
@@ -22,6 +25,8 @@ export class GlobalAppStore {
     }
 
     private init = async () => {
+        this.logger.debug("Init store");
+
         const tokenInfoResponse = await this.extensionService.getToken();
         LocalTokenStorageService.setTokenInfo(tokenInfoResponse.data);
 
@@ -40,8 +45,10 @@ export class GlobalAppStore {
     @action
     updateCurrentUser = async () => {
         try {
+            this.logger.debug("Update current user info");
             this.currentUser = await this.userService.getCurrentUser();
         } catch (error: any) {
+            this.logger.error("Update current user info - error:", error, ", remove tokens and reload page");
             LocalTokenStorageService.removeAllTokens();
             reloadPage();
         }

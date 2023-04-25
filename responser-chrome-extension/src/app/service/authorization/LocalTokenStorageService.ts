@@ -1,19 +1,24 @@
 import {TokenInfo} from "app/model/TokenInfo";
 import {ExtensionService} from "../extension/ExtensionService";
 import ApplicationProperties from "../ApplicationProperties";
+import {Logger} from "../../utils/Logger";
 
 /**
  * Token sore. Contains read/write/delete methods.
  */
 class LocalTokenStorageService {
 
+    logger: Logger = new Logger("LocalTokenStorageService");
+
     tokenInfo: TokenInfo = new TokenInfo();
 
     private extensionService: ExtensionService = new ExtensionService();
 
     setTokenInfo = (tokenInfo: TokenInfo, setBackgroundToken: boolean = false) => {
+        this.logger.debug("Set tokens.");
         this.tokenInfo = tokenInfo;
         if (setBackgroundToken) {
+            this.logger.debug("Set tokens for background.");
             this.extensionService.setToken(tokenInfo);
         }
     }
@@ -38,6 +43,7 @@ class LocalTokenStorageService {
      * Removes all info about token from local storage.
      */
     removeAllTokens() {
+        this.logger.debug("Remove all tokens.");
         this.tokenInfo = null;
         this.extensionService.removeToken();
     }

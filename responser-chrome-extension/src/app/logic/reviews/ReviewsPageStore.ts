@@ -17,10 +17,13 @@ import {ReviewLikeData} from "../../model/ReviewLikeData";
 import {ReviewLikeService} from "../../service/ReviewLikeService";
 import {ResourceType} from "../../model/ResourceType";
 import {Pagination} from "../../model/Pagination";
+import {Logger} from "../../utils/Logger";
 
 const PAGE_ELEMENTS_COUNT = 5;
 
 export class ReviewsPageStore {
+
+    logger: Logger = new Logger("ReviewsPageStore");
 
     extensionService: ExtensionService = new ExtensionService();
 
@@ -60,6 +63,8 @@ export class ReviewsPageStore {
     }
 
     init = async (reviewsResourceType: ResourceType, currentUserId: string) => {
+        this.logger.debug("Init store: reviewsResourceType=", reviewsResourceType, ", currentUserId=", currentUserId);
+
         this.currentUserId = currentUserId;
         this.currentPageNumber = 0;
         this.hasNextReviews = false;
@@ -76,42 +81,67 @@ export class ReviewsPageStore {
 
         await this.loadCurrenUserReview();
         await this.loadReviews();
+
+        this.logger.debug("Store initialisation finished");
     }
 
     initDomain = async () => {
         const {url} = this.currentPageInfo;
+
+        this.logger.debug("Init domain with URL=", url);
+
         this.loadingState.isDomainLoading = true;
 
         try {
             this.domain = await this.domainService.getDomainByUrl(url);
         } catch (error: any) {
+            this.logger.debug("Init domain error - check type of error...");
             if (error.errorType === ApiErrorType.ENTITY_NOT_FOUND) {
+                this.logger.debug("Init domain error is 'ENTITY_NOT_FOUND' type - create new domain.");
                 const newDomainPayload = new CreateDomainPayload(url, "NO_DESCRIPTION");
                 this.domain = await this.domainService.createDomain(newDomainPayload);
+            } else {
+                this.logger.error("Init domain error is unknown: ", error);
             }
         } finally {
             this.loadingState.isDomainLoading = false;
         }
+
+        this.logger.debug("Domain initialisation finished.");
     }
 
     initPage = async () => {
         const {url, description, title} = this.currentPageInfo;
+
+        this.logger.debug("Init page: url=", url, ", description=", description, ", title=", title);
+
         this.loadingState.isPageLoading = true;
 
         try {
             this.page = await this.pagesService.getPageByUrl(url);
         } catch (error: any) {
+            this.logger.debug("Init page error - check type of error...");
             if (error.errorType === ApiErrorType.ENTITY_NOT_FOUND) {
+                this.logger.debug("Init page error is 'ENTITY_NOT_FOUND' type - create new page.");
                 const createPagePayload = new CreatePagePayload(this.domain.id, url, title, description);
                 this.page = await this.pagesService.createPage(createPagePayload);
+            } else {
+                this.logger.error("Init page error is unknown: ", error);
             }
         } finally {
             this.loadingState.isPageLoading = false;
         }
+
+        this.logger.debug("Page initialisation finished.");
     }
 
     loadCurrenUserReview = async () => {
-        if (!this.currentUserId) return;
+        if (!this.currentUserId) {
+            this.logger.debug("Not load current user review - no current user");
+            return;
+        }
+
+        this.logger.debug("Load current user review");
 
         const criteria = this.getReviewsRequestCriteria(undefined, this.currentUserId);
         this.loadingState.isReviewsLoading = true;
@@ -123,6 +153,8 @@ export class ReviewsPageStore {
     }
 
     loadReviews = async () => {
+        this.logger.debug("Load reviews");
+
         const pagination = new Pagination(this.currentPageNumber, PAGE_ELEMENTS_COUNT);
         const criteria = this.getReviewsRequestCriteria(this.currentUserId);
 
@@ -136,9 +168,9 @@ export class ReviewsPageStore {
     }
 
     loadNextReviews = async () => {
-        if (!this.hasNextReviews || this.loadingState.isNextReviewsLoading) {
-            return;
-        }
+        if (!this.hasNextReviews || this.loadingState.isNextReviewsLoading) return;
+
+        this.logger.debug("Load next reviews");
 
         const criteria = this.getReviewsRequestCriteria(this.currentUserId);
         const pagination = new Pagination(
@@ -183,9 +215,9 @@ export class ReviewsPageStore {
     }
 
     removeUserReview = async (): Promise<void> => {
-        if (!this.currentUserReview) {
-            return;
-        }
+        if (!this.currentUserReview) return;
+
+        this.logger.debug("Remove current user review");
 
         this.loadingState.isReviewRemoving = true;
         await this.reviewService.deleteReview(this.currentUserReview.id).finally(
@@ -196,21 +228,25 @@ export class ReviewsPageStore {
     }
 
     createReviewLike = async (review: Review, positive: boolean): Promise<void> => {
+        this.logger.debug("Create review like: review id=", review.id, ", positive=", positive);
         await this.reviewLikeService.createLike(new ReviewLikeData(review.id, positive));
         await this.refreshReviewInArray(review.id);
     }
 
     updateReviewLike = async (reviewLike: ReviewLike, positive: boolean): Promise<void> => {
+        this.logger.debug("Update review like: review like id=", reviewLike.id, ", positive=", positive);
         await this.reviewLikeService.updateLike(new ReviewLikeData(reviewLike.reviewId, positive), reviewLike.id);
         await this.refreshReviewInArray(reviewLike.reviewId);
     }
 
     removeReviewLike = async (reviewLike: ReviewLike): Promise<void> => {
+        this.logger.debug("Remove review like: review like id=", reviewLike.id);
         await this.reviewLikeService.deleteLike(reviewLike.id);
         await this.refreshReviewInArray(reviewLike.reviewId);
     }
 
     private refreshReviewInArray = async (reviewId: string): Promise<void> => {
+        this.logger.debug("Refresh review in array");
         const updatedReview = await this.reviewService.getReview(reviewId);
 
         if (updatedReview.id === this.currentUserReview?.id) {

@@ -2,6 +2,7 @@ import axios, {AxiosRequestConfig} from "axios";
 import ApplicationProperties from "app/service/ApplicationProperties";
 import {TokenInfo} from "app/model/TokenInfo";
 import TokenStore from "app/service/authorization/LocalTokenStorageService";
+import {Logger} from "../../utils/Logger";
 
 /**
  * Authorization service.
@@ -13,12 +14,16 @@ class AuthorizationService {
      */
     refreshAccessTokenPromise: Promise<TokenInfo> = null;
 
+    logger: Logger = new Logger("AuthorizationService");
+
     /**
      * Returns refreshed access token from auth-server.
      */
     refreshAccessToken = (): Promise<TokenInfo> => {
+        this.logger.debug("Refresh access token - start");
         this.refreshAccessTokenPromise = this.refreshAccessTokenRequest()
             .finally(() => {
+                this.logger.debug("Refresh access token - finish");
                 this.refreshAccessTokenPromise = null;
             });
 

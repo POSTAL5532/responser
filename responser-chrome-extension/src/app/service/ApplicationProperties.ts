@@ -1,3 +1,5 @@
+import {LogLevel} from "../utils/Logger";
+
 class ApplicationProperties {
 
     get gatewayApiUrl(): string {
@@ -22,6 +24,10 @@ class ApplicationProperties {
 
     get logoutExtensionPage(): string {
         return process.env.LOGOUT_EXTENSION_PAGE;
+    }
+
+    get logLevel(): LogLevel {
+        return LogLevel[process.env.LOG_LEVEL as keyof typeof LogLevel];
     }
 }
 
