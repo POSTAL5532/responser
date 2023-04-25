@@ -1,4 +1,5 @@
 const path = require("path");
+const TerserPlugin = require("terser-webpack-plugin");
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
@@ -55,12 +56,24 @@ module.exports = (env, args) => {
         mode: "none",
         entry: {app: path.join(__dirname, "src", "index.tsx")},
         target: "web",
-        devtool: "source-map",
+        devtool: env.buildMode === "prod" ? undefined : "source-map",
+        optimization: {
+            minimize: true,
+            minimizer: [
+                new TerserPlugin({
+                    exclude: ["background.js", "content.js", "index.html"],
+                }),
+            ],
+        },
 
         module: {
             rules: [
-                {test: /\.(ts|js)x?$/, exclude: /node_modules|test/, use: "babel-loader",},
-                {test: /\.css$/i, use: ["style-loader", "css-loader"],},
+                {
+                    test: /\.(ts)x?$/,
+                    exclude: /node_modules|test/,
+                    use: "babel-loader"
+                },
+                {test: /\.css$/i, use: ["style-loader", "css-loader"]},
                 {
                     test: /\.less$/,
                     use: [
@@ -69,7 +82,7 @@ module.exports = (env, args) => {
                         "less-loader"
                     ]
                 },
-                {test: /\.html$/, loader: "html-loader"},
+                {test: /\.html$/, use: [{loader: "html-loader", options: {minimize: false}}]},
                 {test: /\.svg$/, use: [{loader: '@svgr/webpack', options: {icon: true}}]},
                 {
                     test: /\.(png|jpg|svg|gif|webp)$/,
@@ -116,7 +129,8 @@ module.exports = (env, args) => {
             new CleanWebpackPlugin(),
             new HtmlWebPackPlugin({
                 template: "./public/index.html",
-                filename: "./index.html"
+                filename: "./index.html",
+                minify: false
             }),
             new webpack.DefinePlugin(convertToProcessEnvProperties(ENV_FILE_PROPERTIES)),
             new CopyPlugin({
