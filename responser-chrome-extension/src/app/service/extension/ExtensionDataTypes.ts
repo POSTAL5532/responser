@@ -4,6 +4,7 @@ export enum ExtensionMessageType {
     GET_TOKEN = "GET_TOKEN",
     OPEN_EXTERNAL_PAGE = "OPEN_EXTERNAL_PAGE",
     GET_CURRENT_PAGE_INFO = "GET_CURRENT_PAGE_INFO",
+    UPDATE_RATING_BADGE = "UPDATE_RATING_BADGE",
 }
 
 export class ExtensionMessage<T = any> {

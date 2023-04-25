@@ -6,12 +6,15 @@ import {ResourceType} from "../../model/ResourceType";
 import {ReviewsRequestCriteria} from "../../model/ReviewsRequestCriteria";
 import {Pagination} from "../../model/Pagination";
 import {Logger} from "../../utils/Logger";
+import {ExtensionService} from "../../service/extension/ExtensionService";
 
 export class EditReviewPageStore {
 
     logger: Logger = new Logger("EditReviewPageStore");
 
     reviewService: ReviewService = new ReviewService();
+
+    extensionService: ExtensionService = new ExtensionService();
 
     currentUserId: string;
 
@@ -83,6 +86,11 @@ export class EditReviewPageStore {
             this.logger.debug("Save new review");
             await this.reviewService.createReview(this.reviewData)
             .finally(() => this.loadingState.isDataSubmitting = false);
+        }
+
+        if (this.reviewData.resourceType === ResourceType.SITE) {
+            this.logger.debug("Update rating badge");
+            this.extensionService.updateRatingBadge();
         }
 
         this.logger.debug("Review saved");

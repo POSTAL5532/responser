@@ -61,6 +61,11 @@ export class ExtensionService {
         return this.sendMessage(message);
     }
 
+    updateRatingBadge = (): Promise<ExtensionResponse> => {
+        const message = new ExtensionMessage(ExtensionMessageType.UPDATE_RATING_BADGE);
+        return this.sendMessage(message);
+    }
+
     sendMessage = <M = any, R = any>(message: ExtensionMessage<M>) => {
         this.logger.debug("Send message to background:", message);
         return new Promise<ExtensionResponse>((resolve, reject) => {

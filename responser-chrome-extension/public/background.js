@@ -10,10 +10,13 @@ const log = (...message) => {
 chrome.runtime.onInstalled.addListener(async () => {
     for (const contentScript of chrome.runtime.getManifest().content_scripts) {
         for (const tab of await chrome.tabs.query({url: contentScript.matches})) {
+            const {id, url} = tab;
+
             chrome.scripting.executeScript({
-                target: {tabId: tab.id},
+                target: {tabId: id},
                 files: contentScript.js,
-            });
+            })
+            .then(() => setSiteRatingBadge(url, id));
         }
     }
 })
@@ -53,7 +56,7 @@ chrome.runtime.onMessageExternal.addListener(
     });
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    log("Internal background listener:", sender, request);
+    log("Internal listener:", sender, request);
 
     switch (request.type) {
         case "SET_TOKEN":
@@ -81,6 +84,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             .then(pageInfo => sendResponse({success: true, data: pageInfo.data}))
             .catch(cause => sendResponse({success: false, message: cause}))
             break;
+        case "UPDATE_RATING_BADGE":
+            updateRatingBadge()
+            .then(() => sendResponse({success: true}))
+            .catch(cause => sendResponse({success: false, message: cause}))
+            break;
         default:
             sendResponse({success: false, message: "Invalid action type"});
             log(`Internal listener: invalid action`);
@@ -94,7 +102,7 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     const url = changeInfo.url || tab.url;
-    if (url && url.startsWith("http")) {
+    if (url && url.startsWith("http") && tab.status === "complete") {
         setSiteRatingBadge(url, tabId);
     }
 });
@@ -132,12 +140,20 @@ const setSiteRatingBadge = async (pageUrl, tabId) => {
     // await chrome.action.setBadgeTextColor({color: textColor, tabId: tabId});
 }
 
-const sendMessageToContent = async (message) => {
-    log("Send message to content:", message);
+const getCurrentTab = async () => {
+    log("Get current tab - start");
     let queryOptions = LOCAL_DEV_MODE
         ? {active: true}
         : {active: true, lastFocusedWindow: !LOCAL_DEV_MODE};
-    let tab = (await chrome.tabs.query(queryOptions))[0];
+
+    const tab = (await chrome.tabs.query(queryOptions))[0];
+    log("Get current tab - finish:", !!tab ? tab.id : "undefined");
+    return tab;
+}
+
+const sendMessageToContent = async (message) => {
+    log("Send message to content:", message);
+    const tab = await getCurrentTab();
     return chrome.tabs.sendMessage(tab.id, message);
 }
 
@@ -170,4 +186,9 @@ const removeTokens = async () => {
 
 const openExternalPage = (url, active) => {
     return chrome.tabs.create({url, active})
+}
+
+const updateRatingBadge = async () => {
+    const tab = await getCurrentTab();
+    return setSiteRatingBadge(tab.url, tab.id);
 }
