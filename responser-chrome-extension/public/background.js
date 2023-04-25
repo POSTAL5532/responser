@@ -1,4 +1,11 @@
-const LOCAL_DEV_MODE = JSON.parse("{{LOCAL_DEV_MODE}}".toLowerCase())
+const LOCAL_DEV_MODE = JSON.parse("{{LOCAL_DEV_MODE}}".toLowerCase());
+
+const log = (...message) => {
+    const messageHeader = `[DEBUG] [EXT: Background script]: ${new Date().toLocaleString("en-US")}:`;
+    if (LOCAL_DEV_MODE) {
+        console.debug(messageHeader, ...message);
+    }
+}
 
 chrome.runtime.onInstalled.addListener(async () => {
     for (const cs of chrome.runtime.getManifest().content_scripts) {
@@ -13,7 +20,7 @@ chrome.runtime.onInstalled.addListener(async () => {
 
 chrome.runtime.onMessageExternal.addListener(
     (request, sender, sendResponse) => {
-        console.debug("Background listener [external]", sender, request);
+        log("External background listener", sender, request);
 
         switch (request.type) {
             case "CHECK_EXTENSION":
@@ -36,14 +43,17 @@ chrome.runtime.onMessageExternal.addListener(
                 break;
             default:
                 sendResponse({success: false, message: "Invalid action type"});
+                log(`External listener: invalid action`);
                 return;
         }
+
+        log(`External listener: finish ${request.type} action`);
 
         return true;
     });
 
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    console.debug("Background listener [internal]", sender, request);
+    log("Internal background listener:", sender, request);
 
     switch (request.type) {
         case "SET_TOKEN":
@@ -73,8 +83,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             break;
         default:
             sendResponse({success: false, message: "Invalid action type"});
+            log(`Internal listener: invalid action`);
             return;
     }
+
+    log(`Internal listener: finish ${request.type} action`);
 
     return true;
 });
@@ -87,6 +100,7 @@ chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
 });
 
 const setSiteRatingBadge = async (pageUrl, tabId) => {
+    log("Set site rating badge");
     const url = new URL("{{API_URL}}/domains/rating");
     url.search = new URLSearchParams({url: pageUrl}).toString();
     const response = await fetch(url);
@@ -119,6 +133,7 @@ const setSiteRatingBadge = async (pageUrl, tabId) => {
 }
 
 const sendMessageToContent = async (message) => {
+    log("Send message to content:", message);
     let queryOptions = LOCAL_DEV_MODE
         ? {active: true}
         : {active: true, lastFocusedWindow: !LOCAL_DEV_MODE};

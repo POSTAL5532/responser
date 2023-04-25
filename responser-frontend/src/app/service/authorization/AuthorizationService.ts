@@ -3,6 +3,7 @@ import ApplicationProperties from "app/service/ApplicationProperties";
 import {TokenInfo} from "app/model/TokenInfo";
 import TokenStore from "app/service/authorization/LocalTokenStorageService";
 import {nativeNavigateTo} from "../../utils/NavigationUtils";
+import {Logger} from "../../utils/Logger";
 
 /**
  * Authorization service.
@@ -19,10 +20,14 @@ class AuthorizationService {
      */
     refreshAccessTokenPromise: Promise<TokenInfo> = null;
 
+    logger: Logger = new Logger("AuthorizationService");
+
     exchangeAuthCode = (authCode: string): Promise<TokenInfo> => {
+        this.logger.debug("Exchange auth code - start");
         this.accessTokenPromise = this.exchangeAuthCodeRequest(authCode)
-            .finally(() => {
+        .finally(() => {
                 this.accessTokenPromise = null;
+                this.logger.debug("Exchange auth code - finish");
             });
 
         return this.accessTokenPromise;
@@ -32,8 +37,10 @@ class AuthorizationService {
      * Returns refreshed access token from auth-server.
      */
     refreshAccessToken = (): Promise<TokenInfo> => {
+        this.logger.debug("Refresh access token - start");
         this.refreshAccessTokenPromise = this.refreshAccessTokenRequest()
             .finally(() => {
+                this.logger.debug("Refresh access token - finish");
                 this.refreshAccessTokenPromise = null;
             });
 
@@ -41,6 +48,7 @@ class AuthorizationService {
     }
 
     requestLoginPage = (): void => {
+        this.logger.debug("Request login page");
         const url = new URL(ApplicationProperties.authLoginPageUrl);
         url.searchParams.set("response_type", "code");
         url.searchParams.set("client_id", ApplicationProperties.clientId);

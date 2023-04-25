@@ -27,7 +27,7 @@ const MainPage: React.FC = () => {
         checkExtension()
         .catch(() => changeExtensionExist(false))
         .finally(() => changeExtensionChecking(false));
-    });
+    }, []);
 
     return (
         <Page className="main-page">

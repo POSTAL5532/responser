@@ -7,6 +7,7 @@ import {nativeNavigateTo} from "../../utils/NavigationUtils";
 import ApplicationProperties from "../../service/ApplicationProperties";
 import LocalTokenStorageService from "../../service/authorization/LocalTokenStorageService";
 import {Icon, IconType} from "../../components/icon/Icon";
+import {useLogger} from "../../utils/Logger";
 import "./AppHeader.less";
 
 type PageHeaderProps = {
@@ -16,10 +17,13 @@ type PageHeaderProps = {
 const AppHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {
     const context = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const extensionService = useExtensionService();
+    const logger = useLogger("AppHeader");
 
     const onLogOut = () => {
+        logger.debug("Logout click")
         LocalTokenStorageService.removeAllTokens()
         extensionService.removeToken().finally(() => {
+            logger.debug("Redirect to auth server logout page")
             nativeNavigateTo(ApplicationProperties.authLogoutPageUrl);
         });
     }

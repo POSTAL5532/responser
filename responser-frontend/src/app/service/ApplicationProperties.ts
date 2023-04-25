@@ -1,3 +1,5 @@
+import {LogLevel} from "../utils/Logger";
+
 class ApplicationProperties {
 
     get gatewayApiUrl(): string {
@@ -38,6 +40,10 @@ class ApplicationProperties {
 
     get chromeExtensionId(): string {
         return process.env.CHROME_EXTENSION_ID;
+    }
+
+    get logLevel(): LogLevel {
+        return LogLevel[process.env.LOG_LEVEL as keyof typeof LogLevel];
     }
 }
 

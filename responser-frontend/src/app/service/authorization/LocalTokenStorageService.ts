@@ -1,5 +1,6 @@
 import {TokenInfo} from "app/model/TokenInfo";
 import ApplicationProperties from "app/service/ApplicationProperties";
+import {Logger} from "../../utils/Logger";
 
 const ACCESS_TOKEN_KEY = "access_token";
 const REFRESH_TOKEN_KEY = "refresh_token";
@@ -10,6 +11,8 @@ const EXPIRES_IN_KEY = "expires_in";
  * Token sore. Contains read/write/delete methods.
  */
 class LocalTokenStorageService {
+
+    logger: Logger = new Logger("LocalTokenStorageService");
 
     get accessToken(): string {
         return localStorage.getItem(ACCESS_TOKEN_KEY);
@@ -84,6 +87,7 @@ class LocalTokenStorageService {
      * Save all token info from {@link TokenInfo} object to local storage.
      */
     setToken = (tokenInfo: TokenInfo) => {
+        this.logger.debug("Set tokens.");
         this.accessToken = tokenInfo.accessToken;
         this.refreshToken = tokenInfo.refreshToken;
         this.tokenType = tokenInfo.tokenType;
@@ -94,6 +98,7 @@ class LocalTokenStorageService {
      * Removes all info about token from local storage.
      */
     removeAllTokens() {
+        this.logger.debug("Remove all tokens.");
         this.removeAccessToken();
         this.removeRefreshToken();
         this.removeTokenType();
