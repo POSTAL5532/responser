@@ -5,7 +5,7 @@ import LocalTokenStorageService from "../../service/authorization/LocalTokenStor
 import {useExtensionService} from "../../service/extension/ExtensionService";
 import {Spinner} from "../../components/spinner/Spinner";
 import {navigateToMainPage} from "../main-page/MainPage";
-import {nativeNavigateToUnauthorizedPage} from "../../utils/NavigationUtils";
+import {nativeNavigateToAuthLogoutPageUrl} from "../../utils/NavigationUtils";
 import {useLogger} from "../../utils/Logger";
 import "./AuthCodePage.less";
 
@@ -19,7 +19,8 @@ export const AuthCodePage: React.FC = () => {
 
     if (!authCode) {
         logger.debug("Auth code query parameter is empty - redirect to unauthorized page.");
-        nativeNavigateToUnauthorizedPage();
+        LocalTokenStorageService.removeAllTokens();
+        nativeNavigateToAuthLogoutPageUrl();
     }
 
     useEffect(() => {
@@ -31,9 +32,9 @@ export const AuthCodePage: React.FC = () => {
             .finally(navigateToMainPage)
         })
         .catch((error) => {
-            logger.debug("Exchange auth code error - redirect to unauthorized page.", error);
+            logger.debug("Exchange auth code error - clear all tokens and logout.", error);
             LocalTokenStorageService.removeAllTokens();
-            nativeNavigateToUnauthorizedPage();
+            nativeNavigateToAuthLogoutPageUrl();
         })
     }, []);
 

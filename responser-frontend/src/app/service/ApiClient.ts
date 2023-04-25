@@ -4,7 +4,7 @@ import ApplicationPropertiesService from "app/service/ApplicationProperties";
 import LocalTokenStorageService from "app/service/authorization/LocalTokenStorageService";
 import AuthorizationService from "app/service/authorization/AuthorizationService";
 import {ApiError} from "../model/ApiError";
-import {nativeNavigateToUnauthorizedPage} from "../utils/NavigationUtils";
+import {nativeNavigateToAuthLogoutPageUrl} from "../utils/NavigationUtils";
 import {Logger} from "../utils/Logger";
 
 const apiClientLogger: Logger = new Logger("ApiClient");
@@ -18,9 +18,9 @@ const refreshTokenIfNeeded = (): Promise<TokenInfo> => {
                 LocalTokenStorageService.setToken(token)
             })
             .catch(() => {
-                LocalTokenStorageService.removeAllTokens();
                 apiClientLogger.warning("Refresh token error - log out");
-                nativeNavigateToUnauthorizedPage();
+                LocalTokenStorageService.removeAllTokens();
+                nativeNavigateToAuthLogoutPageUrl();
             });
     }
 
