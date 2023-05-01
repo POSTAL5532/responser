@@ -44,8 +44,23 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://dev-auth.reviewly.space
+  mail:
+    host: smtpout.secureserver.net
+    port: 465
+    username: info@reviewly.space
+    password: 5#OFpkKn9YXa69Dl6Ts5&q6Z
+    protocol: smtp
+    properties.mail.smtp:
+      auth: true
+      ssl.enable: true
+      ssl.trust: "*"
 responser:
   api:
+    runMode: DEV
+    selfHost: http://dev-api.reviewly.space
+    feApplicationUrl: http://dev-app.reviewly.space
+    responserInfoEmail: info@reviewly.space
+    mockEmail: evgeniionegin791@gmail.com
     allowedOrigins:
       - http://dev-app.reviewly.space
       - chrome-extension://bcgepbhdoibfdnpmemhdjifmjdmfacml

@@ -47,6 +47,7 @@ public class UserConverter {
         userPayload.setUserName(user.getUserName());
         userPayload.setEmail(user.getEmail());
         userPayload.setFullName(user.getFullName());
+        userPayload.setEmailConfirmed(user.getEmailConfirmed());
         userPayload.setCreationDate(user.getCreationDate());
         userPayload.setUpdateDate(user.getUpdateDate());
 

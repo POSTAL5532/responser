@@ -26,4 +26,7 @@ public class User extends AbstractEntity {
 
     @Column(name = "full_name")
     private String fullName;
+
+    @Column(name = "email_confirmed")
+    private Boolean emailConfirmed;
 }

@@ -1,7 +1,9 @@
 package com.responser.backend.service;
 
+import com.responser.backend.model.EmailConfirmation;
 import com.responser.backend.model.User;
 import com.responser.backend.repository.UserRepository;
+import com.responser.backend.service.email.EmailService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -23,15 +25,39 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final EmailService emailService;
+
+    private final EmailConfirmationService emailConfirmationService;
+
     @Transactional
     public void registerUser(User newUser) {
+        log.info("Register new not confirmed user: {}", newUser.getUserName());
+        newUser.setEmailConfirmed(false);
         userRepository.save(newUser);
+        EmailConfirmation emailConfirmation = emailConfirmationService.createEmailConfirmation(newUser.getId());
+        emailService.sendEmailConfirmationMessage(newUser.getEmail(), emailConfirmation);
+    }
+
+    @Transactional
+    public void confirmEmail(String confirmationId) {
+        log.info("Confirm email by confirmation id {}.", confirmationId);
+        EmailConfirmation emailConfirmation = emailConfirmationService.getById(confirmationId);
+        User user = getUser(emailConfirmation.getUserId());
+        user.setEmailConfirmed(true);
+        updateUser(user);
+        emailConfirmationService.deleteConfirmation(confirmationId);
     }
 
     @Transactional
     public void updateUser(String userId, User userUpdates) {
         userUpdates.setId(userId);
-        userRepository.save(userUpdates);
+        updateUser(userUpdates);
+    }
+
+    @Transactional
+    public void updateUser(User user) {
+        log.info("Update user: {}", user.getId());
+        userRepository.save(user);
     }
 
     public User getUser(String userId) {

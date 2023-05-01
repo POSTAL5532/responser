@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Reviewly - Email confirmation</title>
+    <link th:href="@{/css/components-style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/email-confirmation.css}" rel="stylesheet"/>
+</head>
+<body>
+
+<div class="app-header">
+    <div class="header-title">Reviewly</div>
+</div>
+
+<div class="email-confirmation-page">
+    <div class="success-icon"></div>
+    <h2 class="email-confirmation-header">Email successfully confirmed</h2>
+    <h3 class="email-confirmation-annotation">You will be redirected to application in <span id="redirect-timer">5</span> sec</h3>
+    <a th:href="${redirectLink}" class="email-confirmation-redirect-link">Or go it manually</a>
+</div>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+
+    let redirectLink = /*[[${redirectLink}]]*/ "define";
+
+    const interval = setInterval(() => {
+        let element = document.getElementById("redirect-timer");
+        let currentTimer = parseInt(element.innerHTML);
+
+        if (currentTimer === 1) {
+            window.location.href = redirectLink;
+            clearInterval(interval);
+        }
+
+        element.innerHTML = (currentTimer - 1).toString();
+    }, 1000);
+
+    /*]]>*/
+</script>
+
+<script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/js/script.js}"></script>
+</body>
+</html>

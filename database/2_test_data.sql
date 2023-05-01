@@ -1,28 +1,33 @@
-INSERT INTO users (id, user_name, email, password, full_name, creation_date, update_date)
+INSERT INTO users (id, user_name, email, password, full_name, email_confirmed, creation_date, update_date)
 VALUES ('0d7bc62f-7381-4a7a-969c-12c510ac887e', 'testUser', 'testUser@email.em', 'qwerty123', 'Test User',
-        '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
+        true, '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
        ('0d7bc62f-7381-4a7a-969c-12c510ac888e', 'testUser1', 'testUser1@email.em', 'qwerty123', 'Test1 User',
-        '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
+        true, '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
        ('0d7bc62f-7381-4a7a-969c-12c510ac889e', 'testUser2', 'testUser2@emoail.em', 'qwerty123', 'Test2 User',
-        '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
+        true, '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
        ('0d7bc62f-7381-4a7a-969c-12c510ac890e', 'testUser3', 'testUser3@email.em', 'qwerty123', 'Test3 User',
-        '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
+        true, '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
        ('0d7bc62f-7381-4a7a-969c-12c510ac891e', 'testUser4', 'testUser4@email.em', 'qwerty123', 'Test4 User',
-        '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
+        true, '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
        ('0d7bc62f-7381-4a7a-969c-12c510ac892e', 'testUser5', 'testUser5@email.em', 'qwerty123', 'Test5 User',
-        '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
+        true, '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
        ('0d7bc62f-7381-4a7a-969c-12c510ac893e', 'testUser6', 'testUser6@email.em', 'qwerty123', 'Test6 User',
-        '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
+        true, '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
        ('0d7bc62f-7381-4a7a-969c-12c510ac894e', 'testUser7', 'testUser7@email.em', 'qwerty123', 'Test7 User',
-        '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
+        true, '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
        ('0d7bc62f-7381-4a7a-969c-12c510ac895e', 'testUser8', 'testUser8@email.em', 'qwerty123', 'Test8 User',
-        '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
+        true, '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
        ('0d7bc62f-7381-4a7a-969c-12c510ac896e', 'testUser9', 'testUser9@email.em', 'qwerty123', 'Test9 User',
-        '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
+        false, '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
        ('0d7bc62f-7381-4a7a-969c-12c510ac897e', 'testUser10', 'testUser10@email.em', 'qwerty123', 'Test10 User',
-        '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
+        false, '2021-10-23 22:13:37', '2021-10-23 22:13:37'),
        ('0d7bc62f-7381-4a7a-969c-12c510ac898e', 'testUser11', 'testUser11@email.em', 'qwerty123', 'Test11 User',
-        '2021-10-23 22:13:37', '2021-10-23 22:13:37');
+        false, '2021-10-23 22:13:37', '2021-10-23 22:13:37');
+
+INSERT INTO email_confirmations (id, user_id, creation_date, update_date)
+VALUES ('4f7bc62f-7381-4a7a-969c-12c599ac898e', '0d7bc62f-7381-4a7a-969c-12c510ac896e', '2023-04-23 22:13:37', NULL),
+       ('4f7bc62f-7381-4a7a-979c-12c599ac898e', '0d7bc62f-7381-4a7a-969c-12c510ac897e', '2025-04-23 22:13:37', NULL),
+       ('4f7bc62f-7381-4a7a-989c-12c599ac898e', '0d7bc62f-7381-4a7a-969c-12c510ac898e', '2023-03-21 22:13:37', '2025-03-21 22:13:37');
 
 INSERT INTO domains (id, domain, has_ssl, name, description, creation_date, update_date)
 VALUES ('10b7a065-67e6-4a4d-9e43-23fe464fc017', 'www.google.com', true, 'google', 'Some description',

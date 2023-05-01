@@ -1,5 +1,7 @@
 package com.responser.backend.controller.page;
 
+import static com.responser.backend.config.APIServerApplicationProperties.API_ROOT_PATH;
+
 import com.responser.backend.controller.page.payload.PageInfoDTO;
 import com.responser.backend.controller.page.payload.PageDTO;
 import com.responser.backend.converter.PageConverter;
@@ -22,7 +24,7 @@ import jakarta.validation.constraints.NotBlank;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/pages")
+@RequestMapping(API_ROOT_PATH + "/pages")
 public class PageController {
 
     private final PagesService pagesService;

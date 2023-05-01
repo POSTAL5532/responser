@@ -24,6 +24,8 @@ public class UserInfoPayload {
 
     private String fullName;
 
+    private Boolean emailConfirmed;
+
     private LocalDateTime creationDate;
 
     private LocalDateTime updateDate;

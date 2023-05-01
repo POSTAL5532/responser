@@ -1,5 +1,7 @@
 package com.responser.backend.controller.domain;
 
+import static com.responser.backend.config.APIServerApplicationProperties.API_ROOT_PATH;
+
 import com.responser.backend.controller.domain.payload.DomainInfoDTO;
 import com.responser.backend.controller.domain.payload.DomainDTO;
 import com.responser.backend.converter.DomainConverter;
@@ -23,7 +25,7 @@ import jakarta.validation.constraints.NotNull;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/domains")
+@RequestMapping(API_ROOT_PATH + "/domains")
 public class DomainController {
 
     private final DomainService domainService;

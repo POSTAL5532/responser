@@ -1,5 +1,7 @@
 package com.responser.backend.controller.user;
 
+import static com.responser.backend.config.APIServerApplicationProperties.API_ROOT_PATH;
+
 import com.responser.backend.controller.user.payload.CreateUserProfilePayload;
 import com.responser.backend.controller.user.payload.UpdateUserPayload;
 import com.responser.backend.controller.user.payload.UserInfoPayload;
@@ -23,7 +25,7 @@ import java.security.Principal;
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/users")
+@RequestMapping(API_ROOT_PATH + "/users")
 public class UserController {
 
     private final UserService userService;

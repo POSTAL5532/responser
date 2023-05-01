@@ -37,6 +37,9 @@ public class User {
     @Column(name = "full_name")
     private String fullName;
 
+    @Column(name = "email_confirmed")
+    private Boolean emailConfirmed;
+
     @Column(name = "creation_date")
     @CreationTimestamp
     private LocalDateTime creationDate;
