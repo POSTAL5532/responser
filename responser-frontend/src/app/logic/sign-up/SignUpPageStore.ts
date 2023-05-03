@@ -26,10 +26,11 @@ export class SignUpPageStore {
      * Runs sign up process.
      */
     signUp = (setFieldError?: (field: string, message: string) => void): Promise<void> => {
+        this.logger.debug("Sign up new user");
+
         return this.userService.signUp(this.signUpPayload)
         .then(AuthorizationService.requestLoginPage)
         .catch(error => {
-            this.logger.error(error.data);
             Object.keys(error.data).forEach(key => setFieldError(key, error.data[key]))
         });
     }
