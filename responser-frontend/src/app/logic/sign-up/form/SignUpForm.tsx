@@ -8,15 +8,14 @@ import {USERNAME_VALIDATION_SCHEMA, UsernameField} from "app/logic/sign-up/form/
 import {Button} from "app/components/button/Button";
 import {PASSWORD_VALIDATION_SCHEMA, PasswordField} from "app/logic/sign-up/form/PasswordField";
 import {EMAIL_VALIDATION_SCHEMA, EmailField} from "app/logic/sign-up/form/EmailField";
-import {FieldMessage} from "app/components/form/field-message/FieldMessage";
 import AuthorizationService from "../../../service/authorization/AuthorizationService";
 import {FieldLayout} from "../../../components/form/field-layout/FieldLayout";
+import {FormikHelpers} from "formik/dist/types";
 import "./SignUpForm.less";
 
 type SignUpFormProps = {
     signUpPayload: UserAccountDataPayload,
-    onFinish: () => void,
-    signUpErrors?: string[]
+    onFinish: (setFieldError?: (field: string, message: string) => void) => void,
 }
 
 const SIGNUP_FORM_VALIDATION_SCHEMA = Yup.object().shape({
@@ -31,11 +30,10 @@ const SIGNUP_FORM_VALIDATION_SCHEMA = Yup.object().shape({
  * Sign up form.
  */
 const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) => {
-    const {onFinish, signUpPayload, signUpErrors} = props;
+    const {onFinish, signUpPayload} = props;
 
-    const onSubmit = () => {
-        console.log("ON SUBMIT");
-        onFinish();
+    const onSubmit = (values: any, {setFieldError}: FormikHelpers<any>) => {
+        onFinish(setFieldError);
     }
 
     const passwordEqualsValidator: FieldValidator = (value) => {
@@ -74,14 +72,6 @@ const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) => {
                                            onChange={value => signUpPayload.confirmPassword = value}
                                            validator={passwordEqualsValidator}/>
                         </FieldLayout>
-                    </div>
-
-                    <div className="sign-up-errors">
-                        {signUpErrors?.map((error, index) => (
-                            <FieldMessage className="sign-up-error" key={index} isError={true}>
-                                {error}
-                            </FieldMessage>
-                        ))}
                     </div>
 
                     <Button type="submit">Sign Up</Button>

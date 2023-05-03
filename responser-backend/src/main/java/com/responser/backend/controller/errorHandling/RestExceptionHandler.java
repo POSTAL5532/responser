@@ -1,4 +1,4 @@
-package com.responser.backend.controller.errorhandling;
+package com.responser.backend.controller.errorHandling;
 
 import com.responser.backend.controller.payload.ApiError;
 import com.responser.backend.controller.payload.ApiErrorType;
@@ -7,7 +7,9 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 import lombok.NonNull;
@@ -73,9 +75,9 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
     @ExceptionHandler(ConstraintViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ResponseBody
-    public ApiError<List<Violation>> onConstraintValidationException(ConstraintViolationException exception) {
+    public ApiError<Map<String, List<String>>> onConstraintValidationException(ConstraintViolationException exception) {
         log.error("Handle 'ConstraintViolationException' {}", exception.getMessage());
-        ApiError<List<Violation>> response = new ApiError<>(exception.getMessage(), ApiErrorType.VALIDATION_ERROR, new ArrayList<>());
+        ApiError<Map<String, List<String>>> response2 = new ApiError<>("Validation error", ApiErrorType.VALIDATION_ERROR, new HashMap<>());
 
         for (ConstraintViolation<?> violation : exception.getConstraintViolations()) {
             Iterable<Path.Node> iterable = () -> violation.getPropertyPath().iterator();
@@ -83,10 +85,12 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
             List<Path.Node> list = targetStream.toList();
             String fieldName = list.get(list.size() - 1).getName();
 
-            response.getData().add(new Violation(fieldName, violation.getMessage()));
+            Map<String, List<String>> data = response2.getData();
+            List<String> fieldMessages = data.computeIfAbsent(fieldName, k -> new ArrayList<>());
+            fieldMessages.add(violation.getMessage());
         }
 
-        return response;
+        return response2;
     }
 
     /**
@@ -103,14 +107,14 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         @NonNull WebRequest request
     ) {
         log.error("Handle 'MethodArgumentNotValidException' {}", exception.getMessage());
-        ApiError<List<Violation>> response = new ApiError<>(exception.getMessage(), ApiErrorType.VALIDATION_ERROR, new ArrayList<>());
+        ApiError<Map<String, List<String>>> response2 = new ApiError<>("Validation error", ApiErrorType.VALIDATION_ERROR, new HashMap<>());
 
         for (FieldError fieldError : exception.getBindingResult().getFieldErrors()) {
-            response.getData().add(
-                new Violation(fieldError.getField(), fieldError.getDefaultMessage())
-            );
+            Map<String, List<String>> data = response2.getData();
+            List<String> fieldMessages = data.computeIfAbsent(fieldError.getField(), k -> new ArrayList<>());
+            fieldMessages.add(fieldError.getDefaultMessage());
         }
 
-        return handleExceptionInternal(exception, response, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+        return handleExceptionInternal(exception, response2, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
     }
 }

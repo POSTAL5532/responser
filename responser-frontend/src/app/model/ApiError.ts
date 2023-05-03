@@ -1,12 +1,12 @@
-export class ApiError {
+export class ApiError<T = any> {
 
     apiError: boolean;
 
     message: string;
 
-    clientFriendlyMessage: string;
-
     errorType: ApiErrorType;
+
+    data: T;
 }
 
 export enum ApiErrorType {

@@ -23,8 +23,8 @@ export class SignUpPage extends Component {
         this.context.logoutAndClearCurrentUser();
     }
 
-    onFinish = async () => {
-        await this.signUpPageStore.signUp();
+    onFinish = async (setFieldError?: (field: string, message: string) => void) => {
+        await this.signUpPageStore.signUp(setFieldError);
     }
 
     render(): React.ReactNode {
@@ -34,8 +34,7 @@ export class SignUpPage extends Component {
                     <h2 className="sign-up-header">Sign up</h2>
                     <SignUpForm
                         signUpPayload={this.signUpPageStore.signUpPayload}
-                        onFinish={this.onFinish}
-                        signUpErrors={this.signUpPageStore.signUpErrors}/>
+                        onFinish={this.onFinish}/>
                 </div>
             </Page>
         );
