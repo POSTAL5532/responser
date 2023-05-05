@@ -9,6 +9,8 @@ import {ReactComponent as Sandwich} from './sandwich.svg';
 import {ReactComponent as Check} from './check.svg';
 import {ReactComponent as CircleCheck} from './circle_check.svg';
 import {ReactComponent as Empty} from './empty.svg';
+import {ReactComponent as Verified} from './verified.svg';
+import {ReactComponent as Alert} from './alert.svg';
 import "./Icon.less";
 
 export enum IconType {
@@ -22,6 +24,8 @@ export enum IconType {
     CHECK = "CHECK",
     CIRCLE_CHECK = "CIRCLE_CHECK",
     EMPTY = "EMPTY",
+    VERIFIED = "VERIFIED",
+    ALERT = "ALERT",
 }
 
 type IconProps = {
@@ -54,6 +58,10 @@ export const Icon: React.FC<IconProps> = (props: IconProps) => {
             return <CircleCheck className={resultClassName}/>
         case IconType.EMPTY:
             return <Empty className={resultClassName}/>
+        case IconType.VERIFIED:
+            return <Verified className={resultClassName}/>
+        case IconType.ALERT:
+            return <Alert className={resultClassName}/>
         default:
             return null;
     }

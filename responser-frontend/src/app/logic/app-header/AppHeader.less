@@ -17,19 +17,71 @@
 
   .user-block {
     display: flex;
-    cursor: pointer;
 
     .user-info {
       display: flex;
-      flex-direction: column;
       justify-content: center;
-      align-items: end;
+      align-items: center;
       padding-right: 16px;
+
+      .user-alert {
+        height: 22px;
+        width: 22px;
+
+        .icon {
+          height: 100%;
+          width: 100%;
+          cursor: pointer;
+
+          path {
+            stroke: @system-color-danger-400;
+          }
+        }
+      }
+
+      .user-alert-tooltip {
+        z-index: 1;
+        border-radius: 8px;
+        padding: 18px;
+        width: 370px;
+
+        h3 {
+          .fontInterBold();
+          margin-top: 0;
+          margin-bottom: 14px;
+        }
+
+        p {
+          .fontInterRegular();
+          margin-top: 0;
+          margin-bottom: 26px;
+        }
+
+        .button {
+          width: 100%;
+        }
+
+        .confirmation-link-sent-icon-container {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .icon {
+            width: 36px;
+            height: 36px;
+
+            path {
+              stroke: @system-color-success-500;
+            }
+          }
+        }
+      }
 
       .user-full-name {
         .fontInterBold();
         color: @text-color;
         font-size: 20px;
+        margin-left: 10px;
       }
     }
   }

@@ -48,6 +48,12 @@ public class UserService {
         emailConfirmationService.deleteConfirmation(confirmationId);
     }
 
+    public void resendConfirmationEmailForUser(String userId) {
+        User user = getUser(userId);
+        EmailConfirmation emailConfirmation = emailConfirmationService.getByUserId(userId);
+        emailService.sendEmailConfirmationMessage(user.getEmail(), emailConfirmation);
+    }
+
     @Transactional
     public void updateUser(String userId, User userUpdates) {
         userUpdates.setId(userId);

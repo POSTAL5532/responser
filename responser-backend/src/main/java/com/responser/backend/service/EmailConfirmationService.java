@@ -53,6 +53,12 @@ public class EmailConfirmationService {
         emailConfirmationRepository.deleteById(confirmationId);
     }
 
+    public EmailConfirmation getByUserId(String userId) {
+        return emailConfirmationRepository.findByUserId(userId).orElseThrow(
+            () -> logAndThrowNoSuchEmailConfirmationForUser(userId)
+        );
+    }
+
     public boolean existByUserId(String userId) {
         return emailConfirmationRepository.existsByUserId(userId);
     }

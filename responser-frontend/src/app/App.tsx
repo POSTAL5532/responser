@@ -8,8 +8,8 @@ import {SIGN_UP_PAGE_URL, SignUpPage} from "./logic/sign-up/SignUpPage";
 import MainPage, {MAIN_PAGE_URL} from "./logic/main-page/MainPage";
 import LoginExtension, {LOGIN_EXTENSION} from "./logic/login-extension/LoginExtension";
 import LogoutExtension, {LOGOUT_EXTENSION} from "./logic/logout-extension/LogoutExtension";
-import "app/App.less";
 import AuthorizationService from "./service/authorization/AuthorizationService";
+import "app/App.less";
 
 export class App extends Component {
 

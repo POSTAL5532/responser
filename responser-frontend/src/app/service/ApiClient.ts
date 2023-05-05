@@ -80,7 +80,7 @@ export class ApiClient {
         return response.data;
     }
 
-    executePostRequest = async <T = any, B = any>(url: string, body: B, requestOptions?: AxiosRequestConfig): Promise<T> => {
+    executePostRequest = async <T = any, B = any>(url: string, body?: B, requestOptions?: AxiosRequestConfig): Promise<T> => {
         const response = await axios.post<T>(url, body, this.getRequestConfig(requestOptions));
         return response.data;
     }

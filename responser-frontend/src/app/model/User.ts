@@ -9,6 +9,8 @@ export class User {
 
     fullName: string;
 
+    emailConfirmed: boolean;
+
     createdTimestamp: Moment;
 
     public static deserialize(data: any): User {
