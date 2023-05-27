@@ -39,7 +39,7 @@ const EditUserProfileForm: React.FC<EditUserProfileFormProps> = (props: EditUser
                     validationSchema={EDIT_USER_FORM_VALIDATION_SCHEMA}>
                 <Form>
                     <FieldLayout label="Email" className="email-field">
-                            <EmailField onChange={value => updateUserPayload.email = value} disabled={disabled}/>
+                        <EmailField onChange={value => updateUserPayload.email = value} disabled={disabled}/>
                     </FieldLayout>
 
                     <FieldLayout label="Username">
@@ -50,8 +50,10 @@ const EditUserProfileForm: React.FC<EditUserProfileFormProps> = (props: EditUser
                         <FullNameField onChange={value => updateUserPayload.fullName = value} disabled={disabled}/>
                     </FieldLayout>
 
-                    <Button type="submit">Save</Button>
-                    <Button type="button" onClick={navigateToUserProfilePage} styleType={ButtonType.SECONDARY}>Cancel</Button>
+                    <div className="form-controls">
+                        <Button type="submit" loading={disabled} disabled={disabled}>Save</Button>
+                        <Button type="button" onClick={navigateToUserProfilePage} styleType={ButtonType.SECONDARY} disabled={disabled}>Cancel</Button>
+                    </div>
                 </Form>
             </Formik>
         </div>

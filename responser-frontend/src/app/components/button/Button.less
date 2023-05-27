@@ -19,15 +19,27 @@
     padding-left: 8px;
     padding-right: 8px;
     font-size: 14px;
+
+    .spinner {
+      width: 20px !important;
+    }
   }
 
   .icon {
     height: 14px;
   }
 
+  .spinner {
+    width: 26px !important;
+  }
+
   &.primary {
     color: @system-color-light-100;
     background-color: @primary-color-lighter;
+
+    .spinner {
+      color: @system-color-light-100 !important;
+    }
 
     svg path {
       stroke: @system-color-light-100;
@@ -47,6 +59,10 @@
     background-color: @system-color-light-300;
     border: solid 1px @system-color-dark-100;
 
+    .spinner {
+      color: @system-color-dark-300 !important;
+    }
+
     svg path {
       stroke: @system-color-dark-300;
     }
@@ -64,6 +80,10 @@
     color: @system-color-light-100;
     background-color: @system-color-light-500;
     pointer-events: none;
+
+    .spinner {
+      color: @system-color-dark-100 !important;
+    }
 
     svg path {
       stroke: @system-color-light-100;

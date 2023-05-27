@@ -43,7 +43,7 @@ export class EditUserProfilePageStore {
         this.updateUserPayload.fullName = currentUser.fullName;
     }
 
-    public updateUser = async (setFieldError?: (field: string, message: string) => void) => {
+    public updateUser = async (setFieldError?: (field: string, message: string) => void): Promise<void> => {
         this.loadingState.isDataSubmitting = true;
         this.logger.debug("Update user - start.");
 

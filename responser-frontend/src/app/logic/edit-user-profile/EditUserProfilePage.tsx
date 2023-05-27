@@ -33,7 +33,7 @@ const EditUserProfilePage: React.FC = () => {
                 {
                     !!updateUserPayload
                         ? <EditUserForm updateUserPayload={updateUserPayload} onFinish={onFinish} disabled={loadingState.isDataSubmitting}/>
-                        : <Spinner/>
+                        : <Spinner className="edit-user-loading-spinner"/>
                 }
             </div>
         </Page>

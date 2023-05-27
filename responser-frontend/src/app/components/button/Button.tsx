@@ -1,5 +1,6 @@
 import React from "react";
 import classNames from "classnames";
+import {Spinner} from "../spinner/Spinner";
 import "./Button.less";
 
 export enum ButtonType {
@@ -14,29 +15,17 @@ export enum ButtonSize {
 type ButtonProps = {
     styleType?: ButtonType;
     size?: ButtonSize;
+    loading?: boolean;
 } & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
 export const Button: React.FC<ButtonProps> = (props: ButtonProps) => {
-    const {
-        className,
-        disabled,
-        children,
-        styleType = ButtonType.PRIMARY,
-        size,
-        ...otherProps
-    } = props;
+    const {className, disabled, children, styleType = ButtonType.PRIMARY, size, loading, ...otherProps} = props;
 
-    const resultClassName = classNames(
-        "button",
-        styleType.toLowerCase(),
-        {"disabled": disabled},
-        size,
-        className
-    );
+    const resultClassName = classNames("button", styleType.toLowerCase(), {"disabled": disabled}, size, className);
 
     return (
         <button {...otherProps} className={resultClassName} disabled={disabled}>
-            {children}
+            {loading ? <Spinner/> : children}
         </button>
     );
 }

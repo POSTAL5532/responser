@@ -17,12 +17,20 @@
     outline: none;
   }
 
-  &:hover {
-    border-color: @primary-color-lighter;
+  &:not(.disabled) {
+    &:hover {
+      border-color: @primary-color-lighter;
+    }
+
+    &:focus {
+      border-color: @primary-color-main;
+    }
   }
 
-  &:focus {
-    border-color: @primary-color-main;
+  &.disabled {
+    pointer-events: none;
+    background-color: @system-color-light-200;
+    .placeholderColor(@system-color-light-500);
   }
 
   &.invalid {

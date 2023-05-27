@@ -1,5 +1,4 @@
 import React from "react";
-import {Spinner} from "../../components/spinner/Spinner";
 import {Button, ButtonSize, ButtonType} from "../../components/button/Button";
 import {UserProfileProperty} from "./UserProfileProperty";
 import {MessageBlock, MessageBlockType} from "../../components/message-block/MessageBlock";
@@ -16,11 +15,11 @@ type UserProfileEmailPropertyProps = {
 export const UserProfileEmailProperty: React.FC<UserProfileEmailPropertyProps> = (props: UserProfileEmailPropertyProps) => {
     const {email, needEmailConfirmation, onResend, resendConfirmationProcess, confirmationResent} = props;
 
-    const resendButtonContent = !resendConfirmationProcess ? "Resend email confirmation" : <Spinner size={18}/>;
     const resendButton = <Button className="resend-email-confirmation-button"
                                  size={ButtonSize.SMALL}
                                  styleType={ButtonType.SECONDARY}
-                                 onClick={onResend}>{resendButtonContent}</Button>;
+                                 loading={resendConfirmationProcess}
+                                 onClick={onResend}>Resend email confirmation</Button>;
 
     const confirmationResentMessage = "Confirmation message was resent. Check your mailbox and confirm email. If message didn't receive - check spam folder.";
     const needResendConfirmationMessage = <>
