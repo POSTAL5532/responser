@@ -65,7 +65,7 @@ type UserProfilePanelContentProps = {
 const UserProfilePanelContent: React.FC<UserProfilePanelContentProps> = (props: UserProfilePanelContentProps) => {
     const {loading, user, onConfirmationResend, resendConfirmationProcess, confirmationResent} = props;
 
-    if (loading) return <Spinner/>;
+    if (loading) return <Spinner className="user-profile-loading-spinner"/>;
 
     return (
         <>
