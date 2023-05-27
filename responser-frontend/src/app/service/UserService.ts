@@ -2,6 +2,7 @@ import {ApiClient} from "app/service/ApiClient";
 import {UserAccountDataPayload} from "app/model/UserAccountDataPayload";
 import {User} from "app/model/User";
 import {Logger} from "../utils/Logger";
+import {UpdateUserPayload} from "../model/UpdateUserPayload";
 
 const BASE_USER_REQUEST = "/users"
 
@@ -23,5 +24,10 @@ export class UserService {
         this.logger.debug("Get current user.");
         const userData = await this.client.executeGetRequest(`${BASE_USER_REQUEST}/current`);
         return User.deserialize(userData);
+    }
+
+    updateUser = async (userUpdates: UpdateUserPayload): Promise<void> => {
+        this.logger.debug("Update current user:", userUpdates);
+        await this.client.executePutRequest(`${BASE_USER_REQUEST}`, userUpdates);
     }
 }

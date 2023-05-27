@@ -8,7 +8,9 @@ import {SIGN_UP_PAGE_URL, SignUpPage} from "./logic/sign-up/SignUpPage";
 import MainPage, {MAIN_PAGE_URL} from "./logic/main-page/MainPage";
 import LoginExtension, {LOGIN_EXTENSION} from "./logic/login-extension/LoginExtension";
 import LogoutExtension, {LOGOUT_EXTENSION} from "./logic/logout-extension/LogoutExtension";
+import EditUserPage, {EDIT_USER_PAGE_URL} from "./logic/edit-user-profile/EditUserProfilePage";
 import AuthorizationService from "./service/authorization/AuthorizationService";
+import UserProfilePage, {USER_PROFILE_PAGE_URL} from "./logic/user-profile/UserProfilePage";
 import "app/App.less";
 
 export class App extends Component {
@@ -26,7 +28,10 @@ export class App extends Component {
                         <UnauthorizedRoute path={AUTH_CODE_PAGE_URL} exact component={AuthCodePage}/>
 
                         <AuthorizedRoute path={MAIN_PAGE_URL} exact component={MainPage}/>
+                        <AuthorizedRoute path={USER_PROFILE_PAGE_URL} exact component={UserProfilePage}/>
+                        <AuthorizedRoute path={EDIT_USER_PAGE_URL} exact component={EditUserPage}/>
                         <AuthorizedRoute path={LOGIN_EXTENSION} exact component={LoginExtension} redirectLogic={AuthorizationService.requestLoginPage}/>
+
                         <PermitAllRoute path={LOGOUT_EXTENSION} exact component={LogoutExtension}/>
 
                         <Redirect from="*" to={MAIN_PAGE_URL}/>

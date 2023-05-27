@@ -1,28 +1,19 @@
 import React, {ChangeEvent} from "react";
 import {Field, FieldProps} from "formik";
-import * as Yup from 'yup';
 import {InputField} from "app/components/form/input-field/InputField";
 import {FieldMessage} from "app/components/form/field-message/FieldMessage";
 
-type FullNameFieldProps = {
+type UsernameFieldFieldProps = {
     onChange: (value: string) => void;
+    disabled?: boolean;
 };
 
-const FULL_NAME_SIZE_VALID_MESSAGE = "Full name must be from 2 to 255 characters";
-
-export const FULL_NAME_VALIDATION_SCHEMA = {
-    fullName: Yup.string()
-        .required("Full name is required")
-        .min(2, FULL_NAME_SIZE_VALID_MESSAGE)
-        .max(255, FULL_NAME_SIZE_VALID_MESSAGE)
-}
-
-export const FullNameField: React.FC<FullNameFieldProps> = (props: FullNameFieldProps) => {
+export const UsernameField: React.FC<UsernameFieldFieldProps> = (props: UsernameFieldFieldProps) => {
 
     return (
-        <Field name="fullName">
+        <Field name="userName">
             {({field: {onChange, ...other}, meta: {touched, error}}: FieldProps) => {
-                const onFullNameFieldChange = (event: ChangeEvent<HTMLInputElement>) => {
+                const onUsernameFieldChange = (event: ChangeEvent<HTMLInputElement>) => {
                     onChange(event);
                     props.onChange(event.target.value)
                 }
@@ -32,8 +23,9 @@ export const FullNameField: React.FC<FullNameFieldProps> = (props: FullNameField
                         <InputField
                             {...other}
                             invalid={touched && !!error}
-                            placeholder="Enter full name"
-                            onChange={onFullNameFieldChange}/>
+                            placeholder="Enter username"
+                            onChange={onUsernameFieldChange}
+                            disabled={props.disabled}/>
                         <FieldMessage isError={true} visible={touched && !!error}>{error}</FieldMessage>
                     </>
                 );

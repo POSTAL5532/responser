@@ -41,4 +41,5 @@ let slider = tns({
     swipeAngle: false,
     center: true,
     mouseDrag: true,
+    preventScrollOnTouch: "force"
 });

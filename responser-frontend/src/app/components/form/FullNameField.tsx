@@ -1,23 +1,19 @@
 import React, {ChangeEvent} from "react";
 import {Field, FieldProps} from "formik";
-import * as Yup from 'yup';
 import {InputField} from "app/components/form/input-field/InputField";
 import {FieldMessage} from "app/components/form/field-message/FieldMessage";
 
-type EmailFieldProps = {
+type FullNameFieldProps = {
     onChange: (value: string) => void;
+    disabled?: boolean;
 };
 
-export const EMAIL_VALIDATION_SCHEMA = {
-    email: Yup.string().required("Email is required").email("Invalid email")
-}
-
-export const EmailField: React.FC<EmailFieldProps> = (props: EmailFieldProps) => {
+export const FullNameField: React.FC<FullNameFieldProps> = (props: FullNameFieldProps) => {
 
     return (
-        <Field name="email">
+        <Field name="fullName">
             {({field: {onChange, ...other}, meta: {touched, error}}: FieldProps) => {
-                const onEmailChange = (event: ChangeEvent<HTMLInputElement>) => {
+                const onFullNameFieldChange = (event: ChangeEvent<HTMLInputElement>) => {
                     onChange(event);
                     props.onChange(event.target.value)
                 }
@@ -27,8 +23,9 @@ export const EmailField: React.FC<EmailFieldProps> = (props: EmailFieldProps) =>
                         <InputField
                             {...other}
                             invalid={touched && !!error}
-                            placeholder="Enter email"
-                            onChange={onEmailChange}/>
+                            placeholder="Enter full name"
+                            onChange={onFullNameFieldChange}
+                            disabled={props.disabled}/>
                         <FieldMessage isError={true} visible={touched && !!error}>{error}</FieldMessage>
                     </>
                 );

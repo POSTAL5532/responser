@@ -8,7 +8,7 @@ export enum FieldLayoutType {
 }
 
 type FieldLayoutProps = {
-    label: string;
+    label: string | React.ReactNode;
     layoutType?: FieldLayoutType;
     disabled?: boolean;
     className?: string;

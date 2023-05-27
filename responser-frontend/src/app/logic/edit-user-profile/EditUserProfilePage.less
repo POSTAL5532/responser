@@ -1,0 +1,32 @@
+@import "globalsLess";
+
+.edit-user-page {
+  display: flex;
+  justify-content: center;
+
+  .edit-user-form-panel {
+    position: relative;
+    min-height: 404px;
+    width: 100%;
+    background-color: @system-color-light-100;
+    padding: 28px 48px;
+    border-radius: 8px;
+    .stackShadow3();
+
+    .edit-user-header {
+      .fontInterRegular();
+      font-size: 28px;
+      color: @system-color-dark-300;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+
+    .spinner {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      top: 50%;
+    }
+  }
+}

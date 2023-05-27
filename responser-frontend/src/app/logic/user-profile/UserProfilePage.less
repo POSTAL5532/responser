@@ -1,0 +1,49 @@
+@import "globalsLess";
+
+.user-profile-page {
+  display: flex;
+  justify-content: center;
+
+  .user-profile-panel {
+    min-height: 372px;
+    width: 100%;
+    background-color: @white-color;
+    padding: 28px 48px;
+    border-radius: 8px;
+    .stackShadow3();
+
+    .user-profile-header {
+      .fontInterRegular();
+      font-size: 28px;
+      color: @system-color-dark-300;
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 30px;
+    }
+
+    .user-profile-loading {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .user-property {
+      margin-bottom: 16px;
+
+      &:last-child {
+        margin-bottom: 30px;
+      }
+
+      .user-property-label {
+        width: 100px;
+      }
+    }
+
+    .spinner {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      top: 50%;
+    }
+  }
+}

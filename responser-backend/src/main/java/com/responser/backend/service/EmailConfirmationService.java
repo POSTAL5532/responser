@@ -5,8 +5,8 @@ import static java.text.MessageFormat.format;
 import com.responser.backend.exceptions.EntityAlreadyExistException;
 import com.responser.backend.model.EmailConfirmation;
 import com.responser.backend.repository.EmailConfirmationRepository;
-import java.time.LocalDateTime;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -39,16 +39,6 @@ public class EmailConfirmationService {
     }
 
     @Transactional
-    public EmailConfirmation prolongConfirmationForUser(String userId) {
-        EmailConfirmation confirmation = emailConfirmationRepository.findByUserId(userId).orElseThrow(
-            () -> logAndThrowNoSuchEmailConfirmationForUser(userId)
-        );
-
-        confirmation.setUpdateDate(LocalDateTime.now().plusHours(24));
-        return emailConfirmationRepository.save(confirmation);
-    }
-
-    @Transactional
     public void deleteConfirmation(String confirmationId) {
         emailConfirmationRepository.deleteById(confirmationId);
     }
@@ -57,6 +47,10 @@ public class EmailConfirmationService {
         return emailConfirmationRepository.findByUserId(userId).orElseThrow(
             () -> logAndThrowNoSuchEmailConfirmationForUser(userId)
         );
+    }
+
+    public Optional<EmailConfirmation> findByUserId(String userId) {
+        return emailConfirmationRepository.findByUserId(userId);
     }
 
     public boolean existByUserId(String userId) {

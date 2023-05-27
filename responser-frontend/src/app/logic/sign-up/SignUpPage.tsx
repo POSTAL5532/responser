@@ -1,10 +1,10 @@
 import React, {Component} from "react";
-import {Page} from "app/components/page/Page";
 import {observer} from "mobx-react";
-import {SignUpPageStore} from "app/logic/sign-up/SignUpPageStore";
-import SignUpForm from "app/logic/sign-up/form/SignUpForm";
+import {Page} from "../../components/page/Page";
+import {SignUpPageStore} from "./SignUpPageStore";
+import SignUpForm from "./form/SignUpForm";
 import {GlobalAppStoreContext} from "app/GlobalAppStore";
-import "app/logic/sign-up/SignUpPage.less";
+import "./SignUpPage.less";
 
 export const SIGN_UP_PAGE_URL = "/sign-up";
 

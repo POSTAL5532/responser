@@ -11,11 +11,14 @@ export class User {
 
     emailConfirmed: boolean;
 
-    createdTimestamp: Moment;
+    creationDate: Moment;
+
+    updateDate: Moment;
 
     public static deserialize(data: any): User {
         return Object.assign(new User(), data, {
-            createdTimestamp: data.createdTimestamp ? moment(data.createdTimestamp) : null,
+            creationDate: data.creationDate ? moment(data.creationDate) : null,
+            updateDate: data.updateDate ? moment(data.updateDate) : null
         })
     }
 }

@@ -3,14 +3,15 @@ import {observer} from "mobx-react";
 import {Formik, Form, FieldValidator} from "formik";
 import * as Yup from "yup";
 import {UserAccountDataPayload} from "app/model/UserAccountDataPayload";
-import {FULL_NAME_VALIDATION_SCHEMA, FullNameField} from "app/logic/sign-up/form/FullNameField";
-import {USERNAME_VALIDATION_SCHEMA, UsernameField} from "app/logic/sign-up/form/UsernameField";
 import {Button} from "app/components/button/Button";
 import {PASSWORD_VALIDATION_SCHEMA, PasswordField} from "app/logic/sign-up/form/PasswordField";
-import {EMAIL_VALIDATION_SCHEMA, EmailField} from "app/logic/sign-up/form/EmailField";
 import AuthorizationService from "../../../service/authorization/AuthorizationService";
 import {FieldLayout} from "../../../components/form/field-layout/FieldLayout";
 import {FormikHelpers} from "formik/dist/types";
+import {EMAIL_VALIDATION_SCHEMA, FULL_NAME_VALIDATION_SCHEMA, USERNAME_VALIDATION_SCHEMA} from "../../../utils/ValidationUtils";
+import {EmailField} from "../../../components/form/EmailField";
+import {UsernameField} from "../../../components/form/UsernameField";
+import {FullNameField} from "../../../components/form/FullNameField";
 import "./SignUpForm.less";
 
 type SignUpFormProps = {

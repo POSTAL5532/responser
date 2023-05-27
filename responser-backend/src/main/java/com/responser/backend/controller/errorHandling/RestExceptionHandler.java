@@ -2,6 +2,7 @@ package com.responser.backend.controller.errorHandling;
 
 import com.responser.backend.controller.payload.ApiError;
 import com.responser.backend.controller.payload.ApiErrorType;
+import com.responser.backend.exceptions.DataNotValidException;
 import com.responser.backend.exceptions.EntityAlreadyExistException;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.ConstraintViolationException;
@@ -116,5 +117,19 @@ public class RestExceptionHandler extends ResponseEntityExceptionHandler {
         }
 
         return handleExceptionInternal(exception, response2, new HttpHeaders(), HttpStatus.BAD_REQUEST, request);
+    }
+
+    /**
+     * Handle {@link DataNotValidException} validation errors.
+     *
+     * @param exception DataNotValidException
+     * @return {@link ApiError} with {@link ApiErrorType#VALIDATION_ERROR} error type and list of fields errors
+     */
+    @ExceptionHandler(DataNotValidException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    @ResponseBody
+    protected ApiError<Map<String, List<String>>> handleMethodArgumentNotValid(DataNotValidException exception) {
+        log.error("Handle 'ConstraintViolationException' {}", exception.getMessage());
+        return new ApiError<>("Validation error", ApiErrorType.VALIDATION_ERROR, exception.getFieldsErrors());
     }
 }

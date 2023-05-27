@@ -1,7 +1,5 @@
 package com.responser.backend.controller.user.payload;
 
-import com.responser.backend.controller.user.validation.EmailUniqueness;
-import com.responser.backend.controller.user.validation.UsernameUniqueness;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -20,12 +18,10 @@ public class UpdateUserPayload {
 
     @NotBlank(message = "Username must be specified")
     @Size(min = 2, max = 255, message = "Username must be from 2 to 255 characters")
-    @UsernameUniqueness(message = "User with this username is already registered")
     private String userName;
 
     @NotBlank(message = "Email must be specified")
     @Email(message = "Email is incorrect")
-    @EmailUniqueness(message = "User with this email is already registered")
     private String email;
 
     @NotBlank(message = "Full name must be specified")

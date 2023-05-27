@@ -1,6 +1,6 @@
 import React from "react";
 import {User} from "app/model/User";
-import {action, computed, makeAutoObservable, runInAction} from "mobx";
+import {action, makeAutoObservable, runInAction} from "mobx";
 import LocalTokenStorageService from "app/service/authorization/LocalTokenStorageService";
 import {UserService} from "app/service/UserService";
 import {reloadPage} from "./utils/NavigationUtils";
@@ -25,11 +25,6 @@ export class GlobalAppStore {
             this.isLoading = true;
             this.refreshCurrentUser().finally(() => this.isLoading = false);
         }
-    }
-
-    @computed
-    get isAuthorized(): boolean {
-        return !!this.currentUser;
     }
 
     refreshCurrentUser = async () => {

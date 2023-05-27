@@ -1,15 +1,21 @@
 package com.responser.backend.service;
 
+import com.responser.backend.exceptions.DataNotValidException;
 import com.responser.backend.model.EmailConfirmation;
 import com.responser.backend.model.User;
+import com.responser.backend.model.User_;
 import com.responser.backend.repository.UserRepository;
 import com.responser.backend.service.email.EmailService;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import static java.text.MessageFormat.format;
+
 import java.util.NoSuchElementException;
 
 /**
@@ -56,8 +62,29 @@ public class UserService {
 
     @Transactional
     public void updateUser(String userId, User userUpdates) {
-        userUpdates.setId(userId);
-        updateUser(userUpdates);
+        User user = getUser(userId);
+
+        validateUpdateUserData(user, userUpdates);
+
+        if (!user.getUserName().equals(userUpdates.getUserName())) {
+            user.setUserName(userUpdates.getUserName());
+        }
+
+        if (!user.getEmail().equals(userUpdates.getEmail())) {
+            user.setEmail(userUpdates.getEmail());
+
+            EmailConfirmation emailConfirmation = emailConfirmationService
+                .findByUserId(userId)
+                .orElseGet(() -> emailConfirmationService.createEmailConfirmation(userId));
+
+            emailService.sendEmailConfirmationMessage(user.getEmail(), emailConfirmation);
+        }
+
+        if (!user.getFullName().equals(userUpdates.getFullName())) {
+            user.setFullName(userUpdates.getFullName());
+        }
+
+        updateUser(user);
     }
 
     @Transactional
@@ -79,5 +106,21 @@ public class UserService {
 
     public boolean existByUserName(String username) {
         return userRepository.existsByUserName(username);
+    }
+
+    public void validateUpdateUserData(User existingUser, User userUpdates) {
+        Map<String, List<String>> fieldsErrors = new HashMap<>();
+
+        if (!existingUser.getUserName().equals(userUpdates.getUserName()) && existByUserName(userUpdates.getUserName())) {
+            fieldsErrors.put(User_.USER_NAME, List.of("User with this username already exist."));
+        }
+
+        if (!existingUser.getEmail().equals(userUpdates.getEmail()) && existByEmail(userUpdates.getEmail())) {
+            fieldsErrors.put(User_.EMAIL, List.of("User with this email already exist."));
+        }
+
+        if (!fieldsErrors.isEmpty()) {
+            throw new DataNotValidException("Update user data is not valid", fieldsErrors);
+        }
     }
 }

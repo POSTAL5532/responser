@@ -1,0 +1,30 @@
+@import "globalsLess";
+
+.message-block {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid;
+  .fontInterRegular();
+  font-size: 14px;
+  color: @system-color-dark-400;
+
+  &.info {
+    border-color: @system-color-pending-400;
+    background-color: @system-color-pending-100;
+  }
+
+  &.success {
+    border-color: @system-color-success-400;
+    background-color: @system-color-success-100;
+  }
+
+  &.warning {
+    border-color: @system-color-warning-600;
+    background-color: @system-color-warning-100;
+  }
+
+  &.error {
+    border-color: @system-color-danger-300;
+    background-color: @system-color-danger-100;
+  }
+}

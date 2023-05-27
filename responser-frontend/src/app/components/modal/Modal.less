@@ -1,0 +1,32 @@
+@import "globalsLess";
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(84, 84, 84, 0.75);
+
+  .modal {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    left: 50%;
+    top: 50%;
+    background: @system-color-light-100;
+    overflow: auto;
+    border-radius: 8px;
+    outline: none;
+    padding: 28px;
+    .stackShadow3();
+
+    .modal-header {
+      .fontInterRegular();
+      font-size: 22px;
+      margin-top: 0;
+      margin-bottom: 20px;
+    }
+
+    .modal-body {
+      margin-bottom: 20px;
+      .fontInterRegular();
+    }
+  }
+}
