@@ -1,11 +1,12 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {observer} from "mobx-react";
 import {Page} from "../../components/page/Page";
 import EditUserForm from "./form/EditUserProfileForm";
 import {useEditUserPageStore} from "./EditUserProfilePageStore";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {Spinner} from "../../components/spinner/Spinner";
-import {navigateTo} from "../../utils/NavigationUtils";
+import {navigateTo, reloadPage} from "../../utils/NavigationUtils";
+import {Modal} from "../../components/modal/Modal";
 import "./EditUserProfilePage.less";
 
 export const EDIT_USER_PAGE_URL = "/edit-user";
@@ -17,13 +18,14 @@ export const navigateToEditUserPage = () => {
 const EditUserProfilePage: React.FC = () => {
     const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const {init, updateUser, updateUserPayload, loadingState, userWasChanged} = useEditUserPageStore();
+    const [isModalOpen, setIsModalOpen] = useState(false);
 
     useEffect(() => {
         if (!!currentUser) init(currentUser);
     }, [currentUser]);
 
     const onFinish = async (setFieldError?: (field: string, message: string) => void) => {
-        await updateUser(setFieldError);
+        await updateUser(setFieldError).then(() => setIsModalOpen(true));
     }
 
     return (
@@ -39,6 +41,10 @@ const EditUserProfilePage: React.FC = () => {
                         : <Spinner className="edit-user-xloading-spinner"/>
                 }
             </div>
+
+            <Modal isOpen={isModalOpen} header="Done" onOk={reloadPage}>
+                User profile data changes was successfully saved.
+            </Modal>
         </Page>
     );
 }
