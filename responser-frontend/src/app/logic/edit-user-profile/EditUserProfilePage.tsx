@@ -16,10 +16,10 @@ export const navigateToEditUserPage = () => {
 
 const EditUserProfilePage: React.FC = () => {
     const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
-    const {init, updateUser, updateUserPayload, loadingState} = useEditUserPageStore();
+    const {init, updateUser, updateUserPayload, loadingState, userWasChanged} = useEditUserPageStore();
 
     useEffect(() => {
-        if (!!currentUser) init(currentUser.id);
+        if (!!currentUser) init(currentUser);
     }, [currentUser]);
 
     const onFinish = async (setFieldError?: (field: string, message: string) => void) => {
@@ -32,8 +32,11 @@ const EditUserProfilePage: React.FC = () => {
                 <h2 className="edit-user-header">User profile</h2>
                 {
                     !!updateUserPayload
-                        ? <EditUserForm updateUserPayload={updateUserPayload} onFinish={onFinish} disabled={loadingState.isDataSubmitting}/>
-                        : <Spinner className="edit-user-loading-spinner"/>
+                        ? <EditUserForm updateUserPayload={updateUserPayload}
+                                        onFinish={onFinish}
+                                        disabled={loadingState.isDataSubmitting}
+                                        userWasChanged={userWasChanged}/>
+                        : <Spinner className="edit-user-xloading-spinner"/>
                 }
             </div>
         </Page>

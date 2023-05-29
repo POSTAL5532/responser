@@ -1,6 +1,12 @@
 import moment, {Moment} from "moment";
+import {makeAutoObservable} from "mobx";
 
 export class User {
+
+    constructor() {
+        makeAutoObservable(this);
+    }
+
     id: string;
 
     userName: string;

@@ -16,6 +16,7 @@ import "./EditUserProfileForm.less";
 type EditUserProfileFormProps = {
     updateUserPayload: UpdateUserPayload;
     onFinish: (setFieldError?: (field: string, message: string) => void) => void;
+    userWasChanged: boolean;
     disabled?: boolean;
 }
 
@@ -26,7 +27,7 @@ const EDIT_USER_FORM_VALIDATION_SCHEMA = Yup.object().shape({
 });
 
 const EditUserProfileForm: React.FC<EditUserProfileFormProps> = (props: EditUserProfileFormProps) => {
-    const {updateUserPayload, onFinish, disabled} = props;
+    const {updateUserPayload, onFinish, disabled, userWasChanged} = props;
 
     const onSubmit = (values: any, {setFieldError}: FormikHelpers<any>) => {
         onFinish(setFieldError);
@@ -51,7 +52,7 @@ const EditUserProfileForm: React.FC<EditUserProfileFormProps> = (props: EditUser
                     </FieldLayout>
 
                     <div className="form-controls">
-                        <Button type="submit" loading={disabled} disabled={disabled}>Save</Button>
+                        <Button type="submit" loading={disabled} disabled={disabled || !userWasChanged}>Save</Button>
                         <Button type="button" onClick={navigateToUserProfilePage} styleType={ButtonType.SECONDARY} disabled={disabled}>Cancel</Button>
                     </div>
                 </Form>

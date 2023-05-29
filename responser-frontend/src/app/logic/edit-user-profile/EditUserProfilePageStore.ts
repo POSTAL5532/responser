@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {makeAutoObservable} from "mobx";
+import {computed, makeAutoObservable} from "mobx";
 import {Logger} from "../../utils/Logger";
 import {UserService} from "../../service/UserService";
 import {UpdateUserPayload} from "../../model/UpdateUserPayload";
@@ -11,7 +11,7 @@ export class EditUserProfilePageStore {
 
     userService: UserService = new UserService();
 
-    currentUserId: string;
+    currentUser: User;
 
     updateUserPayload: UpdateUserPayload;
 
@@ -21,9 +21,9 @@ export class EditUserProfilePageStore {
         makeAutoObservable(this);
     }
 
-    public init = async (currentUserId: string) => {
-        this.logger.debug("Init store: currentUserId =", currentUserId);
-        this.currentUserId = currentUserId;
+    public init = async (currentUser: User) => {
+        this.logger.debug("Init store: currentUser =", currentUser);
+        this.currentUser = currentUser;
         await this.initUpdateUserPayload();
     }
 
@@ -35,12 +35,23 @@ export class EditUserProfilePageStore {
             this.logger.debug("Init update user payload - finish.");
         });
 
-        this.currentUserId = currentUser.id;
+        this.currentUser = currentUser;
 
         this.updateUserPayload = new UpdateUserPayload();
         this.updateUserPayload.userName = currentUser.userName;
         this.updateUserPayload.email = currentUser.email;
         this.updateUserPayload.fullName = currentUser.fullName;
+    }
+
+    @computed
+    get userWasChanged(): boolean {
+        if (!this.currentUser || !this.updateUserPayload) {
+            return false;
+        }
+
+        return this.currentUser.email !== this.updateUserPayload.email ||
+            this.currentUser.userName !== this.updateUserPayload.userName ||
+            this.currentUser.fullName !== this.updateUserPayload.fullName;
     }
 
     public updateUser = async (setFieldError?: (field: string, message: string) => void): Promise<void> => {
