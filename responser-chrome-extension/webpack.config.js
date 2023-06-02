@@ -143,10 +143,6 @@ module.exports = (env, args) => {
                     {
                         from: path.resolve(__dirname, "public", "background.js"),
                         transform: populateEnvProperties
-                    },
-                    {
-                        from: path.resolve(__dirname, "public", "content.js"),
-                        transform: populateEnvProperties
                     }
                 ],
             })
