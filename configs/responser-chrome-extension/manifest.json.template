@@ -12,10 +12,10 @@
     "default_popup": "index.html",
     "default_title": "Reviewly",
     "default_icon": {
-      "16": "logo192.png",
-      "32": "logo192.png",
-      "64": "logo192.png",
-      "128": "logo192.png"
+      "16": "logo_16.png",
+      "32": "logo_32.png",
+      "64": "logo_64.png",
+      "128": "logo_128.png"
     }
   },
   "background": {
@@ -28,9 +28,9 @@
     ]
   },
   "icons": {
-    "16": "logo192.png",
-    "32": "logo192.png",
-    "64": "logo192.png",
-    "128": "logo192.png"
+    "16": "logo_16.png",
+    "32": "logo_32.png",
+    "64": "logo_64.png",
+    "128": "logo_128.png"
   }
 }

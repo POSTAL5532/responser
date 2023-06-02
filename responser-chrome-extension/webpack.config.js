@@ -135,7 +135,10 @@ module.exports = (env, args) => {
             new webpack.DefinePlugin(convertToProcessEnvProperties(ENV_FILE_PROPERTIES)),
             new CopyPlugin({
                 patterns: [
-                    path.resolve(__dirname, "public", "logo192.png"),
+                    {
+                        from: path.resolve(__dirname, "public", "logo"),
+                        to: path.resolve(__dirname, "build")
+                    },
                     {
                         from: path.resolve(`${CONFIGS_PATH}/manifest.json`),
                         to: "manifest.json"
