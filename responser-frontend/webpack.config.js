@@ -2,7 +2,8 @@ const path = require("path");
 const {CleanWebpackPlugin} = require("clean-webpack-plugin");
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 const webpack = require("webpack");
-const dotenv = require('dotenv');
+const dotenv = require("dotenv");
+const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 
 let ENV_FILE_PROPERTIES;
 let CONFIGS_PATH;
@@ -106,7 +107,13 @@ module.exports = (env, args) => {
                 template: "./public/index.html",
                 filename: "./index.html"
             }),
-            new webpack.DefinePlugin(convertTpProcessEnvProperties(ENV_FILE_PROPERTIES))
+            new webpack.DefinePlugin(convertTpProcessEnvProperties(ENV_FILE_PROPERTIES)),
+            new FaviconsWebpackPlugin({
+                mode: "webapp",
+                devMode: "webapp",
+                logo: path.resolve(__dirname, "public", "favicon_", "logo_2436.png"),
+                inject: true
+            })
         ]
     }
 };
