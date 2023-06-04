@@ -32,7 +32,7 @@ const AppHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {
 
     return (
         <div className="app-header">
-            <div className="header-title">{props.title}</div>
+            <div className="header-title"><Icon type={IconType.REVIEWLY_LOGO}/> {props.title}</div>
             {
                 currentUser &&
                 <div className="user-block">
