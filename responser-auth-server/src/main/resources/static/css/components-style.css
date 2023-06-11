@@ -67,7 +67,7 @@
 
 body {
   margin: 0;
-  background-color: #F2F2F5;
+  background-color: #ffffff;
 }
 
 .app-header {
@@ -75,15 +75,23 @@ body {
   background-color: #FFFFFF;
   height: 86px;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   padding: 0 24px;
   box-shadow: 0 0 2px rgb(40 41 61 / 4%), 0 4px 8px rgb(96 97 112 / 16%);
 }
 
 .app-header .header-title {
+  display: flex;
+  align-items: center;
   font-family: "Inter-Bold";
   font-size: 38px;
   color: #28293D;
+}
+
+.app-header .header-title .icon {
+  height: 28px;
+  width: 28px;
+  margin-right: 10px;
 }
 
 /* ============ FIELD ============ */

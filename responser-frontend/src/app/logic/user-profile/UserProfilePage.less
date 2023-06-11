@@ -5,12 +5,11 @@
   justify-content: center;
 
   .user-profile-panel {
+    max-width: 840px;
+    min-width: 540px;
     min-height: 372px;
     width: 100%;
-    background-color: @white-color;
     padding: 28px 48px;
-    border-radius: 8px;
-    .stackShadow3();
 
     .user-profile-header {
       .fontInterRegular();
@@ -19,6 +18,13 @@
       text-align: center;
       margin-top: 0;
       margin-bottom: 30px;
+    }
+
+    .user-profile-loading-spinner {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      left: 50%;
+      top: 50%;
     }
 
     .user-property {

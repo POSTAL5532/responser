@@ -38,7 +38,7 @@ const EditUserProfilePage: React.FC = () => {
                                         onFinish={onFinish}
                                         disabled={loadingState.isDataSubmitting}
                                         userWasChanged={userWasChanged}/>
-                        : <Spinner className="edit-user-xloading-spinner"/>
+                        : <Spinner className="edit-user-loading-spinner"/>
                 }
             </div>
 
