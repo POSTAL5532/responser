@@ -146,6 +146,17 @@ module.exports = (env, args) => {
                     {
                         from: path.resolve(__dirname, "public", "background.js"),
                         transform: populateEnvProperties
+                    },
+                    {
+                        from: path.resolve(__dirname, "public", "content.js"),
+                        transform: populateEnvProperties
+                    },
+                    {
+                        from: path.resolve(__dirname, "public", "content-styles.css")
+                    },
+                    {
+                        from: path.resolve(__dirname, "public", "fonts"),
+                        to: path.resolve(__dirname, "build", "fonts")
                     }
                 ],
             })

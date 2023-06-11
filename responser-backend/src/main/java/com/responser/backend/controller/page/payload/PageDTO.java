@@ -29,6 +29,8 @@ public class PageDTO {
 
     private Double rating;
 
+    private Integer reviewsCount;
+
     private LocalDateTime creationDate;
 
     private LocalDateTime updateDate;

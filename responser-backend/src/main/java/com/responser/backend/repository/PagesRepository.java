@@ -17,6 +17,9 @@ public interface PagesRepository extends JpaRepository<Page, String> {
 
     Optional<Page> findByUrl(String url);
 
-    @Query("select avg(r.rating) from Review r join Page p on r.resourceId=p.id and p.id=:pageId and r.resourceType='PAGE'")
+    @Query("select avg(r.rating) from Review r where r.resourceId=:pageId and r.resourceType='PAGE'")
     Double commonRating(String pageId);
+
+    @Query("select count(*) from Review r where r.resourceId=:pageId and r.resourceType='PAGE'")
+    Integer reviewsCount(String pageId);
 }

@@ -43,6 +43,8 @@ public class PageController {
         String preparedUrl = UrlUtils.prepareUrl(url);
         PageDTO pageDTO = pageConverter.toPagePayload(pagesService.getByUrl(preparedUrl));
         pageDTO.setRating(pagesService.getPageRating(pageDTO.getId()));
+        pageDTO.setReviewsCount(pagesService.getPageReviewsCount(pageDTO.getId()));
+
         return ResponseEntity.ok(pageDTO);
     }
 

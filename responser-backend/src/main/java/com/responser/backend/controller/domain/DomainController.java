@@ -44,6 +44,8 @@ public class DomainController {
         String preparedUrl = UrlUtils.prepareUrl(url);
         DomainDTO domainDTO = domainConverter.toDomainPayload(domainService.getByUrl(preparedUrl));
         domainDTO.setRating(domainService.getDomainRating(domainDTO.getId()));
+        domainDTO.setReviewsCount(domainService.getDomainReviewsCount(domainDTO.getId()));
+
         return ResponseEntity.ok(domainDTO);
     }
 

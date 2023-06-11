@@ -28,6 +28,8 @@ public class DomainDTO {
 
     private Double rating;
 
+    private Integer reviewsCount;
+
     private Boolean hasSsl;
 
     private LocalDateTime creationDate;

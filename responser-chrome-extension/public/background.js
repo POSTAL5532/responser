@@ -12,6 +12,10 @@ const isHttpUrl = (url) => {
     return url.startsWith("http");
 }
 
+const isTabReadyForActions = (tabId, tabUrl, tabStatus, isTabActive) => {
+    return tabUrl && isHttpUrl(tabUrl) && tabStatus === "complete" && isTabActive;
+}
+
 const setEnabled = async (tabId, tabUrl) => {
     if (!isHttpUrl(tabUrl)) {
         await chrome.action.disable(tabId);
@@ -22,10 +26,7 @@ chrome.runtime.onInstalled.addListener(async () => {
     const tabs = await chrome.tabs.query({status: "complete", windowType: "normal"});
 
     for (const tab of tabs) {
-        if (isHttpUrl(tab.url)) {
-            setSiteRatingBadgeIfNeed(tab.id, tab.url, tab.status, tab.active);
-        }
-
+        setSiteRatingBadgeIfNeed(tab.id, tab.url, tab.status, tab.active);
         setEnabled(tab.id, tab.url);
     }
 })
@@ -111,27 +112,69 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 
 chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
     const url = changeInfo.url || tab.url;
-    await setSiteRatingBadgeIfNeed(tabId, url, tab.status, tab.active);
-    setEnabled(tab.id, tab.url);
+
+    setSiteRatingBadgeIfNeed(tabId, url, tab.status, tab.active);
+    setEnabled(tabId, url);
+
+    if (isTabReadyForActions(tabId, url, tab.status, tab.active)) {
+        const rating = await getRating(url);
+        sendMessageToContent({type: "SHOW_RATING_POPUP", data: rating});
+    }
 });
 
 chrome.tabs.onActivated.addListener(async ({tabId}) => {
     const tab = await chrome.tabs.get(tabId);
     await setSiteRatingBadgeIfNeed(tabId, tab.url, tab.status, tab.active);
-    setEnabled(tab.id, tab.url);
+    await setEnabled(tab.id, tab.url);
 });
 
 const setSiteRatingBadgeIfNeed = async (tabId, tabUrl, tabStatus, isTabActive) => {
-    if (tabUrl && isHttpUrl(tabUrl) && tabStatus === "complete" && isTabActive) {
+    if (isTabReadyForActions(tabId, tabUrl, tabStatus, isTabActive)) {
         await setSiteRatingBadge(tabUrl, tabId);
     }
 };
+
+const getRating = async (pageUrl) => {
+    log("Get site and page rating:", pageUrl);
+
+    const getDomainUrl = new URL("{{API_URL}}/domains");
+    getDomainUrl.search = new URLSearchParams({url: pageUrl}).toString();
+
+    const getPageUrl = new URL("{{API_URL}}/pages");
+    getPageUrl.search = new URLSearchParams({url: pageUrl}).toString();
+
+    const rawResponses = await Promise.all([
+        fetch(getDomainUrl),
+        fetch(getPageUrl)
+    ]);
+
+    const responses = await Promise.all([
+        rawResponses[0].ok ? rawResponses[0].json() : undefined,
+        rawResponses[1].ok ? rawResponses[1].json() : undefined,
+    ]);
+
+    return {
+        siteRating: responses[0] ? responses[0].rating : null,
+        siteReviewsCount: responses[0] ? responses[0].reviewsCount : null,
+        pageRating: responses[1] ? responses[1].rating : null,
+        pageReviewsCount: responses[1] ? responses[1].reviewsCount : null
+    };
+}
 
 const setSiteRatingBadge = async (pageUrl, tabId) => {
     log("Set site rating badge:", tabId, pageUrl);
     const url = new URL("{{API_URL}}/domains/rating");
     url.search = new URLSearchParams({url: pageUrl}).toString();
-    const response = await fetch(url);
+
+    let response;
+
+    try {
+        response = await fetch(url);
+    } catch (error) {
+        log("Error", error.toString());
+        return;
+    }
+
     const responseData = response.ok ? await response.text() : null;
 
     if (!responseData) {
@@ -152,6 +195,12 @@ const setSiteRatingBadge = async (pageUrl, tabId) => {
 
     await chrome.action.setBadgeBackgroundColor({color: backgroundColor, tabId: tabId});
     await chrome.action.setBadgeText({text: ratingValue.toPrecision(2), tabId: tabId});
+}
+
+const sendMessageToContent = async (message) => {
+    log("Send message to content:", message);
+    const tab = await getCurrentTab();
+    return chrome.tabs.sendMessage(tab.id, message);
 }
 
 const getCurrentPageInfo = async () => {

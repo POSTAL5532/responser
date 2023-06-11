@@ -58,6 +58,10 @@ public class DomainService {
         return domainRepository.commonRating(domainId);
     }
 
+    public Integer getDomainReviewsCount(String domainId) {
+        return domainRepository.reviewsCount(domainId);
+    }
+
     public Double getDomainRatingByUrl(String url) {
         Domain domain = getByUrl(UrlUtils.convertToURL(url));
         return domainRepository.commonRating(domain.getId());

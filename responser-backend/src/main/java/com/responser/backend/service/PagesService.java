@@ -62,6 +62,10 @@ public class PagesService {
         return pagesRepository.existsById(id);
     }
 
+    public Integer getPageReviewsCount(String pageId) {
+        return pagesRepository.reviewsCount(pageId);
+    }
+
     public Double getPageRating(String domainId) {
         return pagesRepository.commonRating(domainId);
     }
