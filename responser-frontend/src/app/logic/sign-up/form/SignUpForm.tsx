@@ -17,6 +17,7 @@ import "./SignUpForm.less";
 type SignUpFormProps = {
     signUpPayload: UserAccountDataPayload,
     onFinish: (setFieldError?: (field: string, message: string) => void) => void,
+    disabled: boolean
 }
 
 const SIGNUP_FORM_VALIDATION_SCHEMA = Yup.object().shape({
@@ -31,7 +32,7 @@ const SIGNUP_FORM_VALIDATION_SCHEMA = Yup.object().shape({
  * Sign up form.
  */
 const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) => {
-    const {onFinish, signUpPayload} = props;
+    const {onFinish, signUpPayload, disabled} = props;
 
     const onSubmit = (values: any, {setFieldError}: FormikHelpers<any>) => {
         onFinish(setFieldError);
@@ -49,38 +50,39 @@ const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) => {
 
                 <Form>
                     <FieldLayout label="Email">
-                        <EmailField onChange={value => signUpPayload.email = value}/>
+                        <EmailField onChange={value => signUpPayload.email = value} disabled={disabled}/>
                     </FieldLayout>
 
                     <FieldLayout label="Username">
-                        <UsernameField onChange={value => signUpPayload.userName = value}/>
+                        <UsernameField onChange={value => signUpPayload.userName = value} disabled={disabled}/>
                     </FieldLayout>
 
                     <FieldLayout label="Full name">
-                        <FullNameField onChange={value => signUpPayload.fullName = value}/>
+                        <FullNameField onChange={value => signUpPayload.fullName = value} disabled={disabled}/>
                     </FieldLayout>
 
                     <div className="passwords">
                         <FieldLayout label="Password">
                             <PasswordField name="password"
                                            placeholder="Enter password"
-                                           onChange={value => signUpPayload.password = value}/>
+                                           onChange={value => signUpPayload.password = value}
+                                           disabled={disabled}/>
                         </FieldLayout>
 
                         <FieldLayout label="Confirm password">
                             <PasswordField name="confirmPassword"
                                            placeholder="Confirm password"
                                            onChange={value => signUpPayload.confirmPassword = value}
-                                           validator={passwordEqualsValidator}/>
+                                           validator={passwordEqualsValidator}
+                                           disabled={disabled}/>
                         </FieldLayout>
                     </div>
 
-                    <Button type="submit">Sign Up</Button>
+                    <Button type="submit" disabled={disabled}>{!disabled ? "Sign Up" : "Wait"}</Button>
 
                     <div className="login-offer">
                         <span>Already have account?</span>
-                        <span className="login-link"
-                              onClick={AuthorizationService.requestLoginPage}>
+                        <span className="login-link" onClick={AuthorizationService.requestLoginPage}>
                             Login
                         </span>
                     </div>

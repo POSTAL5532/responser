@@ -9,6 +9,7 @@ type PasswordFieldProps = {
     name: string;
     placeholder: string;
     validator?: FieldValidator;
+    disabled?: boolean;
 };
 
 export const PASSWORD_VALIDATION_SCHEMA = {
@@ -37,7 +38,8 @@ export const PasswordField: React.FC<PasswordFieldProps> = (props: PasswordField
                             type="password"
                             invalid={touched && !!error}
                             placeholder={props.placeholder}
-                            onChange={onPasswordChange}/>
+                            onChange={onPasswordChange}
+                            disabled={props.disabled}/>
                         <FieldMessage isError={true} visible={touched && !!error}>{error}</FieldMessage>
                     </>
                 );

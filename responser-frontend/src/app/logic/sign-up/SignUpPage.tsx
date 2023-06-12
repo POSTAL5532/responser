@@ -33,6 +33,7 @@ export class SignUpPage extends Component {
                 <div className="sign-up-form-panel">
                     <h2 className="sign-up-header">Sign up</h2>
                     <SignUpForm
+                        disabled={this.signUpPageStore.signUpInProcess}
                         signUpPayload={this.signUpPageStore.signUpPayload}
                         onFinish={this.onFinish}/>
                 </div>

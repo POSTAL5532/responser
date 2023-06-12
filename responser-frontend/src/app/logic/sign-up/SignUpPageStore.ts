@@ -18,6 +18,8 @@ export class SignUpPageStore {
 
     userService: UserService = new UserService();
 
+    signUpInProcess: boolean = false;
+
     constructor() {
         makeAutoObservable(this);
     }
@@ -27,11 +29,13 @@ export class SignUpPageStore {
      */
     signUp = (setFieldError?: (field: string, message: string) => void): Promise<void> => {
         this.logger.debug("Sign up new user");
+        this.signUpInProcess = true;
 
         return this.userService.signUp(this.signUpPayload)
         .then(AuthorizationService.requestLoginPage)
         .catch(error => {
             Object.keys(error.data).forEach(key => setFieldError(key, error.data[key]))
-        });
+        })
+        .finally(() => this.signUpInProcess = false);
     }
 }
