@@ -39,7 +39,7 @@ responser:
     clientCredentials:
       -
         clientId: responser-web-client
-        clientSecret: responser-web-client-secret
+        clientSecret: "{noop}responser-web-client-secret"
         redirectUri: http://dev-app.reviewly.space/auth-code
     allowedOrigins:
       - http://dev-app.reviewly.space

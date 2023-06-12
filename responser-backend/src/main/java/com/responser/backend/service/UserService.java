@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -35,10 +36,15 @@ public class UserService {
 
     private final EmailConfirmationService emailConfirmationService;
 
+    private final PasswordEncoder passwordEncoder;
+
     @Transactional
     public void registerUser(User newUser) {
         log.info("Register new not confirmed user: {}", newUser.getUserName());
+
         newUser.setEmailConfirmed(false);
+        newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+
         userRepository.save(newUser);
         EmailConfirmation emailConfirmation = emailConfirmationService.createEmailConfirmation(newUser.getId());
         emailService.sendEmailConfirmationMessage(newUser.getEmail(), emailConfirmation);
