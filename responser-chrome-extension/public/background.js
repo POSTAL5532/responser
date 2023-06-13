@@ -8,25 +8,14 @@ const log = (...message) => {
     }
 }
 
-const isHttpUrl = (url) => {
-    return url.startsWith("http");
-}
-
-const isTabReadyForActions = (tabId, tabUrl, tabStatus, isTabActive) => {
-    return tabUrl && isHttpUrl(tabUrl) && tabStatus === "complete" && isTabActive;
-}
-
-const setEnabled = async (tabId, tabUrl) => {
-    if (!isHttpUrl(tabUrl)) {
-        await chrome.action.disable(tabId);
-    }
-}
-
+// *********************************************
+// ****************** Listeners ****************
+// *********************************************
 chrome.runtime.onInstalled.addListener(async () => {
     const tabs = await chrome.tabs.query({status: "complete", windowType: "normal"});
 
     for (const tab of tabs) {
-        setSiteRatingBadgeIfNeed(tab.id, tab.url, tab.status, tab.active);
+        setRatingBadgeAndShowRatingPopupIfReady(tab.id, tab.url, tab.status, tab.active);
         setEnabled(tab.id, tab.url);
     }
 })
@@ -110,99 +99,157 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     return true;
 });
 
-chrome.tabs.onUpdated.addListener(async (tabId, changeInfo, tab) => {
+chrome.tabs.onUpdated.addListener((tabId, changeInfo, tab) => {
     const url = changeInfo.url || tab.url;
 
-    setSiteRatingBadgeIfNeed(tabId, url, tab.status, tab.active);
     setEnabled(tabId, url);
-
-    if (isTabReadyForActions(tabId, url, tab.status, tab.active)) {
-        const rating = await getRating(url);
-        sendMessageToContent({type: "SHOW_RATING_POPUP", data: rating});
-    }
+    setRatingBadgeAndShowRatingPopupIfReady(tabId, url, tab.status, tab.active);
 });
 
 chrome.tabs.onActivated.addListener(async ({tabId}) => {
     const tab = await chrome.tabs.get(tabId);
-    await setSiteRatingBadgeIfNeed(tabId, tab.url, tab.status, tab.active);
-    await setEnabled(tab.id, tab.url);
+
+    setEnabled(tab.id, tab.url);
+    setSiteRatingBadgeIfNeed(tabId, tab.url, tab.status, tab.active);
 });
 
-const setSiteRatingBadgeIfNeed = async (tabId, tabUrl, tabStatus, isTabActive) => {
-    if (isTabReadyForActions(tabId, tabUrl, tabStatus, isTabActive)) {
-        await setSiteRatingBadge(tabUrl, tabId);
+// *************************************
+// ************** UTILS ****************
+// *************************************
+const isHttpUrl = (url) => {
+    return url.startsWith("http");
+}
+
+const isTabReadyForActions = (tabId, tabUrl, tabStatus, isTabActive) => {
+    return tabUrl && isHttpUrl(tabUrl) && tabStatus === "complete" && isTabActive;
+}
+
+// *************************************
+// *************** LOGIC ***************
+// *************************************
+
+/**
+ * Check url and if it not is "http or https" - disable extension action icon.
+ */
+const setEnabled = async (tabId, tabUrl) => {
+    if (!isHttpUrl(tabUrl)) {
+        await chrome.action.disable(tabId);
     }
+}
+
+/**
+ * Setup rating badge to extension icon and show rating popup if tab is ready to action.
+ *
+ * @param tabId
+ * @param tabUrl
+ * @param tabStatus
+ * @param isTabActive
+ * @returns {Promise<void>}
+ */
+const setRatingBadgeAndShowRatingPopupIfReady = async (tabId, tabUrl, tabStatus, isTabActive) => {
+    if (!isTabReadyForActions(tabId, tabUrl, tabStatus, isTabActive)) {
+        return;
+    }
+
+    const rating = await getRating(tabUrl);
+
+    setSiteRatingBadge(tabId, rating.siteRating);
+    sendMessageToContent({type: "SHOW_RATING_POPUP", data: rating});
+}
+
+/**
+ * Setup rating badge to extension icon if tab is ready to action.
+ *
+ * @param tabId
+ * @param tabUrl
+ * @param tabStatus
+ * @param isTabActive
+ * @returns {Promise<void>}
+ */
+const setSiteRatingBadgeIfNeed = async (tabId, tabUrl, tabStatus, isTabActive) => {
+    if (!isTabReadyForActions(tabId, tabUrl, tabStatus, isTabActive)) {
+        return;
+    }
+
+    const rating = await getRating(tabUrl);
+    await setSiteRatingBadge(tabId, rating.siteRating);
 };
 
+/**
+ * Fetch rating from backend application.
+ *
+ * @param pageUrl
+ * @returns {Promise<{siteRating: float, pageRating: float, siteReviewsCount: number, pageReviewsCount: number} | null>}
+ */
 const getRating = async (pageUrl) => {
     log("Get site and page rating:", pageUrl);
 
-    const getDomainUrl = new URL("{{API_URL}}/domains");
+    const getDomainUrl = new URL("{{API_URL}}/rating");
     getDomainUrl.search = new URLSearchParams({url: pageUrl}).toString();
 
-    const getPageUrl = new URL("{{API_URL}}/pages");
-    getPageUrl.search = new URLSearchParams({url: pageUrl}).toString();
+    const rawResponse = await fetch(getDomainUrl);
+    const response = rawResponse.ok ? await rawResponse.json() : null;
 
-    const rawResponses = await Promise.all([
-        fetch(getDomainUrl),
-        fetch(getPageUrl)
-    ]);
+    if (!response) {
+        return null;
+    }
 
-    const responses = await Promise.all([
-        rawResponses[0].ok ? rawResponses[0].json() : undefined,
-        rawResponses[1].ok ? rawResponses[1].json() : undefined,
-    ]);
+    const siteRating = response.siteRating;
+    const pageRating = response.pageRating;
 
     return {
-        siteRating: responses[0] ? responses[0].rating : null,
-        siteReviewsCount: responses[0] ? responses[0].reviewsCount : null,
-        pageRating: responses[1] ? responses[1].rating : null,
-        pageReviewsCount: responses[1] ? responses[1].reviewsCount : null
+        siteRating: siteRating?.rating,
+        siteReviewsCount: siteRating?.reviewsCount,
+        pageRating: pageRating?.rating,
+        pageReviewsCount: pageRating?.reviewsCount
     };
 }
 
-const setSiteRatingBadge = async (pageUrl, tabId) => {
-    log("Set site rating badge:", tabId, pageUrl);
-    const url = new URL("{{API_URL}}/domains/rating");
-    url.search = new URLSearchParams({url: pageUrl}).toString();
+/**
+ * Setup rating badge to extension icon.
+ *
+ * @param tabId
+ * @param siteRating
+ * @returns {Promise<void>}
+ */
+const setSiteRatingBadge = async (tabId, siteRating) => {
+    log("Set site rating badge:", tabId, siteRating);
 
-    let response;
-
-    try {
-        response = await fetch(url);
-    } catch (error) {
-        log("Error", error.toString());
+    if (!siteRating) {
         return;
     }
-
-    const responseData = response.ok ? await response.text() : null;
-
-    if (!responseData) {
-        return;
-    }
-
-    const ratingValue = parseFloat(responseData);
 
     let backgroundColor;
 
-    if (ratingValue >= 4) {
+    if (siteRating >= 4) {
         backgroundColor = "#23C653";
-    } else if (ratingValue >= 2) {
+    } else if (siteRating >= 2) {
         backgroundColor = "#FFEC3A";
     } else {
         backgroundColor = "#FF4539";
     }
 
     await chrome.action.setBadgeBackgroundColor({color: backgroundColor, tabId: tabId});
-    await chrome.action.setBadgeText({text: ratingValue.toPrecision(2), tabId: tabId});
+    await chrome.action.setBadgeText({text: siteRating.toPrecision(2), tabId: tabId});
 }
 
+/**
+ * Send message to content script listeners.
+ *
+ * @param message
+ * @returns {Promise<any>}
+ */
 const sendMessageToContent = async (message) => {
     log("Send message to content:", message);
     const tab = await getCurrentTab();
     return chrome.tabs.sendMessage(tab.id, message);
 }
 
+/**
+ * Returns current tab page information.
+ *
+ * @returns {Promise<{title: string, url: string}>}
+ */
 const getCurrentPageInfo = async () => {
     const currentTab = await getCurrentTab();
     return {
@@ -211,6 +258,11 @@ const getCurrentPageInfo = async () => {
     }
 }
 
+/**
+ * Returns current tab.
+ *
+ * @returns {Promise<chrome.tabs.Tab>}
+ */
 const getCurrentTab = async () => {
     log("Get current tab - start");
     let queryOptions = LOCAL_DEV_MODE
@@ -222,6 +274,11 @@ const getCurrentTab = async () => {
     return tab;
 }
 
+/**
+ * Returns tokens from extension local storage.
+ *
+ * @returns {Promise<{[p: string]: any}>}
+ */
 const getTokens = async () => {
     return await chrome.storage.local.get({
         accessToken: null,
@@ -231,6 +288,12 @@ const getTokens = async () => {
     });
 }
 
+/**
+ * Setup provided token info to local storage.
+ *
+ * @param tokenData
+ * @returns {Promise<void>}
+ */
 const setTokens = async (tokenData) => {
     await chrome.storage.local.set({
         accessToken: tokenData.accessToken,
@@ -240,6 +303,11 @@ const setTokens = async (tokenData) => {
     });
 }
 
+/**
+ * Remove tokens from local storage.
+ *
+ * @returns {Promise<void>}
+ */
 const removeTokens = async () => {
     await chrome.storage.local.remove([
         "accessToken",
@@ -249,11 +317,24 @@ const removeTokens = async () => {
     ]);
 }
 
+/**
+ * Open external page by creating new tab.
+ *
+ * @param url
+ * @param active
+ * @returns {Promise<chrome.tabs.Tab>}
+ */
 const openExternalPage = (url, active) => {
     return chrome.tabs.create({url, active})
 }
 
+/**
+ * Refresh rating badge for current tab.
+ *
+ * @returns {Promise<void>}
+ */
 const updateRatingBadge = async () => {
     const tab = await getCurrentTab();
-    return setSiteRatingBadge(tab.url, tab.id);
+    const rating = await getRating(tab.url);
+    await setSiteRatingBadge(tab.id, rating.siteRating)
 }

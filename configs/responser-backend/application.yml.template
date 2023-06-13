@@ -56,11 +56,11 @@ spring:
     ssl.trust: "*"
 responser:
   api:
-  runMode: LOCAL
-  selfHost: http://localhost:8080
-  feApplicationUrl: http://127.0.0.1:3000
-  responserInfoEmail: info@reviewly.space
-  mockEmail: evgeniionegin791@gmail.com
-    allowedOrigins:
-      - http://127.0.0.1:3000
-      - chrome-extension://<EXTENSION_ID>
+    runMode: LOCAL
+    selfHost: http://localhost:8080
+    feApplicationUrl: http://127.0.0.1:3000
+    responserInfoEmail: info@reviewly.space
+    mockEmail: evgeniionegin791@gmail.com
+      allowedOrigins:
+        - http://127.0.0.1:3000
+        - chrome-extension://<EXTENSION_ID>
