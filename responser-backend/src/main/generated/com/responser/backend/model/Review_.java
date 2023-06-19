@@ -14,7 +14,6 @@ public abstract class Review_ extends com.responser.backend.model.AbstractEntity
 	public static volatile SingularAttribute<Review, String> text;
 	public static volatile SingularAttribute<Review, String> reviewId;
 	public static volatile SingularAttribute<Review, User> user;
-	public static volatile SingularAttribute<Review, ResourceType> resourceType;
 	public static volatile SetAttribute<Review, ReviewLike> likes;
 
 	public static final String RESOURCE_ID = "resourceId";
@@ -22,7 +21,6 @@ public abstract class Review_ extends com.responser.backend.model.AbstractEntity
 	public static final String TEXT = "text";
 	public static final String REVIEW_ID = "reviewId";
 	public static final String USER = "user";
-	public static final String RESOURCE_TYPE = "resourceType";
 	public static final String LIKES = "likes";
 
 }

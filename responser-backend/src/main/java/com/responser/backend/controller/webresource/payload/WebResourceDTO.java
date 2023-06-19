@@ -1,37 +1,32 @@
-package com.responser.backend.controller.page.payload;
+package com.responser.backend.controller.webresource.payload;
 
-import com.responser.backend.controller.domain.payload.DomainDTO;
+import com.responser.backend.model.ResourceType;
+import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
-
-/**
- * Page DTO payload.
- *
- * @author Shcherbachenya Igor
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class PageDTO {
+public class WebResourceDTO {
 
     private String id;
 
-    private DomainDTO domain;
-
     private String url;
 
-    private String description;
+    private ResourceType resourceType;
 
-    private Double rating;
+    private WebResourceDTO parent;
+
+    private Float rating;
 
     private Integer reviewsCount;
 
     private LocalDateTime creationDate;
 
     private LocalDateTime updateDate;
+
 }

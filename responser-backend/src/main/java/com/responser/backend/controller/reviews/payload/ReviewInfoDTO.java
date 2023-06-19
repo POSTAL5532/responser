@@ -25,7 +25,4 @@ public class ReviewInfoDTO {
     @NotBlank(message = "text must be specified")
     @Size(min = 1, max = 460, message = "text must be in range between 1 and 460")
     private String text;
-
-    @NotBlank(message = "resourceType must be specified")
-    private String resourceType;
 }

@@ -9,6 +9,7 @@ import com.responser.backend.repository.ReviewRepository;
 import com.responser.backend.service.DomainService;
 import com.responser.backend.service.PagesService;
 import com.responser.backend.service.UserService;
+import com.responser.backend.service.WebResourceService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -32,11 +33,9 @@ public class ReviewService {
 
     private final ReviewRepository reviewRepository;
 
-    private final DomainService domainService;
-
-    private final PagesService pagesService;
-
     private final UserService userService;
+
+    private final WebResourceService webResourceService;
 
     public Review getReviewByIdAndUser(String reviewId, String userId) {
         return reviewRepository.findByIdAndUserId(reviewId, userId).orElseThrow(() ->
@@ -65,18 +64,13 @@ public class ReviewService {
     }
 
     /**
-     * Check existence of resource by {@link ResourceType} and resource ID.
+     * Check existence of resource by resource ID.
      *
      * @param resourceId resource ID
-     * @param resourceType resource type
      * @return existence flag
      */
-    public Boolean isResourceExists(String resourceId, ResourceType resourceType) {
-        return switch (resourceType) {
-            case PAGE -> pagesService.existsById(resourceId);
-            case SITE -> domainService.existsById(resourceId);
-            default -> throw new IllegalArgumentException("Bad resource type: " + resourceType);
-        };
+    public Boolean isResourceExists(String resourceId) {
+        return webResourceService.existById(resourceId);
     }
 
     /**
@@ -90,8 +84,8 @@ public class ReviewService {
         String resourceId = newReview.getResourceId();
         String userId = newReview.getUser().getId();
 
-        if (!isResourceExists(resourceId, newReview.getResourceType())) {
-            throw new NoSuchElementException(format("Resource ''{0}'' ({1}) doesn't exist.", userId, newReview.getResourceType()));
+        if (!isResourceExists(resourceId)) {
+            throw new NoSuchElementException(format("Resource ''{0}'' ({1}) doesn't exist.", resourceId));
         }
 
         if (existsByResourceIdAndUserId(resourceId, userId)) {

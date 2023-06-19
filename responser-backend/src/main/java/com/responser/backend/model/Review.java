@@ -17,9 +17,9 @@ import java.util.Set;
 @Table(name = "reviews")
 public class Review extends AbstractEntity {
 
-    @Enumerated(EnumType.STRING)
+    /*@Enumerated(EnumType.STRING)
     @Column(name = "resource_type")
-    private ResourceType resourceType;
+    private ResourceType resourceType;*/
 
     @Column(name = "resource_id")
     private String resourceId;

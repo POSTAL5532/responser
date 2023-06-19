@@ -4,7 +4,6 @@ import com.responser.backend.controller.payload.PageableResponse;
 import com.responser.backend.controller.reviewlike.payload.ReviewLikeDTO;
 import com.responser.backend.controller.reviews.payload.ReviewInfoDTO;
 import com.responser.backend.controller.reviews.payload.ReviewDTO;
-import com.responser.backend.model.ResourceType;
 import com.responser.backend.model.Review;
 import com.responser.backend.model.User;
 import lombok.RequiredArgsConstructor;
@@ -33,7 +32,6 @@ public class ReviewConverter {
 
         Review review = new Review();
         review.setId(reviewId);
-        review.setResourceType(ResourceType.valueOf(reviewInfoDTO.getResourceType()));
         review.setResourceId(reviewInfoDTO.getResourceId());
         review.setRating(reviewInfoDTO.getRating());
         review.setText(reviewInfoDTO.getText());
@@ -54,7 +52,6 @@ public class ReviewConverter {
         return ReviewDTO.builder()
             .id(review.getId())
             .resourceId(review.getResourceId())
-            .resourceType(review.getResourceType())
             .user(userConverter.toUserInfoPayload(review.getUser()))
             .rating(review.getRating())
             .text(review.getText())
@@ -66,7 +63,7 @@ public class ReviewConverter {
 
     public PageableResponse<ReviewDTO> toPageableReviewPayloadList(Page<Review> reviewsPage) {
         List<ReviewDTO> reviewList = reviewsPage.get().map(this::toReviewPayload).collect(Collectors.toList());
-        PageableResponse<ReviewDTO> pageable = new PageableResponse<>(
+        return new PageableResponse<>(
             reviewsPage.getTotalElements(),
             reviewsPage.getTotalPages(),
             reviewsPage.getNumber(),
@@ -74,6 +71,5 @@ public class ReviewConverter {
             reviewsPage.isLast(),
             reviewList
         );
-        return pageable;
     }
 }

@@ -26,7 +26,7 @@ public class RatingController {
     public ResponseEntity<ResourceRatings> getResourceRating(@Valid @NotBlank @RequestParam String url) {
         String preparedUrl = UrlUtils.prepareUrl(url);
 
-        ResourceRating siteResourceRating = ratingService.getDomainFullRating(preparedUrl);
+        ResourceRating siteResourceRating = ratingService.getSiteFullRating(preparedUrl);
         ResourceRating pageResourceRating = ratingService.getPageFullRating(preparedUrl);
 
         return ResponseEntity.ok(new ResourceRatings(pageResourceRating, siteResourceRating));
