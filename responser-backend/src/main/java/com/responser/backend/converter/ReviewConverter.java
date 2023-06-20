@@ -26,6 +26,8 @@ public class ReviewConverter {
 
     private final ReviewLikeConverter reviewLikeConverter;
 
+    private final WebResourceConverter webResourceConverter;
+
     public Review toReview(String reviewId, ReviewInfoDTO reviewInfoDTO, String userId) {
         User fakeUser = new User();
         fakeUser.setId(userId);
@@ -56,6 +58,7 @@ public class ReviewConverter {
             .rating(review.getRating())
             .text(review.getText())
             .reviewLikes(reviewLikes)
+            .webResource(webResourceConverter.toDTO(review.getWebResource()))
             .creationDate(review.getCreationDate())
             .updateDate(review.getUpdateDate())
             .build();

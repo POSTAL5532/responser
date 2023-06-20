@@ -1,18 +1,19 @@
 import React from "react";
+import classNames from "classnames";
 import {ReactComponent as SiteIcon} from './site-icon.svg';
 import {ReactComponent as PageIcon} from './page-icon.svg';
 import {ResourceType} from "../../../model/ResourceType";
-import {Domain} from "../../../model/Domain";
-import {Page} from "../../../model/Page";
 import {TabOption, Tabs} from "../../../components/tabs/Tabs";
 import {PageInfo} from "../../../model/PageInfo";
 import {Spinner} from "../../../components/spinner/Spinner";
+import {WebResource} from "../../../model/WebResource";
+import {UrlUtils} from "../../../utils/UrlUtils";
 import "./ReviewsHeader.less";
 
 type ReviewsHeaderProps = {
     reviewsResourceType: ResourceType;
     onResourceTypeChange: (resourceType: ResourceType) => void;
-    resource: Domain | Page;
+    resource: WebResource;
     isLoading: boolean;
     isReviewsLoading: boolean;
     pageInfo: PageInfo;
@@ -32,13 +33,11 @@ export const ReviewsHeader: React.FC<ReviewsHeaderProps> = (props: ReviewsHeader
     let resourceLabel: string;
     let resourceRating: number;
 
-    if (!isLoading && reviewsResourceType === ResourceType.SITE) {
-        resourceIcon = <SiteIcon className="icon"/>;
-        resourceLabel = (resource as Domain).domain;
-        resourceRating = resource.rating;
-    } else if (!isLoading && reviewsResourceType === ResourceType.PAGE) {
-        resourceIcon = <PageIcon className="icon"/>;
-        resourceLabel = pageInfo.title || pageInfo.url;
+    if (!isLoading) {
+        const isSite = resource.resourceType === ResourceType.SITE;
+
+        resourceIcon = isSite ? <SiteIcon className="icon"/> : <PageIcon className="icon"/>;
+        resourceLabel = isSite ? UrlUtils.getHostFromUrl(pageInfo.url) : UrlUtils.preparePageUrl(pageInfo.url);
         resourceRating = resource.rating;
     }
 
@@ -81,13 +80,23 @@ const ResourceInfo: React.FC<ResourceInfoProps> = (props: ResourceInfoProps) => 
         );
     }
 
+    let ratingLevel;
+
+    if (resourceRating >= 4) {
+        ratingLevel = "good-rating";
+    } else if (resourceRating >= 2) {
+        ratingLevel = "medium-rating";
+    } else {
+        ratingLevel = "bad-rating";
+    }
+
     return (
         <div className={className}>
             {resourceIcon}
             <div className="label">{resourceLabel}</div>
             {
                 !!resourceRating &&
-                <div className="rating">
+                <div className={classNames("rating", ratingLevel)}>
                     <span>{resourceRating.toPrecision(2)} / 5</span>
                 </div>
             }

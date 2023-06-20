@@ -5,7 +5,6 @@ import static com.responser.backend.config.APIServerApplicationProperties.API_RO
 import com.responser.backend.controller.rating.payload.ResourceRatings;
 import com.responser.backend.model.ResourceRating;
 import com.responser.backend.service.RatingService;
-import com.responser.backend.utils.UrlUtils;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
@@ -24,10 +23,8 @@ public class RatingController {
 
     @GetMapping
     public ResponseEntity<ResourceRatings> getResourceRating(@Valid @NotBlank @RequestParam String url) {
-        String preparedUrl = UrlUtils.prepareUrl(url);
-
-        ResourceRating siteResourceRating = ratingService.getSiteFullRating(preparedUrl);
-        ResourceRating pageResourceRating = ratingService.getPageFullRating(preparedUrl);
+        ResourceRating siteResourceRating = ratingService.getSiteFullRating(url);
+        ResourceRating pageResourceRating = ratingService.getPageFullRating(url);
 
         return ResponseEntity.ok(new ResourceRatings(pageResourceRating, siteResourceRating));
     }

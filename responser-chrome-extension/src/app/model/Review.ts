@@ -2,12 +2,11 @@ import {User} from "./User";
 import moment, {Moment} from "moment";
 import {ReviewLike} from "./ReviewLike";
 import {ResourceType} from "./ResourceType";
+import {WebResource} from "./WebResource";
 
 export class Review {
 
     id: string;
-
-    resourceType: ResourceType;
 
     resourceId: string;
 
@@ -21,6 +20,8 @@ export class Review {
 
     reviewLikes: ReviewLike[];
 
+    webResource: WebResource;
+
     creationDate: Moment;
 
     updateDate: Moment;
@@ -31,7 +32,7 @@ export class Review {
             creationDate: moment(data.creationDate),
             updateDate: moment(data.updateDate),
             reviewLikes: data.reviewLikes.map((like: any) => ReviewLike.deserialize(like)),
-            resourceType: ResourceType[data.resourceType as keyof typeof ResourceType]
+            webResource: data.webResource ? WebResource.deserialize(data.webResource) : null
         });
     }
 }

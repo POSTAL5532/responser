@@ -18,7 +18,7 @@ const ReviewsPage: React.FC = () => {
     const extensionService = useExtensionService();
     const {currentUser, userDataLoading} = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const {
-        domain,
+        site,
         page,
         reviews,
         currentUserReview,
@@ -34,7 +34,7 @@ const ReviewsPage: React.FC = () => {
     } = useReviewsPageStore();
 
     const {
-        isDomainLoading,
+        isSiteLoading,
         isPageLoading,
         isReviewRemoving,
         isReviewsLoading,
@@ -49,7 +49,7 @@ const ReviewsPage: React.FC = () => {
         navigateToEditReviewPage({
             reviewId: currentUserReview.id,
             pageId: page.id,
-            domainId: domain.id,
+            domainId: site.id,
             previousResourceType: reviewsResourceType
         });
     }
@@ -57,7 +57,7 @@ const ReviewsPage: React.FC = () => {
     const onAddReviewClick = () => {
         navigateToEditReviewPage({
             pageId: page.id,
-            domainId: domain.id,
+            domainId: site.id,
             previousResourceType: reviewsResourceType
         });
     }
@@ -71,9 +71,9 @@ const ReviewsPage: React.FC = () => {
     return (
         <Page className="reviews-page">
             <ReviewsHeader reviewsResourceType={reviewsResourceType}
-                           resource={reviewsResourceType === ResourceType.PAGE ? page : domain}
-                           isLoading={(!page && !domain) || isDomainLoading || isPageLoading}
-                           isReviewsLoading={(!page && !domain) || isDomainLoading || isPageLoading || isReviewsLoading}
+                           resource={reviewsResourceType === ResourceType.PAGE ? page : site}
+                           isLoading={(!page && !site) || isSiteLoading || isPageLoading}
+                           isReviewsLoading={(!page && !site) || isSiteLoading || isPageLoading || isReviewsLoading}
                            onResourceTypeChange={changeResourceType}
                            pageInfo={currentPageInfo}/>
 
@@ -83,7 +83,7 @@ const ReviewsPage: React.FC = () => {
                          removeLike={removeReviewLike}
                          loadNextReviews={loadNextReviews}
                          isNextReviewsLoading={isNextReviewsLoading}
-                         isLoading={(!page && !domain) || isReviewsLoading || isDomainLoading || isPageLoading}/>
+                         isLoading={(!page && !site) || isReviewsLoading || isSiteLoading || isPageLoading}/>
 
             <ReviewsFooter userAuthorized={!!currentUser}
                            hasUserReview={!!currentUserReview}
@@ -92,7 +92,7 @@ const ReviewsPage: React.FC = () => {
                            onDeleteReviewClick={removeUserReview}
                            onLoginClick={extensionService.openLoginPage}
                            onLogOutClick={extensionService.openLogoutPage}
-                           isLoading={(!page && !domain) || isReviewsLoading || isDomainLoading || isPageLoading}
+                           isLoading={(!page && !site) || isReviewsLoading || isSiteLoading || isPageLoading}
                            isReviewRemoving={isReviewRemoving}/>
         </Page>
     );

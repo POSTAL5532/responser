@@ -22,7 +22,9 @@ export class EditReviewPageStore {
 
     pageId: string;
 
-    domainId: string;
+    siteId: string;
+
+    currentResourceType: ResourceType;
 
     reviewData: ReviewData;
 
@@ -38,7 +40,7 @@ export class EditReviewPageStore {
         makeAutoObservable(this);
     }
 
-    public init = async (currentUserId: string, reviewId: string, pageId: string, domainId: string) => {
+    public init = async (currentUserId: string, reviewId: string, pageId: string, siteId: string) => {
         this.logger.debug(
             "Init store: currentUserId=",
             currentUserId,
@@ -46,13 +48,13 @@ export class EditReviewPageStore {
             reviewId,
             ", pageId=",
             pageId,
-            ", domainId=",
-            domainId
+            ", siteId=",
+            siteId
         );
 
         this.currentUserId = currentUserId;
         this.pageId = pageId;
-        this.domainId = domainId;
+        this.siteId = siteId;
 
         this.loadingState.isDataInitialization = true;
 
@@ -88,7 +90,7 @@ export class EditReviewPageStore {
             .finally(() => this.loadingState.isDataSubmitting = false);
         }
 
-        if (this.reviewData.resourceType === ResourceType.SITE) {
+        if (this.currentResourceType === ResourceType.SITE) {
             this.logger.debug("Update rating badge");
             this.extensionService.updateRatingBadge();
         }
@@ -104,7 +106,7 @@ export class EditReviewPageStore {
         this.reviewData.resourceId = review.resourceId;
         this.reviewData.rating = review.rating;
         this.reviewData.text = review.text;
-        this.reviewData.resourceType = review.resourceType;
+        this.currentResourceType = review.webResource.resourceType;
 
         this.reviewId = review.id;
         this.isNewReview = false;
@@ -114,7 +116,7 @@ export class EditReviewPageStore {
         const criteria = new ReviewsRequestCriteria();
         criteria.resourceType = ResourceType.SITE;
         criteria.forUserId = this.currentUserId;
-        criteria.resourceId = this.domainId;
+        criteria.resourceId = this.siteId;
 
         const response = await this.reviewService.getReviews(criteria, Pagination.SINGLE_ELEMENT);
         this.userLeftSiteReview = response.data.length > 0;
@@ -136,11 +138,11 @@ export class EditReviewPageStore {
         this.reviewData.text = "";
 
         if (this.userLeftSiteReview) {
-            this.reviewData.resourceType = ResourceType.PAGE;
+            this.currentResourceType = ResourceType.PAGE;
             this.reviewData.resourceId = this.pageId;
         } else if (this.userLeftPageReview) {
-            this.reviewData.resourceType = ResourceType.SITE;
-            this.reviewData.resourceId = this.domainId;
+            this.currentResourceType = ResourceType.SITE;
+            this.reviewData.resourceId = this.siteId;
         }
 
         this.isNewReview = true;
@@ -148,12 +150,12 @@ export class EditReviewPageStore {
 
     private initReactions = () => {
         reaction(
-            () => this.reviewData.resourceType,
+            () => this.currentResourceType,
             (newValue) => {
                 if (newValue == ResourceType.PAGE) {
                     this.reviewData.resourceId = this.pageId;
                 } else if (newValue == ResourceType.SITE) {
-                    this.reviewData.resourceId = this.domainId;
+                    this.reviewData.resourceId = this.siteId;
                 } else {
                     throw new Error(`Bad reviews resource type ${newValue}`);
                 }

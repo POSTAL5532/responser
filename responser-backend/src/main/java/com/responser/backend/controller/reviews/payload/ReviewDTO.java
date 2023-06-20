@@ -2,7 +2,7 @@ package com.responser.backend.controller.reviews.payload;
 
 import com.responser.backend.controller.reviewlike.payload.ReviewLikeDTO;
 import com.responser.backend.controller.user.payload.UserInfoPayload;
-import com.responser.backend.model.ResourceType;
+import com.responser.backend.controller.webresource.payload.WebResourceDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -28,8 +28,6 @@ public class ReviewDTO {
 
     private String resourceId;
 
-    private ResourceType resourceType;
-
     private String reviewId;
 
     private Byte rating;
@@ -37,6 +35,8 @@ public class ReviewDTO {
     private String text;
 
     private Collection<ReviewLikeDTO> reviewLikes;
+
+    private WebResourceDTO webResource;
 
     private LocalDateTime creationDate;
 

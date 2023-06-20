@@ -1,13 +1,10 @@
 package com.responser.backend.service.review;
 
 import com.responser.backend.exceptions.EntityAlreadyExistException;
-import com.responser.backend.model.ResourceType;
 import com.responser.backend.model.ReviewsCriteria;
 import com.responser.backend.model.Review;
 import com.responser.backend.model.User;
 import com.responser.backend.repository.ReviewRepository;
-import com.responser.backend.service.DomainService;
-import com.responser.backend.service.PagesService;
 import com.responser.backend.service.UserService;
 import com.responser.backend.service.WebResourceService;
 import lombok.AllArgsConstructor;
@@ -18,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import static java.text.MessageFormat.*;
 
-import java.util.List;
 import java.util.NoSuchElementException;
 
 /**

@@ -8,7 +8,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.jpa.domain.Specification;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -18,8 +17,11 @@ public class ReviewSpecifications {
 
     public static Specification<Review> getAll(ReviewsCriteria criteria) {
         return (root, query, criteriaBuilder) -> {
-            Predicate predicate = criteriaBuilder.equal(root.get(Review_.RESOURCE_ID), criteria.getResourceId());
-            List<Predicate> predicates = new ArrayList<>(Collections.singletonList(predicate));
+            List<Predicate> predicates = new ArrayList<>();
+
+            if (StringUtils.isNotBlank(criteria.getResourceId())) {
+                predicates.add(criteriaBuilder.equal(root.get(Review_.RESOURCE_ID), criteria.getResourceId()));
+            }
 
             Join<Review, User> userRoot = root.join(Review_.USER, JoinType.INNER);
 

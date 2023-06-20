@@ -12,6 +12,8 @@ import "./EditReviewForm.less";
 
 type EditReviewFormProps = {
     reviewData: ReviewData;
+    onCurrentResourceTypeChange: (resourceType: ResourceType) => void;
+    currentResourceType: ResourceType;
     userLeftPageReview: boolean;
     userLeftSiteReview: boolean;
     isLoading: boolean;
@@ -26,19 +28,18 @@ const EditReviewForm: React.FC<EditReviewFormProps> = (props: EditReviewFormProp
         userLeftSiteReview,
         isNewReview,
         isLoading,
-        isDataSubmitting
+        isDataSubmitting,
+        onCurrentResourceTypeChange,
+        currentResourceType
     } = props;
 
     if (isLoading) {
         return (<Skeleton className="edit-form-skeleton"/>);
     }
 
-    const {rating, text, resourceType} = reviewData;
+    const {rating, text} = reviewData;
     const textSize = 460;
 
-    const changeResourceType = (resourceType: ResourceType) => {
-        reviewData.resourceType = resourceType;
-    }
     const onRatingChange = (rating: number) => {
         reviewData.rating = rating;
     }
@@ -63,21 +64,19 @@ const EditReviewForm: React.FC<EditReviewFormProps> = (props: EditReviewFormProp
                             label: "Page review",
                             disabled: isDataSubmitting || userLeftPageReview
                         }
-                    ]} currentValue={resourceType} onChange={changeResourceType}/>
+                    ]} currentValue={currentResourceType} onChange={onCurrentResourceTypeChange}/>
                 </FieldLayout>
             </ConditionShow>
 
-            <FieldLayout label="Rating:" layoutType={FieldLayoutType.INLINE}
-                         disabled={isDataSubmitting || !resourceType}>
-                <Rating value={rating} onChange={onRatingChange}
-                        disabled={isDataSubmitting || !resourceType}/>
+            <FieldLayout label="Rating:" layoutType={FieldLayoutType.INLINE} disabled={isDataSubmitting || !currentResourceType}>
+                <Rating value={rating} onChange={onRatingChange} disabled={isDataSubmitting || !currentResourceType}/>
             </FieldLayout>
 
-            <FieldLayout label="Review text:" disabled={isDataSubmitting || !resourceType}
+            <FieldLayout label="Review text:" disabled={isDataSubmitting || !currentResourceType}
                          className="review-text">
                 <Textarea value={text}
                           onChange={onTextChange}
-                          disabled={isDataSubmitting || !resourceType}
+                          disabled={isDataSubmitting || !currentResourceType}
                           placeholder={`Enter review`}/>
             </FieldLayout>
 

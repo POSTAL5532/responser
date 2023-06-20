@@ -55,7 +55,7 @@ public class WebResourceService {
         };
     }
 
-    public WebResource createSiteWebResource(WebResource newWebResource) {
+    public WebResource createPageWebResource(WebResource newWebResource) {
         WebResource parent = newWebResource.getParent();
 
         if (ObjectUtils.isEmpty(parent)) {
@@ -70,7 +70,7 @@ public class WebResourceService {
         return webResourceRepository.save(newWebResource);
     }
 
-    public WebResource createPageWebResource(WebResource newWebResource) {
+    public WebResource createSiteWebResource(WebResource newWebResource) {
         ResourceType resourceType = newWebResource.getResourceType();
         WebResource parent = newWebResource.getParent();
 

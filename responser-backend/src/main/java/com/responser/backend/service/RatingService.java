@@ -13,8 +13,8 @@ public class RatingService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    public ResourceRating getSiteFullRating(String urlValue) {
-        String url = UrlUtils.prepareSiteUrl(urlValue);
+    public ResourceRating getSiteFullRating(String rawUrl) {
+        String url = UrlUtils.prepareSiteUrl(rawUrl);
 
         TypedQuery<ResourceRating> ratingQuery = entityManager.createQuery(
             "select new com.responser.backend.model.ResourceRating(avg(r.rating), count(*)) from Review r join WebResource wr on wr.url=:url and r.resourceId=wr.id",
@@ -24,7 +24,9 @@ public class RatingService {
         return ratingQuery.getSingleResult();
     }
 
-    public ResourceRating getPageFullRating(String url) {
+    public ResourceRating getPageFullRating(String rawUrl) {
+        String url = UrlUtils.preparePageUrl(rawUrl);
+
         TypedQuery<ResourceRating> ratingQuery = entityManager.createQuery(
             "select new com.responser.backend.model.ResourceRating(avg(r.rating), count(*)) from Review r join WebResource wr on wr.url=:url and r.resourceId=wr.id",
             ResourceRating.class

@@ -43,8 +43,19 @@
       height: 26px;
       align-items: center;
       justify-content: center;
-      background-color: @system-color-success-100;
       border-radius: 4px;
+
+      &.good-rating {
+        background-color: @system-color-success-300;
+      }
+
+      &.medium-rating {
+        background-color: @system-color-warning-400;
+      }
+
+      &.bad-rating {
+        background-color: @system-color-danger-400;
+      }
     }
   }
 }

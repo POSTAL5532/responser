@@ -19,18 +19,12 @@ const EditReviewPage: React.FC = () => {
         domainId,
         previousResourceType
     } = useLocation<NavigateStateProps>().state;
-    const {
-        init,
-        reviewData,
-        saveReview,
-        isNewReview,
-        userLeftSiteReview,
-        userLeftPageReview,
-        loadingState
-    } = useEditReviewPageStore();
+
+    const editReviewPageStore = useEditReviewPageStore();
+    const {reviewData, isNewReview, loadingState} = editReviewPageStore;
 
     useEffect(() => {
-        init(currentUser.id, reviewId, pageId, domainId);
+        editReviewPageStore.init(currentUser.id, reviewId, pageId, domainId);
     }, [reviewId, pageId, domainId]);
 
     const onCancel = () => {
@@ -38,8 +32,8 @@ const EditReviewPage: React.FC = () => {
     }
 
     const onSubmit = async () => {
-        await saveReview();
-        navigateToReviewsPage({resourceType: reviewData.resourceType});
+        await editReviewPageStore.saveReview();
+        navigateToReviewsPage({resourceType: editReviewPageStore.currentResourceType});
     }
 
     const getHeaderText = () => {
@@ -47,15 +41,19 @@ const EditReviewPage: React.FC = () => {
 
         let text: string[] = [isNewReview ? "Create" : "Edit"];
 
-        if (reviewData.resourceType === ResourceType.SITE) {
+        if (editReviewPageStore.currentResourceType === ResourceType.SITE) {
             text.push("site");
-        } else if (reviewData.resourceType === ResourceType.PAGE) {
+        } else if (editReviewPageStore.currentResourceType === ResourceType.PAGE) {
             text.push("page")
         }
 
         text.push("review");
 
         return text.join(" ");
+    }
+
+    const onCurrentResourceTypeChange = (resourceType: ResourceType) => {
+        editReviewPageStore.currentResourceType = resourceType;
     }
 
     return (
@@ -66,15 +64,17 @@ const EditReviewPage: React.FC = () => {
 
             <EditReviewForm reviewData={reviewData}
                             isNewReview={isNewReview}
-                            userLeftSiteReview={userLeftSiteReview}
-                            userLeftPageReview={userLeftPageReview}
+                            currentResourceType={editReviewPageStore.currentResourceType}
+                            onCurrentResourceTypeChange={onCurrentResourceTypeChange}
+                            userLeftSiteReview={editReviewPageStore.userLeftSiteReview}
+                            userLeftPageReview={editReviewPageStore.userLeftPageReview}
                             isLoading={!reviewData || loadingState.isDataInitialization}
                             isDataSubmitting={loadingState.isDataSubmitting}/>
 
             <EditReviewFooter onSubmit={onSubmit}
                               onCancel={onCancel}
                               isNewReview={isNewReview}
-                              submitDisabled={!reviewData?.text || !reviewData?.resourceType}
+                              submitDisabled={!reviewData?.text || !editReviewPageStore.currentResourceType}
                               isDataSubmitting={loadingState.isDataSubmitting}/>
         </Page>
     );

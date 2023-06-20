@@ -17,42 +17,27 @@ import java.net.URL;
 @Slf4j
 public class UrlUtils {
 
-    public static final String SSL_FLAG = "https";
-
     public static final String HTTP_SEPARATOR = "/";
 
-    public static URL convertToURL(String rawUrl) {
+    public static boolean isValidUrl(String rawUrl) {
         try {
-            return new URL(rawUrl);
+            new URL(rawUrl);
         } catch (MalformedURLException e) {
-            log.error("Invalid URL string.");
+            return false;
+        }
+
+        return true;
+    }
+
+    public static void checkUrl(String rawUrl) {
+        if (!isValidUrl(rawUrl)) {
             throw new IllegalArgumentException("Invalid URL string.");
         }
     }
 
-    /**
-     * Format raw url string to right format.
-     *
-     * @param url raw url string
-     * @return prepared url
-     */
-    public static String prepareUrl(String url) {
-        String formattedUrl = StringUtils.trim(url);
-        formattedUrl = StringUtils.removeEnd(formattedUrl.split("#")[0], HTTP_SEPARATOR);
-        return formattedUrl;
-    }
-
-    /**
-     * Returns is url has a ssl (https).
-     *
-     * @param url url object
-     * @return boolean flag
-     */
-    public static boolean haveSsl(URL url) {
-        return url.getProtocol().equals(SSL_FLAG);
-    }
-
     public static String prepareSiteUrl(String rawUrl) {
+        checkUrl(rawUrl);
+
         String formattedUrl = StringUtils.trim(rawUrl);
         URI uri;
 
@@ -66,8 +51,10 @@ public class UrlUtils {
         return StringUtils.removeEnd(uri.resolve(HTTP_SEPARATOR).toString(), HTTP_SEPARATOR);
     }
 
-    public static String preparePageUrl(String url) {
-        String formattedUrl = StringUtils.trim(url);
+    public static String preparePageUrl(String rawUrl) {
+        checkUrl(rawUrl);
+
+        String formattedUrl = StringUtils.trim(rawUrl);
         formattedUrl = StringUtils.removeEnd(formattedUrl.split("#")[0], HTTP_SEPARATOR);
         return formattedUrl;
     }

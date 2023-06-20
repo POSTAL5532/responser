@@ -10,6 +10,7 @@ import javax.annotation.processing.Generated;
 public abstract class Review_ extends com.responser.backend.model.AbstractEntity_ {
 
 	public static volatile SingularAttribute<Review, String> resourceId;
+	public static volatile SingularAttribute<Review, WebResource> webResource;
 	public static volatile SingularAttribute<Review, Byte> rating;
 	public static volatile SingularAttribute<Review, String> text;
 	public static volatile SingularAttribute<Review, String> reviewId;
@@ -17,6 +18,7 @@ public abstract class Review_ extends com.responser.backend.model.AbstractEntity
 	public static volatile SetAttribute<Review, ReviewLike> likes;
 
 	public static final String RESOURCE_ID = "resourceId";
+	public static final String WEB_RESOURCE = "webResource";
 	public static final String RATING = "rating";
 	public static final String TEXT = "text";
 	public static final String REVIEW_ID = "reviewId";

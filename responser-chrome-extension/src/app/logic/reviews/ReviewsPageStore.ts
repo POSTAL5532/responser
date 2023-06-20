@@ -2,13 +2,7 @@ import {makeAutoObservable} from "mobx";
 import {Review} from "../../model/Review";
 import {ReviewService} from "../../service/ReviewService";
 import {useState} from "react";
-import {Domain} from "../../model/Domain";
-import {Page} from "../../model/Page";
-import {DomainService} from "../../service/DomainService";
-import {PagesService} from "../../service/PagesService";
 import {ApiErrorType} from "../../model/ApiError";
-import {CreateDomainPayload} from "../../model/CreateDomainPayload";
-import {CreatePagePayload} from "../../model/CreatePagePayload";
 import {ExtensionService} from "../../service/extension/ExtensionService";
 import {PageInfo} from "../../model/PageInfo";
 import {ReviewsRequestCriteria} from "../../model/ReviewsRequestCriteria";
@@ -18,8 +12,11 @@ import {ReviewLikeService} from "../../service/ReviewLikeService";
 import {ResourceType} from "../../model/ResourceType";
 import {Pagination} from "../../model/Pagination";
 import {Logger} from "../../utils/Logger";
+import {WebResource} from "../../model/WebResource";
+import {WebResourceService} from "../../service/WebResourceService";
+import {NewWebResource} from "../../model/NewWebResource";
 
-const PAGE_ELEMENTS_COUNT = 5;
+const PAGE_ELEMENTS_COUNT = 10;
 
 export class ReviewsPageStore {
 
@@ -27,9 +24,7 @@ export class ReviewsPageStore {
 
     extensionService: ExtensionService = new ExtensionService();
 
-    domainService: DomainService = new DomainService();
-
-    pagesService: PagesService = new PagesService();
+    webResourceService: WebResourceService = new WebResourceService();
 
     reviewService: ReviewService = new ReviewService();
 
@@ -42,9 +37,9 @@ export class ReviewsPageStore {
      */
     currentPageInfo: PageInfo;
 
-    domain: Domain;
+    site: WebResource;
 
-    page: Page;
+    page: WebResource;
 
     currentUserReview: Review;
 
@@ -76,7 +71,7 @@ export class ReviewsPageStore {
         );
         this.currentPageInfo = pageInfo.data;
 
-        await this.initDomain();
+        await this.initSite();
         await this.initPage();
 
         await this.loadCurrenUserReview();
@@ -85,29 +80,29 @@ export class ReviewsPageStore {
         this.logger.debug("Store initialisation finished");
     }
 
-    initDomain = async () => {
+    initSite = async () => {
         const {url} = this.currentPageInfo;
 
-        this.logger.debug("Init domain with URL=", url);
+        this.logger.debug("Init site with URL=", url);
 
-        this.loadingState.isDomainLoading = true;
+        this.loadingState.isSiteLoading = true;
 
         try {
-            this.domain = await this.domainService.getDomainByUrl(url);
+            this.site = await this.webResourceService.getSiteByUrl(url);
         } catch (error: any) {
-            this.logger.debug("Init domain error - check type of error...");
+            this.logger.debug("Init site error - check type of error...");
             if (error.errorType === ApiErrorType.ENTITY_NOT_FOUND) {
-                this.logger.debug("Init domain error is 'ENTITY_NOT_FOUND' type - create new domain.");
-                const newDomainPayload = new CreateDomainPayload(url, "NO_DESCRIPTION");
-                this.domain = await this.domainService.createDomain(newDomainPayload);
+                this.logger.debug("Init site error is 'ENTITY_NOT_FOUND' type - create new site.");
+                const newWebResource = new NewWebResource(url, ResourceType.SITE);
+                this.site = await this.webResourceService.create(newWebResource);
             } else {
-                this.logger.error("Init domain error is unknown: ", error);
+                this.logger.error("Init site error is unknown: ", error);
             }
         } finally {
-            this.loadingState.isDomainLoading = false;
+            this.loadingState.isSiteLoading = false;
         }
 
-        this.logger.debug("Domain initialisation finished.");
+        this.logger.debug("Site initialisation finished.");
     }
 
     initPage = async () => {
@@ -118,13 +113,14 @@ export class ReviewsPageStore {
         this.loadingState.isPageLoading = true;
 
         try {
-            this.page = await this.pagesService.getPageByUrl(url);
+            this.page = await this.webResourceService.getPageByUrl(url);
         } catch (error: any) {
             this.logger.debug("Init page error - check type of error...");
             if (error.errorType === ApiErrorType.ENTITY_NOT_FOUND) {
                 this.logger.debug("Init page error is 'ENTITY_NOT_FOUND' type - create new page.");
-                const createPagePayload = new CreatePagePayload(this.domain.id, url, title, description);
-                this.page = await this.pagesService.createPage(createPagePayload);
+                const createPagePayload = new NewWebResource(url, ResourceType.PAGE);
+                createPagePayload.parentId = this.site.id;
+                this.page = await this.webResourceService.create(createPagePayload);
             } else {
                 this.logger.error("Init page error is unknown: ", error);
             }
@@ -190,14 +186,13 @@ export class ReviewsPageStore {
 
     getReviewsRequestCriteria = (excludeUserId?: string, forUserId?: string): ReviewsRequestCriteria => {
         const criteria = new ReviewsRequestCriteria();
-        criteria.resourceType = this.reviewsResourceType;
 
         switch (this.reviewsResourceType) {
             case ResourceType.PAGE:
                 criteria.resourceId = this.page.id;
                 break;
             case ResourceType.SITE:
-                criteria.resourceId = this.domain.id;
+                criteria.resourceId = this.site.id;
                 break
             default:
                 throw new Error(`Bad reviews resource type ${this.reviewsResourceType}`);
@@ -267,7 +262,7 @@ export class ReviewsPageStoreLoadingState {
 
     isPageInfoLoading: boolean = false;
 
-    isDomainLoading: boolean = false;
+    isSiteLoading: boolean = false;
 
     isPageLoading: boolean = false;
 
