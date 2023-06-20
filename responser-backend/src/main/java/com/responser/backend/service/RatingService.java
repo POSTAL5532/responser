@@ -17,7 +17,7 @@ public class RatingService {
         String url = UrlUtils.prepareSiteUrl(rawUrl);
 
         TypedQuery<ResourceRating> ratingQuery = entityManager.createQuery(
-            "select new com.responser.backend.model.ResourceRating(avg(r.rating), count(*)) from Review r join WebResource wr on wr.url=:url and r.resourceId=wr.id",
+            "select new com.responser.backend.model.ResourceRating(avg(r.rating), count(*)) from Review r join WebResource wr on wr.url=:url and r.resourceId=wr.id and wr.resourceType='SITE'",
             ResourceRating.class
         ).setParameter("url", url);
 
@@ -28,7 +28,7 @@ public class RatingService {
         String url = UrlUtils.preparePageUrl(rawUrl);
 
         TypedQuery<ResourceRating> ratingQuery = entityManager.createQuery(
-            "select new com.responser.backend.model.ResourceRating(avg(r.rating), count(*)) from Review r join WebResource wr on wr.url=:url and r.resourceId=wr.id",
+            "select new com.responser.backend.model.ResourceRating(avg(r.rating), count(*)) from Review r join WebResource wr on wr.url=:url and r.resourceId=wr.id and wr.resourceType='PAGE'",
             ResourceRating.class
         ).setParameter("url", url);
 
