@@ -10,6 +10,8 @@ import LocalTokenStorageService from "../../service/authorization/LocalTokenStor
 import {Icon, IconType} from "../../components/icon/Icon";
 import {useLogger} from "../../utils/Logger";
 import {navigateToUserProfilePage} from "../user-profile/UserProfilePage";
+import {DropDownMenuButton} from "../../components/dropdown-menu-button/DropDownMenuButton";
+import {navigateToMainPage} from "../main-page/MainPage";
 import "./AppHeader.less";
 
 type PageHeaderProps = {
@@ -32,7 +34,10 @@ const AppHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {
 
     return (
         <div className="app-header">
-            <div className="header-title"><Icon type={IconType.REVIEWLY_LOGO}/> {props.title}</div>
+            <div className="header-title" onClick={() => navigateToMainPage(false)}>
+                <Icon type={IconType.REVIEWLY_LOGO}/> {props.title}
+            </div>
+
             {
                 currentUser &&
                 <div className="user-block">
@@ -40,7 +45,10 @@ const AppHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {
                         {!currentUser.emailConfirmed && <UserEmailConfirmationAlert/>}
                         <span className="user-full-name">{currentUser.fullName}</span>
                     </div>
-                    <Button onClick={onLogOut}>Logout <Icon type={IconType.LOGOUT}/></Button>
+                    <DropDownMenuButton label={<Icon type={IconType.SANDWICH}/>} activeLabel={<Icon type={IconType.CANCEL}/>} dropdownMenuItems={[
+                        {label: <>Profile <Icon type={IconType.USER}/></>, onClick: navigateToUserProfilePage},
+                        {label: <>Logout <Icon type={IconType.LOGOUT}/></>, onClick: onLogOut},
+                    ]}/>
                 </div>
             }
         </div>

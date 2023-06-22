@@ -27,6 +27,7 @@
 
   .icon {
     height: 14px;
+    width: 14px;
   }
 
   .spinner {
@@ -56,7 +57,7 @@
 
   &.secondary {
     color: @system-color-dark-300;
-    background-color: @system-color-light-300;
+    background-color: @system-color-light-100;
     border: solid 1px @system-color-dark-100;
 
     .spinner {
@@ -68,11 +69,11 @@
     }
 
     &:hover {
-      background-color: darken(@system-color-light-300, 4%);
+      background-color: @system-color-light-200;
     }
 
     &:active {
-      background-color: darken(@system-color-light-300, 6%);
+      background-color: darken(@system-color-light-200, 4%);
     }
   }
 
@@ -80,9 +81,10 @@
     color: @system-color-light-100;
     background-color: @system-color-light-500;
     pointer-events: none;
+    border: none;
 
     .spinner {
-      color: @system-color-dark-100 !important;
+      color: @system-color-light-100 !important;
     }
 
     svg path {
