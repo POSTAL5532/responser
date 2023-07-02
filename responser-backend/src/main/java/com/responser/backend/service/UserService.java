@@ -47,7 +47,7 @@ public class UserService {
 
         userRepository.save(newUser);
         EmailConfirmation emailConfirmation = emailConfirmationService.createEmailConfirmation(newUser.getId());
-        emailService.sendEmailConfirmationMessage(newUser.getEmail(), emailConfirmation);
+        emailService.sendEmailConfirmationMessage(newUser, emailConfirmation);
     }
 
     @Transactional
@@ -63,7 +63,7 @@ public class UserService {
     public void resendConfirmationEmailForUser(String userId) {
         User user = getUser(userId);
         EmailConfirmation emailConfirmation = emailConfirmationService.getByUserId(userId);
-        emailService.sendEmailConfirmationMessage(user.getEmail(), emailConfirmation);
+        emailService.sendEmailConfirmationMessage(user, emailConfirmation);
     }
 
     @Transactional
@@ -83,7 +83,7 @@ public class UserService {
                 .findByUserId(userId)
                 .orElseGet(() -> emailConfirmationService.createEmailConfirmation(userId));
 
-            emailService.sendEmailConfirmationMessage(user.getEmail(), emailConfirmation);
+            emailService.sendEmailConfirmationMessage(user, emailConfirmation);
         }
 
         if (!user.getFullName().equals(userUpdates.getFullName())) {
