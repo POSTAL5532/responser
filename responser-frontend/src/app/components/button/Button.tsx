@@ -25,7 +25,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props: B
 
     return (
         <button {...otherProps} className={resultClassName} disabled={disabled} ref={ref}>
-            {loading ? <Spinner/> : children}
+            {loading && <Spinner/>} {children}
         </button>
     );
 })

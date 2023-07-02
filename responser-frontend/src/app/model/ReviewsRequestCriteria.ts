@@ -1,6 +1,7 @@
 import {makeAutoObservable} from "mobx";
 import {ResourceType} from "./ResourceType";
 import {SortDirection} from "./SortDirection";
+import {Review} from "./Review";
 
 export class ReviewsRequestCriteria {
 
@@ -12,7 +13,7 @@ export class ReviewsRequestCriteria {
 
     resourceType: ResourceType;
 
-    sortingField: string;
+    sortingField: keyof Review;
 
     sortDirection: SortDirection;
 

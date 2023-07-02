@@ -1,0 +1,15 @@
+@import "globalsLess";
+
+.link {
+  text-decoration: none;
+  .fontInterRegular();
+  color: @primary-color-lighter;
+
+  &:hover {
+    color: darken(@primary-color-lighter, 4%);
+  }
+
+  &:active {
+    color: darken(@primary-color-lighter, 6%);
+  }
+}

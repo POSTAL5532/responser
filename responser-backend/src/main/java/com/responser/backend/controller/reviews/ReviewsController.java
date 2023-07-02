@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
-import org.springframework.http.HttpStatusCode;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -66,7 +66,7 @@ public class ReviewsController {
         if (StringUtils.isNotEmpty(criteria.getForUserId())) {
             if (Objects.isNull(principal) || !principal.getName().equals(criteria.getForUserId())) {
                 log.error("Reviews request criteria with parameter 'forUserId' without authorization.");
-                return ResponseEntity.status(HttpStatusCode.valueOf(401)).build();
+                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
         }
 

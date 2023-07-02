@@ -1,0 +1,110 @@
+@import "globalsLess";
+
+.review-card {
+  background-color: @system-color-light-100;
+  padding: 24px;
+  .stackShadow3();
+  border-radius: 8px;
+  position: relative;
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 14px;
+
+    .publication-info {
+      display: flex;
+      align-items: center;
+      flex: 2;
+
+      .user-name {
+        .fontInterRegular();
+        color: @system-color-dark-200;
+        font-size: 18px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+        max-width: 168px;
+      }
+
+      .user-icon {
+        margin-left: 4px;
+      }
+
+      .published {
+        .fontInterRegular();
+        color: @system-color-dark-100;
+        font-size: 14px;
+        margin-left: 8px;
+      }
+    }
+
+    .web-resource-info {
+      padding-left: 10px;
+      flex: 3;
+      color: #555770;
+      margin-right: 10px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+
+      .resource-type {
+        .fontInterRegular();
+        color: @system-color-dark-200;
+      }
+    }
+
+    .rating {
+      margin-left: auto;
+
+      .star {
+        width: 22px;
+        height: 22px;
+        margin-right: 4px;
+      }
+    }
+
+    .remove {
+      margin-left: auto;
+    }
+  }
+
+  .text {
+    position: relative;
+    .fontInterRegular();
+    font-size: 20px;
+    margin-bottom: 16px;
+    word-wrap: break-word;
+    color: @system-color-dark-400;
+
+    &:not(.expanded) {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+    }
+  }
+
+  .card-footer {
+    display: flex;
+
+    .reaction {
+      margin-right: 10px;
+    }
+  }
+
+  .show-more {
+    .fontInterMedium();
+    font-size: 12px;
+    cursor: pointer;
+    color: @system-color-dark-300;
+    margin-left: auto;
+    margin-right: 16px;
+
+    &:hover {
+      color: @primary-color-lighter;
+    }
+  }
+}

@@ -19,6 +19,8 @@ public class ReviewsCriteriaConverter {
             .resourceId(requestCriteria.getResourceId())
             .excludeUserId(requestCriteria.getExcludeUserId())
             .forUserId(requestCriteria.getForUserId())
+            .sortingField(requestCriteria.getSortingField())
+            .sortDirection(requestCriteria.getSortDirection())
             .resourceType(
                 StringUtils.isNotBlank(requestCriteria.getResourceType())
                     ? ResourceType.valueOf(requestCriteria.getResourceType())

@@ -1,0 +1,35 @@
+@import "globalsLess";
+
+@star-size:24px;
+
+.rating {
+  .star {
+    width: @star-size;
+    height: @star-size;
+    margin-right: 10px;
+
+    path {
+      stroke: @primary-color-lighter;
+    }
+
+    &.filled {
+      path{
+        fill: @primary-color-lighter;
+      }
+    }
+  }
+
+  &.disabled {
+    .star {
+      path {
+        stroke: @system-color-dark-100;
+      }
+
+      &.filled {
+        path{
+          fill: @system-color-dark-100;
+        }
+      }
+    }
+  }
+}

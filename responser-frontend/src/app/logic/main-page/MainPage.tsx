@@ -7,6 +7,8 @@ import {Button, ButtonSize} from "../../components/button/Button";
 import applicationProperties from "../../service/ApplicationProperties";
 import {Icon, IconType} from "../../components/icon/Icon";
 import {MessageBlock, MessageBlockType} from "../../components/message-block/MessageBlock";
+import ReviewsList from "./ReviewsList";
+import {useMainPageStore} from "./MainPageStore";
 import "./MainPage.less";
 
 export const MAIN_PAGE_URL: string = "/main";
@@ -24,7 +26,12 @@ const MainPage: React.FC = () => {
     const [extensionChecking, changeExtensionChecking] = useState(true);
     const [extensionExist, changeExtensionExist] = useState(true);
 
+    const {reviews, init, loadNextReviews, hasNextReviews, loadingState} = useMainPageStore();
+
+    const {isReviewsLoading, isNextReviewsLoading} = loadingState;
+
     useEffect(() => {
+        init();
         checkExtension()
         .catch(() => changeExtensionExist(false))
         .finally(() => changeExtensionChecking(false));
@@ -36,10 +43,19 @@ const MainPage: React.FC = () => {
 
             {!extensionChecking ? <ExtensionExistCheck exist={extensionExist}/> : null}
 
-
             <p className="success-text">
                 Well done! Now you can start to discover websites rating or leave your feedback by browser extension.
             </p>
+
+            <h2 className="last-reviews-list-header">Last users reviews</h2>
+
+            <ReviewsList reviews={reviews}
+                         hasNextReviews={hasNextReviews}
+                         loadNextReviews={loadNextReviews}
+                         isLoading={isReviewsLoading}
+                         isNextReviewsLoading={isNextReviewsLoading}
+                         dontUseCurrentUser={true}
+                         disableReactions={true}/>
         </Page>
     );
 }

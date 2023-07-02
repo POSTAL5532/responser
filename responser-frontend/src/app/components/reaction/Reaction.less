@@ -1,0 +1,47 @@
+@import "globalsLess";
+
+.reaction {
+  display: flex;
+  align-items: center;
+
+  .count {
+    .fontInterMedium();
+    font-size: 16px;
+    line-height: 16px;
+    color: @system-color-dark-300;
+  }
+
+  .reaction-icon {
+    display: flex;
+    margin-right: 4px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+
+      path {
+        stroke: @system-color-dark-300;
+      }
+    }
+  }
+
+  &.current-user-reacted {
+    .reaction-icon svg path {
+      stroke: @primary-color-lighter;
+    }
+  }
+
+  &:not(.disabled) {
+    cursor: pointer;
+
+    &:hover {
+      .count {
+        color: @primary-color-lighter;
+      }
+
+      .reaction-icon svg path {
+        stroke: @primary-color-lighter;
+      }
+    }
+  }
+}
