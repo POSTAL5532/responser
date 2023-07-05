@@ -22,28 +22,16 @@
     }
   }
 
-  .login-offer {
-    span {
-      .fontInterMedium();
-      font-size: 14px;
-      justify-content: center;
-      align-items: center;
-      display: flex;
+  .login-link {
+    .fontInterMedium();
+    font-size: 16px;
+    color: @primary-color-lighter;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
 
-      &:first-child {
-        margin-bottom: 6px;
-      }
-
-      &.login-link {
-        .fontInterSemiBold();
-        font-size: 18px;
-        color: @primary-color-lighter;
-        cursor: pointer;
-
-        &:hover {
-          color: @primary-color-main;
-        }
-      }
+    &:hover {
+      color: @primary-color-main;
     }
   }
 }

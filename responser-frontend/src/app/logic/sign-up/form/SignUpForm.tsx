@@ -80,12 +80,7 @@ const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) => {
 
                     <Button type="submit" disabled={disabled} loading={disabled}>Sign Up</Button>
 
-                    <div className="login-offer">
-                        <span>Already have account?</span>
-                        <span className="login-link" onClick={AuthorizationService.requestLoginPage}>
-                            Login
-                        </span>
-                    </div>
+                    <span className="login-link" onClick={AuthorizationService.requestLoginPage}>Login</span>
                 </Form>
             </Formik>
         </div>
