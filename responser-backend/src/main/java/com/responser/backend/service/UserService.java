@@ -38,6 +38,13 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
+    public User getUser(String userId) {
+        return userRepository.findById(userId).orElseThrow(() -> {
+            log.error("User with id {} doesn't exist", userId);
+            return new NoSuchElementException(format("User with id ''{0}'' doesn't exist", userId));
+        });
+    }
+
     @Transactional
     public void registerUser(User newUser) {
         log.info("Register new not confirmed user: {}", newUser.getUserName());
@@ -99,11 +106,18 @@ public class UserService {
         userRepository.save(user);
     }
 
-    public User getUser(String userId) {
-        return userRepository.findById(userId).orElseThrow(() -> {
-            log.error("User with id {} doesn't exist", userId);
-            return new NoSuchElementException(format("User with id ''{0}'' doesn't exist", userId));
-        });
+    @Transactional
+    public void updateUserPassword(String userId, String oldPassword, String newPassword) {
+        User user = getUser(userId);
+
+        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+            Map<String, List<String>> fieldsErrors = new HashMap<>();
+            fieldsErrors.put("oldPassword", List.of("Old password is not valid."));
+            throw new DataNotValidException("Update user password fail", fieldsErrors);
+        }
+
+        user.setPassword(passwordEncoder.encode(newPassword));
+        updateUser(user);
     }
 
     public boolean existByEmail(String email) {

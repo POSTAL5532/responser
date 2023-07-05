@@ -2,6 +2,7 @@ package com.responser.backend.controller.user.payload;
 
 import com.responser.backend.controller.user.validation.EmailUniqueness;
 import com.responser.backend.controller.user.validation.UsernameUniqueness;
+import com.responser.backend.utils.ValidationUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -31,7 +32,7 @@ public class CreateUserProfilePayload {
 
     @NotBlank(message = "Password must be specified")
     @Pattern(
-            regexp = "^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]{8,}$",
+            regexp = ValidationUtils.PASSWORD_VALIDITY_REGEXP,
             message = "Password must contains minimum eight characters, at least one letter and one number"
         )
     private String password;

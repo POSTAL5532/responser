@@ -3,12 +3,14 @@ package com.responser.backend.controller.user;
 import static com.responser.backend.config.APIServerApplicationProperties.API_ROOT_PATH;
 
 import com.responser.backend.controller.user.payload.CreateUserProfilePayload;
+import com.responser.backend.controller.user.payload.UpdateUserPasswordPayload;
 import com.responser.backend.controller.user.payload.UpdateUserPayload;
 import com.responser.backend.controller.user.payload.UserInfoPayload;
 import com.responser.backend.converter.UserConverter;
 import com.responser.backend.model.User;
 import com.responser.backend.service.UserService;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -53,5 +55,19 @@ public class UserController {
         log.info("Get current {} user.", principal.getName());
         User user = userService.getUser(principal.getName());
         return ResponseEntity.ok(userConverter.toFullUserInfoPayload(user));
+    }
+
+    @PreAuthorize("isAuthenticated()")
+    @PutMapping("/update-password")
+    public ResponseEntity<Void> updatePassword(Principal principal, @Valid @NotNull @RequestBody UpdateUserPasswordPayload updateUserPasswordPayload) {
+        log.info("Update current {} user password.", principal.getName());
+
+        userService.updateUserPassword(
+            principal.getName(),
+            updateUserPasswordPayload.getOldPassword(),
+            updateUserPasswordPayload.getNewPassword()
+        );
+
+        return ResponseEntity.ok().build();
     }
 }

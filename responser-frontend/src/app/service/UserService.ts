@@ -3,6 +3,7 @@ import {UserAccountDataPayload} from "app/model/UserAccountDataPayload";
 import {User} from "app/model/User";
 import {Logger} from "../utils/Logger";
 import {UpdateUserPayload} from "../model/UpdateUserPayload";
+import {UpdateUserPasswordPayload} from "../model/UpdateUserPasswordPayload";
 
 const BASE_USER_REQUEST = "/users"
 
@@ -29,5 +30,10 @@ export class UserService {
     updateUser = async (userUpdates: UpdateUserPayload): Promise<void> => {
         this.logger.debug("Update current user:", userUpdates);
         await this.client.executePutRequest(`${BASE_USER_REQUEST}`, userUpdates);
+    }
+
+    updatePassword = async (passwordPayload: UpdateUserPasswordPayload): Promise<void> => {
+        this.logger.debug("Update current user password:", passwordPayload);
+        await this.client.executePutRequest(`${BASE_USER_REQUEST}/update-password`, passwordPayload);
     }
 }

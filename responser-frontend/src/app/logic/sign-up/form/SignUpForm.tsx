@@ -4,7 +4,7 @@ import {Formik, Form, FieldValidator} from "formik";
 import * as Yup from "yup";
 import {UserAccountDataPayload} from "app/model/UserAccountDataPayload";
 import {Button} from "app/components/button/Button";
-import {PASSWORD_VALIDATION_SCHEMA, PasswordField} from "app/logic/sign-up/form/PasswordField";
+import {PASSWORD_VALIDATION_SCHEMA, PasswordField} from "app/components/form/PasswordField";
 import AuthorizationService from "../../../service/authorization/AuthorizationService";
 import {FieldLayout} from "../../../components/form/field-layout/FieldLayout";
 import {FormikHelpers} from "formik/dist/types";
@@ -78,7 +78,7 @@ const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) => {
                         </FieldLayout>
                     </div>
 
-                    <Button type="submit" disabled={disabled}>{!disabled ? "Sign Up" : "Wait"}</Button>
+                    <Button type="submit" disabled={disabled} loading={disabled}>Sign Up</Button>
 
                     <div className="login-offer">
                         <span>Already have account?</span>
