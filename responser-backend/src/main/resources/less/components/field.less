@@ -1,0 +1,40 @@
+@import "../global.less";
+
+.field-layout {
+  display: flex;
+
+  &.column {
+    flex-direction: column;
+
+    .label {
+      margin-bottom: 6px;
+    }
+  }
+
+  .label {
+    .fontInterRegular();
+    font-size: 14px;
+    color: @system-color-dark-300;
+  }
+}
+
+.field {
+  height: 40px;
+  width: 100%;
+  border-radius: 8px;
+  padding: 10px;
+  .fontInterRegular();
+  font-size: 16px;
+  color: #28293D;
+  border: 1px solid @system-color-dark-100;
+  background-color: @system-color-light-100;
+
+  &:focus, &:active {
+    outline: none;
+  }
+
+  &.disabled {
+    background-color: @system-color-light-500;
+    pointer-events: none;
+  }
+}

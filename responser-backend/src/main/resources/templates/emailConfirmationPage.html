@@ -2,14 +2,12 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Reviewly - Email confirmation</title>
-    <link th:href="@{/css/components-style.css}" rel="stylesheet"/>
-    <link th:href="@{/css/email-confirmation.css}" rel="stylesheet"/>
-</head>
+    <link th:href="@{/css/emailConfirmationPage.css}" rel="stylesheet"/>
+    <th:block th:include="includes/defaultStyles"/>
+    <th:block th:include="includes/favicons"/>
 <body>
 
-<div class="app-header">
-    <div class="header-title">Reviewly</div>
-</div>
+<th:block th:include="includes/header"/>
 
 <div class="email-confirmation-page">
     <div class="success-icon"></div>

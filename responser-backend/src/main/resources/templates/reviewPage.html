@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Reviewly - Review page</title>
+    <link th:href="@{/css/reviewPage.css}" rel="stylesheet"/>
+    <th:block th:include="includes/defaultStyles"/>
+    <th:block th:include="includes/favicons"/>
+
+    <meta property="og:url" th:content="${facebookMetaTags.url}"/>
+    <meta property="og:type" th:content="${facebookMetaTags.type}"/>
+    <meta property="og:title" th:content="${facebookMetaTags.title}"/>
+    <meta property="og:description" th:content="${facebookMetaTags.description}"/>
+    <meta property="og:image" th:content="${facebookMetaTags.imageUrl}"/>
+
+    <meta property="twitter:title" th:content="${twitterMetaTags.title}">
+    <meta property="twitter:description" th:content="${twitterMetaTags.description}">
+    <meta property="twitter:image" th:content="${twitterMetaTags.imageUrl}">
+    <meta name="twitter:card" th:content="${twitterMetaTags.card}">
+</head>
+<body>
+
+<th:block th:include="includes/header"/>
+
+<div class="review-page">
+
+    <div class="resource-info">
+        <h1 class="resource">
+            <span class="resource-type" th:text="${review.webResource.resourceType.name == 'PAGE'} ? 'Page review' : 'Site review'"></span>:
+            <a class="link url" th:href="${review.webResource.url}" target="_blank" th:text="${review.webResource.url}">Something wrong :(</a>
+        </h1>
+    </div>
+
+    <div class="review-header">
+        <div class="publication-info">
+            <div class="user" th:text="${review.user.fullName}">Something wrong :(</div>
+            <div class="published-date" th:text="${#temporals.format(review.creationDate, 'd MMM yyyy')}">Something wrong :(</div>
+        </div>
+        <div class="rating">
+            <th:block th:each="i: ${#numbers.sequence(0, review.rating - 1)}" th:include="includes/starFilled"/>
+            <th:block th:if="${5 - review.rating > 0}" th:each="i: ${#numbers.sequence(0, 5 - review.rating - 1)}" th:include="includes/star"/>
+        </div>
+    </div>
+
+    <div class="review-content">
+        <div class="text" th:text="${review.text}">Something wrong :(</div>
+        <div class="reactions-container">
+            <div class="reactions positive">
+                <span class="reaction-icon">
+                    <th:block th:include="includes/positiveReaction"/>
+                </span>
+                <span class="reactions-count" th:text="${positiveReactions}"></span>
+            </div>
+            <div class="reactions negative">
+                <span class="reaction-icon">
+                    <th:block th:include="includes/negativeReaction"/>
+                </span>
+                <span class="reactions-count" th:text="${negativeReactions}"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/js/script.js}"></script>
+</body>
+</html>

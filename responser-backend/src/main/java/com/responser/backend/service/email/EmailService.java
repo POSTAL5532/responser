@@ -1,6 +1,5 @@
 package com.responser.backend.service.email;
 
-import static com.responser.backend.controller.emailConfirmation.EmailConfirmationController.CONFIRM_EMAIL_URL;
 import static com.responser.backend.controller.emailConfirmation.EmailConfirmationController.EMAIL_CONFIRMATION_URL;
 
 import com.responser.backend.config.APIServerApplicationProperties;
@@ -46,10 +45,7 @@ public class EmailService {
         templateProperties.put("user", user);
         templateProperties.put(
             "confirmationLink",
-            applicationProperties.getSelfHost() +
-                EMAIL_CONFIRMATION_URL +
-                CONFIRM_EMAIL_URL +
-                "/" + emailConfirmation.getId()
+            applicationProperties.getSelfHost() + EMAIL_CONFIRMATION_URL + "/" + emailConfirmation.getId()
         );
 
         emailContext.setProperties(templateProperties);

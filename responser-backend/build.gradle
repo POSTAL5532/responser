@@ -60,3 +60,25 @@ compileJava	{
     options.compilerArgs += ['-AaddGenerationDate=false']
     options.annotationProcessorGeneratedSourcesDirectory = file(generatedMainJava)
 }
+
+task compileLess() {
+    description 'Tasks which shows a welcome message'
+    def baseLessPath = 'src/main/resources/less'
+    def baseCssPath = 'src/main/resources/static/css'
+    def lesscCommand = 'lessc'
+
+    doLast {
+        exec {
+            commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/components/components.less", "${baseCssPath}/components.css"
+        }
+        exec {
+            commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/common.less", "${baseCssPath}/common.css"
+        }
+        exec {
+            commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/emailConfirmationPage.less", "${baseCssPath}/emailConfirmationPage.css"
+        }
+        exec {
+            commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/reviewPage.less", "${baseCssPath}/reviewPage.css"
+        }
+    }
+}

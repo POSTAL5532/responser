@@ -1,5 +1,6 @@
 package com.responser.backend.utils;
 
+import com.responser.backend.exceptions.DataNotValidException;
 import com.responser.backend.model.ResourceType;
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -64,5 +65,17 @@ public class UrlUtils {
             case SITE -> prepareSiteUrl(rawUrl);
             case PAGE -> preparePageUrl(rawUrl);
         };
+    }
+
+    public static String getHost(String rawUrl) {
+        URL url;
+
+        try {
+            url = new URL(rawUrl);
+        } catch (MalformedURLException e) {
+            throw new DataNotValidException("Invalid url");
+        }
+
+        return url.getHost();
     }
 }

@@ -1,0 +1,25 @@
+@import "../global.less";
+
+.app-header {
+  display: flex;
+  background-color: @system-color-light-100;
+  height: 86px;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+  .stackShadow3();
+
+  .header-title {
+    display: flex;
+    align-items: center;
+    .fontInterBold();
+    font-size: 38px;
+    color: @system-color-dark-400;
+
+    .icon {
+      height: 28px;
+      width: 28px;
+      margin-right: 10px;
+    }
+  }
+}

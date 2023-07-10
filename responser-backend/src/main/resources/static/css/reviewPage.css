@@ -1,0 +1,170 @@
+@font-face {
+  font-family: "Inter-Thin";
+  src: url("/font/Inter-Thin.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100;
+}
+@font-face {
+  font-family: "Inter-ExtraLight";
+  src: url("/font/Inter-ExtraLight.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 200;
+}
+@font-face {
+  font-family: "Inter-Light";
+  src: url("/font/Inter-Light.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Inter-Regular";
+  src: url("/font/Inter-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Inter-Medium";
+  src: url("/font/Inter-Medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Inter-SemiBold";
+  src: url("/font/Inter-SemiBold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 600;
+}
+@font-face {
+  font-family: "Inter-Bold";
+  src: url("/font/Inter-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Inter-ExtraBold";
+  src: url("/font/Inter-ExtraBold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 800;
+}
+@font-face {
+  font-family: "Inter-Black";
+  src: url("/font/Inter-Black.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 900;
+}
+.icon {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+.icon.login-icon {
+  -webkit-mask: url("/img/login.svg") center / 20px 20px no-repeat;
+  mask: url("/img/login.svg") center / 20px 20px no-repeat;
+  width: 20px;
+  height: 20px;
+}
+.icon.chrome-icon {
+  -webkit-mask: url("/img/chrome.svg") center / 20px 20px no-repeat;
+  mask: url("/img/chrome.svg") center / 20px 20px no-repeat;
+  width: 20px;
+  height: 20px;
+}
+.icon.arrow-icon {
+  -webkit-mask: url("/img/arrow.svg") center / 8px 14px no-repeat;
+  mask: url("/img/arrow.svg") center / 8px 14px no-repeat;
+  width: 8px;
+  height: 14px;
+}
+.icon.big-arrow-icon {
+  -webkit-mask: url("/img/big-arrow.svg") center / 16px 16px no-repeat;
+  mask: url("/img/big-arrow.svg") center / 16px 16px no-repeat;
+  width: 16px;
+  height: 20px;
+}
+@media screen and (min-width: 1920px) {
+  .review-page {
+    padding: 94px 230px;
+  }
+}
+@media screen and (min-width: 1440px) and (max-width: 1919px) {
+  .review-page {
+    padding: 94px 164px;
+  }
+}
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+  .review-page {
+    padding: 88px 98px;
+  }
+}
+@media screen and (min-width: 1px) and (max-width: 1023px) {
+  .review-page {
+    padding: 80px 60px;
+  }
+}
+.review-page .resource-info {
+  color: #555770;
+}
+.review-page .resource-info .resource {
+  margin-bottom: 10px;
+}
+.review-page .review-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.review-page .review-header .publication-info {
+  display: flex;
+  align-items: center;
+}
+.review-page .review-header .publication-info .user {
+  font-family: "Inter-Regular";
+  color: #8E90A6;
+  font-size: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 240px;
+}
+.review-page .review-header .publication-info .published-date {
+  font-family: "Inter-Regular";
+  color: #C7C8D9;
+  font-size: 22px;
+  margin-left: 8px;
+}
+.review-page .review-header .rating {
+  margin-left: auto;
+}
+.review-page .review-header .rating .star {
+  width: 38px;
+  height: 38px;
+}
+.review-page .review-header .rating .star.filled {
+  margin-left: 6px;
+}
+.review-page .review-content .text {
+  font-family: "Inter-SemiBold";
+  color: #28293D;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+.review-page .review-content .reactions-container {
+  display: flex;
+  gap: 22px;
+}
+.review-page .review-content .reactions-container .reactions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.review-page .review-content .reactions-container .reactions .reaction-icon svg {
+  width: 26px;
+  height: 26px;
+}
+.review-page .review-content .reactions-container .reactions .reaction-icon svg path {
+  stroke: #555770;
+}
+.review-page .review-content .reactions-container .reactions .reactions-count {
+  font-family: "Inter-Medium";
+  font-size: 22px;
+  color: #555770;
+}

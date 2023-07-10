@@ -1,5 +1,6 @@
 package com.responser.backend.exceptions;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import lombok.Getter;
@@ -16,5 +17,10 @@ public class DataNotValidException extends RuntimeException {
     public DataNotValidException(String message, Map<String, List<String>> fieldsErrors) {
         super(message);
         this.fieldsErrors = fieldsErrors;
+    }
+
+    public DataNotValidException(String message) {
+        super(message);
+        this.fieldsErrors = new HashMap<>();
     }
 }

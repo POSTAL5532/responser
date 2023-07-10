@@ -1,3 +1,5 @@
+@import "../global.less";
+
 .email-confirmation-page {
   display: flex;
   flex-direction: column;
@@ -15,25 +17,25 @@
 }
 
 .email-confirmation-header {
-  font-family: "Inter-Regular";
+  .fontInterRegular();
   font-size: 28px;
-  color: #555770;
+  color: @system-color-dark-300;
   margin: 0;
   text-align: center;
   margin-bottom: 14px;
 }
 
 .email-confirmation-annotation {
-  font-family: "Inter-Regular";
-  color: #555770;
+  .fontInterRegular();
+  color: @system-color-dark-300;
   font-size: 14px;
   margin: 0;
   text-align: center;
 }
 
 .email-confirmation-redirect-link {
-  font-family: "Inter-Regular";
-  color: #6690FF;
+  .fontInterRegular();
+  color: @primary-color-lighter;
   font-size: 14px;
   margin: 0;
   text-align: center;
@@ -41,5 +43,6 @@
 }
 
 .email-confirmation-redirect-link:hover {
-  color: #3366FF;
+  color: @primary-color-main;
 }
+

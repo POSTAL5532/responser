@@ -1,0 +1,27 @@
+@import "../global.less";
+
+.button {
+  .fontInterMedium();
+  display: inline-flex;
+  gap: 6px;
+  align-items: center;
+  justify-content: center;
+  padding-left: 12px;
+  padding-right: 12px;
+  height: 40px;
+  font-size: 16px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+
+  &.primary {
+    color: @system-color-light-100;
+    background-color: @primary-color-lighter;
+  }
+
+  &.disabled {
+    background-color: @system-color-light-500;
+    color: @system-color-dark-400;
+    pointer-events: none;
+  }
+}
