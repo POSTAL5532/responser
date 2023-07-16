@@ -3,17 +3,24 @@ package com.responser.backend.controller.reviews;
 import com.responser.backend.config.APIServerApplicationProperties;
 import com.responser.backend.model.Review;
 import com.responser.backend.model.ReviewLike;
+import com.responser.backend.model.ReviewMetaImage;
 import com.responser.backend.model.metatags.FacebookMetaTags;
+import com.responser.backend.model.metatags.SocialMetaTags;
 import com.responser.backend.model.metatags.TwitterMetaTags;
+import com.responser.backend.service.review.ReviewMetaImageService;
 import com.responser.backend.service.review.ReviewService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Slf4j
@@ -23,8 +30,11 @@ import org.springframework.web.servlet.ModelAndView;
 public class ReviewsController {
 
     public static final String REVIEWS_URL = "/reviews";
+    public static final String REVIEW_META_IMAGE_URL = "/meta-image";
 
     private final ReviewService reviewService;
+
+    private final ReviewMetaImageService metaImageService;
 
     private final APIServerApplicationProperties applicationProperties;
 
@@ -52,5 +62,17 @@ public class ReviewsController {
         modelAndView.addObject("twitterMetaTags", new TwitterMetaTags(review, applicationProperties));
 
         return modelAndView;
+    }
+
+    @ResponseBody
+    @GetMapping(REVIEW_META_IMAGE_URL + "/{rawReviewId}")
+    public ResponseEntity<byte[]> getReviewMetaImage(@Valid @NotNull @PathVariable String rawReviewId) {
+        String reviewId = rawReviewId.split(SocialMetaTags.ID_TIMESTAMP_SEPARATOR)[0];
+        ReviewMetaImage metaImage = metaImageService.getByReviewId(reviewId);
+
+        return ResponseEntity.ok()
+            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + reviewId + ".png\"")
+            .contentType(MediaType.IMAGE_PNG)
+            .body(metaImage.getImage());
     }
 }

@@ -57,3 +57,13 @@ CREATE TABLE reviews_likes
     update_date   TIMESTAMP,
     PRIMARY KEY (id)
 );
+
+CREATE TABLE review_meta_image
+(
+    id            VARCHAR(36) NOT NULL UNIQUE,
+    review_id     VARCHAR(36) NOT NULL UNIQUE REFERENCES reviews (id) ON DELETE CASCADE,
+    image         BYTEA       NOT NULL,
+    creation_date TIMESTAMP   NOT NULL,
+    update_date   TIMESTAMP,
+    PRIMARY KEY (id)
+);
