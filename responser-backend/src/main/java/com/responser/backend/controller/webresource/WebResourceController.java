@@ -1,6 +1,6 @@
 package com.responser.backend.controller.webresource;
 
-import static com.responser.backend.config.APIServerApplicationProperties.API_ROOT_PATH;
+import static com.responser.backend.config.ApplicationProperties.API_ROOT_PATH;
 
 import com.responser.backend.controller.webresource.payload.NewWebResourceDTO;
 import com.responser.backend.controller.webresource.payload.WebResourceDTO;

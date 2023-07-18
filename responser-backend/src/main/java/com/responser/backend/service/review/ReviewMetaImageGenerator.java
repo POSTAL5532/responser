@@ -15,6 +15,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.AttributedCharacterIterator;
 import java.text.AttributedString;
 import javax.imageio.ImageIO;
@@ -153,8 +154,8 @@ public class ReviewMetaImageGenerator {
 
     private Font getFont() {
         try {
-            File fontFile = ResourceUtils.getFile("classpath:static/font/Inter-Bold.ttf");
-            return Font.createFont(Font.TRUETYPE_FONT, fontFile);
+            InputStream fontInputStream = getClass().getResourceAsStream("/static/font/Inter-Bold.ttf");
+            return Font.createFont(Font.TRUETYPE_FONT, fontInputStream);
         } catch (FontFormatException | IOException e) {
             throw new RuntimeException(e);
         }

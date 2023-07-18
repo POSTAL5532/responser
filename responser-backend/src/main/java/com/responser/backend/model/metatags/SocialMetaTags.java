@@ -3,7 +3,7 @@ package com.responser.backend.model.metatags;
 import static com.responser.backend.controller.reviews.ReviewsController.REVIEWS_URL;
 import static com.responser.backend.controller.reviews.ReviewsController.REVIEW_META_IMAGE_URL;
 
-import com.responser.backend.config.APIServerApplicationProperties;
+import com.responser.backend.config.ApplicationProperties;
 import com.responser.backend.model.ResourceType;
 import com.responser.backend.model.Review;
 import com.responser.backend.utils.UrlUtils;
@@ -20,13 +20,13 @@ public abstract class SocialMetaTags {
     public static final String ID_TIMESTAMP_SEPARATOR = "_";
 
     protected final Review review;
-    protected final APIServerApplicationProperties applicationProperties;
+    protected final ApplicationProperties applicationProperties;
 
     protected final String description = "Reviewly | Make and rating review for everything in internet";
     protected String title;
     protected String imageUrl;
 
-    public SocialMetaTags(Review review, APIServerApplicationProperties applicationProperties) {
+    public SocialMetaTags(Review review, ApplicationProperties applicationProperties) {
         this.review = review;
         this.applicationProperties = applicationProperties;
 

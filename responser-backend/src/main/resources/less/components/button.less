@@ -13,10 +13,35 @@
   border-radius: 8px;
   border: none;
   cursor: pointer;
+  text-decoration: none;
+  color: @system-color-light-100;
+  background-color: @primary-color-lighter;
 
-  &.primary {
-    color: @system-color-light-100;
-    background-color: @primary-color-lighter;
+  .icon {
+    background-color: @system-color-light-100;
+  }
+
+  &:hover {
+    background-color: @primary-color-main;
+  }
+
+  &.outline {
+    color: @primary-color-lighter;
+    background: transparent;
+    border: solid 1px @primary-color-lighter;
+
+    .icon {
+      background-color: @primary-color-lighter;
+    }
+
+    &:hover {
+      color: @primary-color-main;
+      border-color: @primary-color-main;
+
+      .icon {
+        background-color: @primary-color-main;
+      }
+    }
   }
 
   &.disabled {

@@ -2,7 +2,7 @@ package com.responser.backend.service.email;
 
 import static com.responser.backend.controller.emailConfirmation.EmailConfirmationController.EMAIL_CONFIRMATION_URL;
 
-import com.responser.backend.config.APIServerApplicationProperties;
+import com.responser.backend.config.ApplicationProperties;
 import com.responser.backend.model.EmailConfirmation;
 import com.responser.backend.model.email.EmailContext;
 import com.responser.backend.model.User;
@@ -30,7 +30,7 @@ public class EmailService {
 
     private final JavaMailSender emailSender;
 
-    private final APIServerApplicationProperties applicationProperties;
+    private final ApplicationProperties applicationProperties;
 
     private final SpringTemplateEngine templateEngine;
 

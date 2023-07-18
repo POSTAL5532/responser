@@ -8,6 +8,8 @@ const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 let ENV_FILE_PROPERTIES;
 let CONFIGS_PATH;
 
+const BASE_PATH = "/app/"
+
 /**
  * Init ENV_FILE_PROPERTIES
  */
@@ -42,8 +44,19 @@ module.exports = (env, args) => {
             port: 3000,
             compress: true,
             hot: true,
-            historyApiFallback: true,
-            host: "127.0.0.1"
+            host: "reviewly-local-dev",
+            allowedHosts: ["reviewly-local-dev"],
+            historyApiFallback: {
+                index: BASE_PATH
+            },
+            devMiddleware: {
+                writeToDisk: true,
+            }
+        },
+        output: {
+            filename: 'reviewly.[chunkhash].js',
+            path: path.resolve(__dirname, "build"),
+            publicPath: BASE_PATH
         },
 
         module: {
@@ -59,7 +72,7 @@ module.exports = (env, args) => {
                     ]
                 },
                 {test: /\.html$/, loader: "html-loader"},
-                {test: /\.svg$/, use: [{ loader: '@svgr/webpack', options: { icon: true } }],},
+                {test: /\.svg$/, use: [{loader: '@svgr/webpack', options: {icon: true}}],},
                 {
                     test: /\.(png|jpg|svg|gif|webp)$/,
                     use: [
@@ -71,20 +84,22 @@ module.exports = (env, args) => {
                                 esModule: false
                             }
                         }
-                    ]
+                    ],
+                    type: 'javascript/auto'
                 },
                 {
-                    test: /\.(woff|woff2|eot)$/,
+                    test: /\.(woff|woff2|eot|ttf)$/,
                     use: [
                         {
                             loader: "file-loader",
                             options: {
                                 outputPath: 'fonts',
                                 publicPath: 'fonts',
-                                esModule : false
+                                esModule: false
                             }
                         }
-                    ]
+                    ],
+                    type: 'javascript/auto'
                 }
             ],
         },
@@ -94,18 +109,13 @@ module.exports = (env, args) => {
                 path.resolve(__dirname, "src/")
             ],
             alias: {"globalsLess": path.resolve("src/styles/globals.less")},
-            extensions: [".js", ".ts", ".jsx", ".tsx", ".css", ".less"]
-        },
-        output: {
-            filename: '[name].[chunkhash].js',
-            path: path.resolve(__dirname, "build"),
-            publicPath: "/"
+            extensions: [".js", ".ts", ".jsx", ".tsx", ".css", ".less", ".ttf"]
         },
         plugins: [
             new CleanWebpackPlugin(),
             new HtmlWebPackPlugin({
                 template: "./public/index.html",
-                filename: "./index.html"
+                filename: "./index.html",
             }),
             new webpack.DefinePlugin(convertTpProcessEnvProperties(ENV_FILE_PROPERTIES)),
             new FaviconsWebpackPlugin({

@@ -43,24 +43,32 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://localhost:8081
+          issuer-uri: http://reviewly-local-dev/auth
   mail:
-   host: smtpout.secureserver.net
-   port: 465
-   username: info@reviewly.space
-   password: 5#OFpkKn9YXa69Dl6Ts5&q6Z
-   protocol: smtp
-   properties.mail.smtp:
-    auth: true
-    ssl.enable: true
-    ssl.trust: "*"
+    host: smtpout.secureserver.net
+    port: 465
+    username: info@reviewly.space
+    password: 5#OFpkKn9YXa69Dl6Ts5&q6Z
+    protocol: smtp
+    properties.mail.smtp:
+      auth: true
+      ssl.enable: true
+      ssl.trust: "*"
 responser:
-  api:
-    runMode: LOCAL
-    selfHost: http://localhost:8080
-    feApplicationUrl: http://127.0.0.1:3000
-    responserInfoEmail: info@reviewly.space
-    mockEmail: evgeniionegin791@gmail.com
-      allowedOrigins:
-        - http://127.0.0.1:3000
-        - chrome-extension://<EXTENSION_ID>
+  runMode: LOCAL
+  selfHost: http://reviewly-local-dev
+  feApplicationUrl: http://reviewly-local-dev/app
+  authTokenUrl: http://reviewly-local-dev/auth/oauth2/token
+  authLoginPageUrl: http://reviewly-local-dev/auth/oauth2/authorize
+  authLogoutPageUrl: http://reviewly-local-dev/auth/logout
+  authRedirectUri: http://reviewly-local-dev/app/auth-code
+  signUpPageUrl: http://reviewly-local-dev/app/sign-up
+  unauthorizedPageUrl: http://reviewly-local-dev
+  clientId: responser-web-client
+  clientSecret: responser-web-client-secret
+  downloadExtensionChrome: https://www.google.com
+  chromeExtensionId: bcgepbhdoibfdnpmemhdjifmjdmfacml
+  responserInfoEmail: info@reviewly.space
+  allowedOrigins:
+    - http://reviewly-local-dev
+    - chrome-extension://bcgepbhdoibfdnpmemhdjifmjdmfacml

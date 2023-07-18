@@ -6,6 +6,10 @@ export const navigateTo = (url: string) => {
 }
 
 export const nativeNavigateTo = (url: string) => {
+    if (url.startsWith("/")) {
+        url = ApplicationProperties.basePath + url;
+    }
+
     window.location.href = url;
 }
 

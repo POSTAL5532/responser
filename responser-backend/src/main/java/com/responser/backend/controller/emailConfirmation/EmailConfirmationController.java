@@ -1,8 +1,6 @@
 package com.responser.backend.controller.emailConfirmation;
 
-import static com.responser.backend.config.APIServerApplicationProperties.API_ROOT_PATH;
-
-import com.responser.backend.config.APIServerApplicationProperties;
+import com.responser.backend.config.ApplicationProperties;
 import com.responser.backend.service.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
@@ -24,12 +22,12 @@ public class EmailConfirmationController {
 
     private final UserService userService;
 
-    private final APIServerApplicationProperties apiServerApplicationProperties;
+    private final ApplicationProperties applicationProperties;
 
     @GetMapping("/{confirmationId}")
     public ModelAndView confirmEmailPage(ModelAndView modelAndView, @Valid @NotBlank @PathVariable String confirmationId) {
         userService.confirmEmail(confirmationId);
-        modelAndView.addObject("redirectLink", apiServerApplicationProperties.getFeApplicationUrl());
+        modelAndView.addObject("redirectLink", applicationProperties.getFeApplicationUrl());
         modelAndView.setViewName("emailConfirmationPage");
         return modelAndView;
     }

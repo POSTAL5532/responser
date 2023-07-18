@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+  <title>Reviewly</title>
+  <link th:href="@{/css/index.css}" rel="stylesheet"/>
+  <th:block th:include="includes/defaultStyles"/>
+  <th:block th:include="includes/favicons"/>
+
+  <!--<meta property="og:url" th:content="${facebookMetaTags.url}"/>
+  <meta property="og:type" th:content="${facebookMetaTags.type}"/>
+  <meta property="og:title" th:content="${facebookMetaTags.title}"/>
+  <meta property="og:description" th:content="${facebookMetaTags.description}"/>
+  <meta property="og:image" th:content="${facebookMetaTags.imageUrl}"/>
+  <meta property="og:image:width" th:content="${facebookMetaTags.imageWidth}"/>
+  <meta property="og:image:height" th:content="${facebookMetaTags.imageHeight}"/>
+
+  <meta property="twitter:title" th:content="${twitterMetaTags.title}">
+  <meta property="twitter:description" th:content="${twitterMetaTags.description}">
+  <meta property="twitter:image" th:content="${twitterMetaTags.imageUrl}">
+  <meta name="twitter:card" th:content="${twitterMetaTags.card}">-->
+</head>
+<body>
+
+<th:block th:include="includes/header"/>
+
+<section class="main-description">
+  <div class="slogan-block">
+    <h2 class="slogan">Check what Real users said about websites that you visit</h2>
+  </div>
+  <div class="actions">
+    <a th:href="${applicationProperties.downloadExtensionChrome}" class="button download-extension">
+      Download for Chrome
+      <div class="icon chrome-icon"></div>
+    </a>
+    <a th:href="${loginUrl}" class="button outline login">
+      Login
+      <div class="icon login-icon"></div>
+    </a>
+  </div>
+</section>
+
+<section class="how-it-works">
+  <a id="how-it-works"></a>
+  <img th:src="@{/img/index/reviewler.svg}" alt="Reviewler" class="reviewler">
+  <div class="card">
+    <div class="card-header">
+      <h2>How it works</h2>
+    </div>
+    <div class="card-body">
+      <div class="instructions">
+        <div class="instruction-item active" item-image-id="install-extension">
+          <div class="icon arrow-icon"></div>
+          <h3 class="instruction-header">Install browser extension</h3>
+          <p class="instruction-description">
+            Create your own unique contact groups, with the ability of editing the group.
+          </p>
+        </div>
+        <div class="instruction-item" item-image-id="open-website">
+          <div class="icon arrow-icon"></div>
+          <h3 class="instruction-header">Open any website</h3>
+          <p class="instruction-description">
+            Create your own unique contact groups, with the ability of editing the group.
+          </p>
+        </div>
+        <div class="instruction-item" item-image-id="check-feedbacks">
+          <div class="icon arrow-icon"></div>
+          <h3 class="instruction-header">Check feedbacks</h3>
+          <p class="instruction-description">
+            Create your own unique contact groups, with the ability of editing the group.
+          </p>
+        </div>
+        <div class="instruction-item" item-image-id="add-feedback">
+          <div class="icon arrow-icon"></div>
+          <h3 class="instruction-header">Add your feedback</h3>
+          <p class="instruction-description">
+            Create your own unique contact groups, with the ability of editing the group.
+          </p>
+        </div>
+      </div>
+      <div class="instruction-image">
+        <div class="instruction-image-container">
+          <img th:src="@{/img/index/browsers-icons.svg}" alt="Test" class="how-it-works-img active" id="install-extension">
+        </div>
+        <div class="instruction-image-container">
+          <img th:src="@{/img/index/test.svg}" alt="Test" class="how-it-works-img" id="open-website">
+        </div>
+        <div class="instruction-image-container">
+          <img th:src="@{/img/index/test.svg}" alt="Test" class="how-it-works-img" id="check-feedbacks">
+        </div>
+        <div class="instruction-image-container">
+          <img th:src="@{/img/index/test.svg}" alt="Test" class="how-it-works-img" id="add-feedback">
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="feedbacks">
+  <h2 class="feedbacks-header">What other users say</h2>
+
+  <div class="feedbacks-gallery-container">
+    <div class="feedbacks-gallery">
+      <div class="feedback-container">
+        <div class="feedback-flex">
+          <div class="feedback">
+            <p class="feedback-text">
+              “Awesome tool! Greatly help to communicate with partners! You should definitely use this!”
+            </p>
+            <div class="user-info">
+              <img src="https://gitlab.com/uploads/-/system/user/avatar/56386/tt_avatar_small.jpg" alt="Avatar" class="avatar">
+              <div class="user-info-text">
+                <span class="name">Kate</span>
+                <span class="position">Project Manager, Trello.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="feedback-container">
+        <div class="feedback-flex">
+          <div class="feedback">
+            <p class="feedback-text">
+              “Awesome tool! Greatly help to communicate with partners! You should definitely use this!”
+            </p>
+            <div class="user-info">
+              <img src="https://gitlab.com/uploads/-/system/user/avatar/56386/tt_avatar_small.jpg" alt="Avatar" class="avatar">
+              <div class="user-info-text">
+                <span class="name">Kate</span>
+                <span class="position">Project Manager, Trello.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="feedback-container">
+        <div class="feedback-flex">
+          <div class="feedback">
+            <p class="feedback-text">
+              “Awesome tool! Greatly help to communicate with partners! You should definitely use this!”
+            </p>
+            <div class="user-info">
+              <img src="https://gitlab.com/uploads/-/system/user/avatar/56386/tt_avatar_small.jpg" alt="Avatar" class="avatar">
+              <div class="user-info-text">
+                <span class="name">Kate</span>
+                <span class="position">Project Manager, Trello.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="feedback-container">
+        <div class="feedback-flex">
+          <div class="feedback">
+            <p class="feedback-text">
+              “Awesome tool! Greatly help to communicate with partners! You should definitely use this!”
+            </p>
+            <div class="user-info">
+              <img src="https://gitlab.com/uploads/-/system/user/avatar/56386/tt_avatar_small.jpg" alt="Avatar" class="avatar">
+              <div class="user-info-text">
+                <span class="name">Kate</span>
+                <span class="position">Project Manager, Trello.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="feedback-container">
+        <div class="feedback-flex">
+          <div class="feedback">
+            <p class="feedback-text">
+              “Awesome tool! Greatly help to communicate with partners! You should definitely use this!”
+            </p>
+            <div class="user-info">
+              <img src="https://gitlab.com/uploads/-/system/user/avatar/56386/tt_avatar_small.jpg" alt="Avatar" class="avatar">
+              <div class="user-info-text">
+                <span class="name">Kate</span>
+                <span class="position">Project Manager, Trello.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="feedback-container">
+        <div class="feedback-flex">
+          <div class="feedback">
+            <p class="feedback-text">
+              “Awesome tool! Greatly help to communicate with partners! You should definitely use this!”
+            </p>
+            <div class="user-info">
+              <img src="https://gitlab.com/uploads/-/system/user/avatar/56386/tt_avatar_small.jpg" alt="Avatar" class="avatar">
+              <div class="user-info-text">
+                <span class="name">Kate</span>
+                <span class="position">Project Manager, Trello.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="feedback-container">
+        <div class="feedback-flex">
+          <div class="feedback">
+            <p class="feedback-text">
+              “Awesome tool! Greatly help to communicate with partners! You should definitely use this!”
+            </p>
+            <div class="user-info">
+              <img src="https://gitlab.com/uploads/-/system/user/avatar/56386/tt_avatar_small.jpg" alt="Avatar" class="avatar">
+              <div class="user-info-text">
+                <span class="name">Kate</span>
+                <span class="position">Project Manager, Trello.com</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="feedbacks-gallery-controls">
+      <button class="button prev-button">
+        <span class="icon arrow-icon"></span>
+      </button>
+      <button class="button next-button">
+        <span class="icon arrow-icon"></span>
+      </button>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <a id="faq"></a>
+  <img th:src="@{/img/index/faq-img.svg}" alt="FAQ" class="faq-img">
+  <div class="faq-header-container">
+    <div class="faq-header">
+      <h2 class="header-text">Check real feedback that you can trust</h2>
+      <h3 class="header-description">We help you be more productive by managing your contacts</h3>
+      <a th:href="${applicationProperties.downloadExtensionChrome}" class="button download-extension">
+        Download for Chrome
+        <div class="icon chrome-icon"></div>
+      </a>
+    </div>
+  </div>
+  <div class="card">
+    <div class="card-header">
+      <h2>FAQ</h2>
+    </div>
+    <div class="card-body">
+      <div class="question-item">
+        <h3 class="question-header">Do I need to pay for Reviewly?</h3>
+        <p class="question-answer">
+          Create your own unique contact groups, with the ability of editing the group.
+        </p>
+        <div class="icon arrow-icon"></div>
+      </div>
+      <div class="question-item">
+        <h3 class="question-header">Are feedbacks real?</h3>
+        <p class="question-answer">
+          Create your own unique contact groups, with the ability of editing the group.
+        </p>
+        <div class="icon arrow-icon"></div>
+      </div>
+      <div class="question-item">
+        <h3 class="question-header">Can I add my review for any website?</h3>
+        <p class="question-answer">
+          Create your own unique contact groups, with the ability of editing the group.
+        </p>
+        <div class="icon arrow-icon"></div>
+      </div>
+      <div class="question-item">
+        <h3 class="question-header">Can I find similar website with better rating?</h3>
+        <p class="question-answer">
+          Create your own unique contact groups, with the ability of editing the group.
+        </p>
+        <div class="icon arrow-icon"></div>
+      </div>
+      <div class="question-item">
+        <h3 class="question-header">How can I receive notifications?</h3>
+        <p class="question-answer">
+          Create your own unique contact groups, with the ability of editing the group.
+        </p>
+        <div class="icon arrow-icon"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="coming-soon">
+  <a id="coming-soon"></a>
+  <h2 class="coming-soon-header">Coming Soon</h2>
+
+  <div class="coming-soon-items">
+    <div class="coming-soon-item">
+      <div class="coming-soon-item-info">
+        <h2 class="coming-soon-item-header">Websites catalog and categories</h2>
+        <p class="coming-soon-item-text">Browse 1000’s of websites with collected reviews</p>
+      </div>
+      <img th:src="@{/img/index/catalog-feature.svg}" alt="Catalog" class="feature-img catalog-feature">
+    </div>
+    <div class="coming-soon-item">
+      <div class="coming-soon-item-info">
+        <h2 class="coming-soon-item-header">Favourite websites LookUP</h2>
+        <p class="coming-soon-item-text">Add a website to favourites and get notifications about new reviews</p>
+      </div>
+      <img th:src="@{/img/index/favorite-websites.svg}" alt="Catalog" class="feature-img favourite-websites">
+    </div>
+    <div class="coming-soon-item">
+      <div class="coming-soon-item-info">
+        <h2 class="coming-soon-item-header">Product search by feedback and rating</h2>
+        <p class="coming-soon-item-text">Find anything you need</p>
+      </div>
+      <img th:src="@{/img/index/product-search.svg}" alt="Catalog" class="feature-img product-search">
+    </div>
+    <div class="coming-soon-item">
+      <h2 class="coming-soon-item-header">Don’t wait and start now!</h2>
+      <p class="coming-soon-item-text">Start using XXX right now for free. We’re really excited about you using this tool.</p>
+      <a th:href="${applicationProperties.signUpPageUrl}" class="button outline">Start for free</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <span class="rights">© 2021 All Rights Reserved.</span>
+  <a href="#back-to-top" class="link">Back to Top <div class="icon big-arrow-icon"></div></a>
+  <a th:href="${applicationProperties.signUpPageUrl}" class="link contact-us">Contact us</a>
+</footer>
+
+<script type="text/javascript" th:src="@{/js/jquery.js}"></script>
+<script type="text/javascript" th:src="@{/js/tiny-slider.js}"></script>
+<script type="text/javascript" th:src="@{/js/index.js}"></script>
+</body>
+</html>

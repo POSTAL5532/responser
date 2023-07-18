@@ -25,7 +25,7 @@
   },
   "externally_connectable": {
     "matches": [
-      "http://dev-app.reviewly.space/*"
+      "http://dev.reviewly.space/*"
     ]
   },
   "content_scripts": [

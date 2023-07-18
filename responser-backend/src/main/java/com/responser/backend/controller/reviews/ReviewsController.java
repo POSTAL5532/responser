@@ -1,6 +1,6 @@
 package com.responser.backend.controller.reviews;
 
-import com.responser.backend.config.APIServerApplicationProperties;
+import com.responser.backend.config.ApplicationProperties;
 import com.responser.backend.model.Review;
 import com.responser.backend.model.ReviewLike;
 import com.responser.backend.model.ReviewMetaImage;
@@ -36,7 +36,7 @@ public class ReviewsController {
 
     private final ReviewMetaImageService metaImageService;
 
-    private final APIServerApplicationProperties applicationProperties;
+    private final ApplicationProperties applicationProperties;
 
     /*@GetMapping
     public ModelAndView getReviewsList(ModelAndView modelAndView, @Valid @NotNull @RequestParam Integer page) {

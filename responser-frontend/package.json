@@ -1,6 +1,7 @@
 {
   "name": "responser-webapp",
   "version": "0.0.1",
+  "homepage": "/app",
   "browserslist": {
     "production": [
       ">0.2%",

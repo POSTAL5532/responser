@@ -18,12 +18,12 @@ import java.util.Collections;
 @Configuration
 public class WebConfig {
 
-    private final APIServerApplicationProperties apiServerApplicationProperties;
+    private final ApplicationProperties applicationProperties;
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOriginPatterns(apiServerApplicationProperties.getAllowedOrigins());
+        configuration.setAllowedOriginPatterns(applicationProperties.getAllowedOrigins());
         configuration.setAllowedMethods(Collections.singletonList(CorsConfiguration.ALL));
         configuration.setAllowCredentials(true);
         configuration.setAllowedHeaders(Collections.singletonList(CorsConfiguration.ALL));

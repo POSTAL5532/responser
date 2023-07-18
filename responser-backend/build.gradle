@@ -33,6 +33,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
     implementation 'org.apache.commons:commons-lang3:3.12.0'
+    implementation 'org.apache.httpcomponents.client5:httpclient5:5.2.1'
 
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor 'org.hibernate.orm:hibernate-jpamodelgen:6.1.5.Final'
@@ -79,6 +80,9 @@ task compileLess() {
         }
         exec {
             commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/reviewPage.less", "${baseCssPath}/reviewPage.css"
+        }
+        exec {
+            commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/index.less", "${baseCssPath}/index.css"
         }
     }
 }

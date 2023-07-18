@@ -1,8 +1,13 @@
 server:
   port: 8081
+  servlet:
+    context-path: /auth
   error:
     include-binding-errors: always
     include-message: always
+logging:
+  level:
+    org.springframework.security: trace
 management:
   endpoints:
     web:
@@ -33,13 +38,13 @@ spring:
       platform: postgres
 responser:
   auth:
-    registrationPageUrl: http://127.0.0.1:3000/sign-up
-    afterLogoutUrl: http://127.0.0.1:3000
-    noSessionRedirectUrl: http://127.0.0.1:3000
+    registrationPageUrl: http://reviewly-local-dev/app/sign-up
+    afterLogoutUrl: http://reviewly-local-dev/app
+    noSessionRedirectUrl: http://reviewly-local-dev
     clientCredentials:
       -
         clientId: responser-web-client
         clientSecret: "{noop}responser-web-client-secret"
-        redirectUri: http://127.0.0.1:3000/auth-code
+        redirectUri: http://reviewly-local-dev/app/auth-code
     allowedOrigins:
-      - http://127.0.0.1:3000
+      - http://reviewly-local-dev

@@ -1,15 +1,32 @@
 @import "../global.less";
 
 .link {
-  text-decoration: none;
   .fontInterRegular();
+  font-size: 18px;
   color: @primary-color-lighter;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  .icon {
+    background-color: @primary-color-lighter;
+    margin-left: 8px;
+  }
 
   &:hover {
     color: darken(@primary-color-lighter, 4%);
+
+    .icon {
+      background-color: darken(@primary-color-darker, 4%);
+    }
   }
 
   &:active {
     color: darken(@primary-color-lighter, 6%);
+
+    .icon {
+      background-color: darken(@primary-color-darker, 4%);
+    }
   }
 }

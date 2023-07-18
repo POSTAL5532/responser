@@ -43,7 +43,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://auth.reviewly.space
+          issuer-uri: http://reviewly.space/auth
   mail:
     host: smtpout.secureserver.net
     port: 465
@@ -55,12 +55,20 @@ spring:
       ssl.enable: true
       ssl.trust: "*"
 responser:
-  api:
-    runMode: PROD
-    selfHost: http://api.reviewly.space
-    feApplicationUrl: http://app.reviewly.space
-    responserInfoEmail: info@reviewly.space
-    mockEmail: test@test.test
-    allowedOrigins:
-      - http://app.reviewly.space
-      - chrome-extension://bcgepbhdoibfdnpmemhdjifmjdmfacml
+  runMode: PROD
+  selfHost: http://reviewly.space
+  feApplicationUrl: http://reviewly.space/app
+  authTokenUrl: http://reviewly.space/auth/oauth2/token
+  authLoginPageUrl: http://reviewly.space/auth/oauth2/authorize
+  authLogoutPageUrl: http://reviewly.space/auth/logout
+  authRedirectUri: http://reviewly.space/app/auth-code
+  signUpPageUrl: http://reviewly.space/app/sign-up
+  unauthorizedPageUrl: http://reviewly.space
+  clientId: responser-web-client
+  clientSecret: responser-web-client-secret
+  downloadExtensionChrome: https://www.google.com
+  chromeExtensionId: bcgepbhdoibfdnpmemhdjifmjdmfacml
+  responserInfoEmail: info@reviewly.space
+  allowedOrigins:
+    - http://reviewly.space
+    - chrome-extension://bcgepbhdoibfdnpmemhdjifmjdmfacml

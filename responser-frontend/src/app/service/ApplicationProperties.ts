@@ -2,7 +2,12 @@ import {LogLevel} from "../utils/Logger";
 
 class ApplicationProperties {
 
+    get basePath(): string {
+        return "/app";
+    }
+
     get gatewayApiUrl(): string {
+
         return process.env.API_URL;
     }
 

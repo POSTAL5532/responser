@@ -2,7 +2,7 @@ package com.responser.backend.model.metatags;
 
 import static com.responser.backend.controller.reviews.ReviewsController.REVIEWS_URL;
 
-import com.responser.backend.config.APIServerApplicationProperties;
+import com.responser.backend.config.ApplicationProperties;
 import com.responser.backend.model.Review;
 import com.responser.backend.service.review.ReviewMetaImageGenerator;
 import lombok.Getter;
@@ -17,7 +17,7 @@ public class FacebookMetaTags extends SocialMetaTags {
     private final String imageWidth = String.valueOf(ReviewMetaImageGenerator.IMAGE_WIDTH);
     private final String imageHeight = String.valueOf(ReviewMetaImageGenerator.IMAGE_HEIGHT);
 
-    public FacebookMetaTags(Review review, APIServerApplicationProperties applicationProperties) {
+    public FacebookMetaTags(Review review, ApplicationProperties applicationProperties) {
         super(review, applicationProperties);
         initUrl();
     }
