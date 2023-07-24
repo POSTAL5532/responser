@@ -1,60 +1,58 @@
 package com.responser.backend.controller.webresource;
 
-import static com.responser.backend.config.ApplicationProperties.API_ROOT_PATH;
-
-import com.responser.backend.controller.webresource.payload.NewWebResourceDTO;
 import com.responser.backend.controller.webresource.payload.WebResourceDTO;
 import com.responser.backend.converter.WebResourceConverter;
-import com.responser.backend.model.ResourceType;
+import com.responser.backend.model.AbstractEntity;
+import com.responser.backend.model.ResourceRating;
 import com.responser.backend.model.WebResource;
+import com.responser.backend.service.RatingService;
 import com.responser.backend.service.WebResourceService;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
+import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.http.ResponseEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
 
-@Slf4j
 @RequiredArgsConstructor
-@RestController
-@RequestMapping(API_ROOT_PATH + "/web-resources")
+@Controller
+@RequestMapping("/web-resources")
 public class WebResourceController {
 
-    private final WebResourceService webResourceService;
-
     private final WebResourceConverter webResourceConverter;
+    private final WebResourceService webResourceService;
+    private final RatingService ratingService;
 
-    @GetMapping
-    public ResponseEntity<WebResourceDTO> getWebResourceByUrl(
-        @Valid @NotBlank @RequestParam String url,
-        @Valid @NotBlank @RequestParam ResourceType resourceType
-    ) {
-        log.info("Get web resource: url {}, type {}.", url, resourceType);
+    @GetMapping("/sites-rating")
+    public String getSitesRating(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+        Page<WebResource> webResourcesPage = webResourceService.getSitesWithReviews(PageRequest.of(page, 10));
+        List<String> ids = webResourcesPage.getContent().stream().map(AbstractEntity::getId).toList();
 
-        WebResource webResource = webResourceService.getByUrl(url, resourceType);
+        Map<String, ResourceRating> ratings = ratingService.getWebResourcesRatings(ids).stream()
+            .collect(Collectors.toMap(ResourceRating::getResourceId, Function.identity()));
 
-        WebResourceDTO webResourceDTO = webResourceConverter.toDTO(webResource);
-        webResourceDTO.setRating(webResourceService.getRatingById(webResource.getId()));
-        webResourceDTO.setReviewsCount(webResourceService.getReviewsCount(webResource.getId()));
+        List<WebResourceDTO> webResourceDTOS = webResourcesPage.getContent().stream().map(webResource -> {
+            WebResourceDTO dto = webResourceConverter.toDTO(webResource);
+            ResourceRating rating = ratings.get(webResource.getId());
 
-        return ResponseEntity.ok(webResourceDTO);
-    }
+            dto.setRating(rating.getRating());
+            dto.setReviewsCount(rating.getReviewsCount());
 
-    @PostMapping
-    public ResponseEntity<WebResourceDTO> createWebResource(@Valid @NotNull @RequestBody NewWebResourceDTO newWebResourceDTO) {
-        log.info("Create web resource {}.", newWebResourceDTO);
+            return dto;
+        }).toList();
 
-        WebResource newWebResource = webResourceService.createWebResource(
-            webResourceConverter.toEntity(newWebResourceDTO)
-        );
+        model.addAttribute("sites", webResourceDTOS);
+        model.addAttribute("isLast", webResourcesPage.isLast());
+        model.addAttribute("totalPages", webResourcesPage.getTotalPages());
+        model.addAttribute("currentPageNumber", webResourcesPage.getNumber());
+        model.addAttribute("currentPageNumberOfElements", webResourcesPage.getNumberOfElements());
 
-        return ResponseEntity.ok(webResourceConverter.toDTO(newWebResource));
+        return "sitesRating";
     }
 }

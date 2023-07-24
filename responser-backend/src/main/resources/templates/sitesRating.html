@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Reviewly - Sites rating</title>
+    <link th:href="@{/css/sitesRating.css}" rel="stylesheet"/>
+    <th:block th:include="includes/defaultStyles"/>
+    <th:block th:include="includes/favicons"/>
+</head>
+<body>
+
+<th:block th:include="includes/header"/>
+
+<div class="sites-rating-page">
+    <h1 class="page-header">Sites rating</h1>
+
+    <div class="pages-navigator">
+        <a th:if="${currentPageNumber > 0}" th:href="${'/web-resources/sites-rating?page=' + (currentPageNumber - 1)}" class="link previous-page-link">Previous page</a>
+        <a th:if="${!isLast}" th:href="${'/web-resources/sites-rating?page=' + (currentPageNumber + 1)}" class="link next-page-link">Next page</a>
+    </div>
+
+    <div class="sites-list">
+        <div th:each="site: ${sites}" class="site-container">
+            <a th:href="${site.getUrl()}" target="_blank" class="link"><h2 th:text="${site.getUrl()}">ERROR</h2></a>
+            <div class="rating-container">
+                <div th:text="${'Rating: ' + site.getRating()}"/>
+                <div th:text="${'Reviews: ' + site.getReviewsCount()}"/>
+            </div>
+        </div>
+    </div>
+
+    <div class="pages-navigator">
+        <a th:if="${currentPageNumber > 0}" th:href="${'/web-resources/sites-rating?page=' + (currentPageNumber - 1)}" class="link previous-page-link">Previous page</a>
+        <a th:if="${!isLast}" th:href="${'/web-resources/sites-rating?page=' + (currentPageNumber + 1)}" class="link next-page-link">Next page</a>
+    </div>
+</div>
+
+</body>
+</html>

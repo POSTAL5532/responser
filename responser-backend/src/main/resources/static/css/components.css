@@ -159,10 +159,10 @@
 }
 .app-header {
   display: flex;
+  gap: 24px;
   background-color: #FFFFFF;
   height: 86px;
   align-items: center;
-  justify-content: space-between;
   padding: 0 24px;
   box-shadow: 0 0 2px rgba(40, 41, 61, 0.04), 0 4px 8px rgba(96, 97, 112, 0.16);
 }
@@ -178,6 +178,14 @@
   width: 28px;
   margin-right: 10px;
 }
+.app-header .navigation {
+  display: flex;
+  gap: 14px;
+  width: 100%;
+}
+.app-header .navigation .login {
+  margin-left: auto;
+}
 .link {
   font-family: "Inter-Regular";
   font-size: 18px;
@@ -192,14 +200,14 @@
   margin-left: 8px;
 }
 .link:hover {
-  color: #5281ff;
+  color: #3366FF;
 }
 .link:hover .icon {
-  background-color: #2248c9;
+  background-color: #3366FF;
 }
 .link:active {
-  color: #477aff;
+  color: #144fff;
 }
 .link:active .icon {
-  background-color: #2248c9;
+  background-color: #144fff;
 }

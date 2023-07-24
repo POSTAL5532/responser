@@ -13,7 +13,6 @@ import java.awt.font.TextAttribute;
 import java.awt.font.TextLayout;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.text.AttributedCharacterIterator;
@@ -21,7 +20,6 @@ import java.text.AttributedString;
 import javax.imageio.ImageIO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import org.springframework.util.ResourceUtils;
 
 @Slf4j
 @Service
@@ -106,8 +104,9 @@ public class ReviewMetaImageGenerator {
         }
 
         try {
-            File starFile = ResourceUtils.getFile("classpath:static/img/star.png");
-            star = ImageIO.read(starFile);
+            InputStream starImageInputStream = getClass().getResourceAsStream("/static/img/star.png");
+            assert starImageInputStream != null;
+            star = ImageIO.read(starImageInputStream);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -120,8 +119,9 @@ public class ReviewMetaImageGenerator {
         BufferedImage logo;
 
         try {
-            File labelFile = ResourceUtils.getFile("classpath:static/img/label.png");
-            logo = ImageIO.read(labelFile);
+            InputStream labelImageInputStream = getClass().getResourceAsStream("/static/img/label.png");
+            assert labelImageInputStream != null;
+            logo = ImageIO.read(labelImageInputStream);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
@@ -155,6 +155,7 @@ public class ReviewMetaImageGenerator {
     private Font getFont() {
         try {
             InputStream fontInputStream = getClass().getResourceAsStream("/static/font/Inter-Bold.ttf");
+            assert fontInputStream != null;
             return Font.createFont(Font.TRUETYPE_FONT, fontInputStream);
         } catch (FontFormatException | IOException e) {
             throw new RuntimeException(e);

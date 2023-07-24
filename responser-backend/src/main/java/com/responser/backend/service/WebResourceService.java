@@ -10,6 +10,8 @@ import java.util.NoSuchElementException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.ObjectUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -37,6 +39,10 @@ public class WebResourceService {
                 log.error("{} for url {} doesn't exist", resourceType, rawUrl);
                 return new NoSuchElementException(format("{0} for url {1} doesn't exist", resourceType, rawUrl));
             });
+    }
+
+    public Page<WebResource> getSitesWithReviews(Pageable pageable) {
+        return webResourceRepository.findWithReviewsByResourceType(ResourceType.SITE, pageable);
     }
 
     @Transactional
@@ -88,13 +94,5 @@ public class WebResourceService {
 
     public Boolean existById(String id) {
         return webResourceRepository.existsById(id);
-    }
-
-    public Float getRatingById(String id) {
-        return webResourceRepository.getRatingById(id);
-    }
-
-    public Integer getReviewsCount(String id) {
-        return webResourceRepository.getReviewsCount(id);
     }
 }

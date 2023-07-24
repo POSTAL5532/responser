@@ -21,9 +21,9 @@ public class WebResourceDTO {
 
     private WebResourceDTO parent;
 
-    private Float rating;
+    private Double rating;
 
-    private Integer reviewsCount;
+    private Long reviewsCount;
 
     private LocalDateTime creationDate;
 

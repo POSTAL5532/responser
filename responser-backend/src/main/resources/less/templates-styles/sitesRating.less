@@ -1,0 +1,64 @@
+@import "../global.less";
+
+.sites-rating-page {
+  .adaptationDesktop({
+    padding: 94px 230px;
+  });
+
+  .adaptationSmallDesktop({
+    padding: 94px 164px;
+  });
+
+  .adaptationTablet({
+    padding: 88px 98px;
+  });
+
+  .adaptationMobile({
+    padding: 80px 60px;
+  });
+
+  .page-header {
+    color: @system-color-dark-400;
+  }
+
+  .pages-navigator {
+    display: flex;
+    margin-bottom: 20px;
+
+    .previous-page-link {
+      margin-right: auto;
+    }
+
+    .next-page-link {
+      margin-left: auto;
+    }
+  }
+
+  .sites-list {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-bottom: 20px;
+
+    .site-container {
+      .stackShadow3();
+      border-radius: 8px;
+      padding: 18px;
+
+      .link {
+        margin-bottom: 14px;
+
+        h2 {
+          margin: 0;
+        }
+      }
+
+      .rating-container {
+        color: @system-color-dark-400;
+        font-size: 20px;
+        display: flex;
+        gap: 14px;
+      }
+    }
+  }
+}
