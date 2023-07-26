@@ -14,23 +14,46 @@
     <h1 class="page-header">Sites rating</h1>
 
     <div class="pages-navigator">
-        <a th:if="${currentPageNumber > 0}" th:href="${'/web-resources/sites-rating?page=' + (currentPageNumber - 1)}" class="link previous-page-link">Previous page</a>
-        <a th:if="${!isLast}" th:href="${'/web-resources/sites-rating?page=' + (currentPageNumber + 1)}" class="link next-page-link">Next page</a>
+        <div class="previous-page-nav-container">
+            <a th:if="${currentPageNumber > 0}" th:href="${'/web-resources/sites-rating?page=' + (currentPageNumber - 1)}" class="link">
+                <div class="icon arrow-icon"></div> Prev page
+            </a>
+        </div>
+        <div class="next-page-nav-container">
+            <a th:if="${!isLast}" th:href="${'/web-resources/sites-rating?page=' + (currentPageNumber + 1)}" class="link">
+                Next page <div class="icon arrow-icon"></div>
+            </a>
+        </div>
     </div>
 
     <div class="sites-list">
         <div th:each="site: ${sites}" class="site-container">
-            <a th:href="${site.getUrl()}" target="_blank" class="link"><h2 th:text="${site.getUrl()}">ERROR</h2></a>
-            <div class="rating-container">
-                <div th:text="${'Rating: ' + site.getRating()}"/>
-                <div th:text="${'Reviews: ' + site.getReviewsCount()}"/>
+            <div class="first-row">
+                <a th:href="${site.getUrl()}" th:text="${T(com.responser.backend.utils.UrlUtils).getHost(site.getUrl())}" target="_blank" class="link site-link">!ERROR!</a>
+                <div th:text="${site.getRating() + ' / 5'}" class="rating" th:classappend="${(site.getRating() >= 4 ? 'good-rating' : (site.getRating() >= 2 ? 'medium-rating' : 'bad-rating'))}">!ERROR!</div>
+            </div>
+
+            <div class="second-row">
+                <div class="reviews-count">
+                    <span class="text">Reviews: </span>
+                    <span th:text="${site.getReviewsCount()}" class="value">!ERROR!</span>
+                </div>
+                <a th:href="${site.getUrl()}" th:text="${'Details'}" target="_blank" class="link details-link">!ERROR!</a>
             </div>
         </div>
     </div>
 
     <div class="pages-navigator">
-        <a th:if="${currentPageNumber > 0}" th:href="${'/web-resources/sites-rating?page=' + (currentPageNumber - 1)}" class="link previous-page-link">Previous page</a>
-        <a th:if="${!isLast}" th:href="${'/web-resources/sites-rating?page=' + (currentPageNumber + 1)}" class="link next-page-link">Next page</a>
+        <div class="previous-page-nav-container">
+            <a th:if="${currentPageNumber > 0}" th:href="${'/web-resources/sites-rating?page=' + (currentPageNumber - 1)}" class="link">
+                <div class="icon arrow-icon"></div> Prev page
+            </a>
+        </div>
+        <div class="next-page-nav-container">
+            <a th:if="${!isLast}" th:href="${'/web-resources/sites-rating?page=' + (currentPageNumber + 1)}" class="link">
+                Next page <div class="icon arrow-icon"></div>
+            </a>
+        </div>
     </div>
 </div>
 

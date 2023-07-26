@@ -12,14 +12,22 @@
   .header-title {
     display: flex;
     align-items: center;
-    .fontInterBold();
-    font-size: 38px;
-    color: @system-color-dark-400;
 
     .icon {
       height: 28px;
       width: 28px;
       margin-right: 10px;
+    }
+
+    &, &:active, &:focus {
+      color: @system-color-dark-400;
+      text-decoration: none;
+
+      .title-label {
+        .fontInterBold();
+        font-size: 38px;
+        margin: 0;
+      }
     }
   }
 

@@ -169,14 +169,24 @@
 .app-header .header-title {
   display: flex;
   align-items: center;
-  font-family: "Inter-Bold";
-  font-size: 38px;
-  color: #28293D;
 }
 .app-header .header-title .icon {
   height: 28px;
   width: 28px;
   margin-right: 10px;
+}
+.app-header .header-title,
+.app-header .header-title:active,
+.app-header .header-title:focus {
+  color: #28293D;
+  text-decoration: none;
+}
+.app-header .header-title .title-label,
+.app-header .header-title:active .title-label,
+.app-header .header-title:focus .title-label {
+  font-family: "Inter-Bold";
+  font-size: 38px;
+  margin: 0;
 }
 .app-header .navigation {
   display: flex;
@@ -192,12 +202,12 @@
   color: #6690FF;
   text-decoration: none;
   display: inline-flex;
+  gap: 8px;
   align-items: center;
   justify-content: center;
 }
 .link .icon {
   background-color: #6690FF;
-  margin-left: 8px;
 }
 .link:hover {
   color: #3366FF;

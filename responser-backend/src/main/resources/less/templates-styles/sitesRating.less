@@ -2,54 +2,142 @@
 
 .sites-rating-page {
   .adaptationDesktop({
-    padding: 94px 230px;
+    padding: 60px 230px;
   });
 
   .adaptationSmallDesktop({
-    padding: 94px 164px;
+    padding: 60px 160px;
   });
 
   .adaptationTablet({
-    padding: 88px 98px;
+    padding: 60px 60px;
   });
 
   .adaptationMobile({
-    padding: 80px 60px;
+    padding: 60px 34px;
   });
 
   .page-header {
+    .fontInterMedium();
     color: @system-color-dark-400;
+    text-align: center;
+    margin-bottom: 54px;
+    margin-top: 0;
   }
 
   .pages-navigator {
     display: flex;
-    margin-bottom: 20px;
+    gap: 24px;
+    margin-bottom: 36px;
 
-    .previous-page-link {
-      margin-right: auto;
+    .previous-page-nav-container {
+      display: flex;
+      flex: 1;
+      justify-content: end;
+
+      .icon {
+        transform: rotate(180deg);
+      }
     }
 
-    .next-page-link {
-      margin-left: auto;
+    .next-page-nav-container {
+      display: flex;
+      flex: 1;
     }
   }
 
   .sites-list {
     display: flex;
-    flex-direction: column;
     gap: 24px;
-    margin-bottom: 20px;
+    margin-bottom: 36px;
+    flex-wrap: wrap;
+    justify-content: center;
 
     .site-container {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+
       .stackShadow3();
       border-radius: 8px;
       padding: 18px;
 
-      .link {
-        margin-bottom: 14px;
+      .adaptationDesktop({
+        width: 630px;
+      });
 
-        h2 {
-          margin: 0;
+      .adaptationSmallDesktop({
+        width: 540px;
+      });
+
+      .adaptationTablet({
+        width: 430px;
+      });
+
+      .adaptationMobile({
+        width: 420px;
+      });
+
+      .first-row {
+        display: flex;
+        align-items: center;
+
+        .site-link {
+          .fontInterSemiBold();
+          font-size: 28px;
+          flex: 1;
+          display: block;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          white-space: nowrap;
+          padding-right: 20px;
+        }
+
+        .rating {
+          .fontInterMedium();
+          font-size: 20px;
+          border-radius: 8px;
+          margin-left: auto;
+          width: 76px;
+          height: 36px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          &.good-rating {
+            background-color: @system-color-success-300;
+          }
+
+          &.medium-rating {
+            background-color: @system-color-warning-400;
+          }
+
+          &.bad-rating {
+            background-color: @system-color-danger-300;
+          }
+        }
+      }
+
+      .second-row {
+        display: flex;
+        align-items: center;
+
+        .reviews-count {
+          .fontInterMedium();
+          font-size: 24px;
+
+          .text {
+            color: @system-color-dark-400;
+          }
+          .value {
+            color: @system-color-dark-300;
+          }
+        }
+
+        .details-link {
+          .fontInterMedium();
+          font-size: 20px;
+          margin-left: auto;
         }
       }
 
