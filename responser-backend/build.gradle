@@ -76,6 +76,9 @@ task compileLess() {
             commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/common.less", "${baseCssPath}/common.css"
         }
         exec {
+            commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/layouts/pageMainLayout.less", "${baseCssPath}/pageMainLayout.css"
+        }
+        exec {
             commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/emailConfirmationPage.less", "${baseCssPath}/emailConfirmationPage.css"
         }
         exec {

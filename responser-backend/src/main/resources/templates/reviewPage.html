@@ -1,30 +1,37 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en"
+      th:replace="~{layouts/pageMainLayout :: main-fragment(
+          'Review page',
+           ~{:: #review-page-head},
+           ~{:: #main-content},
+           'Review',
+           'review-page',
+           null
+       )}">
 <head>
-    <title>Reviewly - Review page</title>
-    <link th:href="@{/css/reviewPage.css}" rel="stylesheet"/>
-    <th:block th:include="includes/defaultStyles"/>
-    <th:block th:include="includes/favicons"/>
+    <title></title>
 
-    <meta property="og:url" th:content="${facebookMetaTags.url}"/>
-    <meta property="og:type" th:content="${facebookMetaTags.type}"/>
-    <meta property="og:title" th:content="${facebookMetaTags.title}"/>
-    <meta property="og:description" th:content="${facebookMetaTags.description}"/>
-    <meta property="og:image" th:content="${facebookMetaTags.imageUrl}"/>
-    <meta property="og:image:width" th:content="${facebookMetaTags.imageWidth}"/>
-    <meta property="og:image:height" th:content="${facebookMetaTags.imageHeight}"/>
+    <th:block id="review-page-head">
+        <link th:href="@{/css/reviewPage.css}" rel="stylesheet"/>
 
-    <meta property="twitter:title" th:content="${twitterMetaTags.title}">
-    <meta property="twitter:description" th:content="${twitterMetaTags.description}">
-    <meta property="twitter:image" th:content="${twitterMetaTags.imageUrl}">
-    <meta name="twitter:card" th:content="${twitterMetaTags.card}">
+        <meta property="og:url" th:content="${facebookMetaTags.url}"/>
+        <meta property="og:type" th:content="${facebookMetaTags.type}"/>
+        <meta property="og:title" th:content="${facebookMetaTags.title}"/>
+        <meta property="og:description" th:content="${facebookMetaTags.description}"/>
+        <meta property="og:image" th:content="${facebookMetaTags.imageUrl}"/>
+        <meta property="og:image:width" th:content="${facebookMetaTags.imageWidth}"/>
+        <meta property="og:image:height" th:content="${facebookMetaTags.imageHeight}"/>
+
+        <meta property="twitter:title" th:content="${twitterMetaTags.title}">
+        <meta property="twitter:description" th:content="${twitterMetaTags.description}">
+        <meta property="twitter:image" th:content="${twitterMetaTags.imageUrl}">
+        <meta name="twitter:card" th:content="${twitterMetaTags.card}">
+    </th:block>
 </head>
+
 <body>
-
-<th:block th:include="includes/header"/>
-
-<div class="review-page">
-
+<th:block id="main-content">
     <div class="resource-info">
         <h1 class="resource">
             <span class="resource-type" th:text="${review.webResource.resourceType.name == 'PAGE'} ? 'Page review' : 'Site review'"></span>:
@@ -60,7 +67,7 @@
             </div>
         </div>
     </div>
-</div>
-
+</th:block>
 </body>
+
 </html>

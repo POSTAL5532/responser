@@ -1,40 +1,50 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en"
+      th:replace="~{layouts/pageMainLayout :: main-fragment(
+          'Email confirmation',
+          ~{:: #headContent},
+          ~{:: #mainContent},
+          'Email confirmation',
+          'email-confirmation-page',
+          ~{:: #bodyEndContent}
+      )}">
 <head>
-    <title>Reviewly - Email confirmation</title>
-    <link th:href="@{/css/emailConfirmationPage.css}" rel="stylesheet"/>
-    <th:block th:include="includes/defaultStyles"/>
-    <th:block th:include="includes/favicons"/>
+    <title></title>
+
+    <th:block id="headContent">
+        <link th:href="@{/css/emailConfirmationPage.css}" rel="stylesheet"/>
+    </th:block>
 <body>
 
-<th:block th:include="includes/header"/>
-
-<div class="email-confirmation-page">
+<th:block id="mainContent">
     <div class="success-icon"></div>
     <h2 class="email-confirmation-header">Email successfully confirmed</h2>
     <h3 class="email-confirmation-annotation">You will be redirected to application in <span id="redirect-timer">5</span> sec</h3>
     <a th:href="${redirectLink}" class="email-confirmation-redirect-link">Or go it manually</a>
-</div>
+</th:block>
 
-<script th:inline="javascript">
-    /*<![CDATA[*/
+<th:block id="bodyEndContent">
+    <script th:inline="javascript">
+        /*<![CDATA[*/
 
-    let redirectLink = /*[[${redirectLink}]]*/ "define";
+        let redirectLink = /*[[${redirectLink}]]*/ "define";
 
-    const interval = setInterval(() => {
-        let element = document.getElementById("redirect-timer");
-        let currentTimer = parseInt(element.innerHTML);
+        const interval = setInterval(() => {
+            let element = document.getElementById("redirect-timer");
+            let currentTimer = parseInt(element.innerHTML);
 
-        if (currentTimer === 1) {
-            window.location.href = redirectLink;
-            clearInterval(interval);
-        }
+            if (currentTimer === 1) {
+                window.location.href = redirectLink;
+                clearInterval(interval);
+            }
 
-        element.innerHTML = (currentTimer - 1).toString();
-    }, 1000);
+            element.innerHTML = (currentTimer - 1).toString();
+        }, 1000);
 
-    /*]]>*/
-</script>
+        /*]]>*/
+    </script>
+</th:block>
 
 </body>
 </html>

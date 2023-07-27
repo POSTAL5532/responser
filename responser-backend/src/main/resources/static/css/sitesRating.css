@@ -1,0 +1,201 @@
+@font-face {
+  font-family: "Inter-Thin";
+  src: url("/font/Inter-Thin.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 100;
+}
+@font-face {
+  font-family: "Inter-ExtraLight";
+  src: url("/font/Inter-ExtraLight.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 200;
+}
+@font-face {
+  font-family: "Inter-Light";
+  src: url("/font/Inter-Light.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 300;
+}
+@font-face {
+  font-family: "Inter-Regular";
+  src: url("/font/Inter-Regular.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+}
+@font-face {
+  font-family: "Inter-Medium";
+  src: url("/font/Inter-Medium.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 500;
+}
+@font-face {
+  font-family: "Inter-SemiBold";
+  src: url("/font/Inter-SemiBold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 600;
+}
+@font-face {
+  font-family: "Inter-Bold";
+  src: url("/font/Inter-Bold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 700;
+}
+@font-face {
+  font-family: "Inter-ExtraBold";
+  src: url("/font/Inter-ExtraBold.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 800;
+}
+@font-face {
+  font-family: "Inter-Black";
+  src: url("/font/Inter-Black.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 900;
+}
+.icon {
+  width: 12px;
+  height: 12px;
+  display: block;
+}
+.icon.login-icon {
+  -webkit-mask: url("/img/login.svg") center / 20px 20px no-repeat;
+  mask: url("/img/login.svg") center / 20px 20px no-repeat;
+  width: 20px;
+  height: 20px;
+}
+.icon.chrome-icon {
+  -webkit-mask: url("/img/chrome.svg") center / 20px 20px no-repeat;
+  mask: url("/img/chrome.svg") center / 20px 20px no-repeat;
+  width: 20px;
+  height: 20px;
+}
+.icon.arrow-icon {
+  -webkit-mask: url("/img/arrow.svg") center / 8px 14px no-repeat;
+  mask: url("/img/arrow.svg") center / 8px 14px no-repeat;
+  width: 8px;
+  height: 14px;
+}
+.icon.big-arrow-icon {
+  -webkit-mask: url("/img/big-arrow.svg") center / 16px 16px no-repeat;
+  mask: url("/img/big-arrow.svg") center / 16px 16px no-repeat;
+  width: 16px;
+  height: 20px;
+}
+.sites-rating-page .page-header {
+  font-family: "Inter-Medium";
+  color: #28293D;
+  text-align: center;
+  margin-bottom: 54px;
+  margin-top: 0;
+}
+.sites-rating-page .pages-navigator {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+.sites-rating-page .pages-navigator .previous-page-nav-container {
+  display: flex;
+  flex: 1;
+  justify-content: end;
+}
+.sites-rating-page .pages-navigator .previous-page-nav-container .icon {
+  transform: rotate(180deg);
+}
+.sites-rating-page .pages-navigator .next-page-nav-container {
+  display: flex;
+  flex: 1;
+}
+.sites-rating-page .sites-list {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+.sites-rating-page .sites-list .site-container {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-shadow: 0 0 2px rgba(40, 41, 61, 0.04), 0 4px 8px rgba(96, 97, 112, 0.16);
+  border-radius: 8px;
+  padding: 18px;
+}
+@media screen and (min-width: 1920px) {
+  .sites-rating-page .sites-list .site-container {
+    width: 630px;
+  }
+}
+@media screen and (min-width: 1440px) and (max-width: 1919px) {
+  .sites-rating-page .sites-list .site-container {
+    width: 540px;
+  }
+}
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+  .sites-rating-page .sites-list .site-container {
+    width: 430px;
+  }
+}
+@media screen and (min-width: 1px) and (max-width: 1023px) {
+  .sites-rating-page .sites-list .site-container {
+    width: 420px;
+  }
+}
+.sites-rating-page .sites-list .site-container .first-row {
+  display: flex;
+  align-items: center;
+}
+.sites-rating-page .sites-list .site-container .first-row .site-link {
+  font-family: "Inter-SemiBold";
+  font-size: 28px;
+  flex: 1;
+  display: block;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-right: 20px;
+}
+.sites-rating-page .sites-list .site-container .first-row .rating {
+  font-family: "Inter-Medium";
+  font-size: 20px;
+  border-radius: 8px;
+  margin-left: auto;
+  width: 76px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.sites-rating-page .sites-list .site-container .first-row .rating.good-rating {
+  background-color: #78ED84;
+}
+.sites-rating-page .sites-list .site-container .first-row .rating.medium-rating {
+  background-color: #FFF16C;
+}
+.sites-rating-page .sites-list .site-container .first-row .rating.bad-rating {
+  background-color: #FFA288;
+}
+.sites-rating-page .sites-list .site-container .second-row {
+  display: flex;
+  align-items: center;
+}
+.sites-rating-page .sites-list .site-container .second-row .reviews-count {
+  font-family: "Inter-Medium";
+  font-size: 24px;
+}
+.sites-rating-page .sites-list .site-container .second-row .reviews-count .text {
+  color: #28293D;
+}
+.sites-rating-page .sites-list .site-container .second-row .reviews-count .value {
+  color: #555770;
+}
+.sites-rating-page .sites-list .site-container .second-row .details-link {
+  font-family: "Inter-Medium";
+  font-size: 20px;
+  margin-left: auto;
+}
+.sites-rating-page .sites-list .site-container .rating-container {
+  color: #28293D;
+  font-size: 20px;
+  display: flex;
+  gap: 14px;
+}

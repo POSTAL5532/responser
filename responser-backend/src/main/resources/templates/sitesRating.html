@@ -1,27 +1,34 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en"
+      th:replace="~{layouts/pageMainLayout :: main-fragment(
+          'Sites rating',
+          ~{:: #headContent},
+          ~{:: #mainContent},
+          'Sites rating',
+          'sites-rating-page',
+           null
+      )}">
 <head>
-    <title>Reviewly - Sites rating</title>
-    <link th:href="@{/css/sitesRating.css}" rel="stylesheet"/>
-    <th:block th:include="includes/defaultStyles"/>
-    <th:block th:include="includes/favicons"/>
+    <title></title>
+    <th:block id="headContent">
+        <link th:href="@{/css/sitesRating.css}" rel="stylesheet"/>
+    </th:block>
 </head>
 <body>
 
-<th:block th:include="includes/header"/>
-
-<div class="sites-rating-page">
-    <h1 class="page-header">Sites rating</h1>
-
+<th:block id="mainContent">
     <div class="pages-navigator">
         <div class="previous-page-nav-container">
             <a th:if="${currentPageNumber > 0}" th:href="${'/web-resources/sites-rating?page=' + (currentPageNumber - 1)}" class="link">
-                <div class="icon arrow-icon"></div> Prev page
+                <div class="icon arrow-icon"></div>
+                Prev page
             </a>
         </div>
         <div class="next-page-nav-container">
             <a th:if="${!isLast}" th:href="${'/web-resources/sites-rating?page=' + (currentPageNumber + 1)}" class="link">
-                Next page <div class="icon arrow-icon"></div>
+                Next page
+                <div class="icon arrow-icon"></div>
             </a>
         </div>
     </div>
@@ -30,7 +37,9 @@
         <div th:each="site: ${sites}" class="site-container">
             <div class="first-row">
                 <a th:href="${site.getUrl()}" th:text="${T(com.responser.backend.utils.UrlUtils).getHost(site.getUrl())}" target="_blank" class="link site-link">!ERROR!</a>
-                <div th:text="${site.getRating() + ' / 5'}" class="rating" th:classappend="${(site.getRating() >= 4 ? 'good-rating' : (site.getRating() >= 2 ? 'medium-rating' : 'bad-rating'))}">!ERROR!</div>
+                <div th:text="${site.getRating() + ' / 5'}" class="rating"
+                     th:classappend="${(site.getRating() >= 4 ? 'good-rating' : (site.getRating() >= 2 ? 'medium-rating' : 'bad-rating'))}">!ERROR!
+                </div>
             </div>
 
             <div class="second-row">
@@ -46,16 +55,18 @@
     <div class="pages-navigator">
         <div class="previous-page-nav-container">
             <a th:if="${currentPageNumber > 0}" th:href="${'/web-resources/sites-rating?page=' + (currentPageNumber - 1)}" class="link">
-                <div class="icon arrow-icon"></div> Prev page
+                <div class="icon arrow-icon"></div>
+                Prev page
             </a>
         </div>
         <div class="next-page-nav-container">
             <a th:if="${!isLast}" th:href="${'/web-resources/sites-rating?page=' + (currentPageNumber + 1)}" class="link">
-                Next page <div class="icon arrow-icon"></div>
+                Next page
+                <div class="icon arrow-icon"></div>
             </a>
         </div>
     </div>
-</div>
+</th:block>
 
 </body>
 </html>

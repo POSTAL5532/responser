@@ -81,70 +81,30 @@
   width: 16px;
   height: 20px;
 }
-.review-page .resource-info {
-  color: #555770;
+@media screen and (min-width: 1920px) {
+  .page {
+    padding: 60px 230px;
+  }
 }
-.review-page .resource-info .resource {
-  margin-bottom: 10px;
+@media screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page {
+    padding: 60px 160px;
+  }
 }
-.review-page .review-header {
-  display: flex;
-  align-items: center;
-  margin-bottom: 30px;
+@media screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page {
+    padding: 60px 60px;
+  }
 }
-.review-page .review-header .publication-info {
-  display: flex;
-  align-items: center;
+@media screen and (min-width: 1px) and (max-width: 1023px) {
+  .page {
+    padding: 60px 34px;
+  }
 }
-.review-page .review-header .publication-info .user {
-  font-family: "Inter-Regular";
-  color: #8E90A6;
-  font-size: 30px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  max-width: 240px;
-}
-.review-page .review-header .publication-info .published-date {
-  font-family: "Inter-Regular";
-  color: #C7C8D9;
-  font-size: 22px;
-  margin-left: 8px;
-}
-.review-page .review-header .rating {
-  margin-left: auto;
-}
-.review-page .review-header .rating .star {
-  width: 38px;
-  height: 38px;
-}
-.review-page .review-header .rating .star.filled {
-  margin-left: 6px;
-}
-.review-page .review-content .text {
-  font-family: "Inter-SemiBold";
-  color: #28293D;
-  font-size: 30px;
-  margin-bottom: 30px;
-}
-.review-page .review-content .reactions-container {
-  display: flex;
-  gap: 22px;
-}
-.review-page .review-content .reactions-container .reactions {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-.review-page .review-content .reactions-container .reactions .reaction-icon svg {
-  width: 26px;
-  height: 26px;
-}
-.review-page .review-content .reactions-container .reactions .reaction-icon svg path {
-  stroke: #555770;
-}
-.review-page .review-content .reactions-container .reactions .reactions-count {
+.page .page-header {
   font-family: "Inter-Medium";
-  font-size: 22px;
-  color: #555770;
+  color: #28293D;
+  text-align: center;
+  margin-bottom: 54px;
+  margin-top: 0;
 }

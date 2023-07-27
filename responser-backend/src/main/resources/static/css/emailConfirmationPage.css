@@ -85,9 +85,13 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: 46px;
 }
-.success-icon {
+.email-confirmation-page .page-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.email-confirmation-page .page-content .success-icon {
   -webkit-mask: url("/img/circle_check.svg") center / 100px 100px no-repeat;
   mask: url("/img/circle_check.svg") center / 100px 100px no-repeat;
   width: 100px;
@@ -95,7 +99,7 @@
   background-color: #23C653;
   margin-bottom: 46px;
 }
-.email-confirmation-header {
+.email-confirmation-page .page-content .email-confirmation-header {
   font-family: "Inter-Regular";
   font-size: 28px;
   color: #555770;
@@ -103,14 +107,14 @@
   text-align: center;
   margin-bottom: 14px;
 }
-.email-confirmation-annotation {
+.email-confirmation-page .page-content .email-confirmation-annotation {
   font-family: "Inter-Regular";
   color: #555770;
   font-size: 14px;
   margin: 0;
   text-align: center;
 }
-.email-confirmation-redirect-link {
+.email-confirmation-page .page-content .email-confirmation-redirect-link {
   font-family: "Inter-Regular";
   color: #6690FF;
   font-size: 14px;
@@ -118,6 +122,6 @@
   text-align: center;
   text-decoration: none;
 }
-.email-confirmation-redirect-link:hover {
+.email-confirmation-page .page-content .email-confirmation-redirect-link:hover {
   color: #3366FF;
 }

@@ -1,0 +1,27 @@
+@import "../../global.less";
+
+.page {
+  .adaptationDesktop({
+    padding: 60px 230px;
+  });
+
+  .adaptationSmallDesktop({
+    padding: 60px 160px;
+  });
+
+  .adaptationTablet({
+    padding: 60px 60px;
+  });
+
+  .adaptationMobile({
+    padding: 60px 34px;
+  });
+
+  .page-header {
+    .fontInterMedium();
+    color: @system-color-dark-400;
+    text-align: center;
+    margin-bottom: 54px;
+    margin-top: 0;
+  }
+}
