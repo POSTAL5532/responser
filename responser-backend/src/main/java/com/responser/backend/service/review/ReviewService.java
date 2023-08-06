@@ -129,12 +129,4 @@ public class ReviewService {
 
         reviewRepository.deleteById(reviewId);
     }
-
-    public Double getRatingByResourceId(String id) {
-        return reviewRepository.getRatingByResourceId(id);
-    }
-
-    public Long getReviewsCountByResourceId(String id) {
-        return reviewRepository.getReviewsCountByResourceId(id);
-    }
 }

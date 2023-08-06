@@ -1,0 +1,39 @@
+<div th:fragment="review-card-component(review, class)"
+     th:classappend="${class != null ? class : ''}"
+     th:replace="~{components/card::card-component(~{::#cardContent}, 'review-card' + ${class != null ? ' ' + class : ''})}">
+
+    <th:block id="cardContent">
+        <div class="resource-info">
+            <h1 class="resource">
+                <span class="resource-type" th:text="${review.webResource.resourceType.name == 'PAGE'} ? 'Page review' : 'Site review'">! ERROR !</span>:
+                <a class="link url" th:href="${review.webResource.url}" target="_blank" th:text="${review.webResource.url}">! ERROR !</a>
+            </h1>
+        </div>
+
+        <div class="review-header">
+            <div class="publication-info">
+                <div class="user" th:text="${review.user.fullName}">! ERROR !</div>
+                <div class="published-date" th:text="${#temporals.format(review.creationDate, 'd MMM yyyy')}">! ERROR !</div>
+            </div>
+            <th:block th:replace="~{components/rating::rating-component(${review.rating}, null)}"/>
+        </div>
+
+        <div class="review-content">
+            <div class="text" th:text="${review.text}">! ERROR !</div>
+            <div class="reactions-container">
+                <div class="reactions positive">
+                <span class="reaction-icon">
+                    <th:block th:include="includes/positiveReaction"/>
+                </span>
+                    <span class="reactions-count" th:text="${review.likes.?[positive == true].size}"></span>
+                </div>
+                <div class="reactions negative">
+                <span class="reaction-icon">
+                    <th:block th:include="includes/negativeReaction"/>
+                </span>
+                    <span class="reactions-count" th:text="${review.likes.?[positive == false].size}"></span>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</div>

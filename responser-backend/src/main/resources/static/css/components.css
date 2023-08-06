@@ -221,3 +221,97 @@
 .link:active .icon {
   background-color: #144fff;
 }
+.card {
+  box-shadow: 0 0 2px rgba(40, 41, 61, 0.04), 0 4px 8px rgba(96, 97, 112, 0.16);
+  border-radius: 8px;
+  padding: 18px;
+}
+.review-card .resource-info {
+  color: #555770;
+}
+.review-card .resource-info .resource {
+  margin-bottom: 10px;
+}
+.review-card .review-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+.review-card .review-header .publication-info {
+  display: flex;
+  align-items: center;
+}
+.review-card .review-header .publication-info .user {
+  font-family: "Inter-Regular";
+  color: #8E90A6;
+  font-size: 30px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 240px;
+}
+.review-card .review-header .publication-info .published-date {
+  font-family: "Inter-Regular";
+  color: #C7C8D9;
+  font-size: 22px;
+  margin-left: 8px;
+}
+.review-card .review-header .rating {
+  margin-left: auto;
+}
+.review-card .review-header .rating .star {
+  width: 38px;
+  height: 38px;
+}
+.review-card .review-content .text {
+  font-family: "Inter-SemiBold";
+  color: #28293D;
+  font-size: 30px;
+  margin-bottom: 30px;
+}
+.review-card .review-content .reactions-container {
+  display: flex;
+  gap: 22px;
+}
+.review-card .review-content .reactions-container .reactions {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.review-card .review-content .reactions-container .reactions .reaction-icon svg {
+  width: 26px;
+  height: 26px;
+}
+.review-card .review-content .reactions-container .reactions .reaction-icon svg path {
+  stroke: #555770;
+}
+.review-card .review-content .reactions-container .reactions .reactions-count {
+  font-family: "Inter-Medium";
+  font-size: 22px;
+  color: #555770;
+}
+.rating {
+  display: flex;
+  gap: 4px;
+}
+.rating .star {
+  width: 14px;
+  height: 14px;
+}
+.pages-navigator {
+  display: flex;
+  gap: 24px;
+  margin-bottom: 36px;
+}
+.pages-navigator .previous-page-nav-container {
+  display: flex;
+  flex: 1;
+  justify-content: end;
+}
+.pages-navigator .previous-page-nav-container .icon {
+  transform: rotate(180deg);
+}
+.pages-navigator .next-page-nav-container {
+  display: flex;
+  flex: 1;
+}

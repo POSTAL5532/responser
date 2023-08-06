@@ -13,7 +13,7 @@
 
 <th:block th:include="includes/header"/>
 
-<div class="page" th:classappend="${pageClass}">
+<div class="page" th:classappend="${pageClass != null ? pageClass : ''}">
     <h1 class="page-header" th:if="${pageHeaderTitle != null}" th:text="${pageHeaderTitle}">! ERROR !</h1>
 
     <div th:insert="${mainContent} ?: ~{}" class="page-content">
@@ -23,7 +23,7 @@
 
 <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
 
-<th:block th:if="${bodyEndContent != null}" th:replace="${bodyEndContent}"></th:block>
+<th:block th:if="${bodyEndContent != null}" th:replace="${bodyEndContent} ?: ~{}"></th:block>
 
 </body>
 </html>

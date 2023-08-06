@@ -36,7 +36,7 @@
     <div class="sites-list">
         <div th:each="site: ${sites}" class="site-container">
             <div class="first-row">
-                <a th:href="${site.getUrl()}" th:text="${T(com.responser.backend.utils.UrlUtils).getHost(site.getUrl())}" target="_blank" class="link site-link">!ERROR!</a>
+                <a th:href="${'/web-resources/' + site.getId()}" th:text="${T(com.responser.backend.utils.UrlUtils).getHost(site.getUrl())}" class="link site-link">!ERROR!</a>
                 <div th:text="${site.getRating() + ' / 5'}" class="rating"
                      th:classappend="${(site.getRating() >= 4 ? 'good-rating' : (site.getRating() >= 2 ? 'medium-rating' : 'bad-rating'))}">!ERROR!
                 </div>

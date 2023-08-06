@@ -23,8 +23,8 @@ public class RatingController {
 
     @GetMapping
     public ResponseEntity<ResourceRatings> getResourceRating(@Valid @NotBlank @RequestParam String url) {
-        ResourceRating siteResourceRating = ratingService.getSiteFullRating(url);
-        ResourceRating pageResourceRating = ratingService.getPageFullRating(url);
+        ResourceRating siteResourceRating = ratingService.getSiteFullRatingByUrl(url);
+        ResourceRating pageResourceRating = ratingService.getPageFullRatingByUrl(url);
 
         return ResponseEntity.ok(new ResourceRatings(pageResourceRating, siteResourceRating));
     }

@@ -90,5 +90,8 @@ task compileLess() {
         exec {
             commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/sitesRating.less", "${baseCssPath}/sitesRating.css"
         }
+        exec {
+            commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/webResourceDetails.less", "${baseCssPath}/webResourceDetails.css"
+        }
     }
 }

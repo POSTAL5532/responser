@@ -35,10 +35,6 @@ public class ReviewSpecifications {
                 predicates.add(criteriaBuilder.notEqual(userRoot.get(User_.ID), criteria.getExcludeUserId()));
             }
 
-            /*if (ObjectUtils.isNotEmpty(criteria.getResourceType())) {
-                predicates.add(criteriaBuilder.equal(root.get(Review_.RESOURCE_TYPE), criteria.getResourceType()));
-            }*/
-
             if (StringUtils.isNotBlank(criteria.getSortingField())) {
                 Direction sortDirection = criteria.getSortDirection();
 

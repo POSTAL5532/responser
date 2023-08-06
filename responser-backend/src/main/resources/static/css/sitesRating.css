@@ -88,23 +88,6 @@
   margin-bottom: 54px;
   margin-top: 0;
 }
-.sites-rating-page .pages-navigator {
-  display: flex;
-  gap: 24px;
-  margin-bottom: 36px;
-}
-.sites-rating-page .pages-navigator .previous-page-nav-container {
-  display: flex;
-  flex: 1;
-  justify-content: end;
-}
-.sites-rating-page .pages-navigator .previous-page-nav-container .icon {
-  transform: rotate(180deg);
-}
-.sites-rating-page .pages-navigator .next-page-nav-container {
-  display: flex;
-  flex: 1;
-}
 .sites-rating-page .sites-list {
   display: flex;
   gap: 24px;

@@ -5,8 +5,10 @@ import static com.responser.backend.config.ApplicationProperties.API_ROOT_PATH;
 import com.responser.backend.controller.webresource.payload.NewWebResourceDTO;
 import com.responser.backend.controller.webresource.payload.WebResourceDTO;
 import com.responser.backend.converter.WebResourceConverter;
+import com.responser.backend.model.ResourceRating;
 import com.responser.backend.model.ResourceType;
 import com.responser.backend.model.WebResource;
+import com.responser.backend.service.RatingService;
 import com.responser.backend.service.WebResourceService;
 import com.responser.backend.service.review.ReviewService;
 import jakarta.validation.Valid;
@@ -29,8 +31,8 @@ import org.springframework.web.bind.annotation.RestController;
 public class WebResourceApiController {
 
     private final WebResourceService webResourceService;
-    private final ReviewService reviewService;
     private final WebResourceConverter webResourceConverter;
+    private final RatingService ratingService;
 
     @GetMapping
     public ResponseEntity<WebResourceDTO> getWebResourceByUrl(
@@ -40,10 +42,11 @@ public class WebResourceApiController {
         log.info("Get web resource: url {}, type {}.", url, resourceType);
 
         WebResource webResource = webResourceService.getByUrl(url, resourceType);
+        ResourceRating resourceRating = ratingService.getResourceFullRatingById(webResource.getId());
 
         WebResourceDTO webResourceDTO = webResourceConverter.toDTO(webResource);
-        webResourceDTO.setRating(reviewService.getRatingByResourceId(webResource.getId()));
-        webResourceDTO.setReviewsCount(reviewService.getReviewsCountByResourceId(webResource.getId()));
+        webResourceDTO.setRating(resourceRating.getRating());
+        webResourceDTO.setReviewsCount(resourceRating.getReviewsCount());
 
         return ResponseEntity.ok(webResourceDTO);
     }

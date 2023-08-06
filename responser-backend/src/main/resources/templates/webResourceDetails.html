@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en"
+      th:replace="~{layouts/pageMainLayout :: main-fragment(
+          ${webResourceHost},
+          ~{:: #headContent},
+          ~{:: #mainContent},
+          ${webResourceHost},
+          'resource-details-page',
+           null
+      )}">
+<head>
+    <title></title>
+    <th:block id="headContent">
+        <link th:href="@{/css/webResourceDetails.css}" rel="stylesheet"/>
+    </th:block>
+</head>
+<body>
+
+<th:block id="mainContent">
+
+    <h2 th:text="${'Rating: ' + webResource.rating}">! ERROR !</h2>
+    <h2 th:text="${'Reviews count: ' + webResource.reviewsCount}">! ERROR !</h2>
+
+    <th:block th:replace="~{components/pages-navigator::pages-navigator-component(
+            ${'/web-resources/' + webResource.id + '?reviewsPage='},
+            ${currentPageNumber},
+            ${isLastReviewPage},
+            'Prev reviews',
+            'Next reviews',
+            null
+       )}"/>
+
+    <div class="reviews-list">
+        <th:block th:each="review, loopState: ${reviews}">
+            <th:block th:replace="~{components/review-card::review-card-component(${review}, 'review_' + ${loopState.index})}"/>
+        </th:block>
+    </div>
+
+    <th:block th:replace="~{components/pages-navigator::pages-navigator-component(
+            ${'/web-resources/' + webResource.id + '?reviewsPage='},
+            ${currentPageNumber},
+            ${isLastReviewPage},
+            'Prev reviews',
+            'Next reviews',
+            null
+       )}"/>
+</th:block>
+
+</body>
+</html>

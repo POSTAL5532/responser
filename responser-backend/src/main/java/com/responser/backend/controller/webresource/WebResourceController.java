@@ -4,9 +4,13 @@ import com.responser.backend.controller.webresource.payload.WebResourceDTO;
 import com.responser.backend.converter.WebResourceConverter;
 import com.responser.backend.model.AbstractEntity;
 import com.responser.backend.model.ResourceRating;
+import com.responser.backend.model.Review;
+import com.responser.backend.model.ReviewsCriteria;
 import com.responser.backend.model.WebResource;
 import com.responser.backend.service.RatingService;
 import com.responser.backend.service.WebResourceService;
+import com.responser.backend.service.review.ReviewService;
+import com.responser.backend.utils.UrlUtils;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
@@ -17,6 +21,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -28,9 +33,10 @@ public class WebResourceController {
     private final WebResourceConverter webResourceConverter;
     private final WebResourceService webResourceService;
     private final RatingService ratingService;
+    private final ReviewService reviewService;
 
     @GetMapping("/sites-rating")
-    public String getSitesRating(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+    public String getSitesRatingPage(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         Page<WebResource> webResourcesPage = webResourceService.getSitesWithReviews(PageRequest.of(page, 10));
         List<String> ids = webResourcesPage.getContent().stream().map(AbstractEntity::getId).toList();
 
@@ -49,10 +55,31 @@ public class WebResourceController {
 
         model.addAttribute("sites", webResourceDTOS);
         model.addAttribute("isLast", webResourcesPage.isLast());
-        model.addAttribute("totalPages", webResourcesPage.getTotalPages());
         model.addAttribute("currentPageNumber", webResourcesPage.getNumber());
-        model.addAttribute("currentPageNumberOfElements", webResourcesPage.getNumberOfElements());
 
         return "sitesRating";
+    }
+
+    @GetMapping("/{resourceId}")
+    public String getWebResourceDetailsPage(Model model, @PathVariable String resourceId, @RequestParam(required = false, defaultValue = "0") Integer reviewsPage) {
+        WebResource webResource = webResourceService.getById(resourceId);
+        ResourceRating resourceRating = ratingService.getResourceFullRatingById(webResource.getId());
+
+        Page<Review> reviews = reviewService.getReviews(
+            ReviewsCriteria.builder().resourceId(resourceId).build(),
+            PageRequest.of(reviewsPage, 10)
+        );
+
+        WebResourceDTO webResourceDTO = webResourceConverter.toDTO(webResource);
+        webResourceDTO.setRating(resourceRating.getRating());
+        webResourceDTO.setReviewsCount(resourceRating.getReviewsCount());
+
+        model.addAttribute("webResource", webResourceDTO);
+        model.addAttribute("webResourceHost", UrlUtils.getHost(webResourceDTO.getUrl()));
+        model.addAttribute("reviews", reviews.getContent());
+        model.addAttribute("isLastReviewPage", reviews.isLast());
+        model.addAttribute("currentPageNumber", reviews.getNumber());
+
+        return "webResourceDetails";
     }
 }
