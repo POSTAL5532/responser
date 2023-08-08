@@ -4,6 +4,8 @@ import com.responser.backend.config.ApplicationProperties;
 import com.responser.backend.model.Review;
 import com.responser.backend.model.ReviewLike;
 import com.responser.backend.model.ReviewMetaImage;
+import com.responser.backend.model.Review_;
+import com.responser.backend.model.ReviewsCriteria;
 import com.responser.backend.model.metatags.FacebookMetaTags;
 import com.responser.backend.model.metatags.SocialMetaTags;
 import com.responser.backend.model.metatags.TwitterMetaTags;
@@ -13,13 +15,17 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -38,16 +44,17 @@ public class ReviewsController {
 
     private final ApplicationProperties applicationProperties;
 
-    /*@GetMapping
-    public ModelAndView getReviewsList(ModelAndView modelAndView, @Valid @NotNull @RequestParam Integer page) {
+    @GetMapping("/see-reviews")
+    public String getReviewsList(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
         ReviewsCriteria criteria = ReviewsCriteria.builder().sortingField(Review_.CREATION_DATE).build();
         Page<Review> reviews = reviewService.getReviews(criteria, PageRequest.of(page, 10));
 
-        modelAndView.addObject("reviewsPageable", reviews);
-        modelAndView.setViewName("reviewsListPage");
+        model.addAttribute("reviews", reviews.getContent());
+        model.addAttribute("isLastPage", reviews.isLast());
+        model.addAttribute("currentPageNumber", reviews.getNumber());
 
-        return modelAndView;
-    }*/
+        return "seeReviewsPage";
+    }
 
     @GetMapping("/{reviewId}")
     public ModelAndView getReview(ModelAndView modelAndView, @Valid @NotNull @PathVariable String reviewId) {

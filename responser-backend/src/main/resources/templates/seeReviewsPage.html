@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en"
+      th:replace="~{layouts/pageMainLayout :: main-fragment(
+          'Reviews',
+          ~{:: #headContent},
+          ~{:: #mainContent},
+          'Reviews',
+          'reviews-page',
+           null
+      )}">
+<head>
+  <title></title>
+  <th:block id="headContent">
+    <link th:href="@{/css/lastReviewsPage.css}" rel="stylesheet"/>
+  </th:block>
+</head>
+
+<body>
+<th:block id="mainContent">
+  <th:block th:replace="~{components/pages-navigator::pages-navigator-component(
+            ${'/reviews/see-reviews?page='},
+            ${currentPageNumber},
+            ${isLastPage},
+            'Prev reviews',
+            'Next reviews',
+            null
+       )}"/>
+
+  <div class="reviews-list">
+    <th:block th:each="review, loopState: ${reviews}">
+      <th:block th:replace="~{components/review-card::review-card-component(${review}, 'review_' + ${loopState.index})}"/>
+    </th:block>
+  </div>
+
+  <th:block th:replace="~{components/pages-navigator::pages-navigator-component(
+            ${'/reviews/see-reviews?reviewsPage='},
+            ${currentPageNumber},
+            ${isLastPage},
+            'Prev reviews',
+            'Next reviews',
+            null
+       )}"/>
+</th:block>
+</body>
+</html>

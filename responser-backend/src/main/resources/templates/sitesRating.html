@@ -36,18 +36,17 @@
     <div class="sites-list">
         <div th:each="site: ${sites}" class="site-container">
             <div class="first-row">
-                <a th:href="${'/web-resources/' + site.getId()}" th:text="${T(com.responser.backend.utils.UrlUtils).getHost(site.getUrl())}" class="link site-link">!ERROR!</a>
-                <div th:text="${site.getRating() + ' / 5'}" class="rating"
-                     th:classappend="${(site.getRating() >= 4 ? 'good-rating' : (site.getRating() >= 2 ? 'medium-rating' : 'bad-rating'))}">!ERROR!
+                <a th:href="${'/web-resources/' + site.id}" th:text="${T(com.responser.backend.utils.UrlUtils).getHost(site.url)}" class="link site-link">!ERROR!</a>
+                <div th:text="${#numbers.formatDecimal(site.rating, 1, 1, 'POINT') + ' / 5'}" class="rating"
+                     th:classappend="${(site.rating >= 4 ? 'good-rating' : (site.rating >= 2 ? 'medium-rating' : 'bad-rating'))}">!ERROR!
                 </div>
             </div>
 
             <div class="second-row">
                 <div class="reviews-count">
                     <span class="text">Reviews: </span>
-                    <span th:text="${site.getReviewsCount()}" class="value">!ERROR!</span>
+                    <span th:text="${site.reviewsCount}" class="value">!ERROR!</span>
                 </div>
-                <a th:href="${site.getUrl()}" th:text="${'Details'}" target="_blank" class="link details-link">!ERROR!</a>
             </div>
         </div>
     </div>

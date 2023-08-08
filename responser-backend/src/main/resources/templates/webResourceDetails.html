@@ -19,7 +19,7 @@
 
 <th:block id="mainContent">
 
-    <h2 th:text="${'Rating: ' + webResource.rating}">! ERROR !</h2>
+    <h2 th:text="${'Rating: ' + #numbers.formatDecimal(webResource.rating, 1, 1, 'POINT')}">! ERROR !</h2>
     <h2 th:text="${'Reviews count: ' + webResource.reviewsCount}">! ERROR !</h2>
 
     <th:block th:replace="~{components/pages-navigator::pages-navigator-component(
