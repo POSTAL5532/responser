@@ -1,0 +1,54 @@
+@import "globalsLess";
+
+.radio-button {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+
+  .border {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    background-color: @system-color-light-100;
+    border: solid 1px @gray;
+    border-radius: 50%;
+    transition: border-width 0.1s ease-out, border-color 0.15s;
+  }
+
+  .label {
+    .fontInterMedium();
+    font-size: 14px;
+    color: @dark;
+    margin-left: 6px;
+  }
+
+  &:hover {
+    .border {
+      border: solid 1px @primary;
+    }
+  }
+
+  &.checked {
+    .border {
+      border-width: 6px;
+      border-color: @primary;
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+
+    .border {
+      border: solid 1px @system-color-dark-100;
+
+      .circle {
+        background-color: @system-color-dark-100;
+      }
+    }
+
+    .label {
+      color: @system-color-dark-100;
+    }
+  }
+}

@@ -1,50 +1,117 @@
 @import "globalsLess";
 
-.field {
-  height: 40px;
+.field-container {
   width: 100%;
-  border-radius: 8px;
-  padding: 10px;
-  .fontInterRegular();
-  font-size: 16px;
-  color: @system-color-dark-400;
-  border: 1px solid @system-color-dark-100;
-  background-color: @system-color-light-100;
 
-  .placeholderColor(@system-color-dark-200);
+  .field {
+    position: relative;
+    height: 56px;
+    width: 100%;
+    border-radius: 8px;
+    border: 1px solid @border;
+    background-color: @system-color-light-100;
+    .fieldOutlineShadow(@primary, 0%);
+    transition: box-shadow 0.15s, border-color 0.15s;
 
-  &, &:focus, &:active {
-    outline: none;
-  }
+    input {
+      width: 100%;
+      height: 100%;
+      border: solid 1px;
+      border-radius: 8px;
+      .fontInterMedium();
+      font-size: 16px;
+      color: @dark;
+      padding: 10px 22px 10px 22px;
 
-  &:not(.disabled) {
+      &, &:focus, &:active {
+        border-color: transparent;
+        outline: none;
+      }
+
+      &:focus, &:active, &:not(:placeholder-shown), &:-webkit-autofill {
+        & + .label {
+          top: 14px;
+          font-size: 12px;
+          .fontInterRegular();
+        }
+      }
+    }
+
+    &.with-label {
+      input {
+        padding: 22px 22px 8px 22px;
+      }
+    }
+
+    &.with-message {
+      margin-bottom: 4px;
+    }
+
+    .label {
+      pointer-events: none;
+      font-size: 16px;
+      transform: translateY(-50%);
+      position: absolute;
+      top: 50%;
+      left: 22px;
+      transition: top 0.15s, font-size 0.15s, color 0.15s;
+      color: fade(@dark, 50%);
+      .fontInterMedium();
+    }
+
     &:hover {
-      border-color: @primary-color-lighter;
+      border-color: fade(@primary, 50%);
+
+      .label {
+        color: @dark;
+      }
     }
 
-    &:focus {
-      border-color: @primary-color-main;
+    &.focused {
+      border-color: @primary;
+      .fieldOutlineShadow(@primary, 25%);
+
+      .label {
+        .fontInterRegular();
+        color: @dark;
+      }
+    }
+
+    &.disabled {
+      pointer-events: none;
+      background-color: fade(@gray, 15%);
     }
   }
 
-  &.disabled {
-    pointer-events: none;
-    background-color: @system-color-light-200;
-    .placeholderColor(@system-color-light-500);
+  .message {
+    .fontInterRegular();
+    font-size: 14px;
+    color: @dark;
   }
 
   &.invalid {
-    border-color: @system-color-danger-300;
-    color: @system-color-danger-600;
+    .field {
+      border-color: fade(@red, 60%);
 
-    .placeholderColor(@system-color-danger-300);
+      .label {
+        color: fade(@red, 80%);
+      }
 
-    &:hover {
-      border-color: @system-color-danger-500;
+      &:hover, &.focused {
+        border-color: @red;
+
+        .label {
+          color: @red;
+        }
+      }
+
+      &.focused {
+        .fieldOutlineShadow(@red, 25%);
+      }
     }
 
-    &:focus {
-      border-color: @system-color-danger-600;
+    .message {
+      color: @red;
     }
   }
 }

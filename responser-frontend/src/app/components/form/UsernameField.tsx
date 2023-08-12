@@ -1,7 +1,6 @@
 import React, {ChangeEvent} from "react";
 import {Field, FieldProps} from "formik";
 import {InputField} from "app/components/form/input-field/InputField";
-import {FieldMessage} from "app/components/form/field-message/FieldMessage";
 
 type UsernameFieldFieldProps = {
     onChange: (value: string) => void;
@@ -19,15 +18,13 @@ export const UsernameField: React.FC<UsernameFieldFieldProps> = (props: Username
                 }
 
                 return (
-                    <>
-                        <InputField
-                            {...other}
-                            invalid={touched && !!error}
-                            placeholder="Enter username"
-                            onChange={onUsernameFieldChange}
-                            disabled={props.disabled}/>
-                        <FieldMessage isError={true} visible={touched && !!error}>{error}</FieldMessage>
-                    </>
+                    <InputField
+                        {...other}
+                        label="Username"
+                        invalid={touched && !!error}
+                        onChange={onUsernameFieldChange}
+                        disabled={props.disabled}
+                        message={(touched && !!error) && error}/>
                 );
             }}
         </Field>

@@ -2,23 +2,22 @@ import React, {ChangeEvent} from "react";
 import {Field, FieldProps, FieldValidator} from "formik";
 import * as Yup from 'yup';
 import {InputField} from "app/components/form/input-field/InputField";
-import {FieldMessage} from "app/components/form/field-message/FieldMessage";
 
 type PasswordFieldProps = {
     onChange: (value: string) => void;
     name: string;
-    placeholder: string;
+    label: string;
     validator?: FieldValidator;
     disabled?: boolean;
 };
 
 export const PASSWORD_VALIDATION_SCHEMA = {
     password: Yup.string()
-        .required("Password is required")
-        .matches(
-            /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
-            "Password must contains minimum eight characters, at least one letter and one number"
-        )
+    .required("Password is required")
+    .matches(
+        /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{8,}$/,
+        "Password must contains minimum eight characters, at least one letter and one number"
+    )
 }
 
 export const PasswordField: React.FC<PasswordFieldProps> = (props: PasswordFieldProps) => {
@@ -32,16 +31,14 @@ export const PasswordField: React.FC<PasswordFieldProps> = (props: PasswordField
                 }
 
                 return (
-                    <>
-                        <InputField
-                            {...other}
-                            type="password"
-                            invalid={touched && !!error}
-                            placeholder={props.placeholder}
-                            onChange={onPasswordChange}
-                            disabled={props.disabled}/>
-                        <FieldMessage isError={true} visible={touched && !!error}>{error}</FieldMessage>
-                    </>
+                    <InputField
+                        {...other}
+                        type="password"
+                        invalid={touched && !!error}
+                        label={props.label}
+                        onChange={onPasswordChange}
+                        disabled={props.disabled}
+                        message={(touched && !!error) && error}/>
                 );
             }}
         </Field>

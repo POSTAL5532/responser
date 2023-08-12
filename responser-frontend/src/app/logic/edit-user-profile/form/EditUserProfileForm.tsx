@@ -5,7 +5,6 @@ import * as Yup from "yup";
 import {observer} from "mobx-react";
 import {UpdateUserPayload} from "../../../model/UpdateUserPayload";
 import {EMAIL_VALIDATION_SCHEMA, FULL_NAME_VALIDATION_SCHEMA, USERNAME_VALIDATION_SCHEMA} from "../../../utils/ValidationUtils";
-import {FieldLayout} from "../../../components/form/field-layout/FieldLayout";
 import {EmailField} from "../../../components/form/EmailField";
 import {UsernameField} from "../../../components/form/UsernameField";
 import {FullNameField} from "../../../components/form/FullNameField";
@@ -39,17 +38,11 @@ const EditUserProfileForm: React.FC<EditUserProfileFormProps> = (props: EditUser
                     onSubmit={onSubmit}
                     validationSchema={EDIT_USER_FORM_VALIDATION_SCHEMA}>
                 <Form>
-                    <FieldLayout label="Email" className="email-field">
-                        <EmailField onChange={value => updateUserPayload.email = value} disabled={disabled}/>
-                    </FieldLayout>
+                    <EmailField onChange={value => updateUserPayload.email = value} disabled={disabled}/>
 
-                    <FieldLayout label="Username">
-                        <UsernameField onChange={value => updateUserPayload.userName = value} disabled={disabled}/>
-                    </FieldLayout>
+                    <UsernameField onChange={value => updateUserPayload.userName = value} disabled={disabled}/>
 
-                    <FieldLayout label="Full name">
-                        <FullNameField onChange={value => updateUserPayload.fullName = value} disabled={disabled}/>
-                    </FieldLayout>
+                    <FullNameField onChange={value => updateUserPayload.fullName = value} disabled={disabled}/>
 
                     <div className="form-controls">
                         <Button type="submit" loading={disabled} disabled={disabled || !userWasChanged}>{!disabled ? "Save" : "Wait"}</Button>

@@ -1,37 +1,39 @@
 @import "globalsLess";
 
 .sign-up-form {
-  .field-layout {
-    margin-bottom: 20px;
-  }
-
-  .passwords {
+  form {
     display: flex;
-    gap: 20px;
+    flex-direction: column;
+    gap: 18px;
 
-    .field-layout {
+    .passwords {
+      display: flex;
+      gap: 20px;
+
+      .field-layout {
+        width: 100%;
+      }
+    }
+
+    .button {
       width: 100%;
+
+      &:not(:last-child) {
+        margin-bottom: 18px;
+      }
     }
-  }
 
-  .button {
-    width: 100%;
+    .login-link {
+      .fontInterMedium();
+      font-size: 16px;
+      color: @primary-color-lighter;
+      cursor: pointer;
+      display: flex;
+      justify-content: center;
 
-    &:not(:last-child) {
-      margin-bottom: 18px;
-    }
-  }
-
-  .login-link {
-    .fontInterMedium();
-    font-size: 16px;
-    color: @primary-color-lighter;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-
-    &:hover {
-      color: @primary-color-main;
+      &:hover {
+        color: @primary-color-main;
+      }
     }
   }
 }

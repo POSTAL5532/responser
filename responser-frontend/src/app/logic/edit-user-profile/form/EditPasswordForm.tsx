@@ -3,8 +3,6 @@ import {FieldValidator, Form, Formik} from "formik";
 import {FormikHelpers} from "formik/dist/types";
 import * as Yup from "yup";
 import {observer} from "mobx-react";
-import {EMAIL_VALIDATION_SCHEMA, FULL_NAME_VALIDATION_SCHEMA, USERNAME_VALIDATION_SCHEMA} from "../../../utils/ValidationUtils";
-import {FieldLayout} from "../../../components/form/field-layout/FieldLayout";
 import {Button} from "../../../components/button/Button";
 import {PASSWORD_VALIDATION_SCHEMA, PasswordField} from "../../../components/form/PasswordField";
 import {UpdateUserPasswordPayload} from "../../../model/UpdateUserPasswordPayload";
@@ -18,6 +16,7 @@ type EditPasswordFormProps = {
 }
 
 const EDIT_USER_FORM_VALIDATION_SCHEMA = Yup.object().shape({
+    oldPassword: Yup.string().required("Old is required"),
     newPassword: PASSWORD_VALIDATION_SCHEMA.password,
     confirmNewPassword: PASSWORD_VALIDATION_SCHEMA.password
 });
@@ -39,27 +38,21 @@ const EditPasswordForm: React.FC<EditPasswordFormProps> = (props: EditPasswordFo
                     onSubmit={onSubmit}
                     validationSchema={EDIT_USER_FORM_VALIDATION_SCHEMA}>
                 <Form>
-                    <FieldLayout label="Old password">
-                        <PasswordField name="oldPassword"
-                                       placeholder="Enter old password password"
-                                       onChange={value => updateUserPasswordPayload.oldPassword = value}
-                                       disabled={disabled}/>
-                    </FieldLayout>
+                    <PasswordField name="oldPassword"
+                                   label="Old password"
+                                   onChange={value => updateUserPasswordPayload.oldPassword = value}
+                                   disabled={disabled}/>
 
-                    <FieldLayout label="New password">
-                        <PasswordField name="newPassword"
-                                       placeholder="Enter new password"
-                                       onChange={value => updateUserPasswordPayload.newPassword = value}
-                                       disabled={disabled}/>
-                    </FieldLayout>
+                    <PasswordField name="newPassword"
+                                   label="New password"
+                                   onChange={value => updateUserPasswordPayload.newPassword = value}
+                                   disabled={disabled}/>
 
-                    <FieldLayout label="Confirm password">
-                        <PasswordField name="confirmNewPassword"
-                                       placeholder="Confirm new password"
-                                       onChange={value => updateUserPasswordPayload.confirmNewPassword = value}
-                                       validator={passwordEqualsValidator}
-                                       disabled={disabled}/>
-                    </FieldLayout>
+                    <PasswordField name="confirmNewPassword"
+                                   label="Confirm new password"
+                                   onChange={value => updateUserPasswordPayload.confirmNewPassword = value}
+                                   validator={passwordEqualsValidator}
+                                   disabled={disabled}/>
 
                     <div className="form-controls">
                         <Button type="submit" loading={disabled} disabled={disabled || !passwordsFilled}>Update password</Button>

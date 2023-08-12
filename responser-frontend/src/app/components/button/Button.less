@@ -1,87 +1,52 @@
 @import "globalsLess";
 
 .button {
-  display: inline-flex;
-  gap: 6px;
+  display: flex;
+  gap: 10px;
   align-items: center;
   justify-content: center;
-  padding-left: 12px;
-  padding-right: 12px;
-  height: 40px;
+  padding-left: 26px;
+  padding-right: 26px;
+  height: 50px;
   .fontInterMedium();
   font-size: 16px;
   border-radius: 8px;
   border: none;
   cursor: pointer;
+  transition: color 0.15s, background-color 0.15s;
 
-  &.small {
-    height: 28px;
-    padding-left: 8px;
-    padding-right: 8px;
-    font-size: 14px;
-
-    .spinner {
-      width: 20px !important;
-    }
+  .spinner {
+    width: 20px !important;
   }
 
   .icon {
-    height: 14px;
-    width: 14px;
+    height: 16px;
+    width: 16px;
   }
 
-  .spinner {
-    width: 26px !important;
-  }
-
-  &.primary {
-    color: @system-color-light-100;
-    background-color: @primary-color-lighter;
+  &.small {
+    height: 38px;
+    padding-left: 14px;
+    padding-right: 14px;
+    font-size: 14px;
 
     .spinner {
-      color: @system-color-light-100 !important;
+      width: 14px !important;
     }
 
-    svg path {
-      stroke: @system-color-light-100;
-    }
-
-    &:hover {
-      background-color: darken(@primary-color-lighter, 4%);
-    }
-
-    &:active {
-      background-color: darken(@primary-color-lighter, 6%);
-    }
-  }
-
-  &.secondary {
-    color: @system-color-dark-300;
-    background-color: @system-color-light-100;
-    border: solid 1px @system-color-dark-100;
-
-    .spinner {
-      color: @system-color-dark-300 !important;
-    }
-
-    svg path {
-      stroke: @system-color-dark-300;
-    }
-
-    &:hover {
-      background-color: @system-color-light-200;
-    }
-
-    &:active {
-      background-color: darken(@system-color-light-200, 4%);
+    .icon {
+      height: 14px;
+      width: 14px;
     }
   }
 
   &.disabled {
-    color: @system-color-light-100;
-    background-color: @system-color-light-500;
     pointer-events: none;
-    border: none;
+  }
+
+  &.primary {
+    color: @system-color-light-100;
+    background-color: @primary;
 
     .spinner {
       color: @system-color-light-100 !important;
@@ -89,6 +54,51 @@
 
     svg path {
       stroke: @system-color-light-100;
+    }
+
+    &:hover {
+      background-color: darken(@primary, 4%);
+    }
+
+    &:active {
+      background-color: darken(@primary, 6%);
+    }
+
+    &.disabled {
+      background-color: @primary-light-1;
+    }
+  }
+
+  &.secondary {
+    color: @primary;
+    background-color: @primary-light-2;
+
+    .spinner {
+      color: @primary !important;
+    }
+
+    svg path {
+      stroke: @primary;
+    }
+
+    &:hover {
+      background-color: darken(@primary-light-2, 4%);
+    }
+
+    &:active {
+      background-color: darken(@primary-light-2, 6%);
+    }
+
+    &.disabled {
+      color: @primary-light-1;
+
+      .spinner {
+        color: @primary-light-1 !important;
+      }
+
+      svg path {
+        stroke: @primary-light-1;
+      }
     }
   }
 }

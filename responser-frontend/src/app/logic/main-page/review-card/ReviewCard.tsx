@@ -11,7 +11,7 @@ import {ConditionShow} from "../../../components/ConditionShow";
 import {useIsOverflow} from "../../../utils/LayoutUtils";
 import {Spinner} from "../../../components/spinner/Spinner";
 import {ResourceType} from "../../../model/ResourceType";
-import {Link} from "../../../components/Link/Link";
+import {Link} from "../../../components/link/Link";
 import "./ReviewCard.less";
 
 type ReviewCardProps = {

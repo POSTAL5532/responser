@@ -6,7 +6,6 @@ import {UserAccountDataPayload} from "app/model/UserAccountDataPayload";
 import {Button} from "app/components/button/Button";
 import {PASSWORD_VALIDATION_SCHEMA, PasswordField} from "app/components/form/PasswordField";
 import AuthorizationService from "../../../service/authorization/AuthorizationService";
-import {FieldLayout} from "../../../components/form/field-layout/FieldLayout";
 import {FormikHelpers} from "formik/dist/types";
 import {EMAIL_VALIDATION_SCHEMA, FULL_NAME_VALIDATION_SCHEMA, USERNAME_VALIDATION_SCHEMA} from "../../../utils/ValidationUtils";
 import {EmailField} from "../../../components/form/EmailField";
@@ -49,33 +48,23 @@ const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) => {
                     validationSchema={SIGNUP_FORM_VALIDATION_SCHEMA}>
 
                 <Form>
-                    <FieldLayout label="Email">
-                        <EmailField onChange={value => signUpPayload.email = value} disabled={disabled}/>
-                    </FieldLayout>
+                    <EmailField onChange={value => signUpPayload.email = value} disabled={disabled}/>
 
-                    <FieldLayout label="Username">
-                        <UsernameField onChange={value => signUpPayload.userName = value} disabled={disabled}/>
-                    </FieldLayout>
+                    <UsernameField onChange={value => signUpPayload.userName = value} disabled={disabled}/>
 
-                    <FieldLayout label="Full name">
-                        <FullNameField onChange={value => signUpPayload.fullName = value} disabled={disabled}/>
-                    </FieldLayout>
+                    <FullNameField onChange={value => signUpPayload.fullName = value} disabled={disabled}/>
 
                     <div className="passwords">
-                        <FieldLayout label="Password">
-                            <PasswordField name="password"
-                                           placeholder="Enter password"
-                                           onChange={value => signUpPayload.password = value}
-                                           disabled={disabled}/>
-                        </FieldLayout>
+                        <PasswordField name="password"
+                                       label="Password"
+                                       onChange={value => signUpPayload.password = value}
+                                       disabled={disabled}/>
 
-                        <FieldLayout label="Confirm password">
-                            <PasswordField name="confirmPassword"
-                                           placeholder="Confirm password"
-                                           onChange={value => signUpPayload.confirmPassword = value}
-                                           validator={passwordEqualsValidator}
-                                           disabled={disabled}/>
-                        </FieldLayout>
+                        <PasswordField name="confirmPassword"
+                                       label="Confirm password"
+                                       onChange={value => signUpPayload.confirmPassword = value}
+                                       validator={passwordEqualsValidator}
+                                       disabled={disabled}/>
                     </div>
 
                     <Button type="submit" disabled={disabled} loading={disabled}>Sign Up</Button>
