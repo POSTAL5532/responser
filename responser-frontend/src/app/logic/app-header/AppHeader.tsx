@@ -12,6 +12,7 @@ import {useLogger} from "../../utils/Logger";
 import {navigateToUserProfilePage} from "../user-profile/UserProfilePage";
 import {DropDownMenuButton} from "../../components/dropdown-menu-button/DropDownMenuButton";
 import {navigateToMainPage} from "../main-page/MainPage";
+import classNames from "classnames";
 import "./AppHeader.less";
 
 type PageHeaderProps = {
@@ -19,9 +20,10 @@ type PageHeaderProps = {
 }
 
 const AppHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {
-    const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
+    const {currentUser, hideHeader} = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const extensionService = useExtensionService();
     const logger = useLogger("AppHeader");
+    const resultClassName = classNames("app-header", {"hidden": hideHeader});
 
     const onLogOut = () => {
         logger.debug("Logout click")
@@ -33,7 +35,7 @@ const AppHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {
     }
 
     return (
-        <div className="app-header">
+        <div className={resultClassName}>
             <div className="header-title" onClick={() => navigateToMainPage(false)}>
                 <Icon type={IconType.REVIEWLY_LOGO}/> {props.title}
             </div>

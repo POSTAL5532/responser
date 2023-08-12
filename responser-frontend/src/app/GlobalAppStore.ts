@@ -16,6 +16,8 @@ export class GlobalAppStore {
 
     isLoading: boolean = false;
 
+    hideHeader: boolean = false;
+
     constructor() {
         this.logger.debug("Init store");
 

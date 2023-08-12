@@ -2,21 +2,97 @@
 
 .sign-up-page {
   display: flex;
-  justify-content: center;
+
+  &, &.hidden-header {
+    padding: 0;
+  }
+
+  .description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 45%;
+    height: 100%;
+    padding-left: 60px;
+    padding-right: 110px;
+    color: @system-color-light-100;
+
+    &:after {
+      left: -90px;
+      background: #0C8CE9;
+      bottom: 0;
+      content: '';
+      display: block;
+      height: 100%;
+      position: absolute;
+      right: 0;
+      transform: skewX(-4.5deg);
+      transform-origin: 100%;
+      z-index: -1;
+      width: 50%;
+    }
+
+    .reviewly-logo {
+      position: absolute;
+      left: 60px;
+      top: 40px;
+
+      .icon {
+        width: 40px;
+        height: 40px;
+
+        path {
+          stroke: @system-color-light-100;
+          fill: @system-color-light-100;
+        }
+      }
+
+      .title-label {
+        font-size: 46px;
+        color: @system-color-light-100;
+      }
+    }
+
+    .description-header {
+      margin: 0 0 20px;
+      font-size: 60px;
+    }
+
+    .description-content {
+      line-height: 26px;
+      font-size: 20px;
+    }
+  }
 
   .sign-up-form-panel {
-    max-width: 740px;
-    min-width: 540px;
-    width: 100%;
-    padding: 28px 48px;
+    width: 55%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 30px;
 
     .sign-up-header {
       .fontInterRegular();
-      font-size: 28px;
-      color: @system-color-dark-300;
-      text-align: center;
+      font-size: 44px;
+      color: @dark;
       margin-top: 0;
-      margin-bottom: 20px;
+      margin-bottom: 64px;
+    }
+
+    .sign-up-form {
+      .adaptationDesktop({
+        width: 800px;
+      });
+      .adaptationSmallDesktop({
+        width: 700px;
+      });
+      .adaptationTablet({
+        width: 500px;
+      });
+      .adaptationMobile({
+        width: 450px;
+      });
     }
   }
 }

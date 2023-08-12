@@ -1,9 +1,9 @@
 import React from "react";
 import {observer} from "mobx-react";
-import {Formik, Form, FieldValidator} from "formik";
+import {FieldValidator, Form, Formik} from "formik";
 import * as Yup from "yup";
 import {UserAccountDataPayload} from "app/model/UserAccountDataPayload";
-import {Button} from "app/components/button/Button";
+import {Button, ButtonType} from "app/components/button/Button";
 import {PASSWORD_VALIDATION_SCHEMA, PasswordField} from "app/components/form/PasswordField";
 import AuthorizationService from "../../../service/authorization/AuthorizationService";
 import {FormikHelpers} from "formik/dist/types";
@@ -12,6 +12,7 @@ import {EmailField} from "../../../components/form/EmailField";
 import {UsernameField} from "../../../components/form/UsernameField";
 import {FullNameField} from "../../../components/form/FullNameField";
 import "./SignUpForm.less";
+import {Link} from "../../../components/link/Link";
 
 type SignUpFormProps = {
     signUpPayload: UserAccountDataPayload,
@@ -68,8 +69,9 @@ const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) => {
                     </div>
 
                     <Button type="submit" disabled={disabled} loading={disabled}>Sign Up</Button>
-
-                    <span className="login-link" onClick={AuthorizationService.requestLoginPage}>Login</span>
+                    <div className="login-offer">
+                        Already have an acoount? <Link type="button" href={AuthorizationService.getLoginPagePreparedUrl()}>Login</Link>
+                    </div>
                 </Form>
             </Formik>
         </div>

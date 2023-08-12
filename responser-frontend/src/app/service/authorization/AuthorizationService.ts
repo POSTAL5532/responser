@@ -49,11 +49,15 @@ class AuthorizationService {
 
     requestLoginPage = (): void => {
         this.logger.debug("Request login page");
+        nativeNavigateTo(this.getLoginPagePreparedUrl());
+    }
+
+    getLoginPagePreparedUrl = (): string => {
         const url = new URL(ApplicationProperties.authLoginPageUrl);
         url.searchParams.set("response_type", "code");
         url.searchParams.set("client_id", ApplicationProperties.clientId);
         url.searchParams.set("redirect_uri", ApplicationProperties.authRedirectUri);
-        nativeNavigateTo(url.toString());
+        return url.toString();
     }
 
     private exchangeAuthCodeRequest = async (code: string): Promise<TokenInfo> => {

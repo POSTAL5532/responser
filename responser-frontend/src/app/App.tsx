@@ -12,7 +12,6 @@ import EditUserPage, {EDIT_USER_PAGE_URL} from "./logic/edit-user-profile/EditUs
 import AuthorizationService from "./service/authorization/AuthorizationService";
 import UserProfilePage, {USER_PROFILE_PAGE_URL} from "./logic/user-profile/UserProfilePage";
 import {COMPONENTS_PAGE_URL, ComponentsPage} from "./logic/components-page/ComponentsPage";
-import "app/App.less";
 
 export class App extends Component {
 
