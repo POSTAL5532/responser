@@ -101,6 +101,7 @@
 }
 .email-confirmation-page .page-content .email-confirmation-header {
   font-family: "Inter-Regular";
+  font-size: 16px;
   font-size: 28px;
   color: #555770;
   margin: 0;
@@ -109,6 +110,7 @@
 }
 .email-confirmation-page .page-content .email-confirmation-annotation {
   font-family: "Inter-Regular";
+  font-size: 16px;
   color: #555770;
   font-size: 14px;
   margin: 0;
@@ -116,6 +118,7 @@
 }
 .email-confirmation-page .page-content .email-confirmation-redirect-link {
   font-family: "Inter-Regular";
+  font-size: 16px;
   color: #6690FF;
   font-size: 14px;
   margin: 0;

@@ -1,20 +1,29 @@
 <div class="pages-navigator" th:classappend="${class != null ? class : ''}" th:fragment="pages-navigator-component(
     urlPrefix,
     currentPageNumber,
-    isLast,
-    prevButtonText,
-    nextButtonText,
+    pagesCount,
     class
   )">
     <div class="previous-page-nav-container">
-        <a th:if="${currentPageNumber > 0}" th:href="${urlPrefix + (currentPageNumber - 1)}" class="link">
+        <a th:href="${urlPrefix + (currentPageNumber - 1)}" th:classappend="${currentPageNumber > 0 ? '' : 'disabled'}" class="link">
             <div class="icon arrow-icon"></div>
-            <th:block th:text="${prevButtonText != null ? prevButtonText : 'Prev page'}">! ERROR !</th:block>
+            Prev
         </a>
     </div>
+
+    <div class="pages">
+        <a class="button secondary small"
+           th:each="i: ${#numbers.sequence(0, pagesCount - 1)}"
+           th:text="${i + 1}"
+           th:classappend="${currentPageNumber == i ? 'active' : ''}"
+           th:href="${urlPrefix + i}">
+            !ERROR!
+        </a>
+    </div>
+
     <div class="next-page-nav-container">
-        <a th:if="${!isLast}" th:href="${urlPrefix + (currentPageNumber + 1)}" class="link">
-            <th:block th:text="${nextButtonText != null ? nextButtonText : 'Next page'}">! ERROR !</th:block>
+        <a th:href="${urlPrefix + (currentPageNumber + 1)}" th:classappend="${pagesCount != (currentPageNumber + 1) ? '' : 'disabled'}" class="link">
+            Next
             <div class="icon arrow-icon"></div>
         </a>
     </div>

@@ -103,8 +103,8 @@
 }
 .page .page-header {
   font-family: "Inter-Medium";
-  color: #28293D;
-  text-align: center;
+  font-size: 48px;
+  color: #23262A;
   margin-bottom: 54px;
   margin-top: 0;
 }

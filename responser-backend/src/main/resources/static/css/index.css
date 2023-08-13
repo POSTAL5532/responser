@@ -118,6 +118,7 @@
 .main-description .slogan-block .slogan {
   margin: 0;
   font-family: "Inter-Bold";
+  font-size: 16px;
   font-size: 58px;
   color: #3366FF;
 }
@@ -203,6 +204,7 @@
 }
 .how-it-works .card .card-header h2 {
   font-family: "Inter-Medium";
+  font-size: 16px;
   font-size: 48px;
   font-weight: normal;
   margin: 0;
@@ -249,6 +251,7 @@
 .how-it-works .card .card-body .instructions .instruction-item .instruction-description {
   margin: 0;
   font-family: "Inter-Medium";
+  font-size: 16px;
   font-weight: normal;
   color: #28293D;
 }
@@ -307,6 +310,7 @@
 .feedbacks .feedbacks-header {
   color: #3366FF;
   font-family: "Inter-Medium";
+  font-size: 16px;
   font-size: 48px;
   font-weight: normal;
   margin: 0;
@@ -328,6 +332,7 @@
 }
 .feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .feedback-flex .feedback .feedback-text {
   font-family: "Inter-Medium";
+  font-size: 16px;
   font-size: 22px;
   margin: 0 0 14px;
 }
@@ -347,9 +352,11 @@
 }
 .feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .feedback-flex .feedback .user-info .user-info-text span.name {
   font-family: "Inter-Medium";
+  font-size: 16px;
 }
 .feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .feedback-flex .feedback .user-info .user-info-text span.position {
   font-family: "Inter-Light";
+  font-size: 16px;
 }
 .feedbacks .feedbacks-gallery-container .feedbacks-gallery-controls {
   display: flex;
@@ -467,6 +474,7 @@
 .faq .faq-header-container .faq-header .header-text,
 .faq .faq-header-container .faq-header .header-description {
   font-family: "Inter-Medium";
+  font-size: 16px;
   color: #3366FF;
   font-weight: normal;
   margin: 0;
@@ -514,6 +522,7 @@
 }
 .faq .card .card-header h2 {
   font-family: "Inter-Medium";
+  font-size: 16px;
   font-size: 48px;
   font-weight: normal;
   margin: 0;
@@ -531,6 +540,7 @@
 .faq .card .card-body .question-item .question-answer {
   margin: 0;
   font-family: "Inter-Medium";
+  font-size: 16px;
   font-weight: normal;
   color: #FFFFFF;
 }
@@ -574,6 +584,7 @@
 .coming-soon .coming-soon-header {
   color: #3366FF;
   font-family: "Inter-Medium";
+  font-size: 16px;
   font-size: 48px;
   font-weight: normal;
   margin: 0;
@@ -653,10 +664,12 @@
 }
 .coming-soon .coming-soon-items .coming-soon-item .coming-soon-item-header {
   font-family: "Inter-Medium";
+  font-size: 16px;
   font-size: 22px;
 }
 .coming-soon .coming-soon-items .coming-soon-item .coming-soon-item-text {
   font-family: "Inter-Regular";
+  font-size: 16px;
   font-size: 18px;
 }
 .coming-soon .coming-soon-items .coming-soon-item .feature-img {
@@ -726,6 +739,7 @@
 }
 .footer .rights {
   font-family: "Inter-Medium";
+  font-size: 16px;
   font-size: 18px;
   color: #3366FF;
 }

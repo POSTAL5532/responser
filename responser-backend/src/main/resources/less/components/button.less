@@ -1,52 +1,105 @@
 @import "../global.less";
 
 .button {
-  .fontInterMedium();
-  display: inline-flex;
-  gap: 6px;
+  display: flex;
+  gap: 10px;
   align-items: center;
   justify-content: center;
-  padding-left: 12px;
-  padding-right: 12px;
-  height: 40px;
+  padding-left: 26px;
+  padding-right: 26px;
+  height: 50px;
+  .fontInterMedium();
   font-size: 16px;
   border-radius: 8px;
   border: none;
   cursor: pointer;
+  transition: color 0.15s, background-color 0.15s;
   text-decoration: none;
-  color: @system-color-light-100;
-  background-color: @primary-color-lighter;
+
+  .spinner {
+    width: 20px !important;
+  }
 
   .icon {
-    background-color: @system-color-light-100;
+    height: 16px;
+    width: 16px;
   }
 
-  &:hover {
-    background-color: @primary-color-main;
-  }
+  &.small {
+    height: 38px;
+    padding-left: 14px;
+    padding-right: 14px;
+    font-size: 14px;
 
-  &.outline {
-    color: @primary-color-lighter;
-    background: transparent;
-    border: solid 1px @primary-color-lighter;
-
-    .icon {
-      background-color: @primary-color-lighter;
+    .spinner {
+      width: 14px !important;
     }
 
-    &:hover {
-      color: @primary-color-main;
-      border-color: @primary-color-main;
-
-      .icon {
-        background-color: @primary-color-main;
-      }
+    .icon {
+      height: 14px;
+      width: 14px;
     }
   }
 
   &.disabled {
-    background-color: @system-color-light-500;
-    color: @system-color-dark-400;
     pointer-events: none;
+  }
+
+  &.primary {
+    color: @white;
+    background-color: @primary;
+
+    .spinner {
+      color: @white !important;
+    }
+
+    svg path {
+      stroke: @white;
+    }
+
+    &:hover {
+      background-color: darken(@primary, 4%);
+    }
+
+    &:active {
+      background-color: darken(@primary, 6%);
+    }
+
+    &.disabled {
+      background-color: @primary-light-1;
+    }
+  }
+
+  &.secondary {
+    color: @primary;
+    background-color: @primary-light-2;
+
+    .spinner {
+      color: @primary !important;
+    }
+
+    svg path {
+      stroke: @primary;
+    }
+
+    &:hover {
+      background-color: darken(@primary-light-2, 4%);
+    }
+
+    &:active {
+      background-color: darken(@primary-light-2, 6%);
+    }
+
+    &.disabled {
+      color: @primary-light-1;
+
+      .spinner {
+        color: @primary-light-1 !important;
+      }
+
+      svg path {
+        stroke: @primary-light-1;
+      }
+    }
   }
 }

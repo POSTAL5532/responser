@@ -1,0 +1,73 @@
+@import "../global.less";
+
+.site-card {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  padding: 0 18px 0 0;
+
+  .site-rating {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 120px;
+    height: 100%;
+    border-end-start-radius: 8px;
+    border-start-start-radius: 8px;
+
+    &.good-rating {
+      background-color: @green;
+    }
+
+    &.medium-rating {
+      background-color: @system-color-warning-500;
+    }
+
+    &.bad-rating {
+      background-color: @red;
+    }
+
+    .rating-label {
+      .fontInterRegular(20px);
+      color: @dark;
+    }
+
+    .rating-value {
+      .fontInterSemiBold(36px);
+      color: @dark;
+    }
+  }
+
+  .site-rating-info {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding-left: 20px;
+
+    .site-name {
+      .fontInterSemiBold(28px);
+      color: @dark;
+      margin: 0;
+      line-height: 20px;
+    }
+
+    .site-reviews {
+      padding: 6px 8px;
+      border-radius: 4px;
+      background-color: @gray-light-2;
+      color: @dark;
+      .fontInterRegular(12px);
+      width: fit-content;
+    }
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    margin-left: auto;
+  }
+}

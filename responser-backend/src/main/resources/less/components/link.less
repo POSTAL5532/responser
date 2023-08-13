@@ -2,31 +2,40 @@
 
 .link {
   .fontInterRegular();
-  font-size: 18px;
-  color: @primary-color-lighter;
+  color: @primary;
   text-decoration: none;
   display: inline-flex;
   gap: 8px;
   align-items: center;
   justify-content: center;
+  transition: color 0.15s;
 
   .icon {
-    background-color: @primary-color-lighter;
+    background-color: @primary;
   }
 
   &:hover {
-    color: @primary-color-main;
+    color: darken(@primary, 4%);
 
     .icon {
-      background-color: @primary-color-main;
+      background-color: darken(@primary, 4%);
     }
   }
 
   &:active {
-    color: darken(@primary-color-main, 6%);
+    color: darken(@primary, 6%);
 
     .icon {
-      background-color: darken(@primary-color-main, 6%);
+      background-color: darken(@primary, 6%);
+    }
+  }
+
+  &.disabled {
+    pointer-events: none;
+    color: @gray;
+
+    .icon {
+      background-color: @gray;
     }
   }
 }

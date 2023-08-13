@@ -82,47 +82,87 @@
   height: 20px;
 }
 .button {
-  font-family: "Inter-Medium";
-  display: inline-flex;
-  gap: 6px;
+  display: flex;
+  gap: 10px;
   align-items: center;
   justify-content: center;
-  padding-left: 12px;
-  padding-right: 12px;
-  height: 40px;
+  padding-left: 26px;
+  padding-right: 26px;
+  height: 50px;
+  font-family: "Inter-Medium";
   font-size: 16px;
   border-radius: 8px;
   border: none;
   cursor: pointer;
+  transition: color 0.15s, background-color 0.15s;
   text-decoration: none;
-  color: #FFFFFF;
-  background-color: #6690FF;
+}
+.button .spinner {
+  width: 20px !important;
 }
 .button .icon {
-  background-color: #FFFFFF;
+  height: 16px;
+  width: 16px;
 }
-.button:hover {
-  background-color: #3366FF;
+.button.small {
+  height: 38px;
+  padding-left: 14px;
+  padding-right: 14px;
+  font-size: 14px;
 }
-.button.outline {
-  color: #6690FF;
-  background: transparent;
-  border: solid 1px #6690FF;
+.button.small .spinner {
+  width: 14px !important;
 }
-.button.outline .icon {
-  background-color: #6690FF;
-}
-.button.outline:hover {
-  color: #3366FF;
-  border-color: #3366FF;
-}
-.button.outline:hover .icon {
-  background-color: #3366FF;
+.button.small .icon {
+  height: 14px;
+  width: 14px;
 }
 .button.disabled {
-  background-color: #E3E4EB;
-  color: #28293D;
   pointer-events: none;
+}
+.button.primary {
+  color: #FFFFFF;
+  background-color: #0C8CE9;
+}
+.button.primary .spinner {
+  color: #FFFFFF !important;
+}
+.button.primary svg path {
+  stroke: #FFFFFF;
+}
+.button.primary:hover {
+  background-color: #0b80d6;
+}
+.button.primary:active {
+  background-color: #0b7bcc;
+}
+.button.primary.disabled {
+  background-color: #A3D4FF;
+}
+.button.secondary {
+  color: #0C8CE9;
+  background-color: #F1F9FF;
+}
+.button.secondary .spinner {
+  color: #0C8CE9 !important;
+}
+.button.secondary svg path {
+  stroke: #0C8CE9;
+}
+.button.secondary:hover {
+  background-color: #ddf0ff;
+}
+.button.secondary:active {
+  background-color: #d2ecff;
+}
+.button.secondary.disabled {
+  color: #A3D4FF;
+}
+.button.secondary.disabled .spinner {
+  color: #A3D4FF !important;
+}
+.button.secondary.disabled svg path {
+  stroke: #A3D4FF;
 }
 .field-layout {
   display: flex;
@@ -135,6 +175,7 @@
 }
 .field-layout .label {
   font-family: "Inter-Regular";
+  font-size: 16px;
   font-size: 14px;
   color: #555770;
 }
@@ -185,6 +226,7 @@
 .app-header .header-title:active .title-label,
 .app-header .header-title:focus .title-label {
   font-family: "Inter-Bold";
+  font-size: 16px;
   font-size: 38px;
   margin: 0;
 }
@@ -198,28 +240,36 @@
 }
 .link {
   font-family: "Inter-Regular";
-  font-size: 18px;
-  color: #6690FF;
+  font-size: 16px;
+  color: #0C8CE9;
   text-decoration: none;
   display: inline-flex;
   gap: 8px;
   align-items: center;
   justify-content: center;
+  transition: color 0.15s;
 }
 .link .icon {
-  background-color: #6690FF;
+  background-color: #0C8CE9;
 }
 .link:hover {
-  color: #3366FF;
+  color: #0b80d6;
 }
 .link:hover .icon {
-  background-color: #3366FF;
+  background-color: #0b80d6;
 }
 .link:active {
-  color: #144fff;
+  color: #0b7bcc;
 }
 .link:active .icon {
-  background-color: #144fff;
+  background-color: #0b7bcc;
+}
+.link.disabled {
+  pointer-events: none;
+  color: #A0A8B5;
+}
+.link.disabled .icon {
+  background-color: #A0A8B5;
 }
 .card {
   box-shadow: 0 0 2px rgba(40, 41, 61, 0.04), 0 4px 8px rgba(96, 97, 112, 0.16);
@@ -243,6 +293,7 @@
 }
 .review-card .review-header .publication-info .user {
   font-family: "Inter-Regular";
+  font-size: 16px;
   color: #8E90A6;
   font-size: 30px;
   overflow: hidden;
@@ -252,6 +303,7 @@
 }
 .review-card .review-header .publication-info .published-date {
   font-family: "Inter-Regular";
+  font-size: 16px;
   color: #C7C8D9;
   font-size: 22px;
   margin-left: 8px;
@@ -265,6 +317,7 @@
 }
 .review-card .review-content .text {
   font-family: "Inter-SemiBold";
+  font-size: 16px;
   color: #28293D;
   font-size: 30px;
   margin-bottom: 30px;
@@ -287,8 +340,74 @@
 }
 .review-card .review-content .reactions-container .reactions .reactions-count {
   font-family: "Inter-Medium";
+  font-size: 16px;
   font-size: 22px;
   color: #555770;
+}
+.site-card {
+  display: flex;
+  align-items: center;
+  height: 100px;
+  padding: 0 18px 0 0;
+}
+.site-card .site-rating {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 120px;
+  height: 100%;
+  border-end-start-radius: 8px;
+  border-start-start-radius: 8px;
+}
+.site-card .site-rating.good-rating {
+  background-color: #1EAE69;
+}
+.site-card .site-rating.medium-rating {
+  background-color: #FFEC3A;
+}
+.site-card .site-rating.bad-rating {
+  background-color: #DC3545;
+}
+.site-card .site-rating .rating-label {
+  font-family: "Inter-Regular";
+  font-size: 20px;
+  color: #23262A;
+}
+.site-card .site-rating .rating-value {
+  font-family: "Inter-SemiBold";
+  font-size: 36px;
+  color: #23262A;
+}
+.site-card .site-rating-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding-left: 20px;
+}
+.site-card .site-rating-info .site-name {
+  font-family: "Inter-SemiBold";
+  font-size: 28px;
+  color: #23262A;
+  margin: 0;
+  line-height: 20px;
+}
+.site-card .site-rating-info .site-reviews {
+  padding: 6px 8px;
+  border-radius: 4px;
+  background-color: #DDE1EB;
+  color: #23262A;
+  font-family: "Inter-Regular";
+  font-size: 12px;
+  width: fit-content;
+}
+.site-card .actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 150px;
+  margin-left: auto;
 }
 .rating {
   display: flex;
@@ -308,10 +427,35 @@
   flex: 1;
   justify-content: end;
 }
+.pages-navigator .previous-page-nav-container .link {
+  font-size: 14px;
+}
 .pages-navigator .previous-page-nav-container .icon {
   transform: rotate(180deg);
+}
+.pages-navigator .pages {
+  display: flex;
+  gap: 8px;
+}
+.pages-navigator .pages .button {
+  background-color: #edeff6;
+  color: #23262A;
+}
+.pages-navigator .pages .button:hover {
+  background-color: #dfe3ef;
+}
+.pages-navigator .pages .button.active {
+  border: solid 1px #0C8CE9;
+  color: #0C8CE9;
+  background-color: #F1F9FF;
+}
+.pages-navigator .pages .button.active:hover {
+  background-color: #ddf0ff;
 }
 .pages-navigator .next-page-nav-container {
   display: flex;
   flex: 1;
+}
+.pages-navigator .next-page-nav-container .link {
+  font-size: 14px;
 }

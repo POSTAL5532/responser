@@ -18,53 +18,25 @@
 <body>
 
 <th:block id="mainContent">
-    <div class="pages-navigator">
-        <div class="previous-page-nav-container">
-            <a th:if="${currentPageNumber > 0}" th:href="${'/web-resources/sites-rating?page=' + (currentPageNumber - 1)}" class="link">
-                <div class="icon arrow-icon"></div>
-                Prev page
-            </a>
-        </div>
-        <div class="next-page-nav-container">
-            <a th:if="${!isLast}" th:href="${'/web-resources/sites-rating?page=' + (currentPageNumber + 1)}" class="link">
-                Next page
-                <div class="icon arrow-icon"></div>
-            </a>
-        </div>
-    </div>
+    <th:block th:replace="~{components/pages-navigator::pages-navigator-component(
+            ${'/web-resources/sites-rating?page='},
+            ${currentPageNumber},
+            ${pagesCount},
+            null
+       )}"/>
 
     <div class="sites-list">
-        <div th:each="site: ${sites}" class="site-container">
-            <div class="first-row">
-                <a th:href="${'/web-resources/' + site.id}" th:text="${T(com.responser.backend.utils.UrlUtils).getHost(site.url)}" class="link site-link">!ERROR!</a>
-                <div th:text="${#numbers.formatDecimal(site.rating, 1, 1, 'POINT') + ' / 5'}" class="rating"
-                     th:classappend="${(site.rating >= 4 ? 'good-rating' : (site.rating >= 2 ? 'medium-rating' : 'bad-rating'))}">!ERROR!
-                </div>
-            </div>
-
-            <div class="second-row">
-                <div class="reviews-count">
-                    <span class="text">Reviews: </span>
-                    <span th:text="${site.reviewsCount}" class="value">!ERROR!</span>
-                </div>
-            </div>
-        </div>
+        <th:block th:each="site, loopState: ${sites}">
+            <th:block th:replace="~{components/site-card::site-card-component(${site}, 'site-' + ${loopState.index})}"/>
+        </th:block>
     </div>
 
-    <div class="pages-navigator">
-        <div class="previous-page-nav-container">
-            <a th:if="${currentPageNumber > 0}" th:href="${'/web-resources/sites-rating?page=' + (currentPageNumber - 1)}" class="link">
-                <div class="icon arrow-icon"></div>
-                Prev page
-            </a>
-        </div>
-        <div class="next-page-nav-container">
-            <a th:if="${!isLast}" th:href="${'/web-resources/sites-rating?page=' + (currentPageNumber + 1)}" class="link">
-                Next page
-                <div class="icon arrow-icon"></div>
-            </a>
-        </div>
-    </div>
+    <th:block th:replace="~{components/pages-navigator::pages-navigator-component(
+            ${'/web-resources/sites-rating?page='},
+            ${currentPageNumber},
+            ${pagesCount},
+            null
+       )}"/>
 </th:block>
 
 </body>

@@ -98,6 +98,7 @@
 }
 .review-page .review-header .publication-info .user {
   font-family: "Inter-Regular";
+  font-size: 16px;
   color: #8E90A6;
   font-size: 30px;
   overflow: hidden;
@@ -107,6 +108,7 @@
 }
 .review-page .review-header .publication-info .published-date {
   font-family: "Inter-Regular";
+  font-size: 16px;
   color: #C7C8D9;
   font-size: 22px;
   margin-left: 8px;
@@ -123,6 +125,7 @@
 }
 .review-page .review-content .text {
   font-family: "Inter-SemiBold";
+  font-size: 16px;
   color: #28293D;
   font-size: 30px;
   margin-bottom: 30px;
@@ -145,6 +148,7 @@
 }
 .review-page .review-content .reactions-container .reactions .reactions-count {
   font-family: "Inter-Medium";
+  font-size: 16px;
   font-size: 22px;
   color: #555770;
 }

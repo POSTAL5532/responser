@@ -54,8 +54,8 @@ public class WebResourceController {
         }).toList();
 
         model.addAttribute("sites", webResourceDTOS);
-        model.addAttribute("isLast", webResourcesPage.isLast());
         model.addAttribute("currentPageNumber", webResourcesPage.getNumber());
+        model.addAttribute("pagesCount", webResourcesPage.getTotalPages());
 
         return "sitesRating";
     }
