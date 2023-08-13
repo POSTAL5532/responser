@@ -81,6 +81,33 @@
   width: 16px;
   height: 20px;
 }
+.icon.search-icon {
+  -webkit-mask: url("/img/search.svg") center / 16px 16px no-repeat;
+  mask: url("/img/search.svg") center / 16px 16px no-repeat;
+  width: 16px;
+  height: 16px;
+}
+.sites-rating-page .search .field {
+  position: relative;
+}
+.sites-rating-page .search .field input {
+  padding-right: 50px;
+}
+.sites-rating-page .search .field .button {
+  position: absolute;
+  transform: translateY(-50%);
+  right: 0;
+  top: 50%;
+  background-color: transparent;
+  padding-left: 16px;
+  padding-right: 16px;
+}
+.sites-rating-page .search .field .button .icon {
+  -webkit-mask: url("/img/search.svg") center / 20px 20px no-repeat;
+  mask: url("/img/search.svg") center / 20px 20px no-repeat;
+  width: 20px;
+  height: 20px;
+}
 .sites-rating-page .sites-list {
   display: flex;
   flex-direction: column;

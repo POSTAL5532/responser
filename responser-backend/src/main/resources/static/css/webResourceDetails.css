@@ -81,6 +81,12 @@
   width: 16px;
   height: 20px;
 }
+.icon.search-icon {
+  -webkit-mask: url("/img/search.svg") center / 16px 16px no-repeat;
+  mask: url("/img/search.svg") center / 16px 16px no-repeat;
+  width: 16px;
+  height: 16px;
+}
 .resource-details-page .reviews-list .review-card,
 .resource-details-page .reviews-list .pages-navigator {
   margin-bottom: 20px;

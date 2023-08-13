@@ -81,6 +81,12 @@
   width: 16px;
   height: 20px;
 }
+.icon.search-icon {
+  -webkit-mask: url("/img/search.svg") center / 16px 16px no-repeat;
+  mask: url("/img/search.svg") center / 16px 16px no-repeat;
+  width: 16px;
+  height: 16px;
+}
 * {
   box-sizing: border-box;
 }

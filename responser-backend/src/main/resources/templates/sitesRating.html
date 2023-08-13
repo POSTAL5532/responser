@@ -18,8 +18,21 @@
 <body>
 
 <th:block id="mainContent">
+
+    <form method="get" th:action="${'/web-resources/sites-rating'}">
+        <input hidden="hidden" name="page" th:value="${currentPageNumber}"/>
+
+        <div class="field-container search">
+            <div class="field">
+                <input name="searchUrl" placeholder="Find site by URL" th:value="${searchUrl}"/>
+                <button type="submit" class="button secondary"><div class="icon search-icon"></div></button>
+            </div>
+<!--            <span class="message">asasasasasas</span>-->
+        </div>
+    </form>
+
     <th:block th:replace="~{components/pages-navigator::pages-navigator-component(
-            ${'/web-resources/sites-rating?page='},
+            ${'/web-resources/sites-rating?' + (searchUrl != null ? ('searchUrl=' + searchUrl + '&') : '') + 'page='},
             ${currentPageNumber},
             ${pagesCount},
             null
@@ -32,7 +45,7 @@
     </div>
 
     <th:block th:replace="~{components/pages-navigator::pages-navigator-component(
-            ${'/web-resources/sites-rating?page='},
+            ${'/web-resources/sites-rating?' + (searchUrl != null ? ('searchUrl=' + searchUrl + '&') : '') + 'page='},
             ${currentPageNumber},
             ${pagesCount},
             null

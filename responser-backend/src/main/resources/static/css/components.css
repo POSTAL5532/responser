@@ -81,6 +81,12 @@
   width: 16px;
   height: 20px;
 }
+.icon.search-icon {
+  -webkit-mask: url("/img/search.svg") center / 16px 16px no-repeat;
+  mask: url("/img/search.svg") center / 16px 16px no-repeat;
+  width: 16px;
+  height: 16px;
+}
 .button {
   display: flex;
   gap: 10px;
@@ -127,6 +133,9 @@
 .button.primary .spinner {
   color: #FFFFFF !important;
 }
+.button.primary .icon {
+  background-color: #FFFFFF;
+}
 .button.primary svg path {
   stroke: #FFFFFF;
 }
@@ -146,8 +155,8 @@
 .button.secondary .spinner {
   color: #0C8CE9 !important;
 }
-.button.secondary svg path {
-  stroke: #0C8CE9;
+.button.secondary .icon {
+  background-color: #0C8CE9;
 }
 .button.secondary:hover {
   background-color: #ddf0ff;
@@ -161,42 +170,55 @@
 .button.secondary.disabled .spinner {
   color: #A3D4FF !important;
 }
-.button.secondary.disabled svg path {
-  stroke: #A3D4FF;
+.button.secondary.disabled .icon {
+  background-color: #A3D4FF;
 }
-.field-layout {
-  display: flex;
+.field-container .field input {
+  height: 56px;
+  width: 100%;
+  border-radius: 8px;
+  border: 1px solid #DDE1EB;
+  background-color: #FFFFFF;
+  box-shadow: 0 0 0 3px rgba(12, 140, 233, 0);
+  transition: box-shadow 0.15s, border-color 0.15s;
+  font-family: "Inter-Medium";
+  font-size: 16px;
+  color: #23262A;
+  padding: 10px 22px 10px 22px;
 }
-.field-layout.column {
-  flex-direction: column;
+.field-container .field input:hover {
+  border-color: rgba(12, 140, 233, 0.5);
 }
-.field-layout.column .label {
-  margin-bottom: 6px;
+.field-container .field input,
+.field-container .field input:focus,
+.field-container .field input:active {
+  outline: none;
 }
-.field-layout .label {
+.field-container .field input:focus,
+.field-container .field input:active {
+  border-color: #0C8CE9;
+  box-shadow: 0 0 0 3px rgba(12, 140, 233, 0.25);
+}
+.field-container .message {
   font-family: "Inter-Regular";
   font-size: 16px;
   font-size: 14px;
-  color: #555770;
+  color: #23262A;
 }
-.field {
-  height: 40px;
-  width: 100%;
-  border-radius: 8px;
-  padding: 10px;
-  font-family: "Inter-Regular";
-  font-size: 16px;
-  color: #28293D;
-  border: 1px solid #C7C8D9;
-  background-color: #FFFFFF;
+.field-container.invalid .field input {
+  border-color: rgba(220, 53, 69, 0.6);
 }
-.field:focus,
-.field:active {
-  outline: none;
+.field-container.invalid .field input:focus,
+.field-container.invalid .field input:active {
+  border-color: #DC3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.25);
 }
-.field.disabled {
-  background-color: #E3E4EB;
-  pointer-events: none;
+.field-container.invalid .field input:hover,
+.field-container.invalid .field input:focus {
+  border-color: #DC3545;
+}
+.field-container.invalid .message {
+  color: #DC3545;
 }
 .app-header {
   display: flex;

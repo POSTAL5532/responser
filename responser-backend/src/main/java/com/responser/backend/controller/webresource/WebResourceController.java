@@ -36,7 +36,11 @@ public class WebResourceController {
     private final ReviewService reviewService;
 
     @GetMapping("/sites-rating")
-    public String getSitesRatingPage(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
+    public String getSitesRatingPage(
+        Model model,
+        @RequestParam(required = false, defaultValue = "0") Integer page,
+        @RequestParam(required = false) String searchUrl
+    ) {
         Page<WebResource> webResourcesPage = webResourceService.getSitesWithReviews(PageRequest.of(page, 10));
         List<String> ids = webResourcesPage.getContent().stream().map(AbstractEntity::getId).toList();
 
@@ -53,9 +57,12 @@ public class WebResourceController {
             return dto;
         }).toList();
 
+        System.out.println("searchUrl = " + searchUrl);
+
         model.addAttribute("sites", webResourceDTOS);
         model.addAttribute("currentPageNumber", webResourcesPage.getNumber());
         model.addAttribute("pagesCount", webResourcesPage.getTotalPages());
+        model.addAttribute("searchUrl", searchUrl);
 
         return "sitesRating";
     }
