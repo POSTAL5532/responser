@@ -2,6 +2,7 @@ package com.responser.backend.converter;
 
 import com.responser.backend.controller.webresource.payload.NewWebResourceDTO;
 import com.responser.backend.controller.webresource.payload.WebResourceDTO;
+import com.responser.backend.model.ResourceRating;
 import com.responser.backend.model.ResourceType;
 import com.responser.backend.model.WebResource;
 import com.responser.backend.utils.UrlUtils;
@@ -25,6 +26,26 @@ public class WebResourceConverter {
             .creationDate(webResource.getCreationDate())
             .updateDate(webResource.getUpdateDate())
             .build();
+    }
+
+    public WebResourceDTO toDTO(WebResource webResource, ResourceRating resourceRating) {
+        if (Objects.isNull(webResource)) {
+            return null;
+        }
+
+        WebResourceDTO.WebResourceDTOBuilder builder = WebResourceDTO.builder()
+            .id(webResource.getId())
+            .url(webResource.getUrl())
+            .parent(toDTO(webResource.getParent()))
+            .resourceType(webResource.getResourceType())
+            .creationDate(webResource.getCreationDate())
+            .updateDate(webResource.getUpdateDate());
+
+        if (Objects.nonNull(resourceRating)) {
+            builder.rating(resourceRating.getRating()).reviewsCount(resourceRating.getReviewsCount());
+        }
+
+        return builder.build();
     }
 
     public WebResource toEntity(NewWebResourceDTO newWebResourceDTO) {

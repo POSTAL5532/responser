@@ -11,11 +11,13 @@ import com.responser.backend.service.RatingService;
 import com.responser.backend.service.WebResourceService;
 import com.responser.backend.service.review.ReviewService;
 import com.responser.backend.utils.UrlUtils;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
@@ -41,7 +43,17 @@ public class WebResourceController {
         @RequestParam(required = false, defaultValue = "0") Integer page,
         @RequestParam(required = false) String searchUrl
     ) {
-        Page<WebResource> webResourcesPage = webResourceService.getSitesWithReviews(PageRequest.of(page, 10));
+        PageRequest pageRequest = PageRequest.of(page, 10);
+        Page<WebResource> webResourcesPage;
+
+        Map<String, String> responseAdditionalParameters = new HashMap<>();
+        if (StringUtils.isNotBlank(searchUrl)) {
+            webResourcesPage = webResourceService.getSitesWithReviews(searchUrl, pageRequest);
+            responseAdditionalParameters.put("searchUrl", searchUrl);
+        } else {
+            webResourcesPage = webResourceService.getSitesWithReviews(pageRequest);
+        }
+
         List<String> ids = webResourcesPage.getContent().stream().map(AbstractEntity::getId).toList();
 
         Map<String, ResourceRating> ratings = ratingService.getWebResourcesRatings(ids).stream()
@@ -57,12 +69,10 @@ public class WebResourceController {
             return dto;
         }).toList();
 
-        System.out.println("searchUrl = " + searchUrl);
-
         model.addAttribute("sites", webResourceDTOS);
         model.addAttribute("currentPageNumber", webResourcesPage.getNumber());
         model.addAttribute("pagesCount", webResourcesPage.getTotalPages());
-        model.addAttribute("searchUrl", searchUrl);
+        model.addAttribute("additionalParameters", responseAdditionalParameters);
 
         return "sitesRating";
     }

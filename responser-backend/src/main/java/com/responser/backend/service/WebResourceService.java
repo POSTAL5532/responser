@@ -45,6 +45,10 @@ public class WebResourceService {
         return webResourceRepository.findWithReviewsByResourceType(ResourceType.SITE, pageable);
     }
 
+    public Page<WebResource> getSitesWithReviews(String searchUrl, Pageable pageable) {
+        return webResourceRepository.findWithReviewsByResourceTypeAndUrlContainingSearchUrl(ResourceType.SITE, searchUrl, pageable);
+    }
+
     @Transactional
     public WebResource createWebResource(WebResource newWebResource) {
         ResourceType resourceType = newWebResource.getResourceType();

@@ -1,30 +1,28 @@
 <div class="pages-navigator" th:classappend="${class != null ? class : ''}" th:fragment="pages-navigator-component(
-    urlPrefix,
+    url,
+    pageNumbnerVariableName,
     currentPageNumber,
     pagesCount,
+    additionalParameters,
     class
   )">
-    <div class="previous-page-nav-container">
-        <a th:href="${urlPrefix + (currentPageNumber - 1)}" th:classappend="${currentPageNumber > 0 ? '' : 'disabled'}" class="link">
-            <div class="icon arrow-icon"></div>
-            Prev
-        </a>
-    </div>
+    <form th:action="${url}" method="get" class="page-nav-container previous-page-nav-container" th:with="isDisabled=${currentPageNumber <= 0 || pagesCount == 0}">
+        <input type="text" hidden="hidden" th:each="entry: ${additionalParameters}" th:name="${entry.key}" th:value="${entry.value}">
+        <input th:name="${pageNumbnerVariableName}" type="text" hidden="hidden" th:value="${currentPageNumber - 1}">
 
-    <div class="pages">
-        <a class="button secondary small"
-           th:each="i: ${#numbers.sequence(0, pagesCount - 1)}"
-           th:text="${i + 1}"
-           th:classappend="${currentPageNumber == i ? 'active' : ''}"
-           th:href="${urlPrefix + i}">
-            !ERROR!
-        </a>
-    </div>
-
-    <div class="next-page-nav-container">
-        <a th:href="${urlPrefix + (currentPageNumber + 1)}" th:classappend="${pagesCount != (currentPageNumber + 1) ? '' : 'disabled'}" class="link">
-            Next
+        <button type="submit" th:classappend="${isDisabled ? 'disabled' : ''}" class="link">
             <div class="icon arrow-icon"></div>
-        </a>
-    </div>
+            Prev page
+        </button>
+    </form>
+
+    <form th:action="${url}" method="get" class="page-nav-container next-page-nav-container" th:with="isDisabled=${pagesCount == (currentPageNumber + 1) || pagesCount == 0}">
+        <input type="text" hidden="hidden" th:each="entry: ${additionalParameters}" th:name="${entry.key}" th:value="${entry.value}">
+        <input th:name="${pageNumbnerVariableName}" type="text" hidden="hidden" th:value="${currentPageNumber + 1}">
+
+        <button type="submit" th:classappend="${isDisabled ? 'disabled' : ''}" class="link">
+            Next page
+            <div class="icon arrow-icon"></div>
+        </button>
+    </form>
 </div>

@@ -10,7 +10,6 @@ import com.responser.backend.model.ResourceType;
 import com.responser.backend.model.WebResource;
 import com.responser.backend.service.RatingService;
 import com.responser.backend.service.WebResourceService;
-import com.responser.backend.service.review.ReviewService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -43,10 +42,7 @@ public class WebResourceApiController {
 
         WebResource webResource = webResourceService.getByUrl(url, resourceType);
         ResourceRating resourceRating = ratingService.getResourceFullRatingById(webResource.getId());
-
-        WebResourceDTO webResourceDTO = webResourceConverter.toDTO(webResource);
-        webResourceDTO.setRating(resourceRating.getRating());
-        webResourceDTO.setReviewsCount(resourceRating.getReviewsCount());
+        WebResourceDTO webResourceDTO = webResourceConverter.toDTO(webResource, resourceRating);
 
         return ResponseEntity.ok(webResourceDTO);
     }

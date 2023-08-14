@@ -270,6 +270,7 @@
   align-items: center;
   justify-content: center;
   transition: color 0.15s;
+  cursor: pointer;
 }
 .link .icon {
   background-color: #0C8CE9;
@@ -444,13 +445,17 @@
   gap: 24px;
   margin-bottom: 36px;
 }
-.pages-navigator .previous-page-nav-container {
+.pages-navigator .page-nav-container {
   display: flex;
   flex: 1;
-  justify-content: end;
 }
-.pages-navigator .previous-page-nav-container .link {
+.pages-navigator .page-nav-container .link {
   font-size: 14px;
+  border: none;
+  background-color: transparent;
+}
+.pages-navigator .previous-page-nav-container {
+  justify-content: end;
 }
 .pages-navigator .previous-page-nav-container .icon {
   transform: rotate(180deg);
@@ -473,11 +478,4 @@
 }
 .pages-navigator .pages .button.active:hover {
   background-color: #ddf0ff;
-}
-.pages-navigator .next-page-nav-container {
-  display: flex;
-  flex: 1;
-}
-.pages-navigator .next-page-nav-container .link {
-  font-size: 14px;
 }

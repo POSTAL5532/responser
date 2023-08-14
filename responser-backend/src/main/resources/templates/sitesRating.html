@@ -19,22 +19,24 @@
 
 <th:block id="mainContent">
 
-    <form method="get" th:action="${'/web-resources/sites-rating'}">
-        <input hidden="hidden" name="page" th:value="${currentPageNumber}"/>
+    <form method="get" th:action="${'/web-resources/sites-rating'}" class="search" th:with="invalid=${searchError != null}">
+<!--        <input hidden="hidden" name="page" th:value="${currentPageNumber}"/>-->
 
-        <div class="field-container search">
+        <div class="field-container" th:classappend="${invalid ? 'invalid' : ''}">
             <div class="field">
-                <input name="searchUrl" placeholder="Find site by URL" th:value="${searchUrl}"/>
+                <input name="searchUrl" placeholder="Find site by URL" th:value="${additionalParameters['searchUrl']}"/>
                 <button type="submit" class="button secondary"><div class="icon search-icon"></div></button>
             </div>
-<!--            <span class="message">asasasasasas</span>-->
+            <span class="message" th:if="${invalid}" th:text="${searchError}">! ERROR !</span>
         </div>
     </form>
 
     <th:block th:replace="~{components/pages-navigator::pages-navigator-component(
-            ${'/web-resources/sites-rating?' + (searchUrl != null ? ('searchUrl=' + searchUrl + '&') : '') + 'page='},
+            '/web-resources/sites-rating',
+            'page',
             ${currentPageNumber},
             ${pagesCount},
+            ${additionalParameters},
             null
        )}"/>
 
@@ -42,12 +44,18 @@
         <th:block th:each="site, loopState: ${sites}">
             <th:block th:replace="~{components/site-card::site-card-component(${site}, 'site-' + ${loopState.index})}"/>
         </th:block>
+
+        <div class="no-data" th:if="${sites.size() == 0}">
+            No sites found
+        </div>
     </div>
 
     <th:block th:replace="~{components/pages-navigator::pages-navigator-component(
-            ${'/web-resources/sites-rating?' + (searchUrl != null ? ('searchUrl=' + searchUrl + '&') : '') + 'page='},
+            '/web-resources/sites-rating',
+            'page',
             ${currentPageNumber},
             ${pagesCount},
+            ${additionalParameters},
             null
        )}"/>
 </th:block>

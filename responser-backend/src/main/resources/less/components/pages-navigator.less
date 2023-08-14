@@ -5,14 +5,19 @@
   gap: 24px;
   margin-bottom: 36px;
 
-  .previous-page-nav-container {
+  .page-nav-container {
     display: flex;
     flex: 1;
-    justify-content: end;
 
     .link {
       font-size: 14px;
+      border: none;
+      background-color: transparent;
     }
+  }
+
+  .previous-page-nav-container {
+    justify-content: end;
 
     .icon {
       transform: rotate(180deg);
@@ -40,15 +45,6 @@
           background-color: darken(@primary-light-2, 4%);
         }
       }
-    }
-  }
-
-  .next-page-nav-container {
-    display: flex;
-    flex: 1;
-
-    .link {
-      font-size: 14px;
     }
   }
 }
