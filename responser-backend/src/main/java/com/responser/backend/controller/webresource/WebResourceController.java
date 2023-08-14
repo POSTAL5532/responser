@@ -47,6 +47,7 @@ public class WebResourceController {
         Page<WebResource> webResourcesPage;
 
         Map<String, String> responseAdditionalParameters = new HashMap<>();
+        // TODO: Добавить критерии!
         if (StringUtils.isNotBlank(searchUrl)) {
             webResourcesPage = webResourceService.getSitesWithReviews(searchUrl, pageRequest);
             responseAdditionalParameters.put("searchUrl", searchUrl);
