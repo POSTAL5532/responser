@@ -7,7 +7,7 @@
     class
   )">
     <form th:action="${url}" method="get" class="page-nav-container previous-page-nav-container" th:with="isDisabled=${currentPageNumber <= 0 || pagesCount == 0}">
-        <input type="text" hidden="hidden" th:each="entry: ${additionalParameters}" th:name="${entry.key}" th:value="${entry.value}">
+        <input type="text" hidden="hidden" th:if="${additionalParameters != null}" th:each="entry: ${additionalParameters}" th:name="${entry.key}" th:value="${entry.value}">
         <input th:name="${pageNumbnerVariableName}" type="text" hidden="hidden" th:value="${currentPageNumber - 1}">
 
         <button type="submit" th:classappend="${isDisabled ? 'disabled' : ''}" class="link">

@@ -384,13 +384,13 @@
   border-start-start-radius: 8px;
 }
 .site-card .site-rating.good-rating {
-  background-color: #1EAE69;
+  background-color: #c0fbdf;
 }
 .site-card .site-rating.medium-rating {
-  background-color: #FFEC3A;
+  background-color: #fff6a6;
 }
 .site-card .site-rating.bad-rating {
-  background-color: #DC3545;
+  background-color: #ffc3c8;
 }
 .site-card .site-rating .rating-label {
   font-family: "Inter-Regular";
@@ -443,7 +443,6 @@
 .pages-navigator {
   display: flex;
   gap: 24px;
-  margin-bottom: 36px;
 }
 .pages-navigator .page-nav-container {
   display: flex;

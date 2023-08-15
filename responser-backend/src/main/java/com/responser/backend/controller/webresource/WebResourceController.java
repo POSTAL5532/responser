@@ -95,8 +95,8 @@ public class WebResourceController {
         model.addAttribute("webResource", webResourceDTO);
         model.addAttribute("webResourceHost", UrlUtils.getHost(webResourceDTO.getUrl()));
         model.addAttribute("reviews", reviews.getContent());
-        model.addAttribute("isLastReviewPage", reviews.isLast());
-        model.addAttribute("currentPageNumber", reviews.getNumber());
+        model.addAttribute("reviewsPagesCount", reviews.getTotalPages());
+        model.addAttribute("currentReviewsPageNumber", reviews.getNumber());
 
         return "webResourceDetails";
     }

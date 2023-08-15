@@ -87,11 +87,10 @@
   width: 16px;
   height: 16px;
 }
-.resource-details-page .reviews-list {
+.reviews-page .reviews-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
   margin-top: 36px;
   margin-bottom: 36px;
-}
-.resource-details-page .reviews-list .review-card,
-.resource-details-page .reviews-list .pages-navigator {
-  margin-bottom: 20px;
 }

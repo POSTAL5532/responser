@@ -50,8 +50,8 @@ public class ReviewsController {
         Page<Review> reviews = reviewService.getReviews(criteria, PageRequest.of(page, 10));
 
         model.addAttribute("reviews", reviews.getContent());
-        model.addAttribute("isLastPage", reviews.isLast());
         model.addAttribute("currentPageNumber", reviews.getNumber());
+        model.addAttribute("pagesCount", reviews.getTotalPages());
 
         return "seeReviewsPage";
     }

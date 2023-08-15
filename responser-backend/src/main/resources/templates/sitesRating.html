@@ -20,12 +20,12 @@
 <th:block id="mainContent">
 
     <form method="get" th:action="${'/web-resources/sites-rating'}" class="search" th:with="invalid=${searchError != null}">
-<!--        <input hidden="hidden" name="page" th:value="${currentPageNumber}"/>-->
-
         <div class="field-container" th:classappend="${invalid ? 'invalid' : ''}">
             <div class="field">
                 <input name="searchUrl" placeholder="Find site by URL" th:value="${additionalParameters['searchUrl']}"/>
-                <button type="submit" class="button secondary"><div class="icon search-icon"></div></button>
+                <button type="submit" class="button secondary">
+                    <div class="icon search-icon"></div>
+                </button>
             </div>
             <span class="message" th:if="${invalid}" th:text="${searchError}">! ERROR !</span>
         </div>

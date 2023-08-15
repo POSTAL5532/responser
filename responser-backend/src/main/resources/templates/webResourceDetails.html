@@ -23,11 +23,11 @@
     <h2 th:text="${'Reviews count: ' + webResource.reviewsCount}">! ERROR !</h2>
 
     <th:block th:replace="~{components/pages-navigator::pages-navigator-component(
-            ${'/web-resources/' + webResource.id + '?reviewsPage='},
-            ${currentPageNumber},
-            ${isLastReviewPage},
-            'Prev reviews',
-            'Next reviews',
+            ${'/web-resources/' + webResource.id},
+            'reviewsPage',
+            ${currentReviewsPageNumber},
+            ${reviewsPagesCount},
+            null,
             null
        )}"/>
 
@@ -38,11 +38,11 @@
     </div>
 
     <th:block th:replace="~{components/pages-navigator::pages-navigator-component(
-            ${'/web-resources/' + webResource.id + '?reviewsPage='},
-            ${currentPageNumber},
-            ${isLastReviewPage},
-            'Prev reviews',
-            'Next reviews',
+            ${'/web-resources/' + webResource.id},
+            'reviewsPage',
+            ${currentReviewsPageNumber},
+            ${reviewsPagesCount},
+            null,
             null
        )}"/>
 </th:block>
