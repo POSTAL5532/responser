@@ -45,7 +45,7 @@ public class AuthServerConfig {
 
     private final CORSCustomizer corsCustomizer;
 
-    private final AuthServerApplicationProperties properties;
+    private final ApplicationProperties properties;
 
     @Bean
     @Order(Ordered.HIGHEST_PRECEDENCE)
@@ -57,7 +57,7 @@ public class AuthServerConfig {
             .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
             .csrf().disable()
             .formLogin().loginPage(CommonController.LOGIN_URL).failureUrl(CommonController.LOGIN_URL + "?error=true")
-            .and().logout().logoutUrl(CommonController.LOGOUT_URL).logoutSuccessUrl(properties.getAfterLogoutUrl())
+            .and().logout().logoutUrl(CommonController.LOGOUT_URL).logoutSuccessUrl(properties.getSelfHost())
             .and().getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(Customizer.withDefaults())
             .and().build();
     }

@@ -7,6 +7,7 @@ import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,10 +26,9 @@ public class EmailConfirmationController {
     private final ApplicationProperties applicationProperties;
 
     @GetMapping("/{confirmationId}")
-    public ModelAndView confirmEmailPage(ModelAndView modelAndView, @Valid @NotBlank @PathVariable String confirmationId) {
+    public String confirmEmailPage(Model model, @Valid @NotBlank @PathVariable String confirmationId) {
         userService.confirmEmail(confirmationId);
-        modelAndView.addObject("redirectLink", applicationProperties.getFeApplicationUrl());
-        modelAndView.setViewName("emailConfirmationPage");
-        return modelAndView;
+        model.addAttribute("redirectLink", applicationProperties.getFeApplicationUrl());
+        return "emailConfirmationPage";
     }
 }

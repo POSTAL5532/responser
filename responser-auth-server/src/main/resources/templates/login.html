@@ -107,7 +107,11 @@
                 <span th:if="${param.error}" class="error">Email or Password is invalid.</span>
 
                 <div>
-                    <a th:href="${registrationPageUrl}" class="sign-up-link" id="sign-up-link">Create new account</a>
+                    <a th:href="${@applicationProperties.registrationPageUrl}" class="sign-up-link" id="sign-up-link">Create new account</a>
+                </div>
+
+                <div>
+                    <a th:href="${@applicationProperties.registrationPageUrl}" class="forgot-password-link">Forgot password?</a>
                 </div>
             </form>
         </div>

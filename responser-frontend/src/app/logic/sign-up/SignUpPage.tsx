@@ -4,8 +4,8 @@ import {Page} from "../../components/page/Page";
 import {SignUpPageStore} from "./SignUpPageStore";
 import SignUpForm from "./form/SignUpForm";
 import {GlobalAppStoreContext} from "app/GlobalAppStore";
-import "./SignUpPage.less";
 import {ReviewlyLogo} from "../../components/reviewly-logo/ReviewlyLogo";
+import "./SignUpPage.less";
 
 export const SIGN_UP_PAGE_URL = "/sign-up";
 

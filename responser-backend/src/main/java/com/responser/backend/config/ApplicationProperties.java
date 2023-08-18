@@ -2,11 +2,14 @@ package com.responser.backend.config;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import java.net.URISyntaxException;
 import lombok.Getter;
 import lombok.Setter;
+import org.apache.hc.core5.net.URIBuilder;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
+import org.springframework.stereotype.Component;
 
 /**
  * Custom API application properties.
@@ -15,6 +18,7 @@ import java.util.List;
  */
 @Getter
 @Setter
+@Component("applicationProperties")
 @ConfigurationProperties(prefix = "responser")
 public class ApplicationProperties {
 
@@ -30,7 +34,7 @@ public class ApplicationProperties {
     private String feApplicationUrl;
 
     @NotBlank
-    private String authTokenUrl;
+    private String authApplicationUrl;
 
     @NotBlank
     private String authLoginPageUrl;
@@ -43,9 +47,6 @@ public class ApplicationProperties {
 
     @NotBlank
     private String signUpPageUrl;
-
-    @NotBlank
-    private String unauthorizedPageUrl;
 
     @NotBlank
     private String clientId;
@@ -63,4 +64,13 @@ public class ApplicationProperties {
     private String responserInfoEmail;
 
     private List<String> allowedOrigins;
+
+    public String getLoginUrl() throws URISyntaxException {
+        URIBuilder loginUrlBuilder = new URIBuilder(this.authLoginPageUrl);
+        loginUrlBuilder.addParameter("response_type", "code");
+        loginUrlBuilder.addParameter("client_id", clientId);
+        loginUrlBuilder.addParameter("redirect_uri", authRedirectUri);
+
+        return loginUrlBuilder.build().toString();
+    }
 }

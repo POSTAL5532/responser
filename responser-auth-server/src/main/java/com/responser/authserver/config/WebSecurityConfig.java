@@ -23,7 +23,7 @@ public class WebSecurityConfig {
 
     private final CORSCustomizer corsCustomizer;
 
-    private final AuthServerApplicationProperties properties;
+    private final ApplicationProperties properties;
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
@@ -33,7 +33,7 @@ public class WebSecurityConfig {
             .csrf().disable()
             .formLogin()
             .loginPage(CommonController.LOGIN_URL).failureUrl(CommonController.LOGIN_URL + "?error=true")
-            .and().logout().logoutUrl(CommonController.LOGOUT_URL).logoutSuccessUrl(properties.getAfterLogoutUrl())
+            .and().logout().logoutUrl(CommonController.LOGOUT_URL).logoutSuccessUrl(properties.getSelfHost())
             .and().authorizeHttpRequests()
             .requestMatchers("/", CommonController.LOGIN_URL, CommonController.LOGOUT_URL).permitAll()
             .anyRequest().authenticated()

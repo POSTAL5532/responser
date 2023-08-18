@@ -39,13 +39,15 @@ const MainPage: React.FC = () => {
 
     return (
         <Page className="main-page">
-            <Icon type={IconType.CIRCLE_CHECK}/>
+            <div className="result">
+                <Icon type={IconType.CIRCLE_CHECK}/>
 
-            {!extensionChecking ? <ExtensionExistCheck exist={extensionExist}/> : null}
+                {!extensionChecking ? <ExtensionExistCheck exist={extensionExist}/> : null}
 
-            <p className="success-text">
-                Well done! Now you can start to discover websites rating or leave your feedback by browser extension.
-            </p>
+                <p className="success-text">
+                    Well done! Now you can start to discover websites rating or leave your feedback by browser extension.
+                </p>
+            </div>
 
             <h2 className="last-reviews-list-header">Last users reviews</h2>
 

@@ -4,9 +4,9 @@ import "./ReviewlyLogo.less";
 
 export const ReviewlyLogo: React.FC = () => {
     return(
-        <a className="reviewly-logo" href="/">
+        <div className="reviewly-logo">
             <Icon type={IconType.REVIEWLY_LOGO}/>
             <h1 className="title-label">Reviewly</h1>
-        </a>
+        </div>
     );
 }

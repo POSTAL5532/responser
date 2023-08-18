@@ -55,20 +55,19 @@ spring:
       ssl.enable: true
       ssl.trust: "*"
 responser:
-  runMode: DEV
+  runMode: LOCAL
   selfHost: http://dev.reviewly.space
-  feApplicationUrl: http://dev.reviewly.space/app
-  authTokenUrl: http://dev.reviewly.space/auth/oauth2/token
-  authLoginPageUrl: http://dev.reviewly.space/auth/oauth2/authorize
-  authLogoutPageUrl: http://dev.reviewly.space/auth/logout
-  authRedirectUri: http://dev.reviewly.space/app/auth-code
-  signUpPageUrl: http://dev.reviewly.space/app/sign-up
-  unauthorizedPageUrl: http://dev.reviewly.space
+  feApplicationUrl: ${responser.selfHost}/app
+  authApplicationUrl: ${responser.selfHost}/auth
+  authLoginPageUrl: ${responser.authApplicationUrl}/oauth2/authorize
+  authLogoutPageUrl: ${responser.authApplicationUrl}/logout
+  authRedirectUri: ${responser.feApplicationUrl}/auth-code
+  signUpPageUrl: ${responser.feApplicationUrl}/app/sign-up
   clientId: responser-web-client
   clientSecret: responser-web-client-secret
   downloadExtensionChrome: https://www.google.com
   chromeExtensionId: bcgepbhdoibfdnpmemhdjifmjdmfacml
   responserInfoEmail: info@reviewly.space
   allowedOrigins:
-    - http://dev.reviewly.space
+    - ${responser.selfHost}
     - chrome-extension://bcgepbhdoibfdnpmemhdjifmjdmfacml

@@ -1,11 +1,11 @@
 package com.responser.authserver.controller;
 
-import com.responser.authserver.config.AuthServerApplicationProperties;
+import com.responser.authserver.config.ApplicationProperties;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
 
 @RequiredArgsConstructor
 @Controller
@@ -15,18 +15,17 @@ public class CommonController {
     public static final String LOGOUT_URL = "/logout";
     private static final String SPRING_SECURITY_SAVED_REQUEST = "SPRING_SECURITY_SAVED_REQUEST";
 
-    private final AuthServerApplicationProperties authServerApplicationProperties;
+    private final ApplicationProperties applicationProperties;
 
     @GetMapping(LOGIN_URL)
-    public ModelAndView login(HttpSession session, ModelAndView modelAndView){
+    public String login(HttpSession session, Model model){
         Object object = session.getAttribute(SPRING_SECURITY_SAVED_REQUEST);
 
         if (object == null) {
-            return new ModelAndView("redirect:" + authServerApplicationProperties.getNoSessionRedirectUrl());
+            return "redirect:" + applicationProperties.getSelfHost();
         }
 
-        modelAndView.setViewName("login");
-        modelAndView.addObject("registrationPageUrl", authServerApplicationProperties.getRegistrationPageUrl());
-        return modelAndView;
+        model.addAttribute("registrationPageUrl", applicationProperties.getRegistrationPageUrl());
+        return "login";
     }
 }

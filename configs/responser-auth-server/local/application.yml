@@ -37,14 +37,13 @@ spring:
     init:
       platform: postgres
 responser:
-  auth:
-    registrationPageUrl: http://reviewly-local-dev/app/sign-up
-    afterLogoutUrl: http://reviewly-local-dev/app
-    noSessionRedirectUrl: http://reviewly-local-dev
-    clientCredentials:
-      -
-        clientId: responser-web-client
-        clientSecret: "{noop}responser-web-client-secret"
-        redirectUri: http://reviewly-local-dev/app/auth-code
-    allowedOrigins:
-      - http://reviewly-local-dev
+  selfHost: http://reviewly-local-dev
+  frontendAppUrl: ${responser.selfHost}/app
+  registrationPageUrl: ${responser.frontendAppUrl}/sign-up
+  clientCredentials:
+    -
+      clientId: responser-web-client
+      clientSecret: "{noop}responser-web-client-secret"
+      redirectUri: ${responser.frontendAppUrl}/auth-code
+  allowedOrigins:
+    - ${responser.selfHost}

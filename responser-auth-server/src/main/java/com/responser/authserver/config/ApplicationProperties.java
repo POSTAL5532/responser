@@ -7,6 +7,8 @@ import lombok.ToString;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 import java.util.List;
+import org.springframework.context.annotation.Bean;
+import org.springframework.stereotype.Component;
 
 /**
  * Custom auth server application properties.
@@ -15,21 +17,22 @@ import java.util.List;
  */
 @Getter
 @Setter
-@ConfigurationProperties(prefix = "responser.auth")
-public class AuthServerApplicationProperties {
+@Component("applicationProperties")
+@ConfigurationProperties(prefix = "responser")
+public class ApplicationProperties {
 
     private List<ClientCredentials> clientCredentials;
 
     private List<String> allowedOrigins;
 
     @NotEmpty
+    private String selfHost;
+
+    @NotEmpty
+    private String frontendAppUrl;
+
+    @NotEmpty
     private String registrationPageUrl;
-
-    @NotEmpty
-    private String afterLogoutUrl;
-
-    @NotEmpty
-    private String noSessionRedirectUrl;
 
     @Getter
     @Setter

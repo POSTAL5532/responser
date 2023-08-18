@@ -15,14 +15,14 @@ import java.util.Collections;
 @Component
 public class CORSCustomizer {
 
-    private final AuthServerApplicationProperties authServerApplicationProperties;
+    private final ApplicationProperties applicationProperties;
 
     public void corsCustomizer(HttpSecurity http) throws Exception {
         http.cors(c -> {
             CorsConfigurationSource source = s -> {
                 CorsConfiguration cc = new CorsConfiguration();
                 cc.setAllowCredentials(true);
-                cc.setAllowedOrigins(authServerApplicationProperties.getAllowedOrigins());
+                cc.setAllowedOrigins(applicationProperties.getAllowedOrigins());
                 cc.setAllowedHeaders(Collections.singletonList(CorsConfiguration.ALL));
                 cc.setAllowedMethods(Collections.singletonList(CorsConfiguration.ALL));
                 return cc;
