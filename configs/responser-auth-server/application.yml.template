@@ -40,6 +40,7 @@ responser:
   selfHost: http://reviewly-local-dev
   frontendAppUrl: ${responser.selfHost}/app
   registrationPageUrl: ${responser.frontendAppUrl}/sign-up
+  forgotPasswordPageUrl: ${responser.frontendAppUrl}/forgot-password
   clientCredentials:
     -
       clientId: responser-web-client

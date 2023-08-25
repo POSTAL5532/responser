@@ -12,6 +12,7 @@ import EditUserPage, {EDIT_USER_PAGE_URL} from "./logic/edit-user-profile/EditUs
 import AuthorizationService from "./service/authorization/AuthorizationService";
 import UserProfilePage, {USER_PROFILE_PAGE_URL} from "./logic/user-profile/UserProfilePage";
 import {COMPONENTS_PAGE_URL, ComponentsPage} from "./logic/components-page/ComponentsPage";
+import ForgotPasswordPage, {FORGOT_PASSWORD_PAGE_URL} from "./logic/forgot-password/ForgotPasswordPage";
 
 export class App extends Component {
 
@@ -26,6 +27,7 @@ export class App extends Component {
                     <Switch>
                         <UnauthorizedRoute path={SIGN_UP_PAGE_URL} exact component={SignUpPage}/>
                         <UnauthorizedRoute path={AUTH_CODE_PAGE_URL} exact component={AuthCodePage}/>
+                        <UnauthorizedRoute path={FORGOT_PASSWORD_PAGE_URL} exact component={ForgotPasswordPage}/>
 
                         <AuthorizedRoute path={MAIN_PAGE_URL} exact component={MainPage}/>
                         <AuthorizedRoute path={USER_PROFILE_PAGE_URL} exact component={UserProfilePage}/>

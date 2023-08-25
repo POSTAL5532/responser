@@ -3,6 +3,7 @@ package com.responser.backend.controller.user;
 import static com.responser.backend.config.ApplicationProperties.API_ROOT_PATH;
 
 import com.responser.backend.controller.user.payload.CreateUserProfilePayload;
+import com.responser.backend.controller.user.payload.ForgotPasswordPayload;
 import com.responser.backend.controller.user.payload.UpdateUserPasswordPayload;
 import com.responser.backend.controller.user.payload.UpdateUserPayload;
 import com.responser.backend.controller.user.payload.UserInfoPayload;
@@ -68,6 +69,12 @@ public class UserController {
             updateUserPasswordPayload.getNewPassword()
         );
 
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/send-restore-password-link")
+    public ResponseEntity<Void> sendRestorePasswordLink(@Valid @NotNull @RequestBody ForgotPasswordPayload forgotPasswordPayload) {
+        log.info("Send restoring link for user password with email {}.", forgotPasswordPayload.getEmail());
         return ResponseEntity.ok().build();
     }
 }

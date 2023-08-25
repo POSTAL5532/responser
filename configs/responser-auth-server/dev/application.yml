@@ -38,6 +38,7 @@ responser:
   selfHost: http://dev.reviewly.space
   frontendAppUrl: ${responser.selfHost}/app
   registrationPageUrl: ${responser.frontendAppUrl}/sign-up
+  forgotPasswordPageUrl: ${responser.frontendAppUrl}/forgot-password
   clientCredentials:
     -
       clientId: responser-web-client

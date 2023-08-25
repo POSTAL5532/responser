@@ -34,6 +34,9 @@ public class ApplicationProperties {
     @NotEmpty
     private String registrationPageUrl;
 
+    @NotEmpty
+    private String forgotPasswordPageUrl;
+
     @Getter
     @Setter
     @ToString
