@@ -75,6 +75,7 @@ public class UserController {
     @PostMapping("/send-restore-password-link")
     public ResponseEntity<Void> sendRestorePasswordLink(@Valid @NotNull @RequestBody ForgotPasswordPayload forgotPasswordPayload) {
         log.info("Send restoring link for user password with email {}.", forgotPasswordPayload.getEmail());
+        userService.requestPasswordRestoring(forgotPasswordPayload.getEmail());
         return ResponseEntity.ok().build();
     }
 }

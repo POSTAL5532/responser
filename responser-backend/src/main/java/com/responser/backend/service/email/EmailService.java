@@ -4,6 +4,7 @@ import static com.responser.backend.controller.emailConfirmation.EmailConfirmati
 
 import com.responser.backend.config.ApplicationProperties;
 import com.responser.backend.model.EmailConfirmation;
+import com.responser.backend.model.PasswordRestore;
 import com.responser.backend.model.email.EmailContext;
 import com.responser.backend.model.User;
 import com.responser.backend.model.email.EmailTemplate;
@@ -35,12 +36,6 @@ public class EmailService {
     private final SpringTemplateEngine templateEngine;
 
     public void sendEmailConfirmationMessage(User user, EmailConfirmation emailConfirmation) {
-        EmailContext emailContext = new EmailContext();
-        emailContext.setFrom(applicationProperties.getResponserInfoEmail());
-        emailContext.setSubject("Reviewly registration email confirmation");
-        emailContext.setTo(user.getEmail());
-        emailContext.setTemplate(EmailTemplate.EMAIL_CONFIRMATION_TEMPLATE);
-
         Map<String, Object> templateProperties = new HashMap<>();
         templateProperties.put("user", user);
         templateProperties.put(
@@ -48,7 +43,12 @@ public class EmailService {
             applicationProperties.getSelfHost() + EMAIL_CONFIRMATION_URL + "/" + emailConfirmation.getId()
         );
 
-        emailContext.setProperties(templateProperties);
+        EmailContext emailContext = buildEmailContext(
+            "Reviewly registration email confirmation",
+            user.getEmail(),
+            EmailTemplate.EMAIL_CONFIRMATION_TEMPLATE,
+            templateProperties
+        );
 
         try {
             sendEmailMessage(emailContext);
@@ -56,6 +56,40 @@ public class EmailService {
             log.error("Send email confirmation fail", e);
             throw new RuntimeException(e);
         }
+    }
+
+    public void sendPasswordRestoringLink(User user, PasswordRestore passwordRestore) {
+        Map<String, Object> templateProperties = new HashMap<>();
+        templateProperties.put("user", user);
+        templateProperties.put(
+            "restorePasswordLink",
+            applicationProperties.getRestorePasswordPageUrl() + "?pswrId=" + passwordRestore.getId()
+        );
+
+        EmailContext emailContext = buildEmailContext(
+            "Reviewly restore password",
+            user.getEmail(),
+            EmailTemplate.RESTORE_PASSWORD_TEMPLATE,
+            templateProperties
+        );
+
+        try {
+            sendEmailMessage(emailContext);
+        } catch (MessagingException e) {
+            log.error("Send email confirmation fail", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public EmailContext buildEmailContext(String subject, String to, EmailTemplate template, Map<String, Object> templateProperties) {
+        EmailContext emailContext = new EmailContext();
+        emailContext.setFrom(applicationProperties.getResponserInfoEmail());
+        emailContext.setSubject(subject);
+        emailContext.setTo(to);
+        emailContext.setTemplate(template);
+        emailContext.setProperties(templateProperties);
+
+        return emailContext;
     }
 
     public void sendEmailMessage(EmailContext email) throws MessagingException {

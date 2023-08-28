@@ -31,7 +31,7 @@ public class EmailConfirmationService {
         EmailConfirmation newConfirmation = new EmailConfirmation();
         newConfirmation.setUserId(userId);
 
-        if (existByUserId(userId)) {
+        if (emailConfirmationRepository.existsByUserId(userId)) {
             throw new EntityAlreadyExistException(format("EmailConfirmation for user ''{0}'' already exist", userId));
         }
 
@@ -45,20 +45,11 @@ public class EmailConfirmationService {
 
     public EmailConfirmation getByUserId(String userId) {
         return emailConfirmationRepository.findByUserId(userId).orElseThrow(
-            () -> logAndThrowNoSuchEmailConfirmationForUser(userId)
+            () -> new NoSuchElementException(format("EmailConfirmation for user ''{0}'' doesn't exist", userId))
         );
     }
 
     public Optional<EmailConfirmation> findByUserId(String userId) {
         return emailConfirmationRepository.findByUserId(userId);
-    }
-
-    public boolean existByUserId(String userId) {
-        return emailConfirmationRepository.existsByUserId(userId);
-    }
-
-    private NoSuchElementException logAndThrowNoSuchEmailConfirmationForUser(String userId) {
-        log.error("EmailConfirmation for user {} doesn't exist", userId);
-        return new NoSuchElementException(format("EmailConfirmation for user ''{0}'' doesn't exist", userId));
     }
 }

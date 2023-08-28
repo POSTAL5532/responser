@@ -11,8 +11,8 @@ import lombok.Setter;
 @Setter
 @RequiredArgsConstructor
 @Entity
-@Table(name = "email_confirmations")
-public class EmailConfirmation extends AbstractEntity {
+@Table(name = "password_restores")
+public class PasswordRestore extends AbstractEntity {
 
     @Column(name = "user_id")
     private String userId;

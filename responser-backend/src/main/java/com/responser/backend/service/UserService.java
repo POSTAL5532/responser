@@ -2,13 +2,16 @@ package com.responser.backend.service;
 
 import com.responser.backend.exceptions.DataNotValidException;
 import com.responser.backend.model.EmailConfirmation;
+import com.responser.backend.model.PasswordRestore;
 import com.responser.backend.model.User;
 import com.responser.backend.model.User_;
 import com.responser.backend.repository.UserRepository;
 import com.responser.backend.service.email.EmailService;
+import com.responser.backend.utils.ValidationUtils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -35,6 +38,8 @@ public class UserService {
     private final EmailService emailService;
 
     private final EmailConfirmationService emailConfirmationService;
+
+    private final PasswordRestoreService passwordRestoreService;
 
     private final PasswordEncoder passwordEncoder;
 
@@ -118,6 +123,21 @@ public class UserService {
 
         user.setPassword(passwordEncoder.encode(newPassword));
         updateUser(user);
+    }
+
+    @Transactional
+    public void requestPasswordRestoring(String email) {
+        Optional<User> user = userRepository.findByEmail(email);
+
+        if (user.isEmpty()) {
+            throw new DataNotValidException(
+                "User with this email doesn't exist",
+                ValidationUtils.createSingletonFieldErrorMap(User_.EMAIL, "User with this email doesn't exist")
+            );
+        }
+
+        PasswordRestore passwordRestore = passwordRestoreService.createPasswordRestore(user.get().getId());
+        emailService.sendPasswordRestoringLink(user.get(), passwordRestore);
     }
 
     public boolean existByEmail(String email) {

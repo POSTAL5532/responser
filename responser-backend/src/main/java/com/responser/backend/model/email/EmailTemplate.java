@@ -1,7 +1,8 @@
 package com.responser.backend.model.email;
 
 public enum EmailTemplate {
-    EMAIL_CONFIRMATION_TEMPLATE("emailConfirmationEmailTemplate");
+    EMAIL_CONFIRMATION_TEMPLATE("emailConfirmationEmailTemplate"),
+    RESTORE_PASSWORD_TEMPLATE("restorePasswordEmailTemplate");
 
     private final String templateName;
 

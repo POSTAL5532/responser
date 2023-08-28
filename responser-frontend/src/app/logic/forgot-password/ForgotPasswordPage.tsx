@@ -10,6 +10,7 @@ import {nativeNavigateTo} from "../../utils/NavigationUtils";
 import {Modal} from "../../components/modal/Modal";
 import ApplicationProperties from "../../service/ApplicationProperties";
 import {observer} from "mobx-react";
+import {FormikHelpers} from "formik/dist/types";
 
 export const FORGOT_PASSWORD_PAGE_URL = "/forgot-password";
 
@@ -22,8 +23,8 @@ const ForgotPasswordPage: React.FC = () => {
     const {forgotPasswordPayload, loadingState: {isDataSubmitting}, sendRestorePasswordLink} = useForgotPasswordPageStore();
     const [passwordRestoreLinkSent, setPasswordRestoreLinkSent] = useState(false);
 
-    const onSubmit = () => {
-        sendRestorePasswordLink().then(() => setPasswordRestoreLinkSent(true));
+    const onSubmit = (values: any, {setFieldError}: FormikHelpers<any>) => {
+        sendRestorePasswordLink(setFieldError).then(() => setPasswordRestoreLinkSent(true));
     }
 
     return (

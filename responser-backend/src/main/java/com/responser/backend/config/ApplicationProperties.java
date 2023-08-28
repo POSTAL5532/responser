@@ -46,6 +46,9 @@ public class ApplicationProperties {
     private String authRedirectUri;
 
     @NotBlank
+    private String restorePasswordPageUrl;
+
+    @NotBlank
     private String signUpPageUrl;
 
     @NotBlank

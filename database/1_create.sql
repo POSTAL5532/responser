@@ -23,6 +23,15 @@ CREATE TABLE email_confirmations
     PRIMARY KEY (id)
 );
 
+CREATE TABLE password_restores
+(
+    id            VARCHAR(36) NOT NULL UNIQUE,
+    user_id       VARCHAR(36) NOT NULL REFERENCES users (id) ON DELETE CASCADE,
+    creation_date TIMESTAMP   NOT NULL,
+    update_date   TIMESTAMP,
+    PRIMARY KEY (id)
+);
+
 CREATE TABLE web_resource
 (
     id            VARCHAR(36) NOT NULL UNIQUE,
