@@ -8,7 +8,7 @@ const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 let ENV_FILE_PROPERTIES;
 let CONFIGS_PATH;
 
-const BASE_PATH = "/app/"
+const BASE_PATH = "/app"
 
 /**
  * Init ENV_FILE_PROPERTIES
@@ -80,7 +80,7 @@ module.exports = (env, args) => {
                             loader: "file-loader",
                             options: {
                                 outputPath: 'images',
-                                publicPath: 'images',
+                                //publicPath: 'images', // sometimes has problems with resources routing (absolute / relative paths)
                                 esModule: false
                             }
                         }
@@ -94,7 +94,7 @@ module.exports = (env, args) => {
                             loader: "file-loader",
                             options: {
                                 outputPath: 'fonts',
-                                publicPath: 'fonts',
+                                //publicPath: 'fonts', // sometimes has problems with resources routing (absolute / relative paths)
                                 esModule: false
                             }
                         }
