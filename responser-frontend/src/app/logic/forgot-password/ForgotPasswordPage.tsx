@@ -24,7 +24,7 @@ const ForgotPasswordPage: React.FC = () => {
     const [passwordRestoreLinkSent, setPasswordRestoreLinkSent] = useState(false);
 
     const onSubmit = (values: any, {setFieldError}: FormikHelpers<any>) => {
-        sendRestorePasswordLink(setFieldError).then(() => setPasswordRestoreLinkSent(true));
+        sendRestorePasswordLink(setFieldError).then(result => setPasswordRestoreLinkSent(result));
     }
 
     return (

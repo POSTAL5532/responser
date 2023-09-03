@@ -3,34 +3,44 @@ import {useState} from "react";
 import {ForgotPasswordPayload} from "../../model/ForgotPasswordPayload";
 import {UserService} from "../../service/UserService";
 import {Logger} from "../../utils/Logger";
+import {ApiError, ApiErrorType} from "../../model/ApiError";
 
 export class ForgotPasswordPageStore {
 
     private readonly logger: Logger = new Logger("ForgotPasswordPageStore");
 
-    userService: UserService = new UserService();
+    private readonly userService: UserService = new UserService();
 
-    forgotPasswordPayload: ForgotPasswordPayload = new ForgotPasswordPayload();
+    readonly forgotPasswordPayload: ForgotPasswordPayload = new ForgotPasswordPayload();
 
-    loadingState: ForgotPasswordPageStoreLoadingState = new ForgotPasswordPageStoreLoadingState();
+    readonly loadingState: ForgotPasswordPageStoreLoadingState = new ForgotPasswordPageStoreLoadingState();
 
     constructor() {
         makeAutoObservable(this);
     }
 
-    public sendRestorePasswordLink = async (setFieldError?: (field: string, message: string) => void): Promise<void> => {
+    public sendRestorePasswordLink = async (setFieldError?: (field: string, message: string) => void): Promise<boolean> => {
         this.loadingState.isDataSubmitting = true;
         this.logger.debug("Send restore password link - start.");
 
-        await this.userService.sendRestorePasswordLink(this.forgotPasswordPayload)
-        .catch(error => {
-            Object.keys(error.data).forEach(key => setFieldError(key, error.data[key]));
+        try {
+            await this.userService.sendRestorePasswordLink(this.forgotPasswordPayload);
+        } catch (error) {
+            if (error instanceof ApiError && error.errorType == ApiErrorType.VALIDATION_ERROR) {
+                const apiError = error as ApiError;
+                console.log("IS API ERROR")
+                Object.keys(error.data).forEach(key => setFieldError(key, apiError.data[key]));
+                return false;
+            }
+
+            console.log("IS NON API ERROR")
             throw error;
-        })
-        .finally(() => {
+        } finally {
             this.loadingState.isDataSubmitting = false;
             this.logger.debug("Send restore password link - finish.");
-        });
+        }
+
+        return true;
     }
 }
 

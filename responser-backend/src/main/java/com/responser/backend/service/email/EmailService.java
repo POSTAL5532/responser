@@ -13,6 +13,11 @@ import jakarta.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
@@ -44,7 +49,7 @@ public class EmailService {
         );
 
         EmailContext emailContext = buildEmailContext(
-            "Reviewly registration email confirmation",
+            "Reviewly: Registration email confirmation",
             user.getEmail(),
             EmailTemplate.EMAIL_CONFIRMATION_TEMPLATE,
             templateProperties
@@ -63,11 +68,11 @@ public class EmailService {
         templateProperties.put("user", user);
         templateProperties.put(
             "restorePasswordLink",
-            applicationProperties.getRestorePasswordPageUrl() + "?pswrId=" + passwordRestore.getId()
+            applicationProperties.getRestorePasswordPageUrl() + "/" + passwordRestore.getId()
         );
 
         EmailContext emailContext = buildEmailContext(
-            "Reviewly restore password",
+            "Reviewly: Restore password",
             user.getEmail(),
             EmailTemplate.RESTORE_PASSWORD_TEMPLATE,
             templateProperties
@@ -76,7 +81,26 @@ public class EmailService {
         try {
             sendEmailMessage(emailContext);
         } catch (MessagingException e) {
-            log.error("Send email confirmation fail", e);
+            log.error("Send email with restore password link fail", e);
+            throw new RuntimeException(e);
+        }
+    }
+
+    public void sendPasswordChangedNotification(User user) {
+        Map<String, Object> templateProperties = new HashMap<>();
+        templateProperties.put("user", user);
+
+        EmailContext emailContext = buildEmailContext(
+            "Reviewly: Password changed",
+            user.getEmail(),
+            EmailTemplate.RESTORE_PASSWORD_TEMPLATE,
+            templateProperties
+        );
+
+        try {
+            sendEmailMessage(emailContext);
+        } catch (MessagingException e) {
+            log.error("Send email with restore password link fail", e);
             throw new RuntimeException(e);
         }
     }
@@ -112,4 +136,35 @@ public class EmailService {
 
         emailSender.send(message);
     }
+
+    /*public AssignmentAndJobDetailsResponsesWrapper getAssignmentAndJobDetailsResponsesWrapperConcurrently(String jobId) {
+        AssignmentAndJobDetailsResponsesWrapper responsesWrapper = new AssignmentAndJobDetailsResponsesWrapper();
+        ExecutorService executorService = Executors.newFixedThreadPool(2);
+
+        Callable<LegacyJobDetailsResponse> getJobDetails = () -> legacyJobDetailsService.getJobDetails(jobId);
+        Callable<AssignmentResponse> getAssignmentResponse = () -> (
+            WOM2_JOB_ID_LENGTH == jobId.length()
+                ? assignmentService.getAssignmentData(jobId)
+                : new AssignmentResponse()
+        );
+
+        Future<LegacyJobDetailsResponse> getJobDetailsFuture = executorService.submit(getJobDetails);
+        Future<AssignmentResponse> getAssignmentResponseFuture = executorService.submit(getAssignmentResponse);
+
+        try {
+            responsesWrapper.setLegacyJobDetailsResponse(getJobDetailsFuture.get());
+            responsesWrapper.setAssignmentResponse(getAssignmentResponseFuture.get());
+        } catch (ExecutionException exception) {
+            log.error("Exception occurred while fetching the job details and assignment response. " + exception.getMessage());
+            Throwables.throwIfInstanceOf(exception.getCause(), BellInternalErrorException.class);
+            return responsesWrapper;
+        } catch (InterruptedException exception) {
+            log.error("Multi thread flow exception occurred while fetching the job details and assignment response. " + exception.getMessage());
+            return responsesWrapper;
+        } finally {
+            executorService.shutdownNow();
+        }
+
+        return responsesWrapper;
+    }*/
 }

@@ -45,15 +45,15 @@ spring:
         jwt:
           issuer-uri: http://dev.reviewly.space/auth
   mail:
-    host: smtpout.secureserver.net
-    port: 465
+    host: smtp.office365.com
+    port: 587
     username: info@reviewly.space
     password: 5#OFpkKn9YXa69Dl6Ts5&q6Z
     protocol: smtp
     properties.mail.smtp:
       auth: true
-      ssl.enable: true
-      ssl.trust: "*"
+      starttls:
+        enable: true
 responser:
   runMode: LOCAL
   selfHost: http://dev.reviewly.space

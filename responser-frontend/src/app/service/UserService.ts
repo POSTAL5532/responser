@@ -5,6 +5,7 @@ import {Logger} from "../utils/Logger";
 import {UpdateUserPayload} from "../model/UpdateUserPayload";
 import {UpdateUserPasswordPayload} from "../model/UpdateUserPasswordPayload";
 import {ForgotPasswordPayload} from "../model/ForgotPasswordPayload";
+import {RestorePasswordPayload} from "../model/RestorePasswordPayload";
 
 const BASE_USER_REQUEST = "/users"
 
@@ -38,8 +39,13 @@ export class UserService {
         await this.client.executePutRequest(`${BASE_USER_REQUEST}/update-password`, passwordPayload);
     }
 
-    sendRestorePasswordLink = async (forgotPasswordPayload: ForgotPasswordPayload) => {
+    sendRestorePasswordLink = async (forgotPasswordPayload: ForgotPasswordPayload): Promise<void> => {
         this.logger.debug("Send restoring link for user password.", forgotPasswordPayload);
         await this.client.executePostRequest(`${BASE_USER_REQUEST}/send-restore-password-link`, forgotPasswordPayload)
+    }
+
+    restorePassword = async (restorePasswordPayload: RestorePasswordPayload): Promise<void> => {
+        this.logger.debug("Restore user password.", restorePasswordPayload);
+        await this.client.executePostRequest(`${BASE_USER_REQUEST}/restore-password`, restorePasswordPayload)
     }
 }

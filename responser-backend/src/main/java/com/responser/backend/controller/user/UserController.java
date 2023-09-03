@@ -4,6 +4,7 @@ import static com.responser.backend.config.ApplicationProperties.API_ROOT_PATH;
 
 import com.responser.backend.controller.user.payload.CreateUserProfilePayload;
 import com.responser.backend.controller.user.payload.ForgotPasswordPayload;
+import com.responser.backend.controller.user.payload.RestorePasswordPayload;
 import com.responser.backend.controller.user.payload.UpdateUserPasswordPayload;
 import com.responser.backend.controller.user.payload.UpdateUserPayload;
 import com.responser.backend.controller.user.payload.UserInfoPayload;
@@ -76,6 +77,15 @@ public class UserController {
     public ResponseEntity<Void> sendRestorePasswordLink(@Valid @NotNull @RequestBody ForgotPasswordPayload forgotPasswordPayload) {
         log.info("Send restoring link for user password with email {}.", forgotPasswordPayload.getEmail());
         userService.requestPasswordRestoring(forgotPasswordPayload.getEmail());
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PostMapping("/restore-password")
+    public ResponseEntity<Void> restorePassword(@Valid @NotNull @RequestBody RestorePasswordPayload restorePasswordPayload) {
+        log.info("Restore password by password restore: {}.", restorePasswordPayload);
+        userService.restorePassword(restorePasswordPayload.getRestorePasswordId(), restorePasswordPayload.getNewPassword());
+
         return ResponseEntity.ok().build();
     }
 }

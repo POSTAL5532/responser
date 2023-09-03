@@ -140,6 +140,15 @@ public class UserService {
         emailService.sendPasswordRestoringLink(user.get(), passwordRestore);
     }
 
+    @Transactional
+    public void restorePassword(String passwordRestoreId, String newPassword) {
+        PasswordRestore passwordRestore = passwordRestoreService.getById(passwordRestoreId);
+        User user = getUser(passwordRestore.getUserId());
+        user.setPassword(passwordEncoder.encode(newPassword));
+        userRepository.save(user);
+        emailService.sendPasswordChangedNotification(user);
+    }
+
     public boolean existByEmail(String email) {
         return userRepository.existsByEmail(email);
     }

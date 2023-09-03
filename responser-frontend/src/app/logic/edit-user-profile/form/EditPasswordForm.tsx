@@ -15,7 +15,7 @@ type EditPasswordFormProps = {
     disabled?: boolean;
 }
 
-const EDIT_USER_FORM_VALIDATION_SCHEMA = Yup.object().shape({
+const EDIT_PASSWORD_FORM_VALIDATION_SCHEMA = Yup.object().shape({
     oldPassword: Yup.string().required("Old is required"),
     newPassword: PASSWORD_VALIDATION_SCHEMA.password,
     confirmNewPassword: PASSWORD_VALIDATION_SCHEMA.password
@@ -36,7 +36,7 @@ const EditPasswordForm: React.FC<EditPasswordFormProps> = (props: EditPasswordFo
         <div className="edit-password-form">
             <Formik initialValues={updateUserPasswordPayload}
                     onSubmit={onSubmit}
-                    validationSchema={EDIT_USER_FORM_VALIDATION_SCHEMA}>
+                    validationSchema={EDIT_PASSWORD_FORM_VALIDATION_SCHEMA}>
                 <Form>
                     <PasswordField name="oldPassword"
                                    label="Old password"
