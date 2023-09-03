@@ -1,6 +1,7 @@
 import {TokenInfo} from "app/model/TokenInfo";
 import ApplicationProperties from "app/service/ApplicationProperties";
 import {Logger} from "../../utils/Logger";
+import {removeCookie} from "../../utils/CookieUtils";
 
 const ACCESS_TOKEN_KEY = "access_token";
 const REFRESH_TOKEN_KEY = "refresh_token";
@@ -103,6 +104,7 @@ class LocalTokenStorageService {
         this.removeRefreshToken();
         this.removeTokenType();
         this.removeExpiresIn();
+        removeCookie("userFullName");
     }
 
     get basicAuthorizationHeader(): any {

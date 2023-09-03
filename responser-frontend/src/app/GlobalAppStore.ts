@@ -5,6 +5,7 @@ import LocalTokenStorageService from "app/service/authorization/LocalTokenStorag
 import {UserService} from "app/service/UserService";
 import {reloadPage} from "./utils/NavigationUtils";
 import {Logger} from "./utils/Logger";
+import {setCookie} from "./utils/CookieUtils";
 
 export class GlobalAppStore {
 
@@ -34,6 +35,7 @@ export class GlobalAppStore {
             this.logger.debug("Update current user info");
             const user = await this.userService.getCurrentUser();
             runInAction(() => this.currentUser = user);
+            setCookie("userFullName", this.currentUser.fullName, {path: "/"});
         } catch (error: any) {
             this.logger.error("Update current user info - error:", error, ", remove tokens and reload page");
             LocalTokenStorageService.removeAllTokens();
