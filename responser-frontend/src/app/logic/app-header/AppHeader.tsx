@@ -41,10 +41,6 @@ const AppHeader: React.FC<PageHeaderProps> = (props: PageHeaderProps) => {
                 <Icon type={IconType.REVIEWLY_LOGO}/> {props.title}
             </div>
 
-            <div onClick={() => navigateTo(RESTORE_PASSWORD_PAGE_URL)}>
-                test
-            </div>
-
             {
                 currentUser &&
                 <div className="user-block">
