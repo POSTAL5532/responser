@@ -38,7 +38,7 @@ const RestorePasswordPage: React.FC = () => {
     }
 
     const onSubmit = (values: any, {setFieldError}: FormikHelpers<any>) => {
-        restorePassword(setFieldError).then(() => setPasswordRestored(true));
+        restorePassword(setFieldError).then(result => setPasswordRestored(result));
     }
 
     return(

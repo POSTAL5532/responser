@@ -3,7 +3,7 @@ import {useState} from "react";
 import {UserService} from "../../service/UserService";
 import {RestorePasswordPayload} from "../../model/RestorePasswordPayload";
 import {Logger} from "../../utils/Logger";
-import {ApiError, ApiErrorType} from "../../model/ApiError";
+import {isValidationError, setErrorsToFields} from "../../utils/ErrorUtils";
 
 export class RestorePasswordPageStore {
 
@@ -29,22 +29,25 @@ export class RestorePasswordPageStore {
         return !!this.restorePasswordPayload.newPassword && !!this.restorePasswordPayload.confirmNewPassword;
     }
 
-    public restorePassword = async (setFieldError?: (field: string, message: string) => void) => {
+    public restorePassword = async (setFieldError?: (field: string, message: string) => void): Promise<boolean> => {
         this.loadingState.isDataSubmitting = true;
         this.logger.debug("Password restoring - start.");
 
-        await this.userService.restorePassword(this.restorePasswordPayload)
-        .catch(error => {
-            if (error instanceof ApiError && error.errorType == ApiErrorType.VALIDATION_ERROR) {
-                Object.keys(error.data).forEach(key => setFieldError(key, error.data[key]));
-            } else {
-                throw error;
+        try {
+            await this.userService.restorePassword(this.restorePasswordPayload);
+        } catch (error: any) {
+            if (isValidationError(error)) {
+                setErrorsToFields(error, setFieldError);
+                this.logger.debug("Password restoring - validation error.");
+                return false;
             }
-        })
-        .finally(() => {
+            throw error;
+        } finally {
             this.loadingState.isDataSubmitting = false;
             this.logger.debug("Password restoring - finish.");
-        });
+        }
+
+        return true;
     }
 }
 

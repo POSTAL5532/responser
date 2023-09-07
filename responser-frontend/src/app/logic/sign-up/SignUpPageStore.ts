@@ -1,8 +1,8 @@
 import {makeAutoObservable} from "mobx";
 import {UserAccountDataPayload} from "app/model/UserAccountDataPayload";
 import {UserService} from "app/service/UserService";
-import AuthorizationService from "../../service/authorization/AuthorizationService";
 import {Logger} from "../../utils/Logger";
+import {isValidationError, setErrorsToFields} from "../../utils/ErrorUtils";
 
 /**
  * Sign up page store.
@@ -27,15 +27,22 @@ export class SignUpPageStore {
     /**
      * Runs sign up process.
      */
-    signUp = (setFieldError?: (field: string, message: string) => void): Promise<void> => {
-        this.logger.debug("Sign up new user");
+    signUp = async (setFieldError?: (field: string, message: string) => void): Promise<void> => {
+        this.logger.debug("Sign up new user - start");
         this.signUpInProcess = true;
 
-        return this.userService.signUp(this.signUpPayload)
-        .then(AuthorizationService.requestLoginPage)
-        .catch(error => {
-            Object.keys(error.data).forEach(key => setFieldError(key, error.data[key]))
-        })
-        .finally(() => this.signUpInProcess = false);
+        try {
+            await this.userService.signUp(this.signUpPayload)
+        } catch (error: any) {
+            if (isValidationError(error)) {
+                setErrorsToFields(error, setFieldError);
+                this.logger.error("Sign up new user - validation error");
+                return;
+            }
+            throw error;
+        } finally {
+            this.signUpInProcess = false;
+            this.logger.debug("Sign up new user - finish");
+        }
     }
 }

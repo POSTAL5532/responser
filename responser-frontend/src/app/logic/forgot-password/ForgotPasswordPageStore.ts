@@ -3,7 +3,7 @@ import {useState} from "react";
 import {ForgotPasswordPayload} from "../../model/ForgotPasswordPayload";
 import {UserService} from "../../service/UserService";
 import {Logger} from "../../utils/Logger";
-import {ApiError, ApiErrorType} from "../../model/ApiError";
+import {isValidationError, setErrorsToFields} from "../../utils/ErrorUtils";
 
 export class ForgotPasswordPageStore {
 
@@ -25,15 +25,12 @@ export class ForgotPasswordPageStore {
 
         try {
             await this.userService.sendRestorePasswordLink(this.forgotPasswordPayload);
-        } catch (error) {
-            if (error instanceof ApiError && error.errorType == ApiErrorType.VALIDATION_ERROR) {
-                const apiError = error as ApiError;
-                console.log("IS API ERROR")
-                Object.keys(error.data).forEach(key => setFieldError(key, apiError.data[key]));
+        } catch (error: any) {
+            if (isValidationError(error)) {
+                setErrorsToFields(error, setFieldError);
+                this.logger.debug("Send restore password link - validation error.");
                 return false;
             }
-
-            console.log("IS NON API ERROR")
             throw error;
         } finally {
             this.loadingState.isDataSubmitting = false;

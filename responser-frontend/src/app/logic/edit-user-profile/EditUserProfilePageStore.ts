@@ -5,6 +5,7 @@ import {UserService} from "../../service/UserService";
 import {UpdateUserPayload} from "../../model/UpdateUserPayload";
 import {User} from "../../model/User";
 import {UpdateUserPasswordPayload} from "../../model/UpdateUserPasswordPayload";
+import {isValidationError, setErrorsToFields} from "../../utils/ErrorUtils";
 
 export class EditUserProfilePageStore {
 
@@ -34,10 +35,16 @@ export class EditUserProfilePageStore {
     public initUpdateUserPayload = async () => {
         this.logger.debug("Init update user payload - start.");
 
-        const currentUser: User = await this.userService.getCurrentUser()
-        .finally(() => {
+        let currentUser: User;
+
+        try {
+            currentUser = await this.userService.getCurrentUser();
+        } catch (error: any) {
+            this.logger.error("Init update user payload - error.");
+            throw error;
+        } finally {
             this.logger.debug("Init update user payload - finish.");
-        });
+        }
 
         this.currentUser = currentUser;
 
@@ -77,30 +84,38 @@ export class EditUserProfilePageStore {
         this.loadingState.isDataSubmitting = true;
         this.logger.debug("Update user - start.");
 
-        await this.userService.updateUser(this.updateUserPayload)
-        .catch(error => {
-            Object.keys(error.data).forEach(key => setFieldError(key, error.data[key]));
+        try {
+            await this.userService.updateUser(this.updateUserPayload);
+        } catch (error: any) {
+            if (isValidationError(error)) {
+                setErrorsToFields(error, setFieldError);
+                this.logger.error("Update user - validation error");
+                return;
+            }
             throw error;
-        })
-        .finally(() => {
+        } finally {
             this.loadingState.isDataSubmitting = false;
             this.logger.debug("Update user - finish.");
-        });
+        }
     }
 
     public updatePassword = async (setFieldError?: (field: string, message: string) => void): Promise<void> => {
         this.loadingState.isDataSubmitting = true;
         this.logger.debug("Update user password - start.");
 
-        await this.userService.updatePassword(this.updateUserPasswordPayload)
-        .catch(error => {
-            Object.keys(error.data).forEach(key => setFieldError(key, error.data[key]));
+        try {
+            await this.userService.updatePassword(this.updateUserPasswordPayload);
+        } catch (error: any) {
+            if (isValidationError(error)) {
+                setErrorsToFields(error, setFieldError);
+                this.logger.error("Update user password - validation error");
+                return;
+            }
             throw error;
-        })
-        .finally(() => {
+        } finally {
             this.loadingState.isDataSubmitting = false;
             this.logger.debug("Update user password - finish.");
-        });
+        }
     }
 }
 

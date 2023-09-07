@@ -45,12 +45,10 @@ const errorInterceptor = (error: any): Promise<any> => {
     } else if (data?.apiError) {
         const apiError: ApiError = new ApiError(data.apiError, data.message, data.errorType, data.data);
         apiClientLogger.error("Api request error:", apiError.message, apiError.errorType);
-        console.log("REJECT AS APIERROR")
         return Promise.reject(apiError);
     }
 
     apiClientLogger.error("Request error", data);
-    console.log("REJECT AS NONE APIERROR")
     return Promise.reject(error);
 }
 
