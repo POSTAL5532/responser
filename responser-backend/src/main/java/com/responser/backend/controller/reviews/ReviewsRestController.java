@@ -2,6 +2,7 @@ package com.responser.backend.controller.reviews;
 
 import static com.responser.backend.config.ApplicationProperties.API_ROOT_PATH;
 
+import com.responser.backend.controller.RestApiController;
 import com.responser.backend.controller.payload.PageableResponse;
 import com.responser.backend.controller.payload.Pagination;
 import com.responser.backend.controller.reviews.payload.ReviewInfoDTO;
@@ -38,7 +39,7 @@ import java.util.Objects;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(API_ROOT_PATH + "/reviews")
-public class ReviewsApiController {
+public class ReviewsRestController extends RestApiController {
 
     private final ReviewService reviewService;
 

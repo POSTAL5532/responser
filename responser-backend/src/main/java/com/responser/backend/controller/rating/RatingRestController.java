@@ -2,6 +2,7 @@ package com.responser.backend.controller.rating;
 
 import static com.responser.backend.config.ApplicationProperties.API_ROOT_PATH;
 
+import com.responser.backend.controller.RestApiController;
 import com.responser.backend.controller.rating.payload.ResourceRatings;
 import com.responser.backend.model.ResourceRating;
 import com.responser.backend.service.RatingService;
@@ -17,7 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(API_ROOT_PATH + "/rating")
-public class RatingController {
+public class RatingRestController extends RestApiController {
 
     private final RatingService ratingService;
 

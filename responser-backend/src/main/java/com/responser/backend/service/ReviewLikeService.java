@@ -38,8 +38,8 @@ public class ReviewLikeService {
         String userId = newLike.getUserId();
 
         if (existsByReviewIdAndUserId(reviewId, userId)) {
-            log.error("User {} already leve reaction for review {}", userId, reviewId);
-            throw new EntityAlreadyExistException(format("User ''{0}'' already leve reaction for review ''{1}''", userId, reviewId));
+            log.error("User {} already left reaction for review {}", userId, reviewId);
+            throw new EntityAlreadyExistException(format("User ''{0}'' already left reaction for review ''{1}''", userId, reviewId));
         }
 
         return reviewLikeRepository.save(newLike);

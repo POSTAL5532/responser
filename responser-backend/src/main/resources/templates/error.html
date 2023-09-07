@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      lang="en"
+      th:replace="~{layouts/pageMainLayout :: main-fragment(
+          'Error',
+          ~{:: #headContent},
+          ~{:: #mainContent},
+          ${httpStatus.value() + ' Error'},
+          'error-page',
+           null
+      )}">
+<head>
+    <title></title>
+    <th:block id="headContent">
+        <link th:href="@{/css/sitesRating.css}" rel="stylesheet"/>
+    </th:block>
+</head>
+<body>
+
+<th:block id="mainContent">
+    <h2>Uuups! Something goes wrong!</h2>
+
+    <div th:if="${errorMessage != null}">
+        <h3>Error message:</h3>
+        <p th:text="${errorMessage}">! ERROR !</p>
+    </div>
+
+    <a th:href="${@applicationProperties.selfHost}">Go home</a>
+</th:block>
+
+</body>
+</html>

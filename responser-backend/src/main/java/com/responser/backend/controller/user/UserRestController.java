@@ -2,6 +2,7 @@ package com.responser.backend.controller.user;
 
 import static com.responser.backend.config.ApplicationProperties.API_ROOT_PATH;
 
+import com.responser.backend.controller.RestApiController;
 import com.responser.backend.controller.user.payload.CreateUserProfilePayload;
 import com.responser.backend.controller.user.payload.ForgotPasswordPayload;
 import com.responser.backend.controller.user.payload.RestorePasswordPayload;
@@ -30,7 +31,7 @@ import java.security.Principal;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(API_ROOT_PATH + "/users")
-public class UserController {
+public class UserRestController extends RestApiController {
 
     private final UserService userService;
 

@@ -9,5 +9,7 @@ public enum ApiErrorType {
 
     ENTITY_NOT_FOUND,
 
-    VALIDATION_ERROR
+    VALIDATION_ERROR,
+
+    UNKNOWN_ERROR
 }

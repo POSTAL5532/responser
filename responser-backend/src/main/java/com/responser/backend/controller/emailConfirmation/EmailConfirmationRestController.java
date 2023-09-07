@@ -2,6 +2,7 @@ package com.responser.backend.controller.emailConfirmation;
 
 import static com.responser.backend.config.ApplicationProperties.API_ROOT_PATH;
 
+import com.responser.backend.controller.RestApiController;
 import com.responser.backend.service.UserService;
 import java.security.Principal;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(API_ROOT_PATH + "/email-confirmation")
-public class EmailConfirmationApiController {
+public class EmailConfirmationRestController extends RestApiController {
 
     private final UserService userService;
 

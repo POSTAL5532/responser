@@ -2,6 +2,7 @@ package com.responser.backend.controller.webresource;
 
 import static com.responser.backend.config.ApplicationProperties.API_ROOT_PATH;
 
+import com.responser.backend.controller.RestApiController;
 import com.responser.backend.controller.webresource.payload.NewWebResourceDTO;
 import com.responser.backend.controller.webresource.payload.WebResourceDTO;
 import com.responser.backend.converter.WebResourceConverter;
@@ -27,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 @RestController
 @RequestMapping(API_ROOT_PATH + "/web-resources")
-public class WebResourceApiController {
+public class WebResourceRestController extends RestApiController {
 
     private final WebResourceService webResourceService;
     private final WebResourceConverter webResourceConverter;

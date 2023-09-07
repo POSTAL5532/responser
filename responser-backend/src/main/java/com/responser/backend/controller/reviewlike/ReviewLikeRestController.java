@@ -2,6 +2,7 @@ package com.responser.backend.controller.reviewlike;
 
 import static com.responser.backend.config.ApplicationProperties.API_ROOT_PATH;
 
+import com.responser.backend.controller.RestApiController;
 import com.responser.backend.controller.reviewlike.payload.ReviewLikeInfoDTO;
 import com.responser.backend.controller.reviewlike.payload.ReviewLikeDTO;
 import com.responser.backend.converter.ReviewLikeConverter;
@@ -28,7 +29,7 @@ import java.security.Principal;
 @AllArgsConstructor
 @RestController
 @RequestMapping(API_ROOT_PATH + "/review-likes")
-public class ReviewLikeController {
+public class ReviewLikeRestController extends RestApiController {
 
     private final ReviewLikeService reviewLikeService;
 

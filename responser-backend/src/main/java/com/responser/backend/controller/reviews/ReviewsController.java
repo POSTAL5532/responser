@@ -1,6 +1,7 @@
 package com.responser.backend.controller.reviews;
 
 import com.responser.backend.config.ApplicationProperties;
+import com.responser.backend.exceptions.DataNotValidException;
 import com.responser.backend.model.Review;
 import com.responser.backend.model.ReviewLike;
 import com.responser.backend.model.ReviewMetaImage;
@@ -53,7 +54,10 @@ public class ReviewsController {
         model.addAttribute("currentPageNumber", reviews.getNumber());
         model.addAttribute("pagesCount", reviews.getTotalPages());
 
-        return "seeReviewsPage";
+        // TODO: Сделать абстрактный класс для API контроллеров с собственным exception handling (см. RestExceptionHandler)
+        throw new DataNotValidException("AAAAAAAAAAAAA! Some error message!");
+
+//        return "seeReviewsPage";
     }
 
     @GetMapping("/{reviewId}")
