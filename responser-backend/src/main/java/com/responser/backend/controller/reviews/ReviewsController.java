@@ -1,7 +1,6 @@
 package com.responser.backend.controller.reviews;
 
 import com.responser.backend.config.ApplicationProperties;
-import com.responser.backend.exceptions.DataNotValidException;
 import com.responser.backend.model.Review;
 import com.responser.backend.model.ReviewLike;
 import com.responser.backend.model.ReviewMetaImage;
