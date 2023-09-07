@@ -54,10 +54,7 @@ public class ReviewsController {
         model.addAttribute("currentPageNumber", reviews.getNumber());
         model.addAttribute("pagesCount", reviews.getTotalPages());
 
-        // TODO: Сделать абстрактный класс для API контроллеров с собственным exception handling (см. RestExceptionHandler)
-        throw new DataNotValidException("AAAAAAAAAAAAA! Some error message!");
-
-//        return "seeReviewsPage";
+        return "seeReviewsPage";
     }
 
     @GetMapping("/{reviewId}")
