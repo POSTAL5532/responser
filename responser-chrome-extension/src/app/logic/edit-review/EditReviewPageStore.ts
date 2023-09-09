@@ -41,16 +41,7 @@ export class EditReviewPageStore {
     }
 
     public init = async (currentUserId: string, reviewId: string, pageId: string, siteId: string) => {
-        this.logger.debug(
-            "Init store: currentUserId=",
-            currentUserId,
-            ", reviewId=",
-            reviewId,
-            ", pageId=",
-            pageId,
-            ", siteId=",
-            siteId
-        );
+        this.logger.debug("Init store: currentUserId=", currentUserId, ", reviewId=", reviewId, ", pageId=", pageId, ", siteId=", siteId);
 
         this.currentUserId = currentUserId;
         this.pageId = pageId;
@@ -80,7 +71,7 @@ export class EditReviewPageStore {
     public saveReview = async () => {
         this.loadingState.isDataSubmitting = true;
 
-        if (this.reviewId) {
+        if (!this.isNewReview) {
             this.logger.debug("Save edited review");
             await this.reviewService.updateReview(this.reviewId, this.reviewData)
             .finally(() => this.loadingState.isDataSubmitting = false);

@@ -37,8 +37,9 @@ export class ExtensionService {
 
         try {
             data = await this.sendMessage(message);
-        }catch (error) {
+        } catch (error) {
             this.logger.debug("Get current page info - error:", error);
+            throw error;
         }
 
         this.logger.debug("Get current page info - finish");

@@ -2,7 +2,7 @@ import {makeAutoObservable} from "mobx";
 import {Review} from "../../model/Review";
 import {ReviewService} from "../../service/ReviewService";
 import {useState} from "react";
-import {ApiErrorType} from "../../model/ApiError";
+import {ApiError, ApiErrorType} from "../../model/ApiError";
 import {ExtensionService} from "../../service/extension/ExtensionService";
 import {PageInfo} from "../../model/PageInfo";
 import {ReviewsRequestCriteria} from "../../model/ReviewsRequestCriteria";
@@ -91,12 +91,13 @@ export class ReviewsPageStore {
             this.site = await this.webResourceService.getSiteByUrl(url);
         } catch (error: any) {
             this.logger.debug("Init site error - check type of error...");
-            if (error.errorType === ApiErrorType.ENTITY_NOT_FOUND) {
+            if (error instanceof ApiError && error.errorType === ApiErrorType.ENTITY_NOT_FOUND) {
                 this.logger.debug("Init site error is 'ENTITY_NOT_FOUND' type - create new site.");
                 const newWebResource = new NewWebResource(url, ResourceType.SITE);
                 this.site = await this.webResourceService.create(newWebResource);
             } else {
                 this.logger.error("Init site error is unknown: ", error);
+                throw error;
             }
         } finally {
             this.loadingState.isSiteLoading = false;
@@ -116,13 +117,14 @@ export class ReviewsPageStore {
             this.page = await this.webResourceService.getPageByUrl(url);
         } catch (error: any) {
             this.logger.debug("Init page error - check type of error...");
-            if (error.errorType === ApiErrorType.ENTITY_NOT_FOUND) {
+            if (error instanceof ApiError && error.errorType === ApiErrorType.ENTITY_NOT_FOUND) {
                 this.logger.debug("Init page error is 'ENTITY_NOT_FOUND' type - create new page.");
                 const createPagePayload = new NewWebResource(url, ResourceType.PAGE);
                 createPagePayload.parentId = this.site.id;
                 this.page = await this.webResourceService.create(createPagePayload);
             } else {
                 this.logger.error("Init page error is unknown: ", error);
+                throw error;
             }
         } finally {
             this.loadingState.isPageLoading = false;

@@ -44,8 +44,8 @@ const errorInterceptor = (error: any): Promise<any> => {
                 return axios.request(error.config);
             });
     } else if (data?.apiError) {
-        const apiError = data as ApiError;
-        apiClientLogger.error("Api request error", apiError.message, apiError.errorType);
+        const apiError: ApiError = new ApiError(data.apiError, data.message, data.errorType, data.data);
+        apiClientLogger.error("Api request error:", apiError.message, apiError.errorType);
         return Promise.reject(apiError);
     }
 
