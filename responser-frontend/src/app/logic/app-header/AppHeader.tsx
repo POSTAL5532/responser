@@ -4,7 +4,7 @@ import {Tooltip} from "react-tooltip";
 import {Button, ButtonType} from "app/components/button/Button";
 import {useExtensionService} from "../../service/extension/ExtensionService";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
-import {nativeNavigateTo, navigateTo} from "../../utils/NavigationUtils";
+import {nativeNavigateTo} from "../../utils/NavigationUtils";
 import ApplicationProperties from "../../service/ApplicationProperties";
 import LocalTokenStorageService from "../../service/authorization/LocalTokenStorageService";
 import {Icon, IconType} from "../../components/icon/Icon";
@@ -14,7 +14,6 @@ import {DropDownMenuButton} from "../../components/dropdown-menu-button/DropDown
 import {navigateToMainPage} from "../main-page/MainPage";
 import classNames from "classnames";
 import "./AppHeader.less";
-import {RESTORE_PASSWORD_PAGE_URL} from "../restore-password/RestorePasswordPage";
 
 type PageHeaderProps = {
     title: string;

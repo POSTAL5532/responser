@@ -1,5 +1,5 @@
 import React, {useContext, useEffect, useState} from "react";
-import {Page} from "../../components/page/Page";
+import Page from "../../components/page/Page";
 import {Spinner} from "../../components/spinner/Spinner";
 import {UserProfileProperty} from "./UserProfileProperty";
 import {UserProfileEmailProperty} from "./UserProfileEmailProperty";

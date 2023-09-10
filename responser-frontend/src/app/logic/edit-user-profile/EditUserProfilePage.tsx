@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {observer} from "mobx-react";
-import {Page} from "../../components/page/Page";
+import Page from "../../components/page/Page";
 import EditUserForm from "./form/EditUserProfileForm";
 import {useEditUserPageStore} from "./EditUserProfilePageStore";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";

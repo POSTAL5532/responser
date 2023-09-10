@@ -11,12 +11,14 @@ export class ForgotPasswordPageStore {
 
     private readonly userService: UserService = new UserService();
 
-    readonly forgotPasswordPayload: ForgotPasswordPayload = new ForgotPasswordPayload();
+    readonly forgotPasswordPayload: ForgotPasswordPayload;
 
     readonly loadingState: ForgotPasswordPageStoreLoadingState = new ForgotPasswordPageStoreLoadingState();
 
     constructor() {
         makeAutoObservable(this);
+        this.forgotPasswordPayload = new ForgotPasswordPayload();
+        this.forgotPasswordPayload.email = "";
     }
 
     public sendRestorePasswordLink = async (setFieldError?: (field: string, message: string) => void): Promise<boolean> => {

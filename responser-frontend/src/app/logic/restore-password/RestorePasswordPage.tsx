@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Page} from "../../components/page/Page";
+import Page from "../../components/page/Page";
 import {observer} from "mobx-react";
 import {useParams} from "react-router";
 import {useRestorePasswordPageStore} from "./RestorePasswordPageStore";

@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {observer} from "mobx-react";
-import {Page} from "../../components/page/Page";
+import Page from "../../components/page/Page";
 import {SignUpPageStore} from "./SignUpPageStore";
 import SignUpForm from "./form/SignUpForm";
 import {GlobalAppStoreContext} from "app/GlobalAppStore";

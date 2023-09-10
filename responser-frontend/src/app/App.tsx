@@ -14,6 +14,8 @@ import UserProfilePage, {USER_PROFILE_PAGE_URL} from "./logic/user-profile/UserP
 import {COMPONENTS_PAGE_URL, ComponentsPage} from "./logic/components-page/ComponentsPage";
 import ForgotPasswordPage, {FORGOT_PASSWORD_PAGE_URL} from "./logic/forgot-password/ForgotPasswordPage";
 import RestorePasswordPage, {RESTORE_PASSWORD_PAGE_URL} from "./logic/restore-password/RestorePasswordPage";
+import {ErrorBoundary} from "react-error-boundary";
+import ErrorPage from "./logic/ErrorPage";
 
 export class App extends Component {
 
@@ -21,28 +23,30 @@ export class App extends Component {
 
     render(): React.ReactNode {
         return (
-            <GlobalAppStoreContext.Provider value={this.globalAppStore}>
-                <div className="app">
-                    <AppHeader title="Reviewly"/>
+            <ErrorBoundary FallbackComponent={ErrorPage}>
+                <GlobalAppStoreContext.Provider value={this.globalAppStore}>
+                    <div className="app">
+                        <AppHeader title="Reviewly"/>
 
-                    <Switch>
-                        <UnauthorizedRoute path={SIGN_UP_PAGE_URL} exact component={SignUpPage}/>
-                        <UnauthorizedRoute path={AUTH_CODE_PAGE_URL} exact component={AuthCodePage}/>
-                        <UnauthorizedRoute path={FORGOT_PASSWORD_PAGE_URL} exact component={ForgotPasswordPage}/>
-                        <UnauthorizedRoute path={RESTORE_PASSWORD_PAGE_URL} exact component={RestorePasswordPage}/>
+                        <Switch>
+                            <UnauthorizedRoute path={SIGN_UP_PAGE_URL} exact component={SignUpPage}/>
+                            <UnauthorizedRoute path={AUTH_CODE_PAGE_URL} exact component={AuthCodePage}/>
+                            <UnauthorizedRoute path={FORGOT_PASSWORD_PAGE_URL} exact component={ForgotPasswordPage}/>
+                            <UnauthorizedRoute path={RESTORE_PASSWORD_PAGE_URL} exact component={RestorePasswordPage}/>
 
-                        <AuthorizedRoute path={MAIN_PAGE_URL} exact component={MainPage}/>
-                        <AuthorizedRoute path={USER_PROFILE_PAGE_URL} exact component={UserProfilePage}/>
-                        <AuthorizedRoute path={EDIT_USER_PAGE_URL} exact component={EditUserPage}/>
-                        <AuthorizedRoute path={LOGIN_EXTENSION} exact component={LoginExtension} redirectLogic={AuthorizationService.requestLoginPage}/>
+                            <AuthorizedRoute path={MAIN_PAGE_URL} exact component={MainPage}/>
+                            <AuthorizedRoute path={USER_PROFILE_PAGE_URL} exact component={UserProfilePage}/>
+                            <AuthorizedRoute path={EDIT_USER_PAGE_URL} exact component={EditUserPage}/>
+                            <AuthorizedRoute path={LOGIN_EXTENSION} exact component={LoginExtension} redirectLogic={AuthorizationService.requestLoginPage}/>
 
-                        <PermitAllRoute path={LOGOUT_EXTENSION} exact component={LogoutExtension}/>
-                        <PermitAllRoute path={COMPONENTS_PAGE_URL} exact component={ComponentsPage}/>
+                            <PermitAllRoute path={LOGOUT_EXTENSION} exact component={LogoutExtension}/>
+                            <PermitAllRoute path={COMPONENTS_PAGE_URL} exact component={ComponentsPage}/>
 
-                        <Redirect from="*" to={MAIN_PAGE_URL}/>
-                    </Switch>
-                </div>
-            </GlobalAppStoreContext.Provider>
+                            <Redirect from="*" to={MAIN_PAGE_URL}/>
+                        </Switch>
+                    </div>
+                </GlobalAppStoreContext.Provider>
+            </ErrorBoundary>
         );
     }
 }

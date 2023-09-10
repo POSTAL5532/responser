@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Page} from "../../components/page/Page";
+import Page from "../../components/page/Page";
 import {Button, ButtonSize, ButtonType} from "../../components/button/Button";
 import {Icon, IconType} from "../../components/icon/Icon";
 import {RadioButton} from "../../components/form/radio-button/RadioButton";

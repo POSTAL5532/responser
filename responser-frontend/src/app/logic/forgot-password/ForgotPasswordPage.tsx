@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import {Page} from "../../components/page/Page";
+import Page from "../../components/page/Page";
 import {Form, Formik} from "formik";
 import {EmailField} from "../../components/form/EmailField";
 import {Button} from "../../components/button/Button";

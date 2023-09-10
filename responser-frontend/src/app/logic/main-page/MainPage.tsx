@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {observer} from "mobx-react";
 import {nativeNavigateTo, navigateTo} from "../../utils/NavigationUtils";
-import {Page} from "../../components/page/Page";
+import Page from "../../components/page/Page";
 import {useExtensionService} from "../../service/extension/ExtensionService";
 import {Button, ButtonSize} from "../../components/button/Button";
 import applicationProperties from "../../service/ApplicationProperties";

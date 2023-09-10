@@ -1,6 +1,6 @@
 import React from "react";
 import {User} from "app/model/User";
-import {action, makeAutoObservable, runInAction} from "mobx";
+import {action, computed, makeAutoObservable, runInAction} from "mobx";
 import LocalTokenStorageService from "app/service/authorization/LocalTokenStorageService";
 import {UserService} from "app/service/UserService";
 import {reloadPage} from "./utils/NavigationUtils";
@@ -19,15 +19,30 @@ export class GlobalAppStore {
 
     hideHeader: boolean = false;
 
-    constructor() {
-        this.logger.debug("Init store");
+    errorsStore = new ErrorsStore();
 
+    constructor() {
         makeAutoObservable(this);
+        this.init();
+    }
+
+    init = () => {
+        this.logger.debug("Init global app store");
 
         if (LocalTokenStorageService.isAccessTokenExist && LocalTokenStorageService.isRefreshTokenExist) {
             this.isLoading = true;
             this.refreshCurrentUser().finally(() => this.isLoading = false);
         }
+
+        window.addEventListener("error", errorEvent => {
+            console.log("ON ERROR:", errorEvent.error)
+            this.errorsStore.errors.push(errorEvent.error);
+        });
+
+        window.addEventListener("unhandledrejection", errorEvent => {
+            console.log("ON UNHANDLEDREJECTION:", errorEvent.reason)
+            this.errorsStore.errors.push(errorEvent.reason);
+        });
     }
 
     refreshCurrentUser = async () => {
@@ -57,3 +72,17 @@ export class GlobalAppStore {
 }
 
 export const GlobalAppStoreContext: React.Context<GlobalAppStore> = React.createContext<GlobalAppStore>(null);
+
+export class ErrorsStore {
+
+    errors: any[] = [];
+
+    constructor() {
+        makeAutoObservable(this);
+    }
+
+    @computed
+    get hasErrors(): boolean {
+        return this.errors.length > 0;
+    }
+}
