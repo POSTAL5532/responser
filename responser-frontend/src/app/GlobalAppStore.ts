@@ -29,20 +29,18 @@ export class GlobalAppStore {
     init = () => {
         this.logger.debug("Init global app store");
 
-        if (LocalTokenStorageService.isAccessTokenExist && LocalTokenStorageService.isRefreshTokenExist) {
-            this.isLoading = true;
-            this.refreshCurrentUser().finally(() => this.isLoading = false);
-        }
-
         window.addEventListener("error", errorEvent => {
-            console.log("ON ERROR:", errorEvent.error)
             this.errorsStore.errors.push(errorEvent.error);
         });
 
         window.addEventListener("unhandledrejection", errorEvent => {
-            console.log("ON UNHANDLEDREJECTION:", errorEvent.reason)
             this.errorsStore.errors.push(errorEvent.reason);
         });
+
+        if (LocalTokenStorageService.isAccessTokenExist && LocalTokenStorageService.isRefreshTokenExist) {
+            this.isLoading = true;
+            this.refreshCurrentUser().finally(() => this.isLoading = false);
+        }
     }
 
     refreshCurrentUser = async () => {

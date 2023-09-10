@@ -4,7 +4,7 @@ import {observer} from "mobx-react";
 import {useReviewsPageStore} from "./ReviewsPageStore";
 import ReviewsList from "./ReviewsList";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
-import {Page} from "../../components/page/Page";
+import Page from "../../components/page/Page";
 import {navigateToEditReviewPage} from "../edit-review/EditReviewPage";
 import {ResourceType} from "../../model/ResourceType";
 import {navigateTo} from "../../utils/NavigationUtils";

@@ -23,9 +23,9 @@ export class App extends Component {
 
     render(): React.ReactNode {
         return (
-            <ErrorBoundary FallbackComponent={ErrorPage}>
-                <GlobalAppStoreContext.Provider value={this.globalAppStore}>
-                    <div className="app">
+            <div className="app">
+                <ErrorBoundary FallbackComponent={ErrorPage}>
+                    <GlobalAppStoreContext.Provider value={this.globalAppStore}>
                         <AppHeader title="Reviewly"/>
 
                         <Switch>
@@ -44,9 +44,9 @@ export class App extends Component {
 
                             <Redirect from="*" to={MAIN_PAGE_URL}/>
                         </Switch>
-                    </div>
-                </GlobalAppStoreContext.Provider>
-            </ErrorBoundary>
+                    </GlobalAppStoreContext.Provider>
+                </ErrorBoundary>
+            </div>
         );
     }
 }

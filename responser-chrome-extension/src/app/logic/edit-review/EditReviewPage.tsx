@@ -5,7 +5,7 @@ import {useEditReviewPageStore} from "./EditReviewPageStore";
 import {navigateTo} from "../../utils/NavigationUtils";
 import {navigateToReviewsPage} from "../reviews/ReviewsPage";
 import EditReviewForm from "./form/EditReviewForm";
-import {Page} from "../../components/page/Page";
+import Page from "../../components/page/Page";
 import {ResourceType} from "../../model/ResourceType";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {EditReviewFooter} from "./footer/EditReviewFooter";

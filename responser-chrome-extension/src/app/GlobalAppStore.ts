@@ -19,6 +19,8 @@ export class GlobalAppStore {
 
     userDataLoading: boolean = true;
 
+    errorsStore = new ErrorsStore();
+
     constructor() {
         makeAutoObservable(this);
         this.init();
@@ -26,6 +28,14 @@ export class GlobalAppStore {
 
     private init = async () => {
         this.logger.debug("Init store");
+
+        window.addEventListener("error", errorEvent => {
+            this.errorsStore.errors.push(errorEvent.error);
+        });
+
+        window.addEventListener("unhandledrejection", errorEvent => {
+            this.errorsStore.errors.push(errorEvent.reason);
+        });
 
         const tokenInfoResponse = await this.extensionService.getToken();
         LocalTokenStorageService.setTokenInfo(tokenInfoResponse.data);
@@ -61,3 +71,17 @@ export class GlobalAppStore {
 }
 
 export const GlobalAppStoreContext: React.Context<GlobalAppStore> = React.createContext<GlobalAppStore>(null);
+
+export class ErrorsStore {
+
+    errors: any[] = [];
+
+    constructor() {
+        makeAutoObservable(this);
+    }
+
+    @computed
+    get hasErrors(): boolean {
+        return this.errors.length > 0;
+    }
+}
