@@ -21,6 +21,8 @@ export class EditUserProfilePageStore {
 
     loadingState: EditUserPageStoreLoadingState = new EditUserPageStoreLoadingState();
 
+    rawUserAvatar: File;
+
     constructor() {
         makeAutoObservable(this);
     }
@@ -115,6 +117,24 @@ export class EditUserProfilePageStore {
         } finally {
             this.loadingState.isDataSubmitting = false;
             this.logger.debug("Update user password - finish.");
+        }
+    }
+
+    public setUserRawAvatar = (data: File) => {
+        this.rawUserAvatar = data;
+    }
+
+    public saveUserAvatar = async (data: string, blob: Blob) => {
+        this.loadingState.isDataSubmitting = true;
+        this.logger.debug("Save user avatar - start.");
+
+        try {
+            await this.userService.changeAvatar(blob);
+        } catch (error: any) {
+            throw error;
+        } finally {
+            this.loadingState.isDataSubmitting = false;
+            this.logger.debug("Save user avatar - finish.");
         }
     }
 }

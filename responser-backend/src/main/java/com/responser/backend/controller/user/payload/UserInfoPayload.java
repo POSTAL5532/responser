@@ -24,6 +24,8 @@ public class UserInfoPayload {
 
     private String fullName;
 
+    private String avatarFileName;
+
     private Boolean emailConfirmed;
 
     private LocalDateTime creationDate;

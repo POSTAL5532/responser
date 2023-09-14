@@ -7,13 +7,18 @@ import com.responser.backend.model.User;
 import com.responser.backend.model.User_;
 import com.responser.backend.repository.UserRepository;
 import com.responser.backend.service.email.EmailService;
+import com.responser.backend.service.fileResource.FileResourceService;
+import com.responser.backend.service.fileResource.FileResourceType;
 import com.responser.backend.utils.ValidationUtils;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -42,6 +47,8 @@ public class UserService {
     private final PasswordRestoreService passwordRestoreService;
 
     private final PasswordEncoder passwordEncoder;
+
+    private final FileResourceService fileResourceService;
 
     public User getUser(String userId) {
         return userRepository.findById(userId).orElseThrow(() -> {
@@ -147,6 +154,29 @@ public class UserService {
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
         emailService.sendPasswordChangedNotification(user);
+    }
+
+    @Transactional
+    public String changeAvatar(byte[] avatar, String userId) {
+        User user = getUser(userId);
+
+        String oldAvatarFileName = user.getAvatarFileName();
+        String newAvatarFileName = FileResourceType.USER_AVTAR.getValue() + "_" + user.getId() + "_" + UUID.randomUUID() + ".jpeg";
+
+        try {
+            fileResourceService.uploadFile(avatar, newAvatarFileName);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+        user.setAvatarFileName(newAvatarFileName);
+        updateUser(user);
+
+        if (StringUtils.isNotBlank(oldAvatarFileName)) {
+            fileResourceService.removeFile(oldAvatarFileName);
+        }
+
+        return newAvatarFileName;
     }
 
     public boolean existByEmail(String email) {

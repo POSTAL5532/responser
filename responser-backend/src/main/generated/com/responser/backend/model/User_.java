@@ -12,12 +12,14 @@ public abstract class User_ extends com.responser.backend.model.AbstractEntity_ 
 	public static volatile SingularAttribute<User, Boolean> emailConfirmed;
 	public static volatile SingularAttribute<User, String> fullName;
 	public static volatile SingularAttribute<User, String> userName;
+	public static volatile SingularAttribute<User, String> avatarFileName;
 	public static volatile SingularAttribute<User, String> email;
 
 	public static final String PASSWORD = "password";
 	public static final String EMAIL_CONFIRMED = "emailConfirmed";
 	public static final String FULL_NAME = "fullName";
 	public static final String USER_NAME = "userName";
+	public static final String AVATAR_FILE_NAME = "avatarFileName";
 	public static final String EMAIL = "email";
 
 }

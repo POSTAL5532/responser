@@ -75,6 +75,24 @@ export class ApiClient {
         }
     }
 
+    /*getRequestConfig = (requestOptions: AxiosRequestConfig = {}): AxiosRequestConfig => {
+        const hasCustomContentType: boolean = !!requestOptions.headers?.["Content-type"]
+
+        let headers: any = hasCustomContentType ? requestOptions.headers : {"Content-type": "application/json"}
+
+        if (LocalTokenStorageService.isAccessTokenExist) {
+            headers = {...headers, ...LocalTokenStorageService.authorizationHeader}
+        }
+
+        return {
+            baseURL: ApplicationPropertiesService.gatewayApiUrl,
+            headers: {
+                ...headers
+            },
+            ...requestOptions
+        }
+    }*/
+
     executeGetRequest = async <T = any>(url: string, requestOptions?: AxiosRequestConfig): Promise<T> => {
         const response = await axios.get<T>(url, this.getRequestConfig(requestOptions));
         return response.data;

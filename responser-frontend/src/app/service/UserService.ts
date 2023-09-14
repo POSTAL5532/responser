@@ -48,4 +48,12 @@ export class UserService {
         this.logger.debug("Restore user password.", restorePasswordPayload);
         await this.client.executePostRequest(`${BASE_USER_REQUEST}/restore-password`, restorePasswordPayload)
     }
+
+    changeAvatar = async (blob: Blob): Promise<string> => {
+        const formData = new FormData();
+        formData.append("avatar", blob);
+
+        this.logger.debug("Change user password.");
+        return await this.client.executePostRequest(`${BASE_USER_REQUEST}/change-avatar`, formData)
+    }
 }

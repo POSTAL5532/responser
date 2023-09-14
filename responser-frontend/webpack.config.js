@@ -79,7 +79,7 @@ module.exports = (env, args) => {
                         {
                             loader: "file-loader",
                             options: {
-                                outputPath: 'images',
+                                outputPath: '/images',
                                 //publicPath: 'images', // sometimes has problems with resources routing (absolute / relative paths)
                                 esModule: false
                             }
@@ -93,7 +93,7 @@ module.exports = (env, args) => {
                         {
                             loader: "file-loader",
                             options: {
-                                outputPath: 'fonts',
+                                outputPath: '/fonts',
                                 //publicPath: 'fonts', // sometimes has problems with resources routing (absolute / relative paths)
                                 esModule: false
                             }

@@ -17,6 +17,8 @@ export class User {
 
     emailConfirmed: boolean;
 
+    avatarFileName: string;
+
     creationDate: Moment;
 
     updateDate: Moment;

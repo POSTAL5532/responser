@@ -1,3 +1,6 @@
+## Build project
+`./gradlew build -DbuildMode=<MODE>` (see build modes on bottom)
+
 ## Run database
 `docker-compose up responser_db`
 
@@ -13,20 +16,6 @@
 * Setup `env/<mode>.env` file from `env/.env.template`
 * `npm run start` - run FE app for local development\
   `npm run build:<mode>` - build FE app
-
-### Modes
-* `local` - local development
-* `dev` - dev stage
-* `prod` - production
-
-## Run landing
-* Setup `env/<mode>.env` file from `env/.env.template`
-* `node builder.js` - build landing (`prod` argument for production)
-* `npx serve -l <PORT> build` - run local host with landing
-
-### Modes
-* `dev` - dev stage
-* `prod` - production
 
 ## Build extension
 * `npm run build:<mode>`

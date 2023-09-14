@@ -37,16 +37,16 @@ public class UserConverter {
         UserInfoPayload userPayload = new UserInfoPayload();
         userPayload.setId(user.getId());
         userPayload.setFullName(user.getFullName());
+        userPayload.setAvatarFileName(user.getAvatarFileName());
 
         return userPayload;
     }
 
     public UserInfoPayload toFullUserInfoPayload(User user) {
-        UserInfoPayload userPayload = new UserInfoPayload();
-        userPayload.setId(user.getId());
+        UserInfoPayload userPayload = toUserInfoPayload(user);
+
         userPayload.setUserName(user.getUserName());
         userPayload.setEmail(user.getEmail());
-        userPayload.setFullName(user.getFullName());
         userPayload.setEmailConfirmed(user.getEmailConfirmed());
         userPayload.setCreationDate(user.getCreationDate());
         userPayload.setUpdateDate(user.getUpdateDate());

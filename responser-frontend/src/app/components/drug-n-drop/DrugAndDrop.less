@@ -1,0 +1,37 @@
+@import "globalsLess";
+
+.drug-n-drop {
+  width: 300px;
+  height: 200px;
+  border-radius: 8px;
+  border: dashed 1px gray;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+
+  .file-input {
+    display: none;
+  }
+
+  .label {
+    pointer-events: none;
+  }
+
+  &.active, &:hover {
+    border-color: dodgerblue;
+
+    .label {
+      color: dodgerblue;
+    }
+
+    &.wrong-file-type {
+      border-color: tomato;
+      cursor: not-allowed;
+
+      .label {
+        color: tomato;
+      }
+    }
+  }
+}

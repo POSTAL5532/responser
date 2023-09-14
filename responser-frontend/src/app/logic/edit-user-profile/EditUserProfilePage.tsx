@@ -7,8 +7,13 @@ import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {Spinner} from "../../components/spinner/Spinner";
 import {navigateTo, reloadPage} from "../../utils/NavigationUtils";
 import {Modal} from "../../components/modal/Modal";
-import "./EditUserProfilePage.less";
 import EditPasswordForm from "./form/EditPasswordForm";
+import EditUserAvatarForm from "./form/EditUserAvatarForm";
+import userAvatarPlaceHolder from "../../../images/user-avatar-placeholder.png";
+import {DrugAndDrop} from "../../components/drug-n-drop/DrugAndDrop";
+import {Button, ButtonType} from "../../components/button/Button";
+import {ConditionShow} from "../../components/ConditionShow";
+import "./EditUserProfilePage.less";
 
 export const EDIT_USER_PAGE_URL = "/edit-user";
 
@@ -17,7 +22,8 @@ export const navigateToEditUserPage = () => {
 }
 
 const EditUserProfilePage: React.FC = () => {
-    const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
+    const {currentUser, refreshCurrentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
+    const editUserStore = useEditUserPageStore();
     const {
         init,
         updateUser,
@@ -26,11 +32,15 @@ const EditUserProfilePage: React.FC = () => {
         passwordsFilled,
         updatePassword,
         loadingState,
-        userWasChanged
-    } = useEditUserPageStore();
+        userWasChanged,
+        setUserRawAvatar,
+        rawUserAvatar,
+        saveUserAvatar
+    } = editUserStore;
 
     const [isUserUpdated, setIsUserUpdated] = useState(false);
     const [isPasswordUpdated, setIsPasswordUpdated] = useState(false);
+    const [editUserAvatarMode, setEditUserAvatarMode] = useState(false);
 
     useEffect(() => {
         if (!!currentUser) init(currentUser);
@@ -44,8 +54,31 @@ const EditUserProfilePage: React.FC = () => {
         await updatePassword(setFieldError).then(() => setIsPasswordUpdated(true));
     }
 
+    const onAvatarSave = (dataUrl: string, blob: Blob) => {
+        saveUserAvatar(dataUrl, blob)
+        .then(refreshCurrentUser);
+
+        setEditUserAvatarMode(false);
+        setUserRawAvatar(null);
+    }
+
+    const onAvatarEditCancel = () => {
+        setEditUserAvatarMode(false);
+        setUserRawAvatar(null);
+    }
+
+    const onAvatarReset = () => {
+        setUserRawAvatar(null)
+    }
+
     return (
         <Page className="edit-user-page">
+
+            <div className="edit-form-panel">
+                <img src={!!currentUser?.avatarFileName ? ("http://localhost:3000/" + currentUser.avatarFileName) : userAvatarPlaceHolder} alt="User avatar" className="user-avatar"/>
+                <Button onClick={() => setEditUserAvatarMode(true)}>Change avatar</Button>
+            </div>
+
             <div className="edit-form-panel">
                 <h2 className="edit-header">User profile</h2>
                 {
@@ -76,6 +109,17 @@ const EditUserProfilePage: React.FC = () => {
 
             <Modal isOpen={isPasswordUpdated} header="Done" onOk={reloadPage}>
                 User profile data changes was successfully saved.
+            </Modal>
+
+            <Modal isOpen={editUserAvatarMode} header="Done">
+                <ConditionShow condition={!rawUserAvatar}>
+                    <DrugAndDrop onChange={setUserRawAvatar}/>
+                    <Button onClick={onAvatarEditCancel} styleType={ButtonType.SECONDARY}>Cancel</Button>
+                </ConditionShow>
+                <ConditionShow condition={!!rawUserAvatar}>
+                    <EditUserAvatarForm imageSrc={rawUserAvatar} onSave={onAvatarSave} onCancel={onAvatarEditCancel}/>
+                    <Button onClick={onAvatarReset}>Reset</Button>
+                </ConditionShow>
             </Modal>
         </Page>
     );
