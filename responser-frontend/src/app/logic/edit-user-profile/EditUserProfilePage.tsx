@@ -14,6 +14,7 @@ import {DrugAndDrop} from "../../components/drug-n-drop/DrugAndDrop";
 import {Button, ButtonType} from "../../components/button/Button";
 import {ConditionShow} from "../../components/ConditionShow";
 import "./EditUserProfilePage.less";
+import ApplicationProperties from "../../service/ApplicationProperties";
 
 export const EDIT_USER_PAGE_URL = "/edit-user";
 
@@ -75,7 +76,11 @@ const EditUserProfilePage: React.FC = () => {
         <Page className="edit-user-page">
 
             <div className="edit-form-panel">
-                <img src={!!currentUser?.avatarFileName ? ("http://localhost:3000/" + currentUser.avatarFileName) : userAvatarPlaceHolder} alt="User avatar" className="user-avatar"/>
+                <img alt="User avatar" className="user-avatar" src={
+                    !!currentUser?.avatarFileName
+                        ? (ApplicationProperties.fileStorageUrl + currentUser.avatarFileName)
+                        : userAvatarPlaceHolder
+                }/>
                 <Button onClick={() => setEditUserAvatarMode(true)}>Change avatar</Button>
             </div>
 

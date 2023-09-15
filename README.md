@@ -17,6 +17,11 @@
 * `npm run start` - run FE app for local development\
   `npm run build:<mode>` - build FE app
 
+## Run file store dev stub application
+* Setup `<responser-file-store_module>/src/main/resources/responser-file-store-stub.properties` file 
+from `<responser-file-store_module>/src/main/resources/responser-file-store-stub.properties.template`
+* `./gradlew :responser-file-store:run` - run stub
+
 ## Build extension
 * `npm run build:<mode>`
 * `nodemon --exec npm run build:local --ext "*"` - build extension with changes watching for 

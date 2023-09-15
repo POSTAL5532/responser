@@ -47,6 +47,10 @@ class ApplicationProperties {
         return process.env.CHROME_EXTENSION_ID;
     }
 
+    get fileStorageUrl(): string {
+        return process.env.FILE_STORAGE_URL;
+    }
+
     get logLevel(): LogLevel {
         return LogLevel[process.env.LOG_LEVEL as keyof typeof LogLevel];
     }
