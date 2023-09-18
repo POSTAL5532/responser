@@ -10,11 +10,12 @@ import {Modal} from "../../components/modal/Modal";
 import EditPasswordForm from "./form/EditPasswordForm";
 import EditUserAvatarForm from "./form/EditUserAvatarForm";
 import userAvatarPlaceHolder from "../../../images/user-avatar-placeholder.png";
-import {DrugAndDrop} from "../../components/drug-n-drop/DrugAndDrop";
+import {DragAndDrop} from "../../components/drug-n-drop/DragAndDrop";
 import {Button, ButtonType} from "../../components/button/Button";
 import {ConditionShow} from "../../components/ConditionShow";
-import "./EditUserProfilePage.less";
 import ApplicationProperties from "../../service/ApplicationProperties";
+import {FILE_TYPE} from "../../utils/FileUtils";
+import "./EditUserProfilePage.less";
 
 export const EDIT_USER_PAGE_URL = "/edit-user";
 
@@ -78,7 +79,7 @@ const EditUserProfilePage: React.FC = () => {
             <div className="edit-form-panel">
                 <img alt="User avatar" className="user-avatar" src={
                     !!currentUser?.avatarFileName
-                        ? (ApplicationProperties.fileStorageUrl + currentUser.avatarFileName)
+                        ? (ApplicationProperties.fileStorageUrl + "/" + currentUser.avatarFileName)
                         : userAvatarPlaceHolder
                 }/>
                 <Button onClick={() => setEditUserAvatarMode(true)}>Change avatar</Button>
@@ -118,7 +119,9 @@ const EditUserProfilePage: React.FC = () => {
 
             <Modal isOpen={editUserAvatarMode} header="Done">
                 <ConditionShow condition={!rawUserAvatar}>
-                    <DrugAndDrop onChange={setUserRawAvatar}/>
+                    <DragAndDrop onChange={setUserRawAvatar}
+                                 maxFileSize={2048}
+                                 acceptedFileTypes={[FILE_TYPE.png, FILE_TYPE.bmp, FILE_TYPE.jpeg, FILE_TYPE.jpeg]}/>
                     <Button onClick={onAvatarEditCancel} styleType={ButtonType.SECONDARY}>Cancel</Button>
                 </ConditionShow>
                 <ConditionShow condition={!!rawUserAvatar}>

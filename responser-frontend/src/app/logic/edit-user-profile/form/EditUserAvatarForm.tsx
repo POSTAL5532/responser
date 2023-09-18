@@ -3,38 +3,42 @@ import AvatarEditor from "react-avatar-editor";
 import {observer} from "mobx-react";
 import Compressor from 'compressorjs';
 import {Button, ButtonSize, ButtonType} from "../../../components/button/Button";
+import {Logger, useLogger} from "../../../utils/Logger";
+import {bytesToKilobytes, FILE_TYPE} from "../../../utils/FileUtils";
 
 type EditUserAvatarProps = {
     imageSrc: File;
     onSave?: (dataUrl: string, blob: Blob) => void;
     onCancel?: () => void;
+    compressQuality?: number;
+    resultImageHeight?: number;
 }
 
 const EditUserAvatar: React.FC<EditUserAvatarProps> = (props: EditUserAvatarProps) => {
-    const {imageSrc, onSave, onCancel} = props;
+    const {imageSrc, compressQuality = 0.8, resultImageHeight = 300, onSave, onCancel} = props;
     const editorRef = React.useRef<AvatarEditor>();
-    const [zoom, setZoom] = useState<number>(1)
+    const [zoom, setZoom] = useState<number>(1);
+    const logger: Logger = useLogger("EditUserAvatar");
 
-    console.log("PROPS " + imageSrc.type + " FILE SIZE:", imageSrc.size / 1024)
+    logger.debug("Initial " + imageSrc.type + " file size: " + bytesToKilobytes(imageSrc.size));
 
     const compressImageAndSave = (dataUrl: string, file: Blob) => {
         if (!onSave) return;
-        console.log("RAW " + file.type + " FILE SIZE:", file.size / 1024)
+        logger.debug("Compression: raw " + file.type + " file size:" + bytesToKilobytes(imageSrc.size));
 
         new Compressor(file, {
-            quality: 0.8,
-            height: 300,
+            quality: compressQuality,
+            height: resultImageHeight,
             success: result => {
-                console.log("RESULT " + result.type + " FILE SIZE:", result.size / 1024)
+                logger.debug("Compression: result " + result.type + " file size:" + bytesToKilobytes(imageSrc.size));
                 onSave(dataUrl, result);
             }
         })
     }
 
-    // TODO: Check the quality parameter in toBlob and toDataUrl
     const onSaveButtonClick = () => {
         const dataUrl = editorRef.current.getImage().toDataURL();
-        editorRef.current.getImage().toBlob(blob => compressImageAndSave(dataUrl, blob), "image/jpeg", 0.8);
+        editorRef.current.getImage().toBlob(blob => compressImageAndSave(dataUrl, blob), FILE_TYPE.jpeg, compressQuality);
     }
 
     const onZoomChange = (event: React.ChangeEvent<HTMLInputElement>) => {
