@@ -10,6 +10,8 @@ import {ReviewLike} from "../../../model/ReviewLike";
 import {ConditionShow} from "../../../components/ConditionShow";
 import {useIsOverflow} from "../../../utils/LayoutUtils";
 import {Spinner} from "../../../components/spinner/Spinner";
+import ApplicationProperties from "../../../service/ApplicationProperties";
+import userAvatarPlaceHolder from "../../../../images/user-avatar-placeholder.png";
 import "./ReviewCard.less";
 
 type ReviewCardProps = {
@@ -67,9 +69,14 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
         updateLike(currentUserReviewLike, positive).finally(() => setLikeInProcess(false));
     }
 
+    const userAvatar = user.avatarFileName
+        ? ApplicationProperties.fileStorageUrl + "/" + user.avatarFileName
+        : userAvatarPlaceHolder;
+
     return (
         <div className={className}>
             <div className="card-header">
+                <img src={userAvatar} alt="user-avatar" className="user-avatar"/>
                 <div className="user-name">{user.fullName}</div>
                 <ConditionShow condition={isCurrentUserReview}>
                     <UserIcon className="user-icon"/>

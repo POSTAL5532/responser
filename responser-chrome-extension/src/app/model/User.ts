@@ -1,6 +1,11 @@
 import moment, {Moment} from "moment";
+import {makeAutoObservable} from "mobx";
 
 export class User {
+
+    constructor() {
+        makeAutoObservable(this);
+    }
 
     id: string;
 
@@ -9,6 +14,10 @@ export class User {
     email: string;
 
     fullName: string;
+
+    emailConfirmed: boolean;
+
+    avatarFileName: string;
 
     createdTimestamp: Moment;
 

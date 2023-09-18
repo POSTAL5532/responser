@@ -12,6 +12,8 @@ import {useIsOverflow} from "../../../utils/LayoutUtils";
 import {Spinner} from "../../../components/spinner/Spinner";
 import {ResourceType} from "../../../model/ResourceType";
 import {Link} from "../../../components/link/Link";
+import ApplicationProperties from "../../../service/ApplicationProperties";
+import userAvatarPlaceHolder from "../../../../images/user-avatar-placeholder.png";
 import "./ReviewCard.less";
 
 type ReviewCardProps = {
@@ -80,10 +82,15 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
         }
     }
 
+    const userAvatar = user.avatarFileName
+        ? ApplicationProperties.fileStorageUrl + "/" + user.avatarFileName
+        : userAvatarPlaceHolder;
+
     return (
         <div className={className}>
             <div className="card-header">
                 <div className="publication-info">
+                    <img src={userAvatar} alt="user-avatar" className="user-avatar"/>
                     <div className="user-name">{user.fullName}</div>
                     <ConditionShow condition={isCurrentUserReview}>
                         <UserIcon className="user-icon"/>

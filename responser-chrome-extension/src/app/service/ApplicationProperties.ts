@@ -26,6 +26,10 @@ class ApplicationProperties {
         return process.env.LOGOUT_EXTENSION_PAGE;
     }
 
+    get fileStorageUrl(): string {
+        return process.env.FILE_STORAGE_URL;
+    }
+
     get logLevel(): LogLevel {
         return LogLevel[process.env.LOG_LEVEL as keyof typeof LogLevel];
     }
