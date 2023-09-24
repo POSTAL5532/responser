@@ -6,6 +6,7 @@ import {ReviewsRequestCriteria} from "../../model/ReviewsRequestCriteria";
 import {Pagination} from "../../model/Pagination";
 import {Logger} from "../../utils/Logger";
 import {SortDirection} from "../../model/SortDirection";
+import {ReviewsCriteriaSortingField} from "../../model/ReviewsCriteriaSortingField";
 
 const PAGE_ELEMENTS_COUNT = 10;
 
@@ -73,7 +74,7 @@ export class MainPageStore {
 
     getReviewsRequestCriteria = (): ReviewsRequestCriteria => {
         const criteria = new ReviewsRequestCriteria();
-        criteria.sortingField = "creationDate";
+        criteria.sortingField = ReviewsCriteriaSortingField.CREATION_DATE;
         criteria.sortDirection = SortDirection.DESC;
 
         return criteria;
