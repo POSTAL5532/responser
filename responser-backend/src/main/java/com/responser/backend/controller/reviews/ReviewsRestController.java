@@ -9,9 +9,9 @@ import com.responser.backend.controller.reviews.payload.ReviewInfoDTO;
 import com.responser.backend.controller.reviews.payload.ReviewDTO;
 import com.responser.backend.controller.reviews.payload.ReviewsRequestCriteria;
 import com.responser.backend.converter.PaginationConverter;
-import com.responser.backend.converter.ReviewsCriteriaConverter;
 import com.responser.backend.converter.ReviewConverter;
 import com.responser.backend.model.Review;
+import com.responser.backend.model.ReviewsCriteria;
 import com.responser.backend.service.review.ReviewService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -45,8 +45,6 @@ public class ReviewsRestController extends RestApiController {
 
     private final ReviewConverter reviewConverter;
 
-    private final ReviewsCriteriaConverter reviewsCriteriaConverter;
-
     private final PaginationConverter paginationConverter;
 
     /**
@@ -57,7 +55,7 @@ public class ReviewsRestController extends RestApiController {
      */
     @GetMapping
     public ResponseEntity<PageableResponse<ReviewDTO>> getReviews(
-        @Valid @NotNull ReviewsRequestCriteria criteria,
+        @Valid @NotNull ReviewsCriteria criteria,
         @Valid @NotNull Pagination pagination,
         Principal principal
     ) {
@@ -71,10 +69,7 @@ public class ReviewsRestController extends RestApiController {
             }
         }
 
-        Page<Review> reviews = reviewService.getReviews(
-            reviewsCriteriaConverter.toReviewsCriteria(criteria),
-            paginationConverter.toPageable(pagination)
-        );
+        Page<Review> reviews = reviewService.getReviews(criteria, paginationConverter.toPageable(pagination));
 
         return ResponseEntity.ok(reviewConverter.toPageableReviewPayloadList(reviews));
     }

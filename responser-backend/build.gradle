@@ -50,7 +50,7 @@ tasks.named('test') {
 
 ext {
     // Directory for generated main Java sources
-    generatedMainJava = 'src/main/generated'
+    generatedMainJava = "${buildDir}/generated"
 }
 
 sourceSets {

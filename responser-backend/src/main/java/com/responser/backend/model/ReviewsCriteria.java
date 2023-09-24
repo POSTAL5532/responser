@@ -16,7 +16,7 @@ public class ReviewsCriteria {
 
     private ResourceType resourceType;
 
-    private String sortingField;
+    private ReviewsCriteriaSortingField sortingField;
 
     private Sort.Direction sortDirection;
 }

@@ -6,6 +6,7 @@ import com.responser.backend.model.ReviewLike;
 import com.responser.backend.model.ReviewMetaImage;
 import com.responser.backend.model.Review_;
 import com.responser.backend.model.ReviewsCriteria;
+import com.responser.backend.model.ReviewsCriteriaSortingField;
 import com.responser.backend.model.metatags.FacebookMetaTags;
 import com.responser.backend.model.metatags.SocialMetaTags;
 import com.responser.backend.model.metatags.TwitterMetaTags;
@@ -46,7 +47,7 @@ public class ReviewsController {
 
     @GetMapping("/see-reviews")
     public String getReviewsList(Model model, @RequestParam(required = false, defaultValue = "0") Integer page) {
-        ReviewsCriteria criteria = ReviewsCriteria.builder().sortingField(Review_.CREATION_DATE).build();
+        ReviewsCriteria criteria = ReviewsCriteria.builder().sortingField(ReviewsCriteriaSortingField.CREATION_DATE).build();
         Page<Review> reviews = reviewService.getReviews(criteria, PageRequest.of(page, 10));
 
         model.addAttribute("reviews", reviews.getContent());

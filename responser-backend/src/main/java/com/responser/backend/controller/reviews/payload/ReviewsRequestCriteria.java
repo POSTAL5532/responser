@@ -1,5 +1,7 @@
 package com.responser.backend.controller.reviews.payload;
 
+import com.responser.backend.model.ResourceType;
+import com.responser.backend.model.ReviewsCriteriaSortingField;
 import lombok.Data;
 import org.springframework.data.domain.Sort;
 
@@ -17,9 +19,9 @@ public class ReviewsRequestCriteria {
 
     private String forUserId;
 
-    private String resourceType;
+    private ResourceType resourceType;
 
-    private String sortingField;
+    private ReviewsCriteriaSortingField sortingField;
 
     private Sort.Direction sortDirection;
 }

@@ -48,7 +48,7 @@ CREATE TABLE reviews
 (
     id            VARCHAR(36) NOT NULL UNIQUE,
     user_id       VARCHAR(36) NOT NULL REFERENCES users (id) ON DELETE CASCADE,
-    resource_id   VARCHAR(36) NOT NULL,
+    resource_id   VARCHAR(36) NOT NULL REFERENCES web_resource (id) ON DELETE CASCADE,
     review_id     VARCHAR(36) REFERENCES reviews (id) ON DELETE CASCADE,
     rating        SMALLINT    NOT NULL,
     text          TEXT,
