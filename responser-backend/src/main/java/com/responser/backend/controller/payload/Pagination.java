@@ -18,6 +18,6 @@ public class Pagination {
 
     @NotNull
     @Min(0)
-    @Max(Integer.MAX_VALUE)
+    @Max(20)
     private Integer pageSize;
 }

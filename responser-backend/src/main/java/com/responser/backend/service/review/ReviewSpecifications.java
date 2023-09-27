@@ -17,9 +17,7 @@ import jakarta.persistence.criteria.Order;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import jakarta.persistence.criteria.SetJoin;
-import java.util.Objects;
 import org.apache.commons.lang3.ObjectUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 
@@ -35,22 +33,29 @@ public class ReviewSpecifications {
         return (Root<Review> reviewRoot, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            if (StringUtils.isNotBlank(criteria.getResourceId())) {
+            if (criteria.hasResourceId()) {
                 predicates.add(criteriaBuilder.equal(reviewRoot.get(Review_.RESOURCE_ID), criteria.getResourceId()));
             }
 
             Join<Review, User> userJoin = reviewRoot.join(Review_.USER, JoinType.INNER);
-            if (StringUtils.isNotBlank(criteria.getForUserId())) {
+            if (criteria.hasForUserId()) {
                 predicates.add(criteriaBuilder.equal(userJoin.get(User_.ID), criteria.getForUserId()));
             }
 
-            if (StringUtils.isNotBlank(criteria.getExcludeUserId())) {
+            if (criteria.hasExcludeUserId()) {
                 predicates.add(criteriaBuilder.notEqual(userJoin.get(User_.ID), criteria.getExcludeUserId()));
             }
 
-            ReviewsCriteriaSortingField sortField = criteria.getSortingField();
-            if (Objects.nonNull(sortField)) {
-                Order sortOrder = getSortingOrder(reviewRoot, criteriaQuery, criteriaBuilder, sortField, criteria.getSortDirection());
+            if (criteria.hasMinRating()) {
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(reviewRoot.get(Review_.RATING), criteria.getMinRating()));
+            }
+
+            if (criteria.hasMaxRating()) {
+                predicates.add(criteriaBuilder.lessThanOrEqualTo(reviewRoot.get(Review_.RATING), criteria.getMaxRating()));
+            }
+
+            if (criteria.hasSortingField()) {
+                Order sortOrder = getSortingOrder(reviewRoot, criteriaQuery, criteriaBuilder, criteria.getSortingField(), criteria.getSortDirection());
                 criteriaQuery.orderBy(sortOrder);
             }
 

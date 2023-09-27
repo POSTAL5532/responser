@@ -10,6 +10,7 @@ import com.responser.backend.controller.reviews.payload.ReviewDTO;
 import com.responser.backend.controller.reviews.payload.ReviewsRequestCriteria;
 import com.responser.backend.converter.PaginationConverter;
 import com.responser.backend.converter.ReviewConverter;
+import com.responser.backend.converter.ReviewsCriteriaConverter;
 import com.responser.backend.model.Review;
 import com.responser.backend.model.ReviewsCriteria;
 import com.responser.backend.service.review.ReviewService;
@@ -42,20 +43,19 @@ import java.util.Objects;
 public class ReviewsRestController extends RestApiController {
 
     private final ReviewService reviewService;
-
     private final ReviewConverter reviewConverter;
-
     private final PaginationConverter paginationConverter;
+    private final ReviewsCriteriaConverter reviewsCriteriaConverter;
 
     /**
-     * Returns {@link List<ReviewDTO>} by {@link ReviewsRequestCriteria}. If request criteria contains forUserId parameter - check and compare authorized user.
+     * Returns {@link List<ReviewDTO>} by {@link ReviewsCriteria}. If request criteria contains forUserId parameter - check and compare authorized user.
      *
      * @param criteria reviews request criteria
      * @return {@link List<ReviewDTO>}
      */
     @GetMapping
     public ResponseEntity<PageableResponse<ReviewDTO>> getReviews(
-        @Valid @NotNull ReviewsCriteria criteria,
+        @Valid @NotNull ReviewsRequestCriteria criteria,
         @Valid @NotNull Pagination pagination,
         Principal principal
     ) {
@@ -69,7 +69,10 @@ public class ReviewsRestController extends RestApiController {
             }
         }
 
-        Page<Review> reviews = reviewService.getReviews(criteria, paginationConverter.toPageable(pagination));
+        Page<Review> reviews = reviewService.getReviews(
+            reviewsCriteriaConverter.toReviewsCriteria(criteria),
+            paginationConverter.toPageable(pagination)
+        );
 
         return ResponseEntity.ok(reviewConverter.toPageableReviewPayloadList(reviews));
     }

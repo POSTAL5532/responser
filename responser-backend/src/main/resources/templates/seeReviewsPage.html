@@ -18,14 +18,78 @@
 
 <body>
 <th:block id="mainContent">
-    <th:block th:replace="~{components/pages-navigator::pages-navigator-component(
-            '/reviews/see-reviews',
-            'page',
-            ${currentPageNumber},
-            ${pagesCount},
-            null,
-            null
-       )}"/>
+
+    <div class="sort-filter-container">
+        <form id="sort-filter-form">
+            <div class="sorting-container">
+                <button type="button" class="sorting-button">Sorting</button>
+                <div class="sorting-menu">
+                    <label>
+                        <input type="radio" name="sorting" value="RATING:HIGH"
+                               th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).RATING && criteria.sortDirection == 'ASC'}">
+                        Rating: high first
+                    </label>
+                    <label>
+                        <input type="radio" name="sorting" value="RATING:LOW"
+                               th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).RATING && criteria.sortDirection == 'DESC'}">
+                        Rating: low first
+                    </label>
+                    <label>
+                        <input type="radio" name="sorting" value="CREATION_DATE:HIGH"
+                               th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).CREATION_DATE && criteria.sortDirection == 'ASC'}">
+                        Creation date: high first
+                    </label>
+                    <label>
+                        <input type="radio" name="sorting" value="CREATION_DATE:LOW"
+                               th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).CREATION_DATE && criteria.sortDirection == 'DESC'}">
+                        Creation date: low first
+                    </label>
+                    <label>
+                        <input type="radio" name="sorting" value="POPULARITY:HIGH"
+                               th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).POPULARITY && criteria.sortDirection == 'ASC'}">
+                        Popularity: high first
+                    </label>
+                    <label>
+                        <input type="radio" name="sorting" value="POPULARITY:LOW"
+                               th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).POPULARITY && criteria.sortDirection == 'DESC'}">
+                        Popularity: low first
+                    </label>
+                </div>
+            </div>
+            <div class="filter-container">
+                <button type="button" class="filter-button">Filter</button>
+                <div class="filter-menu">
+                    <h4>Resource type:</h4>
+                    <label>
+                        <input type="radio" name="resourceType" value="SITE" th:checked="${criteria.resourceType == T(com.responser.backend.model.ResourceType).SITE}">
+                        Sites reviews
+                    </label>
+                    <label>
+                        <input type="radio" name="resourceType" value="PAGE" th:checked="${criteria.resourceType == T(com.responser.backend.model.ResourceType).PAGE}">
+                        Pages reviews
+                    </label>
+                    <label>
+                        <input type="radio" name="resourceType" th:value="${null}" th:checked="${criteria.resourceType == null}">
+                        All reviews
+                    </label>
+
+                    <h4>Rating range:</h4>
+                    <label>
+                        Min rating
+                        <input type="number" min="1" max="5" step="1" name="minRating" th:value="${criteria.minRating}">
+                    </label>
+                    <label>
+                        Max rating
+                        <input type="number" min="1" max="5" step="1" name="maxRating" th:value="${criteria.maxRating}">
+                    </label>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <a class="link" th:classappend="${previousSearchUrl == null ? 'disabled' : ''}" th:href="${previousSearchUrl}"><- Previous page</a>
+    <span th:text="${reviewsCount + ' reviews'}">reviews count</span>
+    <a class="link" th:classappend="${nextSearchUrl == null ? 'disabled' : ''}" th:href="${nextSearchUrl}">Next page -></a>
 
     <div class="reviews-list">
         <th:block th:each="review, loopState: ${reviews}">
@@ -33,14 +97,9 @@
         </th:block>
     </div>
 
-    <th:block th:replace="~{components/pages-navigator::pages-navigator-component(
-            '/reviews/see-reviews',
-            'page',
-            ${currentPageNumber},
-            ${pagesCount},
-            ${additionalParameters},
-            null
-       )}"/>
+    <a class="link" th:classappend="${previousSearchUrl == null ? 'disabled' : ''}" th:href="${previousSearchUrl}"><- Previous page</a>
+    <span th:text="${reviewsCount + ' reviews'}">reviews count</span>
+    <a class="link" th:classappend="${nextSearchUrl == null ? 'disabled' : ''}" th:href="${nextSearchUrl}">Next page -></a>
 </th:block>
 </body>
 </html>
