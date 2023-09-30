@@ -5,6 +5,7 @@ import com.responser.backend.model.ReviewsCriteria;
 import com.responser.backend.model.Review;
 import com.responser.backend.model.User;
 import com.responser.backend.repository.ReviewRepository;
+import com.responser.backend.repository.ReviewRepositoryImpl;
 import com.responser.backend.service.UserService;
 import com.responser.backend.service.WebResourceService;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,8 @@ import java.util.NoSuchElementException;
 @Transactional(readOnly = true)
 public class ReviewService {
 
+    private final ReviewRepositoryImpl reviewRepositoryImpl;
+
     private final ReviewRepository reviewRepository;
 
     private final UserService userService;
@@ -36,16 +39,16 @@ public class ReviewService {
     private final ReviewMetaImageService metaImageService;
 
     public Review getReviewByIdAndUser(String reviewId, String userId) {
-        return reviewRepository.findByIdAndUserId(reviewId, userId).orElseThrow(() ->
-                new NoSuchElementException(format(
-                        "Review with id ''{0}'' and user id ''{1}'' doesn't exist", reviewId, userId
-                ))
+        return reviewRepositoryImpl.findByIdAndUserId(reviewId, userId).orElseThrow(() ->
+            new NoSuchElementException(format(
+                "Review with id ''{0}'' and user id ''{1}'' doesn't exist", reviewId, userId
+            ))
         );
     }
 
     public Review getReview(String reviewId) {
-        return reviewRepository.findById(reviewId).orElseThrow(() ->
-                new NoSuchElementException(format("Review ''{0}'' doesn't exist", reviewId))
+        return reviewRepositoryImpl.findById(reviewId).orElseThrow(() ->
+            new NoSuchElementException(format("Review ''{0}'' doesn't exist", reviewId))
         );
     }
 
@@ -54,11 +57,7 @@ public class ReviewService {
     }
 
     public Boolean existsByResourceIdAndUserId(String resourceId, String userId) {
-        return reviewRepository.existsByResourceIdAndUserId(resourceId, userId);
-    }
-
-    public Boolean existsByIdAndUserId(String id, String userId) {
-        return reviewRepository.existsByIdAndUserId(id, userId);
+        return reviewRepositoryImpl.existsByResourceIdAndUserId(resourceId, userId);
     }
 
     /**
@@ -80,7 +79,7 @@ public class ReviewService {
     @Transactional
     public Review createReview(Review newReview) {
         String resourceId = newReview.getResourceId();
-        String userId = newReview.getUser().getId();
+        String userId = newReview.getUserId();
 
         if (!isResourceExists(resourceId)) {
             throw new NoSuchElementException(format("Resource ''{0}'' ({1}) doesn't exist.", resourceId));
@@ -88,13 +87,13 @@ public class ReviewService {
 
         if (existsByResourceIdAndUserId(resourceId, userId)) {
             throw new EntityAlreadyExistException(format(
-                    "User ''{0}'' already left review for resource ''{1}''", userId, resourceId
+                "User ''{0}'' already left review for resource ''{1}''", userId, resourceId
             ));
         }
 
         User referenceUser = userService.getUser(userId);
         newReview.setUser(referenceUser);
-        Review savedReview = reviewRepository.save(newReview);
+        Review savedReview = reviewRepositoryImpl.save(newReview);
 
         metaImageService.create(savedReview);
 
@@ -106,11 +105,11 @@ public class ReviewService {
         Review oldReview = this.getReviewByIdAndUser(review.getId(), review.getUser().getId());
         oldReview.setText(review.getText());
         oldReview.setRating(review.getRating());
-        Review savedReview = reviewRepository.save(oldReview);
+        Review updatedReview = reviewRepositoryImpl.update(oldReview);
 
-        metaImageService.update(savedReview);
+        metaImageService.update(updatedReview);
 
-        return savedReview;
+        return updatedReview;
     }
 
     /**
@@ -121,12 +120,12 @@ public class ReviewService {
      */
     @Transactional
     public void removeReview(String reviewId, String userId) {
-        if (!existsByIdAndUserId(reviewId, userId)) {
-            throw new NoSuchElementException(format(
+        Review review = reviewRepositoryImpl.findByIdAndUserId(reviewId, userId)
+            .orElseThrow(() -> new NoSuchElementException(format(
                     "Review ''{0}'' from user ''{1}'' doesn't exist.", reviewId, userId
-            ));
-        }
+                ))
+            );
 
-        reviewRepository.deleteById(reviewId);
+        reviewRepositoryImpl.delete(review);
     }
 }

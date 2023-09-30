@@ -17,6 +17,9 @@ import java.util.Set;
 @Table(name = "reviews")
 public class Review extends AbstractEntity {
 
+    @Column(name = "user_id")
+    private String userId;
+
     @Column(name = "resource_id")
     private String resourceId;
 
@@ -28,11 +31,11 @@ public class Review extends AbstractEntity {
     private String text;
 
     @ManyToOne
-    @JoinColumn(name = "resource_id", nullable = false, insertable=false, updatable=false)
+    @JoinColumn(name = "resource_id", nullable = false, insertable = false, updatable = false)
     private WebResource webResource;
 
     @ManyToOne
-    @JoinColumn(name = "user_id", nullable = false)
+    @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
     private User user;
 
     @OneToMany(mappedBy = "review", fetch = FetchType.EAGER)

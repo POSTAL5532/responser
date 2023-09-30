@@ -5,8 +5,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 /**
  * Review repository
  *
@@ -15,9 +13,4 @@ import java.util.Optional;
 @Repository
 public interface ReviewRepository extends JpaRepository<Review, String>, JpaSpecificationExecutor<Review> {
 
-    Optional<Review> findByIdAndUserId(String reviewId, String userId);
-
-    Boolean existsByResourceIdAndUserId(String resourceId, String userId);
-
-    Boolean existsByIdAndUserId(String id, String userId);
 }

@@ -65,7 +65,7 @@ public class ReviewsController {
 
         Page<Review> reviews = reviewService.getReviews(
             reviewsCriteriaConverter.toReviewsCriteria(criteria),
-            PageRequest.of(page, 5)
+            PageRequest.of(page, 10)
         );
 
         Pair<String, String> getReviewsNavigationLinks = getReviewsNavigationLinks(criteria, reviews);
@@ -109,20 +109,13 @@ public class ReviewsController {
     private Pair<String, String> getReviewsNavigationLinks(ReviewsRequestCriteria criteria, Page<Review> reviews) {
         MultiValueMap<String, String> params = new LinkedMultiValueMap<>();
 
+        if (criteria.hasSortingField()) {
+            params.add("sortingField", criteria.getSortingField().name());
+        }
 
-        params.add(
-            "sortingField",
-            criteria.hasSortingField()
-                ? criteria.getSortingField().name()
-                : ReviewsCriteriaSortingField.CREATION_DATE.name()
-        );
-
-        params.add(
-            "sortDirection",
-            criteria.hasSortDirection()
-                ? criteria.getSortDirection().name()
-                : Direction.ASC.name()
-        );
+        if (criteria.hasSortDirection()) {
+            params.add("sortDirection", criteria.getSortDirection().name());
+        }
 
         if (criteria.hasResourceType()) {
             params.add("resourceType", criteria.getResourceType().name());

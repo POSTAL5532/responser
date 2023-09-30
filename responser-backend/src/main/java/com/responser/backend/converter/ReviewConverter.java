@@ -5,7 +5,6 @@ import com.responser.backend.controller.reviewlike.payload.ReviewLikeDTO;
 import com.responser.backend.controller.reviews.payload.ReviewInfoDTO;
 import com.responser.backend.controller.reviews.payload.ReviewDTO;
 import com.responser.backend.model.Review;
-import com.responser.backend.model.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -29,15 +28,12 @@ public class ReviewConverter {
     private final WebResourceConverter webResourceConverter;
 
     public Review toReview(String reviewId, ReviewInfoDTO reviewInfoDTO, String userId) {
-        User fakeUser = new User();
-        fakeUser.setId(userId);
-
         Review review = new Review();
         review.setId(reviewId);
         review.setResourceId(reviewInfoDTO.getResourceId());
         review.setRating(reviewInfoDTO.getRating());
         review.setText(reviewInfoDTO.getText());
-        review.setUser(fakeUser);
+        review.setUserId(userId);
 
         return review;
     }
