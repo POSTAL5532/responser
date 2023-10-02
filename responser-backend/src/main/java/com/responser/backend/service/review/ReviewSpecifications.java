@@ -6,17 +6,15 @@ import com.responser.backend.model.ReviewLike_;
 import com.responser.backend.model.Review_;
 import com.responser.backend.model.ReviewsCriteria;
 import com.responser.backend.model.ReviewsCriteriaSortingField;
-import com.responser.backend.model.User;
 import com.responser.backend.model.User_;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Expression;
-import jakarta.persistence.criteria.Join;
 import jakarta.persistence.criteria.JoinType;
 import jakarta.persistence.criteria.Order;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
-import jakarta.persistence.criteria.SetJoin;
+import jakarta.persistence.criteria.Subquery;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
@@ -33,17 +31,18 @@ public class ReviewSpecifications {
         return (Root<Review> reviewRoot, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
+            boolean isCountQuery = processCountQuery(reviewRoot, criteriaQuery);
+
             if (criteria.hasResourceId()) {
                 predicates.add(criteriaBuilder.equal(reviewRoot.get(Review_.RESOURCE_ID), criteria.getResourceId()));
             }
 
-            Join<Review, User> userJoin = reviewRoot.join(Review_.USER, JoinType.INNER);
             if (criteria.hasForUserId()) {
-                predicates.add(criteriaBuilder.equal(userJoin.get(User_.ID), criteria.getForUserId()));
+                predicates.add(criteriaBuilder.equal(reviewRoot.get(Review_.USER).get(User_.ID), criteria.getForUserId()));
             }
 
             if (criteria.hasExcludeUserId()) {
-                predicates.add(criteriaBuilder.notEqual(userJoin.get(User_.ID), criteria.getExcludeUserId()));
+                predicates.add(criteriaBuilder.notEqual(reviewRoot.get(Review_.USER).get(User_.ID), criteria.getExcludeUserId()));
             }
 
             if (criteria.hasMinRating()) {
@@ -54,7 +53,7 @@ public class ReviewSpecifications {
                 predicates.add(criteriaBuilder.lessThanOrEqualTo(reviewRoot.get(Review_.RATING), criteria.getMaxRating()));
             }
 
-            if (criteria.hasSortingField()) {
+            if (criteria.hasSortingField() && !isCountQuery) {
                 Order sortOrder = getSortingOrder(reviewRoot, criteriaQuery, criteriaBuilder, criteria.getSortingField(), criteria.getSortDirection());
                 criteriaQuery.orderBy(sortOrder);
             }
@@ -73,21 +72,42 @@ public class ReviewSpecifications {
         Expression<?> sortExpression;
 
         if (sortField == ReviewsCriteriaSortingField.POPULARITY) {
-            SetJoin<Review, ReviewLike> reviewLikeJoin = reviewRoot.joinSet(Review_.LIKES);
+            Subquery<Long> subquery = criteriaQuery.subquery(Long.class);
+            Root<ReviewLike> likesRoot = subquery.from(ReviewLike.class);
+            subquery.select(criteriaBuilder.count(likesRoot));
 
-            sortExpression = criteriaBuilder.sum(
-                criteriaBuilder.<Integer>selectCase()
-                    .when(criteriaBuilder.equal(reviewLikeJoin.get(ReviewLike_.POSITIVE), true), 1)
-                    .otherwise(0)
-            );
+            subquery.where(criteriaBuilder.and(
+                criteriaBuilder.equal(likesRoot.get(ReviewLike_.REVIEW), reviewRoot),
+                criteriaBuilder.isTrue(likesRoot.get(ReviewLike_.POSITIVE))
+            ));
 
-            criteriaQuery.groupBy(reviewRoot.get(Review_.ID));
+            sortExpression = subquery;
         } else {
             sortExpression = reviewRoot.get(sortField.getFieldName());
         }
 
-        return  ObjectUtils.isEmpty(sortDirection) || sortDirection.isAscending()
+        return ObjectUtils.isEmpty(sortDirection) || sortDirection.isAscending()
             ? criteriaBuilder.asc(sortExpression)
             : criteriaBuilder.desc(sortExpression);
+    }
+
+    /**
+     * Spring Data JPA throws an exception if it has pagination with join fetch. So it disable join fetch if it just <code>COUNT(*)</code>.
+     *
+     * @return flag about this query is <code>COUNT(*)</code> for pagination.
+     */
+    public static boolean processCountQuery(Root<Review> reviewRoot, CriteriaQuery<?> criteriaQuery) {
+        boolean isCountQuery = criteriaQuery.getResultType() == Long.class || criteriaQuery.getResultType() == long.class;
+
+        if (isCountQuery) {
+            reviewRoot.join(Review_.WEB_RESOURCE);
+            reviewRoot.join(Review_.USER);
+        } else {
+            reviewRoot.fetch(Review_.LIKES, JoinType.LEFT);
+            reviewRoot.fetch(Review_.WEB_RESOURCE);
+            reviewRoot.fetch(Review_.USER);
+        }
+
+        return isCountQuery;
     }
 }

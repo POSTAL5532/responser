@@ -129,7 +129,7 @@ public abstract class RestApiController {
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
     @ResponseBody
     protected ApiError<?> handleOtherException(Exception exception) {
-        log.error("Handle 'ConstraintViolationException' {}", exception.getMessage());
+        log.error("Handle 'Unknown error'", exception);
         return new ApiError<>("Internal server error", ApiErrorType.UNKNOWN_ERROR);
     }
 }

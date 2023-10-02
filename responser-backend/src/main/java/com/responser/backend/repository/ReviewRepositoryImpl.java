@@ -1,12 +1,15 @@
 package com.responser.backend.repository;
 
+import com.blazebit.persistence.CriteriaBuilder;
+import com.blazebit.persistence.CriteriaBuilderFactory;
 import com.responser.backend.model.Review;
+import com.responser.backend.model.Review_;
+import com.responser.backend.model.metamodel.ReviewMetaModel;
 import jakarta.persistence.EntityManager;
-import jakarta.persistence.NoResultException;
 import jakarta.persistence.PersistenceContext;
-import jakarta.persistence.TypedQuery;
 import java.util.Objects;
 import java.util.Optional;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
 /**
@@ -15,42 +18,38 @@ import org.springframework.stereotype.Repository;
  * @author Shcherbachenya Igor
  */
 @Repository
+@RequiredArgsConstructor
 public class ReviewRepositoryImpl {
 
     @PersistenceContext
     private EntityManager entityManager;
 
+    private final CriteriaBuilderFactory criteriaBuilderFactory;
+
     public Optional<Review> findById(String id) {
-        Review review = entityManager.find(Review.class, id);
-        return Optional.ofNullable(review);
+        CriteriaBuilder<Review> criteriaBuilder = criteriaBuilderFactory.create(entityManager, Review.class, ReviewMetaModel.ALIAS)
+            .where(ReviewMetaModel.getFromAlias(Review_.ID)).eq(id)
+            .leftJoinFetch(ReviewMetaModel.getFromAlias(Review_.WEB_RESOURCE), Review_.WEB_RESOURCE)
+            .leftJoinFetch(ReviewMetaModel.getFromAlias(Review_.USER), Review_.USER)
+            .leftJoinFetch(ReviewMetaModel.getFromAlias(Review_.LIKES), Review_.LIKES);
+
+        return Optional.ofNullable(criteriaBuilder.getSingleResult());
     }
 
     public Optional<Review> findByIdAndUserId(String reviewId, String userId) {
-        TypedQuery<Review> query = entityManager.createQuery(
-                "from Review review where review.id = :reviewId and review.user.id = :userId", Review.class
-            )
-            .setParameter("reviewId", reviewId)
-            .setParameter("userId", userId);
+        CriteriaBuilder<Review> criteriaBuilder = criteriaBuilderFactory.create(entityManager, Review.class, ReviewMetaModel.ALIAS)
+            .where(ReviewMetaModel.getFromAlias(ReviewMetaModel.ID)).eq(reviewId)
+            .where(ReviewMetaModel.getFromAlias(ReviewMetaModel.USER_ID)).eq(userId);
 
-        try {
-            return Optional.of(query.getSingleResult());
-        } catch (NoResultException exception) {
-            return Optional.empty();
-        }
+        return Optional.ofNullable(criteriaBuilder.getSingleResult());
     }
 
     public Boolean existsByResourceIdAndUserId(String resourceId, String userId) {
-        TypedQuery<Review> query = entityManager.createQuery(
-                "from Review review where review.user.id = :userId and review.resourceId = :resourceId", Review.class
-            )
-            .setParameter("userId", userId)
-            .setParameter("resourceId", resourceId);
+        CriteriaBuilder<Review> criteriaBuilder = criteriaBuilderFactory.create(entityManager, Review.class, ReviewMetaModel.ALIAS)
+        .where(ReviewMetaModel.getFromAlias(ReviewMetaModel.RESOURCE_ID)).eq(resourceId)
+        .where(ReviewMetaModel.getFromAlias(ReviewMetaModel.USER_ID)).eq(userId);
 
-        try {
-            return Objects.nonNull(query.getSingleResult());
-        } catch (NoResultException exception) {
-            return false;
-        }
+        return Objects.nonNull(criteriaBuilder.getSingleResult());
     }
 
     public Review update(Review review) {

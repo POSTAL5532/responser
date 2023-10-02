@@ -30,14 +30,14 @@ public class Review extends AbstractEntity {
 
     private String text;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "resource_id", nullable = false, insertable = false, updatable = false)
     private WebResource webResource;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id", nullable = false, insertable = false, updatable = false)
     private User user;
 
-    @OneToMany(mappedBy = "review", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "review", fetch = FetchType.LAZY)
     private Set<ReviewLike> likes;
 }

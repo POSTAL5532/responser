@@ -35,6 +35,10 @@ dependencies {
     implementation 'org.apache.commons:commons-lang3:3.12.0'
     implementation 'org.apache.httpcomponents.client5:httpclient5:5.2.1'
     implementation 'commons-io:commons-io:2.13.0'
+    implementation 'com.blazebit:blaze-persistence-core-api-jakarta:1.6.9'
+    implementation 'com.blazebit:blaze-persistence-integration-hibernate-6.2:1.6.9'
+    runtimeOnly 'com.blazebit:blaze-persistence-core-impl-jakarta:1.6.9'
+
 
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor 'org.hibernate.orm:hibernate-jpamodelgen:6.1.5.Final'

@@ -18,9 +18,12 @@ public class ReviewLike extends AbstractEntity {
     @Column(name = "user_id")
     private String userId;
 
+    @Column(name = "review_id")
+    private String reviewId;
+
     private Boolean positive;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "review_id", nullable = false)
+    @JoinColumn(name = "review_id", nullable = false, insertable = false, updatable = false)
     private Review review;
 }

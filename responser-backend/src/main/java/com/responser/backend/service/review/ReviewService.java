@@ -18,6 +18,7 @@ import static java.text.MessageFormat.*;
 
 import java.util.NoSuchElementException;
 
+// TODO: Choose between Criteria API and Blaze Persistence
 /**
  * Review service
  *
