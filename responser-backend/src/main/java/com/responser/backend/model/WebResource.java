@@ -25,7 +25,7 @@ public class WebResource extends AbstractEntity {
     @Column(name = "resource_type")
     private ResourceType resourceType;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="parent_id")
     private WebResource parent;
 }

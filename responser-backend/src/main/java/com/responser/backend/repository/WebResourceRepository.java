@@ -13,16 +13,34 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface WebResourceRepository extends JpaRepository<WebResource, String> {
 
-    @Query("select w from WebResource w inner join Review r on w.id = r.resourceId where w.resourceType=:resourceType group by w.id")
+    @Query("""
+        select w from WebResource w
+        left join fetch w.parent parent
+        inner join Review r on w.id = r.resourceId
+        where w.resourceType=:resourceType
+        group by w.id, parent.id
+        """)
     Page<WebResource> findWithReviewsByResourceType(ResourceType resourceType, Pageable pageable);
 
-    @Query("select w from WebResource w inner join Review r on w.id = r.resourceId where w.resourceType=:resourceType and w.url like %:searchUrl% group by w.id")
+    @Query("""
+        select w from WebResource w
+        left join fetch w.parent parent
+        inner join Review r on w.id = r.resourceId
+        where w.resourceType=:resourceType and w.url like %:searchUrl%
+        group by w.id, parent.id
+        """)
     Page<WebResource> findWithReviewsByResourceTypeAndUrlContainingSearchUrl(
         ResourceType resourceType,
         @Param("searchUrl") String searchUrl,
         Pageable pageable
     );
 
+    @Query("""
+        select w from WebResource w
+        left join fetch w.parent parent
+        where w.url=:url and w.resourceType=:resourceType
+        group by w.id, parent.id
+        """)
     Optional<WebResource> findByUrlAndResourceType(String url, ResourceType resourceType);
 
     Boolean existsByUrlAndResourceType(String url, ResourceType resourceType);

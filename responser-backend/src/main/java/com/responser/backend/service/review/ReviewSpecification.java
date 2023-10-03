@@ -15,54 +15,54 @@ import jakarta.persistence.criteria.Order;
 import jakarta.persistence.criteria.Predicate;
 import jakarta.persistence.criteria.Root;
 import jakarta.persistence.criteria.Subquery;
+import java.util.ArrayList;
+import java.util.List;
+import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
+import org.springframework.lang.NonNull;
 
-import java.util.ArrayList;
-import java.util.List;
+@RequiredArgsConstructor
+public class ReviewSpecification implements Specification<Review> {
 
-/**
- * Util class for creating a {@link Specification} for {@link Review} entities selection.
- */
-public class ReviewSpecifications {
+    private final ReviewsCriteria criteria;
 
-    public static Specification<Review> getAll(ReviewsCriteria criteria) {
-        return (Root<Review> reviewRoot, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) -> {
-            List<Predicate> predicates = new ArrayList<>();
+    @Override
+    public Predicate toPredicate(@NonNull Root<Review> reviewRoot, @NonNull CriteriaQuery<?> criteriaQuery, @NonNull CriteriaBuilder criteriaBuilder) {
+        List<Predicate> predicates = new ArrayList<>();
 
-            boolean isCountQuery = processCountQuery(reviewRoot, criteriaQuery);
+        boolean isCountQuery = processCountQuery(reviewRoot, criteriaQuery);
 
-            if (criteria.hasResourceId()) {
-                predicates.add(criteriaBuilder.equal(reviewRoot.get(Review_.RESOURCE_ID), criteria.getResourceId()));
-            }
+        if (criteria.hasResourceId()) {
+            predicates.add(criteriaBuilder.equal(reviewRoot.get(Review_.RESOURCE_ID), criteria.getResourceId()));
+        }
 
-            if (criteria.hasForUserId()) {
-                predicates.add(criteriaBuilder.equal(reviewRoot.get(Review_.USER).get(User_.ID), criteria.getForUserId()));
-            }
+        if (criteria.hasForUserId()) {
+            predicates.add(criteriaBuilder.equal(reviewRoot.get(Review_.USER).get(User_.ID), criteria.getForUserId()));
+        }
 
-            if (criteria.hasExcludeUserId()) {
-                predicates.add(criteriaBuilder.notEqual(reviewRoot.get(Review_.USER).get(User_.ID), criteria.getExcludeUserId()));
-            }
+        if (criteria.hasExcludeUserId()) {
+            predicates.add(criteriaBuilder.notEqual(reviewRoot.get(Review_.USER).get(User_.ID), criteria.getExcludeUserId()));
+        }
 
-            if (criteria.hasMinRating()) {
-                predicates.add(criteriaBuilder.greaterThanOrEqualTo(reviewRoot.get(Review_.RATING), criteria.getMinRating()));
-            }
+        if (criteria.hasMinRating()) {
+            predicates.add(criteriaBuilder.greaterThanOrEqualTo(reviewRoot.get(Review_.RATING), criteria.getMinRating()));
+        }
 
-            if (criteria.hasMaxRating()) {
-                predicates.add(criteriaBuilder.lessThanOrEqualTo(reviewRoot.get(Review_.RATING), criteria.getMaxRating()));
-            }
+        if (criteria.hasMaxRating()) {
+            predicates.add(criteriaBuilder.lessThanOrEqualTo(reviewRoot.get(Review_.RATING), criteria.getMaxRating()));
+        }
 
-            if (criteria.hasSortingField() && !isCountQuery) {
-                Order sortOrder = getSortingOrder(reviewRoot, criteriaQuery, criteriaBuilder, criteria.getSortingField(), criteria.getSortDirection());
-                criteriaQuery.orderBy(sortOrder);
-            }
+        if (criteria.hasSortingField() && !isCountQuery) {
+            Order sortOrder = getSortingOrder(reviewRoot, criteriaQuery, criteriaBuilder, criteria.getSortingField(), criteria.getSortDirection());
+            criteriaQuery.orderBy(sortOrder);
+        }
 
-            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
-        };
+        return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
     }
 
-    public static Order getSortingOrder(
+    public Order getSortingOrder(
         Root<Review> reviewRoot,
         CriteriaQuery<?> criteriaQuery,
         CriteriaBuilder criteriaBuilder,
@@ -96,7 +96,7 @@ public class ReviewSpecifications {
      *
      * @return flag about this query is <code>COUNT(*)</code> for pagination.
      */
-    public static boolean processCountQuery(Root<Review> reviewRoot, CriteriaQuery<?> criteriaQuery) {
+    public boolean processCountQuery(Root<Review> reviewRoot, CriteriaQuery<?> criteriaQuery) {
         boolean isCountQuery = criteriaQuery.getResultType() == Long.class || criteriaQuery.getResultType() == long.class;
 
         if (isCountQuery) {

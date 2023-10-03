@@ -5,7 +5,6 @@ import com.responser.backend.model.ReviewsCriteria;
 import com.responser.backend.model.Review;
 import com.responser.backend.model.User;
 import com.responser.backend.repository.ReviewRepository;
-import com.responser.backend.repository.ReviewRepositoryImpl;
 import com.responser.backend.service.UserService;
 import com.responser.backend.service.WebResourceService;
 import lombok.AllArgsConstructor;
@@ -18,7 +17,6 @@ import static java.text.MessageFormat.*;
 
 import java.util.NoSuchElementException;
 
-// TODO: Choose between Criteria API and Blaze Persistence
 /**
  * Review service
  *
@@ -29,8 +27,6 @@ import java.util.NoSuchElementException;
 @Transactional(readOnly = true)
 public class ReviewService {
 
-    private final ReviewRepositoryImpl reviewRepositoryImpl;
-
     private final ReviewRepository reviewRepository;
 
     private final UserService userService;
@@ -40,7 +36,7 @@ public class ReviewService {
     private final ReviewMetaImageService metaImageService;
 
     public Review getReviewByIdAndUser(String reviewId, String userId) {
-        return reviewRepositoryImpl.findByIdAndUserId(reviewId, userId).orElseThrow(() ->
+        return reviewRepository.findByIdAndUserId(reviewId, userId).orElseThrow(() ->
             new NoSuchElementException(format(
                 "Review with id ''{0}'' and user id ''{1}'' doesn't exist", reviewId, userId
             ))
@@ -48,17 +44,17 @@ public class ReviewService {
     }
 
     public Review getReview(String reviewId) {
-        return reviewRepositoryImpl.findById(reviewId).orElseThrow(() ->
+        return reviewRepository.findById(reviewId).orElseThrow(() ->
             new NoSuchElementException(format("Review ''{0}'' doesn't exist", reviewId))
         );
     }
 
     public Page<Review> getReviews(ReviewsCriteria criteria, Pageable pageable) {
-        return reviewRepository.findAll(ReviewSpecifications.getAll(criteria), pageable);
+        return reviewRepository.findAll(new ReviewSpecification(criteria), pageable);
     }
 
     public Boolean existsByResourceIdAndUserId(String resourceId, String userId) {
-        return reviewRepositoryImpl.existsByResourceIdAndUserId(resourceId, userId);
+        return reviewRepository.existsByResourceIdAndUserId(resourceId, userId);
     }
 
     /**
@@ -94,7 +90,7 @@ public class ReviewService {
 
         User referenceUser = userService.getUser(userId);
         newReview.setUser(referenceUser);
-        Review savedReview = reviewRepositoryImpl.save(newReview);
+        Review savedReview = reviewRepository.save(newReview);
 
         metaImageService.create(savedReview);
 
@@ -103,10 +99,10 @@ public class ReviewService {
 
     @Transactional
     public Review updateReview(Review review) {
-        Review oldReview = this.getReviewByIdAndUser(review.getId(), review.getUser().getId());
+        Review oldReview = this.getReviewByIdAndUser(review.getId(), review.getUserId());
         oldReview.setText(review.getText());
         oldReview.setRating(review.getRating());
-        Review updatedReview = reviewRepositoryImpl.update(oldReview);
+        Review updatedReview = reviewRepository.save(oldReview);
 
         metaImageService.update(updatedReview);
 
@@ -121,12 +117,12 @@ public class ReviewService {
      */
     @Transactional
     public void removeReview(String reviewId, String userId) {
-        Review review = reviewRepositoryImpl.findByIdAndUserId(reviewId, userId)
+        Review review = reviewRepository.findByIdAndUserId(reviewId, userId)
             .orElseThrow(() -> new NoSuchElementException(format(
                     "Review ''{0}'' from user ''{1}'' doesn't exist.", reviewId, userId
                 ))
             );
 
-        reviewRepositoryImpl.delete(review);
+        reviewRepository.delete(review);
     }
 }

@@ -25,6 +25,7 @@ public class ReviewLikeConverter {
 
         ReviewLike reviewLike = new ReviewLike();
         reviewLike.setId(likeId);
+        reviewLike.setReviewId(dataPayload.getReviewId());
         reviewLike.setReview(fakeReview);
         reviewLike.setUserId(userId);
         reviewLike.setPositive(dataPayload.getPositive());
