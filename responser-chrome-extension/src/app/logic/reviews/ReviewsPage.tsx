@@ -67,12 +67,16 @@ const ReviewsPage: React.FC = () => {
     }
 
     const reviewsList = currentUserReview ? [currentUserReview, ...reviews] : reviews;
+    const setHeaderInLoadingState = isSiteLoading || isPageLoading ||
+        (reviewsResourceType === ResourceType.PAGE && !page) ||
+        (reviewsResourceType === ResourceType.SITE && !site) ||
+        (!page && !site);
 
     return (
         <Page className="reviews-page">
             <ReviewsHeader reviewsResourceType={reviewsResourceType}
                            resource={reviewsResourceType === ResourceType.PAGE ? page : site}
-                           isLoading={(!page && !site) || isSiteLoading || isPageLoading}
+                           isLoading={setHeaderInLoadingState}
                            isReviewsLoading={(!page && !site) || isSiteLoading || isPageLoading || isReviewsLoading}
                            onResourceTypeChange={changeResourceType}
                            pageInfo={currentPageInfo}/>

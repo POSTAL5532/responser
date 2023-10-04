@@ -57,22 +57,25 @@ export class ReviewsPageStore {
         makeAutoObservable(this);
     }
 
-    init = async (reviewsResourceType: ResourceType, currentUserId: string) => {
-        this.logger.debug("Init store: reviewsResourceType=", reviewsResourceType, ", currentUserId=", currentUserId);
+    init = async (resourceType: ResourceType, currentUserId: string) => {
+        this.logger.debug("Init store: resourceType=", resourceType, ", currentUserId=", currentUserId);
 
         this.currentUserId = currentUserId;
         this.currentPageNumber = 0;
         this.hasNextReviews = false;
 
-        this.reviewsResourceType = reviewsResourceType || ResourceType.SITE;
+        this.reviewsResourceType = resourceType || ResourceType.SITE;
         this.loadingState.isPageInfoLoading = true;
         const pageInfo = await this.extensionService.getCurrentPageInfo().finally(
             () => this.loadingState.isPageInfoLoading = false
         );
         this.currentPageInfo = pageInfo.data;
 
-        await this.initSite();
-        await this.initPage();
+        if (this.reviewsResourceType === ResourceType.SITE) {
+            await this.initSite();
+        } else if (this.reviewsResourceType === ResourceType.PAGE) {
+            await this.initPage();
+        }
 
         await this.loadCurrenUserReview();
         await this.loadReviews();
