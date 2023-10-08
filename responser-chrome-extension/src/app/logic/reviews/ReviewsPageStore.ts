@@ -57,6 +57,8 @@ export class ReviewsPageStore {
         makeAutoObservable(this);
     }
 
+    // TODO: Refactoring of loading state on the initialization step - some UI elements checks the {some_resource} == null for detecting of loading process
+    // instead of loading store using
     init = async (resourceType: ResourceType, currentUserId: string) => {
         this.logger.debug("Init store: resourceType=", resourceType, ", currentUserId=", currentUserId);
 

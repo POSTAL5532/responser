@@ -7,7 +7,7 @@
           ~{:: #mainContent},
           'Reviews',
           'reviews-page',
-           null
+           ~{:: #endContent}
       )}">
 <head>
     <title></title>
@@ -23,51 +23,58 @@
         <form id="sort-filter-form">
             <div class="sorting-container">
                 <button type="button" class="sorting-button">Sorting</button>
-                <div class="sorting-menu">
+                <div class="sorting-menu" style="padding: 10px; border: solid 1px black">
                     <label>
-                        <input type="radio" name="sorting" value="RATING:HIGH"
-                               th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).RATING && criteria.sortDirection == 'ASC'}">
+                        <input type="radio" name="sortingField" value="RATING:ASC"
+                               th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).RATING && criteria.sortDirection.name == 'ASC'}">
                         Rating: high first
                     </label>
+                    <br>
                     <label>
-                        <input type="radio" name="sorting" value="RATING:LOW"
-                               th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).RATING && criteria.sortDirection == 'DESC'}">
+                        <input type="radio" name="sortingField" value="RATING:DESC"
+                               th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).RATING && criteria.sortDirection.name == 'DESC'}">
                         Rating: low first
                     </label>
+                    <br>
                     <label>
-                        <input type="radio" name="sorting" value="CREATION_DATE:HIGH"
-                               th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).CREATION_DATE && criteria.sortDirection == 'ASC'}">
-                        Creation date: high first
+                        <input type="radio" name="sortingField" value="CREATION_DATE:ASC"
+                               th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).CREATION_DATE && criteria.sortDirection.name == 'ASC'}">
+                        Creation date: old first
                     </label>
+                    <br>
                     <label>
-                        <input type="radio" name="sorting" value="CREATION_DATE:LOW"
-                               th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).CREATION_DATE && criteria.sortDirection == 'DESC'}">
-                        Creation date: low first
+                        <input type="radio" name="sortingField" value="CREATION_DATE:DESC"
+                               th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).CREATION_DATE && criteria.sortDirection.name == 'DESC'}">
+                        Creation date: new first
                     </label>
+                    <br>
                     <label>
-                        <input type="radio" name="sorting" value="POPULARITY:HIGH"
-                               th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).POPULARITY && criteria.sortDirection == 'ASC'}">
-                        Popularity: high first
+                        <input type="radio" name="sortingField" value="POPULARITY:ASC"
+                               th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).POPULARITY && criteria.sortDirection.name == 'ASC'}">
+                        Popularity: Unpopular first
                     </label>
+                    <br>
                     <label>
-                        <input type="radio" name="sorting" value="POPULARITY:LOW"
-                               th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).POPULARITY && criteria.sortDirection == 'DESC'}">
-                        Popularity: low first
+                        <input type="radio" name="sortingField" value="POPULARITY:DESC"
+                               th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).POPULARITY && criteria.sortDirection.name == 'DESC'}">
+                        Popularity: Popular first
                     </label>
                 </div>
             </div>
             <div class="filter-container">
                 <button type="button" class="filter-button">Filter</button>
-                <div class="filter-menu">
+                <div class="filter-menu" style="padding: 10px; border: solid 1px black">
                     <h4>Resource type:</h4>
                     <label>
                         <input type="radio" name="resourceType" value="SITE" th:checked="${criteria.resourceType == T(com.responser.backend.model.ResourceType).SITE}">
                         Sites reviews
                     </label>
+                    <br>
                     <label>
                         <input type="radio" name="resourceType" value="PAGE" th:checked="${criteria.resourceType == T(com.responser.backend.model.ResourceType).PAGE}">
                         Pages reviews
                     </label>
+                    <br>
                     <label>
                         <input type="radio" name="resourceType" th:value="${null}" th:checked="${criteria.resourceType == null}">
                         All reviews
@@ -100,6 +107,43 @@
     <a class="link" th:classappend="${previousSearchUrl == null ? 'disabled' : ''}" th:href="${previousSearchUrl}"><- Previous page</a>
     <span th:text="${reviewsCount + ' reviews'}">reviews count</span>
     <a class="link" th:classappend="${nextSearchUrl == null ? 'disabled' : ''}" th:href="${nextSearchUrl}">Next page -></a>
+</th:block>
+
+<th:block id="endContent">
+    <script>
+        const getFormData = () => {
+            const formRawData = $("#sort-filter-form").serializeArray();
+            const formObject = {};
+
+            jQuery.each(formRawData, (index, field) => {
+                const fieldName = field.name;
+                const fieldValue = field.value;
+
+                if (!fieldValue) {
+                    return;
+                }
+
+                if (fieldName === "sortingField") {
+                    const sortingFieldValue = fieldValue.split(":")[0];
+                    const sortingDirectionValue = fieldValue.split(":")[1];
+                    formObject["sortingField"] = sortingFieldValue;
+                    formObject["sortDirection"] = sortingDirectionValue;
+                    return;
+                }
+
+                formObject[fieldName] = fieldValue;
+            });
+
+            formObject["page"] = "0";
+
+            const url = new URL(window.location.origin + window.location.pathname);
+            url.search = new URLSearchParams(formObject).toString();
+
+            window.location.href = url.toString();
+        }
+
+        $("#sort-filter-form :input").change(getFormData);
+    </script>
 </th:block>
 </body>
 </html>

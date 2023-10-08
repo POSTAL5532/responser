@@ -57,4 +57,8 @@ public class ReviewsCriteria {
     public boolean hasSortDirection() {
         return Objects.nonNull(sortDirection);
     }
+
+    public boolean hasResourceType() {
+        return Objects.nonNull(resourceType);
+    }
 }

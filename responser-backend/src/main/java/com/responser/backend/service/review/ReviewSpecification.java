@@ -7,6 +7,7 @@ import com.responser.backend.model.Review_;
 import com.responser.backend.model.ReviewsCriteria;
 import com.responser.backend.model.ReviewsCriteriaSortingField;
 import com.responser.backend.model.User_;
+import com.responser.backend.model.WebResource_;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Expression;
@@ -52,6 +53,10 @@ public class ReviewSpecification implements Specification<Review> {
 
         if (criteria.hasMaxRating()) {
             predicates.add(criteriaBuilder.lessThanOrEqualTo(reviewRoot.get(Review_.RATING), criteria.getMaxRating()));
+        }
+
+        if (criteria.hasResourceType()) {
+            predicates.add(criteriaBuilder.equal(reviewRoot.get(Review_.WEB_RESOURCE).get(WebResource_.RESOURCE_TYPE), criteria.getResourceType()));
         }
 
         if (criteria.hasSortingField() && !isCountQuery) {
