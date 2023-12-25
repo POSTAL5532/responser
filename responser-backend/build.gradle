@@ -63,6 +63,10 @@ compileJava	{
     options.annotationProcessorGeneratedSourcesDirectory = file(generatedMainJava)
 }
 
+tasks.named("build") {
+    dependsOn("compileLess")
+}
+
 task compileLess() {
     description 'Tasks which shows a welcome message'
     def baseLessPath = 'src/main/resources/less'
@@ -70,13 +74,22 @@ task compileLess() {
     def lesscCommand = 'lessc'
 
     doLast {
-        exec {
+        /*exec {
             commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/components/components.less", "${baseCssPath}/components.css"
+        }*/
+        exec {
+            commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/component/components.less", "${baseCssPath}/components.css"
         }
         exec {
             commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/common.less", "${baseCssPath}/common.css"
         }
         exec {
+            commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/fonts.less", "${baseCssPath}/fonts.css"
+        }
+        exec {
+            commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/index.less", "${baseCssPath}/index.css"
+        }
+        /*exec {
             commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/layouts/pageMainLayout.less", "${baseCssPath}/pageMainLayout.css"
         }
         exec {
@@ -86,9 +99,6 @@ task compileLess() {
             commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/reviewPage.less", "${baseCssPath}/reviewPage.css"
         }
         exec {
-            commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/index.less", "${baseCssPath}/index.css"
-        }
-        exec {
             commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/sitesRating.less", "${baseCssPath}/sitesRating.css"
         }
         exec {
@@ -96,7 +106,7 @@ task compileLess() {
         }
         exec {
             commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/seeReviewsPage.less", "${baseCssPath}/seeReviewsPage.css"
-        }
+        }*/
         exec {
             commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/error.less", "${baseCssPath}/error.css"
         }

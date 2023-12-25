@@ -1,0 +1,58 @@
+@import "../global.less";
+
+.button {
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    border-radius: 6px;
+    height: 36px;
+    .fontOutfitRegular(20px);
+    padding-left: 10px;
+    padding-right: 10px;
+    color: @black-alpha-60;
+    background-color: transparent;
+    border: 1px solid @brown-soft;
+    transition: background-color 0.15s;
+
+    &:active, &:focus {
+        outline: none;
+    }
+
+    &:hover {
+        background-color: @beige-alpha-8;
+    }
+
+    &.primary {
+        height: 44px;
+        border: none;
+        background-color: @lime;
+        gap: 14px;
+
+        &:hover {
+            background-color: @lime-alpha-40;
+        }
+    }
+
+    &.light {
+        border: none;
+
+        &:hover {
+            background-color: @blue-alpha-10;
+        }
+    }
+
+    &.small {
+        height: 28px;
+        .fontOutfitRegular(14px);
+
+        &.primary {
+            height: 40px;
+        }
+
+        &.light {
+            .fontOutfitRegular(16px);
+        }
+    }
+}

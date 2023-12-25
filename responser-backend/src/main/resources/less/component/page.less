@@ -1,0 +1,114 @@
+@import "../global.less";
+
+.page {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .page-content .section, .header .header-content {
+        .adaptationComplex(
+        {
+            width: 1800px;
+        },
+        {
+            width: 1380px;
+        },
+        {
+            width: 964px;
+        },
+        {
+            width: 728px;
+        }
+        );
+    }
+
+    .header {
+        //background: linear-gradient(@ivory, transparent);
+        background: @ivory;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        position: fixed;
+        z-index: 9999;
+
+        .header-content {
+            position: relative;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .adaptationComplex(
+            {
+                height: 98px;
+            },
+            {
+                height: 90px;
+            },
+            {
+                height: 90px;
+            },
+            {
+                height: 70px;
+            }
+            );
+
+            .navigation {
+                .button {
+                    .adaptationComplex(
+                    {
+                        padding: 0 30px;
+                    },
+                    {
+                        padding: 0 24px;
+                    },
+                    {
+                        padding: 0 18px;
+                    },
+                    {
+                        padding: 0 10px;
+                    }
+                    );
+
+                    &.active {
+                        background-color: @blue-alpha-10;
+                    }
+                }
+            }
+
+            .logo-container {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+            }
+
+            .right-control-container {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+
+                .button.primary {
+                    height: 36px;
+                }
+            }
+        }
+    }
+
+    .page-content {
+        .adaptationComplex(
+        {
+            margin-top: 98px;
+        },
+        {
+            margin-top: 90px;
+        },
+        {
+            margin-top: 90px;
+        },
+        {
+            margin-top: 70px;
+        }
+        );
+    }
+}

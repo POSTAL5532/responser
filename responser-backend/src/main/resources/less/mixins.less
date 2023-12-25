@@ -40,29 +40,42 @@
   mask: url(@svgPath) center/@width @height no-repeat;
 }
 
-// Adaptation mixins
-.adaptationMobile(@rules) {
-  @media screen and (min-width: 1px) and (max-width: 1023px) {
-    @rules();
-  }
-}
 
-.adaptationTablet(@rules) {
-  @media screen and (min-width: 1024px) and (max-width: 1439px) {
+
+
+
+// =================================================================
+// ========================== ADAPTATION ===========================
+// =================================================================
+.adaptationDesktop(@rules) {
+  @media only screen and (min-width: 1920px) {
     @rules();
   }
 }
 
 .adaptationSmallDesktop(@rules) {
-  @media screen and (min-width: 1440px) and (max-width: 1919px) {
+  @media only screen and (min-width: 1440px) and (max-width: 1919px) {
     @rules();
   }
 }
 
-.adaptationDesktop(@rules) {
-  @media screen and (min-width: 1920px) {
+.adaptationTablet(@rules) {
+  @media only screen and (min-width: 1024px) and (max-width: 1439px) {
     @rules();
   }
+}
+
+.adaptationMobile(@rules) {
+  @media only screen and (min-width: 1px) and (max-width: 1023px) {
+    @rules();
+  }
+}
+
+.adaptationComplex(@desktopRules, @smallDesktopRules, @tabletRules, @mobileRules) {
+  .adaptationDesktop(@desktopRules);
+  .adaptationSmallDesktop(@smallDesktopRules);
+  .adaptationTablet(@tabletRules);
+  .adaptationMobile(@mobileRules);
 }
 
 .doubleDPI(@rules) {
@@ -70,3 +83,21 @@
     @rules();
   }
 }
+// =================================================================
+
+
+// ===========================================================
+// ========================== FONT ===========================
+// ===========================================================
+.fontOutfitMedium(@font-size: 16px) {
+  font-family: "Outfit-Medium";
+  font-size: @font-size;
+  font-weight: 500;
+}
+
+.fontOutfitRegular(@font-size: 16px) {
+  font-family: "Outfit-Regular";
+  font-size: @font-size;
+  font-weight: 400;
+}
+// =================================================================

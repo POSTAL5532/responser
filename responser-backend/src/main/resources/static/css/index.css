@@ -1,758 +1,1940 @@
-@font-face {
-  font-family: "Inter-Thin";
-  src: url("/font/Inter-Thin.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 100;
+.page.index {
+  transition: background-color 0.5s;
 }
-@font-face {
-  font-family: "Inter-ExtraLight";
-  src: url("/font/Inter-ExtraLight.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 200;
+.page.index.dark {
+  background-color: #605C55;
 }
-@font-face {
-  font-family: "Inter-Light";
-  src: url("/font/Inter-Light.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 300;
+.page.index .page-content .section {
+  background-color: #F2F0EE;
 }
-@font-face {
-  font-family: "Inter-Regular";
-  src: url("/font/Inter-Regular.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 400;
-}
-@font-face {
-  font-family: "Inter-Medium";
-  src: url("/font/Inter-Medium.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 500;
-}
-@font-face {
-  font-family: "Inter-SemiBold";
-  src: url("/font/Inter-SemiBold.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 600;
-}
-@font-face {
-  font-family: "Inter-Bold";
-  src: url("/font/Inter-Bold.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 700;
-}
-@font-face {
-  font-family: "Inter-ExtraBold";
-  src: url("/font/Inter-ExtraBold.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 800;
-}
-@font-face {
-  font-family: "Inter-Black";
-  src: url("/font/Inter-Black.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 900;
-}
-.icon {
-  width: 12px;
-  height: 12px;
-  display: block;
-}
-.icon.login-icon {
-  -webkit-mask: url("/img/login.svg") center / 20px 20px no-repeat;
-  mask: url("/img/login.svg") center / 20px 20px no-repeat;
-  width: 20px;
-  height: 20px;
-}
-.icon.chrome-icon {
-  -webkit-mask: url("/img/chrome.svg") center / 20px 20px no-repeat;
-  mask: url("/img/chrome.svg") center / 20px 20px no-repeat;
-  width: 20px;
-  height: 20px;
-}
-.icon.arrow-icon {
-  -webkit-mask: url("/img/arrow.svg") center / 8px 14px no-repeat;
-  mask: url("/img/arrow.svg") center / 8px 14px no-repeat;
-  width: 8px;
-  height: 14px;
-}
-.icon.big-arrow-icon {
-  -webkit-mask: url("/img/big-arrow.svg") center / 16px 16px no-repeat;
-  mask: url("/img/big-arrow.svg") center / 16px 16px no-repeat;
-  width: 16px;
-  height: 20px;
-}
-.icon.search-icon {
-  -webkit-mask: url("/img/search.svg") center / 16px 16px no-repeat;
-  mask: url("/img/search.svg") center / 16px 16px no-repeat;
-  width: 16px;
-  height: 16px;
-}
-@media screen and (min-width: 1920px) {
-  .main-description {
-    padding: 96px 200px;
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section {
+    border-radius: 70px 70px 70px 0;
+    margin-bottom: 210px;
   }
 }
-@media screen and (min-width: 1440px) and (max-width: 1919px) {
-  .main-description {
-    padding: 96px 112px;
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section {
+    border-radius: 70px 70px 70px 0;
+    margin-bottom: 180px;
   }
 }
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .main-description {
-    padding: 76px 38px;
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section {
+    border-radius: 70px 70px 70px 0;
+    margin-bottom: 150px;
   }
 }
-@media screen and (min-width: 1px) and (max-width: 1023px) {
-  .main-description {
-    padding: 52px 38px;
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section {
+    border-radius: 50px 50px 50px 0;
+    margin-bottom: 140px;
   }
 }
-.main-description .slogan-block {
-  max-width: 840px;
-  padding-bottom: 36px;
-}
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .main-description .slogan-block {
-    max-width: 630px;
-  }
-}
-@media screen and (min-width: 1px) and (max-width: 1023px) {
-  .main-description .slogan-block {
-    max-width: 500px;
-  }
-}
-.main-description .slogan-block .slogan {
-  margin: 0;
-  font-family: "Inter-Bold";
-  font-size: 16px;
-  font-size: 58px;
-  color: #3366FF;
-}
-.main-description .actions {
-  display: flex;
-  gap: 32px;
-}
-.how-it-works {
+.page.index .page-content .section.intro {
+  height: 708px;
   position: relative;
-}
-@media screen and (min-width: 1920px) {
-  .how-it-works {
-    padding: 0 200px 136px;
-  }
-}
-@media screen and (min-width: 1440px) and (max-width: 1919px) {
-  .how-it-works {
-    padding: 0 96px 136px;
-  }
-}
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .how-it-works {
-    padding: 0 0 68px;
-  }
-}
-@media screen and (min-width: 1px) and (max-width: 1023px) {
-  .how-it-works {
-    padding: 0 0 68px;
-  }
-}
-.how-it-works .reviewler {
-  position: absolute;
-  z-index: -1;
-  top: -390px;
-}
-@media screen and (min-width: 1920px) {
-  .how-it-works .reviewler {
-    right: 200px;
-  }
-}
-@media screen and (min-width: 1440px) and (max-width: 1919px) {
-  .how-it-works .reviewler {
-    right: 96px;
-  }
-}
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .how-it-works .reviewler {
-    top: -444px;
-    width: 469px;
-    right: 28px;
-  }
-}
-@media screen and (min-width: 1px) and (max-width: 1023px) {
-  .how-it-works .reviewler {
-    top: -444px;
-    width: 469px;
-    right: 28px;
-  }
-}
-.how-it-works .card {
   display: flex;
   flex-direction: column;
-  padding: 46px 140px;
-  background: linear-gradient(102.22deg, #8DD1FE 0%, #205BB5 103.82%);
-  border-radius: 30px;
-  box-shadow: 0 0 2px rgba(40, 41, 61, 0.04), 0 4px 8px rgba(96, 97, 112, 0.16);
-}
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .how-it-works .card {
-    padding: 46px 54px;
-    border-radius: 0;
-  }
-}
-@media screen and (min-width: 1px) and (max-width: 1023px) {
-  .how-it-works .card {
-    padding: 46px 54px;
-    border-radius: 0;
-  }
-}
-.how-it-works .card .card-header {
-  width: 100%;
-  margin-bottom: 40px;
-}
-.how-it-works .card .card-header h2 {
-  font-family: "Inter-Medium";
-  font-size: 16px;
-  font-size: 48px;
-  font-weight: normal;
-  margin: 0;
-  text-align: center;
-  color: #FFFFFF;
-}
-.how-it-works .card .card-body {
-  display: flex;
-  gap: 10px;
   align-items: center;
+  background-color: transparent;
 }
-.how-it-works .card .card-body .instructions {
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.intro {
+    height: 708px;
+    margin-top: 58px;
+    padding-top: 126px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.intro {
+    height: 606px;
+    margin-top: 20px;
+    padding-top: 70px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.intro {
+    height: 764px;
+    margin-top: 0;
+    padding-top: 264px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.intro {
+    height: 816px;
+    margin-top: 20px;
+    padding-top: 260px;
+  }
+}
+.page.index .page-content .section.intro .intro-head {
+  margin: 0 0 42px;
+  font-family: "Outfit-Regular";
+  font-size: 16px;
+  font-weight: 400;
+  text-align: center;
+  line-height: 100%;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.intro .intro-head {
+    font-size: 70px;
+    width: 814px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.intro .intro-head {
+    font-size: 60px;
+    width: 656px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.intro .intro-head {
+    font-size: 60px;
+    width: 656px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.intro .intro-head {
+    font-size: 50px;
+    width: 560px;
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.intro .input-container {
+    width: 794px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.intro .input-container {
+    width: 670px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.intro .input-container {
+    width: 670px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.intro .input-container {
+    width: 670px;
+  }
+}
+.page.index .page-content .section.intro .intro-image {
+  position: absolute;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.intro .intro-image.reviews {
+    top: 0;
+    right: -26px;
+    width: 444px;
+    height: 392px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.intro .intro-image.reviews {
+    top: 0;
+    right: -84px;
+    width: 370px;
+    height: 326px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.intro .intro-image.reviews {
+    top: 0;
+    right: -20px;
+    width: 278px;
+    height: 244px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.intro .intro-image.reviews {
+    top: 0;
+    right: -24px;
+    width: 278px;
+    height: 244px;
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.intro .intro-image.women {
+    top: 70px;
+    left: -48px;
+    width: 504px;
+    height: 390px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.intro .intro-image.women {
+    top: 100px;
+    left: -134px;
+    width: 420px;
+    height: 326px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.intro .intro-image.women {
+    top: 510px;
+    left: -78px;
+    width: 316px;
+    height: 244px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.intro .intro-image.women {
+    top: 510px;
+    left: -78px;
+    width: 316px;
+    height: 244px;
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.intro .intro-image.extension {
+    top: 426px;
+    left: 296px;
+    width: 396px;
+    height: 282px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.intro .intro-image.extension {
+    top: 372px;
+    left: 222px;
+    width: 330px;
+    height: 236px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.intro .intro-image.extension {
+    top: 540px;
+    left: 690px;
+    width: 248px;
+    height: 176px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.intro .intro-image.extension {
+    top: 637px;
+    left: 482px;
+    width: 248px;
+    height: 176px;
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.intro .intro-image.man {
+    top: 372px;
+    right: 63px;
+    width: 366px;
+    height: 276px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.intro .intro-image.man {
+    top: 302px;
+    right: -4px;
+    width: 306px;
+    height: 230px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.intro .intro-image.man {
+    top: 26px;
+    left: 50px;
+    width: 228px;
+    height: 172px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.intro .intro-image.man {
+    top: 26px;
+    left: -6px;
+    width: 228px;
+    height: 172px;
+  }
+}
+.page.index .page-content .section.extension-demo {
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 860px;
+}
+.page.index .page-content .section.extension-demo .extension-demo-content {
   display: flex;
+  align-items: center;
   flex-direction: column;
-  max-width: 440px;
-  flex-grow: 1;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.extension-demo .extension-demo-content {
+    padding-top: 190px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.extension-demo .extension-demo-content {
+    padding-top: 190px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.extension-demo .extension-demo-content {
+    padding-top: 180px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.extension-demo .extension-demo-content {
+    padding-top: 160px;
+  }
+}
+.page.index .page-content .section.extension-demo .extension-demo-content .extension-demo-header {
+  text-align: center;
+  font-family: "Outfit-Regular";
+  font-size: 16px;
+  font-weight: 400;
+  color: #404038;
+  margin: 0;
+  width: 932px;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.extension-demo .extension-demo-content .extension-demo-header {
+    font-size: 70px;
+    width: 932px;
+    padding-bottom: 72px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.extension-demo .extension-demo-content .extension-demo-header {
+    font-size: 60px;
+    width: 820px;
+    padding-bottom: 66px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.extension-demo .extension-demo-content .extension-demo-header {
+    font-size: 60px;
+    width: 820px;
+    padding-bottom: 66px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.extension-demo .extension-demo-content .extension-demo-header {
+    font-size: 50px;
+    width: 664px;
+    padding-bottom: 58px;
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.extension-demo .extension-demo-content .extension-demo-header .icon {
+    width: 46px;
+    height: 46px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.extension-demo .extension-demo-content .extension-demo-header .icon {
+    width: 42px;
+    height: 42px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.extension-demo .extension-demo-content .extension-demo-header .icon {
+    width: 42px;
+    height: 42px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.extension-demo .extension-demo-content .extension-demo-header .icon {
+    width: 32px;
+    height: 32px;
+  }
+}
+.page.index .page-content .section.extension-demo .extension-demo-content .extension-demo-description {
+  font-family: "Outfit-Regular";
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.6);
+  width: 562px;
+  margin: 0 0 24px;
+}
+.page.index .page-content .section.extension-demo .extension-demo-content .download {
+  margin-bottom: 64px;
+}
+.page.index .page-content .section.extension-demo .extension-demo-content #extension-demo-header-decorator {
+  position: absolute;
+  top: 354px;
+  right: 432px;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.extension-demo .extension-demo-content #extension-demo-header-decorator {
+    top: 354px;
+    right: 432px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.extension-demo .extension-demo-content #extension-demo-header-decorator {
+    top: 326px;
+    right: 272px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.extension-demo .extension-demo-content #extension-demo-header-decorator {
+    top: 318px;
+    right: 56px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.extension-demo .extension-demo-content #extension-demo-header-decorator {
+    top: 274px;
+    right: 18px;
+  }
+}
+.page.index .page-content .section.adventures {
+  display: flex;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.adventures {
+    height: 800px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.adventures {
+    height: 800px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.adventures {
+    height: 800px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.adventures {
+    height: 860px;
+    flex-direction: column;
+  }
+}
+.page.index .page-content .section.adventures .first-container,
+.page.index .page-content .section.adventures .second-container {
+  flex: 1;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.adventures .first-container .text-container {
+    padding-left: 60px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.adventures .first-container .text-container {
+    padding-left: 30px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.adventures .first-container .text-container {
+    padding-left: 30px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.adventures .first-container .text-container {
+    padding-left: 30px;
+  }
+}
+.page.index .page-content .section.adventures .first-container .adventures-header {
+  font-family: "Outfit-Regular";
+  font-size: 16px;
+  font-weight: 400;
+  color: #404038;
+  margin: 0;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.adventures .first-container .adventures-header {
+    margin-top: 120px;
+    font-size: 70px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.adventures .first-container .adventures-header {
+    margin-top: 120px;
+    font-size: 60px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.adventures .first-container .adventures-header {
+    margin-top: 100px;
+    font-size: 60px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.adventures .first-container .adventures-header {
+    margin-top: 100px;
+    font-size: 50px;
+  }
+}
+.page.index .page-content .section.adventures .first-container .adventures-text {
+  font-family: "Outfit-Regular";
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0 0 24px;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.adventures .first-container .adventures-text {
+    font-size: 30px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.adventures .first-container .adventures-text {
+    font-size: 30px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.adventures .first-container .adventures-text {
+    font-size: 30px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.adventures .first-container .adventures-text {
+    font-size: 26px;
+  }
+}
+.page.index .page-content .section.adventures .first-container .adventures-text .decorated {
+  display: inline-block;
+  padding: 0 10px 2px;
+  border-radius: 4px;
+}
+.page.index .page-content .section.adventures .second-container {
+  display: flex;
+  position: relative;
+  border-radius: 0 70px 70px 0;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.adventures .second-container {
+    border-radius: 0 0 50px 0;
+  }
+}
+.page.index .page-content .section.adventures .second-container .adventures-media-image-container {
+  position: absolute;
+  transform: translate(-50%, -50%) scale(1);
+  left: 50%;
+  top: 50%;
+}
+.page.index .page-content .section.adventures .second-container .adventures-media-image-container .separated-image {
+  position: absolute;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.adventures.honest-reviews .first-container .text-container .adventures-header {
+    margin-bottom: 268px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.adventures.honest-reviews .first-container .text-container .adventures-header {
+    margin-bottom: 272px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.adventures.honest-reviews .first-container .text-container .adventures-header {
+    margin-bottom: 272px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.adventures.honest-reviews .first-container .text-container .adventures-header {
+    margin-bottom: 40px;
+  }
+}
+.page.index .page-content .section.adventures.honest-reviews .first-container .text-container .adventures-text {
+  width: 350px;
+}
+.page.index .page-content .section.adventures.honest-reviews .first-container .text-container .adventures-text .decorated {
+  background-color: rgba(214, 222, 115, 0.4);
+  color: #78AC65;
+}
+.page.index .page-content .section.adventures.honest-reviews .second-container {
+  background-color: rgba(214, 222, 115, 0.4);
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.adventures.honest-reviews .second-container .adventures-media-image-container {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.adventures.honest-reviews .second-container .adventures-media-image-container {
+    transform: translate(-50%, -50%) scale(0.85);
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.adventures.honest-reviews .second-container .adventures-media-image-container {
+    transform: translate(-50%, -50%) scale(0.66);
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.adventures.honest-reviews .second-container .adventures-media-image-container {
+    transform: translate(-50%, -50%) scale(0.66);
+  }
+}
+.page.index .page-content .section.adventures.honest-reviews .second-container .adventures-media-image-container .user-container {
+  position: absolute;
+}
+.page.index .page-content .section.adventures.honest-reviews .second-container .adventures-media-image-container .user-container .separated-image:not(.review-card) {
+  transform: scale(0);
+}
+.page.index .page-content .section.adventures.honest-reviews .second-container .adventures-media-image-container .user-container .separated-image.user-backy {
+  top: 110px;
+  right: 18px;
+}
+.page.index .page-content .section.adventures.honest-reviews .second-container .adventures-media-image-container .user-container .separated-image.send-icon {
+  top: 80px;
+  left: 376px;
+}
+.page.index .page-content .section.adventures.honest-reviews .second-container .adventures-media-image-container .user-container.jacob-container {
+  width: 267px;
+  height: 73px;
+  left: 44px;
+  top: 250px;
+}
+.page.index .page-content .section.adventures.honest-reviews .second-container .adventures-media-image-container .user-container.jacob-container .user-jacob {
+  top: -58px;
+  left: -90px;
+}
+.page.index .page-content .section.adventures.honest-reviews .second-container .adventures-media-image-container .user-container.jacob-container .rating-icon {
+  top: 26px;
+  right: -61px;
+}
+.page.index .page-content .section.adventures.honest-reviews .second-container .adventures-media-image-container .user-container.noah-container {
+  width: 308px;
+  height: 84px;
+  left: 106px;
+  top: 60px;
+}
+.page.index .page-content .section.adventures.honest-reviews .second-container .adventures-media-image-container .user-container.noah-container .user-noah {
+  bottom: 40px;
+  left: 158px;
+}
+.page.index .page-content .section.adventures.honest-reviews .second-container .adventures-media-image-container .user-container.noah-container .send-icon {
+  top: 22px;
+  left: 270px;
+}
+.page.index .page-content .section.adventures.honest-reviews .second-container .adventures-media-image-container .user-container.backy-container {
+  width: 350px;
+  height: 96px;
+  left: 252px;
+  top: 168px;
+}
+.page.index .page-content .section.adventures.honest-reviews .second-container .adventures-media-image-container .user-container.backy-container .user-backy {
+  top: -58px;
+  left: 198px;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.adventures.quick-access .first-container .text-container .adventures-header {
+    margin-bottom: 290px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.adventures.quick-access .first-container .text-container .adventures-header {
+    margin-bottom: 200px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.adventures.quick-access .first-container .text-container .adventures-header {
+    margin-bottom: 200px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.adventures.quick-access .first-container .text-container .adventures-header {
+    margin-bottom: 40px;
+  }
+}
+.page.index .page-content .section.adventures.quick-access .first-container .text-container .adventures-text {
+  width: 376px;
+}
+.page.index .page-content .section.adventures.quick-access .first-container .text-container .adventures-text .decorated {
+  background-color: rgba(118, 162, 255, 0.2);
+  color: #4F75C5;
+}
+.page.index .page-content .section.adventures.quick-access .second-container {
+  background-color: rgba(118, 162, 255, 0.1);
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.adventures.quick-access .second-container .adventures-media-image-container {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.adventures.quick-access .second-container .adventures-media-image-container {
+    transform: translate(-50%, -50%) scale(0.83);
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.adventures.quick-access .second-container .adventures-media-image-container {
+    transform: translate(-50%, -50%) scale(0.67);
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.adventures.quick-access .second-container .adventures-media-image-container {
+    transform: translate(-50%, -50%) scale(0.67);
+  }
+}
+.page.index .page-content .section.adventures.quick-access .second-container .adventures-media-image-container .separated-image.extension-bg {
+  top: 136px;
+  left: -90px;
+}
+.page.index .page-content .section.adventures.quick-access .second-container .adventures-media-image-container .separated-image.google-icon {
+  top: 200px;
+  left: 184px;
+}
+.page.index .page-content .section.adventures.quick-access .second-container .adventures-media-image-container .separated-image.amazon-icon {
+  top: 285px;
+  left: 183px;
+}
+.page.index .page-content .section.adventures.quick-access .second-container .adventures-media-image-container .separated-image.google-rating,
+.page.index .page-content .section.adventures.quick-access .second-container .adventures-media-image-container .separated-image.amazon-rating {
+  opacity: 0;
+  transform: scale(0.5);
+}
+.page.index .page-content .section.adventures.quick-access .second-container .adventures-media-image-container .separated-image.google-rating {
+  top: 190px;
+  left: 126px;
+}
+.page.index .page-content .section.adventures.quick-access .second-container .adventures-media-image-container .separated-image.amazon-rating {
+  top: 276px;
+  left: 126px;
+}
+.page.index .page-content .section.adventures.quick-access .second-container .adventures-media-image-container .rating-container {
+  position: absolute;
+}
+.page.index .page-content .section.adventures.quick-access .second-container .adventures-media-image-container .rating-container.google-rating-container,
+.page.index .page-content .section.adventures.quick-access .second-container .adventures-media-image-container .rating-container.amazon-rating-container {
+  width: 312px;
+  height: 74px;
+}
+.page.index .page-content .section.adventures.quick-access .second-container .adventures-media-image-container .rating-container.google-rating-container .rating,
+.page.index .page-content .section.adventures.quick-access .second-container .adventures-media-image-container .rating-container.amazon-rating-container .rating {
+  left: 16px;
+  top: 17px;
+}
+.page.index .page-content .section.adventures.quick-access .second-container .adventures-media-image-container .rating-container.google-rating-container .icon,
+.page.index .page-content .section.adventures.quick-access .second-container .adventures-media-image-container .rating-container.amazon-rating-container .icon {
+  left: 76px;
+  top: 27px;
+}
+.page.index .page-content .section.adventures.quick-access .second-container .adventures-media-image-container .rating-container.google-rating-container {
+  top: 172px;
+  left: 20px;
+}
+.page.index .page-content .section.adventures.quick-access .second-container .adventures-media-image-container .rating-container.amazon-rating-container {
+  top: 258px;
+  left: 20px;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.adventures.ease-of-use .first-container .text-container .adventures-header {
+    margin-bottom: 290px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.adventures.ease-of-use .first-container .text-container .adventures-header {
+    margin-bottom: 200px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.adventures.ease-of-use .first-container .text-container .adventures-header {
+    margin-bottom: 200px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.adventures.ease-of-use .first-container .text-container .adventures-header {
+    margin-bottom: 40px;
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.adventures.ease-of-use .first-container .text-container .adventures-text {
+    width: 420px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.adventures.ease-of-use .first-container .text-container .adventures-text {
+    width: 420px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.adventures.ease-of-use .first-container .text-container .adventures-text {
+    width: 420px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.adventures.ease-of-use .first-container .text-container .adventures-text {
+    width: 408px;
+  }
+}
+.page.index .page-content .section.adventures.ease-of-use .first-container .text-container .adventures-text .decorated {
+  background-color: #E3DEDB;
+  color: #9F8F87;
+}
+.page.index .page-content .section.adventures.ease-of-use .second-container {
+  background-color: #EBE7E4;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.adventures.ease-of-use .second-container .adventures-media-image-container {
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.adventures.ease-of-use .second-container .adventures-media-image-container {
+    transform: translate(-50%, -50%) scale(0.84);
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.adventures.ease-of-use .second-container .adventures-media-image-container {
+    transform: translate(-50%, -50%) scale(0.67);
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.adventures.ease-of-use .second-container .adventures-media-image-container {
+    transform: translate(-50%, -50%) scale(0.67);
+  }
+}
+.page.index .page-content .section.adventures.ease-of-use .second-container .adventures-media-image-container .product-container {
+  position: absolute;
+  width: 256px;
+  height: 274px;
+  top: 40px;
+  right: -40px;
+}
+.page.index .page-content .section.adventures.ease-of-use .second-container .adventures-media-image-container .product-container .product-rating {
+  left: 64px;
+}
+.page.index .page-content .section.adventures.ease-of-use .second-container .adventures-media-image-container .product-container .coffee-machine {
+  top: 30px;
+}
+.page.index .page-content .section.adventures.ease-of-use .second-container .adventures-media-image-container .review-card-demo {
+  position: absolute;
+  transform: translate(-50%, -50%) scale(0);
+}
+.page.index .page-content .section.adventures.ease-of-use .second-container .adventures-media-image-container .review-card-demo.piers-card {
+  width: 330px;
+  height: 96px;
+  top: 166px;
+  left: 89px;
+}
+.page.index .page-content .section.adventures.ease-of-use .second-container .adventures-media-image-container .review-card-demo.piers-card .piers-icon {
+  top: 24px;
+  left: 20px;
+}
+.page.index .page-content .section.adventures.ease-of-use .second-container .adventures-media-image-container .review-card-demo.ellis-card {
+  width: 284px;
+  height: 78px;
+  top: 290px;
+  left: 240px;
+}
+.page.index .page-content .section.adventures.ease-of-use .second-container .adventures-media-image-container .review-card-demo.ellis-card .ellis-icon {
+  top: 20px;
+  left: 16px;
+}
+.page.index .page-content .section.feedbacks {
+  height: 748px;
+}
+.page.index .page-content .section.feedbacks .feedbacks-header-container {
+  position: relative;
+  padding-top: 120px;
+  padding-left: 60px;
+  padding-right: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 100px;
+}
+.page.index .page-content .section.feedbacks .feedbacks-header-container #feedbacks-header-decorator {
+  position: absolute;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.feedbacks .feedbacks-header-container #feedbacks-header-decorator {
+    top: 100px;
+    left: 412px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.feedbacks .feedbacks-header-container #feedbacks-header-decorator {
+    top: 97px;
+    left: 346px;
+    transform: scale(0.85);
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.feedbacks .feedbacks-header-container #feedbacks-header-decorator {
+    top: 97px;
+    left: 346px;
+    transform: scale(0.85);
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.feedbacks .feedbacks-header-container #feedbacks-header-decorator {
+    top: 86px;
+    left: 282px;
+    transform: scale(0.7);
+  }
+}
+.page.index .page-content .section.feedbacks .feedbacks-header-container .feedbacks-header {
+  font-family: "Outfit-Regular";
+  font-size: 16px;
+  font-weight: 400;
+  color: #404038;
+  margin: 0;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.feedbacks .feedbacks-header-container .feedbacks-header {
+    font-size: 70px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.feedbacks .feedbacks-header-container .feedbacks-header {
+    font-size: 60px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.feedbacks .feedbacks-header-container .feedbacks-header {
+    font-size: 60px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.feedbacks .feedbacks-header-container .feedbacks-header {
+    font-size: 50px;
+  }
+}
+.page.index .page-content .section.feedbacks .feedbacks-header-container .feedbacks-gallery-controls {
+  display: flex;
+  margin-top: 16px;
+}
+.page.index .page-content .section.feedbacks .feedbacks-header-container .feedbacks-gallery-controls .button {
+  height: 38px;
+  width: 46px;
+  background-color: #605C55;
+}
+.page.index .page-content .section.feedbacks .feedbacks-header-container .feedbacks-gallery-controls .button:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+}
+.page.index .page-content .section.feedbacks .feedbacks-header-container .feedbacks-gallery-controls .button.prev-button {
+  border-bottom-right-radius: 0;
+  border-top-right-radius: 0;
+}
+.page.index .page-content .section.feedbacks .feedbacks-header-container .feedbacks-gallery-controls .button.next-button {
+  border-bottom-left-radius: 0;
+  border-top-left-radius: 0;
+}
+.page.index .page-content .section.feedbacks .feedbacks-header-container .feedbacks-gallery-controls .button.next-button .icon {
+  transform: rotate(180deg);
+}
+.page.index .page-content .section.feedbacks .feedbacks-gallery-container {
+  width: 100%;
+  max-width: 2000px;
+  position: absolute;
+  transform: translateX(-50%);
+  left: 50%;
+}
+.page.index .page-content .section.feedbacks .feedbacks-gallery-container .feedbacks-gallery-gradient {
+  position: absolute;
+  width: 50px;
+  height: 100%;
+  opacity: 0;
+  top: 0;
+  transition: opacity 0.15s;
+}
+@media only screen and (min-width: 2000px) {
+  .page.index .page-content .section.feedbacks .feedbacks-gallery-container .feedbacks-gallery-gradient {
+    opacity: 1;
+  }
+}
+.page.index .page-content .section.feedbacks .feedbacks-gallery-container .feedbacks-gallery-gradient.left {
+  background-image: linear-gradient(to right, #F9F8F6, transparent);
+  left: 0;
+}
+.page.index .page-content .section.feedbacks .feedbacks-gallery-container .feedbacks-gallery-gradient.right {
+  background-image: linear-gradient(to left, #F9F8F6, transparent);
+  right: 0;
+}
+.page.index .page-content .section.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container {
+  cursor: default;
+  padding-left: 6px;
+  padding-right: 6px;
+}
+.page.index .page-content .section.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .flex-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+}
+.page.index .page-content .section.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .flex-wrapper .feedback {
+  background-color: #FFFFFF;
+  border-radius: 20px;
+  padding: 30px;
+}
+.page.index .page-content .section.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .flex-wrapper .feedback .user-container {
+  display: flex;
+  align-items: center;
   gap: 14px;
 }
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .how-it-works .card .card-body .instructions {
-    max-width: 340px;
+.page.index .page-content .section.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .flex-wrapper .feedback .user-container .user-info .user-info-element {
+  display: block;
+  font-family: "Outfit-Regular";
+  font-size: 16px;
+  font-weight: 400;
+}
+.page.index .page-content .section.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .flex-wrapper .feedback .user-container .user-info .user-info-element.user-name {
+  color: rgba(0, 0, 0, 0.6);
+  font-size: 20px;
+}
+.page.index .page-content .section.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .flex-wrapper .feedback .user-container .user-info .user-info-element.extra-info {
+  color: rgba(0, 0, 0, 0.25);
+  font-size: 14px;
+}
+.page.index .page-content .section.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .flex-wrapper .feedback .feedback-text {
+  font-family: "Outfit-Regular";
+  font-size: 20px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  transition: transform 0.15s;
+}
+.page.index .page-content .section.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container:hover .feedback-text {
+  transform: scale(1.05);
+}
+.page.index .page-content .section.faq {
+  display: flex;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.faq {
+    height: 810px;
   }
 }
-@media screen and (min-width: 1px) and (max-width: 1023px) {
-  .how-it-works .card .card-body .instructions {
-    max-width: 280px;
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.faq {
+    height: 810px;
   }
 }
-.how-it-works .card .card-body .instructions .instruction-item {
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.faq {
+    height: 916px;
+    flex-direction: column;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.faq {
+    height: 860px;
+    flex-direction: column;
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.faq .first-container,
+  .page.index .page-content .section.faq .second-container {
+    flex: 1;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.faq .first-container,
+  .page.index .page-content .section.faq .second-container {
+    flex: 1;
+  }
+}
+.page.index .page-content .section.faq .first-container .faq-header {
+  font-family: "Outfit-Regular";
+  font-size: 16px;
+  font-weight: 400;
+  color: #404038;
+  margin: 0;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.faq .first-container .faq-header {
+    font-size: 70px;
+    margin-top: 120px;
+    margin-left: 60px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.faq .first-container .faq-header {
+    font-size: 60px;
+    margin-top: 120px;
+    margin-left: 30px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.faq .first-container .faq-header {
+    font-size: 60px;
+    margin-top: 100px;
+    margin-left: 30px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.faq .first-container .faq-header {
+    font-size: 50px;
+    margin-top: 100px;
+    margin-left: 30px;
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.faq .second-container {
+    padding-top: 120px;
+    padding-right: 60px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.faq .second-container {
+    padding-top: 120px;
+    padding-right: 30px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.faq .second-container {
+    padding-top: 60px;
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.faq .second-container {
+    padding-top: 60px;
+    padding-right: 30px;
+    padding-left: 30px;
+  }
+}
+.page.index .page-content .section.faq .second-container .question-card {
+  padding: 20px;
+  border-radius: 10px;
+  background-color: #F9F8F6;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: height 0.2s;
+  height: 70px;
+  margin-bottom: 10px;
+}
+.page.index .page-content .section.faq .second-container .question-card .question {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
   position: relative;
-  padding: 14px 16px 14px 42px;
-  border-radius: 18px;
 }
-.how-it-works .card .card-body .instructions .instruction-item .icon {
+.page.index .page-content .section.faq .second-container .question-card .question .question-text {
+  margin: 0;
+  font-family: "Outfit-Regular";
+  font-size: 24px;
+  font-weight: 400;
+  color: #605C55;
+}
+.page.index .page-content .section.faq .second-container .question-card .question .open-action {
   position: absolute;
-  top: 16px;
-  left: 10px;
-  padding: 14px;
-  transform-origin: center;
-  background-color: #28293D;
-  cursor: pointer;
+  width: 14px;
+  height: 14px;
+  transform: translateY(-50%);
+  right: 20px;
+  top: 50%;
 }
-.how-it-works .card .card-body .instructions .instruction-item .instruction-header,
-.how-it-works .card .card-body .instructions .instruction-item .instruction-description {
+.page.index .page-content .section.faq .second-container .question-card .question .open-action .open-action-line {
+  position: absolute;
+  transform: translate(-50%, -50%);
+  left: 50%;
+  top: 50%;
+  transition: transform 0.15s;
+}
+.page.index .page-content .section.faq .second-container .question-card .question .open-action .open-action-line.first {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+.page.index .page-content .section.faq .second-container .question-card .answer {
+  padding-top: 40px;
+}
+.page.index .page-content .section.faq .second-container .question-card .answer p {
+  width: 500px;
   margin: 0;
-  font-family: "Inter-Medium";
+  font-family: "Outfit-Regular";
   font-size: 16px;
-  font-weight: normal;
-  color: #28293D;
+  font-weight: 400;
+  color: #605C55;
 }
-.how-it-works .card .card-body .instructions .instruction-item .instruction-header {
-  font-size: 22px;
-  cursor: pointer;
-  line-height: 32px;
+.page.index .page-content .section.faq .second-container .question-card.active {
+  height: 250px;
 }
-.how-it-works .card .card-body .instructions .instruction-item .instruction-header:hover {
-  color: #FFFFFF;
+.page.index .page-content .section.faq .second-container .question-card.active .question .open-action .open-action-line.first {
+  transform: translate(-50%, -50%) rotate(0deg);
 }
-.how-it-works .card .card-body .instructions .instruction-item .instruction-description {
-  font-size: 16px;
-  display: none;
+.page.index .page-content .section.coming-soon {
+  border-bottom-right-radius: 0;
 }
-.how-it-works .card .card-body .instructions .instruction-item:hover .icon,
-.how-it-works .card .card-body .instructions .instruction-item.active .icon {
-  background-color: #FFFFFF;
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.coming-soon {
+    padding: 120px 60px 60px 60px;
+  }
 }
-.how-it-works .card .card-body .instructions .instruction-item:hover .instruction-header,
-.how-it-works .card .card-body .instructions .instruction-item.active .instruction-header,
-.how-it-works .card .card-body .instructions .instruction-item:hover .instruction-description,
-.how-it-works .card .card-body .instructions .instruction-item.active .instruction-description {
-  color: #FFFFFF;
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.coming-soon {
+    padding: 120px 30px 30px 30px;
+  }
 }
-.how-it-works .card .card-body .instructions .instruction-item.active {
-  height: auto;
-  box-shadow: 0 0 0 1px #FFFFFF;
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.coming-soon {
+    padding: 100px 30px 30px 30px;
+  }
 }
-.how-it-works .card .card-body .instructions .instruction-item.active .icon {
-  background-color: #FFFFFF;
-  transform: rotate(90deg);
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.coming-soon {
+    padding: 100px 30px 30px 30px;
+  }
 }
-.how-it-works .card .card-body .instructions .instruction-item.active .instruction-header {
-  margin-bottom: 8px;
-}
-.how-it-works .card .card-body .instructions .instruction-item.active .instruction-description {
-  display: block;
-}
-.how-it-works .card .card-body .instruction-image {
+.page.index .page-content .section.coming-soon .header-container {
   display: flex;
-  flex-grow: 2;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
+  gap: 20px;
 }
-.how-it-works .card .card-body .instruction-image .how-it-works-img {
-  display: none;
-  height: 410px;
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.coming-soon .header-container {
+    margin-bottom: 100px;
+  }
 }
-.how-it-works .card .card-body .instruction-image .how-it-works-img.active {
-  display: block;
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.coming-soon .header-container {
+    margin-bottom: 80px;
+  }
 }
-.feedbacks {
-  margin-bottom: 136px;
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.coming-soon .header-container {
+    margin-bottom: 100px;
+  }
 }
-.feedbacks .feedbacks-header {
-  color: #3366FF;
-  font-family: "Inter-Medium";
-  font-size: 16px;
-  font-size: 48px;
-  font-weight: normal;
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.coming-soon .header-container {
+    margin-bottom: 100px;
+  }
+}
+.page.index .page-content .section.coming-soon .header-container .coming-soon-header {
   margin: 0;
-  text-align: center;
-  margin-bottom: 54px;
+  font-family: "Outfit-Regular";
+  font-size: 70px;
+  font-weight: 400;
+  color: #404038;
 }
-.feedbacks .feedbacks-gallery-container .feedbacks-gallery {
-  margin-bottom: 22px;
-}
-.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .feedback-flex {
+.page.index .page-content .section.coming-soon .features-container {
   display: flex;
-  justify-content: center;
-  padding: 0 10px;
-}
-.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .feedback-flex .feedback {
-  padding: 30px;
-  border: solid 1px #6690FF;
-  border-radius: 18px;
-}
-.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .feedback-flex .feedback .feedback-text {
-  font-family: "Inter-Medium";
-  font-size: 16px;
-  font-size: 22px;
-  margin: 0 0 14px;
-}
-.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .feedback-flex .feedback .user-info {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-}
-.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .feedback-flex .feedback .user-info .avatar {
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-}
-.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .feedback-flex .feedback .user-info .user-info-text span {
-  display: block;
-  font-size: 18px;
-}
-.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .feedback-flex .feedback .user-info .user-info-text span.name {
-  font-family: "Inter-Medium";
-  font-size: 16px;
-}
-.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .feedback-flex .feedback .user-info .user-info-text span.position {
-  font-family: "Inter-Light";
-  font-size: 16px;
-}
-.feedbacks .feedbacks-gallery-container .feedbacks-gallery-controls {
-  display: flex;
-  justify-content: center;
   gap: 10px;
 }
-.feedbacks .feedbacks-gallery-container .feedbacks-gallery-controls .button {
-  padding: 0;
-  display: flex;
-  height: 38px;
-  width: 38px;
-  align-items: center;
-  justify-content: center;
-  border-radius: 50%;
-}
-.feedbacks .feedbacks-gallery-container .feedbacks-gallery-controls .button .icon {
-  transform-origin: center;
-}
-.feedbacks .feedbacks-gallery-container .feedbacks-gallery-controls .button.prev-button .icon {
-  transform: rotate(180deg);
-}
-.faq {
-  padding: 0 260px;
-  position: relative;
-  margin-bottom: 136px;
-}
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .faq {
-    padding: 0;
-    margin-bottom: 88px;
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.coming-soon .features-container {
+    flex-direction: column;
+    gap: 30px;
   }
 }
-@media screen and (min-width: 1px) and (max-width: 1023px) {
-  .faq {
-    padding: 0;
-    margin-bottom: 88px;
-  }
-}
-.faq .faq-img {
-  position: absolute;
-  z-index: -1;
-}
-@media screen and (min-width: 1920px) {
-  .faq .faq-img {
-    top: -102px;
-    width: 512px;
-    left: 362px;
-  }
-}
-@media screen and (min-width: 1440px) and (max-width: 1919px) {
-  .faq .faq-img {
-    top: -12px;
-    width: 396px;
-    left: 260px;
-  }
-}
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .faq .faq-img {
-    top: -54px;
-    width: 446px;
-    left: 66px;
-  }
-}
-@media screen and (min-width: 1px) and (max-width: 1023px) {
-  .faq .faq-img {
-    top: -32px;
-    width: 420px;
-    left: 38px;
-  }
-}
-.faq .faq-header-container {
-  display: flex;
-  justify-content: end;
-}
-@media screen and (min-width: 1920px) {
-  .faq .faq-header-container {
-    margin-bottom: 74px;
-  }
-}
-@media screen and (min-width: 1440px) and (max-width: 1919px) {
-  .faq .faq-header-container {
-    margin-bottom: 46px;
-  }
-}
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .faq .faq-header-container {
-    margin-bottom: 46px;
-  }
-}
-@media screen and (min-width: 1px) and (max-width: 1023px) {
-  .faq .faq-header-container {
-    margin-bottom: 46px;
-  }
-}
-@media screen and (min-width: 1920px) {
-  .faq .faq-header-container .faq-header {
-    width: 680px;
-  }
-}
-@media screen and (min-width: 1440px) and (max-width: 1919px) {
-  .faq .faq-header-container .faq-header {
-    width: 480px;
-  }
-}
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .faq .faq-header-container .faq-header {
-    width: 500px;
-  }
-}
-@media screen and (min-width: 1px) and (max-width: 1023px) {
-  .faq .faq-header-container .faq-header {
-    width: 500px;
-  }
-}
-.faq .faq-header-container .faq-header .header-text,
-.faq .faq-header-container .faq-header .header-description {
-  font-family: "Inter-Medium";
-  font-size: 16px;
-  color: #3366FF;
-  font-weight: normal;
-  margin: 0;
-}
-.faq .faq-header-container .faq-header .header-text {
-  width: 530px;
-  font-size: 48px;
-  margin-bottom: 28px;
-}
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .faq .faq-header-container .faq-header .header-text {
-    width: 500px;
-  }
-}
-@media screen and (min-width: 1px) and (max-width: 1023px) {
-  .faq .faq-header-container .faq-header .header-text {
-    width: 500px;
-  }
-}
-.faq .faq-header-container .faq-header .header-description {
-  font-size: 18px;
-  margin-bottom: 32px;
-}
-.faq .card {
+.page.index .page-content .section.coming-soon .features-container .feature-card {
+  padding: 30px;
   display: flex;
   flex-direction: column;
-  background: linear-gradient(102.22deg, #8DD1FE 0%, #205BB5 103.82%);
-  border-radius: 30px;
-  box-shadow: 0 0 2px rgba(40, 41, 61, 0.04), 0 4px 8px rgba(96, 97, 112, 0.16);
-  padding: 46px 0;
-}
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .faq .card {
-    border-radius: 0;
-  }
-}
-@media screen and (min-width: 1px) and (max-width: 1023px) {
-  .faq .card {
-    border-radius: 0;
-  }
-}
-.faq .card .card-header {
-  width: 100%;
-  margin-bottom: 40px;
-}
-.faq .card .card-header h2 {
-  font-family: "Inter-Medium";
-  font-size: 16px;
-  font-size: 48px;
-  font-weight: normal;
-  margin: 0;
-  text-align: center;
-  color: #FFFFFF;
-}
-.faq .card .card-body .question-item {
-  position: relative;
-  padding: 30px 38px;
-}
-.faq .card .card-body .question-item:not(:last-child) {
-  border-bottom: solid 1px #B2E4FD;
-}
-.faq .card .card-body .question-item .question-header,
-.faq .card .card-body .question-item .question-answer {
-  margin: 0;
-  font-family: "Inter-Medium";
-  font-size: 16px;
-  font-weight: normal;
-  color: #FFFFFF;
-}
-.faq .card .card-body .question-item .question-header {
-  font-size: 22px;
-  cursor: pointer;
-  line-height: 32px;
-}
-.faq .card .card-body .question-item .question-answer {
-  font-size: 16px;
-  display: none;
-}
-.faq .card .card-body .question-item .icon {
-  transform: rotate(180deg);
-  position: absolute;
-  top: 34px;
-  right: 30px;
-  padding: 14px;
-  transform-origin: center;
+  flex: 1;
+  height: 360px;
   background-color: #FFFFFF;
-  cursor: pointer;
+  border-radius: 10px;
+  transition: background-color 0.15s;
 }
-.faq .card .card-body .question-item.active {
-  background: linear-gradient(102.22deg, #94d2ff 0%, #3370d3 103.82%);
-}
-.faq .card .card-body .question-item.active .icon {
-  transform: rotate(90deg);
-}
-.faq .card .card-body .question-item.active .question-header {
-  margin-bottom: 8px;
-}
-.faq .card .card-body .question-item.active .question-answer {
-  display: block;
-}
-.coming-soon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin-bottom: 144px;
-}
-.coming-soon .coming-soon-header {
-  color: #3366FF;
-  font-family: "Inter-Medium";
-  font-size: 16px;
-  font-size: 48px;
-  font-weight: normal;
-  margin: 0;
-  text-align: center;
-  margin-bottom: 54px;
-}
-.coming-soon .coming-soon-items {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: space-between;
-  justify-content: center;
-}
-@media screen and (min-width: 1920px) {
-  .coming-soon .coming-soon-items {
-    padding: 0 130px;
-    gap: 86px;
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.coming-soon .features-container .feature-card {
+    flex: unset;
   }
 }
-@media screen and (min-width: 1440px) and (max-width: 1919px) {
-  .coming-soon .coming-soon-items {
-    padding: 0 130px;
-    gap: 44px;
-  }
-}
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .coming-soon .coming-soon-items {
-    padding: 0 40px;
-    gap: 20px;
-  }
-}
-@media screen and (min-width: 1px) and (max-width: 1023px) {
-  .coming-soon .coming-soon-items {
-    padding: 0 32px;
-    gap: 20px;
-  }
-}
-.coming-soon .coming-soon-items .coming-soon-item {
+.page.index .page-content .section.coming-soon .features-container .feature-card .icon-container {
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  transition: background-color 0.15s;
   position: relative;
-  display: flex;
-  border: solid 1px #254EDA;
-  border-radius: 18px;
-  padding: 32px 40px;
-  width: 540px;
 }
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .coming-soon .coming-soon-items .coming-soon-item {
-    padding: 18px 20px;
-    width: 456px;
-  }
-}
-@media screen and (min-width: 1px) and (max-width: 1023px) {
-  .coming-soon .coming-soon-items .coming-soon-item {
-    padding: 18px 20px;
-    width: 436px;
-  }
-}
-.coming-soon .coming-soon-items .coming-soon-item:last-child {
-  flex-direction: column;
-  background: linear-gradient(101.83deg, #70BEFE 24.94%, #205BB5 101.92%);
-}
-.coming-soon .coming-soon-items .coming-soon-item:last-child .coming-soon-item-header,
-.coming-soon .coming-soon-items .coming-soon-item:last-child .coming-soon-item-text {
-  color: #FFFFFF;
-}
-.coming-soon .coming-soon-items .coming-soon-item:last-child .button,
-.coming-soon .coming-soon-items .coming-soon-item:last-child .button:hover {
-  color: #FFFFFF;
-  border-color: #FFFFFF;
-}
-.coming-soon .coming-soon-items .coming-soon-item .coming-soon-item-info {
-  width: 200px;
-}
-.coming-soon .coming-soon-items .coming-soon-item .coming-soon-item-header,
-.coming-soon .coming-soon-items .coming-soon-item .coming-soon-item-text {
-  color: #3366FF;
-  font-weight: normal;
-}
-.coming-soon .coming-soon-items .coming-soon-item .coming-soon-item-header {
-  font-family: "Inter-Medium";
-  font-size: 16px;
-  font-size: 22px;
-}
-.coming-soon .coming-soon-items .coming-soon-item .coming-soon-item-text {
-  font-family: "Inter-Regular";
-  font-size: 16px;
-  font-size: 18px;
-}
-.coming-soon .coming-soon-items .coming-soon-item .feature-img {
+.page.index .page-content .section.coming-soon .features-container .feature-card .icon-container .icon {
   position: absolute;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
 }
-.coming-soon .coming-soon-items .coming-soon-item .feature-img.catalog-feature {
-  top: 38px;
-  right: 26px;
-  width: 241px;
+.page.index .page-content .section.coming-soon .features-container .feature-card .icon-container .icon path {
+  transition: stroke 0.15s;
 }
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .coming-soon .coming-soon-items .coming-soon-item .feature-img.catalog-feature {
-    top: 26px;
+.page.index .page-content .section.coming-soon .features-container .feature-card .text-content-container {
+  margin-top: auto;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.coming-soon .features-container .feature-card .text-content-container {
+    width: 280px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.coming-soon .features-container .feature-card .text-content-container {
+    width: 280px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.coming-soon .features-container .feature-card .text-content-container {
+    width: 230px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.coming-soon .features-container .feature-card .text-content-container {
+    width: auto;
+  }
+}
+.page.index .page-content .section.coming-soon .features-container .feature-card .text-content-container .feature-header {
+  margin: 0 0 10px;
+  font-family: "Outfit-Regular";
+  font-size: 24px;
+  font-weight: 400;
+  color: #605C55;
+  transition: color 0.15s;
+}
+.page.index .page-content .section.coming-soon .features-container .feature-card .text-content-container .feature-description {
+  margin: 0;
+  font-family: "Outfit-Regular";
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+}
+.page.index .page-content .section.coming-soon .features-container .feature-card:hover .text-content-container .feature-header {
+  color: rgba(0, 0, 0, 0.6);
+}
+.page.index .page-content .section.coming-soon .features-container .feature-card.catalog-and-categories:hover {
+  background-color: #78AC65;
+}
+.page.index .page-content .section.coming-soon .features-container .feature-card.catalog-and-categories:hover .icon-container {
+  background-color: #FFFFFF;
+}
+.page.index .page-content .section.coming-soon .features-container .feature-card.catalog-and-categories:hover .icon-container .icon path {
+  stroke: #78AC65;
+}
+.page.index .page-content .section.coming-soon .features-container .feature-card.catalog-and-categories .icon-container {
+  background-color: #78AC65;
+}
+.page.index .page-content .section.coming-soon .features-container .feature-card.favorite-websites:hover {
+  background-color: #4F75C5;
+}
+.page.index .page-content .section.coming-soon .features-container .feature-card.favorite-websites:hover .icon-container {
+  background-color: #FFFFFF;
+}
+.page.index .page-content .section.coming-soon .features-container .feature-card.favorite-websites:hover .icon-container .icon path {
+  stroke: #4F75C5;
+}
+.page.index .page-content .section.coming-soon .features-container .feature-card.favorite-websites .icon-container {
+  background-color: #4F75C5;
+}
+.page.index .page-content .section.coming-soon .features-container .feature-card.product-search:hover {
+  background-color: #D6DE73;
+}
+.page.index .page-content .section.coming-soon .features-container .feature-card.product-search:hover .icon-container {
+  background-color: #FFFFFF;
+}
+.page.index .page-content .section.coming-soon .features-container .feature-card.product-search:hover .icon-container .icon path {
+  stroke: #D6DE73;
+}
+.page.index .page-content .section.coming-soon .features-container .feature-card.product-search .icon-container {
+  background-color: #D6DE73;
+}
+.page.index .page-content .section.coming-soon .features-container .feature-card.product-search .text-content-container {
+  width: 360px;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.coming-soon .features-container .feature-card.product-search .text-content-container {
     width: 218px;
   }
 }
-@media screen and (min-width: 1px) and (max-width: 1023px) {
-  .coming-soon .coming-soon-items .coming-soon-item .feature-img.catalog-feature {
-    top: 38px;
-    right: 8px;
-    width: 204px;
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.coming-soon .features-container .feature-card.product-search .text-content-container {
+    width: auto;
   }
 }
-.coming-soon .coming-soon-items .coming-soon-item .feature-img.favourite-websites {
-  top: 22px;
-  right: 32px;
-  width: 224px;
+.page.index .page-content .section.coming-soon .features-container .feature-card.product-search .text-content-container .feature-header {
+  margin: 0 0 30px;
 }
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .coming-soon .coming-soon-items .coming-soon-item .feature-img.favourite-websites {
-    top: 22px;
-    right: 26px;
-    width: 198px;
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.coming-soon .features-container .feature-card.product-search .text-content-container .feature-header {
+    margin: 0 0 10px;
   }
 }
-@media screen and (min-width: 1px) and (max-width: 1023px) {
-  .coming-soon .coming-soon-items .coming-soon-item .feature-img.favourite-websites {
-    top: 22px;
-    right: 26px;
-    width: 198px;
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.contact-us {
+    border-radius: 270px 270px 270px 0;
+    padding-top: 120px;
+    padding-bottom: 60px;
   }
 }
-.coming-soon .coming-soon-items .coming-soon-item .feature-img.product-search {
-  top: 34px;
-  right: 42px;
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.contact-us {
+    border-radius: 270px 270px 270px 0;
+    padding-top: 120px;
+    padding-bottom: 60px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.contact-us {
+    border-radius: 270px 270px 270px 0;
+    padding-top: 100px;
+    padding-bottom: 50px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.contact-us {
+    border-radius: 140px 140px 140px 0;
+    padding-top: 176px;
+    padding-bottom: 155px;
+  }
+}
+.page.index .page-content .section.contact-us .contact-us-header-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 60px;
+}
+.page.index .page-content .section.contact-us .contact-us-header-container .contact-us-header {
+  font-family: "Outfit-Regular";
+  font-size: 60px;
+  font-weight: 400;
+  width: 600px;
+  margin: 0 0 30px;
+  text-align: center;
+  color: #404038;
+  line-height: 100%;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.contact-us .contact-us-header-container .contact-us-header {
+    font-size: 70px;
+    width: 700px;
+  }
+}
+.page.index .page-content .section.contact-us .contact-us-header-container .contact-us-text {
+  font-family: "Outfit-Regular";
+  font-size: 24px;
+  font-weight: 400;
+  width: 430px;
+  margin: 0;
+  text-align: center;
+  color: rgba(0, 0, 0, 0.6);
+}
+.page.index .page-content .section.contact-us .contact-us-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.page.index .page-content .section.contact-us .contact-us-form .user-info-container {
+  width: 650px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+.page.index .page-content .section.contact-us .contact-us-form .user-info-container .field-container {
+  flex: 1;
+}
+.page.index .page-content .section.contact-us .contact-us-form .field-container.text {
+  width: 650px;
+  margin-bottom: 40px;
+}
+.page.index .page-content .section.contact-us .contact-us-form .submit-form {
   width: 200px;
 }
-@media screen and (min-width: 1024px) and (max-width: 1439px) {
-  .coming-soon .coming-soon-items .coming-soon-item .feature-img.product-search {
-    width: 173px;
+.page.index .page-content .section.how-it-works {
+  height: 783px;
+  width: 100%;
+  border-radius: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works {
+    height: 880px;
+    border-radius: 50px;
   }
 }
-@media screen and (min-width: 1px) and (max-width: 1023px) {
-  .coming-soon .coming-soon-items .coming-soon-item .feature-img.product-search {
-    width: 173px;
-  }
-}
-.coming-soon .coming-soon-items .coming-soon-item .link-button {
-  width: 160px;
-}
-.footer {
-  padding: 22px 160px;
-  border-top: solid 1px #3366FF;
+.page.index .page-content .section.how-it-works .card {
+  position: absolute;
+  width: 100%;
   display: flex;
-  justify-content: space-between;
-  flex-grow: 1;
+  flex-direction: row;
 }
-.footer .rights {
-  font-family: "Inter-Medium";
-  font-size: 16px;
-  font-size: 18px;
-  color: #3366FF;
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+  }
 }
-.footer .contact-us,
-.footer .rights {
+.page.index .page-content .section.how-it-works .card .pseudo-border {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  top: -69px;
+}
+.page.index .page-content .section.how-it-works .card .pseudo-border.left {
+  left: 0;
+}
+.page.index .page-content .section.how-it-works .card .pseudo-border.right {
+  right: 0;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card .pseudo-border {
+    width: 50px;
+    height: 50px;
+    top: -49px;
+  }
+}
+.page.index .page-content .section.how-it-works .card .card-part {
+  flex: 1;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card .card-part {
+    flex: unset;
+    padding-left: 30px;
+  }
+}
+.page.index .page-content .section.how-it-works .card .card-part.left {
+  padding-top: 100px;
+  padding-left: 60px;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card .card-part.left {
+    padding-top: 60px;
+    padding-left: 30px;
+  }
+}
+.page.index .page-content .section.how-it-works .card .card-part.left .section-header {
+  margin: 0;
+  font-family: "Outfit-Regular";
+  font-size: 70px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+}
+.page.index .page-content .section.how-it-works .card .card-part.left .image-background {
+  position: relative;
+  background-color: rgba(159, 143, 135, 0.2);
+  border-radius: 44px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.how-it-works .card .card-part.left .image-background {
+    width: 780px;
+    height: 322px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.how-it-works .card .card-part.left .image-background {
+    width: 600px;
+    height: 320px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card .card-part.left .image-background {
+    width: 422px;
+    height: 310px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card .card-part.left .image-background {
+    width: 668px;
+    height: 300px;
+    border-radius: 34px;
+  }
+}
+.page.index .page-content .section.how-it-works .card .card-part.left .image-background .how-it-works-image {
+  position: absolute;
+}
+.page.index .page-content .section.how-it-works .card .card-part.left .image-background .user-avatar {
+  position: absolute;
+}
+.page.index .page-content .section.how-it-works .card .card-part.right .card-header {
+  margin: 32px 0 0 0;
+  font-family: "Outfit-Regular";
+  font-size: 30px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card .card-part.right .card-header {
+    font-family: "Outfit-Regular";
+    font-size: 26px;
+    font-weight: 400;
+  }
+}
+.page.index .page-content .section.how-it-works .card .card-part.right .card-header .number {
+  display: inline-block;
+  color: rgba(0, 0, 0, 0.25);
+  margin-right: 20px;
+}
+.page.index .page-content .section.how-it-works .card .card-part.right .card-text {
+  margin: 40px 0 0 0;
+  font-family: "Outfit-Regular";
+  font-size: 20px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  width: 308px;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card .card-part.right .card-text {
+    margin: 32px 0 0 0;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-1 {
+  background-color: #FFFFFF;
+  top: 0;
+  bottom: 0;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-1 {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-1 .card-part.left,
+.page.index .page-content .section.how-it-works .card.card-1 .card-part.right {
+  padding-top: 60px;
+}
+.page.index .page-content .section.how-it-works .card.card-1 .card-part.right .text {
+  margin: 0;
+  font-family: "Outfit-Regular";
+  font-size: 30px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  width: 574px;
+}
+.page.index .page-content .section.how-it-works .card.card-1 .pseudo-border {
+  display: none;
+}
+.page.index .page-content .section.how-it-works .card.card-2 {
+  background-color: #FBFBEF;
+  top: 383px;
+  bottom: 300px;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-2 {
+    top: 520px;
+    bottom: 270px;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-2 .pseudo-border path {
+  fill: #FBFBEF;
+}
+.page.index .page-content .section.how-it-works .card.card-2 .card-part.left .image-background .how-it-works-image {
+  top: 66px;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.how-it-works .card.card-2 .card-part.left .image-background .how-it-works-image {
+    left: 0;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.how-it-works .card.card-2 .card-part.left .image-background .how-it-works-image {
+    left: -190px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card.card-2 .card-part.left .image-background .how-it-works-image {
+    transform: scale(0.8);
+    left: -248px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-2 .card-part.left .image-background .how-it-works-image {
+    transform: scale(0.8);
+    left: -158px;
+    top: 26px;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-3 {
+  background-color: #F2F4D0;
+  top: 483px;
+  bottom: 200px;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-3 {
+    top: 610px;
+    bottom: 180px;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-3 .pseudo-border path {
+  fill: #F2F4D0;
+}
+.page.index .page-content .section.how-it-works .card.card-3 .card-part.left .image-background .how-it-works-image {
+  top: 66px;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.how-it-works .card.card-3 .card-part.left .image-background .how-it-works-image {
+    right: 0;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.how-it-works .card.card-3 .card-part.left .image-background .how-it-works-image {
+    right: -184px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card.card-3 .card-part.left .image-background .how-it-works-image {
+    transform: scale(0.7);
+    right: -236px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-3 .card-part.left .image-background .how-it-works-image {
+    transform: scale(0.8);
+    right: -78px;
+    top: 38px;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-4 {
+  background-color: #E9EDB1;
+  top: 583px;
+  bottom: 100px;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-4 {
+    top: 700px;
+    bottom: 90px;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-4 .pseudo-border path {
+  fill: #E9EDB1;
+}
+.page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background {
+  height: 363px;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks {
+    transform: scale(1);
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks {
+    transform: scale(0.9);
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks {
+    transform: scale(0.9);
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks {
+    transform: scale(0.8);
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-1 {
+    top: 66px;
+    left: 0;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-1 {
+    top: 66px;
+    left: -152px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-1 {
+    top: 66px;
+    left: -342px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-1 {
+    top: 56px;
+    left: -168px;
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-2 {
+    top: 208px;
+    left: 378px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-2 {
+    top: 194px;
+    left: 240px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-2 {
+    top: 208px;
+    left: 44px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-2 {
+    top: 206px;
+    left: 318px;
+    transform: scale(0.9);
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .url-address {
+  position: absolute;
+  font-family: "Outfit-Regular";
+  font-size: 34px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  left: 40px;
+  top: 102px;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .url-address {
+    display: none;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .url-address {
+    font-family: "Outfit-Regular";
+    font-size: 28px;
+    font-weight: 400;
+    left: 30px;
+    top: 94px;
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .backy-avatar {
+    right: 264px;
+    bottom: 88px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .backy-avatar {
+    right: 212px;
+    bottom: 90px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .backy-avatar {
+    right: 230px;
+    bottom: 80px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .backy-avatar {
+    right: 202px;
+    bottom: 80px;
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .jacob-avatar {
+    right: 264px;
+    bottom: 18px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .jacob-avatar {
+    right: 212px;
+    bottom: 28px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .jacob-avatar {
+    right: 230px;
+    bottom: 14px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .jacob-avatar {
+    right: 202px;
+    bottom: 16px;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-5 {
+  background-color: #D6DE73;
+  top: 683px;
+  bottom: 0;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-5 {
+    top: 790px;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-5 .pseudo-border path {
+  fill: #D6DE73;
+}
+.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background {
+  height: 363px;
+}
+.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .how-it-works-image {
+  top: 44px;
+  right: 0;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .how-it-works-image {
+    right: -40px;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .user-avatar {
+  opacity: 0.4;
+  right: 272px;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .user-avatar {
+    right: 232px;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .user-avatar.backy-avatar {
+  top: 82px;
+}
+.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .user-avatar.jacob-avatar {
+  top: 150px;
+}
+.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .user-avatar.noah-avatar {
+  top: 218px;
+}
+.page.index .page-content .footer {
+  border-radius: 20px 20px 0 0;
+  background-color: #605C55;
+  color: #F9F8F6;
+  height: 236px;
+  display: flex;
+  padding: 30px;
+}
+.page.index .page-content .footer .footer-section {
+  flex: 1;
+}
+.page.index .page-content .footer .footer-section.first .logo-container {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.page.index .page-content .footer .footer-section.first .logo-container .logo path {
+  fill: #F9F8F6;
+}
+.page.index .page-content .footer .footer-section.first .logo-container .logo-text {
+  display: block;
+  font-family: "Outfit-Regular";
+  font-size: 42px;
+  font-weight: 400;
+}
+.page.index .page-content .footer .footer-section.second {
+  display: flex;
+  justify-content: center;
+}
+.page.index .page-content .footer .footer-section.second .contacts-header {
+  font-family: "Outfit-Regular";
   font-size: 14px;
+  font-weight: 400;
 }
-.footer .rights {
-  line-height: 32px;
+.page.index .page-content .footer .footer-section.second .contact {
+  margin: 0;
+  font-family: "Outfit-Regular";
+  font-size: 14px;
+  font-weight: 400;
+}
+.page.index .page-content .footer .footer-section.third {
+  display: flex;
+  justify-content: end;
+}
+.page.index .page-content .footer .footer-section.third .submit-form {
+  width: 180px;
+}
+.page.index .page-content .terms {
+  height: 28px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+.page.index .page-content .terms .terms-section {
+  flex: 1;
+  display: flex;
+}
+.page.index .page-content .terms .terms-section.first,
+.page.index .page-content .terms .terms-section.third {
+  font-family: "Outfit-Regular";
+  font-size: 12px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+}
+.page.index .page-content .terms .terms-section.first {
+  justify-content: start;
+}
+.page.index .page-content .terms .terms-section.second {
+  justify-content: center;
+}
+.page.index .page-content .terms .terms-section.third {
+  justify-content: end;
 }

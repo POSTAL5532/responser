@@ -1,0 +1,28 @@
+@import "../global.less";
+
+.link {
+    display: inline-flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    .fontOutfitMedium(24px);
+    transition: color 0.15s;
+    color: @black-alpha-60;
+
+    .icon rect {
+        transition: fill 0.15s;
+    }
+
+    &.small {
+        .fontOutfitRegular(12px);
+    }
+
+    &:hover {
+        color: @green;
+
+        .icon rect {
+            fill: @green;
+        }
+    }
+}

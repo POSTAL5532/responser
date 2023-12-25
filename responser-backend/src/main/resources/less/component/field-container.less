@@ -1,0 +1,45 @@
+@import "../global.less";
+
+.field-container {
+    .input-container {
+        display: flex;
+        align-items: center;
+        background-color: @white;
+        border-radius: 6px;
+
+        .button {
+            margin-right: 5px;
+        }
+
+        .field-input {
+            background-color: transparent;
+            flex: 1;
+            height: 54px;
+            padding: 0 20px;
+            .fontOutfitRegular(20px);
+
+            &::placeholder {
+                color: @black-alpha-25;
+            }
+
+            &, &:focus, &:active {
+                outline: none;
+                border: none;
+            }
+        }
+    }
+
+    .field-message {
+        .fontOutfitMedium(10px);
+    }
+
+    &.error {
+        .input-container {
+            border: solid 1px @red;
+        }
+
+        .field-message {
+            color: @red;
+        }
+    }
+}
