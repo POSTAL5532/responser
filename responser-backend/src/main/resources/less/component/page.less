@@ -6,21 +6,27 @@
     flex-direction: column;
     align-items: center;
 
+    .adaptationComplex(
+    {
+        padding-left: 60px;
+        padding-right: 60px;
+    },
+    {
+        padding-left: 30px;
+        padding-right: 30px;
+    },
+    {
+        padding-left: 30px;
+        padding-right: 30px;
+    },
+    {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    );
+
     .page-content .section, .header .header-content {
-        .adaptationComplex(
-        {
-            width: 1800px;
-        },
-        {
-            width: 1380px;
-        },
-        {
-            width: 964px;
-        },
-        {
-            width: 728px;
-        }
-        );
+        width: 100%;
     }
 
     .header {
