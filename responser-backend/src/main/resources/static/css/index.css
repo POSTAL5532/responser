@@ -6,6 +6,7 @@
 }
 .page.index .page-content .section {
   background-color: #F2F0EE;
+  width: 100%;
 }
 @media only screen and (min-width: 1920px) {
   .page.index .page-content .section {
@@ -125,7 +126,7 @@
 @media only screen and (min-width: 1920px) {
   .page.index .page-content .section.intro .intro-image.reviews {
     top: 0;
-    right: -26px;
+    right: 0px;
     width: 444px;
     height: 392px;
   }
@@ -133,7 +134,7 @@
 @media only screen and (min-width: 1440px) and (max-width: 1919px) {
   .page.index .page-content .section.intro .intro-image.reviews {
     top: 0;
-    right: -84px;
+    right: 0px;
     width: 370px;
     height: 326px;
   }
@@ -141,7 +142,7 @@
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
   .page.index .page-content .section.intro .intro-image.reviews {
     top: 0;
-    right: -20px;
+    right: 0px;
     width: 278px;
     height: 244px;
   }
@@ -149,7 +150,7 @@
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
   .page.index .page-content .section.intro .intro-image.reviews {
     top: 0;
-    right: -24px;
+    right: 0px;
     width: 278px;
     height: 244px;
   }
@@ -351,8 +352,25 @@
   width: 562px;
   margin: 0 0 24px;
 }
-.page.index .page-content .section.extension-demo .extension-demo-content .download {
-  margin-bottom: 64px;
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.extension-demo .extension-demo-content .download {
+    margin-bottom: 82px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.extension-demo .extension-demo-content .download {
+    margin-bottom: 82px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.extension-demo .extension-demo-content .download {
+    margin-bottom: 82px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.extension-demo .extension-demo-content .download {
+    margin-bottom: 96px;
+  }
 }
 .page.index .page-content .section.extension-demo .extension-demo-content #extension-demo-header-decorator {
   position: absolute;

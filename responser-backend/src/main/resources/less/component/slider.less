@@ -1,0 +1,49 @@
+@import "../global.less";
+
+.slider.noUi-target {
+    height: 1px;
+    border: none;
+    border-radius: unset;
+    box-shadow: none;
+    background-color: @beige-dark-alpha-20;
+
+    .noUi-base {
+        .noUi-origin {
+            transition: transform 0.15s;
+
+            .noUi-handle {
+                width: 14px;
+                height: 14px;
+                top: -7px;
+                right: -7px;
+                border-radius: 50%;
+                background-color: @white;
+                border: solid 1px @beige-dark-alpha-20;
+
+                &, &.noUi-active {
+                    box-shadow: none;
+                }
+
+                &::before, &::after {
+                    display: none;
+                }
+            }
+        }
+    }
+
+    .noUi-pips {
+        height: 3px;
+        padding: 0;
+        top: -3px;
+
+        .noUi-marker {
+            height: 4px;
+            width: 1px;
+            background-color: @beige-dark-alpha-20;
+        }
+
+        .noUi-value {
+            display: none;
+        }
+    }
+}

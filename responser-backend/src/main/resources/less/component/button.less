@@ -5,12 +5,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 6px;
+    gap: 10px;
     border-radius: 6px;
     height: 36px;
+    line-height: 36px;
     .fontOutfitRegular(20px);
-    padding-left: 10px;
-    padding-right: 10px;
+    padding-left: 14px;
+    padding-right: 14px;
     color: @black-alpha-60;
     background-color: transparent;
     border: 1px solid @brown-soft;
@@ -24,14 +25,27 @@
         background-color: @beige-alpha-8;
     }
 
+    .icon {
+        width: 12px;
+        height: 12px;
+    }
+
     &.primary {
         height: 44px;
+        line-height: 44px;
         border: none;
         background-color: @lime;
         gap: 14px;
+        padding-left: 20px;
+        padding-right: 20px;
 
         &:hover {
             background-color: @lime-alpha-40;
+        }
+
+        .icon {
+            width: 14px;
+            height: 14px;
         }
     }
 
@@ -45,10 +59,26 @@
 
     &.small {
         height: 28px;
+        line-height: 28px;
         .fontOutfitRegular(14px);
+        padding-left: 12px;
+        padding-right: 12px;
+
+        .icon {
+            width: 10px;
+            height: 10px;
+        }
 
         &.primary {
             height: 40px;
+            line-height: 40px;
+            padding-left: 14px;
+            padding-right: 14px;
+
+            .icon {
+                width: 12px;
+                height: 12px;
+            }
         }
 
         &.light {

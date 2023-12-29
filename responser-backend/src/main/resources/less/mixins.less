@@ -71,6 +71,22 @@
   }
 }
 
+// Workaround for cover rules.
+.adaptationAll(@rules) {
+  .adaptationDesktop(@rules);
+  .adaptationSmallDesktop(@rules);
+  .adaptationTablet(@rules);
+  .adaptationMobile(@rules);
+}
+
+// Workaround for cover rules.
+.adaptationAllAndMobile(@allRules, @mobileRules) {
+  .adaptationDesktop(@allRules);
+  .adaptationSmallDesktop(@allRules);
+  .adaptationTablet(@allRules);
+  .adaptationMobile(@mobileRules);
+}
+
 .adaptationComplex(@desktopRules, @smallDesktopRules, @tabletRules, @mobileRules) {
   .adaptationDesktop(@desktopRules);
   .adaptationSmallDesktop(@smallDesktopRules);

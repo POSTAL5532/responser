@@ -2,14 +2,15 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <title>Reviewly</title>
+
+    <th:block th:include="includes/favicons"/>
+
     <link th:href="@{/css/index.css}" rel="stylesheet"/>
     <link th:href="@{/css/tiny-slider.css}" rel="stylesheet"/>
 
     <link th:href="@{/css/fonts.css}" rel="stylesheet"/>
     <link th:href="@{/css/components.css}" rel="stylesheet"/>
     <link th:href="@{/css/common.css}" rel="stylesheet"/>
-
-    <th:block th:include="includes/favicons"/>
 
     <script type="text/javascript" th:src="@{/js/gsap/gsap.js}"></script>
     <script type="text/javascript" th:src="@{/js/gsap/scroll-trigger.js}"></script>
@@ -34,7 +35,7 @@
         <div class="header-content">
             <nav class="navigation">
                 <a class="button light active" href="/">Home</a>
-                <a class="button light" href="/">Sites rating</a>
+                <a class="button light" href="/web-resources/sites-rating">Sites rating</a>
                 <a class="button light" href="/">Reviews</a>
             </nav>
             <div class="logo-container">
