@@ -1,9 +1,10 @@
-package com.responser.backend.service;
+package com.responser.backend.service.webResource;
 
 import static java.text.MessageFormat.format;
 
 import com.responser.backend.model.ResourceType;
 import com.responser.backend.model.WebResource;
+import com.responser.backend.model.WebResourceCriteria;
 import com.responser.backend.repository.WebResourceRepository;
 import com.responser.backend.utils.UrlUtils;
 import java.util.NoSuchElementException;
@@ -23,6 +24,10 @@ public class WebResourceService {
 
     private final WebResourceRepository webResourceRepository;
 
+    public Page<WebResource> getWebResources(WebResourceCriteria criteria, Pageable pageable) {
+        return webResourceRepository.findAll(new WebResourceSpecification(criteria), pageable);
+    }
+
     public WebResource getById(String id) {
         return webResourceRepository.findById(id).orElseThrow(() -> {
             log.error("Web resource with id {} doesn't exist", id);
@@ -39,14 +44,6 @@ public class WebResourceService {
                 log.error("{} for url {} doesn't exist", resourceType, rawUrl);
                 return new NoSuchElementException(format("{0} for url {1} doesn't exist", resourceType, rawUrl));
             });
-    }
-
-    public Page<WebResource> getSitesWithReviews(Pageable pageable) {
-        return webResourceRepository.findWithReviewsByResourceType(ResourceType.SITE, pageable);
-    }
-
-    public Page<WebResource> getSitesWithReviews(String searchUrl, Pageable pageable) {
-        return webResourceRepository.findWithReviewsByResourceTypeAndUrlContainingSearchUrl(ResourceType.SITE, searchUrl, pageable);
     }
 
     @Transactional

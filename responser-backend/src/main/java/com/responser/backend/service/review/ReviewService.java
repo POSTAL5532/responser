@@ -6,7 +6,7 @@ import com.responser.backend.model.Review;
 import com.responser.backend.model.User;
 import com.responser.backend.repository.ReviewRepository;
 import com.responser.backend.service.UserService;
-import com.responser.backend.service.WebResourceService;
+import com.responser.backend.service.webResource.WebResourceService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
