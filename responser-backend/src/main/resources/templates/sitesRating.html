@@ -146,42 +146,48 @@
             </form>
 
             <div class="ratings-container">
+                <div class="site-ratings-container">
+                    <div class="no-data" th:if="${sites.size() == 0}">
+                        <span class="no-data-text">
+                            No sites ratings.
+                            <br>
+                            Try to change filter settings.
+                        </span>
+                    </div>
+
+                    <th:block th:each="site, loopState: ${sites}">
+                        <div class="site-rating">
+                            <div class="resource-container">
+                                <div class="rating-value"
+                                     th:classappend="${(site.rating >= 4 ? 'high' : (site.rating >= 2 ? 'medium' : 'low'))}"
+                                     th:text="${#numbers.formatDecimal(site.rating, 1, 1, 'POINT')}">
+                                    ! ERROR !
+                                </div>
+
+                                <img class="resource-icon" src="https://vodastroyservis.ru/wp-content/uploads/google-icon.jpg" alt="google">
+                                <h2 class="resource-name" th:text="${T(com.responser.backend.utils.UrlUtils).getHost(site.url)}">! ERROR !</h2>
+                            </div>
+                            <div class="reviews-count">
+                                <svg class="icon message" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
+                                    <path d="M11.5 7.83333C11.5 8.15749 11.3712 8.46836 11.142 8.69757C10.9128 8.92679 10.6019 9.05556 10.2778 9.05556H2.94444L0.5 11.5V1.72222C0.5 1.39807 0.628769 1.08719 0.857981 0.85798C1.08719 0.628769 1.39807 0.5 1.72222 0.5H10.2778C10.6019 0.5 10.9128 0.628769 11.142 0.85798C11.3712 1.08719 11.5 1.39807 11.5 1.72222V7.83333Z" stroke="black" stroke-opacity="0.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <span class="value" th:text="${site.reviewsCount}">! ERROR !</span>
+                            </div>
+                            <div class="details-container">
+                                <a class="link" th:href="${'/web-resources/' + site.id}">
+                                    See details
+                                    <svg class="icon link" width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <rect x="0.791016" y="0.344727" width="30" height="30" rx="8" fill="#605C55"/>
+                                        <path d="M13.541 19.8447L18.041 15.3447L13.541 10.8447" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                    </th:block>
+                </div>
+
                 <div class="blur-panel" id="blur-panel-1"></div>
                 <div class="blur-panel" id="blur-panel-2"></div>
-
-                <th:block th:each="site, loopState: ${sites}">
-                    <div class="site-rating">
-                        <div class="resource-container">
-                            <div class="rating-value"
-                                 th:classappend="${(site.rating >= 4 ? 'high' : (site.rating >= 2 ? 'medium' : 'low'))}"
-                                 th:text="${#numbers.formatDecimal(site.rating, 1, 1, 'POINT')}">
-                                ! ERROR !
-                            </div>
-
-                            <img class="resource-icon" src="https://vodastroyservis.ru/wp-content/uploads/google-icon.jpg" alt="google">
-                            <h2 class="resource-name" th:text="${T(com.responser.backend.utils.UrlUtils).getHost(site.url)}">! ERROR !</h2>
-                        </div>
-                        <div class="reviews-count">
-                            <svg class="icon message" xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12" fill="none">
-                                <path d="M11.5 7.83333C11.5 8.15749 11.3712 8.46836 11.142 8.69757C10.9128 8.92679 10.6019 9.05556 10.2778 9.05556H2.94444L0.5 11.5V1.72222C0.5 1.39807 0.628769 1.08719 0.857981 0.85798C1.08719 0.628769 1.39807 0.5 1.72222 0.5H10.2778C10.6019 0.5 10.9128 0.628769 11.142 0.85798C11.3712 1.08719 11.5 1.39807 11.5 1.72222V7.83333Z" stroke="black" stroke-opacity="0.25" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                            <span class="value" th:text="${site.reviewsCount}">! ERROR !</span>
-                        </div>
-                        <div class="details-container">
-                            <a class="link" th:href="${'/web-resources/' + site.id}">
-                                See details
-                                <svg class="icon link" width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <rect x="0.791016" y="0.344727" width="30" height="30" rx="8" fill="#605C55"/>
-                                    <path d="M13.541 19.8447L18.041 15.3447L13.541 10.8447" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
-                </th:block>
-
-                <div class="no-data" th:if="${sites.size() == 0}">
-                    No sites found
-                </div>
             </div>
 
             <div class="pagination">

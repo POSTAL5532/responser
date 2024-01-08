@@ -204,6 +204,14 @@
 
             <div class="reviews-container">
                 <div class="cards-container">
+                    <div class="no-data" th:if="${reviews.size() == 0}">
+                        <span class="no-data-text">
+                            No reviews.
+                            <br>
+                            Try to change filter settings.
+                        </span>
+                    </div>
+
                     <th:block th:each="review, loopState: ${reviews}">
                         <div class="review-card">
                             <div class="card-header">

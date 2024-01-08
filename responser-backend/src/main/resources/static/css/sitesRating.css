@@ -136,9 +136,6 @@
 .page.site-reviews .page-content .section .ratings-container {
   position: relative;
   width: 800px;
-  background-color: #FFFFFF;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
   margin-bottom: 20px;
 }
 .page.site-reviews .page-content .section .ratings-container .blur-panel {
@@ -158,21 +155,48 @@
   opacity: 1;
   pointer-events: all;
 }
-.page.site-reviews .page-content .section .ratings-container .site-rating {
+.page.site-reviews .page-content .section .ratings-container .site-ratings-container .no-data {
   display: flex;
   align-items: center;
+  justify-content: center;
+  height: 150px;
+}
+.page.site-reviews .page-content .section .ratings-container .site-ratings-container .no-data .no-data-text {
+  display: block;
+  text-align: center;
+  font-family: "Outfit-Regular";
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+}
+.page.site-reviews .page-content .section .ratings-container .site-ratings-container .site-rating {
+  position: relative;
+  display: flex;
+  background-color: #FFFFFF;
+  align-items: center;
   height: 100px;
-  justify-content: space-between;
   padding-left: 30px;
   padding-right: 30px;
 }
-.page.site-reviews .page-content .section .ratings-container .site-rating .resource-container {
+.page.site-reviews .page-content .section .ratings-container .site-ratings-container .site-rating:first-child {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.page.site-reviews .page-content .section .ratings-container .site-ratings-container .site-rating:not(:last-child):after {
+  content: "";
+  background: rgba(159, 143, 135, 0.08);
+  position: absolute;
+  bottom: 0;
+  left: 30px;
+  right: 30px;
+  height: 1px;
+}
+.page.site-reviews .page-content .section .ratings-container .site-ratings-container .site-rating .resource-container {
   display: flex;
   justify-content: start;
-  flex: 1;
   align-items: center;
 }
-.page.site-reviews .page-content .section .ratings-container .site-rating .resource-container .rating-value {
+.page.site-reviews .page-content .section .ratings-container .site-ratings-container .site-rating .resource-container .rating-value {
   width: 40px;
   height: 40px;
   display: flex;
@@ -185,42 +209,46 @@
   color: #FFFFFF;
   margin-right: 24px;
 }
-.page.site-reviews .page-content .section .ratings-container .site-rating .resource-container .rating-value.high {
+.page.site-reviews .page-content .section .ratings-container .site-ratings-container .site-rating .resource-container .rating-value.high {
   background-color: #78AC65;
 }
-.page.site-reviews .page-content .section .ratings-container .site-rating .resource-container .rating-value.medium {
+.page.site-reviews .page-content .section .ratings-container .site-ratings-container .site-rating .resource-container .rating-value.medium {
   background-color: #4F75C5;
 }
-.page.site-reviews .page-content .section .ratings-container .site-rating .resource-container .rating-value.low {
+.page.site-reviews .page-content .section .ratings-container .site-ratings-container .site-rating .resource-container .rating-value.low {
   background-color: rgba(0, 0, 0, 0.25);
 }
-.page.site-reviews .page-content .section .ratings-container .site-rating .resource-container .resource-icon {
+.page.site-reviews .page-content .section .ratings-container .site-ratings-container .site-rating .resource-container .resource-icon {
   width: 16px;
   height: 16px;
   margin-right: 4px;
 }
-.page.site-reviews .page-content .section .ratings-container .site-rating .resource-container .resource-name {
+.page.site-reviews .page-content .section .ratings-container .site-ratings-container .site-rating .resource-container .resource-name {
   margin: 0;
   font-family: "Outfit-Medium";
   font-size: 18px;
   font-weight: 500;
   color: #404038;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 234px;
 }
-.page.site-reviews .page-content .section .ratings-container .site-rating .reviews-count {
+.page.site-reviews .page-content .section .ratings-container .site-ratings-container .site-rating .reviews-count {
   display: flex;
   justify-content: center;
-  flex: 2;
   align-items: center;
   gap: 4px;
   font-family: "Outfit-Medium";
   font-size: 14px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.6);
+  width: 100px;
 }
-.page.site-reviews .page-content .section .ratings-container .site-rating .details-container {
+.page.site-reviews .page-content .section .ratings-container .site-ratings-container .site-rating .details-container {
   display: flex;
   justify-content: end;
-  flex: 1;
+  width: 322px;
 }
 .page.site-reviews .page-content .section .pagination {
   width: 800px;

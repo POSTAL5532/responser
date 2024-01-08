@@ -181,8 +181,19 @@
   opacity: 1;
   pointer-events: all;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container {
-  width: 100%;
+.page.site-reviews .page-content .section .reviews-container .cards-container .no-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+}
+.page.site-reviews .page-content .section .reviews-container .cards-container .no-data .no-data-text {
+  display: block;
+  text-align: center;
+  font-family: "Outfit-Regular";
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
 }
 .page.site-reviews .page-content .section .reviews-container .cards-container .review-card {
   background-color: #FFFFFF;
