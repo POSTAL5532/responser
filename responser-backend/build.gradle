@@ -74,9 +74,6 @@ task compileLess() {
     def lesscCommand = 'lessc'
 
     doLast {
-        /*exec {
-            commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/components/components.less", "${baseCssPath}/components.css"
-        }*/
         exec {
             commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/component/components.less", "${baseCssPath}/components.css"
         }
@@ -92,6 +89,9 @@ task compileLess() {
         exec {
             commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/sitesRating.less", "${baseCssPath}/sitesRating.css"
         }
+        exec {
+            commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/webResourceDetails.less", "${baseCssPath}/webResourceDetails.css"
+        }
         /*exec {
             commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/layouts/pageMainLayout.less", "${baseCssPath}/pageMainLayout.css"
         }
@@ -100,9 +100,6 @@ task compileLess() {
         }
         exec {
             commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/reviewPage.less", "${baseCssPath}/reviewPage.css"
-        }
-        exec {
-            commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/webResourceDetails.less", "${baseCssPath}/webResourceDetails.css"
         }
         exec {
             commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/seeReviewsPage.less", "${baseCssPath}/seeReviewsPage.css"

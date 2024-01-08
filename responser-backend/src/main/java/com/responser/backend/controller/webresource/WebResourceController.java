@@ -1,15 +1,19 @@
 package com.responser.backend.controller.webresource;
 
+import com.responser.backend.controller.reviews.payload.ReviewsRequestCriteria;
 import com.responser.backend.controller.webresource.payload.WebResourceDTO;
 import com.responser.backend.controller.webresource.payload.WebResourceRequestCriteria;
+import com.responser.backend.converter.ReviewsCriteriaConverter;
 import com.responser.backend.converter.WebResourceConverter;
 import com.responser.backend.converter.WebResourceCriteriaConverter;
 import com.responser.backend.model.AbstractEntity;
 import com.responser.backend.model.ResourceRating;
 import com.responser.backend.model.ResourceType;
 import com.responser.backend.model.Review;
-import com.responser.backend.model.ReviewsCriteria;
+import com.responser.backend.model.ReviewsCriteriaResourceType;
+import com.responser.backend.model.ReviewsCriteriaSortingField;
 import com.responser.backend.model.WebResource;
+import com.responser.backend.model.WebResourceCriteriaSortingField;
 import com.responser.backend.service.RatingService;
 import com.responser.backend.service.webResource.WebResourceService;
 import com.responser.backend.service.review.ReviewService;
@@ -23,6 +27,7 @@ import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -43,6 +48,7 @@ public class WebResourceController {
     private final RatingService ratingService;
     private final ReviewService reviewService;
     private final WebResourceCriteriaConverter criteriaConverter;
+    private final ReviewsCriteriaConverter reviewsCriteriaConverter;
 
     @GetMapping(SITES_RATING_URL)
     public String getSitesRatingPage(
@@ -55,6 +61,11 @@ public class WebResourceController {
 
         if(criteria.hasSearchUrl()) {
             criteria.setSearchUrl(UrlUtils.prepareSiteUrl(criteria.getSearchUrl()));
+        }
+
+        if (!criteria.hasSortingField()) {
+            criteria.setSortingField(WebResourceCriteriaSortingField.CREATION_DATE);
+            criteria.setSortDirection(Direction.ASC);
         }
 
         Page<WebResource> webResourcesPage = webResourceService.getWebResources(
@@ -79,34 +90,53 @@ public class WebResourceController {
 
         model.addAttribute("criteria", criteria);
         model.addAttribute("sites", webResourceDTOS);
-        model.addAttribute("currentPageNumber", webResourcesPage.getNumber());
-        model.addAttribute("pagesCount", webResourcesPage.getTotalPages());
+        /*model.addAttribute("currentPageNumber", webResourcesPage.getNumber());
+        model.addAttribute("pagesCount", webResourcesPage.getTotalPages());*/
         model.addAttribute("previousPageNumber", webResourcesPage.hasPrevious() ? webResourcesPage.getNumber() - 1 : null);
-        model.addAttribute("nextPageNumber", webResourcesPage.hasPrevious() ? webResourcesPage.getNumber() + 1 : null);
+        model.addAttribute("nextPageNumber", webResourcesPage.hasNext() ? webResourcesPage.getNumber() + 1 : null);
 
         return "sitesRating";
     }
 
     @GetMapping("/{resourceId}")
-    public String getWebResourceDetailsPage(Model model, @PathVariable String resourceId,
-                                            @RequestParam(required = false, defaultValue = "0") Integer reviewsPage) {
+    public String getWebResourceDetailsPage(
+        Model model,
+        @PathVariable String resourceId,
+        @RequestParam(required = false, defaultValue = "0") Integer page,
+        @Valid @NotNull ReviewsRequestCriteria reviewsCriteria
+    ) {
+        reviewsCriteria.setResourceId(resourceId);
+
+        if (!reviewsCriteria.hasSortingField()) {
+            reviewsCriteria.setSortingField(ReviewsCriteriaSortingField.CREATION_DATE);
+            reviewsCriteria.setSortDirection(Direction.ASC);
+        }
+
+        if (!reviewsCriteria.hasResourceType()) {
+            reviewsCriteria.setResourceType(ReviewsCriteriaResourceType.ALL);
+        }
+
         WebResource webResource = webResourceService.getById(resourceId);
         ResourceRating resourceRating = ratingService.getResourceFullRatingById(webResource.getId());
 
         Page<Review> reviews = reviewService.getReviews(
-            ReviewsCriteria.builder().resourceId(resourceId).build(),
-            PageRequest.of(reviewsPage, 10)
+            reviewsCriteriaConverter.toReviewsCriteria(reviewsCriteria),
+            PageRequest.of(page, 10)
         );
 
         WebResourceDTO webResourceDTO = webResourceConverter.toDTO(webResource);
         webResourceDTO.setRating(resourceRating.getRating());
         webResourceDTO.setReviewsCount(resourceRating.getReviewsCount());
 
+        model.addAttribute("reviewsCriteria", reviewsCriteria);
         model.addAttribute("webResource", webResourceDTO);
         model.addAttribute("webResourceHost", UrlUtils.getHost(webResourceDTO.getUrl()));
         model.addAttribute("reviews", reviews.getContent());
         model.addAttribute("reviewsPagesCount", reviews.getTotalPages());
         model.addAttribute("currentReviewsPageNumber", reviews.getNumber());
+
+        model.addAttribute("previousPageNumber", reviews.hasPrevious() ? reviews.getNumber() - 1 : null);
+        model.addAttribute("nextPageNumber", reviews.hasNext() ? reviews.getNumber() + 1 : null);
 
         return "webResourceDetails";
     }

@@ -90,11 +90,11 @@
                                 </label>
                                 <label class="field radio-button">
                                     <input type="radio" name="sortingField" value="CREATION_DATE" data-sort-direction="ASC"
-                                           th:checked="${criteria.sortingField == null || criteria.sortingField == T(com.responser.backend.model.WebResourceCriteriaSortingField).CREATION_DATE}"/>
+                                           th:checked="${criteria.sortingField == T(com.responser.backend.model.WebResourceCriteriaSortingField).CREATION_DATE && criteria.sortDirection.name == 'ASC'}"/>
                                     <span>No sorting</span>
                                 </label>
 
-                                <input type="text" name="sortDirection" th:value="${criteria.sortDirection != null ? criteria.sortDirection.name : 'ASC'}" hidden="hidden">
+                                <input type="text" name="sortDirection" th:value="${criteria.sortDirection}" hidden="hidden">
                             </div>
                             <button class="button primary small" type="submit">Apply</button>
                         </div>

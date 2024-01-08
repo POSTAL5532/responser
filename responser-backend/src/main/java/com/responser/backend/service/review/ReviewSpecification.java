@@ -5,6 +5,7 @@ import com.responser.backend.model.ReviewLike;
 import com.responser.backend.model.ReviewLike_;
 import com.responser.backend.model.Review_;
 import com.responser.backend.model.ReviewsCriteria;
+import com.responser.backend.model.ReviewsCriteriaResourceType;
 import com.responser.backend.model.ReviewsCriteriaSortingField;
 import com.responser.backend.model.User_;
 import com.responser.backend.model.WebResource_;
@@ -36,7 +37,18 @@ public class ReviewSpecification implements Specification<Review> {
         boolean isCountQuery = processCountQuery(reviewRoot, criteriaQuery);
 
         if (criteria.hasResourceId()) {
-            predicates.add(criteriaBuilder.equal(reviewRoot.get(Review_.RESOURCE_ID), criteria.getResourceId()));
+            Predicate resourceIdPredicate;
+
+            if (criteria.hasResourceType() && (criteria.getResourceType().equals(ReviewsCriteriaResourceType.ALL) || criteria.getResourceType().equals(ReviewsCriteriaResourceType.PAGE))) {
+                resourceIdPredicate = criteriaBuilder.or(
+                    criteriaBuilder.equal(reviewRoot.get(Review_.RESOURCE_ID), criteria.getResourceId()),
+                    criteriaBuilder.equal(reviewRoot.get(Review_.WEB_RESOURCE).get(WebResource_.PARENT_ID), criteria.getResourceId())
+                );
+            } else {
+                resourceIdPredicate = criteriaBuilder.equal(reviewRoot.get(Review_.RESOURCE_ID), criteria.getResourceId());
+            }
+
+            predicates.add(resourceIdPredicate);
         }
 
         if (criteria.hasForUserId()) {
@@ -55,7 +67,7 @@ public class ReviewSpecification implements Specification<Review> {
             predicates.add(criteriaBuilder.lessThanOrEqualTo(reviewRoot.get(Review_.RATING), criteria.getMaxRating()));
         }
 
-        if (criteria.hasResourceType()) {
+        if (criteria.hasResourceType() && !criteria.getResourceType().equals(ReviewsCriteriaResourceType.ALL)) {
             predicates.add(criteriaBuilder.equal(reviewRoot.get(Review_.WEB_RESOURCE).get(WebResource_.RESOURCE_TYPE), criteria.getResourceType()));
         }
 

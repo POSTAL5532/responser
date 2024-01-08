@@ -18,6 +18,7 @@ public class ReviewsCriteriaConverter {
             .excludeUserId(requestCriteria.getExcludeUserId())
             .forUserId(requestCriteria.getForUserId())
             .resourceType(requestCriteria.getResourceType())
+            .searchUrl(requestCriteria.getSearchUrl())
             .minRating(requestCriteria.getMinRating())
             .maxRating(requestCriteria.getMaxRating())
             .sortingField(requestCriteria.getSortingField())

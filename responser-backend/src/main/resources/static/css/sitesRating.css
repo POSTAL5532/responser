@@ -143,6 +143,7 @@
 }
 .page.site-reviews .page-content .section .ratings-container .blur-panel {
   position: absolute;
+  top: 0;
   background-color: rgba(242, 240, 238, 0.6);
   backdrop-filter: blur(2.5px);
   width: 100%;

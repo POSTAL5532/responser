@@ -15,7 +15,7 @@
     color: @black-alpha-60;
     background-color: transparent;
     border: 1px solid @brown-soft;
-    transition: background-color 0.15s;
+    transition: background-color 0.15s, color 0.15s;
 
     &:active, &:focus {
         outline: none;
@@ -28,6 +28,10 @@
     .icon {
         width: 12px;
         height: 12px;
+
+        path {
+            transition: stroke 0.15s;
+        }
     }
 
     &.primary {

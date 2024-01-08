@@ -20,7 +20,9 @@ public class ReviewsCriteria {
 
     private String forUserId;
 
-    private ResourceType resourceType;
+    private ReviewsCriteriaResourceType resourceType;
+
+    private String searchUrl;
 
     private Integer maxRating;
 
@@ -60,5 +62,9 @@ public class ReviewsCriteria {
 
     public boolean hasResourceType() {
         return Objects.nonNull(resourceType);
+    }
+
+    public boolean hasSearchUrl() {
+        return StringUtils.isNotBlank(searchUrl);
     }
 }

@@ -34,4 +34,34 @@ window.addEventListener('load', (event) => {
         const sortDirectionValue = $(this).attr("data-sort-direction");
         sortDirectionInput.attr("value", sortDirectionValue);
     });
+
+    $(".review-text").each(function () {
+        const nativeTextElement = this;
+        const overflowed = nativeTextElement.scrollHeight > nativeTextElement.clientHeight;
+
+        if (!overflowed) {
+            const parent = $(this).closest(".review-card");
+            const showMoreButton = parent.find(".show-more");
+            showMoreButton.css("display", "none");
+            $(this).css("height", "auto")
+        }
+    });
+
+    const toggleTextHeight = (isOverflowed, textElement, buttonElement, fullHeight) => {
+        if (isOverflowed) {
+            textElement.first().css("height", `${fullHeight}px`);
+            buttonElement.text("Show less");
+        } else {
+            textElement.first().css("height", "");
+            buttonElement.text("Show more");
+        }
+    }
+
+    $(".show-more").click(function () {
+        const parent = $(this).closest(".review-card");
+        const textElement = parent.find(".review-text");
+        const nativeTextElement = textElement.get(0);
+        const isOverflowed = nativeTextElement.scrollHeight > nativeTextElement.clientHeight;
+        toggleTextHeight(isOverflowed, textElement, $(this), nativeTextElement.scrollHeight + 10);
+    });
 });

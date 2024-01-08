@@ -24,12 +24,15 @@ public class WebResource extends AbstractEntity {
 
     private String url;
 
+    @Column(name="parent_id")
+    private String parentId;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "resource_type")
     private ResourceType resourceType;
 
     @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name="parent_id")
+    @JoinColumn(name="parent_id", insertable = false, updatable = false)
     private WebResource parent;
 
     @OneToMany(mappedBy = "webResource", fetch = FetchType.LAZY)

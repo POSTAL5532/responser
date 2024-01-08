@@ -1,6 +1,6 @@
 package com.responser.backend.controller.reviews.payload;
 
-import com.responser.backend.model.ResourceType;
+import com.responser.backend.model.ReviewsCriteriaResourceType;
 import com.responser.backend.model.ReviewsCriteriaSortingField;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
@@ -23,7 +23,9 @@ public class ReviewsRequestCriteria {
 
     private String forUserId;
 
-    private ResourceType resourceType;
+    private ReviewsCriteriaResourceType resourceType;
+
+    private String searchUrl;
 
     @Max(5)
     @Min(0)
@@ -51,6 +53,10 @@ public class ReviewsRequestCriteria {
 
     public boolean hasResourceType() {
         return Objects.nonNull(resourceType);
+    }
+
+    public boolean hasSearchUrl() {
+        return StringUtils.isNotBlank(searchUrl);
     }
 
     public boolean hasMaxRating() {
