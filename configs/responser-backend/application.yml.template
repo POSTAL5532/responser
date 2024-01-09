@@ -78,6 +78,9 @@ responser:
   downloadExtensionChrome: https://www.google.com
   chromeExtensionId: bcgepbhdoibfdnpmemhdjifmjdmfacml
   responserInfoEmail: info@reviewly.space
+  fileStorageUrl: http://localhost:5050
+  fileStorageUrlSitesIcons: ${responser.fileStorageUrl}/site-icon
+  fileStorageUrlUsersAvatars: ${responser.fileStorageUrl}/user-avatar
   allowedOrigins:
     - ${responser.selfHost}
-    - chrome-extension://bcgepbhdoibfdnpmemhdjifmjdmfacml
+    - chrome-extension://${responser.chromeExtensionId}

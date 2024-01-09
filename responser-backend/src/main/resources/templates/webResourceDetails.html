@@ -62,7 +62,9 @@
         <section class="section">
             <h1 class="section-header">
                 <div class="site-logo-container">
-                    <img src="https://vodastroyservis.ru/wp-content/uploads/google-icon.jpg" alt="" class="site-logo">
+                    <img class="site-logo"
+                         th:src="${@applicationProperties.fileStorageUrlSitesIcons + '/' + (webResource.iconFileName != null ? webResource.iconFileName : 'default_site_icon.png')}"
+                         th:alt="${T(com.responser.backend.utils.UrlUtils).getHost(webResource.url)}">
                 </div>
                 <span class="site-name" th:text="${webResourceHost}">Google.com</span>
                 <div class="site-rating-container">
@@ -216,7 +218,9 @@
                         <div class="review-card">
                             <div class="card-header">
                                 <div class="user-info-container">
-                                    <img class="user-avatar" src="https://vodastroyservis.ru/wp-content/uploads/google-icon.jpg" alt="">
+                                    <img class="user-avatar"
+                                         th:src="${@applicationProperties.fileStorageUrlUsersAvatars + '/' + (review.user.avatarFileName != null ? review.user.avatarFileName : 'default_avatar.png')}"
+                                         th:alt="${review.user.fullName}">
                                     <div class="name-date">
                                         <span class="user-name" th:text="${review.user.fullName}">! ERROR !</span>
                                         <span class="review-date" th:text="${#temporals.format(review.creationDate, 'd MMM yyyy')}">! ERROR !</span>

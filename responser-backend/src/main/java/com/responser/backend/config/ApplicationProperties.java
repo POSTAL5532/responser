@@ -66,6 +66,15 @@ public class ApplicationProperties {
     @NotBlank
     private String responserInfoEmail;
 
+    @NotBlank
+    private String fileStorageUrl;
+
+    @NotBlank
+    private String fileStorageUrlSitesIcons;
+
+    @NotBlank
+    private String fileStorageUrlUsersAvatars;
+
     private List<String> allowedOrigins;
 
     public String getLoginUrl() throws URISyntaxException {

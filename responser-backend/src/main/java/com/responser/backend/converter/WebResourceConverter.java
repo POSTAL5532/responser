@@ -23,6 +23,7 @@ public class WebResourceConverter {
             .url(webResource.getUrl())
             .parent(toDTO(webResource.getParent()))
             .resourceType(webResource.getResourceType())
+            .iconFileName(webResource.getIconFileName())
             .creationDate(webResource.getCreationDate())
             .updateDate(webResource.getUpdateDate())
             .build();
@@ -38,6 +39,7 @@ public class WebResourceConverter {
             .url(webResource.getUrl())
             .parent(toDTO(webResource.getParent()))
             .resourceType(webResource.getResourceType())
+            .iconFileName(webResource.getIconFileName())
             .creationDate(webResource.getCreationDate())
             .updateDate(webResource.getUpdateDate());
 

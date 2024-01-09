@@ -9,7 +9,6 @@ import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
-import java.util.List;
 import java.util.Set;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +33,9 @@ public class WebResource extends AbstractEntity {
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name="parent_id", insertable = false, updatable = false)
     private WebResource parent;
+
+    @Column(name="icon_file_name")
+    private String iconFileName;
 
     @OneToMany(mappedBy = "webResource", fetch = FetchType.LAZY)
     private Set<Review> reviews;

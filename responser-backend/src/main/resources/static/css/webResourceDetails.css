@@ -38,7 +38,7 @@
 }
 .page.site-reviews .page-content .section .section-header {
   margin: 0 0 60px;
-  font-family: "Outfit-Regular";
+  font-family: "Outfit-Regular", sans-serif;
   font-size: 60px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
@@ -71,7 +71,7 @@
 }
 .page.site-reviews .page-content .section .section-header .site-rating-container .site-rating {
   display: block;
-  font-family: "Outfit-Medium";
+  font-family: "Outfit-Medium", sans-serif;
   font-size: 16px;
   font-weight: 500;
   color: #FFFFFF;
@@ -93,7 +93,7 @@
   background-color: transparent;
   border: none;
   outline: none;
-  font-family: "Outfit-Regular";
+  font-family: "Outfit-Regular", sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.4);
@@ -109,7 +109,7 @@
 }
 .page.site-reviews .page-content .section .sorting-filter-container .dropdown-menu-container .dropdown-menu .menu-group-header {
   margin: 0 0 16px;
-  font-family: "Outfit-Medium";
+  font-family: "Outfit-Medium", sans-serif;
   font-size: 14px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.6);
@@ -190,7 +190,7 @@
 .page.site-reviews .page-content .section .reviews-container .cards-container .no-data .no-data-text {
   display: block;
   text-align: center;
-  font-family: "Outfit-Regular";
+  font-family: "Outfit-Regular", sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
@@ -239,12 +239,12 @@
   overflow: hidden;
   text-overflow: ellipsis;
   width: 224px;
-  font-family: "Outfit-Medium";
+  font-family: "Outfit-Medium", sans-serif;
   font-size: 16px;
   font-weight: 500;
 }
 .page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-header .user-info-container .name-date .review-date {
-  font-family: "Outfit-Regular";
+  font-family: "Outfit-Regular", sans-serif;
   font-size: 10px;
   font-weight: 400;
 }
@@ -264,7 +264,7 @@
 }
 .page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-header .resource-type .value {
   display: block;
-  font-family: "Outfit-Regular";
+  font-family: "Outfit-Regular", sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
@@ -286,7 +286,7 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-family: "Outfit-Regular";
+  font-family: "Outfit-Regular", sans-serif;
   font-size: 12px;
   font-weight: 400;
   margin-bottom: 8px;
@@ -302,7 +302,7 @@
   -webkit-line-clamp: 3;
   line-clamp: 3;
   -webkit-box-orient: vertical;
-  font-family: "Outfit-Regular";
+  font-family: "Outfit-Regular", sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
@@ -315,7 +315,7 @@
 }
 .page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-footer .show-more {
   height: 16px;
-  font-family: "Outfit-Regular";
+  font-family: "Outfit-Regular", sans-serif;
   font-size: 12px;
   font-weight: 400;
   border: none;
@@ -352,7 +352,7 @@
 }
 .page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-footer .actions-container .reaction .reactions-count {
   display: block;
-  font-family: "Outfit-Medium";
+  font-family: "Outfit-Medium", sans-serif;
   font-size: 12px;
   font-weight: 500;
   color: #6E6E70;

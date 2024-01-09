@@ -38,7 +38,7 @@
 }
 .page.site-reviews .page-content .section .section-header {
   margin: 0 0 60px;
-  font-family: "Outfit-Regular";
+  font-family: "Outfit-Regular", sans-serif;
   font-size: 60px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
@@ -60,7 +60,7 @@
   background-color: transparent;
   border: none;
   outline: none;
-  font-family: "Outfit-Regular";
+  font-family: "Outfit-Regular", sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.4);
@@ -80,7 +80,7 @@
 }
 .page.site-reviews .page-content .section .sorting-filter-container .dropdown-menu-container.sorting .dropdown-menu .menu-group-header {
   margin: 0 0 16px;
-  font-family: "Outfit-Medium";
+  font-family: "Outfit-Medium", sans-serif;
   font-size: 12px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.6);
@@ -101,7 +101,7 @@
 }
 .page.site-reviews .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .menu-group-header {
   margin: 0 0 16px;
-  font-family: "Outfit-Medium";
+  font-family: "Outfit-Medium", sans-serif;
   font-size: 12px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.6);
@@ -164,7 +164,7 @@
 .page.site-reviews .page-content .section .ratings-container .site-ratings-container .no-data .no-data-text {
   display: block;
   text-align: center;
-  font-family: "Outfit-Regular";
+  font-family: "Outfit-Regular", sans-serif;
   font-size: 14px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
@@ -203,7 +203,7 @@
   justify-content: center;
   align-items: center;
   border-radius: 10px;
-  font-family: "Outfit-Medium";
+  font-family: "Outfit-Medium", sans-serif;
   font-size: 16px;
   font-weight: 500;
   color: #FFFFFF;
@@ -225,7 +225,7 @@
 }
 .page.site-reviews .page-content .section .ratings-container .site-ratings-container .site-rating .resource-container .resource-name {
   margin: 0;
-  font-family: "Outfit-Medium";
+  font-family: "Outfit-Medium", sans-serif;
   font-size: 18px;
   font-weight: 500;
   color: #404038;
@@ -239,7 +239,7 @@
   justify-content: center;
   align-items: center;
   gap: 4px;
-  font-family: "Outfit-Medium";
+  font-family: "Outfit-Medium", sans-serif;
   font-size: 14px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.6);

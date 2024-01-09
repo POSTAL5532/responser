@@ -19,6 +19,8 @@ public class WebResourceDTO {
 
     private ResourceType resourceType;
 
+    private String iconFileName;
+
     private WebResourceDTO parent;
 
     private Double rating;

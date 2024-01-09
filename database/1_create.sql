@@ -8,7 +8,7 @@ CREATE TABLE users
     email            VARCHAR(255) NOT NULL UNIQUE,
     password         VARCHAR(255) NOT NULL,
     full_name        VARCHAR(255) NOT NULL,
-    avatar_file_name VARCHAR(255) UNIQUE,
+    avatar_file_name VARCHAR(255),
     email_confirmed  boolean      NOT NULL,
     creation_date    TIMESTAMP    NOT NULL,
     update_date      TIMESTAMP,
@@ -35,12 +35,13 @@ CREATE TABLE password_restores
 
 CREATE TABLE web_resource
 (
-    id            VARCHAR(36) NOT NULL UNIQUE,
-    parent_id     VARCHAR(36) REFERENCES web_resource (id) ON DELETE CASCADE,
-    url           TEXT        NOT NULL,
-    resource_type VARCHAR(36) NOT NULL,
-    creation_date TIMESTAMP   NOT NULL,
-    update_date   TIMESTAMP,
+    id             VARCHAR(36) NOT NULL UNIQUE,
+    parent_id      VARCHAR(36) REFERENCES web_resource (id) ON DELETE CASCADE,
+    url            TEXT        NOT NULL,
+    icon_file_name VARCHAR(255),
+    resource_type  VARCHAR(36) NOT NULL,
+    creation_date  TIMESTAMP   NOT NULL,
+    update_date    TIMESTAMP,
     PRIMARY KEY (id)
 );
 

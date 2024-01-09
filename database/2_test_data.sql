@@ -1,6 +1,6 @@
 INSERT INTO users (id, user_name, email, password, full_name, avatar_file_name, email_confirmed, creation_date)
 VALUES
-    ('00000000-0000-0000-user-000000000001', 'user1', 'user1@example.com', '{bcrypt}$2a$10$pGU6idGIsvDdDUukCxNvduBL5ST2wwlDBcoPrh9z5YfpZUcU/mAey', 'Igor Shcherbachenya', NULL, true, '2023-11-04 12:34:56'),
+    ('00000000-0000-0000-user-000000000001', 'user1', 'user1@example.com', '{bcrypt}$2a$10$pGU6idGIsvDdDUukCxNvduBL5ST2wwlDBcoPrh9z5YfpZUcU/mAey', 'Igor Shcherbachenya', 'user_avatar_00000000-0000-0000-user-000000000001_c6f8d918-c445-4b85-85c6-30652bc60445.jpeg', true, '2023-11-04 12:34:56'),
     ('00000000-0000-0000-user-000000000002', 'user2', 'user2@example.com', '{bcrypt}$2a$10$pGU6idGIsvDdDUukCxNvduBL5ST2wwlDBcoPrh9z5YfpZUcU/mAey', 'Jane Doe', NULL, true, '2023-11-04 12:45:00'),
     ('00000000-0000-0000-user-000000000003', 'user3', 'user3@example.com', '{bcrypt}$2a$10$pGU6idGIsvDdDUukCxNvduBL5ST2wwlDBcoPrh9z5YfpZUcU/mAey', 'Bob Smith', NULL, true, '2023-11-04 13:00:15'),
     ('00000000-0000-0000-user-000000000004', 'user4', 'user4@example.com', '{bcrypt}$2a$10$pGU6idGIsvDdDUukCxNvduBL5ST2wwlDBcoPrh9z5YfpZUcU/mAey', 'Mary Johnson', NULL, true, '2023-11-04 14:15:30'),
@@ -23,13 +23,13 @@ VALUES
 
 
 
-INSERT INTO web_resource (id, parent_id, url, resource_type, creation_date, update_date)
+INSERT INTO web_resource (id, parent_id, url, icon_file_name, resource_type, creation_date, update_date)
 VALUES
-    ('00000000-0000-0000-0001-0webresource', NULL, 'https://www.google.com', 'SITE', '2022-10-25 22:13:37', NULL),
-    ('00000000-0000-0000-0002-0webresource', '00000000-0000-0000-0001-0webresource', 'https://www.google.com', 'PAGE', '2022-10-26 22:13:37', NULL),
-    ('00000000-0000-0000-0003-0webresource', NULL, 'https://github.com', 'SITE', '2022-10-25 22:13:37', NULL),
-    ('00000000-0000-0000-0004-0webresource', '00000000-0000-0000-0003-0webresource', 'https://github.com/POSTAL5532?tab=repositories', 'PAGE', '2022-10-25 22:13:37', NULL),
-    ('00000005-0000-0000-0005-0webresource', '00000000-0000-0000-0003-0webresource', 'https://github.com/POSTAL5532?tab=projects', 'PAGE', '2022-10-26 22:13:37', NULL);
+    ('00000000-0000-0000-0001-0webresource', NULL, 'https://www.google.com', 'default_site_icon.png', 'SITE', '2022-10-25 22:13:37', NULL),
+    ('00000000-0000-0000-0002-0webresource', '00000000-0000-0000-0001-0webresource', 'https://www.google.com', NULL, 'PAGE', '2022-10-26 22:13:37', NULL),
+    ('00000000-0000-0000-0003-0webresource', NULL, 'https://github.com', 'default_site_icon.png', 'SITE', '2022-10-25 22:13:37', NULL),
+    ('00000000-0000-0000-0004-0webresource', '00000000-0000-0000-0003-0webresource', 'https://github.com/POSTAL5532?tab=repositories', NULL, 'PAGE', '2022-10-25 22:13:37', NULL),
+    ('00000005-0000-0000-0005-0webresource', '00000000-0000-0000-0003-0webresource', 'https://github.com/POSTAL5532?tab=projects', NULL, 'PAGE', '2022-10-26 22:13:37', NULL);
 
 
 INSERT INTO reviews (id, user_id, resource_id, rating, text, creation_date)
