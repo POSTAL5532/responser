@@ -68,6 +68,9 @@ public class ReviewConverter {
             reviewsPage.getNumber(),
             reviewsPage.getNumberOfElements(),
             reviewsPage.isLast(),
+            reviewsPage.isFirst(),
+            reviewsPage.hasPrevious(),
+            reviewsPage.hasNext(),
             reviewList
         );
     }

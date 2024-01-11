@@ -1,8 +1,3 @@
-import {User} from "./User";
-import moment from "moment/moment";
-import {ReviewLike} from "./ReviewLike";
-import {ResourceType} from "./ResourceType";
-
 export class PageableResponse<T> {
 
     totalElements: number;
@@ -11,7 +6,7 @@ export class PageableResponse<T> {
 
     currentPageNumber: number;
 
-    currentPageElements: number;
+    currentPageSize: number;
 
     isLast: boolean;
 

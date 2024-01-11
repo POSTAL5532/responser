@@ -25,9 +25,9 @@ VALUES
 
 INSERT INTO web_resource (id, parent_id, url, icon_file_name, resource_type, creation_date, update_date)
 VALUES
-    ('00000000-0000-0000-0001-0webresource', NULL, 'https://www.google.com', 'default_site_icon.png', 'SITE', '2022-10-25 22:13:37', NULL),
+    ('00000000-0000-0000-0001-0webresource', NULL, 'https://www.google.com', 'google-icon.png', 'SITE', '2022-10-25 22:13:37', NULL),
     ('00000000-0000-0000-0002-0webresource', '00000000-0000-0000-0001-0webresource', 'https://www.google.com', NULL, 'PAGE', '2022-10-26 22:13:37', NULL),
-    ('00000000-0000-0000-0003-0webresource', NULL, 'https://github.com', 'default_site_icon.png', 'SITE', '2022-10-25 22:13:37', NULL),
+    ('00000000-0000-0000-0003-0webresource', NULL, 'https://github.com', NULL, 'SITE', '2022-10-25 22:13:37', NULL),
     ('00000000-0000-0000-0004-0webresource', '00000000-0000-0000-0003-0webresource', 'https://github.com/POSTAL5532?tab=repositories', NULL, 'PAGE', '2022-10-25 22:13:37', NULL),
     ('00000005-0000-0000-0005-0webresource', '00000000-0000-0000-0003-0webresource', 'https://github.com/POSTAL5532?tab=projects', NULL, 'PAGE', '2022-10-26 22:13:37', NULL);
 

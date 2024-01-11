@@ -92,6 +92,9 @@ task compileLess() {
         exec {
             commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/webResourceDetails.less", "${baseCssPath}/webResourceDetails.css"
         }
+        exec {
+            commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/seeReviewsPage.less", "${baseCssPath}/seeReviewsPage.css"
+        }
         /*exec {
             commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/layouts/pageMainLayout.less", "${baseCssPath}/pageMainLayout.css"
         }
@@ -100,9 +103,6 @@ task compileLess() {
         }
         exec {
             commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/reviewPage.less", "${baseCssPath}/reviewPage.css"
-        }
-        exec {
-            commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/seeReviewsPage.less", "${baseCssPath}/seeReviewsPage.css"
         }*/
         exec {
             commandLine 'cmd', '/c', lesscCommand, "${baseLessPath}/templates-styles/error.less", "${baseCssPath}/error.css"

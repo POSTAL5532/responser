@@ -18,6 +18,11 @@ public class Main {
                 .get(new HelloWorldHandler())
                 .get("user-avatar/:fileName", new GetUserAvatarHandler())
                 .get("site-icon/:fileName", new GetSiteIconHandler())
+                .post("user-avatar", ctx -> {
+                    ctx.getRequest().getBody().then(typedData -> {
+                        byte[] fileBytes = typedData.getBytes();
+                    });
+                })
             )
         );
     }

@@ -6,7 +6,7 @@ export class PageableResponse<T> {
 
     currentPageNumber: number;
 
-    currentPageElements: number;
+    currentPageSize: number;
 
     isLast: boolean;
 

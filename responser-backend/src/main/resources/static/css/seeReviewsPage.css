@@ -1,0 +1,418 @@
+@media only screen and (min-width: 1920px) {
+  .page.reviews {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.reviews {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.reviews {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.reviews {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+.page.reviews .page-content {
+  max-width: 1860px;
+}
+.page.reviews .page-content .section {
+  width: 100%;
+  border-radius: 20px;
+  background-color: rgba(159, 143, 135, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px;
+  padding-bottom: 100px;
+  margin-bottom: 30px;
+}
+.page.reviews .page-content .section .section-header {
+  margin: 0 0 60px;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 60px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.page.reviews .page-content .section .field-container {
+  width: 800px;
+  margin-bottom: 30px;
+}
+.page.reviews .page-content .section .sorting-filter-container {
+  width: 800px;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.page.reviews .page-content .section .sorting-filter-container .open-sorting,
+.page.reviews .page-content .section .sorting-filter-container .open-filter {
+  display: flex;
+  cursor: pointer;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.4);
+  height: 20px;
+  line-height: 20px;
+  align-items: center;
+  gap: 6px;
+  transition: color 0.15s;
+}
+.page.reviews .page-content .section .sorting-filter-container .open-sorting:hover,
+.page.reviews .page-content .section .sorting-filter-container .open-filter:hover {
+  color: rgba(0, 0, 0, 0.6);
+}
+.page.reviews .page-content .section .sorting-filter-container .dropdown-menu-container .dropdown-menu .menu-group-header {
+  margin: 0 0 16px;
+  font-family: "Outfit-Medium", sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+}
+.page.reviews .page-content .section .sorting-filter-container .dropdown-menu-container .dropdown-menu .field-group {
+  padding-left: 12px;
+  margin-bottom: 16px;
+}
+.page.reviews .page-content .section .sorting-filter-container .dropdown-menu-container .dropdown-menu .field-group .field:not(:last-child) {
+  margin-bottom: 14px;
+}
+.page.reviews .page-content .section .sorting-filter-container .dropdown-menu-container.sorting .dropdown-menu {
+  padding: 20px;
+  width: 230px;
+}
+.page.reviews .page-content .section .sorting-filter-container .dropdown-menu-container.sorting .dropdown-menu .button {
+  width: 100%;
+}
+.page.reviews .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu {
+  padding: 20px;
+  width: 280px;
+}
+.page.reviews .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .rating-range-labels-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.page.reviews .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .rating-range-labels-container .rating-label {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: rgba(0, 0, 0, 0.6);
+}
+.page.reviews .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .rating-range-labels-container .rating-label .prefix,
+.page.reviews .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .rating-range-labels-container .rating-label .value {
+  display: block;
+}
+.page.reviews .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .rating-range-labels-container .rating-label .value {
+  width: 10px;
+}
+.page.reviews .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .slider-container {
+  padding-left: 7px;
+  padding-right: 7px;
+  margin-bottom: 24px;
+}
+.page.reviews .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .button {
+  width: 100%;
+}
+.page.reviews .page-content .section .reviews-container {
+  position: relative;
+  width: 800px;
+  margin-bottom: 20px;
+}
+.page.reviews .page-content .section .reviews-container .blur-panel {
+  position: absolute;
+  top: 0;
+  background-color: rgba(242, 240, 238, 0.6);
+  backdrop-filter: blur(2.5px);
+  width: 100%;
+  height: 100%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s;
+}
+.page.reviews .page-content .section .reviews-container .blur-panel.active {
+  opacity: 1;
+  pointer-events: all;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .no-data {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 150px;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .no-data .no-data-text {
+  display: block;
+  text-align: center;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card {
+  position: relative;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card:first-child .web-resource-data {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .web-resource-data {
+  height: 42px;
+  background-color: #F9F8F6;
+  padding-left: 30px;
+  padding-right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .web-resource-data .web-resource-name-container {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .web-resource-data .web-resource-name-container .resource-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .web-resource-data .web-resource-name-container .resource-name {
+  margin: 0;
+  width: 600px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: "Outfit-Medium", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .web-resource-data .site-rating-link {
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card:not(:last-child):after {
+  content: "";
+  background: rgba(159, 143, 135, 0.08);
+  position: absolute;
+  bottom: 0;
+  left: 30px;
+  right: 30px;
+  height: 1px;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container {
+  padding: 30px;
+  background-color: #FFFFFF;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-header .user-info-container {
+  display: flex;
+  align-items: center;
+  width: 302px;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-header .user-info-container .user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-header .user-info-container .name-date .user-name,
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-header .user-info-container .name-date .review-date {
+  display: block;
+  color: rgba(0, 0, 0, 0.6);
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-header .user-info-container .name-date .user-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 224px;
+  font-family: "Outfit-Medium", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-header .user-info-container .name-date .review-date {
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-header .resource-type {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 138px;
+  height: 30px;
+  border-radius: 28px;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-header .resource-type.site-type {
+  background-color: rgba(214, 222, 115, 0.4);
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-header .resource-type.page-type {
+  background-color: rgba(118, 162, 255, 0.2);
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-header .resource-type .value {
+  display: block;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-header .rating {
+  gap: 6px;
+  display: flex;
+  margin-left: auto;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-header .rating .star path {
+  fill: rgba(214, 222, 115, 0.4);
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-header .rating .star.active path {
+  fill: #D6DE73;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .page-link {
+  display: block;
+  width: 740px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .review-text {
+  margin: 0 0 16px;
+  width: 740px;
+  height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  transition: height 0.15s;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-footer .show-more {
+  height: 16px;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  border: none;
+  border-radius: unset;
+  width: unset;
+  padding: 0;
+  gap: 4px;
+  color: rgba(0, 0, 0, 0.6);
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-footer .show-more .icon {
+  width: 6px;
+  height: 8px;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-footer .show-more .icon path {
+  stroke: rgba(0, 0, 0, 0.6);
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-footer .show-more:hover {
+  background-color: transparent;
+  color: #404038;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-footer .show-more:hover .icon path {
+  stroke: #404038;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-footer .actions-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-footer .actions-container .reaction {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-footer .actions-container .reaction .reactions-count {
+  display: block;
+  font-family: "Outfit-Medium", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6E6E70;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-footer .actions-container .share-button {
+  padding: 0;
+  height: auto;
+  border: 0;
+  border-radius: unset;
+  margin-left: 6px;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-footer .actions-container .share-button .share {
+  width: 14px;
+  height: 14px;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-footer .actions-container .share-button .share path {
+  stroke: #6E6E70;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-footer .actions-container .share-button:hover {
+  background-color: transparent;
+}
+.page.reviews .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-footer .actions-container .share-button:hover .share path {
+  stroke: #404038;
+}
+.page.reviews .page-content .section .pagination {
+  width: 800px;
+  display: flex;
+  justify-content: space-between;
+}
+.page.reviews .page-content .section .pagination .button {
+  border: none;
+  background-color: rgba(159, 143, 135, 0.08);
+  font-size: 16px;
+}
+.page.reviews .page-content .section .pagination .button:hover {
+  background-color: rgba(159, 143, 135, 0.2);
+}
+.page.reviews .page-content .section .pagination .button.disabled {
+  pointer-events: none;
+}
+.page.reviews .page-content .section .pagination .button-container {
+  display: flex;
+  flex: 1;
+}
+.page.reviews .page-content .section .pagination .button-container.next {
+  justify-content: end;
+}
+.page.reviews .page-content .section .pagination .button-container .previous-button,
+.page.reviews .page-content .section .pagination .button-container .next-button {
+  width: 122px;
+}
+.page.reviews .page-content .section .pagination .pages-container {
+  display: flex;
+  justify-content: space-between;
+  flex: 2;
+}

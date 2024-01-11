@@ -66,7 +66,7 @@
                          th:src="${@applicationProperties.fileStorageUrlSitesIcons + '/' + (webResource.iconFileName != null ? webResource.iconFileName : 'default_site_icon.png')}"
                          th:alt="${T(com.responser.backend.utils.UrlUtils).getHost(webResource.url)}">
                 </div>
-                <span class="site-name" th:text="${webResourceHost}">Google.com</span>
+                <span class="site-name" th:text="${T(com.responser.backend.utils.UrlUtils).getHost(webResource.url)}">Google.com</span>
                 <div class="site-rating-container">
                     <span class="site-rating" th:text="${#numbers.formatDecimal(webResource.rating, 1, 1, 'POINT')}">! ERROR !</span>
                 </div>
@@ -100,32 +100,32 @@
                             <p class="menu-group-header">Rating</p>
                             <div class="field-group">
                                 <label class="field radio-button">
-                                    <input type="radio" name="sortingField" value="RATING" data-sort-direction="DESC"
+                                    <input type="radio" name="sortingField" th:value="${T(com.responser.backend.model.ReviewsCriteriaSortingField).RATING.name}" data-sort-direction="DESC"
                                            th:checked="${reviewsCriteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).RATING && reviewsCriteria.sortDirection.name == 'DESC'}"/>
                                     <span>High rating first</span>
                                 </label>
                                 <label class="field radio-button">
-                                    <input type="radio" name="sortingField" value="RATING" data-sort-direction="ASC"
+                                    <input type="radio" name="sortingField" th:value="${T(com.responser.backend.model.ReviewsCriteriaSortingField).RATING.name}" data-sort-direction="ASC"
                                            th:checked="${reviewsCriteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).RATING && reviewsCriteria.sortDirection.name == 'ASC'}"/>
                                     <span>Low rating first</span>
                                 </label>
                                 <label class="field radio-button">
-                                    <input type="radio" name="sortingField" value="CREATION_DATE" data-sort-direction="DESC"
+                                    <input type="radio" name="sortingField" th:value="${T(com.responser.backend.model.ReviewsCriteriaSortingField).CREATION_DATE.name}" data-sort-direction="DESC"
                                            th:checked="${reviewsCriteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).CREATION_DATE && reviewsCriteria.sortDirection.name == 'DESC'}"/>
                                     <span>New first</span>
                                 </label>
                                 <label class="field radio-button">
-                                    <input type="radio" name="sortingField" value="CREATION_DATE" data-sort-direction="ASC"
+                                    <input type="radio" name="sortingField" th:value="${T(com.responser.backend.model.ReviewsCriteriaSortingField).CREATION_DATE.name}" data-sort-direction="ASC"
                                            th:checked="${reviewsCriteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).CREATION_DATE && reviewsCriteria.sortDirection.name == 'ASC'}"/>
                                     <span>Old first</span>
                                 </label>
                                 <label class="field radio-button">
-                                    <input type="radio" name="sortingField" value="POPULARITY" data-sort-direction="DESC"
+                                    <input type="radio" name="sortingField" th:value="${T(com.responser.backend.model.ReviewsCriteriaSortingField).POPULARITY.name}" data-sort-direction="DESC"
                                            th:checked="${reviewsCriteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).POPULARITY && reviewsCriteria.sortDirection.name == 'DESC'}"/>
                                     <span>Popular first</span>
                                 </label>
                                 <label class="field radio-button">
-                                    <input type="radio" name="sortingField" value="POPULARITY" data-sort-direction="ASC"
+                                    <input type="radio" name="sortingField" th:value="${T(com.responser.backend.model.ReviewsCriteriaSortingField).POPULARITY.name}" data-sort-direction="ASC"
                                            th:checked="${reviewsCriteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).POPULARITY && reviewsCriteria.sortDirection.name == 'ASC'}"/>
                                     <span>Unpopular first</span>
                                 </label>
@@ -156,12 +156,12 @@
                             <p class="menu-group-header">Review type</p>
                             <div class="field-group">
                                 <label class="field radio-button">
-                                    <input type="radio" name="resourceType" value="SITE"
+                                    <input type="radio" name="resourceType" th:value="${T(com.responser.backend.model.ReviewsCriteriaResourceType).SITE.name}"
                                            th:checked="${reviewsCriteria.resourceType == T(com.responser.backend.model.ReviewsCriteriaResourceType).SITE}"/>
                                     <span>Site</span>
                                 </label>
                                 <label class="field radio-button">
-                                    <input type="radio" name="resourceType" value="PAGE"
+                                    <input type="radio" name="resourceType" th:value="${T(com.responser.backend.model.ReviewsCriteriaResourceType).PAGE.name}"
                                            th:checked="${reviewsCriteria.resourceType == T(com.responser.backend.model.ReviewsCriteriaResourceType).PAGE}"/>
                                     <span>Page</span>
                                 </label>

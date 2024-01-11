@@ -14,9 +14,15 @@ public class PageableResponse<T> {
 
     private Integer currentPageNumber;
 
-    private Integer currentPageElements;
+    private Integer currentPageSize;
 
     private Boolean isLast;
+
+    private Boolean isFirst;
+
+    private Boolean hasPrevious;
+
+    private Boolean hasNext;
 
     private List<T> data;
 }

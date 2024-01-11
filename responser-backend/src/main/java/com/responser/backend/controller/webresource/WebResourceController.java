@@ -90,8 +90,6 @@ public class WebResourceController {
 
         model.addAttribute("criteria", criteria);
         model.addAttribute("sites", webResourceDTOS);
-        /*model.addAttribute("currentPageNumber", webResourcesPage.getNumber());
-        model.addAttribute("pagesCount", webResourcesPage.getTotalPages());*/
         model.addAttribute("previousPageNumber", webResourcesPage.hasPrevious() ? webResourcesPage.getNumber() - 1 : null);
         model.addAttribute("nextPageNumber", webResourcesPage.hasNext() ? webResourcesPage.getNumber() + 1 : null);
 
@@ -130,11 +128,7 @@ public class WebResourceController {
 
         model.addAttribute("reviewsCriteria", reviewsCriteria);
         model.addAttribute("webResource", webResourceDTO);
-        model.addAttribute("webResourceHost", UrlUtils.getHost(webResourceDTO.getUrl()));
         model.addAttribute("reviews", reviews.getContent());
-        model.addAttribute("reviewsPagesCount", reviews.getTotalPages());
-        model.addAttribute("currentReviewsPageNumber", reviews.getNumber());
-
         model.addAttribute("previousPageNumber", reviews.hasPrevious() ? reviews.getNumber() - 1 : null);
         model.addAttribute("nextPageNumber", reviews.hasNext() ? reviews.getNumber() + 1 : null);
 
