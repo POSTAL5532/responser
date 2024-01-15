@@ -142,14 +142,8 @@ a.button {
 .field-container .input-container .field-input {
   background-color: transparent;
   flex: 1;
-  height: 50px;
-  padding: 0 20px;
-  font-family: "Outfit-Regular", sans-serif;
-  font-size: 16px;
-  font-weight: 400;
-}
-.field-container .input-container .field-input.big {
   height: 54px;
+  padding: 0 20px;
   font-family: "Outfit-Regular", sans-serif;
   font-size: 20px;
   font-weight: 400;

@@ -1,10 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 <head>
     <title>Reviewly - Login</title>
 
-    <link th:href="@{/css/components-style.css}" rel="stylesheet"/>
-    <link th:href="@{/css/sign-in-style.css}" rel="stylesheet"/>
+    <link th:href="@{/css/login.css}" rel="stylesheet"/>
+
+    <link th:href="@{/css/fonts.css}" rel="stylesheet"/>
+    <link th:href="@{/css/components.css}" rel="stylesheet"/>
+    <link th:href="@{/css/common.css}" rel="stylesheet"/>
 
     <link rel="icon" type="image/x-icon" th:href="@{/images/favicon.ico}">
     <link rel="icon" type="image/png" sizes="16x16" th:href="@{/images/favicon-16x16.png}">
@@ -75,50 +78,139 @@
           th:href="@{/images/apple-touch-startup-image-2732x2048.png}">
 </head>
 <body>
-
-<div class="app-header">
-    <div class="header-title">
-        <svg width="1em" height="1em" viewBox="0 0 228 228" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon reviewly_logo">
-            <path fill-rule="evenodd" clip-rule="evenodd"
-                  d="M0 14C0 6.268 6.268 0 14 0h77.258c9.692 0 16.452 9.611 13.175 18.733l-24.655 68.63c-3.277 9.12 3.483 18.732 13.175 18.732l120.356.001c7.732 0 13.999 6.268 13.999 14V214c0 7.732-6.268 13.999-13.999 13.999h-7.289c-3.29 0-6.475-1.159-8.996-3.273L84.388 130.255c-7.464-6.26-18.879-3.174-22.172 5.993l-29.633 82.486A14 14 0 0 1 19.408 228H14c-7.732 0-14-6.268-14-14V14Zm151.264 34.21c-3.311 9.128 3.451 18.772 13.161 18.772H214c7.732 0 14-6.268 14-14V14c0-7.732-6.268-14-14-14h-35.438a13.998 13.998 0 0 0-13.16 9.227l-14.138 38.982Z"
-                  fill="#516DFF"></path>
-        </svg>
-        Reviewly
-    </div>
-</div>
-
-<div class="sign-in-page">
-    <div class="sign-in-form-panel">
-        <h2 class="sign-in-header">Sign in</h2>
-
-        <div class="sign-in-form">
-            <form th:action="@{/login}" method="POST" class="form-sign-in">
-                <div class="field-layout column">
-                    <span class="label">Username or email</span>
-                    <input type="text" name="username" placeholder="Username or email" class="field" id="username">
-                </div>
-                <div class="field-layout column">
-                    <span class="label">Password</span>
-                    <input type="password" name="password" placeholder="Password" class="field" id="password">
-                </div>
-
-                <button type="Submit" class="button primary" id="submit" th:text="Login"></button>
-
-                <span th:if="${param.error}" class="error">Email or Password is invalid.</span>
-
-                <div>
-                    <a th:href="${@applicationProperties.registrationPageUrl}" class="sign-up-link" id="sign-up-link">Create new account</a>
-                </div>
-
-                <div>
-                    <a th:href="${@applicationProperties.forgotPasswordPageUrl}" class="forgot-password-link">Forgot password?</a>
-                </div>
-            </form>
+<div class="page login">
+    <header class="header">
+        <div class="header-content">
+            <nav class="navigation">
+                <a class="button light active" href="/">Home</a>
+                <a class="button light" href="/">Sites rating</a>
+                <a class="button light" href="/">Reviews</a>
+            </nav>
+            <div class="logo-container">
+                <a class="logo-link" href="/">
+                    <svg width="28" height="31" viewBox="0 0 28 31" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon logo">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M0.09375 2.60318C0.09375 1.58353 0.869152 0.749268 1.81687 0.749268H11.3514C12.5289 0.749268 13.3617 2.01611 12.9597 3.22116L9.94423 12.2435C9.54217 13.4486 10.375 14.7154 11.5525 14.7154H26.2564C27.2041 14.7154 27.9795 15.5497 27.9795 16.5694V28.9288C27.9795 29.9484 27.2041 30.7827 26.2564 30.7827H25.3661C24.9641 30.7827 24.562 30.6282 24.2748 30.3501L10.4899 17.9289C9.57089 17.0946 8.19239 17.4963 7.79033 18.7323L4.17179 29.5777C3.91332 30.3192 3.28151 30.7827 2.56355 30.7827H1.81687C0.869152 30.7827 0.09375 29.9484 0.09375 28.9288L0.09375 2.60318ZM18.5885 7.11438C18.1865 8.31942 19.0193 9.58627 20.1968 9.58627H26.2564C27.2041 9.58627 27.9795 8.752 27.9795 7.73235V2.60318C27.9795 1.58353 27.2041 0.749268 26.2564 0.749268H21.9199C21.2019 0.749268 20.5701 1.24365 20.3116 1.95431L18.5885 7.08348V7.11438Z"
+                              fill="#404038"/>
+                    </svg>
+                </a>
+            </div>
+            <div class="right-control-container">
+                <a href="/" class="button">
+                    <!-- chrome.svg -->
+                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon chrome">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M4.09176 4.59337C5.32978 3.1465 7.16913 2.22949 9.22266 2.22949C11.563 2.22949 13.6252 3.42057 14.8361 5.22962H9.22315C7.67588 5.22962 6.34749 6.16669 5.77451 7.50427L4.09176 4.59337ZM2.6224 4.02902C2.59431 4.06095 2.56922 4.09498 2.54724 4.13069C1.55688 5.49179 0.972656 7.16741 0.972656 8.97949C0.972656 13.206 4.15086 16.6902 8.24771 17.1725C8.28249 17.1789 8.31747 17.1827 8.3524 17.1841C8.63839 17.2141 8.92873 17.2295 9.22266 17.2295C13.779 17.2295 17.4727 13.5358 17.4727 8.97949C17.4727 7.82596 17.2359 6.72773 16.8084 5.73072C16.7961 5.69599 16.7814 5.66243 16.7645 5.63025C15.4803 2.74283 12.5866 0.729492 9.22266 0.729492C6.52377 0.729492 4.12756 2.02545 2.6224 4.02902ZM15.5886 6.72962H12.2234C12.6942 7.35636 12.9731 8.13541 12.9731 8.97962C12.9731 9.71695 12.7603 10.4046 12.3928 10.9844L9.66393 15.7153C13.1862 15.488 15.9727 12.5592 15.9727 8.97949C15.9727 8.19061 15.8373 7.43333 15.5886 6.72962ZM7.98897 15.617L9.66967 12.7033C9.52325 12.7207 9.37424 12.7296 9.22315 12.7296C7.77822 12.7296 6.52417 11.9124 5.89797 10.715L3.16791 5.99238C2.72279 6.89289 2.47266 7.90698 2.47266 8.97949C2.47266 12.2861 4.85018 15.0373 7.98897 15.617ZM11.1685 10.1049C11.1786 10.0875 11.1892 10.0706 11.2004 10.0543C11.3743 9.735 11.4731 9.36885 11.4731 8.97962C11.4731 7.73698 10.4658 6.72962 9.22315 6.72962C7.98051 6.72962 6.97315 7.73698 6.97315 8.97962C6.97315 9.34712 7.06125 9.69404 7.21749 10.0004L7.27748 10.1042C7.2874 10.1213 7.29656 10.1387 7.30498 10.1563C7.70083 10.8002 8.41184 11.2296 9.22315 11.2296C10.0153 11.2296 10.7119 10.8202 11.1128 10.2015L11.1685 10.1049Z"
+                              fill="black" fill-opacity="0.6"/>
+                    </svg>
+                    Download for chrome
+                </a>
+                <a href="/" class="button primary user">
+                    <!-- user.svg -->
+                    <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon user">
+                        <path
+                            d="M15.0034 16.25V14.75C15.0034 13.9544 14.6873 13.1913 14.1247 12.6287C13.5621 12.0661 12.7991 11.75 12.0034 11.75H6.00342C5.20777 11.75 4.44471 12.0661 3.8821 12.6287C3.31949 13.1913 3.00342 13.9544 3.00342 14.75V16.25"
+                            stroke="black" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        <path
+                            d="M8.99658 8.75C10.6534 8.75 11.9966 7.40685 11.9966 5.75C11.9966 4.09315 10.6534 2.75 8.99658 2.75C7.33973 2.75 5.99658 4.09315 5.99658 5.75C5.99658 7.40685 7.33973 8.75 8.99658 8.75Z"
+                            stroke="black" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
         </div>
+    </header>
+
+    <div class="page-content">
+        <section class="section">
+            <h1 class="section-header">Start for free</h1>
+            <h2 class="login-header">Login</h2>
+
+            <div class="login-form-container">
+                <form method="POST" th:action="@{/login}" class="login-form">
+                    <div class="field-container user-name" th:classappend="${param.error != null ? 'error' : ''}">
+                        <div class="input-container">
+                            <input name="username" class="field-input" type="text" placeholder="Username or E-mail">
+                        </div>
+                    </div>
+                    <div class="field-container password" th:classappend="${param.error != null ? 'error' : ''}">
+                        <div class="input-container">
+                            <input name="password" class="field-input" type="password" placeholder="Password">
+                            <button type="button" class="button show-password" id="switch-password">
+                                <svg class="icon eye" xmlns="http://www.w3.org/2000/svg" width="18" height="19" viewBox="0 0 18 19" fill="none">
+                                    <g clip-path="url(#clip0_1410_23763)">
+                                        <path d="M13.455 13.955C12.1729 14.9323 10.6118 15.4737 9 15.5C3.75 15.5 0.75 9.50002 0.75 9.50002C1.68292 7.76144 2.97685 6.24247 4.545 5.04502M7.425 3.68002C7.94125 3.55918 8.4698 3.49877 9 3.50002C14.25 3.50002 17.25 9.50002 17.25 9.50002C16.7947 10.3517 16.2518 11.1536 15.63 11.8925M10.59 11.09C10.384 11.3111 10.1356 11.4884 9.85961 11.6114C9.58362 11.7343 9.28568 11.8005 8.98357 11.8058C8.68146 11.8111 8.38137 11.7555 8.10121 11.6424C7.82104 11.5292 7.56654 11.3608 7.35288 11.1471C7.13923 10.9335 6.97079 10.679 6.85763 10.3988C6.74447 10.1186 6.68889 9.81856 6.69423 9.51645C6.69956 9.21434 6.76568 8.9164 6.88866 8.6404C7.01163 8.36441 7.18894 8.11601 7.41 7.91002" stroke="black" stroke-opacity="0.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                        <path d="M0.75 1.25L17.25 17.75" stroke="black" stroke-opacity="0.25" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </g>
+                                    <defs>
+                                        <clipPath id="clip0_1410_23763">
+                                            <rect width="18" height="18" fill="white" transform="translate(0 0.5)"/>
+                                        </clipPath>
+                                    </defs>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                    <a th:href="${@applicationProperties.forgotPasswordPageUrl}" class="link small">Forgot your password?</a>
+
+                    <span th:if="${param.error}" class="error-message">User credentials is invalid.</span>
+
+                    <button type="submit" class="button primary small submit" id="submit">
+                        <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon user">
+                            <path
+                                d="M15.0034 16.25V14.75C15.0034 13.9544 14.6873 13.1913 14.1247 12.6287C13.5621 12.0661 12.7991 11.75 12.0034 11.75H6.00342C5.20777 11.75 4.44471 12.0661 3.8821 12.6287C3.31949 13.1913 3.00342 13.9544 3.00342 14.75V16.25"
+                                stroke="black" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path
+                                d="M8.99658 8.75C10.6534 8.75 11.9966 7.40685 11.9966 5.75C11.9966 4.09315 10.6534 2.75 8.99658 2.75C7.33973 2.75 5.99658 4.09315 5.99658 5.75C5.99658 7.40685 7.33973 8.75 8.99658 8.75Z"
+                                stroke="black" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Log in now
+                    </button>
+                </form>
+
+                <span class="or">or</span>
+
+                <a class="link big create-new-account" href="https://google.com">
+                    Create new account
+                    <svg class="icon link" width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0.791016" y="0.344727" width="30" height="30" rx="8" fill="#605C55"/>
+                        <path d="M13.541 19.8447L18.041 15.3447L13.541 10.8447" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
+            </div>
+
+        </section>
+
+        <footer class="footer">
+            <div class="footer-section first">
+                <div class="logo-container">
+                    <svg class="icon logo" width="28" height="31" viewBox="0 0 28 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd"
+                              d="M0.09375 2.60318C0.09375 1.58353 0.869152 0.749268 1.81687 0.749268H11.3514C12.5289 0.749268 13.3617 2.01611 12.9597 3.22116L9.94423 12.2435C9.54217 13.4486 10.375 14.7154 11.5525 14.7154H26.2564C27.2041 14.7154 27.9795 15.5497 27.9795 16.5694V28.9288C27.9795 29.9484 27.2041 30.7827 26.2564 30.7827H25.3661C24.9641 30.7827 24.562 30.6282 24.2748 30.3501L10.4899 17.9289C9.57089 17.0946 8.19239 17.4963 7.79033 18.7323L4.17179 29.5777C3.91332 30.3192 3.28151 30.7827 2.56355 30.7827H1.81687C0.869152 30.7827 0.09375 29.9484 0.09375 28.9288L0.09375 2.60318ZM18.5885 7.11438C18.1865 8.31942 19.0193 9.58627 20.1968 9.58627H26.2564C27.2041 9.58627 27.9795 8.752 27.9795 7.73235V2.60318C27.9795 1.58353 27.2041 0.749268 26.2564 0.749268H21.9199C21.2019 0.749268 20.5701 1.24365 20.3116 1.95431L18.5885 7.08348V7.11438Z"
+                              fill="#404038"/>
+                    </svg>
+                    <span class="logo-text">Reviewly</span>
+                </div>
+            </div>
+            <div class="footer-section second">
+                <div class="contacts-container">
+                    <h3 class="contacts-header">Contacts</h3>
+                    <p class="contact">M. support@reviewly.com</p>
+                    <p class="contact">W. reviewly.com</p>
+                </div>
+            </div>
+            <div class="footer-section third">
+                <button class="button primary submit-form">
+                    <svg class="icon play" width="12" height="16" viewBox="0 0 12 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M0.75 1.25L11.25 8L0.75 14.75V1.25Z" stroke="black" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Start for free
+                </button>
+            </div>
+        </footer>
     </div>
 </div>
 
 <script type="text/javascript" th:src="@{/js/jquery.js}"></script>
-<script type="text/javascript" th:src="@{/js/script.js}"></script>
+<script type="text/javascript" th:src="@{/js/login.js}"></script>
 </body>
 </html>

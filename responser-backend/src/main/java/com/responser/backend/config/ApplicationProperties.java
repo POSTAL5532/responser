@@ -52,6 +52,9 @@ public class ApplicationProperties {
     private String signUpPageUrl;
 
     @NotBlank
+    private String profilePageUrl;
+
+    @NotBlank
     private String clientId;
 
     @NotBlank
