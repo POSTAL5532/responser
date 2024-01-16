@@ -154,7 +154,7 @@ public class ReviewMetaImageGenerator {
 
     private Font getFont() {
         try {
-            InputStream fontInputStream = getClass().getResourceAsStream("/static/font/Inter-Bold.ttf");
+            InputStream fontInputStream = getClass().getResourceAsStream("/static/font/Outfit-Medium.ttf");
             assert fontInputStream != null;
             return Font.createFont(Font.TRUETYPE_FONT, fontInputStream);
         } catch (FontFormatException | IOException e) {

@@ -1,98 +1,101 @@
 @import "../global.less";
 
-.review-page {
-  .resource-info {
-    color: @system-color-dark-300;
-
-    .resource {
-      margin-bottom: 10px;
+.page.review {
+    .adaptationAllAndMobile(
+    {
+        padding-left: 30px;
+        padding-right: 30px;
+    },
+    {
+        padding-left: 20px;
+        padding-right: 20px;
     }
-  }
+    );
 
-  .review-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 30px;
+    .page-content {
+        max-width: 1860px;
 
-    .publication-info {
-      display: flex;
-      align-items: center;
+        .section {
+            width: 100%;
+            border-radius: 20px;
+            background-color: @beige-alpha-8;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 60px;
+            padding-bottom: 100px;
+            margin-bottom: 30px;
 
-      .user {
-        .fontInterRegular();
-        color: @system-color-dark-200;
-        font-size: 30px;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        white-space: nowrap;
-        max-width: 240px;
-      }
+            .section-header {
+                margin: 0 0 60px;
+                .fontOutfitRegular(60px);
+                color: @black-alpha-60;
+                display: flex;
+                align-items: center;
+                gap: 18px;
 
-      .published-date {
-        .fontInterRegular();
-        color: @system-color-dark-100;
-        font-size: 22px;
-        margin-left: 8px;
-      }
-    }
+                .site-logo-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    background-color: @white;
 
-    .rating {
-      margin-left: auto;
+                    .site-logo {
+                        width: 35px;
+                        height: 35px;
+                        border-radius: 50%;
+                    }
+                }
 
-      .star {
-        width: 38px;
-        height: 38px;
+                .site-rating-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 10px;
+                    background-color: #78AC65;
 
-        &.filled {
-          margin-left: 6px;
-        }
-      }
-    }
-  }
-
-  .review-content {
-    .text {
-      .fontInterSemiBold();
-      color: @system-color-dark-400;
-      font-size: 30px;
-      margin-bottom: 30px;
-    }
-
-    .reactions-container {
-      display: flex;
-      gap: 22px;
-
-      .reactions {
-        display: flex;
-        align-items: center;
-        gap: 6px;
-
-        .reaction-icon {
-          svg {
-            width: 26px;
-            height: 26px;
-
-            path {
-              stroke: @system-color-dark-300;
+                    .site-rating {
+                        display: block;
+                        .fontOutfitMedium(16px);
+                        color: @white;
+                    }
+                }
             }
-          }
+
+            .reviews-container {
+                position: relative;
+                width: 800px;
+                margin-bottom: 20px;
+
+                .cards-container {
+                    .review-card {
+                        .card-body-container {
+                            .review-text {
+                                height: auto;
+                                overflow: unset;
+                                text-overflow: unset;
+                                word-wrap: unset;
+                                -webkit-line-clamp: unset;
+                                line-clamp: unset;
+                                -webkit-box-orient: unset;
+                                display: block;
+                                margin-bottom: 24px;
+                            }
+
+                            .card-footer {
+                                .show-more {
+                                    display: none;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
-
-        .reactions-count {
-          .fontInterMedium();
-          font-size: 22px;
-          color: @system-color-dark-300;
-        }
-
-        &.positive {
-
-        }
-
-        &.negative {
-
-        }
-      }
     }
-  }
 }
-

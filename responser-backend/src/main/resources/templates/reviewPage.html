@@ -1,73 +1,48 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      lang="en"
-      th:replace="~{layouts/pageMainLayout :: main-fragment(
-          'Review page',
-           ~{:: #review-page-head},
-           ~{:: #main-content},
-           'Review',
-           'review-page',
-           null
-       )}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/pageLayout(pageClass='review')}"
+      lang="en">
 <head>
-    <title></title>
+    <title>Reviewly - Review</title>
 
-    <th:block id="review-page-head">
-        <link th:href="@{/css/reviewPage.css}" rel="stylesheet"/>
+    <link th:href="@{/css/reviewPage.css}" rel="stylesheet"/>
 
-        <meta property="og:url" th:content="${facebookMetaTags.url}"/>
-        <meta property="og:type" th:content="${facebookMetaTags.type}"/>
-        <meta property="og:title" th:content="${facebookMetaTags.title}"/>
-        <meta property="og:description" th:content="${facebookMetaTags.description}"/>
-        <meta property="og:image" th:content="${facebookMetaTags.imageUrl}"/>
-        <meta property="og:image:width" th:content="${facebookMetaTags.imageWidth}"/>
-        <meta property="og:image:height" th:content="${facebookMetaTags.imageHeight}"/>
+    <meta property="og:url" th:content="${facebookMetaTags.url}"/>
+    <meta property="og:type" th:content="${facebookMetaTags.type}"/>
+    <meta property="og:title" th:content="${facebookMetaTags.title}"/>
+    <meta property="og:description" th:content="${facebookMetaTags.description}"/>
+    <meta property="og:image" th:content="${facebookMetaTags.imageUrl}"/>
+    <meta property="og:image:width" th:content="${facebookMetaTags.imageWidth}"/>
+    <meta property="og:image:height" th:content="${facebookMetaTags.imageHeight}"/>
 
-        <meta property="twitter:title" th:content="${twitterMetaTags.title}">
-        <meta property="twitter:description" th:content="${twitterMetaTags.description}">
-        <meta property="twitter:image" th:content="${twitterMetaTags.imageUrl}">
-        <meta name="twitter:card" th:content="${twitterMetaTags.card}">
-    </th:block>
+    <meta property="twitter:title" th:content="${twitterMetaTags.title}">
+    <meta property="twitter:description" th:content="${twitterMetaTags.description}">
+    <meta property="twitter:image" th:content="${twitterMetaTags.imageUrl}">
+    <meta name="twitter:card" th:content="${twitterMetaTags.card}">
 </head>
 
 <body>
-<th:block id="main-content">
-    <div class="resource-info">
-        <h1 class="resource">
-            <span class="resource-type" th:text="${review.webResource.resourceType.name == 'PAGE'} ? 'Page review' : 'Site review'"></span>:
-            <a class="link url" th:href="${review.webResource.url}" target="_blank" th:text="${review.webResource.url}">Something wrong :(</a>
+<div class="page-content" layout:fragment="page-content">
+    <section class="section" th:with="rootWebResource=${review.webResource.parent == null ? review.webResource : review.webResource.parent}">
+        <h1 class="section-header">
+            <div class="site-logo-container">
+                <img class="site-logo"
+                     th:src="${@applicationProperties.fileStorageUrlSitesIcons + '/' + (rootWebResource.iconFileName != null ? rootWebResource.iconFileName : 'default_site_icon.png')}"
+                     th:alt="${T(com.responser.backend.utils.UrlUtils).getHost(rootWebResource.url)}">
+            </div>
+            <span class="site-name" th:text="${T(com.responser.backend.utils.UrlUtils).getHost(rootWebResource.url)}">Google.com</span>
+            <div class="site-rating-container">
+                <span class="site-rating" th:text="${#numbers.formatDecimal(resourceRating, 1, 1, 'POINT')}">! ERROR !</span>
+            </div>
         </h1>
-    </div>
 
-    <div class="review-header">
-        <div class="publication-info">
-            <div class="user" th:text="${review.user.fullName}">Something wrong :(</div>
-            <div class="published-date" th:text="${#temporals.format(review.creationDate, 'd MMM yyyy')}">Something wrong :(</div>
-        </div>
-        <div class="rating">
-            <th:block th:each="i: ${#numbers.sequence(0, review.rating - 1)}" th:include="includes/starFilled"/>
-            <th:block th:if="${5 - review.rating > 0}" th:each="i: ${#numbers.sequence(0, 5 - review.rating - 1)}" th:include="includes/star"/>
-        </div>
-    </div>
-
-    <div class="review-content">
-        <div class="text" th:text="${review.text}">Something wrong :(</div>
-        <div class="reactions-container">
-            <div class="reactions positive">
-                <span class="reaction-icon">
-                    <th:block th:include="includes/positiveReaction"/>
-                </span>
-                <span class="reactions-count" th:text="${positiveReactions}"></span>
-            </div>
-            <div class="reactions negative">
-                <span class="reaction-icon">
-                    <th:block th:include="includes/negativeReaction"/>
-                </span>
-                <span class="reactions-count" th:text="${negativeReactions}"></span>
+        <div class="reviews-container">
+            <div class="cards-container">
+                <th:block th:replace="~{components/review-card::review-card(review=${review}, needWebResourceDataBlock=true)}"/>
             </div>
         </div>
-    </div>
-</th:block>
+    </section>
+</div>
 </body>
-
 </html>

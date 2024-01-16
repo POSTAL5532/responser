@@ -1,0 +1,97 @@
+@media only screen and (min-width: 1920px) {
+  .page.review {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.review {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.review {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.review {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+.page.review .page-content {
+  max-width: 1860px;
+}
+.page.review .page-content .section {
+  width: 100%;
+  border-radius: 20px;
+  background-color: rgba(159, 143, 135, 0.08);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 60px;
+  padding-bottom: 100px;
+  margin-bottom: 30px;
+}
+.page.review .page-content .section .section-header {
+  margin: 0 0 60px;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 60px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+.page.review .page-content .section .section-header .site-logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #FFFFFF;
+}
+.page.review .page-content .section .section-header .site-logo-container .site-logo {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+}
+.page.review .page-content .section .section-header .site-rating-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background-color: #78AC65;
+}
+.page.review .page-content .section .section-header .site-rating-container .site-rating {
+  display: block;
+  font-family: "Outfit-Medium", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  color: #FFFFFF;
+}
+.page.review .page-content .section .reviews-container {
+  position: relative;
+  width: 800px;
+  margin-bottom: 20px;
+}
+.page.review .page-content .section .reviews-container .cards-container .review-card .card-body-container .review-text {
+  height: auto;
+  overflow: unset;
+  text-overflow: unset;
+  word-wrap: unset;
+  -webkit-line-clamp: unset;
+  line-clamp: unset;
+  -webkit-box-orient: unset;
+  display: block;
+  margin-bottom: 24px;
+}
+.page.review .page-content .section .reviews-container .cards-container .review-card .card-body-container .card-footer .show-more {
+  display: none;
+}
