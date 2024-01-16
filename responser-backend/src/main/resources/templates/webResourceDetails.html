@@ -162,7 +162,7 @@
 
             <div class="reviews-container">
                 <div class="cards-container">
-                    <div class="no-data" th:if="${reviews.size() == 0}">
+                    <div class="no-data" th:if="${reviews.currentPageSize == 0}">
                         <span class="no-data-text">
                             No reviews.
                             <br>
@@ -170,8 +170,10 @@
                         </span>
                     </div>
 
-                    <th:block th:each="review, loopState: ${reviews}">
-                        <div class="review-card">
+                    <th:block th:each="review, loopState: ${reviews.data}">
+                        <th:block th:replace="~{components/review-card::review-card(review=${review}, needWebResourceDataBlock=true)}"/>
+
+                        <!--<div class="review-card">
                             <div class="card-header">
                                 <div class="user-info-container">
                                     <img class="user-avatar"
@@ -239,7 +241,7 @@
                                     </button>
                                 </div>
                             </div>
-                        </div>
+                        </div>-->
                     </th:block>
                 </div>
 

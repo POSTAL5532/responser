@@ -1,0 +1,249 @@
+@import "../global.less";
+
+.review-card {
+    position: relative;
+
+    &:first-child {
+        .web-resource-data {
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+        }
+    }
+
+    .web-resource-data {
+        height: 42px;
+        background-color: @ivory;
+        padding-left: 30px;
+        padding-right: 30px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .web-resource-name-container {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+
+            .resource-icon {
+                width: 20px;
+                height: 20px;
+                border-radius: 4px;
+            }
+
+            .resource-name {
+                margin: 0;
+                width: 600px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                .fontOutfitMedium(18px);
+                color: @black-alpha-60;
+            }
+        }
+
+        .site-rating-link {
+            .fontOutfitRegular(14px);
+        }
+    }
+
+    &:not(:last-child) {
+        &:after {
+            content: "";
+            background: @beige-alpha-8;
+            position: absolute;
+            bottom: 0;
+            left: 30px;
+            right: 30px;
+            height: 1px;
+        }
+    }
+
+    .card-body-container {
+        padding: 30px;
+        background-color: @white;
+
+        .card-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 16px;
+
+            .user-info-container {
+                display: flex;
+                align-items: center;
+                width: 302px;
+
+                .user-avatar {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                    margin-right: 12px;
+                }
+
+                .name-date {
+                    .user-name, .review-date {
+                        display: block;
+                        color: @black-alpha-60;
+                    }
+
+                    .user-name {
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                        width: 224px;
+                        .fontOutfitMedium(16px);
+                    }
+
+                    .review-date {
+                        .fontOutfitRegular(10px);
+                    }
+                }
+            }
+
+            .resource-type {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                width: 138px;
+                height: 30px;
+                border-radius: 28px;
+
+                &.site-type {
+                    background-color: @lime-alpha-40;
+                }
+
+                &.page-type {
+                    background-color: @blue-alpha-20;
+                }
+
+                .value {
+                    display: block;
+                    .fontOutfitRegular(16px);
+                    color: @black-alpha-60;
+                }
+            }
+
+            .rating {
+                gap: 6px;
+                display: flex;
+                margin-left: auto;
+
+                .star {
+                    path {
+                        fill: @lime-alpha-40;
+                    }
+
+                    &.active {
+                        path {
+                            fill: @lime;
+                        }
+                    }
+                }
+            }
+        }
+
+        .page-link {
+            display: block;
+            width: 740px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            .fontOutfitRegular(12px);
+            margin-bottom: 8px;
+        }
+
+        .review-text {
+            margin: 0 0 16px;
+            width: 740px;
+            height: 60px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            word-wrap: break-word;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+            .fontOutfitRegular(16px);
+            color: @black-alpha-60;
+            transition: height 0.15s;
+        }
+
+        .card-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+            .show-more {
+                height: 16px;
+                .fontOutfitRegular(12px);
+                border: none;
+                border-radius: unset;
+                width: unset;
+                padding: 0;
+                gap: 4px;
+                color: @black-alpha-60;
+
+                .icon {
+                    width: 6px;
+                    height: 8px;
+
+                    path {
+                        stroke: @black-alpha-60;
+                    }
+                }
+
+                &:hover {
+                    background-color: transparent;
+                    color: @brown-dark;
+
+                    .icon path {
+                        stroke: @brown-dark;
+                    }
+                }
+            }
+
+            .actions-container {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-left: auto;
+
+                .reaction {
+                    display: flex;
+                    align-items: center;
+                    gap: 4px;
+
+                    .reactions-count {
+                        display: block;
+                        .fontOutfitMedium(12px);
+                        color: @gray;
+                    }
+                }
+
+                .share-button {
+                    padding: 0;
+                    height: auto;
+                    border: 0;
+                    border-radius: unset;
+                    margin-left: 6px;
+
+                    .share {
+                        width: 14px;
+                        height: 14px;
+
+                        path {
+                            stroke: @gray;
+                        }
+                    }
+
+                    &:hover {
+                        background-color: transparent;
+
+                        .share path {
+                            stroke: @brown-dark;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

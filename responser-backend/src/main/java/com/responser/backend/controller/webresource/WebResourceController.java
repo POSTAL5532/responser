@@ -3,6 +3,7 @@ package com.responser.backend.controller.webresource;
 import com.responser.backend.controller.reviews.payload.ReviewsRequestCriteria;
 import com.responser.backend.controller.webresource.payload.WebResourceDTO;
 import com.responser.backend.controller.webresource.payload.WebResourceRequestCriteria;
+import com.responser.backend.converter.ReviewConverter;
 import com.responser.backend.converter.ReviewsCriteriaConverter;
 import com.responser.backend.converter.WebResourceConverter;
 import com.responser.backend.converter.WebResourceCriteriaConverter;
@@ -49,6 +50,7 @@ public class WebResourceController {
     private final ReviewService reviewService;
     private final WebResourceCriteriaConverter criteriaConverter;
     private final ReviewsCriteriaConverter reviewsCriteriaConverter;
+    private final ReviewConverter reviewConverter;
 
     @GetMapping(SITES_RATING_URL)
     public String getSitesRatingPage(
@@ -128,7 +130,7 @@ public class WebResourceController {
 
         model.addAttribute("reviewsCriteria", reviewsCriteria);
         model.addAttribute("webResource", webResourceDTO);
-        model.addAttribute("reviews", reviews.getContent());
+        model.addAttribute("reviews", reviewConverter.toPageableReviewPayloadList(reviews));
         model.addAttribute("previousPageNumber", reviews.hasPrevious() ? reviews.getNumber() - 1 : null);
         model.addAttribute("nextPageNumber", reviews.hasNext() ? reviews.getNumber() + 1 : null);
 
