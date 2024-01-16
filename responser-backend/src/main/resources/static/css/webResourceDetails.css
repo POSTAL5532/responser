@@ -1,31 +1,31 @@
 @media only screen and (min-width: 1920px) {
-  .page.site-reviews {
+  .page.web-resource-details {
     padding-left: 30px;
     padding-right: 30px;
   }
 }
 @media only screen and (min-width: 1440px) and (max-width: 1919px) {
-  .page.site-reviews {
+  .page.web-resource-details {
     padding-left: 30px;
     padding-right: 30px;
   }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.site-reviews {
+  .page.web-resource-details {
     padding-left: 30px;
     padding-right: 30px;
   }
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.site-reviews {
+  .page.web-resource-details {
     padding-left: 20px;
     padding-right: 20px;
   }
 }
-.page.site-reviews .page-content {
+.page.web-resource-details .page-content {
   max-width: 1860px;
 }
-.page.site-reviews .page-content .section {
+.page.web-resource-details .page-content .section {
   width: 100%;
   border-radius: 20px;
   background-color: rgba(159, 143, 135, 0.08);
@@ -36,7 +36,7 @@
   padding-bottom: 100px;
   margin-bottom: 30px;
 }
-.page.site-reviews .page-content .section .section-header {
+.page.web-resource-details .page-content .section .section-header {
   margin: 0 0 60px;
   font-family: "Outfit-Regular", sans-serif;
   font-size: 60px;
@@ -46,7 +46,7 @@
   align-items: center;
   gap: 18px;
 }
-.page.site-reviews .page-content .section .section-header .site-logo-container {
+.page.web-resource-details .page-content .section .section-header .site-logo-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,12 +55,12 @@
   border-radius: 50%;
   background-color: #FFFFFF;
 }
-.page.site-reviews .page-content .section .section-header .site-logo-container .site-logo {
+.page.web-resource-details .page-content .section .section-header .site-logo-container .site-logo {
   width: 35px;
   height: 35px;
   border-radius: 50%;
 }
-.page.site-reviews .page-content .section .section-header .site-rating-container {
+.page.web-resource-details .page-content .section .section-header .site-rating-container {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -69,25 +69,25 @@
   border-radius: 10px;
   background-color: #78AC65;
 }
-.page.site-reviews .page-content .section .section-header .site-rating-container .site-rating {
+.page.web-resource-details .page-content .section .section-header .site-rating-container .site-rating {
   display: block;
   font-family: "Outfit-Medium", sans-serif;
   font-size: 16px;
   font-weight: 500;
   color: #FFFFFF;
 }
-.page.site-reviews .page-content .section .field-container {
+.page.web-resource-details .page-content .section .field-container {
   width: 800px;
   margin-bottom: 30px;
 }
-.page.site-reviews .page-content .section .sorting-filter-container {
+.page.web-resource-details .page-content .section .sorting-filter-container {
   width: 800px;
   display: flex;
   justify-content: space-between;
   margin-bottom: 12px;
 }
-.page.site-reviews .page-content .section .sorting-filter-container .open-sorting,
-.page.site-reviews .page-content .section .sorting-filter-container .open-filter {
+.page.web-resource-details .page-content .section .sorting-filter-container .open-sorting,
+.page.web-resource-details .page-content .section .sorting-filter-container .open-filter {
   display: flex;
   cursor: pointer;
   background-color: transparent;
@@ -103,68 +103,68 @@
   gap: 6px;
   transition: color 0.15s;
 }
-.page.site-reviews .page-content .section .sorting-filter-container .open-sorting:hover,
-.page.site-reviews .page-content .section .sorting-filter-container .open-filter:hover {
+.page.web-resource-details .page-content .section .sorting-filter-container .open-sorting:hover,
+.page.web-resource-details .page-content .section .sorting-filter-container .open-filter:hover {
   color: rgba(0, 0, 0, 0.6);
 }
-.page.site-reviews .page-content .section .sorting-filter-container .dropdown-menu-container .dropdown-menu .menu-group-header {
+.page.web-resource-details .page-content .section .sorting-filter-container .dropdown-menu-container .dropdown-menu .menu-group-header {
   margin: 0 0 16px;
   font-family: "Outfit-Medium", sans-serif;
   font-size: 14px;
   font-weight: 500;
   color: rgba(0, 0, 0, 0.6);
 }
-.page.site-reviews .page-content .section .sorting-filter-container .dropdown-menu-container .dropdown-menu .field-group {
+.page.web-resource-details .page-content .section .sorting-filter-container .dropdown-menu-container .dropdown-menu .field-group {
   padding-left: 12px;
   margin-bottom: 16px;
 }
-.page.site-reviews .page-content .section .sorting-filter-container .dropdown-menu-container .dropdown-menu .field-group .field:not(:last-child) {
+.page.web-resource-details .page-content .section .sorting-filter-container .dropdown-menu-container .dropdown-menu .field-group .field:not(:last-child) {
   margin-bottom: 14px;
 }
-.page.site-reviews .page-content .section .sorting-filter-container .dropdown-menu-container.sorting .dropdown-menu {
+.page.web-resource-details .page-content .section .sorting-filter-container .dropdown-menu-container.sorting .dropdown-menu {
   padding: 20px;
   width: 230px;
 }
-.page.site-reviews .page-content .section .sorting-filter-container .dropdown-menu-container.sorting .dropdown-menu .button {
+.page.web-resource-details .page-content .section .sorting-filter-container .dropdown-menu-container.sorting .dropdown-menu .button {
   width: 100%;
 }
-.page.site-reviews .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu {
+.page.web-resource-details .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu {
   padding: 20px;
   width: 280px;
 }
-.page.site-reviews .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .rating-range-labels-container {
+.page.web-resource-details .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .rating-range-labels-container {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 14px;
 }
-.page.site-reviews .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .rating-range-labels-container .rating-label {
+.page.web-resource-details .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .rating-range-labels-container .rating-label {
   display: flex;
   align-items: center;
   gap: 4px;
   color: rgba(0, 0, 0, 0.6);
 }
-.page.site-reviews .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .rating-range-labels-container .rating-label .prefix,
-.page.site-reviews .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .rating-range-labels-container .rating-label .value {
+.page.web-resource-details .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .rating-range-labels-container .rating-label .prefix,
+.page.web-resource-details .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .rating-range-labels-container .rating-label .value {
   display: block;
 }
-.page.site-reviews .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .rating-range-labels-container .rating-label .value {
+.page.web-resource-details .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .rating-range-labels-container .rating-label .value {
   width: 10px;
 }
-.page.site-reviews .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .slider-container {
+.page.web-resource-details .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .slider-container {
   padding-left: 7px;
   padding-right: 7px;
   margin-bottom: 24px;
 }
-.page.site-reviews .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .button {
+.page.web-resource-details .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .button {
   width: 100%;
 }
-.page.site-reviews .page-content .section .reviews-container {
+.page.web-resource-details .page-content .section .reviews-container {
   position: relative;
   width: 800px;
   margin-bottom: 20px;
 }
-.page.site-reviews .page-content .section .reviews-container .blur-panel {
+.page.web-resource-details .page-content .section .reviews-container .blur-panel {
   position: absolute;
   top: 0;
   background-color: rgba(242, 240, 238, 0.6);
@@ -177,17 +177,17 @@
   pointer-events: none;
   transition: opacity 0.3s;
 }
-.page.site-reviews .page-content .section .reviews-container .blur-panel.active {
+.page.web-resource-details .page-content .section .reviews-container .blur-panel.active {
   opacity: 1;
   pointer-events: all;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .no-data {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .no-data {
   display: flex;
   align-items: center;
   justify-content: center;
   height: 150px;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .no-data .no-data-text {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .no-data .no-data-text {
   display: block;
   text-align: center;
   font-family: "Outfit-Regular", sans-serif;
@@ -195,16 +195,16 @@
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card {
   background-color: #FFFFFF;
   padding: 30px;
   position: relative;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card:first-child {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card:first-child {
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card:not(:last-child):after {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card:not(:last-child):after {
   content: "";
   background: rgba(159, 143, 135, 0.08);
   position: absolute;
@@ -213,28 +213,28 @@
   right: 30px;
   height: 1px;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-header {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-header {
   display: flex;
   align-items: center;
   margin-bottom: 16px;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-header .user-info-container {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-header .user-info-container {
   display: flex;
   align-items: center;
   width: 302px;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-header .user-info-container .user-avatar {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-header .user-info-container .user-avatar {
   width: 40px;
   height: 40px;
   border-radius: 50%;
   margin-right: 12px;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-header .user-info-container .name-date .user-name,
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-header .user-info-container .name-date .review-date {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-header .user-info-container .name-date .user-name,
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-header .user-info-container .name-date .review-date {
   display: block;
   color: rgba(0, 0, 0, 0.6);
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-header .user-info-container .name-date .user-name {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-header .user-info-container .name-date .user-name {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -243,12 +243,12 @@
   font-size: 16px;
   font-weight: 500;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-header .user-info-container .name-date .review-date {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-header .user-info-container .name-date .review-date {
   font-family: "Outfit-Regular", sans-serif;
   font-size: 10px;
   font-weight: 400;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-header .resource-type {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-header .resource-type {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -256,31 +256,31 @@
   height: 30px;
   border-radius: 28px;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-header .resource-type.site-type {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-header .resource-type.site-type {
   background-color: rgba(214, 222, 115, 0.4);
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-header .resource-type.page-type {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-header .resource-type.page-type {
   background-color: rgba(118, 162, 255, 0.2);
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-header .resource-type .value {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-header .resource-type .value {
   display: block;
   font-family: "Outfit-Regular", sans-serif;
   font-size: 16px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-header .rating {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-header .rating {
   gap: 6px;
   display: flex;
   margin-left: auto;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-header .rating .star path {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-header .rating .star path {
   fill: rgba(214, 222, 115, 0.4);
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-header .rating .star.active path {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-header .rating .star.active path {
   fill: #D6DE73;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .page-link {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .page-link {
   display: block;
   width: 740px;
   white-space: nowrap;
@@ -291,7 +291,7 @@
   font-weight: 400;
   margin-bottom: 8px;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .review-text {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .review-text {
   margin: 0 0 16px;
   width: 740px;
   height: 60px;
@@ -308,12 +308,12 @@
   color: rgba(0, 0, 0, 0.6);
   transition: height 0.15s;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-footer {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-footer {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-footer .show-more {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-footer .show-more {
   height: 16px;
   font-family: "Outfit-Regular", sans-serif;
   font-size: 12px;
@@ -325,86 +325,86 @@
   gap: 4px;
   color: rgba(0, 0, 0, 0.6);
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-footer .show-more .icon {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-footer .show-more .icon {
   width: 6px;
   height: 8px;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-footer .show-more .icon path {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-footer .show-more .icon path {
   stroke: rgba(0, 0, 0, 0.6);
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-footer .show-more:hover {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-footer .show-more:hover {
   background-color: transparent;
   color: #404038;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-footer .show-more:hover .icon path {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-footer .show-more:hover .icon path {
   stroke: #404038;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-footer .actions-container {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-footer .actions-container {
   display: flex;
   align-items: center;
   gap: 8px;
   margin-left: auto;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-footer .actions-container .reaction {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-footer .actions-container .reaction {
   display: flex;
   align-items: center;
   gap: 4px;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-footer .actions-container .reaction .reactions-count {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-footer .actions-container .reaction .reactions-count {
   display: block;
   font-family: "Outfit-Medium", sans-serif;
   font-size: 12px;
   font-weight: 500;
   color: #6E6E70;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-footer .actions-container .share-button {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-footer .actions-container .share-button {
   padding: 0;
   height: auto;
   border: 0;
   border-radius: unset;
   margin-left: 6px;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-footer .actions-container .share-button .share {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-footer .actions-container .share-button .share {
   width: 14px;
   height: 14px;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-footer .actions-container .share-button .share path {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-footer .actions-container .share-button .share path {
   stroke: #6E6E70;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-footer .actions-container .share-button:hover {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-footer .actions-container .share-button:hover {
   background-color: transparent;
 }
-.page.site-reviews .page-content .section .reviews-container .cards-container .review-card .card-footer .actions-container .share-button:hover .share path {
+.page.web-resource-details .page-content .section .reviews-container .cards-container .review-card .card-footer .actions-container .share-button:hover .share path {
   stroke: #404038;
 }
-.page.site-reviews .page-content .section .pagination {
+.page.web-resource-details .page-content .section .pagination {
   width: 800px;
   display: flex;
   justify-content: space-between;
 }
-.page.site-reviews .page-content .section .pagination .button {
+.page.web-resource-details .page-content .section .pagination .button {
   border: none;
   background-color: rgba(159, 143, 135, 0.08);
   font-size: 16px;
 }
-.page.site-reviews .page-content .section .pagination .button:hover {
+.page.web-resource-details .page-content .section .pagination .button:hover {
   background-color: rgba(159, 143, 135, 0.2);
 }
-.page.site-reviews .page-content .section .pagination .button.disabled {
+.page.web-resource-details .page-content .section .pagination .button.disabled {
   pointer-events: none;
 }
-.page.site-reviews .page-content .section .pagination .button-container {
+.page.web-resource-details .page-content .section .pagination .button-container {
   display: flex;
   flex: 1;
 }
-.page.site-reviews .page-content .section .pagination .button-container.next {
+.page.web-resource-details .page-content .section .pagination .button-container.next {
   justify-content: end;
 }
-.page.site-reviews .page-content .section .pagination .button-container .previous-button,
-.page.site-reviews .page-content .section .pagination .button-container .next-button {
+.page.web-resource-details .page-content .section .pagination .button-container .previous-button,
+.page.web-resource-details .page-content .section .pagination .button-container .next-button {
   width: 122px;
 }
-.page.site-reviews .page-content .section .pagination .pages-container {
+.page.web-resource-details .page-content .section .pagination .pages-container {
   display: flex;
   justify-content: space-between;
   flex: 2;

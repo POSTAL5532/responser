@@ -324,7 +324,8 @@ a.button {
     margin-top: 70px;
   }
 }
-.page .page-content .footer {
+.page .footer {
+  width: 100%;
   border-radius: 20px 20px 0 0;
   background-color: #605C55;
   color: #F9F8F6;
@@ -332,67 +333,68 @@ a.button {
   display: flex;
   padding: 30px;
 }
-.page .page-content .footer .footer-section {
+.page .footer .footer-section {
   flex: 1;
 }
-.page .page-content .footer .footer-section.first .logo-container {
+.page .footer .footer-section.first .logo-container {
   display: flex;
   align-items: center;
   gap: 14px;
 }
-.page .page-content .footer .footer-section.first .logo-container .logo path {
+.page .footer .footer-section.first .logo-container .logo path {
   fill: #F9F8F6;
 }
-.page .page-content .footer .footer-section.first .logo-container .logo-text {
+.page .footer .footer-section.first .logo-container .logo-text {
   display: block;
   font-family: "Outfit-Regular", sans-serif;
   font-size: 42px;
   font-weight: 400;
 }
-.page .page-content .footer .footer-section.second {
+.page .footer .footer-section.second {
   display: flex;
   justify-content: center;
 }
-.page .page-content .footer .footer-section.second .contacts-header {
+.page .footer .footer-section.second .contacts-header {
   font-family: "Outfit-Regular", sans-serif;
   font-size: 14px;
   font-weight: 400;
 }
-.page .page-content .footer .footer-section.second .contact {
+.page .footer .footer-section.second .contact {
   margin: 0;
   font-family: "Outfit-Regular", sans-serif;
   font-size: 14px;
   font-weight: 400;
 }
-.page .page-content .footer .footer-section.third {
+.page .footer .footer-section.third {
   display: flex;
   justify-content: end;
 }
-.page .page-content .terms {
+.page .terms {
+  width: 100%;
   height: 28px;
   margin-top: 10px;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
 }
-.page .page-content .terms .terms-section {
+.page .terms .terms-section {
   flex: 1;
   display: flex;
 }
-.page .page-content .terms .terms-section.first,
-.page .page-content .terms .terms-section.third {
+.page .terms .terms-section.first,
+.page .terms .terms-section.third {
   font-family: "Outfit-Regular", sans-serif;
   font-size: 12px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
 }
-.page .page-content .terms .terms-section.first {
+.page .terms .terms-section.first {
   justify-content: start;
 }
-.page .page-content .terms .terms-section.second {
+.page .terms .terms-section.second {
   justify-content: center;
 }
-.page .page-content .terms .terms-section.third {
+.page .terms .terms-section.third {
   justify-content: end;
 }
 .slider.noUi-target {
