@@ -13,7 +13,6 @@ import com.responser.backend.model.metatags.SocialMetaTags;
 import com.responser.backend.model.metatags.TwitterMetaTags;
 import com.responser.backend.service.RatingService;
 import com.responser.backend.service.review.ReviewMetaImageGenerator;
-import com.responser.backend.service.review.ReviewMetaImageService;
 import com.responser.backend.service.review.ReviewService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;

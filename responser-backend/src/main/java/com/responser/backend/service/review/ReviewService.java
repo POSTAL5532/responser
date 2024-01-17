@@ -33,8 +33,6 @@ public class ReviewService {
 
     private final WebResourceService webResourceService;
 
-    private final ReviewMetaImageService metaImageService;
-
     public Review getReviewByIdAndUser(String reviewId, String userId) {
         return reviewRepository.findByIdAndUserId(reviewId, userId).orElseThrow(() ->
             new NoSuchElementException(format(
@@ -90,11 +88,8 @@ public class ReviewService {
 
         User referenceUser = userService.getUser(userId);
         newReview.setUser(referenceUser);
-        Review savedReview = reviewRepository.save(newReview);
 
-        metaImageService.create(savedReview);
-
-        return savedReview;
+        return reviewRepository.save(newReview);
     }
 
     @Transactional
@@ -102,11 +97,8 @@ public class ReviewService {
         Review oldReview = this.getReviewByIdAndUser(review.getId(), review.getUserId());
         oldReview.setText(review.getText());
         oldReview.setRating(review.getRating());
-        Review updatedReview = reviewRepository.save(oldReview);
 
-        metaImageService.update(updatedReview);
-
-        return updatedReview;
+        return reviewRepository.save(oldReview);
     }
 
     /**
