@@ -32,10 +32,7 @@ public class ReviewMetaImageGenerator {
     public static final int PADDING_Y = 50;
     public static final int TEXT_PADDING_Y = 180;
 
-    public static final Color RED_COLOR = Color.decode("#FF4539");
-    public static final Color YELOW_COLOR = Color.decode("#DBC72A");
-    public static final Color GREEN_COLOR = Color.decode("#23C653");
-    public static final Color MAIN_COLOR = Color.decode("#28293D");
+    public static final Color MAIN_COLOR = new Color(0,0,0,0.6f);
 
     public ByteArrayOutputStream generate(Review review) {
         String message = review.getText();
@@ -48,7 +45,7 @@ public class ReviewMetaImageGenerator {
         drawLogo(graphics);
         drawRating(graphics, review.getRating());
 
-        AttributedCharacterIterator messageIterator = getAttributedCharacterIterator(message, getFontSize(message), MAIN_COLOR);
+        AttributedCharacterIterator messageIterator = getAttributedCharacterIterator(message, getFontSize(message));
         FontRenderContext frc = graphics.getFontRenderContext();
         LineBreakMeasurer messageLBM = new LineBreakMeasurer(messageIterator, frc);
 
@@ -60,7 +57,7 @@ public class ReviewMetaImageGenerator {
             y += textLayout.getAscent();
 
             if (y >= 490) {
-                graphics.drawString(getAttributedCharacterIterator("...", getFontSize(message), MAIN_COLOR), PADDING_X, 490);
+                graphics.drawString(getAttributedCharacterIterator("...", getFontSize(message)), PADDING_X, 490);
                 break;
             } else {
                 textLayout.draw(graphics, (float) PADDING_X, y);
@@ -92,27 +89,39 @@ public class ReviewMetaImageGenerator {
     }
 
     private void drawRating(Graphics2D graphics, byte rating) {
-        BufferedImage star;
-        Color ratingColor;
-
-        if (rating >= 4) {
-            ratingColor = GREEN_COLOR;
-        } else if (rating > 2) {
-            ratingColor = YELOW_COLOR;
-        } else {
-            ratingColor = RED_COLOR;
-        }
+        BufferedImage activeStar;
+        BufferedImage inactiveStar;
 
         try {
-            InputStream starImageInputStream = getClass().getResourceAsStream("/static/img/star.png");
-            assert starImageInputStream != null;
-            star = ImageIO.read(starImageInputStream);
+            InputStream actvieStarImageInputStream = getClass().getResourceAsStream("/static/img/active_star.png");
+            assert actvieStarImageInputStream != null;
+            
+            InputStream inactiveStarImageInputStream = getClass().getResourceAsStream("/static/img/inactive_satr.png");
+            assert inactiveStarImageInputStream != null;
+
+            activeStar = ImageIO.read(actvieStarImageInputStream);
+            inactiveStar = ImageIO.read(inactiveStarImageInputStream);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
 
-        graphics.drawImage(star, 650, 40, null);
-        graphics.drawString(getAttributedCharacterIterator(rating + " / 5", 92, ratingColor), 750, 115);
+        int starWidth = 54;
+        int starsYPosition = 54;
+        int firstStarXPosition = 740;
+        int lastStarXPosition = 0;
+
+        for (int i = 0; i < rating; i++) {
+            lastStarXPosition = firstStarXPosition + (i * starWidth);
+            graphics.drawImage(activeStar, lastStarXPosition, starsYPosition, null);
+        }
+
+        lastStarXPosition += starWidth;
+
+        for (int i = 0; i < (5 - rating); i++) {
+            graphics.drawImage(inactiveStar, lastStarXPosition + (i * starWidth), starsYPosition, null);
+        }
+
+        graphics.drawString(getAttributedCharacterIterator(rating + "/5", 43, TextAttribute.WEIGHT_BOLD), 655, 93);
     }
 
     private void drawLogo(Graphics2D graphics) {
@@ -129,11 +138,15 @@ public class ReviewMetaImageGenerator {
         graphics.drawImage(logo, PADDING_X, PADDING_Y, null);
     }
 
-    private AttributedCharacterIterator getAttributedCharacterIterator(String text, int fontSize, Color color) {
+    private AttributedCharacterIterator getAttributedCharacterIterator(String text, int fontSize) {
+        return getAttributedCharacterIterator(text, fontSize, TextAttribute.WEIGHT_MEDIUM);
+    }
+
+    private AttributedCharacterIterator getAttributedCharacterIterator(String text, int fontSize, Float wight) {
         AttributedString attributedString = new AttributedString(text);
         attributedString.addAttribute(TextAttribute.SIZE, fontSize);
-        attributedString.addAttribute(TextAttribute.WEIGHT, TextAttribute.WEIGHT_BOLD);
-        attributedString.addAttribute(TextAttribute.FOREGROUND, color);
+        attributedString.addAttribute(TextAttribute.WEIGHT, wight);
+        attributedString.addAttribute(TextAttribute.FOREGROUND, MAIN_COLOR);
 
         return attributedString.getIterator();
     }
