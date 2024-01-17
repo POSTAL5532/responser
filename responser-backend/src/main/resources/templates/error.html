@@ -1,32 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-      lang="en"
-      th:replace="~{layouts/pageMainLayout :: main-fragment(
-          'Error',
-          ~{:: #headContent},
-          ~{:: #mainContent},
-          ${httpStatus.value() + ' Error'},
-          'error-page',
-           null
-      )}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/pageLayout(pageClass='error')}"
+      lang="en">
 <head>
-    <title></title>
-    <th:block id="headContent">
-        <link th:href="@{/css/sitesRating.css}" rel="stylesheet"/>
-    </th:block>
+    <title>Error</title>
+
+    <link th:href="@{/css/error.css}" rel="stylesheet"/>
 </head>
 <body>
+<div class="page-content" layout:fragment="page-content">
+    <section class="section">
+        <h1 class="section-header">Grats. You broke it!</h1>
+        <h2 class="description">Feel free to use our site navigation =)</h2>
 
-<th:block id="mainContent">
-    <h2>Uuups! Something goes wrong!</h2>
+        <span class="or">or</span>
 
-    <div th:if="${errorMessage != null}">
-        <h3>Error message:</h3>
-        <p th:text="${errorMessage}">! ERROR !</p>
-    </div>
-
-    <a th:href="${@applicationProperties.selfHost}">Go home</a>
-</th:block>
-
+        <a class="link big create-new-account" href="/">
+            <svg class="icon link" xmlns="http://www.w3.org/2000/svg" width="25" height="24" viewBox="0 0 25 24" fill="none">
+                <rect x="0.0351562" width="24" height="24" rx="6" fill="#605C55"/>
+                <path d="M13.5352 15L10.5352 12L13.5352 9" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            Go back to Home
+        </a>
+    </section>
+</div>
 </body>
 </html>

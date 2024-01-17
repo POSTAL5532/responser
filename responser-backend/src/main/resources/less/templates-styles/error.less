@@ -1,5 +1,55 @@
 @import "../global.less";
 
-.error-page {
+.page.error {
+    height: 100vh;
 
+    .adaptationAllAndMobile(
+    {
+        padding-left: 30px;
+        padding-right: 30px;
+    },
+    {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    );
+
+    .page-content {
+        display: flex;
+        flex-direction: column;
+        height: 100%;
+
+        .section {
+            flex: 1 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            background-color: @beige-alpha-8;
+            margin-bottom: 30px;
+
+            .section-header {
+                .fontOutfitRegular(60px);
+                color: @black-alpha-60;
+                margin: 0 0 30px;
+            }
+
+            .description {
+                margin: 0 0 20px;
+                .fontOutfitRegular(24px);
+                color: @black-alpha-60;
+            }
+
+            .or {
+                .fontOutfitRegular(24px);
+                color: @black-alpha-60;
+                margin: 0 0 20px;
+            }
+        }
+
+        .footer {
+            flex-shrink: 0;
+        }
+    }
 }

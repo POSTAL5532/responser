@@ -1,0 +1,66 @@
+.page.error {
+  height: 100vh;
+}
+@media only screen and (min-width: 1920px) {
+  .page.error {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.error {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.error {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.error {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+.page.error .page-content {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.page.error .page-content .section {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 20px;
+  background-color: rgba(159, 143, 135, 0.08);
+  margin-bottom: 30px;
+}
+.page.error .page-content .section .section-header {
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 60px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0 0 30px;
+}
+.page.error .page-content .section .description {
+  margin: 0 0 20px;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+}
+.page.error .page-content .section .or {
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  margin: 0 0 20px;
+}
+.page.error .page-content .footer {
+  flex-shrink: 0;
+}
