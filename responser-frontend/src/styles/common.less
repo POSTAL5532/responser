@@ -1,21 +1,15 @@
 @import "globalsLess";
 
-html {
-  height: 100%;
-
-  body {
-    margin: 0;
-    background-color: @system-color-light-100;
-    .fontInterRegular();
-    color: @dark;
-    height: 100%;
-
-    #root {
-      height: 100%;
-    }
-  }
+* {
+  box-sizing: border-box;
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
+html {
+  scroll-behavior: smooth;
+
+  body {
+    .fontOutfitRegular();
+    background-color: @ivory;
+    margin: 0;
+  }
 }

@@ -1,98 +1,43 @@
 @import "globalsLess";
 
 .sign-up-page {
-  display: flex;
+    .page-content {
+        height: 100%;
 
-  &, &.hidden-header {
-    padding: 0;
-  }
+        .section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-bottom: 150px;
 
-  .description {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    width: 45%;
-    height: 100%;
-    padding-left: 60px;
-    padding-right: 110px;
-    color: @system-color-light-100;
+            .sign-up-header, .sign-up-description {
+                text-align: center;
+                margin: 0;
+            }
 
-    &:after {
-      left: -90px;
-      background: #0C8CE9;
-      bottom: 0;
-      content: '';
-      display: block;
-      height: 100%;
-      position: absolute;
-      right: 0;
-      transform: skewX(-4.5deg);
-      transform-origin: 100%;
-      z-index: -1;
-      width: 50%;
-    }
+            .sign-up-header {
+                .fontOutfitRegular(60px);
+                color: @black-alpha-60;
+                margin-top: 60px;
+                margin-bottom: 10px;
+            }
 
-    .reviewly-logo {
-      position: absolute;
-      left: 60px;
-      top: 40px;
+            .sign-up-description {
+                .fontOutfitRegular(24px);
+                color: @black-alpha-60;
+                margin-bottom: 50px;
+            }
 
-      .icon {
-        width: 40px;
-        height: 40px;
+            .sign-up-form {
+                width: 460px;
+                margin-bottom: 30px;
+            }
 
-        path {
-          stroke: @system-color-light-100;
-          fill: @system-color-light-100;
+            .or {
+                .fontOutfitRegular(24px);
+                color: @black-alpha-60;
+                margin: 0 0 20px;
+            }
         }
-      }
-
-      .title-label {
-        font-size: 46px;
-        color: @system-color-light-100;
-      }
     }
-
-    .description-header {
-      margin: 0 0 20px;
-      font-size: 60px;
-    }
-
-    .description-content {
-      line-height: 26px;
-      font-size: 20px;
-    }
-  }
-
-  .sign-up-form-panel {
-    width: 55%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 30px;
-
-    .sign-up-header {
-      .fontInterRegular();
-      font-size: 44px;
-      color: @dark;
-      margin-top: 0;
-      margin-bottom: 64px;
-    }
-
-    .sign-up-form {
-      .adaptationDesktop({
-        width: 800px;
-      });
-      .adaptationSmallDesktop({
-        width: 700px;
-      });
-      .adaptationTablet({
-        width: 500px;
-      });
-      .adaptationMobile({
-        width: 450px;
-      });
-    }
-  }
 }

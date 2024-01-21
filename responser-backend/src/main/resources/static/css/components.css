@@ -147,6 +147,7 @@ a.button {
   font-family: "Outfit-Regular", sans-serif;
   font-size: 16px;
   font-weight: 400;
+  color: #404038;
 }
 .field-container .input-container .field-input.big {
   height: 54px;
@@ -163,9 +164,18 @@ a.button {
   outline: none;
   border: none;
 }
+.field-container .input-container .field-input:-webkit-autofill,
+.field-container .input-container .field-input:-webkit-autofill:hover,
+.field-container .input-container .field-input:-webkit-autofill:focus,
+.field-container .input-container .field-input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #404038;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  box-shadow: 0 0 0 1000px transparent inset;
+}
 .field-container .field-message {
   font-family: "Outfit-Medium", sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 500;
 }
 .field-container.error .input-container {
@@ -302,7 +312,7 @@ a.button {
 }
 .page .page-content {
   width: 100%;
-  max-width: 1800px;
+  max-width: 1860px;
 }
 @media only screen and (min-width: 1920px) {
   .page .page-content {
@@ -330,6 +340,7 @@ a.button {
   background-color: #605C55;
   color: #F9F8F6;
   height: 236px;
+  min-height: 236px;
   display: flex;
   padding: 30px;
 }

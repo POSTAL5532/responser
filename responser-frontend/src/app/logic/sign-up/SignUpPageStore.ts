@@ -3,6 +3,8 @@ import {UserAccountDataPayload} from "app/model/UserAccountDataPayload";
 import {UserService} from "app/service/UserService";
 import {Logger} from "../../utils/Logger";
 import {isValidationError, setErrorsToFields} from "../../utils/ErrorUtils";
+import {useState} from "react";
+import {MainPageStore} from "../main-page/MainPageStore";
 
 /**
  * Sign up page store.
@@ -45,4 +47,9 @@ export class SignUpPageStore {
             this.logger.debug("Sign up new user - finish");
         }
     }
+}
+
+export const useSignUpPageStore = (): SignUpPageStore => {
+    const [signUpPageStore] = useState(new SignUpPageStore());
+    return signUpPageStore;
 }

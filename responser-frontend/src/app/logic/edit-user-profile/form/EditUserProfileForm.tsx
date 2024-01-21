@@ -46,7 +46,7 @@ const EditUserProfileForm: React.FC<EditUserProfileFormProps> = (props: EditUser
 
                     <div className="form-controls">
                         <Button type="submit" loading={disabled} disabled={disabled || !userWasChanged}>{!disabled ? "Save" : "Wait"}</Button>
-                        <Button type="button" onClick={navigateToUserProfilePage} styleType={ButtonType.SECONDARY} disabled={disabled}>Cancel</Button>
+                        <Button type="button" onClick={navigateToUserProfilePage} styleType={ButtonType.LIGHT} disabled={disabled}>Cancel</Button>
                     </div>
                 </Form>
             </Formik>

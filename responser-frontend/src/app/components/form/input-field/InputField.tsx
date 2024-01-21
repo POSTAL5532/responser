@@ -1,41 +1,57 @@
-import React, {useState} from "react";
+import React from "react";
 import classNames from "classnames";
-import "./InputField.less";
 import {ConditionShow} from "../../ConditionShow";
+import "./InputField.less";
 
-type InputFieldProps = {
-    label?: string;
+export enum InputFieldStyleType {
+    SECONDARY = "secondary"
+}
+
+export type InputFieldProps = {
     invalid?: boolean;
     message?: string;
+    styleType?: InputFieldStyleType;
+    leftExtraComponent?: React.ReactNode;
+    rightExtraComponent?: React.ReactNode;
 } & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>;
 
 export const InputField: React.FC<InputFieldProps> = (props: InputFieldProps) => {
-    const {className, invalid = false, disabled, label, message, value, ...otherProps} = props;
-    const [focused, setFocused] = useState(false);
+    const {
+        className,
+        invalid = false,
+        disabled,
+        message,
+        value,
+        leftExtraComponent,
+        rightExtraComponent,
+        ...otherProps
+    } = props;
 
     const resultFieldContainerClassName = classNames(
         "field-container",
         {"invalid": invalid},
-        props.className
-    );
-
-    const resultFieldClassName = classNames(
-        "field",
         {"disabled": disabled},
-        {"focused": focused},
-        {"with-label": !!label},
         {"with-message": !!message},
+        {"with-left-extra": !!leftExtraComponent},
+        {"with-right-extra": !!rightExtraComponent},
+        props.styleType,
+        className
     );
 
-    const setFocus = (focus: boolean) => {
-        setFocused(focus);
-    }
+    console.log(props.styleType)
 
     return (
         <div className={resultFieldContainerClassName}>
-            <div className={resultFieldClassName} onFocus={() => setFocus(true)} onBlur={() => setFocus(false)}>
-                <input {...otherProps} disabled={disabled} value={value} placeholder=" "/>
-                <span className="label">{label}</span>
+            <div className="field">
+                <ConditionShow condition={!!leftExtraComponent}>
+                    <div className="extra-component left">{leftExtraComponent}</div>
+                </ConditionShow>
+
+                <input {...otherProps} disabled={disabled} value={value}/>
+
+                <ConditionShow condition={!!rightExtraComponent}>
+                    <div className="extra-component right">{rightExtraComponent}</div>
+                </ConditionShow>
             </div>
 
             <ConditionShow condition={!!message}>

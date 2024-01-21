@@ -1,11 +1,31 @@
 @import "globalsLess";
 
 .page {
-  height: 100%;
-  position: relative;
-  padding: 132px 50px 30px;
+    height: 100vh;
+    padding-left: 30px;
+    padding-right: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 
-  &.hidden-header {
-    padding-top: 50px;
-  }
+    .page-content {
+        width: 100%;
+        max-width: 1860px;
+
+        .adaptationComplex(
+        {
+            margin-top: 98px;
+        },
+        {
+            margin-top: 90px;
+        },
+        {
+            margin-top: 90px;
+        },
+        {
+            margin-top: 70px;
+        }
+        );
+    }
 }

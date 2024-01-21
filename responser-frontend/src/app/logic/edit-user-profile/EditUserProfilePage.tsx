@@ -122,7 +122,7 @@ const EditUserProfilePage: React.FC = () => {
                     <DragAndDrop onChange={setUserRawAvatar}
                                  maxFileSize={2048}
                                  acceptedFileTypes={[FILE_TYPE.png, FILE_TYPE.bmp, FILE_TYPE.jpeg, FILE_TYPE.jpeg]}/>
-                    <Button onClick={onAvatarEditCancel} styleType={ButtonType.SECONDARY}>Cancel</Button>
+                    <Button onClick={onAvatarEditCancel} styleType={ButtonType.LIGHT}>Cancel</Button>
                 </ConditionShow>
                 <ConditionShow condition={!!rawUserAvatar}>
                     <EditUserAvatarForm imageSrc={rawUserAvatar} onSave={onAvatarSave} onCancel={onAvatarEditCancel}/>

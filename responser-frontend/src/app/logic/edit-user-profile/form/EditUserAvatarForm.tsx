@@ -62,7 +62,7 @@ const EditUserAvatar: React.FC<EditUserAvatarProps> = (props: EditUserAvatarProp
             <input className="slider" type="range" min="1" max="100" value={zoom} onChange={onZoomChange}/>
 
             <Button onClick={onSaveButtonClick} size={ButtonSize.SMALL}>Save</Button>
-            <Button onClick={onCancel} size={ButtonSize.SMALL} styleType={ButtonType.SECONDARY}>Cancel</Button>
+            <Button onClick={onCancel} size={ButtonSize.SMALL} styleType={ButtonType.LIGHT}>Cancel</Button>
         </div>
     )
 }

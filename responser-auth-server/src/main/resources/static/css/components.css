@@ -142,8 +142,15 @@ a.button {
 .field-container .input-container .field-input {
   background-color: transparent;
   flex: 1;
-  height: 54px;
+  height: 50px;
   padding: 0 20px;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: #404038;
+}
+.field-container .input-container .field-input.big {
+  height: 54px;
   font-family: "Outfit-Regular", sans-serif;
   font-size: 20px;
   font-weight: 400;
@@ -157,9 +164,18 @@ a.button {
   outline: none;
   border: none;
 }
+.field-container .input-container .field-input:-webkit-autofill,
+.field-container .input-container .field-input:-webkit-autofill:hover,
+.field-container .input-container .field-input:-webkit-autofill:focus,
+.field-container .input-container .field-input:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #404038;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  box-shadow: 0 0 0 1000px transparent inset;
+}
 .field-container .field-message {
   font-family: "Outfit-Medium", sans-serif;
-  font-size: 10px;
+  font-size: 12px;
   font-weight: 500;
 }
 .field-container.error .input-container {
@@ -296,7 +312,7 @@ a.button {
 }
 .page .page-content {
   width: 100%;
-  max-width: 1800px;
+  max-width: 1860px;
 }
 @media only screen and (min-width: 1920px) {
   .page .page-content {
@@ -318,75 +334,78 @@ a.button {
     margin-top: 70px;
   }
 }
-.page .page-content .footer {
+.page .footer {
+  width: 100%;
   border-radius: 20px 20px 0 0;
   background-color: #605C55;
   color: #F9F8F6;
   height: 236px;
+  min-height: 236px;
   display: flex;
   padding: 30px;
 }
-.page .page-content .footer .footer-section {
+.page .footer .footer-section {
   flex: 1;
 }
-.page .page-content .footer .footer-section.first .logo-container {
+.page .footer .footer-section.first .logo-container {
   display: flex;
   align-items: center;
   gap: 14px;
 }
-.page .page-content .footer .footer-section.first .logo-container .logo path {
+.page .footer .footer-section.first .logo-container .logo path {
   fill: #F9F8F6;
 }
-.page .page-content .footer .footer-section.first .logo-container .logo-text {
+.page .footer .footer-section.first .logo-container .logo-text {
   display: block;
   font-family: "Outfit-Regular", sans-serif;
   font-size: 42px;
   font-weight: 400;
 }
-.page .page-content .footer .footer-section.second {
+.page .footer .footer-section.second {
   display: flex;
   justify-content: center;
 }
-.page .page-content .footer .footer-section.second .contacts-header {
+.page .footer .footer-section.second .contacts-header {
   font-family: "Outfit-Regular", sans-serif;
   font-size: 14px;
   font-weight: 400;
 }
-.page .page-content .footer .footer-section.second .contact {
+.page .footer .footer-section.second .contact {
   margin: 0;
   font-family: "Outfit-Regular", sans-serif;
   font-size: 14px;
   font-weight: 400;
 }
-.page .page-content .footer .footer-section.third {
+.page .footer .footer-section.third {
   display: flex;
   justify-content: end;
 }
-.page .page-content .terms {
+.page .terms {
+  width: 100%;
   height: 28px;
   margin-top: 10px;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
 }
-.page .page-content .terms .terms-section {
+.page .terms .terms-section {
   flex: 1;
   display: flex;
 }
-.page .page-content .terms .terms-section.first,
-.page .page-content .terms .terms-section.third {
+.page .terms .terms-section.first,
+.page .terms .terms-section.third {
   font-family: "Outfit-Regular", sans-serif;
   font-size: 12px;
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
 }
-.page .page-content .terms .terms-section.first {
+.page .terms .terms-section.first {
   justify-content: start;
 }
-.page .page-content .terms .terms-section.second {
+.page .terms .terms-section.second {
   justify-content: center;
 }
-.page .page-content .terms .terms-section.third {
+.page .terms .terms-section.third {
   justify-content: end;
 }
 .slider.noUi-target {
@@ -476,4 +495,223 @@ a.button {
 }
 .radio-button input[type="radio"]:checked::before {
   transform: scale(1);
+}
+.review-card {
+  position: relative;
+}
+.review-card:first-child .web-resource-data {
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.review-card .web-resource-data {
+  height: 42px;
+  background-color: #F9F8F6;
+  padding-left: 30px;
+  padding-right: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.review-card .web-resource-data .web-resource-name-container {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+.review-card .web-resource-data .web-resource-name-container .resource-icon {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+}
+.review-card .web-resource-data .web-resource-name-container .resource-name {
+  margin: 0;
+  width: 600px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: "Outfit-Medium", sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(0, 0, 0, 0.6);
+}
+.review-card .web-resource-data .site-rating-link {
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+.review-card:not(:last-child):after {
+  content: "";
+  background: rgba(159, 143, 135, 0.08);
+  position: absolute;
+  bottom: 0;
+  left: 30px;
+  right: 30px;
+  height: 1px;
+}
+.review-card .card-body-container {
+  padding: 30px;
+  background-color: #FFFFFF;
+}
+.review-card .card-body-container .card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+}
+.review-card .card-body-container .card-header .user-info-container {
+  display: flex;
+  align-items: center;
+  width: 302px;
+}
+.review-card .card-body-container .card-header .user-info-container .user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
+.review-card .card-body-container .card-header .user-info-container .name-date .user-name,
+.review-card .card-body-container .card-header .user-info-container .name-date .review-date {
+  display: block;
+  color: rgba(0, 0, 0, 0.6);
+}
+.review-card .card-body-container .card-header .user-info-container .name-date .user-name {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 224px;
+  font-family: "Outfit-Medium", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+}
+.review-card .card-body-container .card-header .user-info-container .name-date .review-date {
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+}
+.review-card .card-body-container .card-header .resource-type {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 138px;
+  height: 30px;
+  border-radius: 28px;
+}
+.review-card .card-body-container .card-header .resource-type.site-type {
+  background-color: rgba(214, 222, 115, 0.4);
+}
+.review-card .card-body-container .card-header .resource-type.page-type {
+  background-color: rgba(118, 162, 255, 0.2);
+}
+.review-card .card-body-container .card-header .resource-type .value {
+  display: block;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+}
+.review-card .card-body-container .card-header .rating {
+  gap: 6px;
+  display: flex;
+  margin-left: auto;
+}
+.review-card .card-body-container .card-header .rating .star path {
+  fill: rgba(214, 222, 115, 0.4);
+}
+.review-card .card-body-container .card-header .rating .star.active path {
+  fill: #D6DE73;
+}
+.review-card .card-body-container .page-link {
+  display: block;
+  width: 740px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.review-card .card-body-container .review-text {
+  margin: 0 0 16px;
+  width: 740px;
+  height: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  word-wrap: break-word;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  transition: height 0.15s;
+}
+.review-card .card-body-container .card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.review-card .card-body-container .card-footer .show-more {
+  height: 16px;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  border: none;
+  border-radius: unset;
+  width: unset;
+  padding: 0;
+  gap: 4px;
+  color: rgba(0, 0, 0, 0.6);
+}
+.review-card .card-body-container .card-footer .show-more .icon {
+  width: 6px;
+  height: 8px;
+}
+.review-card .card-body-container .card-footer .show-more .icon path {
+  stroke: rgba(0, 0, 0, 0.6);
+}
+.review-card .card-body-container .card-footer .show-more:hover {
+  background-color: transparent;
+  color: #404038;
+}
+.review-card .card-body-container .card-footer .show-more:hover .icon path {
+  stroke: #404038;
+}
+.review-card .card-body-container .card-footer .actions-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+}
+.review-card .card-body-container .card-footer .actions-container .reaction {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.review-card .card-body-container .card-footer .actions-container .reaction .reactions-count {
+  display: block;
+  font-family: "Outfit-Medium", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6E6E70;
+}
+.review-card .card-body-container .card-footer .actions-container .share-button {
+  padding: 0;
+  height: auto;
+  border: 0;
+  border-radius: unset;
+  margin-left: 6px;
+}
+.review-card .card-body-container .card-footer .actions-container .share-button .share {
+  width: 14px;
+  height: 14px;
+}
+.review-card .card-body-container .card-footer .actions-container .share-button .share path {
+  stroke: #6E6E70;
+}
+.review-card .card-body-container .card-footer .actions-container .share-button:hover {
+  background-color: transparent;
+}
+.review-card .card-body-container .card-footer .actions-container .share-button:hover .share path {
+  stroke: #404038;
 }

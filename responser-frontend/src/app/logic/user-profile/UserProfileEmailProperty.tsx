@@ -17,7 +17,7 @@ export const UserProfileEmailProperty: React.FC<UserProfileEmailPropertyProps> =
 
     const resendButton = <Button className="resend-email-confirmation-button"
                                  size={ButtonSize.SMALL}
-                                 styleType={ButtonType.SECONDARY}
+                                 styleType={ButtonType.LIGHT}
                                  loading={resendConfirmationProcess}
                                  onClick={onResend}>Resend email confirmation</Button>;
 

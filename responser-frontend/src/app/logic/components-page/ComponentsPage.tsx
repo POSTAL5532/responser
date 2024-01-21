@@ -27,32 +27,44 @@ export const Buttons: React.FC = () => {
         <div className="components-container buttons-container">
             <h1>Buttons</h1>
             <div style={{display: "flex", gap: 10}}>
-                <Button size={ButtonSize.SMALL} styleType={loading ? ButtonType.PRIMARY : ButtonType.SECONDARY} onClick={() => setLoading(!loading)}>Loading</Button>
-                <Button size={ButtonSize.SMALL} styleType={disabled ? ButtonType.PRIMARY : ButtonType.SECONDARY} onClick={() => setDisabled(!disabled)}>Disabled</Button>
+                <Button size={ButtonSize.SMALL} styleType={loading ? ButtonType.PRIMARY : ButtonType.LIGHT} onClick={() => setLoading(!loading)}>Loading</Button>
+                <Button size={ButtonSize.SMALL} styleType={disabled ? ButtonType.PRIMARY : ButtonType.LIGHT} onClick={() => setDisabled(!disabled)}>Disabled</Button>
             </div>
 
-            <h3>Primary</h3>
+            <h3>Default</h3>
             <div className="components buttons">
                 <Button loading={loading} disabled={disabled}>Button text</Button>
                 <Button loading={loading} disabled={disabled}>Button text<Icon type={IconType.ALERT}/></Button>
             </div>
 
-            <h3>Primary small</h3>
+            <h3>Default small</h3>
             <div className="components buttons">
                 <Button loading={loading} disabled={disabled} size={ButtonSize.SMALL}>Button text</Button>
                 <Button loading={loading} disabled={disabled} size={ButtonSize.SMALL}>Button text<Icon type={IconType.ALERT}/></Button>
             </div>
 
-            <h3>Secondary</h3>
+            <h3>Primary</h3>
             <div className="components buttons">
-                <Button loading={loading} disabled={disabled} styleType={ButtonType.SECONDARY}>Button text</Button>
-                <Button loading={loading} disabled={disabled} styleType={ButtonType.SECONDARY}>Button text<Icon type={IconType.ALERT}/></Button>
+                <Button loading={loading} disabled={disabled} styleType={ButtonType.PRIMARY}>Button text</Button>
+                <Button loading={loading} disabled={disabled} styleType={ButtonType.PRIMARY}>Button text<Icon type={IconType.ALERT}/></Button>
             </div>
 
-            <h3>Secondary small</h3>
+            <h3>Primary small</h3>
             <div className="components buttons">
-                <Button loading={loading} disabled={disabled} size={ButtonSize.SMALL} styleType={ButtonType.SECONDARY}>Button text</Button>
-                <Button loading={loading} disabled={disabled} size={ButtonSize.SMALL} styleType={ButtonType.SECONDARY}>
+                <Button loading={loading} disabled={disabled} size={ButtonSize.SMALL} styleType={ButtonType.PRIMARY}>Button text</Button>
+                <Button loading={loading} disabled={disabled} size={ButtonSize.SMALL} styleType={ButtonType.PRIMARY}>Button text<Icon type={IconType.ALERT}/></Button>
+            </div>
+
+            <h3>Light</h3>
+            <div className="components buttons">
+                <Button loading={loading} disabled={disabled} styleType={ButtonType.LIGHT}>Button text</Button>
+                <Button loading={loading} disabled={disabled} styleType={ButtonType.LIGHT}>Button text<Icon type={IconType.ALERT}/></Button>
+            </div>
+
+            <h3>Light small</h3>
+            <div className="components buttons">
+                <Button loading={loading} disabled={disabled} size={ButtonSize.SMALL} styleType={ButtonType.LIGHT}>Button text</Button>
+                <Button loading={loading} disabled={disabled} size={ButtonSize.SMALL} styleType={ButtonType.LIGHT}>
                     Button text<Icon type={IconType.ALERT}/>
                 </Button>
             </div>
@@ -99,30 +111,34 @@ export const InputFields: React.FC = () => {
         <div className="components-container buttons-container">
             <h1>Input fields</h1>
 
-            <h3>With label</h3>
             <div className="components fields">
-                <InputField label="Some label"/>
-                <InputField label="Some label" value="One interesting value"/>
-                <InputField label="Some label" invalid={true}/>
-                <InputField label="Some label" invalid={true} value="One interesting value"/>
-                <InputField label="Disabled" disabled={true}/>
-                <InputField label="Disabled" disabled={true} value="One interesting value"/>
+                <InputField placeholder="Placeholder"/>
+                <InputField placeholder="Placeholder" value="One interesting value"/>
+                <InputField placeholder="Placeholder" invalid={true}/>
+                <InputField placeholder="Placeholder" invalid={true} value="One interesting value"/>
+                <InputField placeholder="Disabled" disabled={true}/>
+                <InputField placeholder="Disabled" disabled={true} value="Disabled value"/>
             </div>
 
             <h3>With message</h3>
             <div className="components fields">
-                <InputField label="Some label" message="I have an message for you. What do you think abou it?"/>
-                <InputField label="Some label" message="I have an message for you. What do you think abou it?" value="One interesting value"/>
-                <InputField label="Some label" message="I have an message for you. What do you think abou it?" invalid={true}/>
-                <InputField label="Some label" message="I have an message for you. What do you think abou it?" invalid={true} value="One interesting value"/>
+                <InputField placeholder="Some label" message="I have an message for you. What do you think abou it?"/>
+                <InputField placeholder="Some label" message="I have an message for you. What do you think abou it?" value="One interesting value"/>
+                <InputField placeholder="Some label" message="I have an message for you. What do you think abou it?" invalid={true}/>
+                <InputField placeholder="Some label" message="I have an message for you. What do you think abou it?" invalid={true} value="One interesting value"/>
             </div>
 
-            <h3>Without label</h3>
+            <h3>With extra</h3>
             <div className="components fields">
-                <InputField/>
-                <InputField value="One interesting value"/>
-                <InputField invalid={true}/>
-                <InputField invalid={true} value="One interesting value"/>
+                <InputField placeholder="Placeholder" leftExtraComponent={<Button>Extra</Button>}/>
+                <InputField placeholder="Placeholder" rightExtraComponent={<Button>Extra</Button>}/>
+                <InputField placeholder="Placeholder" leftExtraComponent={<Button>Extra</Button>} rightExtraComponent={<Button styleType={ButtonType.PRIMARY}>Extra</Button>}/>
+                <InputField placeholder="Placeholder" leftExtraComponent={<Button styleType={ButtonType.PRIMARY}>Extra</Button>}/>
+                <InputField placeholder="Placeholder" rightExtraComponent={<Button styleType={ButtonType.PRIMARY}>Extra</Button>}/>
+                <InputField placeholder="Placeholder" leftExtraComponent={<Button>Extra</Button>} rightExtraComponent={<Button>Extra</Button>}/>
+                <InputField placeholder="Placeholder" leftExtraComponent={<Button>Extra</Button>} value="Qwerty 123" invalid={true}/>
+                <InputField placeholder="Placeholder" rightExtraComponent={<Button>Extra</Button>} value="Qwerty 123" invalid={true}/>
+                <InputField placeholder="Placeholder" leftExtraComponent={<Button>Extra</Button>} rightExtraComponent={<Button>Extra</Button>} value="Qwerty 123" invalid={true}/>
             </div>
         </div>
     );

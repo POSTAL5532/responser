@@ -26,7 +26,7 @@ export const Modal: React.FC<ModalProps> = (props: ModalProps) => {
             </div>
             <ConditionShow condition={!!onOk || !!onCancel}>
                 <ConditionShow condition={!!onCancel}>
-                    <Button styleType={ButtonType.SECONDARY} onClick={onCancel}>OK</Button>
+                    <Button styleType={ButtonType.LIGHT} onClick={onCancel}>OK</Button>
                 </ConditionShow>
                 <ConditionShow condition={!!onOk}>
                     <Button onClick={onOk}>OK</Button>

@@ -1,0 +1,68 @@
+@import "globalsLess";
+
+@tooltip-border-radius: 8px;
+@tooltip-margin: 4px;
+
+.tooltip-container {
+    position: relative;
+
+    .tooltip {
+        width: 150px;
+        position: absolute;
+        padding: 8px;
+        background-color: @beige-dark-alpha-20;
+        .fontOutfitMedium(12px);
+        color: @brown-soft;
+        transform: scale(0);
+        opacity: 0;
+        transform-origin: top left;
+        transition: transform 0.15s, opacity 0.1s;
+    }
+
+    &.show {
+        .tooltip {
+            transform: scale(1);
+            opacity: 1;
+        }
+    }
+
+    &.left {
+        .tooltip {
+            top: 50%;
+            right: calc(-100% - @tooltip-margin);
+
+            border-top-left-radius: @tooltip-border-radius;
+            border-bottom-left-radius: @tooltip-border-radius;
+            border-bottom-right-radius: @tooltip-border-radius;
+        }
+    }
+
+    &.right {
+        .tooltip {
+            top: 50%;
+            left: calc(100% + @tooltip-margin);
+
+            border-top-right-radius: @tooltip-border-radius;
+            border-bottom-left-radius: @tooltip-border-radius;
+            border-bottom-right-radius: @tooltip-border-radius;
+        }
+    }
+
+    &.top {
+        .tooltip {
+            bottom: calc(-100% - @tooltip-margin);
+            left: 50%;
+
+            border-radius: @tooltip-border-radius;
+        }
+    }
+
+    &.bottom {
+        .tooltip {
+            top: calc(100% + @tooltip-margin);
+            left: 50%;
+
+            border-radius: @tooltip-border-radius;
+        }
+    }
+}

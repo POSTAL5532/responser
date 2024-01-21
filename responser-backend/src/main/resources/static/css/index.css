@@ -4,6 +4,9 @@
 .page.index.dark {
   background-color: #605C55;
 }
+.page.index .page-content {
+  max-width: 1800px;
+}
 .page.index .page-content .section {
   background-color: #F2F0EE;
   width: 100%;

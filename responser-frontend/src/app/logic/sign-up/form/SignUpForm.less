@@ -1,35 +1,17 @@
 @import "globalsLess";
 
 .sign-up-form {
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
 
-    .passwords {
-      display: flex;
-      gap: 20px;
+        .confirm-password {
+            margin-bottom: 40px;
+        }
 
-      .field-layout {
-        width: 100%;
-      }
+        .submit {
+            width: 100%;
+        }
     }
-
-    .button {
-      width: 100%;
-    }
-
-    .login-link {
-      .fontInterMedium();
-      font-size: 16px;
-      color: @primary-color-lighter;
-      cursor: pointer;
-      display: flex;
-      justify-content: center;
-
-      &:hover {
-        color: @primary-color-main;
-      }
-    }
-  }
 }

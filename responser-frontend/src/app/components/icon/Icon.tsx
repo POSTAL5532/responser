@@ -14,24 +14,26 @@ import {ReactComponent as Alert} from './alert.svg';
 import {ReactComponent as ReviewlyLogo} from './reviewly_log.svg';
 import {ReactComponent as User} from './user.svg';
 import {ReactComponent as SpinnerCircle} from './spinner-circle.svg';
+import {ReactComponent as Eye} from './eye.svg';
 import "./Icon.less";
 
 export enum IconType {
-    CANCEL = "CANCEL",
-    DELETE = "DELETE",
-    EDIT = "EDIT",
-    LOGIN = "LOGIN",
-    LOGOUT = "LOGOUT",
-    PLUS = "PLUS",
-    SANDWICH = "SANDWICH",
-    CHECK = "CHECK",
-    CIRCLE_CHECK = "CIRCLE_CHECK",
-    EMPTY = "EMPTY",
-    VERIFIED = "VERIFIED",
-    ALERT = "ALERT",
-    REVIEWLY_LOGO = "REVIEWLY_LOGO",
-    USER = "USER",
-    SPINNER_CIRCLE = "SPINNER_CIRCLE",
+    CANCEL = "cancel",
+    DELETE = "delete",
+    EDIT = "edit",
+    LOGIN = "login",
+    LOGOUT = "logout",
+    PLUS = "plus",
+    SANDWICH = "sandwich",
+    CHECK = "check",
+    CIRCLE_CHECK = "circle_check",
+    EMPTY = "empty",
+    VERIFIED = "verified",
+    ALERT = "alert",
+    REVIEWLY_LOGO = "reviewly_logo",
+    USER = "user",
+    SPINNER_CIRCLE = "spinner_circle",
+    EYE = "eye",
 }
 
 type IconProps = {
@@ -41,7 +43,7 @@ type IconProps = {
 
 export const Icon: React.FC<IconProps> = (props: IconProps) => {
     const {type, className} = props;
-    const resultClassName = classNames("icon", type.toLowerCase(), className);
+    const resultClassName = classNames("icon", type, className);
 
     switch (props.type) {
         case IconType.CANCEL:
@@ -74,6 +76,8 @@ export const Icon: React.FC<IconProps> = (props: IconProps) => {
             return <User className={resultClassName}/>
         case IconType.SPINNER_CIRCLE:
             return <SpinnerCircle className={resultClassName}/>
+        case IconType.EYE:
+            return <Eye className={resultClassName}/>
         default:
             return null;
     }

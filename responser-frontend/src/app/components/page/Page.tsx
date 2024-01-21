@@ -1,6 +1,5 @@
 import React, {PropsWithChildren, useContext, useEffect} from "react";
 import {Helmet} from "react-helmet";
-import classNames from "classnames";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {observer} from "mobx-react";
 import "./Page.less";
@@ -14,13 +13,14 @@ type PageProps = {
  * Page wrapper. Adding tab title.
  */
 const Page: React.FC<PropsWithChildren<PageProps>> = (props: PropsWithChildren<PageProps>) => {
-    const {tabTitle, className, children, hideHeader = false, ...otherProps} = props;
-    const resultClassName = classNames("page", {"hidden-header": hideHeader}, className);
+    const {tabTitle, className, children} = props;
     const globalAppStore = useContext<GlobalAppStore>(GlobalAppStoreContext);
 
     useEffect(() => {
-        globalAppStore.hideHeader = hideHeader;
-    }, [hideHeader]);
+        if (!!className) {
+            globalAppStore.appPageClassName = className;
+        }
+    }, [className]);
 
     useEffect(() => {
         if (globalAppStore.errorsStore.hasErrors) {
@@ -29,7 +29,7 @@ const Page: React.FC<PropsWithChildren<PageProps>> = (props: PropsWithChildren<P
     }, [globalAppStore.errorsStore.hasErrors]);
 
     return (
-        <div  {...otherProps} className={resultClassName}>
+        <div className="page-content">
             <Helmet>
                 <title>Reviewly{tabTitle ? `- ${tabTitle}` : ""}</title>
             </Helmet>

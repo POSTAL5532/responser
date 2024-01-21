@@ -1,29 +1,25 @@
 import React, {ChangeEvent} from "react";
 import {Field, FieldProps} from "formik";
-import {InputField} from "app/components/form/input-field/InputField";
+import {InputField, InputFieldProps} from "app/components/form/input-field/InputField";
 
-type UsernameFieldFieldProps = {
-    onChange: (value: string) => void;
-    disabled?: boolean;
-};
-
-export const UsernameField: React.FC<UsernameFieldFieldProps> = (props: UsernameFieldFieldProps) => {
+export const UsernameField: React.FC<InputFieldProps> = (props: InputFieldProps) => {
 
     return (
         <Field name="userName">
             {({field: {onChange, ...other}, meta: {touched, error}}: FieldProps) => {
                 const onUsernameFieldChange = (event: ChangeEvent<HTMLInputElement>) => {
                     onChange(event);
-                    props.onChange(event.target.value)
+                    props.onChange(event)
                 }
 
                 return (
                     <InputField
                         {...other}
-                        label="Username"
+                        className={props.className}
+                        placeholder={props.placeholder || "Username"}
                         invalid={touched && !!error}
                         onChange={onUsernameFieldChange}
-                        disabled={props.disabled}
+                        styleType={props.styleType}
                         message={(touched && !!error) && error}/>
                 );
             }}

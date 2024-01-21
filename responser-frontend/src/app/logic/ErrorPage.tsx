@@ -4,7 +4,7 @@ import {observer} from "mobx-react";
 import {Button} from "../components/button/Button";
 import {navigateToMainPage} from "./main-page/MainPage";
 
-const ErrorPage: React.FC<FallbackProps> = (props: FallbackProps) => {
+const ErrorPage: React.FC<FallbackProps> = (props?: FallbackProps) => {
     return (
         <div>
             <h1>Something goes wrong!</h1>

@@ -5,14 +5,14 @@ import * as Yup from "yup";
 import {UserAccountDataPayload} from "app/model/UserAccountDataPayload";
 import {Button, ButtonType} from "app/components/button/Button";
 import {PASSWORD_VALIDATION_SCHEMA, PasswordField} from "app/components/form/PasswordField";
-import AuthorizationService from "../../../service/authorization/AuthorizationService";
 import {FormikHelpers} from "formik/dist/types";
 import {EMAIL_VALIDATION_SCHEMA, FULL_NAME_VALIDATION_SCHEMA, USERNAME_VALIDATION_SCHEMA} from "../../../utils/ValidationUtils";
 import {EmailField} from "../../../components/form/EmailField";
 import {UsernameField} from "../../../components/form/UsernameField";
 import {FullNameField} from "../../../components/form/FullNameField";
+import {InputFieldStyleType} from "../../../components/form/input-field/InputField";
+import {Tooltip} from "../../../components/tooltip/Tooltip";
 import "./SignUpForm.less";
-import {Link} from "../../../components/link/Link";
 
 type SignUpFormProps = {
     signUpPayload: UserAccountDataPayload,
@@ -49,29 +49,37 @@ const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) => {
                     validationSchema={SIGNUP_FORM_VALIDATION_SCHEMA}>
 
                 <Form>
-                    <EmailField onChange={value => signUpPayload.email = value} disabled={disabled}/>
+                    <EmailField onChange={({target}) => signUpPayload.email = target.value}
+                                disabled={disabled}
+                                styleType={InputFieldStyleType.SECONDARY}/>
 
-                    <UsernameField onChange={value => signUpPayload.userName = value} disabled={disabled}/>
+                    <UsernameField onChange={({target}) => signUpPayload.userName = target.value}
+                                   disabled={disabled}
+                                   styleType={InputFieldStyleType.SECONDARY}/>
 
-                    <FullNameField onChange={value => signUpPayload.fullName = value} disabled={disabled}/>
+                    <FullNameField onChange={({target}) => signUpPayload.fullName = target.value}
+                                   disabled={disabled}
+                                   styleType={InputFieldStyleType.SECONDARY}/>
 
-                    <div className="passwords">
+                    <Tooltip content="Password must contains minimum eight characters, at least one letter and one number.">
                         <PasswordField name="password"
-                                       label="Password"
-                                       onChange={value => signUpPayload.password = value}
-                                       disabled={disabled}/>
+                                       placeholder="Password"
+                                       onChange={({target}) => signUpPayload.password = target.value}
+                                       disabled={disabled}
+                                       styleType={InputFieldStyleType.SECONDARY}/>
+                    </Tooltip>
 
+                    <Tooltip content="Password must contains minimum eight characters, at least one letter and one number.">
                         <PasswordField name="confirmPassword"
-                                       label="Confirm password"
-                                       onChange={value => signUpPayload.confirmPassword = value}
+                                       placeholder="Confirm password"
+                                       className="confirm-password"
+                                       onChange={({target}) => signUpPayload.confirmPassword = target.value}
                                        validator={passwordEqualsValidator}
-                                       disabled={disabled}/>
-                    </div>
+                                       disabled={disabled}
+                                       styleType={InputFieldStyleType.SECONDARY}/>
+                    </Tooltip>
 
-                    <Button type="submit" disabled={disabled} loading={disabled}>Sign Up</Button>
-                    <div className="login-offer">
-                        Already have an acoount? <Link type="button" href={AuthorizationService.getLoginPagePreparedUrl()}>Login</Link>
-                    </div>
+                    <Button type="submit" className="submit" styleType={ButtonType.PRIMARY} disabled={disabled} loading={disabled}>Sign Up</Button>
                 </Form>
             </Formik>
         </div>

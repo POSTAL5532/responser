@@ -6,9 +6,12 @@ class ApplicationProperties {
         return "/app";
     }
 
-    get gatewayApiUrl(): string {
-
+    get apiUrl(): string {
         return process.env.API_URL;
+    }
+
+    get landingPageUrl(): string {
+        return process.env.LANDING_URL;
     }
 
     get authLoginPageUrl(): string {

@@ -1,117 +1,86 @@
 @import "globalsLess";
 
 .field-container {
-  width: 100%;
-
-  .field {
-    position: relative;
-    height: 56px;
     width: 100%;
-    border-radius: 8px;
-    border: 1px solid @gray-light-2;
-    background-color: @system-color-light-100;
-    .fieldOutlineShadow(@primary, 0%);
-    transition: box-shadow 0.15s, border-color 0.15s;
 
-    input {
-      width: 100%;
-      height: 100%;
-      border: solid 1px;
-      border-radius: 8px;
-      .fontInterMedium();
-      font-size: 16px;
-      color: @dark;
-      padding: 10px 22px 10px 22px;
-
-      &, &:focus, &:active {
-        border-color: transparent;
-        outline: none;
-      }
-
-      &:focus, &:active, &:not(:placeholder-shown), &:-webkit-autofill {
-        & + .label {
-          top: 14px;
-          font-size: 12px;
-          .fontInterRegular();
-        }
-      }
-    }
-
-    &.with-label {
-      input {
-        padding: 22px 22px 8px 22px;
-      }
-    }
-
-    &.with-message {
-      margin-bottom: 4px;
-    }
-
-    .label {
-      pointer-events: none;
-      font-size: 16px;
-      transform: translateY(-50%);
-      position: absolute;
-      top: 50%;
-      left: 22px;
-      transition: top 0.15s, font-size 0.15s, color 0.15s;
-      color: fade(@dark, 50%);
-      .fontInterMedium();
-    }
-
-    &:hover {
-      border-color: fade(@primary, 50%);
-
-      .label {
-        color: @dark;
-      }
-    }
-
-    &.focused {
-      border-color: @primary;
-      .fieldOutlineShadow(@primary, 25%);
-
-      .label {
-        .fontInterRegular();
-        color: @dark;
-      }
-    }
-
-    &.disabled {
-      pointer-events: none;
-      background-color: fade(@gray, 15%);
-    }
-  }
-
-  .message {
-    .fontInterRegular();
-    font-size: 14px;
-    color: @dark;
-  }
-
-  &.invalid {
     .field {
-      border-color: fade(@red, 60%);
+        display: flex;
+        align-items: center;
+        position: relative;
+        height: 50px;
+        width: 100%;
+        border: solid 1px transparent;
+        border-radius: 6px;
+        background-color: @white;
 
-      .label {
-        color: fade(@red, 80%);
-      }
+        input {
+            width: 100%;
+            height: 100%;
+            border: none;
+            .fontOutfitRegular(16px);
+            color: @brown-dark;
+            padding: 0 20px;
+            background-color: transparent;
 
-      &:hover, &.focused {
-        border-color: @red;
+            &, &:focus, &:active {
+                border-color: transparent;
+                outline: none;
+            }
 
-        .label {
-          color: @red;
+            &::placeholder {
+                color: @black-alpha-25;
+            }
+
+            &:-webkit-autofill,
+            &:-webkit-autofill:hover,
+            &:-webkit-autofill:focus,
+            &:-webkit-autofill:active {
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: @brown-dark;
+                -webkit-box-shadow: 0 0 0 1000px transparent inset;
+                box-shadow: 0 0 0 1000px transparent inset;
+            }
         }
-      }
 
-      &.focused {
-        .fieldOutlineShadow(@red, 25%);
-      }
+        .extra-component {
+            .button {
+                height: 40px;
+            }
+        }
+    }
+
+    &.secondary .field {
+        background-color: @beige-alpha-8;
+    }
+
+    &.with-left-extra .field {
+        padding-left: 5px;
+    }
+
+    &.with-right-extra .field {
+        padding-right: 5px;
+    }
+
+    &.with-message .field {
+        margin-bottom: 4px;
+    }
+
+    &.disabled .field {
+        pointer-events: none;
     }
 
     .message {
-      color: @red;
+        .fontOutfitMedium(12px);
+        color: @brown-dark;
     }
-  }
+
+    &.invalid {
+        .field {
+            border-color: @red;
+        }
+
+        .message {
+            color: @red;
+        }
+    }
 }

@@ -1,52 +1,45 @@
-import React, {Component} from "react";
+import React from "react";
 import {observer} from "mobx-react";
 import Page from "../../components/page/Page";
-import {SignUpPageStore} from "./SignUpPageStore";
+import {useSignUpPageStore} from "./SignUpPageStore";
 import SignUpForm from "./form/SignUpForm";
-import {GlobalAppStoreContext} from "app/GlobalAppStore";
-import {ReviewlyLogo} from "../../components/reviewly-logo/ReviewlyLogo";
 import "./SignUpPage.less";
+import {Link, LinkSize} from "../../components/link/Link";
+import AuthorizationService from "../../service/authorization/AuthorizationService";
 
 export const SIGN_UP_PAGE_URL = "/sign-up";
 
-/**
- * Sign up page.
- */
-@observer
-export class SignUpPage extends Component {
+const SignUpPage: React.FC = () => {
 
-    static contextType = GlobalAppStoreContext;
-    context!: React.ContextType<typeof GlobalAppStoreContext>
+    const {signUpPayload, signUpInProcess, signUp} = useSignUpPageStore();
 
-    signUpPageStore: SignUpPageStore = new SignUpPageStore();
-
-    componentDidMount(): void {
-        this.context.logoutAndClearCurrentUser();
+    const onFinish = async (setFieldError?: (field: string, message: string) => void) => {
+        await signUp(setFieldError);
     }
 
-    onFinish = async (setFieldError?: (field: string, message: string) => void) => {
-        await this.signUpPageStore.signUp(setFieldError);
-    }
+    return (
+        <Page tabTitle="Sign Up" className="sign-up-page">
+            <section className="section">
+                <h1 className="sign-up-header">Start for free</h1>
+                <h2 className="sign-up-description">Create new account</h2>
 
-    render(): React.ReactNode {
-        return (
-            <Page tabTitle="SignUp" className="sign-up-page" hideHeader={true}>
-                <div className="description">
-                    <ReviewlyLogo/>
-                    <h1 className="description-header">What is Lorem Ipsum</h1>
-                    <p className="description-content">
-                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever
-                        since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
-                    </p>
-                </div>
-                <div className="sign-up-form-panel">
-                    <h1 className="sign-up-header">Create new user account</h1>
-                    <SignUpForm
-                        disabled={this.signUpPageStore.signUpInProcess}
-                        signUpPayload={this.signUpPageStore.signUpPayload}
-                        onFinish={this.onFinish}/>
-                </div>
-            </Page>
-        );
-    }
+                <SignUpForm
+                    disabled={signUpInProcess}
+                    signUpPayload={signUpPayload}
+                    onFinish={onFinish}/>
+
+                <span className="or">or</span>
+
+                <Link size={LinkSize.BIG} href={AuthorizationService.getLoginPagePreparedUrl()}>
+                    Already have an account? Log in now
+                    <svg className="icon link" width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0.791016" y="0.344727" width="30" height="30" rx="8" fill="#605C55"></rect>
+                        <path d="M13.541 19.8447L18.041 15.3447L13.541 10.8447" stroke="white" stroke-linecap="round" stroke-linejoin="round"></path>
+                    </svg>
+                </Link>
+            </section>
+        </Page>
+    );
 }
+
+export default observer(SignUpPage);

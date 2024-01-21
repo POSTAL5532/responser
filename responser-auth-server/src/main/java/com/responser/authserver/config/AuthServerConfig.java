@@ -57,7 +57,7 @@ public class AuthServerConfig {
             .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
             .csrf().disable()
             .formLogin().loginPage(CommonController.LOGIN_URL).failureUrl(CommonController.LOGIN_URL + "?error=true")
-            .and().logout().logoutUrl(CommonController.LOGOUT_URL).logoutSuccessUrl(properties.getSelfHost())
+            .and().logout().logoutUrl(CommonController.LOGOUT_URL).invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl(properties.getSelfHost())
             .and().getConfigurer(OAuth2AuthorizationServerConfigurer.class).oidc(Customizer.withDefaults())
             .and().build();
     }

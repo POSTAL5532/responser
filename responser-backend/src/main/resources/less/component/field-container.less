@@ -17,6 +17,7 @@
             height: 50px;
             padding: 0 20px;
             .fontOutfitRegular(16px);
+            color: @brown-dark;
 
             &.big {
                 height: 54px;
@@ -31,11 +32,21 @@
                 outline: none;
                 border: none;
             }
+
+            &:-webkit-autofill,
+            &:-webkit-autofill:hover,
+            &:-webkit-autofill:focus,
+            &:-webkit-autofill:active {
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: @brown-dark;
+                -webkit-box-shadow: 0 0 0 1000px transparent inset;
+                box-shadow: 0 0 0 1000px transparent inset;
+            }
         }
     }
 
     .field-message {
-        .fontOutfitMedium(10px);
+        .fontOutfitMedium(12px);
     }
 
     &.error {

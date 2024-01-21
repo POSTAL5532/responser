@@ -4,7 +4,7 @@ import {AUTH_CODE_PAGE_URL, AuthCodePage} from "./logic/auth-code-page/AuthCodeP
 import {GlobalAppStore, GlobalAppStoreContext} from "./GlobalAppStore";
 import AppHeader from "./logic/app-header/AppHeader";
 import {AuthorizedRoute, PermitAllRoute, UnauthorizedRoute} from "./components/CustomRoute";
-import {SIGN_UP_PAGE_URL, SignUpPage} from "./logic/sign-up/SignUpPage";
+import SignUpPage, {SIGN_UP_PAGE_URL} from "./logic/sign-up/SignUpPage";
 import MainPage, {MAIN_PAGE_URL} from "./logic/main-page/MainPage";
 import LoginExtension, {LOGIN_EXTENSION} from "./logic/login-extension/LoginExtension";
 import LogoutExtension, {LOGOUT_EXTENSION} from "./logic/logout-extension/LogoutExtension";
@@ -16,17 +16,21 @@ import ForgotPasswordPage, {FORGOT_PASSWORD_PAGE_URL} from "./logic/forgot-passw
 import RestorePasswordPage, {RESTORE_PASSWORD_PAGE_URL} from "./logic/restore-password/RestorePasswordPage";
 import {ErrorBoundary} from "react-error-boundary";
 import ErrorPage from "./logic/ErrorPage";
+import classNames from "classnames";
+import {observer} from "mobx-react";
+import {AppFooter} from "./logic/app-footer/AppFooter";
 
+@observer
 export class App extends Component {
 
     globalAppStore: GlobalAppStore = new GlobalAppStore();
 
     render(): React.ReactNode {
         return (
-            <div className="app">
+            <div className={classNames("page", this.globalAppStore.appPageClassName)}>
                 <ErrorBoundary FallbackComponent={ErrorPage}>
                     <GlobalAppStoreContext.Provider value={this.globalAppStore}>
-                        <AppHeader title="Reviewly"/>
+                        <AppHeader/>
 
                         <Switch>
                             <UnauthorizedRoute path={SIGN_UP_PAGE_URL} exact component={SignUpPage}/>
@@ -44,6 +48,8 @@ export class App extends Component {
 
                             <Redirect from="*" to={MAIN_PAGE_URL}/>
                         </Switch>
+
+                        <AppFooter/>
                     </GlobalAppStoreContext.Provider>
                 </ErrorBoundary>
             </div>

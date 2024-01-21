@@ -22,9 +22,6 @@
     padding-right: 20px;
   }
 }
-.page.web-resource-details .page-content {
-  max-width: 1860px;
-}
 .page.web-resource-details .page-content .section {
   width: 100%;
   border-radius: 20px;

@@ -1,29 +1,25 @@
 import React, {ChangeEvent} from "react";
 import {Field, FieldProps} from "formik";
-import {InputField} from "app/components/form/input-field/InputField";
+import {InputField, InputFieldProps} from "app/components/form/input-field/InputField";
 
-type FullNameFieldProps = {
-    onChange: (value: string) => void;
-    disabled?: boolean;
-};
-
-export const FullNameField: React.FC<FullNameFieldProps> = (props: FullNameFieldProps) => {
+export const FullNameField: React.FC<InputFieldProps> = (props: InputFieldProps) => {
 
     return (
         <Field name="fullName">
             {({field: {onChange, ...other}, meta: {touched, error}}: FieldProps) => {
                 const onFullNameFieldChange = (event: ChangeEvent<HTMLInputElement>) => {
                     onChange(event);
-                    props.onChange(event.target.value)
+                    props.onChange(event)
                 }
 
                 return (
                     <InputField
                         {...other}
-                        label="Full name"
+                        className={props.className}
+                        placeholder={props.placeholder || "Full name"}
                         invalid={touched && !!error}
                         onChange={onFullNameFieldChange}
-                        disabled={props.disabled}
+                        styleType={props.styleType}
                         message={(touched && !!error) && error}/>
                 );
             }}

@@ -20,7 +20,7 @@ type DropDownMenuButtonProps = {
 }
 
 export const DropDownMenuButton: React.FC<DropDownMenuButtonProps> = (props: DropDownMenuButtonProps) => {
-    const {label, activeLabel, size, className, styleType = ButtonType.SECONDARY, onClick, disabled, dropdownMenuItems} = props;
+    const {label, activeLabel, size, className, styleType = ButtonType.LIGHT, onClick, disabled, dropdownMenuItems} = props;
     const [active, setActive] = useState<boolean>(false);
     const resultClassName = classNames("drop-down-menu-button", {"active": active}, {"disabled": disabled}, size, className);
 

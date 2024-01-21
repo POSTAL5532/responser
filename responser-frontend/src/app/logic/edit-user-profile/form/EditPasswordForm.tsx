@@ -39,17 +39,17 @@ const EditPasswordForm: React.FC<EditPasswordFormProps> = (props: EditPasswordFo
                     validationSchema={EDIT_PASSWORD_FORM_VALIDATION_SCHEMA}>
                 <Form>
                     <PasswordField name="oldPassword"
-                                   label="Old password"
+                                   placeholder="Old password"
                                    onChange={value => updateUserPasswordPayload.oldPassword = value}
                                    disabled={disabled}/>
 
                     <PasswordField name="newPassword"
-                                   label="New password"
+                                   placeholder="New password"
                                    onChange={value => updateUserPasswordPayload.newPassword = value}
                                    disabled={disabled}/>
 
                     <PasswordField name="confirmNewPassword"
-                                   label="Confirm new password"
+                                   placeholder="Confirm new password"
                                    onChange={value => updateUserPasswordPayload.confirmNewPassword = value}
                                    validator={passwordEqualsValidator}
                                    disabled={disabled}/>

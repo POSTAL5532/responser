@@ -21,6 +21,8 @@ export class GlobalAppStore {
 
     errorsStore = new ErrorsStore();
 
+    appPageClassName: string = null;
+
     constructor() {
         makeAutoObservable(this);
         this.init();

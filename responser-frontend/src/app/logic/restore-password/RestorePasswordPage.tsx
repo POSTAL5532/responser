@@ -50,12 +50,12 @@ const RestorePasswordPage: React.FC = () => {
                     validationSchema={RESTORE_PASSWORD_FORM_VALIDATION_SCHEMA}>
                 <Form>
                     <PasswordField name="newPassword"
-                                   label="New password"
+                                   placeholder="New password"
                                    onChange={value => restorePasswordPayload.newPassword = value}
                                    disabled={isDataSubmitting}/>
 
                     <PasswordField name="confirmNewPassword"
-                                   label="Confirm new password"
+                                   placeholder="Confirm new password"
                                    onChange={value => restorePasswordPayload.confirmNewPassword = value}
                                    validator={passwordEqualsValidator}
                                    disabled={isDataSubmitting}/>

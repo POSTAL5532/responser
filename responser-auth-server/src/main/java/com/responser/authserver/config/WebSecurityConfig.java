@@ -33,7 +33,7 @@ public class WebSecurityConfig {
             .csrf().disable()
             .formLogin()
             .loginPage(CommonController.LOGIN_URL).failureUrl(CommonController.LOGIN_URL + "?error=true")
-            .and().logout().logoutUrl(CommonController.LOGOUT_URL).logoutSuccessUrl(properties.getSelfHost())
+            .and().logout().logoutUrl(CommonController.LOGOUT_URL).invalidateHttpSession(true).deleteCookies("JSESSIONID").logoutSuccessUrl(properties.getSelfHost())
             .and().authorizeHttpRequests()
             .requestMatchers("/", CommonController.LOGIN_URL, CommonController.LOGOUT_URL).permitAll()
             .anyRequest().authenticated()

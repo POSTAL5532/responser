@@ -4,8 +4,8 @@ import {Spinner} from "../spinner/Spinner";
 import "./Button.less";
 
 export enum ButtonType {
-    PRIMARY = "PRIMARY",
-    SECONDARY = "SECONDARY",
+    PRIMARY = "primary",
+    LIGHT = "light",
 }
 
 export enum ButtonSize {
@@ -19,12 +19,21 @@ type ButtonProps = {
 } & React.DetailedHTMLProps<React.ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>;
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props: ButtonProps, ref: ForwardedRef<HTMLButtonElement>) => {
-    const {className, disabled, children, styleType = ButtonType.PRIMARY, size, loading, ...otherProps} = props;
+    const {
+        className,
+        disabled,
+        children,
+        styleType ,
+        size,
+        loading,
+        type,
+        ...otherProps
+    } = props;
 
-    const resultClassName = classNames("button", styleType.toLowerCase(), {"disabled": disabled}, size, className);
+    const resultClassName = classNames("button", styleType, {"disabled": disabled}, size, className);
 
     return (
-        <button {...otherProps} className={resultClassName} disabled={disabled} ref={ref}>
+        <button {...otherProps} type={type || "button"} className={resultClassName} disabled={disabled} ref={ref}>
             {loading && <Spinner/>} {children}
         </button>
     );
