@@ -24,6 +24,7 @@ export const InputField: React.FC<InputFieldProps> = (props: InputFieldProps) =>
         value,
         leftExtraComponent,
         rightExtraComponent,
+        styleType,
         ...otherProps
     } = props;
 
@@ -34,7 +35,7 @@ export const InputField: React.FC<InputFieldProps> = (props: InputFieldProps) =>
         {"with-message": !!message},
         {"with-left-extra": !!leftExtraComponent},
         {"with-right-extra": !!rightExtraComponent},
-        props.styleType,
+        styleType,
         className
     );
 

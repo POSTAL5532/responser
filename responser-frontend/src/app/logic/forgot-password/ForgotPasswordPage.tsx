@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import Page from "../../components/page/Page";
 import {Form, Formik} from "formik";
 import {EmailField} from "../../components/form/EmailField";
-import {Button} from "../../components/button/Button";
+import {Button, ButtonType} from "../../components/button/Button";
 import {useForgotPasswordPageStore} from "./ForgotPasswordPageStore";
 import * as Yup from "yup";
 import {EMAIL_VALIDATION_SCHEMA} from "../../utils/ValidationUtils";
@@ -11,6 +11,9 @@ import {Modal} from "../../components/modal/Modal";
 import ApplicationProperties from "../../service/ApplicationProperties";
 import {observer} from "mobx-react";
 import {FormikHelpers} from "formik/dist/types";
+import {PageName} from "../../components/page-name/PageName";
+import "./ForgotPasswordPage.less";
+import {InputFieldStyleType} from "../../components/form/input-field/InputField";
 
 export const FORGOT_PASSWORD_PAGE_URL = "/forgot-password";
 
@@ -28,20 +31,23 @@ const ForgotPasswordPage: React.FC = () => {
     }
 
     return (
-        <Page tabTitle="Restore password">
-            <h2 className="restore-password">Restore password</h2>
+        <Page tabTitle="Restore password" className="forgot-password-page">
+            <section className="section">
+                <PageName>Restore password</PageName>
+                <h2 className="restore-password-description">Restore your account access by email.</h2>
 
-            <div className="restore-password-form">
-                <Formik initialValues={forgotPasswordPayload} onSubmit={onSubmit} validationSchema={RESTORE_PASSWORD_VALIDATION_SCHEMA}>
-                    <Form>
-                        <EmailField onChange={value => forgotPasswordPayload.email = value} disabled={isDataSubmitting}/>
+                <div className="forgot-password-form">
+                    <Formik initialValues={forgotPasswordPayload} onSubmit={onSubmit} validationSchema={RESTORE_PASSWORD_VALIDATION_SCHEMA}>
+                        <Form>
+                            <EmailField styleType={InputFieldStyleType.SECONDARY}
+                                        onChange={({target}) => forgotPasswordPayload.email = target.value}
+                                        disabled={isDataSubmitting}/>
 
-                        <div className="form-controls">
-                            <Button type="submit" loading={isDataSubmitting} disabled={isDataSubmitting}>Restore</Button>
-                        </div>
-                    </Form>
-                </Formik>
-            </div>
+                            <Button type="submit" styleType={ButtonType.PRIMARY} loading={isDataSubmitting} disabled={isDataSubmitting}>Restore</Button>
+                        </Form>
+                    </Formik>
+                </div>
+            </section>
 
             <Modal isOpen={passwordRestoreLinkSent} header="Done" onOk={() => nativeNavigateTo(ApplicationProperties.unauthorizedPageUrl)}>
                 We sent password restore link to your email.

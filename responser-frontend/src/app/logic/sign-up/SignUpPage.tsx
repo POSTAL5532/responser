@@ -6,6 +6,7 @@ import SignUpForm from "./form/SignUpForm";
 import "./SignUpPage.less";
 import {Link, LinkSize} from "../../components/link/Link";
 import AuthorizationService from "../../service/authorization/AuthorizationService";
+import {PageName} from "../../components/page-name/PageName";
 
 export const SIGN_UP_PAGE_URL = "/sign-up";
 
@@ -20,7 +21,7 @@ const SignUpPage: React.FC = () => {
     return (
         <Page tabTitle="Sign Up" className="sign-up-page">
             <section className="section">
-                <h1 className="sign-up-header">Start for free</h1>
+                <PageName className="sign-up-header">Start for free</PageName>
                 <h2 className="sign-up-description">Create new account</h2>
 
                 <SignUpForm
