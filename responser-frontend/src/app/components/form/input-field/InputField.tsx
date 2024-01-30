@@ -39,8 +39,6 @@ export const InputField: React.FC<InputFieldProps> = (props: InputFieldProps) =>
         className
     );
 
-    console.log(props.styleType)
-
     return (
         <div className={resultFieldContainerClassName}>
             <div className="field">

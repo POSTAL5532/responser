@@ -27,8 +27,8 @@ export const Buttons: React.FC = () => {
         <div className="components-container buttons-container">
             <h1>Buttons</h1>
             <div style={{display: "flex", gap: 10}}>
-                <Button size={ButtonSize.SMALL} styleType={loading ? ButtonType.PRIMARY : ButtonType.LIGHT} onClick={() => setLoading(!loading)}>Loading</Button>
-                <Button size={ButtonSize.SMALL} styleType={disabled ? ButtonType.PRIMARY : ButtonType.LIGHT} onClick={() => setDisabled(!disabled)}>Disabled</Button>
+                <Button size={ButtonSize.SMALL} styleType={loading ? ButtonType.DEFAULT : ButtonType.LIGHT} onClick={() => setLoading(!loading)}>Loading</Button>
+                <Button size={ButtonSize.SMALL} styleType={disabled ? ButtonType.DEFAULT : ButtonType.LIGHT} onClick={() => setDisabled(!disabled)}>Disabled</Button>
             </div>
 
             <h3>Default</h3>

@@ -11,6 +11,7 @@ import com.responser.backend.controller.user.payload.UpdateUserPayload;
 import com.responser.backend.controller.user.payload.UserInfoPayload;
 import com.responser.backend.converter.UserConverter;
 import com.responser.backend.model.User;
+import com.responser.backend.service.RatingService;
 import com.responser.backend.service.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -39,6 +40,8 @@ public class UserRestController extends RestApiController {
 
     private final UserConverter userConverter;
 
+    private final RatingService ratingService;
+
     @PostMapping
     public ResponseEntity<Void> registerUser(@Valid @RequestBody CreateUserProfilePayload newUser) {
         log.info("Register new user.");
@@ -57,9 +60,15 @@ public class UserRestController extends RestApiController {
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/current")
     public ResponseEntity<UserInfoPayload> getCurrentUser(Principal principal) {
-        log.info("Get current {} user.", principal.getName());
-        User user = userService.getUser(principal.getName());
-        return ResponseEntity.ok(userConverter.toFullUserInfoPayload(user));
+        String userId = principal.getName();
+
+        log.info("Get current {} user.", userId);
+
+        User user = userService.getUser(userId);
+        UserInfoPayload userPayload = userConverter.toFullUserInfoPayload(user);
+        userPayload.setReviewsCommonRating(ratingService.getUserReviewsRating(userId));
+
+        return ResponseEntity.ok(userPayload);
     }
 
     @PreAuthorize("isAuthenticated()")

@@ -79,7 +79,7 @@ const EditUserProfilePage: React.FC = () => {
             <div className="edit-form-panel">
                 <img alt="User avatar" className="user-avatar" src={
                     !!currentUser?.avatarFileName
-                        ? (ApplicationProperties.fileStorageUrl + "/" + currentUser.avatarFileName)
+                        ? (ApplicationProperties.userAvatarsStorageUrl + "/" + currentUser.avatarFileName)
                         : userAvatarPlaceHolder
                 }/>
                 <Button onClick={() => setEditUserAvatarMode(true)}>Change avatar</Button>

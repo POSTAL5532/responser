@@ -1,15 +1,19 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {observer} from "mobx-react";
 import {nativeNavigateTo, navigateTo} from "../../utils/NavigationUtils";
 import Page from "../../components/page/Page";
 import {useExtensionService} from "../../service/extension/ExtensionService";
 import {Button, ButtonSize} from "../../components/button/Button";
 import applicationProperties from "../../service/ApplicationProperties";
-import {Icon, IconType} from "../../components/icon/Icon";
 import {MessageBlock, MessageBlockType} from "../../components/message-block/MessageBlock";
-import ReviewsList from "./ReviewsList";
-import {useMainPageStore} from "./MainPageStore";
+import {MainPageNavigation, useMainPageStoreNew} from "./MainPageStoreNew";
+import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
+import {MainMenu} from "./main-menu/MainMenu";
+import {PageName} from "../../components/page-name/PageName";
+import classNames from "classnames";
+import {Icon, IconType} from "../../components/icon/Icon";
 import "./MainPage.less";
+import ReviewsPageItem from "./reviews-page-item/MyReviewsPageItem";
 
 export const MAIN_PAGE_URL: string = "/main";
 
@@ -22,24 +26,59 @@ export const navigateToMainPage = (native: boolean = true) => {
 }
 
 const MainPage: React.FC = () => {
+    const {currentUser, refreshCurrentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
+    const {navigation, navigateTo} = useMainPageStoreNew();
+    const [menuHidden, setMenuHidden] = useState(true);
+
     const {checkExtension} = useExtensionService();
     const [extensionChecking, changeExtensionChecking] = useState(true);
     const [extensionExist, changeExtensionExist] = useState(true);
 
-    const {reviews, init, loadNextReviews, hasNextReviews, loadingState} = useMainPageStore();
+    // const {reviews, init, loadNextReviews, hasNextReviews, loadingState} = useMainPageStore();
 
-    const {isReviewsLoading, isNextReviewsLoading} = loadingState;
+
+    //const {isReviewsLoading, isNextReviewsLoading} = loadingState;
 
     useEffect(() => {
-        init();
+        //init();
         checkExtension()
         .catch(() => changeExtensionExist(false))
         .finally(() => changeExtensionChecking(false));
     }, []);
 
+    const getCurrentComponent = (): React.ReactNode => {
+        if (navigation === MainPageNavigation.MY_REVIEWS) {
+            return <ReviewsPageItem/>;
+        }
+        if (navigation === MainPageNavigation.PROFILE) {
+            return <PageName>My profile</PageName>;
+        }
+        if (navigation === MainPageNavigation.SECURITY) {
+            return <PageName>Security settings</PageName>;
+        }
+    }
+
+    const onNavigate = (menuItem: MainPageNavigation) => {
+        setMenuHidden(true);
+        navigateTo(menuItem);
+    }
+
     return (
         <Page className="main-page">
-            <div className="result">
+            <section className="section">
+                <MainMenu user={currentUser} onNavigate={onNavigate} hidden={menuHidden}/>
+
+                {getCurrentComponent()}
+
+                <Button className={classNames("menu-control show-menu", {"hidden": !menuHidden})} onClick={() => setMenuHidden(false)}>
+                    <Icon type={IconType.SANDWICH}/>
+                </Button>
+                <Button className={classNames("menu-control hide-menu", {"hidden": menuHidden})} onClick={() => setMenuHidden(true)}>
+                    <Icon type={IconType.CLOSE}/>
+                </Button>
+            </section>
+
+            {/*<div className="result">
                 <Icon type={IconType.CIRCLE_CHECK}/>
 
                 {!extensionChecking ? <ExtensionExistCheck exist={extensionExist}/> : null}
@@ -57,7 +96,7 @@ const MainPage: React.FC = () => {
                          isLoading={isReviewsLoading}
                          isNextReviewsLoading={isNextReviewsLoading}
                          dontUseCurrentUser={true}
-                         disableReactions={true}/>
+                         disableReactions={true}/>*/}
         </Page>
     );
 }

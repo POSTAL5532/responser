@@ -3,62 +3,78 @@ import classNames from "classnames";
 import {Button, ButtonSize, ButtonType} from "../button/Button";
 import "./DropDownMenuButton.less";
 
-export type MenuItem = {
-    label: React.ReactNode;
-    onClick?: () => void;
-}
+type DropDownMenuButtonChildrenFCType = (closeMenu: () => void, openMenu: () => void) => JSX.Element;
 
 type DropDownMenuButtonProps = {
     label: React.ReactNode;
-    activeLabel?: React.ReactNode;
+    children: DropDownMenuButtonChildrenFCType | React.ReactNode;
     className?: string;
     onClick?: () => void;
-    dropdownMenuItems?: MenuItem[];
+    onOpen?: () => void;
+    onClose?: () => void;
+    onStateChange?: (isOpen: boolean) => void;
     styleType?: ButtonType;
     size?: ButtonSize;
     disabled?: boolean;
 }
 
 export const DropDownMenuButton: React.FC<DropDownMenuButtonProps> = (props: DropDownMenuButtonProps) => {
-    const {label, activeLabel, size, className, styleType = ButtonType.LIGHT, onClick, disabled, dropdownMenuItems} = props;
+    const {
+        label,
+        size,
+        className,
+        styleType = ButtonType.DEFAULT,
+        onClick,
+        onOpen,
+        onClose,
+        onStateChange,
+        children
+    } = props;
+
     const [active, setActive] = useState<boolean>(false);
-    const resultClassName = classNames("drop-down-menu-button", {"active": active}, {"disabled": disabled}, size, className);
+    const resultClassName = classNames("drop-down-menu-button", {"active": active}, className);
 
     const buttonRef = useRef(null);
     const containerRef = useRef(null);
 
-    useOutsideAlerter(buttonRef, containerRef, () => setActive(false));
+    const openDropdown = () => {
+        setActive(true);
+        onStateChange?.(true);
+        onOpen?.();
+        console.log("Call OPEN")
+    }
+
+    const closeDropdown = () => {
+        setActive(false);
+        onStateChange?.(false);
+        onClose?.();
+    }
+
+    useOutsideAlerter(buttonRef, containerRef, closeDropdown);
 
     const onButtonClick = () => {
         onClick?.();
-        setActive(!active);
+
+        if (!active) {
+            openDropdown();
+        } else {
+            closeDropdown();
+        }
     }
 
-    const onItemClick = (originalCallBack: () => void) => {
-        originalCallBack?.();
-        setActive(false);
-    }
+    const renderChildren = () => {
+        if (!!children && typeof children === 'function') {
+            return (children as Function)(closeDropdown, openDropdown);
+        }
 
-    const mapMenuItems = () => {
-        return dropdownMenuItems?.map((item, index) => (
-            <DropDownMenuItem key={index} label={item.label} onClick={() => onItemClick(item.onClick)}/>
-        ));
+        return children;
     }
 
     return (
         <div className={resultClassName}>
-            <Button onClick={onButtonClick} disabled={false} size={size} styleType={styleType} ref={buttonRef} loading={false}>{
-                active ? (activeLabel ? activeLabel : label) : label
-            }</Button>
-            <div className="drop-down-menu" ref={containerRef}>{mapMenuItems()}</div>
-        </div>
-    );
-}
+            <Button onClick={onButtonClick} disabled={false} size={size} styleType={styleType} ref={buttonRef} loading={false}>{label}</Button>
 
-export const DropDownMenuItem: React.FC<MenuItem> = (props: MenuItem) => {
-    return (
-        <div className="dropdown-menu-item" onClick={props.onClick}>
-            {props.label}
+            <div className="drop-down-menu" ref={containerRef}>{renderChildren()}</div>
         </div>
     );
 }

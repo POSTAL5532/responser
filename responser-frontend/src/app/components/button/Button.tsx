@@ -6,6 +6,7 @@ import "./Button.less";
 export enum ButtonType {
     PRIMARY = "primary",
     LIGHT = "light",
+    DEFAULT = "default"
 }
 
 export enum ButtonSize {
@@ -34,7 +35,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props: B
 
     return (
         <button {...otherProps} type={type || "button"} className={resultClassName} disabled={disabled} ref={ref}>
-            {loading && <Spinner/>} {children}
+            {loading ? <Spinner/> : children}
         </button>
     );
 })

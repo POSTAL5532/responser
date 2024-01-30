@@ -6,6 +6,7 @@ import App from "app/App";
 import "styles/common.less"
 import "styles/fonts.less";
 import 'react-tooltip/dist/react-tooltip.css'
+import "nouislider/distribute/nouislider.css";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 

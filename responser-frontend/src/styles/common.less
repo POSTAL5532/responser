@@ -1,15 +1,22 @@
 @import "globalsLess";
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
 }
 
 html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
+    height: 100%;
 
-  body {
-    .fontOutfitRegular();
-    background-color: @ivory;
-    margin: 0;
-  }
+    body {
+        .fontOutfitRegular();
+        background-color: @ivory;
+        margin: 0;
+        height: 100%;
+
+        #root {
+            height: 100%;
+        }
+    }
 }

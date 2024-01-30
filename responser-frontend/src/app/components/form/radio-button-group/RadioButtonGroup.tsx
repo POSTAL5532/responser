@@ -1,7 +1,7 @@
 import React, {ReactElement} from "react";
 import classNames from "classnames";
+import {isEqual} from "lodash";
 import {RadioButton} from "../radio-button/RadioButton";
-import "./RadioButtonGroup.less";
 
 export type RadioButtonGroupOption<T> = {
     value: T,
@@ -29,7 +29,7 @@ export const RadioButtonGroup = <T extends any>(props: RadioButtonGroupGroup<T>)
         return options.map((option, index) => (
             <RadioButton key={index}
                          onClick={() => onButtonClick(option.value)}
-                         checked={option.value === currentValue}
+                         checked={isEqual(option.value, currentValue)}
                          disabled={disabled || option.disabled}
                          label={option.label}/>
         ));

@@ -1,58 +1,20 @@
 @import "globalsLess";
 
 .drop-down-menu-button {
-  position: relative;
+    position: relative;
 
-  .drop-down-menu {
-    top: 46px;
-    right: 0;
-    position: absolute;
-    display: none;
-    z-index: 1;
-    background-color: @system-color-light-100;
-    border: solid 1px @system-color-light-300;
-    border-radius: 8px;
-    .stackShadow2();
-
-    .dropdown-menu-item {
-      padding: 0 20px;
-      height: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-      .fontInterRegular();
-      color: @system-color-dark-400;
-
-      &:not(:last-child) {
-        border-bottom: solid 1px @system-color-light-300;
-      }
-
-      .icon {
-        //height: 16px;
-        //width: 16px;
-
-        path {
-          stroke: @system-color-dark-400;
-          fill: transparent;
-        }
-      }
-
-      &:hover {
-        background-color: @system-color-light-200;
-        color: @primary-color-lighter;
-
-        .icon path {
-          stroke: @primary-color-lighter;
-        }
-      }
-    }
-  }
-
-  &.active {
     .drop-down-menu {
-      display: block;
+        top: 46px;
+        position: absolute;
+        display: none;
+        z-index: 1;
+        background-color: @system-color-light-100;
+        border-radius: 8px;
     }
-  }
+
+    &.active {
+        .drop-down-menu {
+            display: block;
+        }
+    }
 }

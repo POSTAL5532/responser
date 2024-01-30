@@ -15,11 +15,15 @@ import {ReactComponent as ReviewlyLogo} from './reviewly_log.svg';
 import {ReactComponent as User} from './user.svg';
 import {ReactComponent as SpinnerCircle} from './spinner-circle.svg';
 import {ReactComponent as Eye} from './eye.svg';
+import {ReactComponent as Star} from './star.svg';
+import {ReactComponent as HelpCircle} from './help_circle.svg';
+import {ReactComponent as Logout} from './log_out.svg';
+import {ReactComponent as Close} from './close.svg';
 import "./Icon.less";
 
 export enum IconType {
     CANCEL = "cancel",
-    DELETE = "delete",
+    REMOVE = "remove",
     EDIT = "edit",
     LOGIN = "login",
     LOGOUT = "logout",
@@ -34,6 +38,9 @@ export enum IconType {
     USER = "user",
     SPINNER_CIRCLE = "spinner_circle",
     EYE = "eye",
+    STAR = "star",
+    HELP_CIRCLE = "help_circle",
+    CLOSE = "close",
 }
 
 type IconProps = {
@@ -48,14 +55,14 @@ export const Icon: React.FC<IconProps> = (props: IconProps) => {
     switch (props.type) {
         case IconType.CANCEL:
             return <Cancel className={resultClassName}/>
-        case IconType.DELETE:
+        case IconType.REMOVE:
             return <Delete className={resultClassName}/>
         case IconType.EDIT:
             return <Edit className={resultClassName}/>
         case IconType.LOGIN:
             return <Login className={resultClassName}/>
         case IconType.LOGOUT:
-            return <Login className={resultClassName}/>
+            return <Logout className={resultClassName}/>
         case IconType.PLUS:
             return <Plus className={resultClassName}/>
         case IconType.SANDWICH:
@@ -78,6 +85,12 @@ export const Icon: React.FC<IconProps> = (props: IconProps) => {
             return <SpinnerCircle className={resultClassName}/>
         case IconType.EYE:
             return <Eye className={resultClassName}/>
+        case IconType.STAR:
+            return <Star className={resultClassName}/>
+        case IconType.HELP_CIRCLE:
+            return <HelpCircle className={resultClassName}/>
+        case IconType.CLOSE:
+            return <Close className={resultClassName}/>
         default:
             return null;
     }

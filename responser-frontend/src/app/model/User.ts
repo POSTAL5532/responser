@@ -15,9 +15,11 @@ export class User {
 
     fullName: string;
 
+    avatarFileName: string;
+
     emailConfirmed: boolean;
 
-    avatarFileName: string;
+    reviewsCommonRating: number;
 
     creationDate: Moment;
 

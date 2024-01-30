@@ -28,6 +28,8 @@ public class UserInfoPayload {
 
     private Boolean emailConfirmed;
 
+    private Double reviewsCommonRating;
+
     private LocalDateTime creationDate;
 
     private LocalDateTime updateDate;

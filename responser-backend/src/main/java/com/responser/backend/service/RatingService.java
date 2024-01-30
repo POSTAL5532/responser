@@ -61,4 +61,13 @@ public class RatingService {
 
         return ratingQuery.getResultList();
     }
+
+    public Double getUserReviewsRating(String userId) {
+        TypedQuery<Double> reviewsRatingQuery = entityManager.createQuery(
+            "select avg(r.rating) from Review r where r.userId = :userId",
+            Double.class
+        ).setParameter("userId", userId);
+
+        return reviewsRatingQuery.getSingleResult();
+    }
 }

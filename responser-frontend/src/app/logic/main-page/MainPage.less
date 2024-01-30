@@ -1,53 +1,73 @@
 @import "globalsLess";
 
 .main-page {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    .page-content {
+        padding-bottom: 30px;
 
-  .result {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+        .section {
+            background-color: @beige-alpha-8;
+            border-radius: 70px;
+            padding: 30px;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            text-overflow: ellipsis;
 
-    .icon {
-      height: 100px;
-      width: 100px;
-      margin-bottom: 46px;
+            .menu-control {
+                padding: 0;
+                line-height: unset;
+                height: unset;
+                border: none;
+                transition: opacity 0.15s;
+                display: none;
 
-      path {
-        stroke: @system-color-success-500;
-      }
+                &, &:hover {
+                    background-color: transparent;
+                }
+
+                .adaptationMobile({
+                    display: block;
+                });
+
+                .icon {
+                    height: 34px;
+                    width: 34px;
+                }
+
+                &.hide-menu {
+                    position: absolute;
+                    right: 60px;
+                    top: 84px;
+                }
+
+                &.show-menu {
+                    position: absolute;
+                    left: 60px;
+                    top: 84px;
+                }
+
+                &.hidden {
+                    opacity: 0;
+                    pointer-events: none;
+                }
+            }
+
+            .page-item {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                transition: opacity 0.15s;
+
+                .adaptationMobile({
+                    &.hidden {
+                        opacity: 0;
+                    }
+                });
+
+                .page-name {
+                    margin-top: 30px;
+                }
+            }
+        }
     }
-
-    .extension-does-not-exist {
-      margin-bottom: 18px;
-
-      .button {
-        margin-left: 6px;
-      }
-    }
-
-    .success-text {
-      .fontInterRegular();
-      font-size: 22px;
-      max-width: 840px;
-      text-align: center;
-      margin-bottom: 52px;
-      margin-top: 0;
-      color: @system-color-dark-400;
-    }
-  }
-
-  .last-reviews-list-header {
-    .fontInterSemiBold();
-    color: @system-color-dark-400;
-  }
-
-  .reviews {
-    max-width: 840px;
-    min-width: 540px;
-    width: 100%;
-  }
 }

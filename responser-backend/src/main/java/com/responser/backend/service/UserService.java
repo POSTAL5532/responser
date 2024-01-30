@@ -63,6 +63,7 @@ public class UserService {
 
         newUser.setEmailConfirmed(false);
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        newUser.setAvatarFileName("default_avatar.png");
 
         userRepository.save(newUser);
         EmailConfirmation emailConfirmation = emailConfirmationService.createEmailConfirmation(newUser.getId());

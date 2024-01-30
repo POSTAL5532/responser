@@ -16,6 +16,6 @@ export const Spinner: React.FC<SpinnerProps> = (props: SpinnerProps) => {
                                  size={size}
                                  thickness={180}
                                  speed={180}
-                                 color={color || "#6690FF"}
+                                 color={color || "rgba(0, 0, 0, 0.60)"}
                                  secondaryColor="rgba(0, 0, 0, 0)"/>
 }

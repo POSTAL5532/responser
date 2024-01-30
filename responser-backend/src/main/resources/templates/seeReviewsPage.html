@@ -57,6 +57,10 @@
                                            th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).RATING && criteria.sortDirection.name == 'ASC'}"/>
                                     <span>Low rating first</span>
                                 </label>
+                            </div>
+
+                            <p class="menu-group-header">Date</p>
+                            <div class="field-group">
                                 <label class="field radio-button">
                                     <input type="radio" name="sortingField" th:value="${T(com.responser.backend.model.ReviewsCriteriaSortingField).CREATION_DATE.name}" data-sort-direction="DESC"
                                            th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).CREATION_DATE && criteria.sortDirection.name == 'DESC'}"/>
@@ -67,6 +71,10 @@
                                            th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).CREATION_DATE && criteria.sortDirection.name == 'ASC'}"/>
                                     <span>Old first</span>
                                 </label>
+                            </div>
+
+                            <p class="menu-group-header">Popularity</p>
+                            <div class="field-group">
                                 <label class="field radio-button">
                                     <input type="radio" name="sortingField" th:value="${T(com.responser.backend.model.ReviewsCriteriaSortingField).POPULARITY.name}" data-sort-direction="DESC"
                                            th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).POPULARITY && criteria.sortDirection.name == 'DESC'}"/>
@@ -77,9 +85,10 @@
                                            th:checked="${criteria.sortingField == T(com.responser.backend.model.ReviewsCriteriaSortingField).POPULARITY && criteria.sortDirection.name == 'ASC'}"/>
                                     <span>Unpopular first</span>
                                 </label>
-
-                                <input type="text" name="sortDirection" th:value="${criteria.sortDirection}" hidden="hidden">
                             </div>
+
+                            <input type="text" name="sortDirection" th:value="${criteria.sortDirection}" hidden="hidden">
+
                             <button class="button primary small" type="submit">Apply</button>
                         </div>
                     </div>

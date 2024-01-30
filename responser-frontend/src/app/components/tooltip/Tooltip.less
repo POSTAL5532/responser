@@ -16,7 +16,9 @@
         transform: scale(0);
         opacity: 0;
         transform-origin: top left;
-        transition: transform 0.15s, opacity 0.1s;
+        transition-delay: 300ms;
+        transition-duration: 0.15s, 0.1s;
+        transition-property: transform, opacity;
     }
 
     &.show {
@@ -53,7 +55,9 @@
             bottom: calc(-100% - @tooltip-margin);
             left: 50%;
 
-            border-radius: @tooltip-border-radius;
+            border-top-right-radius: @tooltip-border-radius;
+            border-top-left-radius: @tooltip-border-radius;
+            border-bottom-right-radius: @tooltip-border-radius;
         }
     }
 
@@ -62,7 +66,9 @@
             top: calc(100% + @tooltip-margin);
             left: 50%;
 
-            border-radius: @tooltip-border-radius;
+            border-top-right-radius: @tooltip-border-radius;
+            border-bottom-left-radius: @tooltip-border-radius;
+            border-bottom-right-radius: @tooltip-border-radius;
         }
     }
 }

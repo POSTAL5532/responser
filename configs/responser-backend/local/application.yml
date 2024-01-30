@@ -82,6 +82,7 @@ responser:
   fileStorageUrl: http://localhost:5050
   fileStorageUrlSitesIcons: ${responser.fileStorageUrl}/site-icon
   fileStorageUrlUsersAvatars: ${responser.fileStorageUrl}/user-avatar
+  defaultUserAvatarFileName: default_avatar.png
   allowedOrigins:
     - ${responser.selfHost}
     - chrome-extension://bcgepbhdoibfdnpmemhdjifmjdmfacml
