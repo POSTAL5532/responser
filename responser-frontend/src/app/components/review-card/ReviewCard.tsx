@@ -1,0 +1,128 @@
+import React, {useState} from "react";
+import {Review} from "../../model/Review";
+import classNames from "classnames";
+import {ResourceType} from "../../model/ResourceType";
+import {UrlUtils} from "../../utils/UrlUtils";
+import ApplicationProperties from "../../service/ApplicationProperties";
+import {Rating} from "../rating/Rating";
+import {Link} from "../link/Link";
+import {ConditionShow} from "../ConditionShow";
+import {useIsOverflow} from "../../utils/LayoutUtils";
+import {Button} from "../button/Button";
+import {Reaction} from "../reaction/Reaction";
+import {ReviewLike} from "../../model/ReviewLike";
+import {User} from "../../model/User";
+import {Icon, IconType} from "../icon/Icon";
+import {observer} from "mobx-react";
+import "./ReviewCard.less";
+
+type ReviewCardProps = {
+    review: Review;
+    className?: string;
+    currentUser?: User;
+    disableReactions?: boolean;
+    createLike?: (review: Review, positive: boolean) => Promise<void>;
+    updateLike?: (reviewLike: ReviewLike, positive: boolean) => Promise<void>;
+    removeLike?: (reviewLike: ReviewLike) => Promise<void>;
+    underlining?: boolean;
+}
+
+const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
+    const {review, className, currentUser, disableReactions, createLike, updateLike, removeLike, underlining = true} = props;
+    const {webResource, creationDate, rating, text, reviewLikes} = review;
+
+    const [expanded, setExpanded] = useState<boolean>(false);
+    const [wasOverflowed, setWasOverflowed] = useState<boolean>(false);
+    const [likeInProcess, setLikeInProcess] = useState<boolean>(false);
+
+    const textRef = React.useRef<HTMLDivElement>();
+
+    useIsOverflow(textRef, (hasOverflow) => {
+        if (hasOverflow) setWasOverflowed(true)
+    });
+
+    const resultClassName = classNames("review-card", {"underlining": underlining}, className);
+    const rootWebResource = !webResource.parent ? webResource : webResource.parent;
+    const webResourceHost = UrlUtils.getHostFromUrl(rootWebResource.url);
+
+    const positives = [];
+    const negatives = [];
+    let currentUserReviewLike: ReviewLike;
+
+    reviewLikes.forEach(reviewLike => {
+        if (reviewLike.positive) {
+            positives.push(reviewLike);
+        } else {
+            negatives.push(reviewLike)
+        }
+
+        if (reviewLike.userId === currentUser?.id) {
+            currentUserReviewLike = reviewLike;
+        }
+    });
+
+    const onReaction = (positive: boolean) => {
+        setLikeInProcess(true);
+
+        if (!currentUserReviewLike) {
+            createLike?.(review, positive).finally(() => setLikeInProcess(false));
+            return;
+        }
+
+        if (currentUserReviewLike.positive === positive) {
+            removeLike?.(currentUserReviewLike).finally(() => setLikeInProcess(false));
+            return;
+        }
+
+        updateLike?.(currentUserReviewLike, positive).finally(() => setLikeInProcess(false));
+    }
+
+    return (
+        <div className={resultClassName}>
+            <div className="card-header">
+                <div className="resource-info-container">
+                    <img className="resource-icon" src={ApplicationProperties.sitesIconsStorageUrl + "/" + rootWebResource.iconFileName} alt={webResourceHost}/>
+                    <div className="domain-date">
+                        <span className="resource-domain">{webResourceHost}</span>
+                        <span className="review-date">{creationDate.format("MMM Do YY")}</span>
+                    </div>
+                </div>
+
+                <div className={classNames("resource-type", (webResource.resourceType.toLowerCase() + "-type"))}>
+                    {webResource.resourceType === ResourceType.SITE ? "Site review" : "Page review"}
+                </div>
+
+                <Rating value={rating} readonly={true}/>
+            </div>
+
+            <Link className="resource-link" href={webResource.url} target="_blank">{webResource.url}</Link>
+
+            <div className={classNames("review-text", {"expanded": expanded})} ref={textRef}>{text}</div>
+
+            <div className="card-footer">
+                <ConditionShow condition={wasOverflowed}>
+                    <Button className="show-more" onClick={() => setExpanded(!expanded)}>
+                        {expanded ? "show less" : "show more"}
+                    </Button>
+                </ConditionShow>
+
+                <div className="actions-container">
+                    <Reaction count={positives.length}
+                              positive={true}
+                              currentUserReacted={currentUserReviewLike?.positive}
+                              disabled={disableReactions || likeInProcess || !currentUser}
+                              onClick={onReaction}/>
+                    <Reaction count={negatives.length}
+                              positive={false}
+                              currentUserReacted={currentUserReviewLike && !currentUserReviewLike.positive}
+                              disabled={disableReactions || likeInProcess || !currentUser}
+                              onClick={onReaction}/>
+
+                    <Button className="share-button"><Icon type={IconType.SEND}/></Button>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+export default observer(ReviewCard);

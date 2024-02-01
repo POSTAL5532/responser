@@ -1,0 +1,176 @@
+@import "globalsLess";
+
+.review-card {
+    position: relative;
+    padding: 30px;
+    background-color: @white;
+
+    &.underlining {
+        &:after {
+            content: "";
+            background: @beige-alpha-8;
+            position: absolute;
+            bottom: 0;
+            left: 30px;
+            right: 30px;
+            height: 1px;
+        }
+    }
+
+    .card-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 16px;
+
+        .resource-info-container {
+            display: flex;
+            align-items: center;
+            width: 302px;
+
+            .resource-icon {
+                width: 40px;
+                height: 40px;
+                border-radius: 50%;
+                margin-right: 12px;
+            }
+
+            .domain-date {
+                .resource-domain, .review-date {
+                    display: block;
+                    color: @black-alpha-60;
+                }
+
+                .resource-domain {
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    width: 224px;
+                    .fontOutfitMedium(16px);
+                }
+
+                .review-date {
+                    .fontOutfitRegular(10px);
+                }
+            }
+        }
+
+        .resource-type {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 138px;
+            height: 30px;
+            border-radius: 28px;
+            .fontOutfitRegular(16px);
+            color: @black-alpha-60;
+
+            &.site-type {
+                background-color: @lime-alpha-40;
+            }
+
+            &.page-type {
+                background-color: @blue-alpha-20;
+            }
+        }
+
+        .rating {
+            margin-left: auto;
+        }
+    }
+
+    .resource-link {
+        display: block;
+        width: 740px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        .fontOutfitRegular(12px);
+        margin-bottom: 8px;
+    }
+
+    .review-text {
+        .fontOutfitRegular(16px);
+        margin: 0 0 16px;
+        word-wrap: break-word;
+        color: @black-alpha-60;
+
+        &:not(.expanded) {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
+    }
+
+    .card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .show-more {
+            height: 16px;
+            .fontOutfitRegular(12px);
+            border: none;
+            border-radius: unset;
+            width: unset;
+            padding: 0;
+            gap: 4px;
+            color: @black-alpha-60;
+
+            .icon {
+                width: 6px;
+                height: 8px;
+
+                path {
+                    stroke: @black-alpha-60;
+                }
+            }
+
+            &:hover {
+                background-color: transparent;
+                color: @brown-dark;
+
+                .icon path {
+                    stroke: @brown-dark;
+                }
+            }
+        }
+
+        .actions-container {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-left: auto;
+
+            .reaction {
+                margin-right: 12px;
+            }
+
+            .share-button {
+                padding: 0;
+                height: auto;
+                border: 0;
+                border-radius: unset;
+
+                .send {
+                    width: 14px;
+                    height: 14px;
+
+                    path {
+                        stroke: @gray;
+                    }
+                }
+
+                &:hover {
+                    background-color: transparent;
+
+                    .send path {
+                        stroke: @brown-dark;
+                    }
+                }
+            }
+        }
+    }
+}

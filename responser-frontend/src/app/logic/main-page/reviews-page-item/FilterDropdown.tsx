@@ -4,6 +4,7 @@ import {Button, ButtonType} from "../../../components/button/Button";
 import {RadioButtonGroup} from "../../../components/form/radio-button-group/RadioButtonGroup";
 import {ResourceType} from "../../../model/ResourceType";
 import Nouislider from "nouislider-react";
+import {Icon, IconType} from "../../../components/icon/Icon";
 
 type FilterDropdownProps = {
     currentResourceTypeValue: ResourceType;
@@ -27,7 +28,7 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = (props: FilterDropd
     } = props;
 
     return (
-        <DropDownMenuButton label="Filter" className="filter-dropdown" onStateChange={onDropdownStateChange}>
+        <DropDownMenuButton label={<>Filter<Icon type={IconType.SETTINGS_1}/></>} className="filter-dropdown" onStateChange={onDropdownStateChange}>
             {(closeMenu) => (
                 <div className="menu">
                     <p className="menu-group-header">Rating</p>

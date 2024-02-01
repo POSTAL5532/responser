@@ -1,35 +1,37 @@
 @import "globalsLess";
 
-@star-size:24px;
+@star-size: 18px;
 
 .rating {
-  .star {
-    width: @star-size;
-    height: @star-size;
-    margin-right: 10px;
-
-    path {
-      stroke: @primary-color-lighter;
-    }
-
-    &.filled {
-      path{
-        fill: @primary-color-lighter;
-      }
-    }
-  }
-
-  &.disabled {
     .star {
-      path {
-        stroke: @system-color-dark-100;
-      }
+        width: @star-size;
+        height: @star-size;
+        margin-right: 6px;
 
-      &.filled {
-        path{
-          fill: @system-color-dark-100;
+        &.empty {
+            path {
+                fill: @lime-alpha-40;
+            }
         }
-      }
+
+        &.filled {
+            path {
+                fill: @lime;
+            }
+        }
     }
-  }
+
+    &.disabled {
+        .star {
+            path {
+                stroke: @system-color-dark-100;
+            }
+
+            &.filled {
+                path {
+                    fill: @system-color-dark-100;
+                }
+            }
+        }
+    }
 }

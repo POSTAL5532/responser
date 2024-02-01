@@ -12,8 +12,9 @@ import {MainMenu} from "./main-menu/MainMenu";
 import {PageName} from "../../components/page-name/PageName";
 import classNames from "classnames";
 import {Icon, IconType} from "../../components/icon/Icon";
-import "./MainPage.less";
 import ReviewsPageItem from "./reviews-page-item/MyReviewsPageItem";
+import "./MainPage.less";
+import {PageItem} from "./PageItem";
 
 export const MAIN_PAGE_URL: string = "/main";
 
@@ -46,9 +47,9 @@ const MainPage: React.FC = () => {
         .finally(() => changeExtensionChecking(false));
     }, []);
 
-    const getCurrentComponent = (): React.ReactNode => {
+    /*const getCurrentComponent = (): React.ReactNode => {
         if (navigation === MainPageNavigation.MY_REVIEWS) {
-            return <ReviewsPageItem/>;
+            return <ReviewsPageItem hidden={!menuHidden}/>;
         }
         if (navigation === MainPageNavigation.PROFILE) {
             return <PageName>My profile</PageName>;
@@ -56,7 +57,7 @@ const MainPage: React.FC = () => {
         if (navigation === MainPageNavigation.SECURITY) {
             return <PageName>Security settings</PageName>;
         }
-    }
+    }*/
 
     const onNavigate = (menuItem: MainPageNavigation) => {
         setMenuHidden(true);
@@ -68,7 +69,9 @@ const MainPage: React.FC = () => {
             <section className="section">
                 <MainMenu user={currentUser} onNavigate={onNavigate} hidden={menuHidden}/>
 
-                {getCurrentComponent()}
+                {navigation === MainPageNavigation.MY_REVIEWS && <ReviewsPageItem hidden={!menuHidden}/>}
+                {navigation === MainPageNavigation.PROFILE && <PageItem hidden={!menuHidden}><PageName>My profile</PageName></PageItem>}
+                {navigation === MainPageNavigation.SECURITY && <PageItem hidden={!menuHidden}><PageName>My profile</PageName></PageItem>}
 
                 <Button className={classNames("menu-control show-menu", {"hidden": !menuHidden})} onClick={() => setMenuHidden(false)}>
                     <Icon type={IconType.SANDWICH}/>

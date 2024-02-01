@@ -10,6 +10,8 @@ export class WebResource {
 
     resourceType: ResourceType;
 
+    iconFileName: string;
+
     parent: WebResource;
 
     rating: number;

@@ -54,9 +54,9 @@ class ApplicationProperties {
         return process.env.USER_AVATARS_URL;
     }
 
-    /*get userAvatarsStorageUrl(): string {
-        return process.env.USER_AVATARS_URL;
-    }*/
+    get sitesIconsStorageUrl(): string {
+        return process.env.SITES_ICONS_URL;
+    }
 
     get logLevel(): LogLevel {
         return LogLevel[process.env.LOG_LEVEL as keyof typeof LogLevel];
