@@ -1,53 +1,43 @@
 @import "globalsLess";
 
 .radio-button {
-  display: flex;
-  cursor: pointer;
-  align-items: center;
-
-  .border {
-    position: relative;
-    width: 22px;
-    height: 22px;
-    background-color: @system-color-light-100;
-    border: solid 1px @gray;
-    border-radius: 50%;
-    transition: border-width 0.1s ease-out, border-color 0.15s;
-  }
-
-  .label {
-    .fontInterMedium();
-    font-size: 14px;
-    color: @dark;
-    margin-left: 6px;
-  }
-
-  &:hover {
-    .border {
-      border: solid 1px @primary;
-    }
-  }
-
-  &.checked {
-    .border {
-      border-width: 6px;
-      border-color: @primary;
-    }
-  }
-
-  &.disabled {
-    pointer-events: none;
+    display: flex;
+    gap: 4px;
+    cursor: pointer;
+    align-items: center;
 
     .border {
-      border: solid 1px @system-color-dark-100;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 14px;
+        height: 14px;
+        border: solid 1px @beige-dark-alpha-20;
+        border-radius: 50%;
 
-      .circle {
-        background-color: @system-color-dark-100;
-      }
+        .checked-indicator {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            transform: scale(0);
+            transition: 120ms transform ease-in-out;
+            background-color: @black-alpha-60;
+        }
     }
 
     .label {
-      color: @system-color-dark-100;
+        .fontOutfitRegular(14px);
+        color: @black-alpha-60;
+        line-height: 14px;
     }
-  }
+
+    &.checked {
+        .checked-indicator {
+            transform: scale(1);
+        }
+    }
+
+    &.disabled {
+        pointer-events: none;
+    }
 }

@@ -12,14 +12,7 @@ type RadioButtonProps = {
 
 export const RadioButton: React.FC<RadioButtonProps> = (props: RadioButtonProps) => {
     const {onClick, checked = false, label, className, disabled = false} = props
-    const resultClassName = classNames(
-        "radio-button",
-        {
-            "checked": checked,
-            "disabled": disabled
-        },
-        className
-    );
+    const resultClassName = classNames("radio-button", {"checked": checked}, className);
 
     const onRadioButtonClick = () => {
         onClick?.();
@@ -27,7 +20,9 @@ export const RadioButton: React.FC<RadioButtonProps> = (props: RadioButtonProps)
 
     return (
         <div className={resultClassName} onClick={onRadioButtonClick}>
-            <div className="border"></div>
+            <div className="border">
+                <div className="checked-indicator"></div>
+            </div>
             {label ? <span className="label">{label}</span> : null}
         </div>
     );

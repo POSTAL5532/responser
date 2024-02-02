@@ -3,7 +3,7 @@ import React from "react";
 import {DropDownMenuButton} from "../../../components/dropdown-menu-button/DropDownMenuButton";
 import {ReviewsCriteriaSortingField} from "../../../model/ReviewsCriteriaSortingField";
 import {SortDirection} from "../../../model/SortDirection";
-import {Button, ButtonType} from "../../../components/button/Button";
+import {Button, ButtonSize, ButtonType} from "../../../components/button/Button";
 import {RadioButtonGroup} from "../../../components/form/radio-button-group/RadioButtonGroup";
 
 type SortingDropdownProps = {
@@ -44,7 +44,7 @@ export const SortingDropdown: React.FC<SortingDropdownProps> = (props: SortingDr
                         currentValue={currentSortingValue}
                         onChange={setCriteriaSorting}/>
 
-                    <Button styleType={ButtonType.PRIMARY} onClick={() => {
+                    <Button styleType={ButtonType.PRIMARY} size={ButtonSize.SMALL} onClick={() => {
                         closeMenu();
                         loadReviews();
                     }}>Apply</Button>

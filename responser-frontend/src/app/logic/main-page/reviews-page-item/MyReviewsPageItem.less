@@ -19,87 +19,142 @@
             justify-content: space-between;
             margin-bottom: 10px;
 
-            .drop-down-menu-button {
-                .drop-down-menu {
-                    .menu {
-                        padding: 20px;
+            .dropdown-menu-button {
+                .dropdown-menu-trigger {
+                    display: flex;
+                    cursor: pointer;
+                    background-color: transparent;
+                    border: none;
+                    outline: none;
+                    .fontOutfitRegular(14px);
+                    color: @black-alpha-40;
+                    height: 20px;
+                    line-height: 20px;
+                    align-items: center;
+                    gap: 6px;
+                    transition: color 0.15s;
 
-                        .menu-group-header {
-                            margin: 0 0 16px;
-                            .fontOutfitMedium(14px);
-                            color: @black-alpha-60;
-                        }
+                    &:hover {
+                        color: @black-alpha-60;
+                    }
+                }
 
-                        .field-group {
-                            padding-left: 12px;
-                            margin-bottom: 16px;
+                .dropdown-menu-container {
+                    top: 26px;
 
-                            .field:not(:last-child) {
-                                margin-bottom: 14px;
+                    .dropdown-menu {
+                        .menu {
+                            padding: 20px;
+
+                            .menu-group-header {
+                                margin: 0 0 16px;
+                                .fontOutfitMedium(14px);
+                                color: @black-alpha-60;
+                            }
+
+                            .field-group {
+                                padding-left: 12px;
+                                margin-bottom: 16px;
+
+                                .radio-group {
+                                    .radio-button:not(:last-child) {
+                                        margin-bottom: 14px;
+                                    }
+                                }
+                            }
+
+                            .button {
+                                width: 100%;
                             }
                         }
                     }
                 }
 
                 &.sorting-dropdown {
-                    .drop-down-menu {
+                    .dropdown-menu-container {
                         left: 0;
                         width: 230px;
                     }
                 }
 
                 &.filter-dropdown {
-                    .drop-down-menu {
+                    .dropdown-menu-container {
                         right: 0;
                         width: 280px;
 
                         .menu {
-                            .noUi-target {
-                                height: 1px;
-                                border: none;
-                                border-radius: unset;
-                                box-shadow: none;
-                                background-color: @beige-dark-alpha-20;
-                                margin-bottom: 30px;
-                                margin-top: 30px;
+                            .rating-range-labels-container {
+                                display: flex;
+                                align-items: center;
+                                justify-content: space-between;
+                                margin-bottom: 14px;
 
-                                .noUi-base {
-                                    .noUi-origin {
-                                        transition: transform 0.15s;
+                                .rating-label {
+                                    display: flex;
+                                    align-items: center;
+                                    gap: 4px;
+                                    color: @black-alpha-60;
 
-                                        .noUi-handle {
-                                            width: 14px;
-                                            height: 14px;
-                                            top: -7px;
-                                            right: -7px;
-                                            border-radius: 50%;
-                                            background-color: @white;
-                                            border: solid 1px @beige-dark-alpha-20;
+                                    .prefix, .value {
+                                        display: block;
+                                    }
 
-                                            &, &.noUi-active {
-                                                box-shadow: none;
-                                            }
+                                    .value {
+                                        width: 10px;
+                                    }
+                                }
+                            }
 
-                                            &::before, &::after {
-                                                display: none;
+                            .slider-container {
+                                padding-left: 7px;
+                                padding-right: 7px;
+                                margin-bottom: 24px;
+
+                                .noUi-target {
+                                    height: 1px;
+                                    border: none;
+                                    border-radius: unset;
+                                    box-shadow: none;
+                                    background-color: @beige-dark-alpha-20;
+
+                                    .noUi-base {
+                                        .noUi-origin {
+                                            transition: transform 0.15s;
+
+                                            .noUi-handle {
+                                                width: 14px;
+                                                height: 14px;
+                                                top: -7px;
+                                                right: -7px;
+                                                border-radius: 50%;
+                                                background-color: @white;
+                                                border: solid 1px @beige-dark-alpha-20;
+
+                                                &, &.noUi-active {
+                                                    box-shadow: none;
+                                                }
+
+                                                &::before, &::after {
+                                                    display: none;
+                                                }
                                             }
                                         }
                                     }
-                                }
 
-                                .noUi-pips {
-                                    height: 3px;
-                                    padding: 0;
-                                    top: -3px;
+                                    .noUi-pips {
+                                        height: 3px;
+                                        padding: 0;
+                                        top: -3px;
 
-                                    .noUi-marker {
-                                        height: 4px;
-                                        width: 1px;
-                                        background-color: @beige-dark-alpha-20;
-                                    }
+                                        .noUi-marker {
+                                            height: 4px;
+                                            width: 1px;
+                                            background-color: @beige-dark-alpha-20;
+                                        }
 
-                                    .noUi-value {
-                                        display: none;
+                                        .noUi-value {
+                                            display: none;
+                                        }
                                     }
                                 }
                             }

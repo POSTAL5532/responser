@@ -1,20 +1,26 @@
 @import "globalsLess";
 
-.drop-down-menu-button {
+.dropdown-menu-button {
     position: relative;
 
-    .drop-down-menu {
+    .dropdown-menu-container {
         top: 46px;
         position: absolute;
-        display: none;
-        z-index: 1;
-        background-color: @system-color-light-100;
-        border-radius: 8px;
+        z-index: 2;
+        height: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        transition: height 0.15s;
+
+        .dropdown-menu {
+            background-color: @system-color-light-100;
+            border-radius: 8px;
+        }
     }
 
     &.active {
-        .drop-down-menu {
-            display: block;
+        .dropdown-menu-container {
+            height: auto;
         }
     }
 }

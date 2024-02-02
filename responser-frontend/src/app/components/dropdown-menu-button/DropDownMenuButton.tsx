@@ -32,19 +32,21 @@ export const DropDownMenuButton: React.FC<DropDownMenuButtonProps> = (props: Dro
     } = props;
 
     const [active, setActive] = useState<boolean>(false);
-    const resultClassName = classNames("drop-down-menu-button", {"active": active}, className);
+    const [dropdownContainerHeight, setDropdownContainerHeight] = useState<number>(0);
+    const resultClassName = classNames("dropdown-menu-button", {"active": active}, className);
 
     const buttonRef = useRef(null);
     const containerRef = useRef(null);
 
     const openDropdown = () => {
+        setDropdownContainerHeight(containerRef.current.clientHeight);
         setActive(true);
         onStateChange?.(true);
         onOpen?.();
-        console.log("Call OPEN")
     }
 
     const closeDropdown = () => {
+        setDropdownContainerHeight(0);
         setActive(false);
         onStateChange?.(false);
         onClose?.();
@@ -72,9 +74,20 @@ export const DropDownMenuButton: React.FC<DropDownMenuButtonProps> = (props: Dro
 
     return (
         <div className={resultClassName}>
-            <Button onClick={onButtonClick} disabled={false} size={size} styleType={styleType} ref={buttonRef} loading={false}>{label}</Button>
+            <Button
+                className="dropdown-menu-trigger"
+                onClick={onButtonClick}
+                disabled={false}
+                size={size}
+                styleType={styleType}
+                ref={buttonRef}
+                loading={false}>
+                {label}
+            </Button>
 
-            <div className="drop-down-menu" ref={containerRef}>{renderChildren()}</div>
+            <div className="dropdown-menu-container" style={{height: dropdownContainerHeight}}>
+                <div className="dropdown-menu" ref={containerRef}>{renderChildren()}</div>
+            </div>
         </div>
     );
 }
