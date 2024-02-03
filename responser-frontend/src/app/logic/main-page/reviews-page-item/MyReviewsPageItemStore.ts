@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {action, makeAutoObservable} from "mobx";
+import {action, computed, makeAutoObservable} from "mobx";
 import {Logger} from "../../../utils/Logger";
 import {ReviewService} from "../../../service/ReviewService";
 import {Review} from "../../../model/Review";
@@ -23,6 +23,8 @@ export class MyReviewsPageItemStore {
     currentPageNumber: number;
 
     hasNextReviews: boolean;
+
+    totalReviewsCount: number = 0;
 
     reviewsRequestCriteria: ReviewsRequestCriteria = new ReviewsRequestCriteria();
 
@@ -58,6 +60,7 @@ export class MyReviewsPageItemStore {
 
         this.reviews = reviewsResponse.data;
         this.hasNextReviews = !reviewsResponse.isLast;
+        this.totalReviewsCount = reviewsResponse.totalElements;
     }
 
     loadNextReviews = async () => {
@@ -97,6 +100,11 @@ export class ReviewsPageItemStoreLoadingState {
 
     constructor() {
         makeAutoObservable(this);
+    }
+
+    @computed
+    get hasAnyLoading(): boolean {
+        return this.isReviewsLoading || this.isNextReviewsLoading;
     }
 }
 

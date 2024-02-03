@@ -14,6 +14,7 @@ type FilterDropdownProps = {
     maxRating: number;
     onRatingRangeChange: (values: number[]) => void;
     onDropdownStateChange?: (isOpen: boolean) => void;
+    disabled?: boolean;
 }
 
 export const FilterDropdown: React.FC<FilterDropdownProps> = (props: FilterDropdownProps) => {
@@ -24,17 +25,20 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = (props: FilterDropd
         maxRating,
         onRatingRangeChange,
         onDropdownStateChange,
-        loadReviews
+        loadReviews,
+        disabled = false
     } = props;
 
     return (
-        <DropDownMenuButton label={<>Filter<Icon type={IconType.SETTINGS_1}/></>} className="filter-dropdown" onStateChange={onDropdownStateChange}>
+        <DropDownMenuButton label={<>Filter<Icon type={IconType.SETTINGS_1}/></>} className="filter-dropdown" onStateChange={onDropdownStateChange}
+                            disabled={disabled}>
             {(closeMenu) => (
                 <div className="menu">
                     <p className="menu-group-header">Rating</p>
 
                     <div className="field-group">
                         <RadioButtonGroup<ResourceType>
+                            disabled={disabled}
                             options={[
                                 {label: "Site", value: ResourceType.SITE},
                                 {label: "Page", value: ResourceType.PAGE},
@@ -58,14 +62,16 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = (props: FilterDropd
                     </div>
 
                     <div className="slider-container">
-                        <Nouislider range={{min: 1, max: 5}}
-                                    start={[minRating, maxRating]}
-                                    step={1}
-                                    pips={{mode: 'steps', density: -1}}
-                                    onSlide={onRatingRangeChange}/>
+                        <Nouislider
+                            disabled={disabled}
+                            range={{min: 1, max: 5}}
+                            start={[minRating, maxRating]}
+                            step={1}
+                            pips={{mode: 'steps', density: -1}}
+                            onSlide={onRatingRangeChange}/>
                     </div>
 
-                    <Button styleType={ButtonType.PRIMARY} size={ButtonSize.SMALL} onClick={() => {
+                    <Button styleType={ButtonType.PRIMARY} size={ButtonSize.SMALL} disabled={disabled} onClick={() => {
                         closeMenu();
                         loadReviews();
                     }}>Apply</Button>

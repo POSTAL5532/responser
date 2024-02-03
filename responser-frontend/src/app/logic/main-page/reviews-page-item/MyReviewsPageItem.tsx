@@ -13,8 +13,8 @@ import {SortingDropdown} from "./SortingDropdown";
 import {FilterDropdown} from "./FilterDropdown";
 import classNames from "classnames";
 import ReviewCard from "../../../components/review-card/ReviewCard";
-import "./MyReviewsPageItem.less";
 import {PageItem} from "../PageItem";
+import "./MyReviewsPageItem.less";
 
 type MyReviewsPageItemProps = {
     hidden: boolean;
@@ -30,6 +30,7 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
     const {
         init,
         reviews,
+        totalReviewsCount,
         reviewsRequestCriteria,
         setCriteriaSorting,
         loadReviews,
@@ -38,7 +39,7 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
         loadingState
     } = useMyReviewsPageItem();
 
-    const {isReviewsLoading, isNextReviewsLoading} = loadingState;
+    const {isReviewsLoading, isNextReviewsLoading, hasAnyLoading} = loadingState;
 
     useEffect(() => {
         if (!!currentUser) {
@@ -62,16 +63,20 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
 
             <div className="filter-form">
                 <InputField
+                    disabled={hasAnyLoading}
                     className="search-filed"
                     placeholder="Enter URL"
-                    rightExtraComponent={<Button styleType={ButtonType.PRIMARY}><Icon type={IconType.SEARCH}/>Search</Button>}/>
+                    rightExtraComponent={<Button styleType={ButtonType.PRIMARY} disabled={hasAnyLoading}><Icon type={IconType.SEARCH}/>Search</Button>}/>
 
                 <div className="sorting-filter-container">
                     <SortingDropdown
+                        disabled={hasAnyLoading}
                         currentSortingValue={currentSortingValue}
                         setCriteriaSorting={setCriteriaSorting}
                         onDropdownStateChange={setShowBlurSorting}
                         loadReviews={loadReviews}/>
+
+                    <p className="total-reviews-count">{totalReviewsCount} reviews</p>
 
                     <FilterDropdown
                         currentResourceTypeValue={reviewsRequestCriteria.resourceType}
@@ -85,7 +90,7 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
             </div>
 
             <div className="reviews-list">
-                {isReviewsLoading ? <div className="reviews-loading"><Spinner/></div> : reviews.map(mapReviewCard)}
+               {isReviewsLoading ? <div className="reviews-loading"><Spinner/></div> : reviews.map(mapReviewCard)}
 
                 <ConditionShow condition={!isReviewsLoading && reviews.length < 1}>
                     <NoReviews/>
@@ -93,7 +98,7 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
 
                 <ConditionShow condition={reviews.length > 0 && hasNextReviews}>
                     <div className="load-next-reviews">
-                        <Button onClick={loadNextReviews} loading={isNextReviewsLoading} disabled={isNextReviewsLoading}>Load more reviews</Button>
+                        <Button onClick={loadNextReviews} loading={isNextReviewsLoading} disabled={hasAnyLoading}>Load more reviews</Button>
                     </div>
                 </ConditionShow>
 
@@ -108,8 +113,8 @@ export default observer(MyReviewsPageItem);
 const NoReviews: React.FC = () => {
     return (
         <div className="no-reviews">
-            <Icon type={IconType.EMPTY}/>
-            <span className="label">Create a first review.</span>
+            <span className="text">No reviews.</span>
+            <span className="text">Try to change filter settings.</span>
         </div>
     );
 }
