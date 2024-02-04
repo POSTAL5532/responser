@@ -5,7 +5,7 @@ import {useParams} from "react-router";
 import {useRestorePasswordPageStore} from "./RestorePasswordPageStore";
 import {FieldValidator, Form, Formik} from "formik";
 import {Button, ButtonType} from "../../components/button/Button";
-import {Modal} from "../../components/modal/Modal";
+//import {Modal} from "../../components/modal/Modal";
 import {nativeNavigateTo} from "../../utils/NavigationUtils";
 import ApplicationProperties from "../../service/ApplicationProperties";
 import * as Yup from "yup";
@@ -73,9 +73,9 @@ const RestorePasswordPage: React.FC = () => {
                 </div>
             </section>
 
-            <Modal isOpen={passwordRestored} header="Done" onOk={() => nativeNavigateTo(ApplicationProperties.unauthorizedPageUrl)}>
+            {/*<Modal isOpen={passwordRestored} header="Done" onOk={() => nativeNavigateTo(ApplicationProperties.unauthorizedPageUrl)}>
                 Your password was changed. Now you can login with your new password.
-            </Modal>
+            </Modal>*/}
         </Page>
     );
 }

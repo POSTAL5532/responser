@@ -3,7 +3,6 @@ import {Review} from "../../model/Review";
 import classNames from "classnames";
 import {ResourceType} from "../../model/ResourceType";
 import {UrlUtils} from "../../utils/UrlUtils";
-import ApplicationProperties from "../../service/ApplicationProperties";
 import {Rating} from "../rating/Rating";
 import {Link} from "../link/Link";
 import {ConditionShow} from "../ConditionShow";
@@ -15,21 +14,36 @@ import {User} from "../../model/User";
 import {Icon, IconType} from "../icon/Icon";
 import {observer} from "mobx-react";
 import "./ReviewCard.less";
+import {getWebResourceIconUrl} from "../../utils/ResourcesUtils";
 
 type ReviewCardProps = {
     review: Review;
     className?: string;
     currentUser?: User;
     disableReactions?: boolean;
+    underlining?: boolean;
+
     createLike?: (review: Review, positive: boolean) => Promise<void>;
     updateLike?: (reviewLike: ReviewLike, positive: boolean) => Promise<void>;
     removeLike?: (reviewLike: ReviewLike) => Promise<void>;
-    underlining?: boolean;
+
+    onEditReviewClick?: (reviewId: string) => void;
 }
 
 const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
-    const {review, className, currentUser, disableReactions, createLike, updateLike, removeLike, underlining = true} = props;
-    const {webResource, creationDate, rating, text, reviewLikes} = review;
+    const {
+        review,
+        className,
+        currentUser,
+        disableReactions,
+        createLike,
+        updateLike,
+        removeLike,
+        underlining = true,
+        onEditReviewClick
+    } = props;
+
+    const {id, webResource, creationDate, rating, text, reviewLikes} = review;
 
     const [expanded, setExpanded] = useState<boolean>(false);
     const [wasOverflowed, setWasOverflowed] = useState<boolean>(false);
@@ -81,7 +95,7 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
         <div className={resultClassName}>
             <div className="card-header">
                 <div className="resource-info-container">
-                    <img className="resource-icon" src={ApplicationProperties.sitesIconsStorageUrl + "/" + rootWebResource.iconFileName} alt={webResourceHost}/>
+                    <img className="resource-icon" src={getWebResourceIconUrl(webResource)} alt={webResourceHost}/>
                     <div className="domain-date">
                         <span className="resource-domain">{webResourceHost}</span>
                         <span className="review-date">{creationDate.format("MMM Do YY")}</span>
@@ -107,6 +121,10 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
                 </ConditionShow>
 
                 <div className="actions-container">
+                    <ConditionShow condition={!!onEditReviewClick}>
+                        <Button className="edit-review" onClick={() => onEditReviewClick(id)}><Icon type={IconType.EDIT}/> Edit</Button>
+                    </ConditionShow>
+
                     <Reaction count={positives.length}
                               positive={true}
                               currentUserReacted={currentUserReviewLike?.positive}

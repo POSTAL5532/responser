@@ -1,0 +1,81 @@
+@import "globalsLess";
+
+@import "globalsLess";
+
+.text-area-container {
+    width: 100%;
+
+    .text-area {
+        display: flex;
+        align-items: center;
+        position: relative;
+        height: 100px;
+        width: 100%;
+        border: solid 1px transparent;
+        border-radius: 6px;
+        background-color: @white;
+
+        textarea {
+            width: 100%;
+            height: 100%;
+            border: none;
+            .fontOutfitRegular(18px);
+            color: @black-alpha-60;
+            padding: 20px;
+            background-color: transparent;
+            resize: none;
+
+            &, &:focus, &:active {
+                border-color: transparent;
+                outline: none;
+            }
+
+            &::placeholder {
+                color: @black-alpha-25;
+            }
+
+            &:-webkit-autofill,
+            &:-webkit-autofill:hover,
+            &:-webkit-autofill:focus,
+            &:-webkit-autofill:active {
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: @brown-dark;
+                -webkit-box-shadow: 0 0 0 1000px transparent inset;
+                box-shadow: 0 0 0 1000px transparent inset;
+            }
+        }
+
+        .extra-component {
+            .button {
+                height: 40px;
+            }
+        }
+    }
+
+    &.secondary .text-area {
+        background-color: @beige-alpha-8;
+    }
+
+    &.with-message .text-area {
+        margin-bottom: 4px;
+    }
+
+    &.disabled .text-area {
+        pointer-events: none;
+    }
+
+    .message {
+        .fontOutfitMedium(12px);
+        color: @brown-dark;
+    }
+
+    &.invalid {
+        .text-area {
+            border-color: @red;
+        }
+
+        .message {
+            color: @red;
+        }
+    }
+}

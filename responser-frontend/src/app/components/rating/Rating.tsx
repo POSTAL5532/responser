@@ -17,7 +17,7 @@ export const Rating: React.FC<RatingProps> = (props: RatingProps) => {
     const resultClassName = classNames("rating", {"readonly": readonly, "disabled": disabled,}, className);
 
     const onRatingChange = (value: number) => {
-        if (!disabled) onChange(value);
+        if (!disabled) onChange?.(value);
     }
 
     return (

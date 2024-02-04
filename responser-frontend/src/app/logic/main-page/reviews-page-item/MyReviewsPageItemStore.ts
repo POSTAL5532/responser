@@ -1,5 +1,5 @@
 import {useState} from "react";
-import {action, computed, makeAutoObservable} from "mobx";
+import {action, computed, makeAutoObservable, runInAction} from "mobx";
 import {Logger} from "../../../utils/Logger";
 import {ReviewService} from "../../../service/ReviewService";
 import {Review} from "../../../model/Review";
@@ -7,6 +7,7 @@ import {Pagination} from "../../../model/Pagination";
 import {ReviewsRequestCriteria} from "../../../model/ReviewsRequestCriteria";
 import {ReviewsCriteriaSortingField} from "../../../model/ReviewsCriteriaSortingField";
 import {SortDirection} from "../../../model/SortDirection";
+import {ReviewData} from "../../../model/ReviewData";
 
 export class MyReviewsPageItemStore {
 
@@ -17,6 +18,10 @@ export class MyReviewsPageItemStore {
     reviewService: ReviewService = new ReviewService();
 
     reviews: Review[] = [];
+
+    editingReview: Review = null;
+
+    editingReviewData: ReviewData = null;
 
     loadingState: ReviewsPageItemStoreLoadingState = new ReviewsPageItemStoreLoadingState();
 
@@ -55,7 +60,7 @@ export class MyReviewsPageItemStore {
 
         this.loadingState.isReviewsLoading = true;
         const reviewsResponse = await this.reviewService.getReviews(this.reviewsRequestCriteria, pagination).finally(
-            () => this.loadingState.isReviewsLoading = false
+            () => runInAction(() => this.loadingState.isReviewsLoading = false)
         );
 
         this.reviews = reviewsResponse.data;
@@ -72,12 +77,49 @@ export class MyReviewsPageItemStore {
 
         this.loadingState.isNextReviewsLoading = true;
         const reviewsResponse = await this.reviewService.getReviews(this.reviewsRequestCriteria, pagination).finally(
-            () => this.loadingState.isNextReviewsLoading = false
+            () => runInAction(() => this.loadingState.isNextReviewsLoading = false)
         );
 
         this.reviews.push(...reviewsResponse.data);
         this.currentPageNumber += 1;
         this.hasNextReviews = !reviewsResponse.isLast;
+    }
+
+    initReviewForEdit = async (reviewId: string) => {
+        this.logger.debug("Load review for editing:", reviewId, " - begun");
+
+        this.loadingState.isEditingReviewLoading = true;
+        this.editingReview = await this.reviewService.getReview(reviewId).finally(
+            () => runInAction(() => this.loadingState.isEditingReviewLoading = false)
+        );
+
+        this.editingReviewData = new ReviewData();
+        this.editingReviewData.resourceId = this.editingReview.resourceId;
+        this.editingReviewData.text = this.editingReview.text;
+        this.editingReviewData.rating = this.editingReview.rating;
+
+        this.logger.debug("Load review for editing:", reviewId, " - finish");
+    }
+
+    updateReview = async () => {
+        this.logger.debug("Update editing review:", this.editingReview.id, " - begun");
+
+        this.loadingState.isEditingReviewSaving = true;
+        console.log(this.editingReviewData);
+
+        const updatedReview: Review = await this.reviewService.updateReview(this.editingReview.id, this.editingReviewData).finally(
+            () => runInAction(() => this.loadingState.isEditingReviewSaving = false)
+        );
+
+        const reviewIndex = this.reviews.findIndex(review => review.id === updatedReview.id);
+        this.reviews[reviewIndex] = updatedReview;
+
+        this.logger.debug("Update editing review:", this.editingReview.id, " - finish");
+    }
+
+    cleanEditingData = () => {
+        this.editingReview = null;
+        this.editingReviewData = null;
     }
 
     @action
@@ -97,6 +139,10 @@ export class ReviewsPageItemStoreLoadingState {
     isReviewsLoading: boolean = false;
 
     isNextReviewsLoading: boolean = false;
+
+    isEditingReviewLoading: boolean = false;
+
+    isEditingReviewSaving: boolean = false;
 
     constructor() {
         makeAutoObservable(this);

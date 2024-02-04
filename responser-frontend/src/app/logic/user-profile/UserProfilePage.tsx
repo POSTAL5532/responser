@@ -10,7 +10,7 @@ import {useUserProfilePageStore} from "./UserProfilePageStore";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {Button} from "../../components/button/Button";
 import {navigateToEditUserPage} from "../edit-user-profile/EditUserProfilePage";
-import {Modal} from "../../components/modal/Modal";
+//import {Modal} from "../../components/modal/Modal";
 import "./UserProfilePage.less";
 
 export const USER_PROFILE_PAGE_URL = "/user-profile";
@@ -45,9 +45,9 @@ const UserProfilePage: React.FC = () => {
                                          confirmationResent={isConfirmationResent}/>
             </div>
 
-            <Modal isOpen={isModalOpen} header="Done" onOk={() => setIsModalOpen(false)}>
+            {/*<Modal isOpen={isModalOpen} header="Done" onOk={() => setIsModalOpen(false)}>
                 Confirmation message was resent. Check your mailbox and confirm email. If message didn't receive - check spam folder.
-            </Modal>
+            </Modal>*/}
         </Page>
     );
 }

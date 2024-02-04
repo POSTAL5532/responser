@@ -1,37 +1,91 @@
 import React, {PropsWithChildren} from "react";
 import ReactModal from "react-modal";
 import classNames from "classnames";
-import {Button, ButtonType} from "../button/Button";
-import "./Modal.less";
 import {ConditionShow} from "../ConditionShow";
+import {Icon, IconType} from "../icon/Icon";
+import "./Modal.less";
 
-export type ModalProps = PropsWithChildren<{
+const MODAL_HEADER_DISPLAY_NAME = "Header";
+const MODAL_BODY_DISPLAY_NAME = "Body";
+const MODAL_FOOTER_DISPLAY_NAME = "Footer";
+
+const getChildrenOnDisplayName = (children: React.ReactNode, displayName: string) => (
+    React.Children.map(
+        children,
+        (child: any) => child.type.displayName === displayName ? child : null
+    )
+);
+
+type ModalProps = PropsWithChildren<{
     isOpen: boolean;
-    header: string;
     className?: string;
-    onOk?: () => void;
-    onCancel?: () => void;
-
 }>;
 
-export const Modal: React.FC<ModalProps> = (props: ModalProps) => {
-    const {isOpen, className, children, header, onOk, onCancel} = props;
+type ModalSubcomponents = {
+    Header: React.FC<HeaderProps>;
+    Body: React.FC<PropsWithChildren>;
+    Footer: React.FC<PropsWithChildren>;
+}
+
+const Modal: React.FC<ModalProps> & ModalSubcomponents = (props: ModalProps) => {
+    const {isOpen, className, children} = props;
+
     const resultClassName = classNames("modal", className);
+
+    const header = getChildrenOnDisplayName(children, MODAL_HEADER_DISPLAY_NAME);
+    const body = getChildrenOnDisplayName(children, MODAL_BODY_DISPLAY_NAME);
+    const footer = getChildrenOnDisplayName(children, MODAL_FOOTER_DISPLAY_NAME);
 
     return (
         <ReactModal isOpen={isOpen} className={resultClassName} overlayClassName="modal-overlay" ariaHideApp={false}>
-            <h1 className="modal-header">{header}</h1>
-            <div className="modal-body">
-                {children}
-            </div>
-            <ConditionShow condition={!!onOk || !!onCancel}>
-                <ConditionShow condition={!!onCancel}>
-                    <Button styleType={ButtonType.LIGHT} onClick={onCancel}>OK</Button>
-                </ConditionShow>
-                <ConditionShow condition={!!onOk}>
-                    <Button onClick={onOk}>OK</Button>
-                </ConditionShow>
-            </ConditionShow>
+            {header}
+            {body}
+            {footer}
         </ReactModal>
     );
 }
+
+export default Modal;
+
+type HeaderProps = PropsWithChildren<{
+    onClose?: () => void;
+}>;
+
+const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
+    const {children, onClose} = props;
+
+    return(
+        <div className="modal-header">
+            {children}
+
+            <ConditionShow condition={!!onClose}>
+                <button className="close-modal" onClick={onClose}><Icon type={IconType.CLOSE}/></button>
+            </ConditionShow>
+        </div>
+    );
+}
+
+Header.displayName = MODAL_HEADER_DISPLAY_NAME;
+Modal.Header = Header;
+
+const Body: React.FC<PropsWithChildren> = (props: PropsWithChildren) => {
+    return(
+        <div className="modal-body">
+            {props.children}
+        </div>
+    );
+}
+
+Body.displayName = MODAL_BODY_DISPLAY_NAME;
+Modal.Body = Body;
+
+const Footer: React.FC<PropsWithChildren> = (props: PropsWithChildren) => {
+    return(
+        <div className="modal-footer">
+            {props.children}
+        </div>
+    );
+}
+
+Footer.displayName = MODAL_FOOTER_DISPLAY_NAME;
+Modal.Footer = Footer;

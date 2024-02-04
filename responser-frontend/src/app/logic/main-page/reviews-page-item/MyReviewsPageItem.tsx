@@ -14,6 +14,7 @@ import {FilterDropdown} from "./FilterDropdown";
 import classNames from "classnames";
 import ReviewCard from "../../../components/review-card/ReviewCard";
 import {PageItem} from "../PageItem";
+import EditReviewModal from "./EditReviewModal";
 import "./MyReviewsPageItem.less";
 
 type MyReviewsPageItemProps = {
@@ -26,20 +27,32 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
     const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const [showBlurSorting, setShowBlurSorting] = useState(false);
     const [showBlurFilter, setShowBlurFilter] = useState(false);
+    const [showEditReviewModal, setShowEditReviewModal] = useState(false);
 
     const {
         init,
         reviews,
+        editingReview,
+        editingReviewData,
         totalReviewsCount,
         reviewsRequestCriteria,
         setCriteriaSorting,
         loadReviews,
         loadNextReviews,
         hasNextReviews,
-        loadingState
+        loadingState,
+        initReviewForEdit,
+        cleanEditingData,
+        updateReview
     } = useMyReviewsPageItem();
 
-    const {isReviewsLoading, isNextReviewsLoading, hasAnyLoading} = loadingState;
+    const {
+        isReviewsLoading,
+        isNextReviewsLoading,
+        isEditingReviewLoading,
+        isEditingReviewSaving,
+        hasAnyLoading
+    } = loadingState;
 
     useEffect(() => {
         if (!!currentUser) {
@@ -47,14 +60,34 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
         }
     }, [currentUser]);
 
-    const mapReviewCard = (review: Review, index: number, array: Review[]) => {
-        return <ReviewCard key={review.id} review={review} currentUser={currentUser} underlining={index < array.length - 1}/>;
-    }
-
     const currentSortingValue = new SortingWrapper(reviewsRequestCriteria.sortingField, reviewsRequestCriteria.sortDirection);
+
     const onRatingChange = (range: number[]) => {
         reviewsRequestCriteria.minRating = Math.trunc(range[0]);
         reviewsRequestCriteria.maxRating = Math.trunc(range[1]);
+    }
+
+    const onEditReviewClick = (reviewId: string) => {
+        setShowEditReviewModal(true);
+        initReviewForEdit(reviewId);
+    }
+
+    const onUpdateReview = () => {
+        updateReview().finally(() => setShowEditReviewModal(false));
+    }
+
+    const onEditModalClose = () => {
+        setShowEditReviewModal(false)
+        cleanEditingData();
+    }
+
+    const mapReviewCard = (review: Review, index: number, array: Review[]) => {
+        return <ReviewCard
+            key={review.id}
+            review={review}
+            currentUser={currentUser}
+            underlining={index < array.length - 1}
+            onEditReviewClick={onEditReviewClick}/>;
     }
 
     return (
@@ -90,7 +123,7 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
             </div>
 
             <div className="reviews-list">
-               {isReviewsLoading ? <div className="reviews-loading"><Spinner/></div> : reviews.map(mapReviewCard)}
+                {isReviewsLoading ? <div className="reviews-loading"><Spinner/></div> : reviews.map(mapReviewCard)}
 
                 <ConditionShow condition={!isReviewsLoading && reviews.length < 1}>
                     <NoReviews/>
@@ -104,6 +137,15 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
 
                 <BlurPanel active={showBlurSorting || showBlurFilter}/>
             </div>
+
+            <EditReviewModal
+                show={showEditReviewModal}
+                editingReview={editingReview}
+                editingReviewData={editingReviewData}
+                onClose={onEditModalClose}
+                onSave={onUpdateReview}
+                reviewIsLoading={isEditingReviewLoading}
+                reviewIsSaving={isEditingReviewSaving}/>
         </PageItem>
     );
 }

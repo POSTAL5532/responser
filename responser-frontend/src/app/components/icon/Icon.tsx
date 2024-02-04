@@ -19,6 +19,9 @@ import {ReactComponent as Play} from './play.svg';
 import {ReactComponent as Arrow} from './arrow.svg';
 import {ReactComponent as Search} from './search.svg';
 import {ReactComponent as Settings1} from './settings_1.svg';
+import {ReactComponent as Edit} from './edit.svg';
+import {ReactComponent as ExternalLink} from './external-link.svg';
+import {ReactComponent as Check} from './check.svg';
 import "./Icon.less";
 
 export enum IconType {
@@ -40,7 +43,10 @@ export enum IconType {
     PLAY = "play",
     ARROW = "arrow",
     SEARCH = "search",
-    SETTINGS_1 = "Settings-1",
+    SETTINGS_1 = "settings-1",
+    EDIT = "edit",
+    EXTERNAL_LINK = "external-link",
+    CHECK = "check",
 }
 
 type IconProps = {
@@ -91,6 +97,12 @@ export const Icon: React.FC<IconProps> = (props: IconProps) => {
             return <Search className={resultClassName}/>
         case IconType.SETTINGS_1:
             return <Settings1 className={resultClassName}/>
+        case IconType.EDIT:
+            return <Edit className={resultClassName}/>
+        case IconType.EXTERNAL_LINK:
+            return <ExternalLink className={resultClassName}/>
+        case IconType.CHECK:
+            return <Check className={resultClassName}/>
         default:
             return null;
     }

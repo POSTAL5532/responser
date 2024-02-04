@@ -16,7 +16,13 @@
         height: 24px;
 
         rect {
+            fill: @black-alpha-60;
             transition: fill 0.15s;
+        }
+
+        path {
+            stroke: @black-alpha-60;
+            transition: stroke 0.15s;
         }
     }
 
@@ -41,8 +47,14 @@
     &:hover {
         color: @green;
 
-        .icon rect {
-            fill: @green;
+        .icon {
+            rect {
+                fill: @green;
+            }
+
+            path {
+                stroke: @green;
+            }
         }
     }
 }

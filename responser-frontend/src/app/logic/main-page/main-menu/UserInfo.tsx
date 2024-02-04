@@ -1,9 +1,9 @@
 import React from "react";
-import ApplicationProperties from "../../../service/ApplicationProperties";
 import {Icon, IconType} from "../../../components/icon/Icon";
 import {User} from "../../../model/User";
 import {Spinner} from "../../../components/spinner/Spinner";
 import {Tooltip, TooltipPosition} from "../../../components/tooltip/Tooltip";
+import {getUserAvatarUrl} from "../../../utils/ResourcesUtils";
 
 type UserInfoProps = {
     user: User;
@@ -22,7 +22,7 @@ export const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
 
     return(
         <div className="user-info-container">
-            <img alt="User avatar" className="user-avatar" src={ApplicationProperties.userAvatarsStorageUrl + "/" + user.avatarFileName}/>
+            <img alt="User avatar" className="user-avatar" src={getUserAvatarUrl(user)}/>
             <div className="user-info">
                 <h2 className="username">{user.userName}</h2>
                 <div className="rating-container">

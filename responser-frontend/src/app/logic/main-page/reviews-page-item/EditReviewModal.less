@@ -1,0 +1,107 @@
+@import "globalsLess";
+
+.modal-overlay {
+    .edit-review-modal {
+        width: 800px;
+
+        .modal-header {
+            .web-resource-info {
+                display: flex;
+                gap: 12px;
+                width: 280px;
+                align-items: center;
+
+                .web-resource-icon {
+                    width: 40px;
+                    height: 40px;
+                    border-radius: 50%;
+                }
+
+                .resource-name {
+                    margin: 0;
+                    .fontOutfitMedium(18px);
+                    color: @brown-dark;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    white-space: nowrap;
+                    padding-right: 24px;
+                }
+            }
+        }
+
+        .modal-body {
+            min-height: 390px;
+            position: relative;
+            padding: 20px 30px 30px 30px;
+
+            // Strange lines workaround
+            margin-top: -2px;
+            margin-bottom: -2px;
+
+            .review-loading {
+                position: absolute;
+                transform: translate(-50%, -50%);
+                left: 50%;
+                top: 50%;
+            }
+
+            .edit-review-form {
+                display: flex;
+                flex-direction: column;
+
+                .resource-link {
+                    display: block;
+                    width: 740px;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    .fontOutfitRegular(16px);
+                    margin-bottom: 20px;
+
+                    .icon {
+                        width: 12px;
+                        height: 12px;
+                    }
+                }
+
+                .label {
+                    margin: 0 0 10px;
+                    .fontOutfitRegular(14px);
+                    color: @black-alpha-60;
+                }
+
+                .rating {
+                    margin-bottom: 30px;
+                }
+
+                .review-text-input {
+                    margin-bottom: 6px;
+
+                    .text-area {
+                        height: 192px;
+                    }
+                }
+
+                .text-length-indicator {
+                    text-align: end;
+                    .fontOutfitRegular(10px);
+                    color: @black-alpha-25;
+                }
+            }
+        }
+
+        .modal-footer {
+            // Strange lines workaround
+            padding-top: 2px;
+            gap: 6px;
+
+            .button {
+                flex: 1;
+
+                &.cancel-button {
+                    height: 44px;
+                }
+            }
+        }
+    }
+}

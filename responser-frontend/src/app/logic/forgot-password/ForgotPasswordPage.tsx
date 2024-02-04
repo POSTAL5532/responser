@@ -7,7 +7,7 @@ import {useForgotPasswordPageStore} from "./ForgotPasswordPageStore";
 import * as Yup from "yup";
 import {EMAIL_VALIDATION_SCHEMA} from "../../utils/ValidationUtils";
 import {nativeNavigateTo} from "../../utils/NavigationUtils";
-import {Modal} from "../../components/modal/Modal";
+//import {Modal} from "../../components/modal/Modal";
 import ApplicationProperties from "../../service/ApplicationProperties";
 import {observer} from "mobx-react";
 import {FormikHelpers} from "formik/dist/types";
@@ -49,9 +49,9 @@ const ForgotPasswordPage: React.FC = () => {
                 </div>
             </section>
 
-            <Modal isOpen={passwordRestoreLinkSent} header="Done" onOk={() => nativeNavigateTo(ApplicationProperties.unauthorizedPageUrl)}>
+            {/*<Modal isOpen={passwordRestoreLinkSent} header="Done" onOk={() => nativeNavigateTo(ApplicationProperties.unauthorizedPageUrl)}>
                 We sent password restore link to your email.
-            </Modal>
+            </Modal>*/}
         </Page>
     );
 }

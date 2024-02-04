@@ -6,7 +6,7 @@ import {useEditUserPageStore} from "./EditUserProfilePageStore";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {Spinner} from "../../components/spinner/Spinner";
 import {navigateTo, reloadPage} from "../../utils/NavigationUtils";
-import {Modal} from "../../components/modal/Modal";
+//import {Modal} from "../../components/modal/Modal";
 import EditPasswordForm from "./form/EditPasswordForm";
 import EditUserAvatarForm from "./form/EditUserAvatarForm";
 import userAvatarPlaceHolder from "../../../images/user-avatar-placeholder.png";
@@ -97,9 +97,9 @@ const EditUserProfilePage: React.FC = () => {
                 }
             </div>
 
-            <Modal isOpen={isUserUpdated} header="Done" onOk={reloadPage}>
+            {/*<Modal isOpen={isUserUpdated} header="Done" onOk={reloadPage}>
                 User profile data changes was successfully saved.
-            </Modal>
+            </Modal>*/}
 
             <div className="edit-form-panel">
                 <h2 className="edit-header">User password</h2>
@@ -113,7 +113,7 @@ const EditUserProfilePage: React.FC = () => {
                 }
             </div>
 
-            <Modal isOpen={isPasswordUpdated} header="Done" onOk={reloadPage}>
+            {/*<Modal isOpen={isPasswordUpdated} header="Done" onOk={reloadPage}>
                 User profile data changes was successfully saved.
             </Modal>
 
@@ -128,7 +128,7 @@ const EditUserProfilePage: React.FC = () => {
                     <EditUserAvatarForm imageSrc={rawUserAvatar} onSave={onAvatarSave} onCancel={onAvatarEditCancel}/>
                     <Button onClick={onAvatarReset}>Reset</Button>
                 </ConditionShow>
-            </Modal>
+            </Modal>*/}
         </Page>
     );
 }

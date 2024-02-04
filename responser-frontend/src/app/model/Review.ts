@@ -2,6 +2,7 @@ import {User} from "./User";
 import moment, {Moment} from "moment";
 import {ReviewLike} from "./ReviewLike";
 import {WebResource} from "./WebResource";
+import {makeAutoObservable} from "mobx";
 
 export class Review {
 
@@ -24,6 +25,10 @@ export class Review {
     creationDate: Moment;
 
     updateDate: Moment;
+
+    constructor() {
+        makeAutoObservable(this);
+    }
 
     public static deserialize(data: any): Review {
         return Object.assign(new Review(), data, {
