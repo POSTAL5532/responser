@@ -6,7 +6,7 @@ import {useExtensionService} from "../../service/extension/ExtensionService";
 import {Button, ButtonSize} from "../../components/button/Button";
 import applicationProperties from "../../service/ApplicationProperties";
 import {MessageBlock, MessageBlockType} from "../../components/message-block/MessageBlock";
-import {MainPageNavigation, useMainPageStoreNew} from "./MainPageStoreNew";
+import {MainPageNavigation, useMainPageStoreNew} from "./MainPageStore";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {MainMenu} from "./main-menu/MainMenu";
 import {PageName} from "../../components/page-name/PageName";

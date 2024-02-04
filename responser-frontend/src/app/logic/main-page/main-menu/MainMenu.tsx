@@ -2,7 +2,7 @@ import React from "react";
 import {User} from "../../../model/User";
 import {UserInfo} from "./UserInfo";
 import {Button} from "../../../components/button/Button";
-import {MainPageNavigation} from "../MainPageStoreNew";
+import {MainPageNavigation} from "../MainPageStore";
 import ApplicationProperties from "../../../service/ApplicationProperties";
 import {useLogger} from "../../../utils/Logger";
 import LocalTokenStorageService from "../../../service/authorization/LocalTokenStorageService";

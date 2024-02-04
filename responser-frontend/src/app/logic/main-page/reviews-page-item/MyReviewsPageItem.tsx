@@ -36,14 +36,17 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
         editingReviewData,
         totalReviewsCount,
         reviewsRequestCriteria,
+        hasNextReviews,
+        loadingState,
         setCriteriaSorting,
         loadReviews,
         loadNextReviews,
-        hasNextReviews,
-        loadingState,
         initReviewForEdit,
         cleanEditingData,
-        updateReview
+        updateReview,
+        createReviewLike,
+        updateReviewLike,
+        removeReviewLike,
     } = useMyReviewsPageItem();
 
     const {
@@ -86,6 +89,9 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
             key={review.id}
             review={review}
             currentUser={currentUser}
+            createLike={createReviewLike}
+            updateLike={updateReviewLike}
+            removeLike={removeReviewLike}
             underlining={index < array.length - 1}
             onEditReviewClick={onEditReviewClick}/>;
     }

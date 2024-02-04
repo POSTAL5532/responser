@@ -8,6 +8,9 @@ import {ReviewsRequestCriteria} from "../../../model/ReviewsRequestCriteria";
 import {ReviewsCriteriaSortingField} from "../../../model/ReviewsCriteriaSortingField";
 import {SortDirection} from "../../../model/SortDirection";
 import {ReviewData} from "../../../model/ReviewData";
+import {ReviewLike} from "../../../model/ReviewLike";
+import {ReviewLikeService} from "../../../service/ReviewLikeService";
+import {ReviewLikeData} from "../../../model/ReviewLikeData";
 
 export class MyReviewsPageItemStore {
 
@@ -16,6 +19,8 @@ export class MyReviewsPageItemStore {
     logger: Logger = new Logger("MyReviewsPageItemStore");
 
     reviewService: ReviewService = new ReviewService();
+
+    reviewLikeService: ReviewLikeService = new ReviewLikeService();
 
     reviews: Review[] = [];
 
@@ -115,6 +120,32 @@ export class MyReviewsPageItemStore {
         this.reviews[reviewIndex] = updatedReview;
 
         this.logger.debug("Update editing review:", this.editingReview.id, " - finish");
+    }
+
+    createReviewLike = async (review: Review, positive: boolean): Promise<void> => {
+        this.logger.debug("Create review like: review id=", review.id, ", positive=", positive);
+        await this.reviewLikeService.createLike(new ReviewLikeData(review.id, positive));
+        await this.refreshReviewInArray(review.id);
+    }
+
+    updateReviewLike = async (reviewLike: ReviewLike, positive: boolean): Promise<void> => {
+        this.logger.debug("Update review like: review like id=", reviewLike.id, ", positive=", positive);
+        await this.reviewLikeService.updateLike(new ReviewLikeData(reviewLike.reviewId, positive), reviewLike.id);
+        await this.refreshReviewInArray(reviewLike.reviewId);
+    }
+
+    removeReviewLike = async (reviewLike: ReviewLike): Promise<void> => {
+        this.logger.debug("Remove review like: review like id=", reviewLike.id);
+        await this.reviewLikeService.deleteLike(reviewLike.id);
+        await this.refreshReviewInArray(reviewLike.reviewId);
+    }
+
+    private refreshReviewInArray = async (reviewId: string): Promise<void> => {
+        this.logger.debug("Refresh review in array");
+        const updatedReview = await this.reviewService.getReview(reviewId);
+
+        const updatedIndex = this.reviews.findIndex(r => r.id === updatedReview.id);
+        this.reviews.splice(updatedIndex, 1, updatedReview);
     }
 
     cleanEditingData = () => {

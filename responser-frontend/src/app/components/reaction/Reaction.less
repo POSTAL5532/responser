@@ -3,6 +3,7 @@
 .reaction {
     display: flex;
     align-items: center;
+    cursor: pointer;
 
     .count {
         .fontOutfitRegular(12px);
@@ -31,7 +32,8 @@
         }
     }
 
-    &:not(.disabled) {
-        cursor: pointer;
+    &.disabled {
+        cursor: default;
+        opacity: 0.5;
     }
 }
