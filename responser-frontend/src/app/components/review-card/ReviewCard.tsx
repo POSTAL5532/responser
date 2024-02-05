@@ -13,8 +13,8 @@ import {ReviewLike} from "../../model/ReviewLike";
 import {User} from "../../model/User";
 import {Icon, IconType} from "../icon/Icon";
 import {observer} from "mobx-react";
-import "./ReviewCard.less";
 import {getWebResourceIconUrl} from "../../utils/ResourcesUtils";
+import "./ReviewCard.less";
 
 type ReviewCardProps = {
     review: Review;
@@ -28,6 +28,7 @@ type ReviewCardProps = {
     removeLike?: (reviewLike: ReviewLike) => Promise<void>;
 
     onEditReviewClick?: (reviewId: string) => void;
+    onRemoveReviewClick?: (review: Review) => void;
 }
 
 const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
@@ -39,8 +40,9 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
         createLike,
         updateLike,
         removeLike,
-        underlining = true,
-        onEditReviewClick
+        onEditReviewClick,
+        onRemoveReviewClick,
+        underlining = true
     } = props;
 
     const {id, webResource, creationDate, rating, text, reviewLikes} = review;
@@ -56,8 +58,7 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
     });
 
     const resultClassName = classNames("review-card", {"underlining": underlining}, className);
-    const rootWebResource = !webResource.parent ? webResource : webResource.parent;
-    const webResourceHost = UrlUtils.getHostFromUrl(rootWebResource.url);
+    const webResourceHost = UrlUtils.getHostFromWebResource(webResource);
 
     const positives = [];
     const negatives = [];
@@ -121,6 +122,10 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
                 </ConditionShow>
 
                 <div className="actions-container">
+                    <ConditionShow condition={!!onRemoveReviewClick}>
+                        <Button className="remove-review" onClick={() => onRemoveReviewClick(review)}><Icon type={IconType.REMOVE}/> Remove</Button>
+                    </ConditionShow>
+
                     <ConditionShow condition={!!onEditReviewClick}>
                         <Button className="edit-review" onClick={() => onEditReviewClick(id)}><Icon type={IconType.EDIT}/> Edit</Button>
                     </ConditionShow>

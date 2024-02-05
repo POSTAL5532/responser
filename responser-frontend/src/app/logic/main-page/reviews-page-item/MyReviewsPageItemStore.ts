@@ -28,6 +28,8 @@ export class MyReviewsPageItemStore {
 
     editingReviewData: ReviewData = null;
 
+    reviewForDelete: Review = null;
+
     loadingState: ReviewsPageItemStoreLoadingState = new ReviewsPageItemStoreLoadingState();
 
     currentPageNumber: number;
@@ -140,6 +142,30 @@ export class MyReviewsPageItemStore {
         await this.refreshReviewInArray(reviewLike.reviewId);
     }
 
+    @action
+    setReviewForDelete = (review: Review) => {
+        this.reviewForDelete = review;
+    }
+
+    @action
+    clearReviewForDelete = () => {
+        this.reviewForDelete = null;
+    }
+
+    removeReview = async (): Promise<void> => {
+        this.logger.debug("Remove current user review");
+
+        this.loadingState.isReviewRemoving = true;
+        await this.reviewService.deleteReview(this.reviewForDelete.id).finally(
+            () => runInAction(() => {
+                this.loadingState.isReviewRemoving = false;
+                this.clearReviewForDelete();
+            })
+        );
+
+        await this.loadReviews();
+    }
+
     private refreshReviewInArray = async (reviewId: string): Promise<void> => {
         this.logger.debug("Refresh review in array");
         const updatedReview = await this.reviewService.getReview(reviewId);
@@ -168,6 +194,8 @@ export const useMyReviewsPageItem = (): MyReviewsPageItemStore => {
 export class ReviewsPageItemStoreLoadingState {
 
     isReviewsLoading: boolean = false;
+
+    isReviewRemoving: boolean = false;
 
     isNextReviewsLoading: boolean = false;
 

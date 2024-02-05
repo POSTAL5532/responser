@@ -1,5 +1,6 @@
 import React, {useContext, useEffect, useState} from "react";
 import {observer} from "mobx-react";
+import classNames from "classnames";
 import {ConditionShow} from "../../../components/ConditionShow";
 import {Button, ButtonType} from "../../../components/button/Button";
 import {Review} from "../../../model/Review";
@@ -11,10 +12,10 @@ import {Spinner} from "../../../components/spinner/Spinner";
 import {InputField} from "../../../components/form/input-field/InputField";
 import {SortingDropdown} from "./SortingDropdown";
 import {FilterDropdown} from "./FilterDropdown";
-import classNames from "classnames";
 import ReviewCard from "../../../components/review-card/ReviewCard";
 import {PageItem} from "../PageItem";
 import EditReviewModal from "./EditReviewModal";
+import {RemoveReviewConfirmationModal} from "./RemoveReviewConfirmationModal";
 import "./MyReviewsPageItem.less";
 
 type MyReviewsPageItemProps = {
@@ -29,11 +30,14 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
     const [showBlurFilter, setShowBlurFilter] = useState(false);
     const [showEditReviewModal, setShowEditReviewModal] = useState(false);
 
+    const myReviewsPageIteStore = useMyReviewsPageItem();
+
     const {
         init,
         reviews,
         editingReview,
         editingReviewData,
+        reviewForDelete,
         totalReviewsCount,
         reviewsRequestCriteria,
         hasNextReviews,
@@ -46,21 +50,23 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
         updateReview,
         createReviewLike,
         updateReviewLike,
+        setReviewForDelete,
+        clearReviewForDelete,
+        removeReview,
         removeReviewLike,
-    } = useMyReviewsPageItem();
+    } = myReviewsPageIteStore;
 
     const {
         isReviewsLoading,
         isNextReviewsLoading,
         isEditingReviewLoading,
         isEditingReviewSaving,
+        isReviewRemoving,
         hasAnyLoading
     } = loadingState;
 
     useEffect(() => {
-        if (!!currentUser) {
-            init(currentUser.id);
-        }
+        if (!!currentUser) init(currentUser.id);
     }, [currentUser]);
 
     const currentSortingValue = new SortingWrapper(reviewsRequestCriteria.sortingField, reviewsRequestCriteria.sortDirection);
@@ -93,7 +99,8 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
             updateLike={updateReviewLike}
             removeLike={removeReviewLike}
             underlining={index < array.length - 1}
-            onEditReviewClick={onEditReviewClick}/>;
+            onEditReviewClick={onEditReviewClick}
+            onRemoveReviewClick={setReviewForDelete}/>;
     }
 
     return (
@@ -152,6 +159,12 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
                 onSave={onUpdateReview}
                 reviewIsLoading={isEditingReviewLoading}
                 reviewIsSaving={isEditingReviewSaving}/>
+
+            <RemoveReviewConfirmationModal
+                removing={isReviewRemoving}
+                show={!!reviewForDelete}
+                onClose={clearReviewForDelete}
+                onConfirm={removeReview}/>
         </PageItem>
     );
 }

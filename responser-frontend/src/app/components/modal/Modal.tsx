@@ -19,48 +19,50 @@ const getChildrenOnDisplayName = (children: React.ReactNode, displayName: string
 type ModalProps = PropsWithChildren<{
     isOpen: boolean;
     className?: string;
+    onClose?: () => void;
+    disableControls?: boolean;
 }>;
 
 type ModalSubcomponents = {
-    Header: React.FC<HeaderProps>;
+    Header: React.FC<PropsWithChildren>;
     Body: React.FC<PropsWithChildren>;
     Footer: React.FC<PropsWithChildren>;
 }
 
 const Modal: React.FC<ModalProps> & ModalSubcomponents = (props: ModalProps) => {
-    const {isOpen, className, children} = props;
+    const {isOpen, className, disableControls = false, onClose, children} = props;
 
-    const resultClassName = classNames("modal", className);
+    const resultClassName = classNames("modal", {"disable-controls": disableControls}, className);
 
     const header = getChildrenOnDisplayName(children, MODAL_HEADER_DISPLAY_NAME);
     const body = getChildrenOnDisplayName(children, MODAL_BODY_DISPLAY_NAME);
     const footer = getChildrenOnDisplayName(children, MODAL_FOOTER_DISPLAY_NAME);
+
+    if (!body || body.length < 1) {
+        throw new Error("'Modal' component must have an 'Modal.Body' children.")
+    }
 
     return (
         <ReactModal isOpen={isOpen} className={resultClassName} overlayClassName="modal-overlay" ariaHideApp={false}>
             {header}
             {body}
             {footer}
+
+            <ConditionShow condition={!!onClose}>
+                <button className="close-modal" onClick={onClose} disabled={disableControls}><Icon type={IconType.CLOSE}/></button>
+            </ConditionShow>
         </ReactModal>
     );
 }
 
 export default Modal;
 
-type HeaderProps = PropsWithChildren<{
-    onClose?: () => void;
-}>;
-
-const Header: React.FC<HeaderProps> = (props: HeaderProps) => {
-    const {children, onClose} = props;
+const Header: React.FC<PropsWithChildren> = (props: PropsWithChildren) => {
+    const {children} = props;
 
     return(
         <div className="modal-header">
             {children}
-
-            <ConditionShow condition={!!onClose}>
-                <button className="close-modal" onClick={onClose}><Icon type={IconType.CLOSE}/></button>
-            </ConditionShow>
         </div>
     );
 }

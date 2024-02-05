@@ -62,8 +62,8 @@ const EditReviewModal: React.FC<EditReviewModalProps> = (props: EditReviewModalP
     const saveButtonIsDisabled = reviewIsLoading || reviewIsSaving || (editingReviewData?.text.trim() == reviewOldText && editingReviewData?.rating == reviewOldRating);
 
     return (
-        <Modal isOpen={show} className="edit-review-modal">
-            <Modal.Header onClose={onClose}>
+        <Modal isOpen={show} className="edit-review-modal" onClose={onClose}>
+            <Modal.Header>
                 <div className="web-resource-info">{getHeaderContent()}</div>
                 <div className="modal-header-label">
                     Edit {editingReview?.webResource.resourceType == ResourceType.PAGE ? "page" : "site"} review
