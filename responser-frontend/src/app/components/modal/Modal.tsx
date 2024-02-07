@@ -32,7 +32,7 @@ type ModalSubcomponents = {
 const Modal: React.FC<ModalProps> & ModalSubcomponents = (props: ModalProps) => {
     const {isOpen, className, disableControls = false, onClose, children} = props;
 
-    const resultClassName = classNames("modal", {"disable-controls": disableControls}, className);
+    const resultClassName = classNames("modal", {"disable-controls": disableControls});
 
     const header = getChildrenOnDisplayName(children, MODAL_HEADER_DISPLAY_NAME);
     const body = getChildrenOnDisplayName(children, MODAL_BODY_DISPLAY_NAME);
@@ -43,7 +43,7 @@ const Modal: React.FC<ModalProps> & ModalSubcomponents = (props: ModalProps) => 
     }
 
     return (
-        <ReactModal isOpen={isOpen} className={resultClassName} overlayClassName="modal-overlay" ariaHideApp={false}>
+        <ReactModal isOpen={isOpen} className={resultClassName} overlayClassName={classNames("modal-overlay", className)} ariaHideApp={false}>
             {header}
             {body}
             {footer}

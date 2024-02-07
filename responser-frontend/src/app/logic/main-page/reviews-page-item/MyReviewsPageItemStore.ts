@@ -30,6 +30,8 @@ export class MyReviewsPageItemStore {
 
     reviewForDelete: Review = null;
 
+    reviewForShare: Review = null;
+
     loadingState: ReviewsPageItemStoreLoadingState = new ReviewsPageItemStoreLoadingState();
 
     currentPageNumber: number;
@@ -164,6 +166,16 @@ export class MyReviewsPageItemStore {
         );
 
         await this.loadReviews();
+    }
+
+    @action
+    setReviewForShare = (review: Review) => {
+        this.reviewForShare = review;
+    }
+
+    @action
+    clearReviewForShare = () => {
+        this.reviewForShare = null;
     }
 
     private refreshReviewInArray = async (reviewId: string): Promise<void> => {

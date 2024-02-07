@@ -16,6 +16,7 @@ import ReviewCard from "../../../components/review-card/ReviewCard";
 import {PageItem} from "../PageItem";
 import EditReviewModal from "./EditReviewModal";
 import {RemoveReviewConfirmationModal} from "./RemoveReviewConfirmationModal";
+import {ShareReviewModal} from "./ShareReviewModal";
 import "./MyReviewsPageItem.less";
 
 type MyReviewsPageItemProps = {
@@ -38,6 +39,7 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
         editingReview,
         editingReviewData,
         reviewForDelete,
+        reviewForShare,
         totalReviewsCount,
         reviewsRequestCriteria,
         hasNextReviews,
@@ -52,6 +54,8 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
         updateReviewLike,
         setReviewForDelete,
         clearReviewForDelete,
+        setReviewForShare,
+        clearReviewForShare,
         removeReview,
         removeReviewLike,
     } = myReviewsPageIteStore;
@@ -90,8 +94,8 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
         cleanEditingData();
     }
 
-    const mapReviewCard = (review: Review, index: number, array: Review[]) => {
-        return <ReviewCard
+    const mapReviewCard = (review: Review, index: number, array: Review[]) => (
+        <ReviewCard
             key={review.id}
             review={review}
             currentUser={currentUser}
@@ -100,8 +104,9 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
             removeLike={removeReviewLike}
             underlining={index < array.length - 1}
             onEditReviewClick={onEditReviewClick}
-            onRemoveReviewClick={setReviewForDelete}/>;
-    }
+            onRemoveReviewClick={setReviewForDelete}
+            onShareReviewClick={setReviewForShare}/>
+    );
 
     return (
         <PageItem hidden={hidden} className="my-reviews-page-item">
@@ -165,6 +170,8 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
                 show={!!reviewForDelete}
                 onClose={clearReviewForDelete}
                 onConfirm={removeReview}/>
+
+            <ShareReviewModal show={!!reviewForShare} review={reviewForShare} onClose={clearReviewForShare}/>
         </PageItem>
     );
 }

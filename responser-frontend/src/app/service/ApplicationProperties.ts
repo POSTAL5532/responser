@@ -14,6 +14,10 @@ class ApplicationProperties {
         return process.env.LANDING_URL;
     }
 
+    get reviewWebLinkUrl(): string {
+        return process.env.REVIEW_WEB_LINK_URL;
+    }
+
     get authLoginPageUrl(): string {
         return process.env.AUTH_LOGIN_PAGE_URL;
     }

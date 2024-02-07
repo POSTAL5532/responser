@@ -29,6 +29,7 @@ type ReviewCardProps = {
 
     onEditReviewClick?: (reviewId: string) => void;
     onRemoveReviewClick?: (review: Review) => void;
+    onShareReviewClick: (review: Review) => void;
 }
 
 const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
@@ -42,6 +43,7 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
         removeLike,
         onEditReviewClick,
         onRemoveReviewClick,
+        onShareReviewClick,
         underlining = true
     } = props;
 
@@ -141,7 +143,7 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
                               disabled={disableReactions || likeInProcess || !currentUser}
                               onClick={onReaction}/>
 
-                    <Button className="share-button"><Icon type={IconType.SEND}/></Button>
+                    <Button className="share-button" onClick={() => onShareReviewClick(review)}><Icon type={IconType.SEND}/></Button>
                 </div>
             </div>
         </div>

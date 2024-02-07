@@ -38,4 +38,4 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>((props: B
             {loading ? <Spinner/> : children}
         </button>
     );
-})
+});
