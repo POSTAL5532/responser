@@ -3,6 +3,13 @@
 .field-container {
     width: 100%;
 
+    .field-label {
+        display: block;
+        margin-bottom: 8px;
+        .fontOutfitRegular(12px);
+        color: @brown-soft;
+    }
+
     .field {
         display: flex;
         align-items: center;
@@ -65,8 +72,12 @@
         margin-bottom: 4px;
     }
 
-    &.disabled .field {
-        pointer-events: none;
+    &.disabled {
+        opacity: 0.5;
+
+        .field {
+            pointer-events: none;
+        }
     }
 
     .message {

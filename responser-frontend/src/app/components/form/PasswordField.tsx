@@ -34,6 +34,8 @@ export const PasswordField: React.FC<PasswordFieldProps> = (props: PasswordField
                 return (
                     <InputField
                         {...other}
+                        disabled={props.disabled}
+                        label={props.label}
                         className={classNames("password", props.className)}
                         type={showPassword ? "text" : "password"}
                         invalid={touched && !!error}

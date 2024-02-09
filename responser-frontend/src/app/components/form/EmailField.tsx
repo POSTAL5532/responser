@@ -14,11 +14,15 @@ export const EmailField: React.FC<InputFieldProps> = (props: InputFieldProps) =>
                 return (
                     <InputField
                         {...other}
+                        disabled={props.disabled}
+                        label={props.label}
                         className={props.className}
                         placeholder={props.placeholder || "Email"}
                         invalid={touched && !!error}
                         onChange={onEmailChange}
                         styleType={props.styleType}
+                        rightExtraComponent={props.rightExtraComponent}
+                        leftExtraComponent={props.leftExtraComponent}
                         message={(touched && !!error) && error}/>
                 );
             }}

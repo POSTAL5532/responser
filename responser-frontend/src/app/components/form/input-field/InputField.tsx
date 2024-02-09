@@ -8,6 +8,7 @@ export enum InputFieldStyleType {
 }
 
 export type InputFieldProps = {
+    label?: string;
     invalid?: boolean;
     message?: string;
     styleType?: InputFieldStyleType;
@@ -18,6 +19,7 @@ export type InputFieldProps = {
 export const InputField: React.FC<InputFieldProps> = (props: InputFieldProps) => {
     const {
         className,
+        label,
         invalid = false,
         disabled,
         message,
@@ -41,6 +43,10 @@ export const InputField: React.FC<InputFieldProps> = (props: InputFieldProps) =>
 
     return (
         <div className={resultFieldContainerClassName}>
+            <ConditionShow condition={!!label}>
+                <span className="field-label">{label}</span>
+            </ConditionShow>
+
             <div className="field">
                 <ConditionShow condition={!!leftExtraComponent}>
                     <div className="extra-component left">{leftExtraComponent}</div>

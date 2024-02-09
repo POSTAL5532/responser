@@ -17,14 +17,18 @@ type TooltipProps = {
 }
 
 export const Tooltip: React.FC<PropsWithChildren<TooltipProps>> = (props: PropsWithChildren<TooltipProps>) => {
-    const {children, className, position = TooltipPosition.RIGHT, content} = props;
+    const {children, className, position = TooltipPosition.RIGHT, content, show} = props;
+    const [showState, setShowState] = useState<boolean>(false);
 
-    const [show, setShow] = useState<boolean>(false);
-
-    const resultClassName = classNames("tooltip-container", position, {"show": show}, className);
+    const resultClassName = classNames(
+        "tooltip-container",
+        position,
+        {"show": (show != false) && (showState || show)},
+        className
+    );
 
     return (
-        <div className={resultClassName} onMouseOver={() => setShow(true)} onMouseLeave={() => setShow(false)}>
+        <div className={resultClassName} onMouseOver={() => setShowState(true)} onMouseLeave={() => setShowState(false)}>
             {children}
             <div className="tooltip">{content}</div>
         </div>

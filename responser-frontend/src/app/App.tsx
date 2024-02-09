@@ -1,5 +1,8 @@
 import React, {Component} from 'react';
 import {Redirect, Switch} from "react-router";
+import classNames from "classnames";
+import {observer} from "mobx-react";
+import {ErrorBoundary} from "react-error-boundary";
 import {AUTH_CODE_PAGE_URL, AuthCodePage} from "./logic/auth-code-page/AuthCodePage";
 import {GlobalAppStore, GlobalAppStoreContext} from "./GlobalAppStore";
 import AppHeader from "./logic/app-header/AppHeader";
@@ -10,14 +13,10 @@ import LoginExtension, {LOGIN_EXTENSION} from "./logic/login-extension/LoginExte
 import LogoutExtension, {LOGOUT_EXTENSION} from "./logic/logout-extension/LogoutExtension";
 import EditUserPage, {EDIT_USER_PAGE_URL} from "./logic/edit-user-profile/EditUserProfilePage";
 import AuthorizationService from "./service/authorization/AuthorizationService";
-import UserProfilePage, {USER_PROFILE_PAGE_URL} from "./logic/user-profile/UserProfilePage";
 import {COMPONENTS_PAGE_URL, ComponentsPage} from "./logic/components-page/ComponentsPage";
 import ForgotPasswordPage, {FORGOT_PASSWORD_PAGE_URL} from "./logic/forgot-password/ForgotPasswordPage";
 import RestorePasswordPage, {RESTORE_PASSWORD_PAGE_URL} from "./logic/restore-password/RestorePasswordPage";
-import {ErrorBoundary} from "react-error-boundary";
 import ErrorPage from "./logic/ErrorPage";
-import classNames from "classnames";
-import {observer} from "mobx-react";
 import {AppFooter} from "./logic/app-footer/AppFooter";
 
 @observer
@@ -39,7 +38,6 @@ export class App extends Component {
                             <UnauthorizedRoute path={RESTORE_PASSWORD_PAGE_URL} exact component={RestorePasswordPage}/>
 
                             <AuthorizedRoute path={MAIN_PAGE_URL} exact component={MainPage}/>
-                            <AuthorizedRoute path={USER_PROFILE_PAGE_URL} exact component={UserProfilePage}/>
                             <AuthorizedRoute path={EDIT_USER_PAGE_URL} exact component={EditUserPage}/>
                             <AuthorizedRoute path={LOGIN_EXTENSION} exact component={LoginExtension} redirectLogic={AuthorizationService.requestLoginPage}/>
 

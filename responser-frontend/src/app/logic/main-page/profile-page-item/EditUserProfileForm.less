@@ -1,0 +1,52 @@
+@import "globalsLess";
+
+.edit-user-form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    .update-user {
+        width: 100%;
+        margin-top: 40px;
+    }
+
+    .email-tooltip {
+        .tooltip {
+            width: 150px;
+        }
+    }
+
+    .with-right-extra.email-field {
+        .field {
+            padding-right: 10px;
+
+            .extra-component {
+                width: 28px;
+                height: 28px;
+                background-color: @green;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 50%;
+
+                .icon {
+                    width: 12px;
+                    height: 12px;
+
+                    path {
+                        stroke: @white;
+                    }
+                }
+            }
+        }
+
+        &.not-confirmed .field .extra-component {
+            background-color: @red;
+
+            .icon {
+                width: 16px;
+                height: 16px;
+            }
+        }
+    }
+}

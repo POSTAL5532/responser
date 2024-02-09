@@ -8,8 +8,9 @@ export class MainPageStore {
 
     navigation: MainPageNavigation = MainPageNavigation.MY_REVIEWS;
 
-    constructor() {
+    constructor(initialPageItem: MainPageNavigation = MainPageNavigation.MY_REVIEWS) {
         makeAutoObservable(this);
+        this.navigation = initialPageItem;
     }
 
     public navigateTo = (pageItem: MainPageNavigation) => {
@@ -18,14 +19,14 @@ export class MainPageStore {
     }
 }
 
-export const useMainPageStoreNew = (): MainPageStore => {
-    const [mainPageStore] = useState(new MainPageStore());
+export const useMainPageStoreNew = (initialPageItem: MainPageNavigation = MainPageNavigation.PROFILE): MainPageStore => {
+    const [mainPageStore] = useState(new MainPageStore(initialPageItem));
     return mainPageStore;
 }
 
 //TODO: Need refactoring with new React-Router
 export enum MainPageNavigation {
-    PROFILE = "profile",
-    MY_REVIEWS = "my-reviews",
-    SECURITY = "security",
+    PROFILE = "PROFILE",
+    MY_REVIEWS = "my-MY_REVIEWS",
+    SECURITY = "SECURITY",
 }

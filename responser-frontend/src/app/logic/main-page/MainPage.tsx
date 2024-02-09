@@ -13,8 +13,10 @@ import {PageName} from "../../components/page-name/PageName";
 import classNames from "classnames";
 import {Icon, IconType} from "../../components/icon/Icon";
 import ReviewsPageItem from "./reviews-page-item/MyReviewsPageItem";
-import "./MainPage.less";
 import {PageItem} from "./PageItem";
+import MyProfilePageItem from "./profile-page-item/MyProfilePageItem";
+import {useQuery} from "../../../router";
+import "./MainPage.less";
 
 export const MAIN_PAGE_URL: string = "/main";
 
@@ -27,18 +29,16 @@ export const navigateToMainPage = (native: boolean = true) => {
 }
 
 const MainPage: React.FC = () => {
+    const query = useQuery();
+    const pageItem: MainPageNavigation = MainPageNavigation[query.get("item") as keyof typeof MainPageNavigation];
+
     const {currentUser, refreshCurrentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
-    const {navigation, navigateTo} = useMainPageStoreNew();
+    const {navigation, navigateTo} = useMainPageStoreNew(pageItem);
     const [menuHidden, setMenuHidden] = useState(true);
 
     const {checkExtension} = useExtensionService();
     const [extensionChecking, changeExtensionChecking] = useState(true);
     const [extensionExist, changeExtensionExist] = useState(true);
-
-    // const {reviews, init, loadNextReviews, hasNextReviews, loadingState} = useMainPageStore();
-
-
-    //const {isReviewsLoading, isNextReviewsLoading} = loadingState;
 
     useEffect(() => {
         //init();
@@ -46,18 +46,6 @@ const MainPage: React.FC = () => {
         .catch(() => changeExtensionExist(false))
         .finally(() => changeExtensionChecking(false));
     }, []);
-
-    /*const getCurrentComponent = (): React.ReactNode => {
-        if (navigation === MainPageNavigation.MY_REVIEWS) {
-            return <ReviewsPageItem hidden={!menuHidden}/>;
-        }
-        if (navigation === MainPageNavigation.PROFILE) {
-            return <PageName>My profile</PageName>;
-        }
-        if (navigation === MainPageNavigation.SECURITY) {
-            return <PageName>Security settings</PageName>;
-        }
-    }*/
 
     const onNavigate = (menuItem: MainPageNavigation) => {
         setMenuHidden(true);
@@ -70,7 +58,7 @@ const MainPage: React.FC = () => {
                 <MainMenu user={currentUser} onNavigate={onNavigate} hidden={menuHidden}/>
 
                 {navigation === MainPageNavigation.MY_REVIEWS && <ReviewsPageItem hidden={!menuHidden}/>}
-                {navigation === MainPageNavigation.PROFILE && <PageItem hidden={!menuHidden}><PageName>My profile</PageName></PageItem>}
+                {navigation === MainPageNavigation.PROFILE && <MyProfilePageItem hidden={!menuHidden}/>}
                 {navigation === MainPageNavigation.SECURITY && <PageItem hidden={!menuHidden}><PageName>My profile</PageName></PageItem>}
 
                 <Button className={classNames("menu-control show-menu", {"hidden": !menuHidden})} onClick={() => setMenuHidden(false)}>
@@ -80,6 +68,7 @@ const MainPage: React.FC = () => {
                     <Icon type={IconType.CLOSE}/>
                 </Button>
             </section>
+
 
             {/*<div className="result">
                 <Icon type={IconType.CIRCLE_CHECK}/>

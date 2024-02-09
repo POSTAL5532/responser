@@ -34,38 +34,52 @@ export const Buttons: React.FC = () => {
             <h3>Default</h3>
             <div className="components buttons">
                 <Button loading={loading} disabled={disabled}>Button text</Button>
-                <Button loading={loading} disabled={disabled}>Button text<Icon type={IconType.ALERT}/></Button>
+                <Button loading={loading} disabled={disabled}>Button text<Icon type={IconType.CIRCLE_ALERT}/></Button>
             </div>
 
             <h3>Default small</h3>
             <div className="components buttons">
                 <Button loading={loading} disabled={disabled} size={ButtonSize.SMALL}>Button text</Button>
-                <Button loading={loading} disabled={disabled} size={ButtonSize.SMALL}>Button text<Icon type={IconType.ALERT}/></Button>
+                <Button loading={loading} disabled={disabled} size={ButtonSize.SMALL}>Button text<Icon type={IconType.CIRCLE_ALERT}/></Button>
             </div>
 
             <h3>Primary</h3>
             <div className="components buttons">
                 <Button loading={loading} disabled={disabled} styleType={ButtonType.PRIMARY}>Button text</Button>
-                <Button loading={loading} disabled={disabled} styleType={ButtonType.PRIMARY}>Button text<Icon type={IconType.ALERT}/></Button>
+                <Button loading={loading} disabled={disabled} styleType={ButtonType.PRIMARY}>Button text<Icon type={IconType.CIRCLE_ALERT}/></Button>
             </div>
 
             <h3>Primary small</h3>
             <div className="components buttons">
                 <Button loading={loading} disabled={disabled} size={ButtonSize.SMALL} styleType={ButtonType.PRIMARY}>Button text</Button>
-                <Button loading={loading} disabled={disabled} size={ButtonSize.SMALL} styleType={ButtonType.PRIMARY}>Button text<Icon type={IconType.ALERT}/></Button>
+                <Button loading={loading} disabled={disabled} size={ButtonSize.SMALL} styleType={ButtonType.PRIMARY}>Button text<Icon type={IconType.CIRCLE_ALERT}/></Button>
             </div>
 
             <h3>Light</h3>
             <div className="components buttons">
                 <Button loading={loading} disabled={disabled} styleType={ButtonType.LIGHT}>Button text</Button>
-                <Button loading={loading} disabled={disabled} styleType={ButtonType.LIGHT}>Button text<Icon type={IconType.ALERT}/></Button>
+                <Button loading={loading} disabled={disabled} styleType={ButtonType.LIGHT}>Button text<Icon type={IconType.CIRCLE_ALERT}/></Button>
             </div>
 
             <h3>Light small</h3>
             <div className="components buttons">
                 <Button loading={loading} disabled={disabled} size={ButtonSize.SMALL} styleType={ButtonType.LIGHT}>Button text</Button>
                 <Button loading={loading} disabled={disabled} size={ButtonSize.SMALL} styleType={ButtonType.LIGHT}>
-                    Button text<Icon type={IconType.ALERT}/>
+                    Button text<Icon type={IconType.CIRCLE_ALERT}/>
+                </Button>
+            </div>
+
+            <h3>Link</h3>
+            <div className="components buttons">
+                <Button loading={loading} disabled={disabled} styleType={ButtonType.LINK}>Button text</Button>
+                <Button loading={loading} disabled={disabled} styleType={ButtonType.LINK}>Button text <Icon type={IconType.LINK}/></Button>
+            </div>
+
+            <h3>Link small</h3>
+            <div className="components buttons">
+                <Button loading={loading} disabled={disabled} size={ButtonSize.SMALL} styleType={ButtonType.LINK}>Button text</Button>
+                <Button loading={loading} disabled={disabled} size={ButtonSize.SMALL} styleType={ButtonType.LINK}>
+                    Button text <Icon type={IconType.LINK}/>
                 </Button>
             </div>
         </div>

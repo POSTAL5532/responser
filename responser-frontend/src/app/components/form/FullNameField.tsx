@@ -15,11 +15,15 @@ export const FullNameField: React.FC<InputFieldProps> = (props: InputFieldProps)
                 return (
                     <InputField
                         {...other}
+                        disabled={props.disabled}
+                        label={props.label}
                         className={props.className}
                         placeholder={props.placeholder || "Full name"}
                         invalid={touched && !!error}
                         onChange={onFullNameFieldChange}
                         styleType={props.styleType}
+                        rightExtraComponent={props.rightExtraComponent}
+                        leftExtraComponent={props.leftExtraComponent}
                         message={(touched && !!error) && error}/>
                 );
             }}

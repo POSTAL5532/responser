@@ -6,7 +6,8 @@ import "./Button.less";
 export enum ButtonType {
     PRIMARY = "primary",
     LIGHT = "light",
-    DEFAULT = "default"
+    LINK = "link-button",
+    DEFAULT = "default",
 }
 
 export enum ButtonSize {

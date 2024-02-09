@@ -3,7 +3,7 @@ import classNames from "classnames";
 import {ReactComponent as Delete} from './delete.svg';
 import {ReactComponent as Sandwich} from './sandwich.svg';
 import {ReactComponent as Empty} from './empty.svg';
-import {ReactComponent as Alert} from './alert.svg';
+import {ReactComponent as CircleAlert} from './circle-alert.svg';
 import {ReactComponent as Eye} from './eye.svg';
 import {ReactComponent as Star} from './star.svg';
 import {ReactComponent as HelpCircle} from './help_circle.svg';
@@ -22,6 +22,7 @@ import {ReactComponent as Settings1} from './settings_1.svg';
 import {ReactComponent as Edit} from './edit.svg';
 import {ReactComponent as ExternalLink} from './external-link.svg';
 import {ReactComponent as Check} from './check.svg';
+import {ReactComponent as Link} from './link-icon.svg';
 import {ReactComponent as FbLogo} from './fb_logo.svg';
 import {ReactComponent as TgLogo} from './tg_logo.svg';
 import {ReactComponent as XLogo} from './x_logo.svg';
@@ -35,7 +36,7 @@ export enum IconType {
     LOGOUT = "logout",
     SANDWICH = "sandwich",
     EMPTY = "empty",
-    ALERT = "alert",
+    CIRCLE_ALERT = "circle-alert",
     REVIEWLY = "reviewly",
     EYE = "eye",
     STAR = "star",
@@ -53,6 +54,7 @@ export enum IconType {
     EDIT = "edit",
     EXTERNAL_LINK = "external-link",
     CHECK = "check",
+    LINK = "link",
     FB_LOGO = "fb-logo",
     X_LOGO = "x-logo",
     TG_LOGO = "tg-logo",
@@ -79,8 +81,8 @@ export const Icon: React.FC<IconProps> = (props: IconProps) => {
             return <Sandwich className={resultClassName}/>
         case IconType.EMPTY:
             return <Empty className={resultClassName}/>
-        case IconType.ALERT:
-            return <Alert className={resultClassName}/>
+        case IconType.CIRCLE_ALERT:
+            return <CircleAlert className={resultClassName}/>
         case IconType.EYE:
             return <Eye className={resultClassName}/>
         case IconType.STAR:
@@ -115,6 +117,8 @@ export const Icon: React.FC<IconProps> = (props: IconProps) => {
             return <ExternalLink className={resultClassName}/>
         case IconType.CHECK:
             return <Check className={resultClassName}/>
+        case IconType.LINK:
+            return <Link className={resultClassName}/>
         case IconType.FB_LOGO:
             return <FbLogo className={resultClassName}/>
         case IconType.X_LOGO:

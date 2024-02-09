@@ -82,7 +82,9 @@ public class UserService {
 
     public void resendConfirmationEmailForUser(String userId) {
         User user = getUser(userId);
-        EmailConfirmation emailConfirmation = emailConfirmationService.getByUserId(userId);
+        Optional<EmailConfirmation> emailConfirmationOptional = emailConfirmationService.findByUserId(userId);
+        EmailConfirmation emailConfirmation = emailConfirmationOptional.orElseGet(() -> emailConfirmationService.createEmailConfirmation(userId));
+
         emailService.sendEmailConfirmationMessage(user, emailConfirmation);
     }
 

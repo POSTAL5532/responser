@@ -41,6 +41,10 @@
         path {
             transition: stroke 0.15s;
         }
+
+        rect {
+            transition: fill 0.15s;
+        }
     }
 
     &.primary {
@@ -67,6 +71,60 @@
 
         &:hover {
             background-color: @blue-alpha-10;
+        }
+    }
+
+    &.link-button {
+        border: none;
+        padding: 0;
+        height: auto;
+        .fontOutfitMedium(18px);
+        line-height: 18px;
+
+        .icon {
+            width: 24px;
+            height: 24px;
+
+            rect {
+                fill: @black-alpha-60;
+            }
+
+            path {
+                stroke: @white;
+            }
+
+            &.link {
+                path {
+                    stroke: @white;
+                }
+            }
+        }
+
+        &:hover {
+            background-color: transparent;
+
+            color: @green;
+
+            .icon {
+                rect {
+                    fill: @green;
+                }
+
+                path {
+                    stroke: @green;
+                }
+
+                &.link {
+                    path {
+                        stroke: @white;
+                    }
+                }
+            }
+        }
+
+        &.small {
+            padding: 0;
+            height: auto;
         }
     }
 

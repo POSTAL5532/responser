@@ -19,7 +19,7 @@ VALUES
     ('00000000-0000-0000-user-000000000017', 'user17', 'user17@example.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Daniel Smith', 'default_avatar.png', true, '2023-11-04 17:30:45'),
     ('00000000-0000-0000-user-000000000018', 'user18', 'user18@example.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Olivia Davis', 'default_avatar.png', true, '2023-11-04 17:45:00'),
     ('00000000-0000-0000-user-000000000019', 'user19', 'user19@example.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Ryan Johnson', 'default_avatar.png', true, '2023-11-04 18:00:15'),
-    ('00000000-0000-0000-user-000000000020', 'user20', 'user20@example.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Alex Johnson', 'default_avatar.png', true, '2023-11-04 16:30:45');
+    ('00000000-0000-0000-user-000000000020', 'user20', 'user20@example.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Alex Johnson', 'default_avatar.png', false, '2023-11-04 16:30:45');
 
 
 
