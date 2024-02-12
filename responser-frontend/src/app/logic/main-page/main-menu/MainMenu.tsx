@@ -16,10 +16,11 @@ type MainMenuProps = {
     user: User;
     onNavigate: (navigateTo: MainPageNavigation) => void;
     hidden: boolean;
+    currentNavigation: MainPageNavigation;
 }
 
 export const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
-    const {user, onNavigate, hidden} = props;
+    const {user, currentNavigation, onNavigate, hidden} = props;
 
     const extensionService = useExtensionService();
     const logger = useLogger("MainMenu");
@@ -36,14 +37,18 @@ export const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
         });
     }
 
+    const getMenuItemClassName = (navigationItem: MainPageNavigation) => {
+        return classNames("menu-item", {"active": navigationItem === currentNavigation});
+    }
+
     return (
         <div className={classNames("main-menu-container", {"hidden": hidden})}>
             <UserInfo user={user}/>
 
             <div className="main-menu">
-                <Button className="menu-item" onClick={() => onNavigate(MainPageNavigation.MY_REVIEWS)}>My reviews</Button>
-                <Button className="menu-item" onClick={() => onNavigate(MainPageNavigation.PROFILE)}>My profile</Button>
-                <Button className="menu-item" onClick={() => onNavigate(MainPageNavigation.SECURITY)}>Security settings</Button>
+                <Button className={getMenuItemClassName(MainPageNavigation.MY_REVIEWS)} onClick={() => onNavigate(MainPageNavigation.MY_REVIEWS)}>My reviews</Button>
+                <Button className={getMenuItemClassName(MainPageNavigation.PROFILE)} onClick={() => onNavigate(MainPageNavigation.PROFILE)}>My profile</Button>
+                <Button className={getMenuItemClassName(MainPageNavigation.SECURITY)} onClick={() => onNavigate(MainPageNavigation.SECURITY)}>Security settings</Button>
             </div>
 
             <div className="account-control-container">
