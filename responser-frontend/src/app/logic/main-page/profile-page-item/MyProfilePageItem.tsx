@@ -1,7 +1,7 @@
 import React, {useContext, useEffect, useState} from "react";
+import {observer} from "mobx-react";
 import {PageItem} from "../PageItem";
 import {PageName} from "../../../components/page-name/PageName";
-import {observer} from "mobx-react";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../../GlobalAppStore";
 import {useMyProfilePageItemStore} from "./MyProfilePageItemStore";
 import EditUserForm from "./EditUserProfileForm";
@@ -65,16 +65,16 @@ const MyProfilePageItem: React.FC<MyProfilePageItemProps> = (props: MyProfilePag
                     resendConfirmationEmail={onEmailConfirmationResend}/>
             </div>
 
-            <Modal isOpen={isUserUpdated} onClose={onUpdateUserConfirmationClose} className="user-data-saved-modal">
+            <Modal isOpen={isUserUpdated} onClose={onUpdateUserConfirmationClose} className="result-modal user-data-saved-modal">
                 <Modal.Body>
-                    <p>User profile data changes was successfully saved.</p>
+                    <p className="result-text">User profile data changes was successfully saved.</p>
                     <Button styleType={ButtonType.PRIMARY} onClick={onUpdateUserConfirmationClose}>Ok</Button>
                 </Modal.Body>
             </Modal>
 
-            <Modal isOpen={isEmailConfirmationSentModal} onClose={() => setIsEmailConfirmationSentModal(false)} className="email-confirmation-resent-modal">
+            <Modal isOpen={isEmailConfirmationSentModal} onClose={() => setIsEmailConfirmationSentModal(false)} className="result-modal email-confirmation-resent-modal">
                 <Modal.Body>
-                    <p>Email confirmation link sent to you. Check your inbox and confirm email.</p>
+                    <p className="result-text">Confirmation message was resent. Check your mailbox and confirm email. If message didn't receive - check spam folder.</p>
                     <Button styleType={ButtonType.PRIMARY} onClick={() => setIsEmailConfirmationSentModal(false)}>Ok</Button>
                 </Modal.Body>
             </Modal>

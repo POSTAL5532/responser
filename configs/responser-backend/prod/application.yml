@@ -72,7 +72,7 @@ responser:
   authLogoutPageUrl: ${responser.authApplicationUrl}/logout
   authRedirectUri: ${responser.feApplicationUrl}/auth-code
   signUpPageUrl: ${responser.feApplicationUrl}/sign-up
-  profilePageUrl: ${responser.feApplicationUrl}/user-profile
+  profilePageUrl: ${responser.feApplicationUrl}/main
   restorePasswordPageUrl: ${responser.feApplicationUrl}/restore-password
   clientId: responser-web-client
   clientSecret: responser-web-client-secret

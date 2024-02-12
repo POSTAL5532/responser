@@ -11,7 +11,6 @@ import SignUpPage, {SIGN_UP_PAGE_URL} from "./logic/sign-up/SignUpPage";
 import MainPage, {MAIN_PAGE_URL} from "./logic/main-page/MainPage";
 import LoginExtension, {LOGIN_EXTENSION} from "./logic/login-extension/LoginExtension";
 import LogoutExtension, {LOGOUT_EXTENSION} from "./logic/logout-extension/LogoutExtension";
-import EditUserPage, {EDIT_USER_PAGE_URL} from "./logic/edit-user-profile/EditUserProfilePage";
 import AuthorizationService from "./service/authorization/AuthorizationService";
 import {COMPONENTS_PAGE_URL, ComponentsPage} from "./logic/components-page/ComponentsPage";
 import ForgotPasswordPage, {FORGOT_PASSWORD_PAGE_URL} from "./logic/forgot-password/ForgotPasswordPage";
@@ -38,7 +37,6 @@ export class App extends Component {
                             <UnauthorizedRoute path={RESTORE_PASSWORD_PAGE_URL} exact component={RestorePasswordPage}/>
 
                             <AuthorizedRoute path={MAIN_PAGE_URL} exact component={MainPage}/>
-                            <AuthorizedRoute path={EDIT_USER_PAGE_URL} exact component={EditUserPage}/>
                             <AuthorizedRoute path={LOGIN_EXTENSION} exact component={LoginExtension} redirectLogic={AuthorizationService.requestLoginPage}/>
 
                             <PermitAllRoute path={LOGOUT_EXTENSION} exact component={LogoutExtension}/>

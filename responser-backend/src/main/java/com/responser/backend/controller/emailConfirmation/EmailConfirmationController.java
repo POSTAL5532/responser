@@ -29,6 +29,6 @@ public class EmailConfirmationController {
     public String confirmEmailPage(Model model, @Valid @NotBlank @PathVariable String confirmationId) {
         userService.confirmEmail(confirmationId);
         model.addAttribute("redirectLink", applicationProperties.getFeApplicationUrl());
-        return "emailConfirmationPage";
+        return "redirect:" + applicationProperties.getProfilePageUrl();
     }
 }

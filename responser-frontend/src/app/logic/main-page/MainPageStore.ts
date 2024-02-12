@@ -27,6 +27,6 @@ export const useMainPageStoreNew = (initialPageItem: MainPageNavigation = MainPa
 //TODO: Need refactoring with new React-Router
 export enum MainPageNavigation {
     PROFILE = "PROFILE",
-    MY_REVIEWS = "my-MY_REVIEWS",
+    MY_REVIEWS = "MY_REVIEWS",
     SECURITY = "SECURITY",
 }

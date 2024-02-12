@@ -4,10 +4,10 @@ import {Button, ButtonType} from "app/components/button/Button";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {nativeNavigateTo, navigateTo} from "../../utils/NavigationUtils";
 import ApplicationProperties from "../../service/ApplicationProperties";
-import {USER_PROFILE_PAGE_URL} from "../user-profile/UserProfilePage";
 import AuthorizationService from "../../service/authorization/AuthorizationService";
-import "./AppHeader.less";
 import {Icon, IconType} from "../../components/icon/Icon";
+import {MAIN_PAGE_URL} from "../main-page/MainPage";
+import "./AppHeader.less";
 
 const AppHeader: React.FC = () => {
     const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
@@ -33,7 +33,7 @@ const AppHeader: React.FC = () => {
 
                     {
                         !!currentUser
-                            ? <Button styleType={ButtonType.PRIMARY} onClick={() => navigateTo(USER_PROFILE_PAGE_URL)}>
+                            ? <Button styleType={ButtonType.PRIMARY} onClick={() => navigateTo(MAIN_PAGE_URL)}>
                                 <Icon type={IconType.USER}/>
                             </Button>
                             : <Button styleType={ButtonType.PRIMARY} onClick={AuthorizationService.requestLoginPage}>

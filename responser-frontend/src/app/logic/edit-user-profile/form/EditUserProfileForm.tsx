@@ -9,7 +9,7 @@ import {EmailField} from "../../../components/form/EmailField";
 import {UsernameField} from "../../../components/form/UsernameField";
 import {FullNameField} from "../../../components/form/FullNameField";
 import {Button, ButtonType} from "../../../components/button/Button";
-import {navigateToUserProfilePage} from "../../user-profile/UserProfilePage";
+//import {navigateToUserProfilePage} from "../../user-profile/UserProfilePage";
 import "./EditUserProfileForm.less";
 
 type EditUserProfileFormProps = {
@@ -38,15 +38,15 @@ const EditUserProfileForm: React.FC<EditUserProfileFormProps> = (props: EditUser
                     onSubmit={onSubmit}
                     validationSchema={EDIT_USER_FORM_VALIDATION_SCHEMA}>
                 <Form>
-                    <EmailField onChange={value => updateUserPayload.email = value} disabled={disabled}/>
+                    {/*<EmailField onChange={value => updateUserPayload.email = value} disabled={disabled}/>
 
                     <UsernameField onChange={value => updateUserPayload.userName = value} disabled={disabled}/>
 
-                    <FullNameField onChange={value => updateUserPayload.fullName = value} disabled={disabled}/>
+                    <FullNameField onChange={value => updateUserPayload.fullName = value} disabled={disabled}/>*/}
 
                     <div className="form-controls">
                         <Button type="submit" loading={disabled} disabled={disabled || !userWasChanged}>{!disabled ? "Save" : "Wait"}</Button>
-                        <Button type="button" onClick={navigateToUserProfilePage} styleType={ButtonType.LIGHT} disabled={disabled}>Cancel</Button>
+                        {/*<Button type="button" onClick={navigateToUserProfilePage} styleType={ButtonType.LIGHT} disabled={disabled}>Cancel</Button>*/}
                     </div>
                 </Form>
             </Formik>
