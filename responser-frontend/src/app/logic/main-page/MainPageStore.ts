@@ -19,7 +19,7 @@ export class MainPageStore {
     }
 }
 
-export const useMainPageStoreNew = (initialPageItem: MainPageNavigation = MainPageNavigation.PROFILE): MainPageStore => {
+export const useMainPageStoreNew = (initialPageItem: MainPageNavigation = MainPageNavigation.SECURITY): MainPageStore => {
     const [mainPageStore] = useState(new MainPageStore(initialPageItem));
     return mainPageStore;
 }

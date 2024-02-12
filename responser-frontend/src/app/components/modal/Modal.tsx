@@ -3,7 +3,7 @@ import ReactModal from "react-modal";
 import classNames from "classnames";
 import {ConditionShow} from "../ConditionShow";
 import {Icon, IconType} from "../icon/Icon";
-import "./Modal.less";
+import "./Modal.less"; // TODO: Improve default style behavior if no have header or footer
 
 const MODAL_HEADER_DISPLAY_NAME = "Header";
 const MODAL_BODY_DISPLAY_NAME = "Body";

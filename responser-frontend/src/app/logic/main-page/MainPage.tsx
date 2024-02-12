@@ -17,6 +17,7 @@ import {PageItem} from "./PageItem";
 import MyProfilePageItem from "./profile-page-item/MyProfilePageItem";
 import {useQuery} from "../../../router";
 import "./MainPage.less";
+import SecurityPageItem from "./security-page-item/SecurityPageItem";
 
 export const MAIN_PAGE_URL: string = "/main";
 
@@ -59,7 +60,7 @@ const MainPage: React.FC = () => {
 
                 {navigation === MainPageNavigation.MY_REVIEWS && <ReviewsPageItem hidden={!menuHidden}/>}
                 {navigation === MainPageNavigation.PROFILE && <MyProfilePageItem hidden={!menuHidden}/>}
-                {navigation === MainPageNavigation.SECURITY && <PageItem hidden={!menuHidden}><PageName>My profile</PageName></PageItem>}
+                {navigation === MainPageNavigation.SECURITY && <SecurityPageItem hidden={!menuHidden}/>}
 
                 <Button className={classNames("menu-control show-menu", {"hidden": !menuHidden})} onClick={() => setMenuHidden(false)}>
                     <Icon type={IconType.SANDWICH}/>
