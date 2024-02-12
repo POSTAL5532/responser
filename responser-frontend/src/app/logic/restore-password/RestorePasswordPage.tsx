@@ -1,17 +1,16 @@
 import React, {useState} from "react";
-import Page from "../../components/page/Page";
-import {observer} from "mobx-react";
 import {useParams} from "react-router";
-import {useRestorePasswordPageStore} from "./RestorePasswordPageStore";
+import {observer} from "mobx-react";
 import {FieldValidator, Form, Formik} from "formik";
-import {Button, ButtonType} from "../../components/button/Button";
-//import {Modal} from "../../components/modal/Modal";
-import {nativeNavigateTo} from "../../utils/NavigationUtils";
-import ApplicationProperties from "../../service/ApplicationProperties";
 import * as Yup from "yup";
-import {PASSWORD_VALIDATION_SCHEMA, PasswordField} from "../../components/form/PasswordField";
 import {FormikHelpers} from "formik/dist/types";
+import Page from "../../components/page/Page";
+import {useRestorePasswordPageStore} from "./RestorePasswordPageStore";
+import {Button, ButtonType} from "../../components/button/Button";
+import {PASSWORD_VALIDATION_SCHEMA, PasswordField} from "../../components/form/PasswordField";
 import {PageName} from "../../components/page-name/PageName";
+import Modal from "../../components/modal/Modal";
+import AuthorizationService from "../../service/authorization/AuthorizationService";
 import "./RestorePasswordPage.less"
 
 export const RESTORE_PASSWORD_PAGE_URL = "/restore-password/:restorePasswordId";
@@ -73,9 +72,15 @@ const RestorePasswordPage: React.FC = () => {
                 </div>
             </section>
 
-            {/*<Modal isOpen={passwordRestored} header="Done" onOk={() => nativeNavigateTo(ApplicationProperties.unauthorizedPageUrl)}>
-                Your password was changed. Now you can login with your new password.
-            </Modal>*/}
+            <Modal isOpen={passwordRestored} onClose={() => AuthorizationService.requestLoginPage()} className="password-changed-modal">
+                <Modal.Body>
+                    <p className="text">
+                        Your password was changed. Now you can login with your new password.
+                    </p>
+
+                    <Button styleType={ButtonType.PRIMARY} onClick={() => AuthorizationService.requestLoginPage()}>Ok</Button>
+                </Modal.Body>
+            </Modal>
         </Page>
     );
 }

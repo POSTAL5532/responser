@@ -38,7 +38,7 @@ const EditPasswordForm: React.FC<EditPasswordFormProps> = (props: EditPasswordFo
                     onSubmit={onSubmit}
                     validationSchema={EDIT_PASSWORD_FORM_VALIDATION_SCHEMA}>
                 <Form>
-                    <PasswordField name="oldPassword"
+                    {/*<PasswordField name="oldPassword"
                                    placeholder="Old password"
                                    onChange={value => updateUserPasswordPayload.oldPassword = value}
                                    disabled={disabled}/>
@@ -56,7 +56,7 @@ const EditPasswordForm: React.FC<EditPasswordFormProps> = (props: EditPasswordFo
 
                     <div className="form-controls">
                         <Button type="submit" loading={disabled} disabled={disabled || !passwordsFilled}>Update password</Button>
-                    </div>
+                    </div>*/}
                 </Form>
             </Formik>
         </div>

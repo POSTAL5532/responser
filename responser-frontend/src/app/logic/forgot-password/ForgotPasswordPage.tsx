@@ -1,19 +1,19 @@
 import React, {useState} from "react";
-import Page from "../../components/page/Page";
+import {observer} from "mobx-react";
 import {Form, Formik} from "formik";
+import * as Yup from "yup";
+import {FormikHelpers} from "formik/dist/types";
+import Page from "../../components/page/Page";
 import {EmailField} from "../../components/form/EmailField";
 import {Button, ButtonType} from "../../components/button/Button";
 import {useForgotPasswordPageStore} from "./ForgotPasswordPageStore";
-import * as Yup from "yup";
 import {EMAIL_VALIDATION_SCHEMA} from "../../utils/ValidationUtils";
 import {nativeNavigateTo} from "../../utils/NavigationUtils";
-//import {Modal} from "../../components/modal/Modal";
 import ApplicationProperties from "../../service/ApplicationProperties";
-import {observer} from "mobx-react";
-import {FormikHelpers} from "formik/dist/types";
 import {PageName} from "../../components/page-name/PageName";
-import "./ForgotPasswordPage.less";
 import {InputFieldStyleType} from "../../components/form/input-field/InputField";
+import Modal from "../../components/modal/Modal";
+import "./ForgotPasswordPage.less";
 
 export const FORGOT_PASSWORD_PAGE_URL = "/forgot-password";
 
@@ -49,9 +49,15 @@ const ForgotPasswordPage: React.FC = () => {
                 </div>
             </section>
 
-            {/*<Modal isOpen={passwordRestoreLinkSent} header="Done" onOk={() => nativeNavigateTo(ApplicationProperties.unauthorizedPageUrl)}>
-                We sent password restore link to your email.
-            </Modal>*/}
+            <Modal isOpen={passwordRestoreLinkSent} onClose={() => nativeNavigateTo(ApplicationProperties.unauthorizedPageUrl)} className="restore-sent-modal">
+                <Modal.Body>
+                    <p className="text">
+                        We sent password restore link to your email. Restore password by link and retry the login.
+                    </p>
+
+                    <Button styleType={ButtonType.PRIMARY} onClick={() => nativeNavigateTo(ApplicationProperties.unauthorizedPageUrl)}>Ok</Button>
+                </Modal.Body>
+            </Modal>
         </Page>
     );
 }
