@@ -18,8 +18,10 @@
   `npm run build:<mode>` - build FE app
 
 ## Run file store dev stub application
+* Copy directories from `<responser-file-store_module>/files_storage` directory to non git place
 * Setup `<responser-file-store_module>/src/main/resources/responser-file-store-stub.properties` file 
-from `<responser-file-store_module>/src/main/resources/responser-file-store-stub.properties.template`
+  from `<responser-file-store_module>/src/main/resources/responser-file-store-stub.properties.template` 
+  and specify paths to files from previous step
 * `./gradlew :responser-file-store:run` - run stub
 
 ## Build extension
@@ -33,12 +35,12 @@ development
 * `prod` - production
 
 ## Test users:
-login: `testUser`\
-email: `testUser@test.test`\
-password: `qwerty`
+login: `user1`\
+email: `user1@rmail.com`\
+password: `qwerty123`
 
-login: `testUser<N>`\
-email: `testUser<N>@test.test`\
-password: `qwerty`
+login: `user<N>`\
+email: `user<N>@rmail.com`\
+password: `qwerty123`
 
-where `<N>` from `1` to `9`
+where `<N>` from `1` to `20`

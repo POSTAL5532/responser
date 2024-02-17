@@ -17,12 +17,10 @@ public class Main {
             .handlers(chain -> chain
                 .get(new HelloWorldHandler())
                 .get("user-avatar/:fileName", new GetUserAvatarHandler())
+                .post("user-avatar", new SetUserAvatarHandler())
+                .delete("delete-user-avatar/:fileName", new RemoveUserAvatarHandler())
+
                 .get("site-icon/:fileName", new GetSiteIconHandler())
-                .post("user-avatar", ctx -> {
-                    ctx.getRequest().getBody().then(typedData -> {
-                        byte[] fileBytes = typedData.getBytes();
-                    });
-                })
             )
         );
     }

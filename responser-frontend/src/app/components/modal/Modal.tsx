@@ -32,11 +32,18 @@ type ModalSubcomponents = {
 const Modal: React.FC<ModalProps> & ModalSubcomponents = (props: ModalProps) => {
     const {isOpen, className, disableControls = false, onClose, children} = props;
 
-    const resultClassName = classNames("modal", {"disable-controls": disableControls});
-
     const header = getChildrenOnDisplayName(children, MODAL_HEADER_DISPLAY_NAME);
     const body = getChildrenOnDisplayName(children, MODAL_BODY_DISPLAY_NAME);
     const footer = getChildrenOnDisplayName(children, MODAL_FOOTER_DISPLAY_NAME);
+
+    const resultClassName = classNames(
+        "modal",
+        {
+            "disable-controls": disableControls,
+            "no-header": !header || header.length === 0,
+            "no-footer": !footer || footer.length === 0
+        },
+    );
 
     if (!body || body.length < 1) {
         throw new Error("'Modal' component must have an 'Modal.Body' children.")

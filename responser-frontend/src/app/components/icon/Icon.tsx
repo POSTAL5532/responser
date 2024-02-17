@@ -29,6 +29,9 @@ import {ReactComponent as XLogo} from './x_logo.svg';
 import {ReactComponent as LiLogo} from './li_logo.svg';
 import {ReactComponent as VkLogo} from './vk_logo.svg';
 import {ReactComponent as RedditLogo} from './reddit_logo.svg';
+import {ReactComponent as Refresh} from './refresh.svg';
+import {ReactComponent as Upload} from './upload.svg';
+import {ReactComponent as FullArrow} from './full-arrow.svg';
 import "./Icon.less";
 
 export enum IconType {
@@ -60,7 +63,10 @@ export enum IconType {
     TG_LOGO = "tg-logo",
     LI_LOGO = "li-logo",
     VK_LOGO = "vk-logo",
-    REDDIT_LOGO = "reddit-logo"
+    REDDIT_LOGO = "reddit-logo",
+    REFRESH = "refresh",
+    UPLOAD = "upload",
+    FULL_ARROW = "full-arrow",
 }
 
 type IconProps = {
@@ -131,6 +137,12 @@ export const Icon: React.FC<IconProps> = (props: IconProps) => {
             return <VkLogo className={resultClassName}/>
         case IconType.REDDIT_LOGO:
             return <RedditLogo className={resultClassName}/>
+        case IconType.REFRESH:
+            return <Refresh className={resultClassName}/>
+        case IconType.UPLOAD:
+            return <Upload className={resultClassName}/>
+        case IconType.FULL_ARROW:
+            return <FullArrow className={resultClassName}/>
         default:
             return null;
     }

@@ -1,0 +1,71 @@
+@import "globalsLess";
+
+.avatar-editor {
+    .avatar-editor-canvas-container {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 300px;
+        width: 300px;
+        background-color: @black-alpha-60;
+        border-radius: 20px;
+        overflow: hidden;
+        margin-bottom: 12px;
+
+        canvas {
+            border-radius: 14px;
+        }
+    }
+
+    &.loading .avatar-editor-canvas-container {
+        pointer-events: none;
+    }
+
+    .controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .noUi-target {
+            width: 120px;
+            height: 4px;
+            border: none;
+            border-radius: unset;
+            box-shadow: none;
+            background-color: @beige-dark-alpha-20;
+
+            .noUi-base {
+                .noUi-connects {
+                    .noUi-connect {
+                        background-color: @beige-dark-alpha-20;
+                    }
+                }
+
+                .noUi-origin {
+                    .noUi-handle {
+                        width: 14px;
+                        height: 14px;
+                        top: -5px;
+                        right: -5px;
+                        border-radius: 50%;
+                        background-color: @white;
+                        border: solid 1px @beige-dark-alpha-20;
+                        cursor: pointer;
+
+                        &, &.noUi-active {
+                            box-shadow: none;
+                        }
+
+                        &::before, &::after {
+                            display: none;
+                        }
+                    }
+                }
+            }
+        }
+
+        .button {
+            width: 90px;
+        }
+    }
+}

@@ -3,6 +3,10 @@ import ApplicationProperties from "../service/ApplicationProperties";
 import {WebResource} from "../model/WebResource";
 
 export const getUserAvatarUrl = (user: User): string => {
+    if (!user) {
+        return null;
+    }
+
     return ApplicationProperties.userAvatarsStorageUrl + "/" + user.avatarFileName;
 }
 

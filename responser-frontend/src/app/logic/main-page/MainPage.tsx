@@ -9,12 +9,13 @@ import applicationProperties from "../../service/ApplicationProperties";
 import {MessageBlock, MessageBlockType} from "../../components/message-block/MessageBlock";
 import {MainPageNavigation, useMainPageStoreNew} from "./MainPageStore";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
-import {MainMenu} from "./main-menu/MainMenu";
+import MainMenu from "./main-menu/MainMenu";
 import {Icon, IconType} from "../../components/icon/Icon";
 import ReviewsPageItem from "./reviews-page-item/MyReviewsPageItem";
 import MyProfilePageItem from "./profile-page-item/MyProfilePageItem";
 import SecurityPageItem from "./security-page-item/SecurityPageItem";
 import {useQuery} from "../../../router";
+import EditUserAvatar from "./edit-user-avatar/EditUserAvatar";
 import "./MainPage.less";
 
 export const MAIN_PAGE_URL: string = "/main";
@@ -34,6 +35,7 @@ const MainPage: React.FC = () => {
     const {currentUser, refreshCurrentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const {navigation, navigateTo} = useMainPageStoreNew(pageItem);
     const [menuHidden, setMenuHidden] = useState(true);
+    const [editUserAvatar, setEditUserAvatar] = useState(false);
 
     const {checkExtension} = useExtensionService();
     const [extensionChecking, changeExtensionChecking] = useState(true);
@@ -53,11 +55,18 @@ const MainPage: React.FC = () => {
     return (
         <Page className="main-page">
             <section className="section">
-                <MainMenu user={currentUser} currentNavigation={navigation} onNavigate={onNavigate} hidden={menuHidden}/>
+                <MainMenu
+                    user={currentUser}
+                    currentNavigation={navigation}
+                    onNavigate={onNavigate}
+                    onChangeUserAvatarClick={() => setEditUserAvatar(true)}
+                    hidden={menuHidden}/>
 
                 {navigation === MainPageNavigation.MY_REVIEWS && <ReviewsPageItem hidden={!menuHidden}/>}
                 {navigation === MainPageNavigation.PROFILE && <MyProfilePageItem hidden={!menuHidden}/>}
                 {navigation === MainPageNavigation.SECURITY && <SecurityPageItem hidden={!menuHidden}/>}
+
+                <EditUserAvatar show={editUserAvatar} onClose={() => setEditUserAvatar(false)}/>
 
                 <Button className={classNames("menu-control show-menu", {"hidden": !menuHidden})} onClick={() => setMenuHidden(false)}>
                     <Icon type={IconType.SANDWICH}/>

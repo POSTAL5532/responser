@@ -16,6 +16,6 @@ public class GetUserAvatarHandler implements Handler {
             throw new NullPointerException("fileName parameter is empty!");
         }
 
-        ctx.getResponse().sendFile(Path.of(APP_PROPERTIES.getFilesBasePath() + "\\users-avatars\\" + fileName));
+        ctx.getResponse().sendFile(Path.of(APP_PROPERTIES.getUsersAvatarsPath() + "\\" + fileName));
     }
 }

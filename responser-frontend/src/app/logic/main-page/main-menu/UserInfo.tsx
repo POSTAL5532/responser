@@ -1,16 +1,19 @@
 import React from "react";
+import {observer} from "mobx-react";
 import {Icon, IconType} from "../../../components/icon/Icon";
 import {User} from "../../../model/User";
 import {Spinner} from "../../../components/spinner/Spinner";
 import {Tooltip, TooltipPosition} from "../../../components/tooltip/Tooltip";
 import {getUserAvatarUrl} from "../../../utils/ResourcesUtils";
+import {Button} from "../../../components/button/Button";
 
 type UserInfoProps = {
     user: User;
+    onChangeUserAvatarClick: () => void;
 }
 
-export const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
-    const {user} = props;
+const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
+    const {user, onChangeUserAvatarClick} = props;
 
     if (!user) {
         return(
@@ -23,6 +26,7 @@ export const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
     return(
         <div className="user-info-container">
             <img alt="User avatar" className="user-avatar" src={getUserAvatarUrl(user)}/>
+            <Button className="change-user-avatar" onClick={onChangeUserAvatarClick}><Icon type={IconType.EDIT}/></Button>
             <div className="user-info">
                 <h2 className="username">{user.userName}</h2>
                 <div className="rating-container">
@@ -37,3 +41,5 @@ export const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
         </div>
     );
 }
+
+export default observer(UserInfo);

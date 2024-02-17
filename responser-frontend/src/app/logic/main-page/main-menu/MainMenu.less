@@ -8,14 +8,16 @@
     padding-left: 30px;
     padding-top: 30px;
     transition: transform 0.15s;
+    z-index: 1;
 
-    .adaptationMobile({
+    .adaptationTabletAndMobile({
         &.hidden {
             transform: translateX(-100%);
         }
     });
 
     .user-info-container {
+        position: relative;
         display: flex;
         align-items: center;
         gap: 8px;
@@ -25,6 +27,24 @@
             width: 100px;
             height: 100px;
             border-radius: 50%;
+        }
+
+        .change-user-avatar {
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            background-color: @green;
+            padding: 0;
+            border: none;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+
+            .icon {
+                path {
+                    stroke: @white;
+                }
+            }
         }
 
         .user-info {
@@ -88,6 +108,10 @@
             .icon {
                 height: 14px;
                 width: 14px;
+
+                path {
+                    stroke: @white;
+                }
             }
 
             &:hover {

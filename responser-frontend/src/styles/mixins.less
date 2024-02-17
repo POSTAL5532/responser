@@ -74,6 +74,12 @@
   .adaptationMobile(@mobileRules);
 }
 
+// Workaround for cover rules.
+.adaptationTabletAndMobile(@rules) {
+  .adaptationTablet(@rules);
+  .adaptationMobile(@rules);
+}
+
 .adaptationComplex(@desktopRules, @smallDesktopRules, @tabletRules, @mobileRules) {
   .adaptationDesktop(@desktopRules);
   .adaptationSmallDesktop(@smallDesktopRules);

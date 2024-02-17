@@ -1,6 +1,8 @@
 import React, {ChangeEvent, DragEvent, SyntheticEvent, useState} from "react";
 import classNames from "classnames";
+import {ConditionShow} from "../ConditionShow";
 import "./DragAndDrop.less";
+import {Icon, IconType} from "../icon/Icon";
 
 type DragAndDropProps = {
     onChange?: (data: File) => void;
@@ -93,10 +95,16 @@ export const DragAndDrop: React.FC<DragAndDropProps> = (props: DragAndDropProps)
         handleFileChanging(event, event.currentTarget.files?.[0]);
     }
 
-    const resultClassName = classNames("drag-n-drop", {"active": active, "wrong-file-type": wrongFileType})
+    const resultClassName = classNames(
+        "drag-n-drop",
+        {
+            "active": active,
+            "wrong-file-type": wrongFileType
+        }
+    );
 
     return (
-        <div>
+        <div className="drag-n-drop-container">
             <div onClick={onFileClick} className={resultClassName} onDragEnter={onDragEnter} onDragLeave={onDragLeave} onDragOver={onDragOver} onDrop={onDrop}>
 
                 <input ref={fileInputRef}
@@ -105,13 +113,23 @@ export const DragAndDrop: React.FC<DragAndDropProps> = (props: DragAndDropProps)
                        onChange={onFileChange}
                        accept={acceptedFileTypes.length > 0 ? acceptedFileTypes.join(", ") : undefined}/>
 
-                <p className="label">{
-                    active ? (wrongFileType ? "Bad file type" : "Drop file here") : "Click or Drag and Drop file here"}
-                </p>
-            </div>
+                <ConditionShow condition={!active || wrongFileType}>
+                    <p className="label">Click or Drag photo here</p>
+                </ConditionShow>
 
-            {wrongFileTypeMessage && <span style={{color: "red"}}>Wrong file type</span>}
-            {wrongFileSize && <span style={{color: "red"}}>Wrong file size</span>}
+                <ConditionShow condition={active && !wrongFileType}>
+                    <Icon type={IconType.UPLOAD}/>
+                </ConditionShow>
+
+                <ConditionShow condition={active && wrongFileType}>
+                    <p className="error-message active-error">Wrong file type</p>
+                </ConditionShow>
+
+                <ConditionShow condition={!active && (wrongFileTypeMessage || wrongFileSize)}>
+                    {wrongFileTypeMessage && <p className="error-message resdult-error">Wrong file type</p>}
+                    {wrongFileSize && <p className="error-message resdult-error">Wrong file size</p>}
+                </ConditionShow>
+            </div>
         </div>
     );
 }

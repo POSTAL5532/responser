@@ -1,0 +1,118 @@
+@import "globalsLess";
+
+.edit-user-avatar-modal {
+    .modal {
+        width: 510px;
+        height: 410px;
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            .modal-title {
+                margin: 0 0 20px;
+                .fontOutfitRegular(24px);
+                color: @black-alpha-60;
+            }
+
+            .show-avatar-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 54px;
+
+                .user-avatar {
+                    width: 200px;
+                    height: 200px;
+                    border-radius: 50%;
+                    margin-bottom: 20px;
+                }
+
+                .controls {
+                    display: flex;
+                    gap: 6px;
+
+                    .button {
+                        flex: 1;
+                        height: 44px;
+                        width: 192px;
+                        padding-left: 14px;
+                        padding-right: 14px;
+                        font-size: 18px;
+
+                        .icon {
+                            width: 14px;
+                            height: 14px;
+                        }
+                    }
+                }
+            }
+
+            .back-action {
+                position: absolute;
+                left: 26px;
+                top: 26px;
+                border: none;
+                background-color: transparent;
+                padding: unset;
+                cursor: pointer;
+                z-index: 1;
+
+                &, &:focus, &:active, &:hover {
+                    outline: none;
+                }
+
+                .icon {
+                    width: 12px;
+                    height: 12px;
+
+                    path {
+                        stroke: @black-alpha-40;
+                        transition: stroke 0.15s;
+                    }
+                }
+
+                &:hover .icon path {
+                    stroke: @black-alpha-60;
+                }
+            }
+
+            .user-avatar-drag-drop {
+                width: 100%;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 54px;
+
+                .drag-n-drop-container {
+                    margin-bottom: 20px;
+                }
+
+                .file-requirements {
+                    width: 388px;
+
+                    p {
+                        margin: 0;
+                        .fontOutfitMedium(12px);
+                        color: @black-alpha-60;
+
+                        &.supported-formats {
+                            margin-bottom: 6px;
+                        }
+                    }
+                }
+            }
+
+            .user-avatar-edit-form {
+                width: 100%;
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                padding-top: 40px;
+            }
+        }
+    }
+}

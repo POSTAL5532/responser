@@ -16,6 +16,7 @@ repositories {
 
 dependencies {
     runtimeOnly "org.slf4j:slf4j-simple:1.7.36"
+    implementation 'commons-io:commons-io:2.13.0'
 }
 
 mainClassName = "com.responser.filestorestub.Main"

@@ -1,37 +1,59 @@
 @import "globalsLess";
 
-.drag-n-drop {
-  width: 300px;
-  height: 200px;
-  border-radius: 8px;
-  border: dashed 1px gray;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
+.drag-n-drop-container {
+    .drag-n-drop {
+        position: relative;
+        width: 388px;
+        height: 200px;
+        border-radius: 20px;
+        border: dashed 1px @brown-dark;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
 
-  .file-input {
-    display: none;
-  }
+        .file-input {
+            display: none;
+        }
 
-  .label {
-    pointer-events: none;
-  }
+        .label {
+            pointer-events: none;
+            .fontOutfitRegular(16px);
+            color: @black-alpha-60;
+            width: 118px;
+            text-align: center;
+        }
 
-  &.active, &:hover {
-    border-color: dodgerblue;
+        .icon.upload {
+            pointer-events: none;
+            width: 44px;
+            height: 44px;
+        }
 
-    .label {
-      color: dodgerblue;
+        &.wrong-file-type {
+            border-color: @red;
+        }
+
+        .error-message {
+            .fontOutfitMedium(12px);
+            margin: 0;
+            position: absolute;
+            left: 50%;
+            bottom: 10px;
+            pointer-events: none;
+            color: @red;
+            transform: translateX(-50%);
+        }
+
+        &.active {
+            &:not(.wrong-file-type) {
+                border: solid 1px @lime;
+                background-color: @lime-very-light;
+            }
+
+            &.wrong-file-type {
+                border-color: @red;
+            }
+        }
     }
-
-    &.wrong-file-type {
-      border-color: tomato;
-      cursor: not-allowed;
-
-      .label {
-        color: tomato;
-      }
-    }
-  }
 }

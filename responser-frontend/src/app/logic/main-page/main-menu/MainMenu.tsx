@@ -1,6 +1,8 @@
 import React from "react";
+import {observer} from "mobx-react";
+import classNames from "classnames";
 import {User} from "../../../model/User";
-import {UserInfo} from "./UserInfo";
+import UserInfo from "./UserInfo";
 import {Button} from "../../../components/button/Button";
 import {MainPageNavigation} from "../MainPageStore";
 import ApplicationProperties from "../../../service/ApplicationProperties";
@@ -9,7 +11,6 @@ import LocalTokenStorageService from "../../../service/authorization/LocalTokenS
 import {nativeNavigateTo} from "../../../utils/NavigationUtils";
 import {useExtensionService} from "../../../service/extension/ExtensionService";
 import {Icon, IconType} from "../../../components/icon/Icon";
-import classNames from "classnames";
 import "./MainMenu.less";
 
 type MainMenuProps = {
@@ -17,10 +18,11 @@ type MainMenuProps = {
     onNavigate: (navigateTo: MainPageNavigation) => void;
     hidden: boolean;
     currentNavigation: MainPageNavigation;
+    onChangeUserAvatarClick: () => void;
 }
 
-export const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
-    const {user, currentNavigation, onNavigate, hidden} = props;
+const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
+    const {user, currentNavigation, onChangeUserAvatarClick, onNavigate, hidden} = props;
 
     const extensionService = useExtensionService();
     const logger = useLogger("MainMenu");
@@ -43,12 +45,14 @@ export const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
 
     return (
         <div className={classNames("main-menu-container", {"hidden": hidden})}>
-            <UserInfo user={user}/>
+            <UserInfo user={user} onChangeUserAvatarClick={onChangeUserAvatarClick}/>
 
             <div className="main-menu">
-                <Button className={getMenuItemClassName(MainPageNavigation.MY_REVIEWS)} onClick={() => onNavigate(MainPageNavigation.MY_REVIEWS)}>My reviews</Button>
+                <Button className={getMenuItemClassName(MainPageNavigation.MY_REVIEWS)} onClick={() => onNavigate(MainPageNavigation.MY_REVIEWS)}>My
+                    reviews</Button>
                 <Button className={getMenuItemClassName(MainPageNavigation.PROFILE)} onClick={() => onNavigate(MainPageNavigation.PROFILE)}>My profile</Button>
-                <Button className={getMenuItemClassName(MainPageNavigation.SECURITY)} onClick={() => onNavigate(MainPageNavigation.SECURITY)}>Security settings</Button>
+                <Button className={getMenuItemClassName(MainPageNavigation.SECURITY)} onClick={() => onNavigate(MainPageNavigation.SECURITY)}>Security
+                    settings</Button>
             </div>
 
             <div className="account-control-container">
@@ -59,4 +63,4 @@ export const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
     );
 }
 
-
+export default observer(MainMenu);
