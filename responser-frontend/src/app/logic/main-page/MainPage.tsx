@@ -6,7 +6,6 @@ import Page from "../../components/page/Page";
 import {useExtensionService} from "../../service/extension/ExtensionService";
 import {Button, ButtonSize} from "../../components/button/Button";
 import applicationProperties from "../../service/ApplicationProperties";
-import {MessageBlock, MessageBlockType} from "../../components/message-block/MessageBlock";
 import {MainPageNavigation, useMainPageStoreNew} from "./MainPageStore";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import MainMenu from "./main-menu/MainMenu";
@@ -101,10 +100,10 @@ const ExtensionExistCheck: React.FC<ExtensionExistCheckProps> = ({exist}) => {
     }
 
     return (
-        <MessageBlock type={MessageBlockType.WARNING} className="extension-does-not-exist">
+        <div>
             Looks like you didn't install the browser extension for reviews.
             <Button size={ButtonSize.SMALL} onClick={onInstallExtensionClick}>Install extension</Button>
-        </MessageBlock>
+        </div>
     );
 }
 
