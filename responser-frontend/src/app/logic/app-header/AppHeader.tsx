@@ -41,8 +41,7 @@ const AppHeader: React.FC = () => {
                                 <Icon type={IconType.USER}/>
                             </Button>
                             : <Button styleType={ButtonType.PRIMARY} onClick={AuthorizationService.requestLoginPage}>
-                                <Icon type={IconType.LOGIN}/>
-                                Login
+                                <Icon type={IconType.LOGIN}/> Login
                             </Button>
                     }
                 </div>
