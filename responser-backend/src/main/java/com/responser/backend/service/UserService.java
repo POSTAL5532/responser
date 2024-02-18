@@ -1,5 +1,6 @@
 package com.responser.backend.service;
 
+import com.responser.backend.config.ApplicationProperties;
 import com.responser.backend.exceptions.DataNotValidException;
 import com.responser.backend.model.EmailConfirmation;
 import com.responser.backend.model.PasswordRestore;
@@ -10,7 +11,6 @@ import com.responser.backend.service.email.EmailService;
 import com.responser.backend.service.fileResource.FileResourceService;
 import com.responser.backend.service.fileResource.FileResourceType;
 import com.responser.backend.utils.ValidationUtils;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -18,7 +18,6 @@ import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,6 +48,8 @@ public class UserService {
     private final PasswordEncoder passwordEncoder;
 
     private final FileResourceService fileResourceService;
+
+    private final ApplicationProperties applicationProperties;
 
     public User getUser(String userId) {
         return userRepository.findById(userId).orElseThrow(() -> {
@@ -166,16 +167,29 @@ public class UserService {
         String oldAvatarFileName = user.getAvatarFileName();
         String newAvatarFileName = FileResourceType.USER_AVTAR.getValue() + "_" + user.getId() + "_" + UUID.randomUUID() + ".jpeg";
 
-        try {
-            fileResourceService.uploadFile(avatar, newAvatarFileName);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        fileResourceService.uploadFile(avatar, newAvatarFileName);
 
         user.setAvatarFileName(newAvatarFileName);
         updateUser(user);
 
-        if (StringUtils.isNotBlank(oldAvatarFileName)) {
+        if (!applicationProperties.getDefaultUserAvatarFileName().equals(oldAvatarFileName)) {
+            fileResourceService.removeFile(oldAvatarFileName);
+        }
+
+        return newAvatarFileName;
+    }
+
+    @Transactional
+    public String removeAvatar(String userId) {
+        User user = getUser(userId);
+
+        String oldAvatarFileName = user.getAvatarFileName();
+        String newAvatarFileName = applicationProperties.getDefaultUserAvatarFileName();
+
+        user.setAvatarFileName(newAvatarFileName);
+        updateUser(user);
+
+        if (!applicationProperties.getDefaultUserAvatarFileName().equals(oldAvatarFileName)) {
             fileResourceService.removeFile(oldAvatarFileName);
         }
 

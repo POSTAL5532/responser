@@ -107,4 +107,12 @@ public class UserRestController extends RestApiController {
         String avatarFileName = userService.changeAvatar(avatar.getBytes(), principal.getName());
         return ResponseEntity.ok(avatarFileName);
     }
+
+    @PreAuthorize("isAuthenticated()")
+    @DeleteMapping("/remove-avatar")
+    public ResponseEntity<String> removeAvatar(Principal principal) {
+        log.info("Remove user avatar for user {}", principal.getName());
+        String avatarFileName = userService.removeAvatar(principal.getName());
+        return ResponseEntity.ok(avatarFileName);
+    }
 }

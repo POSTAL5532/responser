@@ -34,6 +34,20 @@ export class EditUserAvatarStore {
             this.logger.debug("Save user avatar - finish.");
         }
     }
+
+    public removeUserAvatar = async () => {
+        this.loadingState.isDataSubmitting = true;
+        this.logger.debug("Remove user avatar - start.");
+
+        try {
+            await this.userService.removeAvatar();
+        } catch (error: any) {
+            throw error;
+        } finally {
+            this.loadingState.isDataSubmitting = false;
+            this.logger.debug("Remove user avatar - finish.");
+        }
+    }
 }
 
 export const useEditUserAvatarStore = (): EditUserAvatarStore => {

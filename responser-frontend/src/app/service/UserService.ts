@@ -53,7 +53,12 @@ export class UserService {
         const formData = new FormData();
         formData.append("avatar", blob);
 
-        this.logger.debug("Change user password.");
+        this.logger.debug("Change user avatar.");
         return await this.client.executePostRequest(`${BASE_USER_REQUEST}/change-avatar`, formData)
+    }
+
+    removeAvatar = async (): Promise<string> => {
+        this.logger.debug("Remove user avatar.");
+        return await this.client.executeDeleteRequest(`${BASE_USER_REQUEST}/remove-avatar`)
     }
 }

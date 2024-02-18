@@ -13,6 +13,8 @@ import {getUserAvatarUrl} from "../../../utils/ResourcesUtils";
 import {Icon, IconType} from "../../../components/icon/Icon";
 import "./EditUserAvatar.less";
 
+const DEFAULT_USER_AVATAR_FILE_NAME = "default_avatar.png";
+
 type EditUserAvatarProps = {
     show: boolean;
     onClose: () => void;
@@ -27,7 +29,8 @@ const EditUserAvatar: React.FC<EditUserAvatarProps> = (props: EditUserAvatarProp
         rawUserAvatar,
         loadingState,
         setUserRawAvatar,
-        saveUserAvatar
+        saveUserAvatar,
+        removeUserAvatar
     } = useEditUserAvatarStore();
 
     const {isDataSubmitting} = loadingState;
@@ -39,6 +42,11 @@ const EditUserAvatar: React.FC<EditUserAvatarProps> = (props: EditUserAvatarProp
             setUserRawAvatar(null);
             setShowUserAvatar(true);
         });
+    }
+
+    const onRemoveAvatar = () => {
+        removeUserAvatar()
+        .then(refreshCurrentUser);
     }
 
     const onAvatarEditCancel = () => {
@@ -71,7 +79,12 @@ const EditUserAvatar: React.FC<EditUserAvatarProps> = (props: EditUserAvatarProp
                                 disabled={isDataSubmitting}>
                                 <Icon type={IconType.REFRESH}/> Change picture
                             </Button>
-                            <Button disabled={isDataSubmitting}><Icon type={IconType.REMOVE}/> Delete picture</Button>
+                            <Button
+                                loading={isDataSubmitting}
+                                disabled={isDataSubmitting || currentUser?.avatarFileName === DEFAULT_USER_AVATAR_FILE_NAME}
+                                onClick={onRemoveAvatar}>
+                                <Icon type={IconType.REMOVE}/> Delete picture
+                            </Button>
                         </div>
                     </div>
                 </ConditionShow>
