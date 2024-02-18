@@ -3,10 +3,10 @@ import {useQuery} from "../../../router";
 import AuthorizationService from "../../service/authorization/AuthorizationService";
 import LocalTokenStorageService from "../../service/authorization/LocalTokenStorageService";
 import {useExtensionService} from "../../service/extension/ExtensionService";
-import {Spinner} from "../../components/spinner/Spinner";
 import {navigateToMainPage} from "../main-page/MainPage";
 import {nativeNavigateToAuthLogoutPageUrl} from "../../utils/NavigationUtils";
 import {useLogger} from "../../utils/Logger";
+import {WaitStubPage} from "../wait-stub-page/WaitStubPage";
 import "./AuthCodePage.less";
 
 export const AUTH_CODE_PAGE_URL = "/auth-code";
@@ -28,8 +28,7 @@ export const AuthCodePage: React.FC = () => {
         AuthorizationService.exchangeAuthCode(authCode)
         .then(tokenInfo => {
             LocalTokenStorageService.setToken(tokenInfo);
-            extensionService.setToken(tokenInfo)
-            .finally(navigateToMainPage)
+            extensionService.setToken(tokenInfo).finally(navigateToMainPage)
         })
         .catch((error) => {
             logger.debug("Exchange auth code error - clear all tokens and logout.", error);
@@ -38,10 +37,5 @@ export const AuthCodePage: React.FC = () => {
         })
     }, []);
 
-    return (
-        <div className="auth-code">
-            <Spinner/>
-            <span>Wait for a moment</span>
-        </div>
-    );
+    return <WaitStubPage/>;
 }

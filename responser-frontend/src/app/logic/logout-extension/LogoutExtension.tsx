@@ -5,6 +5,7 @@ import {nativeNavigateTo} from "../../utils/NavigationUtils";
 import ApplicationProperties from "../../service/ApplicationProperties";
 import LocalTokenStorageService from "../../service/authorization/LocalTokenStorageService";
 import {useLogger} from "../../utils/Logger";
+import {WaitStubPage} from "../wait-stub-page/WaitStubPage";
 
 export const LOGOUT_EXTENSION: string = "/logout-extension";
 
@@ -18,7 +19,7 @@ const LogoutExtension: React.FC = () => {
         nativeNavigateTo(ApplicationProperties.authLogoutPageUrl);
     });
 
-    return null;
+    return <WaitStubPage/>;
 }
 
 export default observer(LogoutExtension);

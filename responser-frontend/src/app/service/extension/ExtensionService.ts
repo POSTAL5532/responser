@@ -54,7 +54,12 @@ export class ExtensionService {
         })
         .catch(error => {
             this.logger.error("Set token - error", error);
-            throw error;
+
+            if (error != "Chrome runtime is not defined!") {
+                throw error;
+            }
+
+            return null;
         })
         .finally(() => {
             this.logger.debug("Set token - finish")
@@ -79,7 +84,12 @@ export class ExtensionService {
         })
         .catch(error => {
             this.logger.error("Remove token - error", error);
-            throw error;
+
+            if (error != "Chrome runtime is not defined!") {
+                throw error;
+            }
+
+            return null;
         })
         .finally(() => {
             this.logger.debug("Remove token - finish")

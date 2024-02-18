@@ -4,6 +4,7 @@ import {MAIN_PAGE_URL} from "app/logic/main-page/MainPage";
 import TokenStore from "app/service/authorization/LocalTokenStorageService";
 import {nativeNavigateTo} from "../utils/NavigationUtils";
 import ApplicationProperties from "../service/ApplicationProperties";
+import LocalTokenStorageService from "../service/authorization/LocalTokenStorageService";
 
 type CustomRouteComponentProps = {
     redirectLogic?: () => void;
@@ -23,6 +24,8 @@ const CustomRoute = (canActivate?: () => boolean, redirectPath?: string, isNativ
                            }
 
                            if (!canActivate()) {
+                               LocalTokenStorageService.removeAllTokens();
+
                                if (redirectLogic) {
                                    redirectLogic();
                                    return null;

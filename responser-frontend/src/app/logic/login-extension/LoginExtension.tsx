@@ -3,6 +3,7 @@ import {observer} from "mobx-react";
 import {useExtensionService} from "../../service/extension/ExtensionService";
 import {navigateToMainPage} from "../main-page/MainPage";
 import {useLogger} from "../../utils/Logger";
+import {WaitStubPage} from "../wait-stub-page/WaitStubPage";
 
 export const LOGIN_EXTENSION: string = "/login-extension";
 
@@ -22,7 +23,7 @@ const LoginExtension: React.FC = () => {
         })
     }, []);
 
-    return null;
+    return <WaitStubPage/>;
 }
 
 export default observer(LoginExtension);
