@@ -17,8 +17,12 @@ const AppHeader: React.FC = () => {
             <div className="header-content">
                 <nav className="navigation">
                     <Button styleType={ButtonType.LIGHT} onClick={() => nativeNavigateTo(ApplicationProperties.landingPageUrl)}>Home</Button>
-                    <Button styleType={ButtonType.LIGHT} onClick={() => nativeNavigateTo(ApplicationProperties.landingPageUrl)}>Sites rating</Button>
-                    <Button styleType={ButtonType.LIGHT} onClick={() => nativeNavigateTo(ApplicationProperties.landingPageUrl)}>Reviews</Button>
+                    <Button styleType={ButtonType.LIGHT} onClick={() => nativeNavigateTo(ApplicationProperties.landingPageUrl + "/web-resources/sites-rating")}>
+                        Sites rating
+                    </Button>
+                    <Button styleType={ButtonType.LIGHT} onClick={() => nativeNavigateTo(ApplicationProperties.landingPageUrl + "/reviews/see-reviews")}>
+                        Reviews
+                    </Button>
                 </nav>
                 <div className="logo-container">
                     <a className="logo-link" href={ApplicationProperties.landingPageUrl}>
