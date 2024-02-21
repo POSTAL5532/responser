@@ -74,6 +74,9 @@
 .page.reviews .page-content .section .sorting-filter-container .open-filter:hover {
   color: rgba(0, 0, 0, 0.6);
 }
+.page.reviews .page-content .section .sorting-filter-container .dropdown-menu-container .dropdown-menu {
+  padding: 20px;
+}
 .page.reviews .page-content .section .sorting-filter-container .dropdown-menu-container .dropdown-menu .menu-group-header {
   margin: 0 0 16px;
   font-family: "Outfit-Medium", sans-serif;
@@ -89,14 +92,12 @@
   margin-bottom: 14px;
 }
 .page.reviews .page-content .section .sorting-filter-container .dropdown-menu-container.sorting .dropdown-menu {
-  padding: 20px;
   width: 230px;
 }
 .page.reviews .page-content .section .sorting-filter-container .dropdown-menu-container.sorting .dropdown-menu .button {
   width: 100%;
 }
 .page.reviews .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu {
-  padding: 20px;
   width: 280px;
 }
 .page.reviews .page-content .section .sorting-filter-container .dropdown-menu-container.filter .dropdown-menu .rating-range-labels-container {
@@ -193,4 +194,37 @@
   display: flex;
   justify-content: space-between;
   flex: 2;
+}
+.page.reviews .page-content .share-review-modal .modal {
+  width: 360px;
+  height: 250px;
+}
+.page.reviews .page-content .share-review-modal .modal .modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+  border-radius: 20px;
+}
+.page.reviews .page-content .share-review-modal .modal .modal-body .share-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.page.reviews .page-content .share-review-modal .modal .modal-body .share-buttons .share-row {
+  display: flex;
+  gap: 4px;
+}
+.page.reviews .page-content .share-review-modal .modal .modal-body .share-buttons .share-row .share-button {
+  padding: 0;
+  height: 62px;
+  width: 90px;
+}
+.page.reviews .page-content .share-review-modal .modal .modal-body .share-buttons .share-row .share-button .icon {
+  width: 18px;
+  height: 18px;
+}
+.page.reviews .page-content .share-review-modal .modal .modal-body .share-buttons .share-row .share-button .icon path {
+  fill: rgba(0, 0, 0, 0.6);
 }

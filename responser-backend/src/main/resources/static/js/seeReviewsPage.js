@@ -67,3 +67,48 @@ window.addEventListener('load', (event) => {
         toggleTextHeight(isOverflowed, textElement, $(this), nativeTextElement.scrollHeight + 10);
     });
 });
+
+
+
+const openShareModal = (reviewPageLink) => {
+    $("#share-review-link-value").val(reviewPageLink);
+    $("#share-review-modal").css("display", "flex");
+}
+
+const closeShareModal = () => {
+    $("#share-review-modal").css("display", "none");
+}
+
+const shareFB = () => {
+    const urlToShare = $("#share-review-link-value").val();
+    window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(urlToShare), '_blank', 'width=550,height=400');
+}
+
+const shareVK = () => {
+    const urlToShare = $("#share-review-link-value").val();
+    // 'https://vk.com/share.php?url=' + encodeURIComponent(urlToShare) + '&title=' + encodeURIComponent(textToShare)
+    window.open('https://vk.com/share.php?url=' + encodeURIComponent(urlToShare), '_blank', 'width=550,height=400');
+}
+
+const shareX = () => {
+    const urlToShare = $("#share-review-link-value").val();
+    // 'https://twitter.com/intent/tweet?url=' + encodeURIComponent(urlToShare) + '&text=' + encodeURIComponent(textToShare)
+    window.open('https://twitter.com/intent/tweet?url=' + encodeURIComponent(urlToShare), '_blank', 'width=550,height=400');
+}
+
+const shareTG = () => {
+    const urlToShare = $("#share-review-link-value").val();
+    // 'https://t.me/share/url?url=' + encodeURIComponent(urlToShare) + '&text=' + encodeURIComponent(textToShare)
+    window.open('https://t.me/share/url?url=' + encodeURIComponent(urlToShare), '_blank', 'width=550,height=400');
+}
+
+const shareLI = () => {
+    const urlToShare = $("#share-review-link-value").val();
+    window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(urlToShare), '_blank', 'width=550,height=400');
+}
+
+const shareReddit = () => {
+    const urlToShare = $("#share-review-link-value").val();
+    // 'https://www.reddit.com/submit?url=' + encodeURIComponent(urlToShare) + '&title=' + encodeURIComponent(textToShare)
+    window.open('https://www.reddit.com/submit?url=' + encodeURIComponent(urlToShare), '_blank', 'width=550,height=400');
+}

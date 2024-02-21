@@ -84,7 +84,10 @@
                     </svg>
                     <span class="reactions-count" th:text="${review.reviewLikes.?[positive == false].size}">! ERROR !</span>
                 </div>
-                <button class="button share-button">
+                <button class="button share-button"
+                        th:data-review-link="${@applicationProperties.selfHost + '/reviews/' + review.id}"
+                        th:onClick="openShareModal(this.getAttribute('data-review-link'))">
+
                     <svg class="icon share" xmlns="http://www.w3.org/2000/svg" width="14.783246" height="14.783257" viewBox="0 0 14.783246 14.783257"
                          fill="none"
                          version="1.1" id="svg13">
@@ -99,6 +102,7 @@
                             <rect width="16" height="16" fill="#ffffff" transform="translate(0,0.00170898)" id="rect8" x="0" y="0"/>
                         </clipPath>
                     </svg>
+
                 </button>
             </div>
         </div>

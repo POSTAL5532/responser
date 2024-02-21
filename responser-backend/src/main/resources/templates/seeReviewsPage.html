@@ -191,13 +191,14 @@
                     </button>
                 </div>
                 <div class="pages-container">
-                    <button class="button page-button">1</button>
+                    <!-- // TODO: Realize paging navigation -->
+                    <!--<button class="button page-button">1</button>
                     <span class="pages-placeholder">...</span>
                     <button class="button page-button">3</button>
                     <button class="button page-button active">4</button>
                     <button class="button page-button">5</button>
                     <span class="pages-placeholder">...</span>
-                    <button class="button page-button">10</button>
+                    <button class="button page-button">10</button>-->
                 </div>
                 <div class="button-container next">
                     <button class="button next-button" type="submit" name="page" form="criteria-form" th:classappend="${!reviews.hasNext ? 'disabled' : ''}"
@@ -210,6 +211,62 @@
                 </div>
             </div>
         </section>
+
+        <div id="share-review-modal" class="modal-container share-review-modal">
+            <div class="modal">
+                <div class="modal-body">
+                    <input id="share-review-link-value" type="text" hidden="hidden">
+
+                    <button id="close-share-review-modal" class="close-modal" th:onclick="closeShareModal()">
+                        <svg width="1em" height="1em" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon close">
+                            <path d="m7.5.5-7 7M.5.5l7 7" stroke="#000" stroke-opacity="0.6" stroke-linecap="round" stroke-linejoin="round"></path>
+                        </svg>
+                    </button>
+
+                    <div class="share-buttons">
+                        <div class="share-row first-row">
+                            <button class="button primary share-button" th:onclick="shareFB()">
+                                <svg viewBox="0 0 15.5 30" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" class="icon fb-logo">
+                                    <path d="M10.1 30V16.3h4.6l.7-5.3h-5.3V7.6c0-1.5.4-2.6 2.6-2.6h2.8V.2C15 .1 13.3 0 11.4 0 7.3 0 4.5 2.5 4.5 7v4H0v5.3h4.6V30Z" fill="#fff"></path>
+                                </svg>
+                            </button>
+
+                            <button class="react-share__ShareButton button primary share-button" th:onclick="shareX()">
+                                <svg viewBox="0 0 32.36 29.25" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" class="icon x-logo">
+                                    <path d="M25.485 0h4.962l-10.84 12.39 12.752 16.86h-9.985l-7.821-10.226L5.604 29.25H.639l11.595-13.252L0 0h10.239l7.07 9.347zm-1.741 26.28h2.749L8.745 2.814h-2.95Z" fill="#fff"></path>
+                                </svg>
+                            </button>
+
+                            <button class="react-share__ShareButton button primary share-button" th:onclick="shareTG()">
+                                <svg viewBox="0 0 41.543 35.352" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" class="icon tg-logo">
+                                    <path d="M38.416.003a4.302 4.302 0 0 0-1.962.413c-.85.326-8.64 3.34-16.523 6.391-3.969 1.533-7.934 3.066-10.986 4.241a777.434 777.434 0 0 1-5.468 2.093c-.808.281-1.9.636-2.827 1.728a2.638 2.638 0 0 0-.588 1.103 2.436 2.436 0 0 0 .167 1.571c.465.961 1.253 1.358 2.184 1.714 3.09.99 6.286 1.935 8.933 2.824a785.712 785.712 0 0 1 2.84 10.343c.306.691.972.948 1.658.955l-.003.035s.539.053 1.064-.074c.527-.123 1.189-.428 1.791-.992.662-.622 2.459-2.388 3.477-3.385l7.674 5.664.061.035s.85.597 2.093.682c.622.042 1.44-.078 2.142-.592.708-.516 1.177-1.347 1.396-2.295.657-2.862 5.01-23.578 5.753-27.007l-.021.08c.52-1.93.328-3.7-.871-4.75a3.174 3.174 0 0 0-1.984-.779v.002zm-.207 3.29c.047.045.043.045.003.048-.012-.003.14.207-.158 1.326l-.012.042-.01.039c-.758 3.506-5.155 24.408-5.741 26.964-.08.345-.114.32-.095.299-.176-.026-.5-.165-.527-.176l-13.134-9.701c4.498-4.332 9.1-8.254 13.744-12.433.821-.412.684-1.685-.299-1.707-1.043.246-1.923.996-2.88 1.475-5.5 3.263-11.119 6.132-16.559 9.493-2.792-.97-5.578-1.777-8.152-2.576 2.233-.895 4.008-1.556 5.756-2.23 3.051-1.176 7.016-2.704 10.985-4.24 7.94-3.07 15.927-6.164 16.62-6.43l.056-.024.053-.023a.963.963 0 0 1 .355-.1s-.018-.058-.004-.045h-.001zM17.29 25.359l2.167 1.601c-.934.913-1.817 1.774-2.455 2.388l.288-3.99" fill="#fff"></path>
+                                </svg>
+                            </button>
+                        </div>
+
+                        <div class="share-row second-row">
+                            <button class="react-share__ShareButton button primary share-button" th:onclick="shareLI()">
+                                <svg viewBox="0 0 26 26" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" class="icon li-logo">
+                                    <path d="M.4 26h5.4V8.6H.4ZM3.1 0C1.4 0 0 1.4 0 3.1c0 1.7 1.4 3.1 3.1 3.1 1.7 0 3.1-1.4 3.1-3.1C6.2 1.4 4.8 0 3.1 0Zm16.4 8.2c-2.6 0-4.4 1.4-5.1 2.8h-.1V8.6H9.1V26h5.4v-8.6c0-2.3.4-4.5 3.2-4.5 2.8 0 2.8 2.6 2.8 4.6V26H26v-9.5c0-4.7-1-8.3-6.5-8.3Z" fill="#fff"></path>
+                                </svg>
+                            </button>
+
+                            <button class="react-share__ShareButton button primary share-button" th:onclick="shareReddit()">
+                                <svg viewBox="0 0 42.626 37.88" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" class="icon reddit-logo">
+                                    <path d="M42.626 19.223a4.67 4.67 0 0 0-7.903-3.199 22.771 22.771 0 0 0-12.32-3.937l2.078-9.985 6.848 1.442a3.199 3.199 0 0 0 3.02 2.851 3.2 3.2 0 1 0-2.602-4.805L23.907.024a.985.985 0 0 0-.754.137.978.978 0 0 0-.43.629l-2.37 11.105a22.801 22.801 0 0 0-12.477 3.938 4.672 4.672 0 1 0-5.152 7.648c-.04.469-.04.938 0 1.406 0 7.168 8.35 12.993 18.655 12.993 10.301 0 18.657-5.825 18.657-12.993a9.387 9.387 0 0 0 0-1.406 4.68 4.68 0 0 0 2.59-4.258zm-32 3.2a3.198 3.198 0 1 1 6.398 0c0 1.769-1.43 3.199-3.2 3.199-1.765 0-3.198-1.43-3.198-3.2zm18.593 8.8a12.304 12.304 0 0 1-7.906 2.465 12.286 12.286 0 0 1-7.902-2.465.868.868 0 0 1 .054-1.16.868.868 0 0 1 1.16-.055 10.482 10.482 0 0 0 6.657 2.016 10.491 10.491 0 0 0 6.687-1.953.898.898 0 0 1 1.266.016.898.898 0 0 1-.016 1.265zm-.578-5.472a3.2 3.2 0 0 1-3.2-3.2 3.198 3.198 0 1 1 6.398 0 3.202 3.202 0 0 1-3.23 3.328zm0 0" fill="#fff"></path>
+                                </svg>
+                            </button>
+
+                            <button class="react-share__ShareButton button primary share-button" th:onclick="shareVK()">
+                                <svg viewBox="0 0 42.887 25.015" width="1em" height="1em" xmlns="http://www.w3.org/2000/svg" class="icon vk-logo">
+                                    <path d="M34.85 25.015h-.2c-2.17-.36-3.66-1.92-4.92-3.37-.72-.81-1.82-2.66-3.12-2.47-1.85.3-.93 3.52-1.71 4.9-.62 1.11-3.29.91-5.12.71-5.79-.62-8.75-3.77-11.35-7.14a64.13 64.13 0 0 1-6.92-11.47A10.59 10.59 0 0 1 0 1.685c.91-.81 2.47-.51 4.02-.51 1.31 0 3.36-.29 4.32.2.57.26 1.14 1.8 1.57 2.8a37.18 37.18 0 0 0 3.31 5.82c.56.81 1.41 2.35 2.41 2.14 1-.21 1.06-2.63 1.1-4.18 0-1.77 0-4-.5-4.9-.5-.9-1.32-.88-2.17-1.41.73-1.49 2.72-1.63 5.12-1.63 2 0 4.84-.23 5.62 1.12.78 1.35.25 3.85.2 5.71-.06 2.09-.41 4.25 1 5.21 1.09-.12 1.68-1.2 2.31-2a28 28 0 0 0 3.32-5.88c.44-1 .91-2.65 1.71-3 1.21-.47 3.15-.1 4.92-.1 1.46 0 4.05-.41 4.52.61.39.85-.75 3-1.1 3.57a61.88 61.88 0 0 1-4.12 5.61c-.58.78-1.78 2-1.71 3.27.05.94 1 1.67 1.71 2.35a33.12 33.12 0 0 1 3.92 4.18c.47.62 1.5 2 1.4 2.76-.31 2.56-6.09.99-8.03 1.59z" fill="#fff"></path>
+                                </svg>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </div>
 </body>
