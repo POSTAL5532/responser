@@ -15,14 +15,14 @@
 
 <body>
     <div class="page-content" layout:fragment="page-content">
-        <section class="section">
+        <section class="section" th:with="resourceBasePath=${T(com.responser.backend.utils.UrlUtils).getHost(webResource.url)}">
             <h1 class="section-header">
                 <div class="site-logo-container">
                     <img class="site-logo"
                          th:src="${@applicationProperties.fileStorageUrlSitesIcons + '/' + (webResource.iconFileName != null ? webResource.iconFileName : 'default_site_icon.png')}"
                          th:alt="${T(com.responser.backend.utils.UrlUtils).getHost(webResource.url)}">
                 </div>
-                <span class="site-name" th:text="${T(com.responser.backend.utils.UrlUtils).getHost(webResource.url)}">Google.com</span>
+                <span class="site-name" th:text="${resourceBasePath}">! ERROR !</span>
                 <div class="site-rating-container">
                     <span class="site-rating" th:text="${#numbers.formatDecimal(webResource.rating, 1, 1, 'POINT')}">! ERROR !</span>
                 </div>
@@ -31,7 +31,7 @@
             <form method="GET" id="criteria-form" th:action="${T(com.responser.backend.controller.webresource.WebResourceController).WEB_RESOURCES_URL + '/' + webResource.id}">
                 <div class="field-container">
                     <div class="input-container">
-                        <input class="field-input" type="text" placeholder="Enter URL" name="searchUrl" th:value="${reviewsCriteria.searchUrl != null ? reviewsCriteria.searchUrl : ''}">
+                        <input class="field-input" type="text" th:placeholder="${'Enter ' + resourceBasePath + ' url'}" name="searchUrl" th:value="${reviewsCriteria.searchUrl != null ? reviewsCriteria.searchUrl : ''}">
                         <button class="button primary" type="button" id="submit-with-search">
                             <svg class="icon search" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
