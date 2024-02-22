@@ -25,7 +25,7 @@ spring:
   database:
     driverClassName: org.postgresql.Driver
   datasource:
-    url: jdbc:postgresql://responser-db:5432/responser
+    url: jdbc:postgresql://localhost:5432/responser
     username: postgres
     password: root
     testWhileIdle: 'true'
