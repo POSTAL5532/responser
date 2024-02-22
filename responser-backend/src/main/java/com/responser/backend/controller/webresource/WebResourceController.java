@@ -67,7 +67,7 @@ public class WebResourceController {
 
         if (!criteria.hasSortingField()) {
             criteria.setSortingField(WebResourceCriteriaSortingField.CREATION_DATE);
-            criteria.setSortDirection(Direction.ASC);
+            criteria.setSortDirection(Direction.DESC);
         }
 
         Page<WebResource> webResourcesPage = webResourceService.getWebResources(
@@ -92,6 +92,8 @@ public class WebResourceController {
 
         model.addAttribute("criteria", criteria);
         model.addAttribute("sites", webResourceDTOS);
+
+        // TODO: Refactor to Page<>, without redundant attributes
         model.addAttribute("previousPageNumber", webResourcesPage.hasPrevious() ? webResourcesPage.getNumber() - 1 : null);
         model.addAttribute("nextPageNumber", webResourcesPage.hasNext() ? webResourcesPage.getNumber() + 1 : null);
 
@@ -109,7 +111,7 @@ public class WebResourceController {
 
         if (!reviewsCriteria.hasSortingField()) {
             reviewsCriteria.setSortingField(ReviewsCriteriaSortingField.CREATION_DATE);
-            reviewsCriteria.setSortDirection(Direction.ASC);
+            reviewsCriteria.setSortDirection(Direction.DESC);
         }
 
         if (!reviewsCriteria.hasResourceType()) {
@@ -131,6 +133,8 @@ public class WebResourceController {
         model.addAttribute("reviewsCriteria", reviewsCriteria);
         model.addAttribute("webResource", webResourceDTO);
         model.addAttribute("reviews", reviewConverter.toPageableReviewPayloadList(reviews));
+
+        // TODO: Refactor to Page<>, without redundant attributes
         model.addAttribute("previousPageNumber", reviews.hasPrevious() ? reviews.getNumber() - 1 : null);
         model.addAttribute("nextPageNumber", reviews.hasNext() ? reviews.getNumber() + 1 : null);
 

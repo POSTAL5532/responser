@@ -80,15 +80,13 @@ window.addEventListener('load', (event) => {
         $("input[name=maxRating]").val("5");
     }
 
-    $("#submit-with-search").click(function (){
+    $("#submit-with-search").click(function () {
         resetSorting();
         resetFilter();
-        valuesSlider.noUiSlider.set([1,5])
+        valuesSlider.noUiSlider.set([1, 5]);
         $("#criteria-form").submit();
     });
 });
-
-
 
 const openShareModal = (reviewPageLink) => {
     $("#share-review-link-value").val(reviewPageLink);
