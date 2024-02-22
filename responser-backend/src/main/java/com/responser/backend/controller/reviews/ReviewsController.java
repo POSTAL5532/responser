@@ -7,6 +7,7 @@ import com.responser.backend.converter.ReviewsCriteriaConverter;
 import com.responser.backend.model.ResourceRating;
 import com.responser.backend.model.Review;
 import com.responser.backend.model.ReviewLike;
+import com.responser.backend.model.ReviewsCriteriaResourceType;
 import com.responser.backend.model.ReviewsCriteriaSortingField;
 import com.responser.backend.model.metatags.FacebookMetaTags;
 import com.responser.backend.model.metatags.SocialMetaTags;
@@ -60,6 +61,10 @@ public class ReviewsController {
         if (Objects.isNull(criteria.getSortingField())) {
             criteria.setSortingField(ReviewsCriteriaSortingField.CREATION_DATE);
             criteria.setSortDirection(Direction.DESC);
+        }
+
+        if (Objects.isNull(criteria.getResourceType())) {
+            criteria.setResourceType(ReviewsCriteriaResourceType.ALL);
         }
 
         Page<Review> reviews = reviewService.getReviews(

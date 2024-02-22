@@ -65,7 +65,7 @@ public class ReviewsRestController extends RestApiController {
         if (StringUtils.isNotEmpty(criteria.getForUserId())) {
             if (Objects.isNull(principal) || !principal.getName().equals(criteria.getForUserId())) {
                 log.error("Reviews request criteria with parameter 'forUserId' without authorization.");
-                    return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
         }
 

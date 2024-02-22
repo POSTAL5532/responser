@@ -22,8 +22,8 @@
             <form method="GET" id="criteria-form" th:action="${T(com.responser.backend.controller.reviews.ReviewsController).REVIEWS_URL + T(com.responser.backend.controller.reviews.ReviewsController).SEE_REVIEWS_URL}">
                 <div class="field-container">
                     <div class="input-container">
-                        <input class="field-input" type="text" placeholder="Enter URL" th:value="${criteria.searchUrl != null ? criteria.searchUrl : ''}">
-                        <button class="button primary" type="submit">
+                        <input class="field-input" type="text" placeholder="Enter URL" name="searchUrl" th:value="${criteria.searchUrl != null ? criteria.searchUrl : ''}">
+                        <button class="button primary" type="button" id="submit-with-search">
                             <svg class="icon search" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
                                 <path fill-rule="evenodd" clip-rule="evenodd"
                                       d="M1.05664 4.50652C1.05664 2.60174 2.60077 1.05762 4.50555 1.05762C6.41032 1.05762 7.95445 2.60174 7.95445 4.50652C7.95445 5.43688 7.58607 6.28121 6.98721 6.90158C6.97161 6.91384 6.95658 6.92716 6.9422 6.94154C6.92775 6.95599 6.91437 6.97111 6.90206 6.98679C6.28155 7.58647 5.43663 7.95543 4.50555 7.95543C2.60077 7.95543 1.05664 6.4113 1.05664 4.50652ZM7.27894 7.98539C6.5184 8.5925 5.55435 8.95543 4.50555 8.95543C2.04848 8.95543 0.0566406 6.96358 0.0566406 4.50652C0.0566406 2.04946 2.04848 0.0576172 4.50555 0.0576172C6.96261 0.0576172 8.95445 2.04946 8.95445 4.50652C8.95445 5.5545 8.59211 6.51784 7.98586 7.2781L9.79652 9.08876C9.99179 9.28402 9.99179 9.6006 9.79652 9.79587C9.60126 9.99113 9.28468 9.99113 9.08942 9.79587L7.27894 7.98539Z"
@@ -123,7 +123,7 @@
                                     <span>Page</span>
                                 </label>
                                 <label class="field radio-button">
-                                    <input type="radio" name="resourceType" value=""
+                                    <input type="radio" name="resourceType" th:value="${T(com.responser.backend.model.ReviewsCriteriaResourceType).ALL.name}"
                                            th:checked="${criteria.resourceType == T(com.responser.backend.model.ReviewsCriteriaResourceType).ALL}"/>
                                     <span>All</span>
                                 </label>
@@ -132,7 +132,7 @@
                             <p class="menu-group-header">Rating</p>
                             <div class="rating-range-labels-container">
                                 <div class="rating-label min-rating-label">
-                                    <input type="number" name="minRating" th:value="${criteria.minRating != null ? criteria.minRating : 0}" hidden="hidden">
+                                    <input type="number" name="minRating" th:value="${criteria.minRating != null ? criteria.minRating : 1}" hidden="hidden">
                                     <span class="prefix">from</span>
                                     <svg class="icon star" xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none">
                                         <path
@@ -172,7 +172,7 @@
                     </div>
 
                     <th:block th:each="review, loopState: ${reviews.data}">
-                        <th:block th:replace="~{components/review-card::review-card(review=${review})}"/>
+                        <th:block th:replace="~{components/review-card::review-card(review=${review}, showWebResourceData=${true})}"/>
                     </th:block>
                 </div>
 

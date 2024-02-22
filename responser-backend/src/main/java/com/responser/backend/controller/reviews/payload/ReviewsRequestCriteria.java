@@ -28,11 +28,11 @@ public class ReviewsRequestCriteria {
     private String searchUrl;
 
     @Max(5)
-    @Min(0)
+    @Min(1)
     private Integer maxRating;
 
     @Max(5)
-    @Min(0)
+    @Min(1)
     private Integer minRating;
 
     private ReviewsCriteriaSortingField sortingField;

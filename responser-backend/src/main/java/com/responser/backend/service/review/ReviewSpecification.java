@@ -71,6 +71,10 @@ public class ReviewSpecification implements Specification<Review> {
             predicates.add(criteriaBuilder.equal(reviewRoot.get(Review_.WEB_RESOURCE).get(WebResource_.RESOURCE_TYPE), criteria.getResourceType()));
         }
 
+        if (criteria.hasSearchUrl()) {
+            predicates.add(criteriaBuilder.like(reviewRoot.get(Review_.WEB_RESOURCE).get(WebResource_.URL), "%" + criteria.getSearchUrl().trim() + "%"));
+        }
+
         if (criteria.hasSortingField() && !isCountQuery) {
             Order sortOrder = getSortingOrder(reviewRoot, criteriaQuery, criteriaBuilder, criteria.getSortingField(), criteria.getSortDirection());
             criteriaQuery.orderBy(sortOrder);
