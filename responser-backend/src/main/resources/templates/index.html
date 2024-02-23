@@ -34,17 +34,19 @@
     <div class="page-content" layout:fragment="page-content">
         <section class="section intro">
             <h1 class="intro-head">Unlock Honest Feedback for Every Website</h1>
-            <div class="field-container">
-                <div class="input-container">
-                    <input class="field-input" type="text" placeholder="Enter the site that interests you">
-                    <button class="button primary">
-                        <svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon checked">
-                            <path d="M13.5449 1.41675L5.29492 9.66675L1.54492 5.91675" stroke="black" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        Explore reviews
-                    </button>
+            <form method="GET" id="criteria-form" th:action="${T(com.responser.backend.controller.reviews.ReviewsController).REVIEWS_URL + T(com.responser.backend.controller.reviews.ReviewsController).SEE_REVIEWS_URL}">
+                <div class="field-container">
+                    <div class="input-container">
+                        <input class="field-input" type="text" placeholder="Enter the site that interests you" name="searchUrl">
+                        <button class="button primary" type="submit">
+                            <svg width="15" height="11" viewBox="0 0 15 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon checked">
+                                <path d="M13.5449 1.41675L5.29492 9.66675L1.54492 5.91675" stroke="black" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            Explore reviews
+                        </button>
+                    </div>
                 </div>
-            </div>
+            </form>
 
             <!-- intro-extension.svg -->
             <svg class="intro-image extension" width="396" height="283" viewBox="0 0 396 283" fill="none" xmlns="http://www.w3.org/2000/svg">
