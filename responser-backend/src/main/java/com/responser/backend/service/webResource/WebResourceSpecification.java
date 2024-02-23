@@ -34,7 +34,7 @@ public class WebResourceSpecification implements Specification<WebResource> {
         List<Predicate> predicates = new ArrayList<>();
 
         if (criteria.hasSearchUrl()) {
-            predicates.add(criteriaBuilder.equal(webResourceRoot.get(WebResource_.URL), criteria.getSearchUrl()));
+            predicates.add(criteriaBuilder.like(webResourceRoot.get(WebResource_.URL), "%" + criteria.getSearchUrl().trim() + "%"));
         }
 
         if (criteria.hasResourceType()) {

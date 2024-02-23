@@ -19,11 +19,11 @@ public class WebResourceRequestCriteria {
     private Boolean withReviews;
 
     @Max(5)
-    @Min(0)
+    @Min(1)
     private Integer maxRating;
 
     @Max(5)
-    @Min(0)
+    @Min(1)
     private Integer minRating;
 
     private WebResourceCriteriaSortingField sortingField;

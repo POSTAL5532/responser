@@ -21,7 +21,7 @@
                 <div class="field-container">
                     <div class="input-container">
                         <input class="field-input" name="searchUrl" type="text" placeholder="Enter URL" th:value="${criteria.searchUrl != null ? criteria.searchUrl : ''}">
-                        <button class="button primary" type="submit">
+                        <button class="button primary" type="button" id="submit-with-search">
                             <svg class="icon search" xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 10 10" fill="none">
                                 <path fill-rule="evenodd" clip-rule="evenodd" d="M1.05664 4.50652C1.05664 2.60174 2.60077 1.05762 4.50555 1.05762C6.41032 1.05762 7.95445 2.60174 7.95445 4.50652C7.95445 5.43688 7.58607 6.28121 6.98721 6.90158C6.97161 6.91384 6.95658 6.92716 6.9422 6.94154C6.92775 6.95599 6.91437 6.97111 6.90206 6.98679C6.28155 7.58647 5.43663 7.95543 4.50555 7.95543C2.60077 7.95543 1.05664 6.4113 1.05664 4.50652ZM7.27894 7.98539C6.5184 8.5925 5.55435 8.95543 4.50555 8.95543C2.04848 8.95543 0.0566406 6.96358 0.0566406 4.50652C0.0566406 2.04946 2.04848 0.0576172 4.50555 0.0576172C6.96261 0.0576172 8.95445 2.04946 8.95445 4.50652C8.95445 5.5545 8.59211 6.51784 7.98586 7.2781L9.79652 9.08876C9.99179 9.28402 9.99179 9.6006 9.79652 9.79587C9.60126 9.99113 9.28468 9.99113 9.08942 9.79587L7.27894 7.98539Z" fill="black" fill-opacity="0.6"/>
                             </svg>
@@ -53,8 +53,8 @@
                                     <span>Low rating first</span>
                                 </label>
                                 <label class="field radio-button">
-                                    <input type="radio" name="sortingField" value="CREATION_DATE" data-sort-direction="ASC"
-                                           th:checked="${criteria.sortingField == T(com.responser.backend.model.WebResourceCriteriaSortingField).CREATION_DATE && criteria.sortDirection.name == 'ASC'}"/>
+                                    <input type="radio" name="sortingField" value="CREATION_DATE" data-sort-direction="DESC"
+                                           th:checked="${criteria.sortingField == T(com.responser.backend.model.WebResourceCriteriaSortingField).CREATION_DATE && criteria.sortDirection.name == 'DESC'}"/>
                                     <span>No sorting</span>
                                 </label>
 
@@ -84,7 +84,7 @@
                             <p class="menu-group-header">Rating</p>
                             <div class="rating-range-labels-container">
                                 <div class="rating-label min-rating-label">
-                                    <input type="number" name="minRating" th:value="${criteria.minRating != null ? criteria.minRating : 0}" hidden="hidden">
+                                    <input type="number" name="minRating" th:value="${criteria.minRating != null ? criteria.minRating : 1}" hidden="hidden">
                                     <span class="prefix">from</span>
                                     <svg class="icon star" xmlns="http://www.w3.org/2000/svg" width="10" height="11" viewBox="0 0 10 11" fill="none">
                                         <path d="M4.51454 1.16393C4.66717 0.693405 5.33283 0.693405 5.48546 1.16393L6.31546 3.72264C6.38371 3.93304 6.57973 4.07553 6.80093 4.07553H9.48866C9.98285 4.07553 10.1886 4.70776 9.78897 4.99855L7.61309 6.58204C7.43451 6.712 7.35979 6.94209 7.42794 7.15217L8.25871 9.71325C8.41128 10.1836 7.87275 10.5743 7.47293 10.2834L5.30031 8.70226C5.1213 8.57198 4.8787 8.57198 4.69969 8.70226L2.52707 10.2834C2.12725 10.5743 1.58872 10.1836 1.74129 9.71325L2.57206 7.15217C2.64021 6.94209 2.56549 6.712 2.38691 6.58204L0.211034 4.99855C-0.188552 4.70776 0.0171457 4.07553 0.511344 4.07553H3.19907C3.42027 4.07553 3.61629 3.93304 3.68454 3.72264L4.51454 1.16393Z" fill="#D6DE73"/>

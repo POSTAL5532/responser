@@ -61,10 +61,6 @@ public class WebResourceController {
         criteria.setResourceType(ResourceType.SITE);
         criteria.setWithReviews(true);
 
-        if(criteria.hasSearchUrl()) {
-            criteria.setSearchUrl(UrlUtils.prepareSiteUrl(criteria.getSearchUrl()));
-        }
-
         if (!criteria.hasSortingField()) {
             criteria.setSortingField(WebResourceCriteriaSortingField.CREATION_DATE);
             criteria.setSortDirection(Direction.DESC);
