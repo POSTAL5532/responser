@@ -1,3 +1,0 @@
-<div class="card" th:fragment="card-component(cardContent, class)" th:classappend="${class != null ? class : ''}">
-  <th:block th:if="${cardContent != null}" th:replace="${cardContent} ?: ~{}"></th:block>
-</div>

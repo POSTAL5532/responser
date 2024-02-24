@@ -1,0 +1,41 @@
+@import "../global.less";
+
+.share-modal .modal {
+    width: 360px;
+    height: 250px;
+
+    .modal-body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+        border-radius: 20px;
+
+        .share-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            .share-row {
+                display: flex;
+                gap: 4px;
+
+                .share-button {
+                    padding: 0;
+                    height: 62px;
+                    width: 90px;
+
+                    .icon {
+                        width: 18px;
+                        height: 18px;
+
+                        path {
+                            fill: @black-alpha-60;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

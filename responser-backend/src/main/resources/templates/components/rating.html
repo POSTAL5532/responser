@@ -1,4 +1,0 @@
-<div class="rating" th:fragment="rating-component(rating, class)" th:classappend="${class != null ? class : ''}">
-    <th:block th:each="i: ${#numbers.sequence(0, rating - 1)}" th:include="includes/starFilled"/>
-    <th:block th:if="${5 - rating > 0}" th:each="i: ${#numbers.sequence(0, 5 - rating - 1)}" th:include="includes/star"/>
-</div>

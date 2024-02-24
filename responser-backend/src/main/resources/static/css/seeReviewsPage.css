@@ -195,36 +195,3 @@
   justify-content: space-between;
   flex: 2;
 }
-.page.reviews .page-content .share-review-modal .modal {
-  width: 360px;
-  height: 250px;
-}
-.page.reviews .page-content .share-review-modal .modal .modal-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 30px;
-  border-radius: 20px;
-}
-.page.reviews .page-content .share-review-modal .modal .modal-body .share-buttons {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.page.reviews .page-content .share-review-modal .modal .modal-body .share-buttons .share-row {
-  display: flex;
-  gap: 4px;
-}
-.page.reviews .page-content .share-review-modal .modal .modal-body .share-buttons .share-row .share-button {
-  padding: 0;
-  height: 62px;
-  width: 90px;
-}
-.page.reviews .page-content .share-review-modal .modal .modal-body .share-buttons .share-row .share-button .icon {
-  width: 18px;
-  height: 18px;
-}
-.page.reviews .page-content .share-review-modal .modal .modal-body .share-buttons .share-row .share-button .icon path {
-  fill: rgba(0, 0, 0, 0.6);
-}
