@@ -34,7 +34,7 @@ export const FilterDropdown: React.FC<FilterDropdownProps> = (props: FilterDropd
                             disabled={disabled}>
             {(closeMenu) => (
                 <div className="menu">
-                    <p className="menu-group-header">Rating</p>
+                    <p className="menu-group-header">Review type</p>
 
                     <div className="field-group">
                         <RadioButtonGroup<ResourceType>

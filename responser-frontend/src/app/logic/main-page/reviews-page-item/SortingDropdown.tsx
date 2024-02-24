@@ -22,6 +22,7 @@ export const SortingDropdown: React.FC<SortingDropdownProps> = (props: SortingDr
             {(closeMenu) => (
                 <div className="menu">
                     <SortingMenuItem
+                        groupLabel="Rating"
                         disabled={disabled}
                         firstLabel="High rating first"
                         firstValue={new SortingWrapper(ReviewsCriteriaSortingField.RATING, SortDirection.DESC)}
@@ -31,6 +32,7 @@ export const SortingDropdown: React.FC<SortingDropdownProps> = (props: SortingDr
                         onChange={setCriteriaSorting}/>
 
                     <SortingMenuItem
+                        groupLabel="Date"
                         disabled={disabled}
                         firstLabel="New ones first"
                         firstValue={new SortingWrapper(ReviewsCriteriaSortingField.CREATION_DATE, SortDirection.DESC)}
@@ -40,6 +42,7 @@ export const SortingDropdown: React.FC<SortingDropdownProps> = (props: SortingDr
                         onChange={setCriteriaSorting}/>
 
                     <SortingMenuItem
+                        groupLabel="Popularity"
                         disabled={disabled}
                         firstLabel="Popular first"
                         firstValue={new SortingWrapper(ReviewsCriteriaSortingField.POPULARITY, SortDirection.DESC)}
@@ -60,6 +63,7 @@ export const SortingDropdown: React.FC<SortingDropdownProps> = (props: SortingDr
 
 
 type SortingMenuItemProps = {
+    groupLabel: string;
     firstLabel: string;
     firstValue: SortingWrapper;
     secondLabel: string;
@@ -70,6 +74,7 @@ type SortingMenuItemProps = {
 }
 const SortingMenuItem: React.FC<SortingMenuItemProps> = (props: SortingMenuItemProps) => {
     const {
+        groupLabel,
         currentValue,
         onChange,
         firstLabel,
@@ -81,7 +86,7 @@ const SortingMenuItem: React.FC<SortingMenuItemProps> = (props: SortingMenuItemP
 
     return (
         <>
-            <p className="menu-group-header">Rating</p>
+            <p className="menu-group-header">{groupLabel}</p>
             <div className="field-group">
                 <RadioButtonGroup<SortingWrapper>
                     disabled={disabled}

@@ -44,11 +44,7 @@ export class MyReviewsPageItemStore {
 
     constructor() {
         makeAutoObservable(this);
-        this.reviewsRequestCriteria.sortingField = ReviewsCriteriaSortingField.CREATION_DATE;
-        this.reviewsRequestCriteria.sortDirection = SortDirection.DESC;
-        this.reviewsRequestCriteria.resourceType = null;
-        this.reviewsRequestCriteria.minRating = 1;
-        this.reviewsRequestCriteria.maxRating = 5;
+        this.resetReviewsCriteria();
     }
 
     init = async (currentUserId: string) => {
@@ -58,6 +54,14 @@ export class MyReviewsPageItemStore {
         await this.loadReviews();
 
         this.logger.debug("Store initialisation finished");
+    }
+
+    resetReviewsCriteria = () => {
+        this.reviewsRequestCriteria.sortingField = ReviewsCriteriaSortingField.CREATION_DATE;
+        this.reviewsRequestCriteria.sortDirection = SortDirection.DESC;
+        this.reviewsRequestCriteria.resourceType = null;
+        this.reviewsRequestCriteria.minRating = 1;
+        this.reviewsRequestCriteria.maxRating = 5;
     }
 
     loadReviews = async () => {
@@ -75,6 +79,11 @@ export class MyReviewsPageItemStore {
         this.reviews = reviewsResponse.data;
         this.hasNextReviews = !reviewsResponse.isLast;
         this.totalReviewsCount = reviewsResponse.totalElements;
+    }
+
+    loadReviewsBySearch = async () => {
+        this.resetReviewsCriteria();
+        await this.loadReviews();
     }
 
     loadNextReviews = async () => {

@@ -46,6 +46,7 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
         loadingState,
         setCriteriaSorting,
         loadReviews,
+        loadReviewsBySearch,
         loadNextReviews,
         initReviewForEdit,
         cleanEditingData,
@@ -115,9 +116,15 @@ const MyReviewsPageItem: React.FC<MyReviewsPageItemProps> = (props: MyReviewsPag
             <div className="filter-form">
                 <InputField
                     disabled={hasAnyLoading}
-                    className="search-filed"
+                    className="search-field"
                     placeholder="Enter URL"
-                    rightExtraComponent={<Button styleType={ButtonType.PRIMARY} disabled={hasAnyLoading}><Icon type={IconType.SEARCH}/>Search</Button>}/>
+                    value={reviewsRequestCriteria.searchUrl}
+                    onChange={event => reviewsRequestCriteria.searchUrl = event.target.value}
+                    rightExtraComponent={
+                        <Button styleType={ButtonType.PRIMARY} disabled={hasAnyLoading} onClick={loadReviewsBySearch} loading={hasAnyLoading}>
+                            <Icon type={IconType.SEARCH}/>Search
+                        </Button>
+                    }/>
 
                 <div className="sorting-filter-container">
                     <SortingDropdown
