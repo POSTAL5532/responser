@@ -74,6 +74,13 @@
 .page.reviews .page-content .section .sorting-filter-container .open-filter:hover {
   color: rgba(0, 0, 0, 0.6);
 }
+.page.reviews .page-content .section .sorting-filter-container .total-reviews-count {
+  margin: 0;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.4);
+}
 .page.reviews .page-content .section .sorting-filter-container .dropdown-menu-container .dropdown-menu {
   padding: 20px;
 }

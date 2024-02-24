@@ -104,6 +104,13 @@
 .page.web-resource-details .page-content .section .sorting-filter-container .open-filter:hover {
   color: rgba(0, 0, 0, 0.6);
 }
+.page.web-resource-details .page-content .section .sorting-filter-container .total-reviews-count {
+  margin: 0;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.4);
+}
 .page.web-resource-details .page-content .section .sorting-filter-container .dropdown-menu-container .dropdown-menu .menu-group-header {
   margin: 0 0 16px;
   font-family: "Outfit-Medium", sans-serif;

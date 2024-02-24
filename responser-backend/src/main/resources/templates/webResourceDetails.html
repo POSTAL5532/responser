@@ -45,7 +45,7 @@
 
                 <div class="sorting-filter-container">
                     <button class="open-sorting" data-dropdown-trigger="dropdown-trigger" data-dropdown-id="sorting-container" data-dropdown-activation-id="blur-panel-1" type="button">
-                        New ones first
+                        Sorting
                         <svg class="icon arrow down" xmlns="http://www.w3.org/2000/svg" width="12" height="6" viewBox="0 0 12 6" fill="none">
                             <path d="M1.5 0.75L6 5.25L10.5 0.75" stroke="black" stroke-opacity="0.4" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -100,6 +100,8 @@
                             <button class="button primary small" type="submit">Apply</button>
                         </div>
                     </div>
+
+                    <p class="total-reviews-count" th:if="${reviews.totalElements > 0}" th:text="${reviews.totalElements + ' reviews'}">! ERROR !</p>
 
                     <button class="open-filter" data-dropdown-trigger="dropdown-trigger" data-dropdown-id="filter-container" data-dropdown-activation-id="blur-panel-2" type="button">
                         Filters
