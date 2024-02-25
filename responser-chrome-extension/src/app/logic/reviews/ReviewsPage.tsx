@@ -29,7 +29,6 @@ const ReviewsPage: React.FC = () => {
         removeReviewLike,
         removeUserReview,
         loadNextReviews,
-        currentPageInfo,
         loadingState
     } = useReviewsPageStore();
 
@@ -78,8 +77,7 @@ const ReviewsPage: React.FC = () => {
                            resource={reviewsResourceType === ResourceType.PAGE ? page : site}
                            isLoading={setHeaderInLoadingState}
                            isReviewsLoading={(!page && !site) || isSiteLoading || isPageLoading || isReviewsLoading}
-                           onResourceTypeChange={changeResourceType}
-                           pageInfo={currentPageInfo}/>
+                           onResourceTypeChange={changeResourceType}/>
 
             <ReviewsList reviews={reviewsList}
                          createLike={createReviewLike}

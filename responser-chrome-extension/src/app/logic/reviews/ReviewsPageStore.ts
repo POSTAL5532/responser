@@ -71,6 +71,7 @@ export class ReviewsPageStore {
         const pageInfo = await this.extensionService.getCurrentPageInfo().finally(
             () => this.loadingState.isPageInfoLoading = false
         );
+
         this.currentPageInfo = pageInfo.data;
 
         if (this.reviewsResourceType === ResourceType.SITE) {

@@ -8,18 +8,22 @@ import {ReactComponent as Plus} from './plus.svg';
 import {ReactComponent as Sandwich} from './sandwich.svg';
 import {ReactComponent as Check} from './check.svg';
 import {ReactComponent as Empty} from './empty.svg';
+import {ReactComponent as Reviewly} from './reviewly.svg';
+import {ReactComponent as Star} from './star.svg';
 import "./Icon.less";
 
 export enum IconType {
-    CANCEL = "CANCEL",
-    DELETE = "DELETE",
-    EDIT = "EDIT",
-    LOGIN = "LOGIN",
-    LOGOUT = "LOGOUT",
-    PLUS = "PLUS",
-    SANDWICH = "SANDWICH",
-    CHECK = "CHECK",
-    EMPTY = "EMPTY",
+    CANCEL = "cancel",
+    DELETE = "delete",
+    EDIT = "edit",
+    LOGIN = "login",
+    LOGOUT = "logout",
+    PLUS = "plus",
+    SANDWICH = "sandwich",
+    CHECK = "check",
+    EMPTY = "empty",
+    REVIEWLY = "reviewly",
+    STAR = "star",
 }
 
 type IconProps = {
@@ -50,6 +54,10 @@ export const Icon: React.FC<IconProps> = (props: IconProps) => {
             return <Check className={resultClassName}/>
         case IconType.EMPTY:
             return <Empty className={resultClassName}/>
+        case IconType.REVIEWLY:
+            return <Reviewly className={resultClassName}/>
+        case IconType.STAR:
+            return <Star className={resultClassName}/>
         default:
             return null;
     }

@@ -32,9 +32,7 @@ export const Tabs = <T extends any>(props: TabsProps<T>): ReactElement => {
         ))
     }
 
-    const resultClassName = classNames("tabs", {"disabled": disabled}, className);
-
-    return (<div className={resultClassName}>{getOptionsTabs()}</div>);
+    return <div className={classNames("tabs", {"disabled": disabled}, className)}>{getOptionsTabs()}</div>;
 }
 
 type TabProps = {

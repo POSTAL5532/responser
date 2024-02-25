@@ -26,8 +26,12 @@ class ApplicationProperties {
         return process.env.LOGOUT_EXTENSION_PAGE;
     }
 
-    get fileStorageUrl(): string {
-        return process.env.FILE_STORAGE_URL;
+    get userAvatarsStorageUrl(): string {
+        return process.env.USER_AVATARS_URL;
+    }
+
+    get sitesIconsStorageUrl(): string {
+        return process.env.SITES_ICONS_URL;
     }
 
     get logLevel(): LogLevel {

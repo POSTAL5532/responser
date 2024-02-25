@@ -1,13 +1,10 @@
 import React from "react";
-import classNames from "classnames";
-import {ReactComponent as SiteIcon} from './site-icon.svg';
-import {ReactComponent as PageIcon} from './page-icon.svg';
 import {ResourceType} from "../../../model/ResourceType";
 import {TabOption, Tabs} from "../../../components/tabs/Tabs";
-import {PageInfo} from "../../../model/PageInfo";
 import {Spinner} from "../../../components/spinner/Spinner";
 import {WebResource} from "../../../model/WebResource";
-import {UrlUtils} from "../../../utils/UrlUtils";
+import {AppHeader} from "../../../components/app-header/AppHeader";
+import {Icon, IconType} from "../../../components/icon/Icon";
 import "./ReviewsHeader.less";
 
 type ReviewsHeaderProps = {
@@ -16,7 +13,6 @@ type ReviewsHeaderProps = {
     resource: WebResource;
     isLoading: boolean;
     isReviewsLoading: boolean;
-    pageInfo: PageInfo;
 }
 
 export const ReviewsHeader: React.FC<ReviewsHeaderProps> = (props: ReviewsHeaderProps) => {
@@ -25,81 +21,44 @@ export const ReviewsHeader: React.FC<ReviewsHeaderProps> = (props: ReviewsHeader
         resource,
         isLoading,
         isReviewsLoading,
-        onResourceTypeChange,
-        pageInfo
+        onResourceTypeChange
     } = props;
-
-    let resourceIcon: JSX.Element;
-    let resourceLabel: string;
-    let resourceRating: number;
-
-    if (!isLoading) {
-        const isSite = resource.resourceType === ResourceType.SITE;
-
-        resourceIcon = isSite ? <SiteIcon className="icon"/> : <PageIcon className="icon"/>;
-        resourceLabel = isSite ? UrlUtils.getHostFromUrl(pageInfo.url) : UrlUtils.preparePageUrl(pageInfo.url);
-        resourceRating = resource.rating;
-    }
 
     const resourceTypeOptions: TabOption<ResourceType>[] = [
         {value: ResourceType.SITE, label: "Site reviews"},
         {value: ResourceType.PAGE, label: "Page reviews"}
-    ]
+    ];
 
-    return (
-        <div className="reviews-header">
-            <ResourceInfo resourceIcon={resourceIcon}
-                          resourceLabel={resourceLabel}
-                          resourceRating={resourceRating}
-                          isLoading={isLoading}/>
+    const getHeaderLabel = () => {
+        if (isLoading) {
+            return <Spinner/>;
+        }
 
-            <Tabs<ResourceType> onChange={onResourceTypeChange}
-                                options={resourceTypeOptions}
-                                currentValue={reviewsResourceType}
-                                disabled={isReviewsLoading || isLoading}/>
-        </div>
-    )
-}
+        if (!resource.rating) {
+            return null;
+        }
 
-type ResourceInfoProps = {
-    resourceIcon: JSX.Element;
-    resourceLabel: string;
-    resourceRating: number;
-    isLoading?: boolean;
-}
-
-const ResourceInfo: React.FC<ResourceInfoProps> = (props: ResourceInfoProps) => {
-    const {resourceIcon, resourceLabel, resourceRating, isLoading} = props;
-    const className = "resource-info";
-
-    if (isLoading) {
         return (
-            <div className={className}>
-                <Spinner size={26}/>
-            </div>
+            <>
+                <p className="resource-type">
+                    {resource.resourceType === ResourceType.SITE && "Site rating"}
+                    {resource.resourceType === ResourceType.PAGE && "Page rating"}
+                </p>
+                <div className="resource-rating">
+                    <Icon type={IconType.STAR}/>
+                    <p className="rating-value">{resource.rating.toPrecision(2)}</p>
+                </div>
+            </>
         );
     }
 
-    let ratingLevel;
-
-    if (resourceRating >= 4) {
-        ratingLevel = "good-rating";
-    } else if (resourceRating >= 2) {
-        ratingLevel = "medium-rating";
-    } else {
-        ratingLevel = "bad-rating";
-    }
-
     return (
-        <div className={className}>
-            {resourceIcon}
-            <div className="label">{resourceLabel}</div>
-            {
-                !!resourceRating &&
-                <div className={classNames("rating", ratingLevel)}>
-                    <span>{resourceRating.toPrecision(2)} / 5</span>
-                </div>
-            }
-        </div>
-    );
+        <AppHeader headerLabel={getHeaderLabel()} className="reviews-header">
+            <Tabs<ResourceType>
+                onChange={onResourceTypeChange}
+                options={resourceTypeOptions}
+                currentValue={reviewsResourceType}
+                disabled={isReviewsLoading || isLoading}/>
+        </AppHeader>
+    )
 }

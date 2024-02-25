@@ -21,9 +21,7 @@ export class App extends Component {
                     <GlobalAppStoreContext.Provider value={this.globalAppStore}>
                         <Switch>
                             <PermitAllRoute path={REVIEWS_PAGE_URL} exact component={ReviewsPage}/>
-
                             <AuthorizedRoute path={EDIT_REVIEW_PAGE_URL} exact component={EditReviewPage}/>
-
                             <Redirect from="*" to={REVIEWS_PAGE_URL}/>
                         </Switch>
                     </GlobalAppStoreContext.Provider>

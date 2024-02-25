@@ -1,61 +1,47 @@
 @import "globalsLess";
 
 .reviews-header {
-  background-color: @system-color-light-100;
-  .stackShadow3();
+    gap: 12px;
 
-  .resource-info {
-    margin-right: 12px;
-    margin-left: 12px;
-    display: flex;
-    height: 36px;
-    align-items: center;
+    .main-content {
+        .header-label {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
 
-    .icon {
-      width: 18px;
-      height: 18px;
-      margin-right: 10px;
+            .spinner {
+                width: 16px !important;
+            }
 
-      path {
-        stroke: @system-color-dark-300;
-      }
+            .resource-type {
+                margin: 0;
+                .fontOutfitMedium(12px);
+                color: @brown-dark;
+            }
+
+            .resource-rating {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 4px;
+
+                .rating-value {
+                    margin: 0;
+                    .fontOutfitMedium(12px);
+                    color: @black-alpha-60;
+                }
+            }
+        }
     }
 
-    .label {
-      .fontInterRegular();
-      font-size: 16px;
-      line-height: 18px;
-      color: @system-color-dark-300;
-      margin-right: 10px;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      max-width: 216px;
+    .additional-content {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .tabs {
+            width: 280px;
+        }
     }
-
-    .rating {
-      .fontInterMedium();
-      font-size: 12px;
-      line-height: 12px;
-      color: @system-color-dark-300;
-      display: flex;
-      width: 54px;
-      height: 26px;
-      align-items: center;
-      justify-content: center;
-      border-radius: 4px;
-
-      &.good-rating {
-        background-color: @system-color-success-300;
-      }
-
-      &.medium-rating {
-        background-color: @system-color-warning-400;
-      }
-
-      &.bad-rating {
-        background-color: @system-color-danger-400;
-      }
-    }
-  }
 }

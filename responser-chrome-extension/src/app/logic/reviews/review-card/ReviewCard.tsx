@@ -70,7 +70,7 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
     }
 
     const userAvatar = user.avatarFileName
-        ? ApplicationProperties.fileStorageUrl + "/" + user.avatarFileName
+        ? ApplicationProperties.userAvatarsStorageUrl + "/" + user.avatarFileName
         : userAvatarPlaceHolder;
 
     return (
