@@ -23,14 +23,14 @@
   box-shadow: 0 0 2px rgba(40, 41, 61, 0.04), 0 4px 8px rgba(96, 97, 112, 0.16);
 }
 
-.show {
+.reviewly-rating-popup.show {
   top: -150px;
   animation-name: show-reviewly-rating-popup-animation;
   animation-duration: 400ms;
   animation-fill-mode: forwards;
 }
 
-.hide {
+.reviewly-rating-popup.hide {
   top: 8px;
   animation-name: hide-reviewly-rating-popup-animation;
   animation-duration: 400ms;
@@ -42,71 +42,71 @@
   font-size: unset;
 }
 
-.reviewly-rating-block, .reviewly-logo {
+.reviewly-rating-popup .reviewly-rating-block, .reviewly-logo {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.reviewly-logo {
+.reviewly-rating-popup .reviewly-logo {
   width: 64px;
 }
 
-.reviewly-logo svg {
+.reviewly-rating-popup .reviewly-logo svg {
   width: 46px;
   height: 46px;
 }
 
-.reviewly-rating-block {
+.reviewly-rating-popup .reviewly-rating-block {
   flex-direction: column;
 }
 
-.reviewly-logo, .reviewly-rating-block:not(:last-child) {
+.reviewly-rating-popup .reviewly-logo, .reviewly-rating-popup .reviewly-rating-block:not(:last-child) {
   border-right: solid 1px #C7C8D9;
 }
 
-.reviewly-site-rating {
+.reviewly-rating-popup .reviewly-rating-block.reviewly-site-rating {
   padding: 0 6px 0 8px;
 }
 
-.reviewly-page-rating {
+.reviewly-rating-popup .reviewly-rating-block.reviewly-page-rating {
   padding: 0 8px 0 6px;
 }
 
-.reviewly-rating-block p {
+.reviewly-rating-popup .reviewly-rating-block p {
   margin: 0;
 }
 
-.reviewly-rating-header {
+.reviewly-rating-popup .reviewly-rating-block .reviewly-rating-header {
   font-family: "Inter-Regular";
   font-size: 12px;
   color: #555770;
 }
 
-.reviewly-rating {
+.reviewly-rating-popup .reviewly-rating-block .reviewly-rating {
   font-family: "Inter-SemiBold";
   font-size: 24px;
 }
 
-.reviewly-reviews-count {
+.reviewly-rating-popup .reviewly-rating-block .reviewly-reviews-count {
   font-family: "Inter-Regular";
   font-size: 12px;
   color: #555770;
 }
 
-.reviewly-reviews-count-value {
+.reviewly-rating-popup .reviewly-rating-block .reviewly-reviews-count .reviewly-reviews-count-value {
   font-family: "Inter-SemiBold"
 }
 
-.good-rating {
+.reviewly-rating-popup .reviewly-rating-block .reviewly-rating.good-rating {
   color: #23C653;
 }
 
-.medium-rating {
+.reviewly-rating-popup .reviewly-rating-block .reviewly-rating.medium-rating {
   color: #DBC72A;
 }
 
-.bad-rating {
+.reviewly-rating-popup .reviewly-rating-block .reviewly-rating.bad-rating {
   color: #FF4539;
 }
 
