@@ -1,93 +1,147 @@
 @import "globalsLess";
 
 .review-card {
-  background-color: @system-color-light-100;
-  padding: 8px 12px;
-  .stackShadow2();
-  border-radius: 8px;
-  position: relative;
-
-  .card-header {
-    display: flex;
-    align-items: center;
-    margin-bottom: 4px;
-
-    .user-avatar {
-      width: 34px;
-      height: 34px;
-      border-radius: 50%;
-      margin-right: 6px;
-    }
-
-    .user-name {
-      .fontInterRegular();
-      color: @system-color-dark-200;
-      font-size: 14px;
-      line-height: 14px;
-    }
-
-    .user-icon {
-      margin-left: 4px;
-    }
-
-    .published {
-      .fontInterRegular();
-      color: @system-color-dark-100;
-      font-size: 12px;
-      line-height: 12px;
-      margin-left: 8px;
-    }
-
-    .rating {
-      margin-left: auto;
-
-      .star {
-        width: 16px;
-        height: 16px;
-        margin-right: 4px;
-      }
-    }
-
-    .remove {
-      margin-left: auto;
-    }
-  }
-
-  .text {
     position: relative;
-    .fontInterRegular();
-    font-size: 14px;
-    margin-bottom: 6px;
-    word-wrap: break-word;
+    padding: 10px;
+    background-color: @white;
 
-    &:not(.expanded) {
-      overflow: hidden;
-      text-overflow: ellipsis;
-      display: -webkit-box;
-      -webkit-line-clamp: 3;
-      line-clamp: 3;
-      -webkit-box-orient: vertical;
+    &.underlining {
+        &:after {
+            content: "";
+            background: @beige-alpha-8;
+            position: absolute;
+            bottom: 0;
+            left: 10px;
+            right: 10px;
+            height: 1px;
+        }
     }
-  }
 
-  .card-footer {
-    display: flex;
+    .card-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
 
-    .reaction {
-      margin-right: 10px;
+        .user-info-container {
+            display: flex;
+            align-items: center;
+
+            .user-avatar {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                margin-right: 8px;
+            }
+
+            .user-data {
+                .user-name, .review-date {
+                    display: block;
+                }
+
+                .user-name {
+                    color: @black-alpha-60;
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    width: 218px;
+                    .fontOutfitMedium(12px);
+                }
+
+                .review-date {
+                    color: @black-alpha-40;
+                    .fontOutfitRegular(12px);
+                }
+            }
+        }
+
+        .rating {
+            margin-left: auto;
+        }
     }
-  }
 
-  .show-more {
-    .fontInterMedium();
-    font-size: 12px;
-    cursor: pointer;
-    color: @system-color-dark-300;
-    margin-left: auto;
-    margin-right: 16px;
+    .review-text {
+        .fontOutfitRegular(14px);
+        margin: 0 0 10px;
+        word-wrap: break-word;
+        color: @black-alpha-60;
 
-    &:hover {
-      color: @primary-color-lighter;
+        &:not(.expanded) {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            display: -webkit-box;
+            -webkit-line-clamp: 3;
+            line-clamp: 3;
+            -webkit-box-orient: vertical;
+        }
     }
-  }
+
+    .card-footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        .show-more {
+            height: 16px;
+            .fontOutfitRegular(12px);
+            border: none;
+            border-radius: unset;
+            width: unset;
+            padding: 0;
+            gap: 4px;
+            color: @black-alpha-40;
+
+            .icon {
+                width: 6px;
+                height: 8px;
+
+                path {
+                    stroke: @black-alpha-40;
+                }
+            }
+
+            &:hover {
+                background-color: transparent;
+                color: @black-alpha-60;
+
+                .icon path {
+                    stroke: @black-alpha-60;
+                }
+            }
+        }
+
+        .actions-container {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            margin-left: auto;
+
+            .reaction {
+                margin-right: 12px;
+            }
+
+            .share-button {
+                padding: 0;
+                height: auto;
+                border: 0;
+                border-radius: unset;
+
+                .send {
+                    width: 14px;
+                    height: 14px;
+
+                    path {
+                        stroke: @gray;
+                    }
+                }
+
+                &:hover {
+                    background-color: transparent;
+
+                    .send path {
+                        stroke: @brown-dark;
+                    }
+                }
+            }
+        }
+    }
 }

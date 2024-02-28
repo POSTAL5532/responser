@@ -1,47 +1,38 @@
 @import "globalsLess";
 
 .reaction {
-  display: flex;
-  align-items: center;
-
-  .count {
-    .fontInterMedium();
-    font-size: 14px;
-    line-height: 14px;
-    color: @system-color-dark-300;
-  }
-
-  .reaction-icon {
     display: flex;
-    margin-right: 4px;
-
-    svg {
-      width: 14px;
-      height: 14px;
-
-      path {
-        stroke: @system-color-dark-300;
-      }
-    }
-  }
-
-  &.current-user-reacted {
-    .reaction-icon svg path {
-      stroke: @primary-color-lighter;
-    }
-  }
-
-  &:not(.disabled) {
+    align-items: center;
     cursor: pointer;
 
-    &:hover {
-      .count {
-        color: @primary-color-lighter;
-      }
-
-      .reaction-icon svg path {
-        stroke: @primary-color-lighter;
-      }
+    .count {
+        .fontOutfitRegular(12px);
+        line-height: 12px;
+        color: @gray;
     }
-  }
+
+    .reaction-icon {
+        display: flex;
+        margin-right: -2px;
+        width: 14px;
+        height: 14px;
+        transform: translate(-50%, 0)
+    }
+
+    &.current-user-reacted {
+        .reaction-icon path.circle_arrow_svg__circle {
+            fill: @lime;
+            fill-opacity: 1;
+        }
+    }
+
+    &.negative {
+        .reaction-icon {
+            transform: translate(-50%, 0) rotate(180deg);
+        }
+    }
+
+    &.disabled {
+        cursor: default;
+    }
 }

@@ -1,65 +1,64 @@
 @import "globalsLess";
 
 .button {
-  display: inline-flex;
-  gap: 6px;
-  align-items: center;
-  justify-content: center;
-  padding-left: 12px;
-  padding-right: 12px;
-  height: 34px;
-  .fontInterMedium();
-  font-size: 14px;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    border-radius: 6px;
+    height: 30px;
+    line-height: 30px;
+    .fontOutfitRegular(14px);
+    padding-left: 10px;
+    padding-right: 10px;
+    color: @white;
+    background-color: transparent;
+    border: 1px solid @white;
+    transition: background-color 0.15s, color 0.15s;
 
-  .icon {
-    height: 14px;
-  }
-
-  &.primary {
-    color: @system-color-light-100;
-    background-color: @primary-color-lighter;
-
-    svg path {
-      stroke: @system-color-light-100;
+    &:active, &:focus {
+        outline: none;
     }
 
     &:hover {
-      background-color: darken(@primary-color-lighter, 4%);
+        background-color: @beige-alpha-8;
     }
 
-    &:active {
-      background-color: darken(@primary-color-lighter, 6%);
-    }
-  }
-
-  &.secondary {
-    color: @system-color-dark-300;
-    background-color: @system-color-light-300;
-    border: solid 1px @system-color-dark-100;
-
-    svg path {
-      stroke: @system-color-dark-300;
+    &.disabled {
+        pointer-events: none;
+        opacity: 0.5;
     }
 
-    &:hover {
-      background-color: darken(@system-color-light-300, 4%);
+    .spinner {
+        width: 14px !important;
     }
 
-    &:active {
-      background-color: darken(@system-color-light-300, 6%);
-    }
-  }
+    .icon {
+        width: 8px;
+        height: 8px;
 
-  &.disabled {
-    color: @system-color-light-100;
-    background-color: @system-color-light-500;
-    pointer-events: none;
+        path {
+            transition: stroke 0.15s;
+        }
 
-    svg path {
-      stroke: @system-color-light-100;
+        rect {
+            transition: fill 0.15s;
+        }
     }
-  }
+
+    &.primary {
+        border: none;
+        background-color: @white;
+        color: @black-alpha-60;
+
+        &:hover {
+            background-color: @beige-alpha-60;
+        }
+
+        .icon {
+            width: 14px;
+            height: 14px;
+        }
+    }
 }

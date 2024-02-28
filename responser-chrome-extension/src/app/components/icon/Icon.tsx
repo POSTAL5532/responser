@@ -10,11 +10,13 @@ import {ReactComponent as Check} from './check.svg';
 import {ReactComponent as Empty} from './empty.svg';
 import {ReactComponent as Reviewly} from './reviewly.svg';
 import {ReactComponent as Star} from './star.svg';
+import {ReactComponent as Send} from './send.svg';
+import {ReactComponent as CircleArrow} from './circle_arrow.svg';
 import "./Icon.less";
 
 export enum IconType {
     CANCEL = "cancel",
-    DELETE = "delete",
+    REMOVE = "remove",
     EDIT = "edit",
     LOGIN = "login",
     LOGOUT = "logout",
@@ -24,6 +26,8 @@ export enum IconType {
     EMPTY = "empty",
     REVIEWLY = "reviewly",
     STAR = "star",
+    SEND = "send",
+    CIRCLE_ARROW = "circle-arrow",
 }
 
 type IconProps = {
@@ -38,7 +42,7 @@ export const Icon: React.FC<IconProps> = (props: IconProps) => {
     switch (props.type) {
         case IconType.CANCEL:
             return <Cancel className={resultClassName}/>
-        case IconType.DELETE:
+        case IconType.REMOVE:
             return <Delete className={resultClassName}/>
         case IconType.EDIT:
             return <Edit className={resultClassName}/>
@@ -58,6 +62,10 @@ export const Icon: React.FC<IconProps> = (props: IconProps) => {
             return <Reviewly className={resultClassName}/>
         case IconType.STAR:
             return <Star className={resultClassName}/>
+        case IconType.SEND:
+            return <Send className={resultClassName}/>
+        case IconType.CIRCLE_ARROW:
+            return <CircleArrow className={resultClassName}/>
         default:
             return null;
     }

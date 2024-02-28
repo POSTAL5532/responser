@@ -1,0 +1,72 @@
+@import "globalsLess";
+
+.link {
+    text-decoration: none;
+    display: inline-flex;
+    cursor: pointer;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    .fontOutfitRegular(18px);
+    transition: color 0.15s;
+    color: @black-alpha-60;
+
+    .icon {
+        width: 24px;
+        height: 24px;
+
+        rect {
+            fill: @black-alpha-60;
+            transition: fill 0.15s;
+        }
+
+        path {
+            stroke: @black-alpha-60;
+            transition: stroke 0.15s;
+        }
+
+        &.link {
+            path {
+                stroke: @white;
+            }
+        }
+    }
+
+    &.big {
+        .fontOutfitMedium(24px);
+
+        .icon {
+            width: 30px;
+            height: 30px;
+        }
+    }
+
+    &.small {
+        .fontOutfitRegular(12px);
+
+        .icon {
+            width: 18px;
+            height: 18px;
+        }
+    }
+
+    &:hover {
+        color: @green;
+
+        .icon {
+            rect {
+                fill: @green;
+            }
+
+            path {
+                stroke: @green;
+            }
+
+            &.link {
+                path {
+                    stroke: @white;
+                }
+            }
+        }
+    }
+}

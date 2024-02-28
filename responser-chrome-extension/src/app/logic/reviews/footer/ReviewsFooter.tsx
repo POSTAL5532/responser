@@ -54,7 +54,7 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
                     {
                         isReviewRemoving
                             ? <Spinner size={14} color="#555770"/>
-                            : <Icon type={IconType.DELETE}/>
+                            : <Icon type={IconType.REMOVE}/>
                     }
                     Delete review
                 </Button>

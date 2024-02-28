@@ -1,8 +1,7 @@
 import React from "react";
-import {ReactComponent as ReactionIcon} from './reaction.svg';
-import {ReactComponent as ReactionNegativeIcon} from './reaction-negative.svg';
 import classNames from "classnames";
-import "./Reaction.less"
+import {Icon, IconType} from "../icon/Icon";
+import "./Reaction.less";
 
 type ReactionProps = {
     count: number;
@@ -17,19 +16,18 @@ export const Reaction: React.FC<ReactionProps> = (props: ReactionProps) => {
     const {count, positive, currentUserReacted, disabled, onClick, className} = props;
     const resultClassName = classNames("reaction", {
         "positive": positive,
+        "negative": !positive,
         "current-user-reacted": currentUserReacted,
         "disabled": disabled
     }, className);
 
     const onReactionClick = () => {
-        if (!disabled) onClick(positive)
+        if (!disabled) onClick(positive);
     }
 
     return (
         <div className={resultClassName} onClick={onReactionClick}>
-            <span className="reaction-icon">
-                {positive ? <ReactionIcon/> : <ReactionNegativeIcon/>}
-            </span>
+            <Icon type={IconType.CIRCLE_ARROW} className="reaction-icon"/>
             <span className="count">{count}</span>
         </div>
     );

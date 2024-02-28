@@ -30,7 +30,7 @@ const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
         isNextReviewsLoading
     } = props;
     const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
-    const className = "reviews";
+    const className = "reviews-list";
 
     if (isLoading) {
         return (
@@ -56,7 +56,8 @@ const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
                            currentUser={currentUser}
                            createLike={createLike}
                            updateLike={updateLike}
-                           removeLike={removeLike}/>;
+                           removeLike={removeLike}
+                           onShareReviewClick={() => console.log("On share click")}/>;
     }
 
     return (

@@ -35,7 +35,7 @@ export const ReviewsHeader: React.FC<ReviewsHeaderProps> = (props: ReviewsHeader
         }
 
         if (!resource.rating) {
-            return null;
+            return <p className="resource-type">Reviewly</p>;
         }
 
         return (
