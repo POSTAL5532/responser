@@ -1,50 +1,69 @@
 @import "globalsLess";
 
-.reviews-list {
-    overflow-y: auto;
+.reviews-list-container {
+    height: 420px;
 
-    &::-webkit-scrollbar {
-        width: 6px;
-    }
+    .reviews-list {
+        height: 380px;
+        overflow-y: auto;
+        // padding-bottom: 40px; // footer has fixed position
 
-    &::-webkit-scrollbar-track {
-        background-color: transparent;
-    }
+        .review-card:last-child {
+            padding-bottom: 20px;
+        }
 
-    &::-webkit-scrollbar-thumb {
-        background-color: @beige-dark-alpha-20;
-        border: 2px solid transparent;
-        background-clip: content-box;
-    }
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
 
-    .cards-skeleton {
-        .stackShadow2();
-        border-radius: 8px;
-        --base-color: @system-color-light-100;
-        --highlight-color: @system-color-light-300;
-    }
+        &::-webkit-scrollbar-track {
+            background-color: transparent;
+        }
 
-    .no-reviews {
-        position: absolute;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        .fontInterRegular();
-        font-size: 14px;
-        color: @system-color-dark-200;
+        &::-webkit-scrollbar-thumb {
+            background-color: @beige-dark-alpha-20;
+            border: 2px solid transparent;
+            background-clip: content-box;
+        }
 
-        svg {
-            height: 28px;
-            width: 28px;
-            margin-bottom: 10px;
+        .no-reviews {
+            position: absolute;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            .fontInterRegular();
+            font-size: 14px;
+            color: @system-color-dark-200;
 
-            path {
-                stroke: @system-color-dark-200;
+            svg {
+                height: 28px;
+                width: 28px;
+                margin-bottom: 10px;
+
+                path {
+                    stroke: @system-color-dark-200;
+                }
             }
         }
+    }
+
+    &.blur {
+        padding-right: 6px;
+
+        .reviews-list {
+            overflow-y: hidden;
+        }
+    }
+
+    .bottom-blur {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: 40px;
     }
 }

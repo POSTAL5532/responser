@@ -15,14 +15,15 @@
     color: @white;
     background-color: transparent;
     border: 1px solid @white;
-    transition: background-color 0.15s, color 0.15s;
+    transition: background-color 0.15s, color 0.15s, border-color 0.15s;
 
     &:active, &:focus {
         outline: none;
     }
 
     &:hover {
-        background-color: @beige-alpha-8;
+        background-color: @gray;
+        border-color: @gray;
     }
 
     &.disabled {
@@ -35,11 +36,12 @@
     }
 
     .icon {
-        width: 8px;
-        height: 8px;
+        width: 12px;
+        height: 12px;
 
         path {
             transition: stroke 0.15s;
+            stroke: @white;
         }
 
         rect {
@@ -57,8 +59,9 @@
         }
 
         .icon {
-            width: 14px;
-            height: 14px;
+            path {
+                stroke: @black-alpha-60;
+            }
         }
     }
 }

@@ -11,6 +11,7 @@ import {ReviewLike} from "../../../model/ReviewLike";
 import {User} from "../../../model/User";
 import {Icon, IconType} from "../../../components/icon/Icon";
 import {getUserAvatarUrl} from "../../../utils/ResourcesUtils";
+import {BlurPanel} from "../../../components/blur-panel/BlurPanel";
 import "./ReviewCard.less";
 
 type ReviewCardProps = {
@@ -19,6 +20,7 @@ type ReviewCardProps = {
     currentUser?: User;
     disableReactions?: boolean;
     underlining?: boolean;
+    blur?: boolean;
 
     createLike?: (review: Review, positive: boolean) => Promise<void>;
     updateLike?: (reviewLike: ReviewLike, positive: boolean) => Promise<void>;
@@ -36,7 +38,8 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
         updateLike,
         removeLike,
         onShareReviewClick,
-        underlining = true
+        underlining = true,
+        blur = false
     } = props;
 
     const {user, creationDate, rating, text, reviewLikes} = review;
@@ -123,6 +126,8 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
                     <Button className="share-button" onClick={() => onShareReviewClick(review)}><Icon type={IconType.SEND}/></Button>
                 </div>
             </div>
+
+            <BlurPanel active={blur} className="review-card-blur"/>
         </div>
     )
 }

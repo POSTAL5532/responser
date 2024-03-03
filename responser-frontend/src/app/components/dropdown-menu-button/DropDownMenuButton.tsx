@@ -36,10 +36,10 @@ export const DropDownMenuButton: React.FC<DropDownMenuButtonProps> = (props: Dro
     const resultClassName = classNames("dropdown-menu-button", {"active": active}, className);
 
     const buttonRef = useRef(null);
-    const containerRef = useRef(null);
+    const dropdownMenuRef = useRef(null);
 
     const openDropdown = () => {
-        setDropdownContainerHeight(containerRef.current.clientHeight);
+        setDropdownContainerHeight(dropdownMenuRef.current.clientHeight);
         setActive(true);
         onStateChange?.(true);
         onOpen?.();
@@ -52,7 +52,7 @@ export const DropDownMenuButton: React.FC<DropDownMenuButtonProps> = (props: Dro
         onClose?.();
     }
 
-    useOutsideAlerter(buttonRef, containerRef, closeDropdown);
+    useOutsideAlerter(buttonRef, dropdownMenuRef, closeDropdown);
 
     const onButtonClick = () => {
         onClick?.();
@@ -86,7 +86,7 @@ export const DropDownMenuButton: React.FC<DropDownMenuButtonProps> = (props: Dro
             </Button>
 
             <div className="dropdown-menu-container" style={{height: dropdownContainerHeight}}>
-                <div className="dropdown-menu" ref={containerRef}>{renderChildren()}</div>
+                <div className="dropdown-menu" ref={dropdownMenuRef}>{renderChildren()}</div>
             </div>
         </div>
     );

@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useLocation} from "react-router";
 import {observer} from "mobx-react";
 import {useReviewsPageStore} from "./ReviewsPageStore";
@@ -40,6 +40,8 @@ const ReviewsPage: React.FC = () => {
         isNextReviewsLoading
     } = loadingState;
 
+    const [check, setCheck] = useState<boolean>(false);
+
     useEffect(() => {
         if (!userDataLoading) init(locationState?.resourceType, currentUser?.id);
     }, [userDataLoading]);
@@ -73,29 +75,35 @@ const ReviewsPage: React.FC = () => {
 
     return (
         <Page className="reviews-page">
-            <ReviewsHeader reviewsResourceType={reviewsResourceType}
-                           resource={reviewsResourceType === ResourceType.PAGE ? page : site}
-                           isLoading={setHeaderInLoadingState}
-                           isReviewsLoading={(!page && !site) || isSiteLoading || isPageLoading || isReviewsLoading}
-                           onResourceTypeChange={changeResourceType}/>
+            <ReviewsHeader
+                reviewsResourceType={reviewsResourceType}
+                resource={reviewsResourceType === ResourceType.PAGE ? page : site}
+                isLoading={setHeaderInLoadingState}
+                isReviewsLoading={(!page && !site) || isSiteLoading || isPageLoading || isReviewsLoading}
+                onResourceTypeChange={changeResourceType}/>
 
-            <ReviewsList reviews={reviewsList}
-                         createLike={createReviewLike}
-                         updateLike={updateReviewLike}
-                         removeLike={removeReviewLike}
-                         loadNextReviews={loadNextReviews}
-                         isNextReviewsLoading={isNextReviewsLoading}
-                         isLoading={(!page && !site) || isReviewsLoading || isSiteLoading || isPageLoading}/>
+            <ReviewsList
+                reviews={reviewsList}
+                createLike={createReviewLike}
+                updateLike={updateReviewLike}
+                removeLike={removeReviewLike}
+                loadNextReviews={loadNextReviews}
+                isNextReviewsLoading={isNextReviewsLoading}
+                isLoading={(!page && !site) || isReviewsLoading || isSiteLoading || isPageLoading}
+                blur={check}/>
 
-            <ReviewsFooter userAuthorized={!!currentUser}
-                           hasUserReview={!!currentUserReview}
-                           onEditReviewClick={onEditReviewClick}
-                           onAddReviewClick={onAddReviewClick}
-                           onDeleteReviewClick={removeUserReview}
-                           onLoginClick={extensionService.openLoginPage}
-                           onLogOutClick={extensionService.openLogoutPage}
-                           isLoading={(!page && !site) || isReviewsLoading || isSiteLoading || isPageLoading}
-                           isReviewRemoving={isReviewRemoving}/>
+            <ReviewsFooter
+                userAuthorized={!!currentUser}
+                hasUserReview={!!currentUserReview}
+                onEditReviewClick={onEditReviewClick}
+                onAddReviewClick={onAddReviewClick}
+                onDeleteReviewClick={removeUserReview}
+                onLoginClick={extensionService.openLoginPage}
+                onLogOutClick={extensionService.openLogoutPage}
+                isLoading={(!page && !site) || isReviewsLoading || isSiteLoading || isPageLoading}
+                isReviewRemoving={isReviewRemoving}
+                onCheck={() => setCheck(!check)}
+                showCheck={check}/>
         </Page>
     );
 }

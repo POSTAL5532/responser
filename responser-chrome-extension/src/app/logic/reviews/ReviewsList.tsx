@@ -7,6 +7,9 @@ import {Review} from "../../model/Review";
 import {ReviewLike} from "../../model/ReviewLike";
 import {Icon, IconType} from "../../components/icon/Icon";
 import {ConditionShow} from "../../components/ConditionShow";
+import {Spinner} from "../../components/spinner/Spinner";
+import {BlurPanel} from "../../components/blur-panel/BlurPanel";
+import classNames from "classnames";
 import "./ReviewsList.less";
 
 type ReviewsListProps = {
@@ -17,6 +20,7 @@ type ReviewsListProps = {
     loadNextReviews: () => Promise<void>;
     isLoading: boolean;
     isNextReviewsLoading: boolean;
+    blur?: boolean;
 }
 
 const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
@@ -27,10 +31,11 @@ const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
         removeLike,
         isLoading,
         loadNextReviews,
-        isNextReviewsLoading
+        isNextReviewsLoading,
+        blur = false
     } = props;
     const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
-    const className = "reviews-list";
+    const className = classNames("reviews-list-container", {"blur": blur});
 
     if (isLoading) {
         return (
@@ -50,23 +55,32 @@ const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
         }
     }
 
-    const mapReviewCard = (review: Review) => {
-        return <ReviewCard key={review.id}
-                           review={review}
-                           currentUser={currentUser}
-                           createLike={createLike}
-                           updateLike={updateLike}
-                           removeLike={removeLike}
-                           onShareReviewClick={() => console.log("On share click")}/>;
+    const mapReviewCard = (review: Review, index: number) => {
+        return <ReviewCard
+            blur={blur}
+            key={review.id}
+            review={review}
+            underlining={index < (reviews.length - 1)}
+            currentUser={currentUser}
+            createLike={createLike}
+            updateLike={updateLike}
+            removeLike={removeLike}
+            onShareReviewClick={() => console.log("On share click")}/>;
     }
 
     return (
         <div className={className} onScroll={onScroll}>
-            {reviews.map(mapReviewCard)}
-            {isNextReviewsLoading && <Skeleton height={90} count={3} className="cards-skeleton"/>}
+            <div className="reviews-list">
+                {reviews.map(mapReviewCard)}
+            </div>
+
+            {isNextReviewsLoading && <Spinner/>}
+
             <ConditionShow condition={reviews.length < 1}>
                 <NoReviews/>
             </ConditionShow>
+
+            <BlurPanel active={blur} className="bottom-blur"/>
         </div>
     );
 }

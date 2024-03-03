@@ -1,8 +1,8 @@
 import React, {PropsWithChildren, useContext, useEffect} from "react";
 import classNames from "classnames";
-import "./Page.less";
 import {observer} from "mobx-react";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
+import "./Page.less";
 
 type Page = {
     className?: string;

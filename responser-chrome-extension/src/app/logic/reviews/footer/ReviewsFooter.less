@@ -1,13 +1,18 @@
 @import "globalsLess";
 
 .reviews-footer {
-  padding: 10px 14px;
-  margin-top: auto;
-  background-color: @system-color-light-100;
-  display: flex;
-  gap: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
 
-  .logout {
-    margin-left: auto;
-  }
+    .app-footer {
+        display: flex;
+        gap: 10px;
+
+        .logout {
+            margin-left: auto;
+        }
+    }
 }
