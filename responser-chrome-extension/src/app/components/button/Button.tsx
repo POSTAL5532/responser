@@ -4,7 +4,8 @@ import {Spinner} from "../spinner/Spinner";
 import "./Button.less";
 
 export enum ButtonType {
-    PRIMARY = "primary"
+    PRIMARY = "primary",
+    LITE = "lite"
 }
 
 type ButtonProps = {

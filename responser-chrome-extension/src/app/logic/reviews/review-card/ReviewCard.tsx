@@ -43,6 +43,7 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
     } = props;
 
     const {user, creationDate, rating, text, reviewLikes} = review;
+    const isCurrentUserReview = currentUser && currentUser.id === user.id;
 
     const [expanded, setExpanded] = useState<boolean>(false);
     const [wasOverflowed, setWasOverflowed] = useState<boolean>(false);
@@ -54,7 +55,7 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
         if (hasOverflow) setWasOverflowed(true)
     });
 
-    const resultClassName = classNames("review-card", {"underlining": underlining}, className);
+    const resultClassName = classNames("review-card", {"underlining": underlining, "current-user-review": isCurrentUserReview}, className);
 
     const positives = [];
     const negatives = [];

@@ -20,22 +20,44 @@
         padding-right: 5px;
     }
 
-    .footer-submenu-container {
+    .footer-submenu {
         position: absolute;
-        height: 0;
         left: 10px;
         right: 10px;
-        bottom: ~"calc(@{app-footer-container} - 20px)";
-        overflow: hidden;
-        text-overflow: ellipsis;
-        transition: height 0.15s;
+        bottom: ~"calc(@{app-footer-container} - 10px)";
+        background-color: @white;
+        padding: 10px 10px 20px;
+        border-top-left-radius: 10px;
+        border-top-right-radius: 10px;
+        box-shadow: 0 0 1px rgba(40, 41, 61, 0.04), 0 2px 10px rgba(96, 97, 112, 0.16);
 
-        .footer-submenu {
-            background-color: @white;
-            padding: 10px 10px 20px;
-            border-top-left-radius: 10px;
-            border-top-right-radius: 10px;
-            box-shadow: 0 0 1px rgba(40, 41, 61, 0.04), 0 2px 10px rgba(96, 97, 112, 0.16);
+        .close-submenu {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            border: none;
+            background-color: transparent;
+            padding: unset;
+            cursor: pointer;
+            z-index: 1;
+
+            &, &:focus, &:active, &:hover {
+                outline: none;
+            }
+
+            .icon {
+                width: 10px;
+                height: 10px;
+
+                path {
+                    stroke: @black-alpha-40;
+                    transition: stroke 0.15s;
+                }
+            }
+
+            &:hover .icon path {
+                stroke: @black-alpha-60;
+            }
         }
     }
 }

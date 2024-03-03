@@ -13,6 +13,10 @@ export class ReviewsRequestCriteria {
 
     resourceType: ResourceType;
 
+    maxRating: number;
+
+    minRating: number;
+
     sortingField: ReviewsCriteriaSortingField;
 
     sortDirection: SortDirection;

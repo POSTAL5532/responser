@@ -12,6 +12,9 @@ import {ReactComponent as Reviewly} from './reviewly.svg';
 import {ReactComponent as Star} from './star.svg';
 import {ReactComponent as Send} from './send.svg';
 import {ReactComponent as CircleArrow} from './circle_arrow.svg';
+import {ReactComponent as Settings} from './settings.svg';
+import {ReactComponent as Sorting} from './sorting.svg';
+import {ReactComponent as Close} from './close.svg';
 import "./Icon.less";
 
 export enum IconType {
@@ -28,6 +31,9 @@ export enum IconType {
     STAR = "star",
     SEND = "send",
     CIRCLE_ARROW = "circle-arrow",
+    SETTINGS = "settings",
+    SORTING = "sorting",
+    CLOSE = "close",
 }
 
 type IconProps = {
@@ -66,6 +72,12 @@ export const Icon: React.FC<IconProps> = (props: IconProps) => {
             return <Send className={resultClassName}/>
         case IconType.CIRCLE_ARROW:
             return <CircleArrow className={resultClassName}/>
+        case IconType.SETTINGS:
+            return <Settings className={resultClassName}/>
+        case IconType.SORTING:
+            return <Sorting className={resultClassName}/>
+        case IconType.CLOSE:
+            return <Close className={resultClassName}/>
         default:
             return null;
     }

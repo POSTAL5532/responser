@@ -1,7 +1,7 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useEffect} from "react";
 import {useLocation} from "react-router";
 import {observer} from "mobx-react";
-import {useReviewsPageStore} from "./ReviewsPageStore";
+import {SortingWrapper, useReviewsPageStore} from "./ReviewsPageStore";
 import ReviewsList from "./ReviewsList";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import Page from "../../components/page/Page";
@@ -23,24 +23,24 @@ const ReviewsPage: React.FC = () => {
         reviews,
         currentUserReview,
         reviewsResourceType,
+        editableSortingCriteria,
+        editableFilterCriteria,
         init,
         createReviewLike,
         updateReviewLike,
         removeReviewLike,
         removeUserReview,
+        loadReviews,
         loadNextReviews,
+        setCriteriaSorting,
+        setupEditableSortingCriteria,
+        setupEditableFilterCriteria,
+        applyEditableCriteria,
         loadingState
     } = useReviewsPageStore();
 
-    const {
-        isSiteLoading,
-        isPageLoading,
-        isReviewRemoving,
-        isReviewsLoading,
-        isNextReviewsLoading
-    } = loadingState;
-
-    const [check, setCheck] = useState<boolean>(false);
+    const {isSiteLoading, isPageLoading, isReviewRemoving, isReviewsLoading, isNextReviewsLoading} = loadingState;
+    const currentSortingValue = new SortingWrapper(editableSortingCriteria?.sortingField, editableSortingCriteria?.sortDirection);
 
     useEffect(() => {
         if (!userDataLoading) init(locationState?.resourceType, currentUser?.id);
@@ -61,6 +61,30 @@ const ReviewsPage: React.FC = () => {
             domainId: site.id,
             previousResourceType: reviewsResourceType
         });
+    }
+
+    const onOpenSortingClick = () => {
+        setupEditableSortingCriteria();
+    }
+
+    const onOpenFilterClick = () => {
+        setupEditableFilterCriteria();
+    }
+
+    const onRatingRangeChange = (values: number[]) => {
+        editableFilterCriteria.minRating = Math.trunc(values[0]);
+        editableFilterCriteria.maxRating = Math.trunc(values[1]);
+    }
+
+    const closeSubmenu = () => {
+        setupEditableSortingCriteria(null);
+        setupEditableFilterCriteria(null);
+    }
+
+    const applySortingFilter = () => {
+        applyEditableCriteria();
+        closeSubmenu();
+        loadReviews();
     }
 
     const changeResourceType = (resourceType: ResourceType) => {
@@ -90,7 +114,7 @@ const ReviewsPage: React.FC = () => {
                 loadNextReviews={loadNextReviews}
                 isNextReviewsLoading={isNextReviewsLoading}
                 isLoading={(!page && !site) || isReviewsLoading || isSiteLoading || isPageLoading}
-                blur={check}/>
+                blur={!!editableSortingCriteria || !!editableFilterCriteria}/>
 
             <ReviewsFooter
                 userAuthorized={!!currentUser}
@@ -102,8 +126,20 @@ const ReviewsPage: React.FC = () => {
                 onLogOutClick={extensionService.openLogoutPage}
                 isLoading={(!page && !site) || isReviewsLoading || isSiteLoading || isPageLoading}
                 isReviewRemoving={isReviewRemoving}
-                onCheck={() => setCheck(!check)}
-                showCheck={check}/>
+
+                showSorting={!!editableSortingCriteria}
+                onOpenSortingClick={onOpenSortingClick}
+                currentSortingValue={currentSortingValue}
+                setCriteriaSorting={setCriteriaSorting}
+
+                showFilter={!!editableFilterCriteria}
+                onOpenFilterClick={onOpenFilterClick}
+                minRating={editableFilterCriteria?.minRating}
+                maxRating={editableFilterCriteria?.maxRating}
+                onRatingRangeChange={onRatingRangeChange}
+
+                onSubmenuCloseClick={closeSubmenu}
+                onApplySortingFilter={applySortingFilter}/>
         </Page>
     );
 }

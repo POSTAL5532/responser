@@ -1,4 +1,4 @@
-import {makeAutoObservable} from "mobx";
+import {action, makeAutoObservable} from "mobx";
 import {Review} from "../../model/Review";
 import {ReviewService} from "../../service/ReviewService";
 import {useState} from "react";
@@ -15,6 +15,8 @@ import {Logger} from "../../utils/Logger";
 import {WebResource} from "../../model/WebResource";
 import {WebResourceService} from "../../service/WebResourceService";
 import {NewWebResource} from "../../model/NewWebResource";
+import {ReviewsCriteriaSortingField} from "../../model/ReviewsCriteriaSortingField";
+import {SortDirection} from "../../model/SortDirection";
 
 const PAGE_ELEMENTS_COUNT = 10;
 
@@ -37,6 +39,12 @@ export class ReviewsPageStore {
      */
     currentPageInfo: PageInfo;
 
+    reviewsCriteria: ReviewsRequestCriteria;
+
+    editableSortingCriteria: EditableSortingCriteria;
+
+    editableFilterCriteria: EditableFilterCriteria;
+
     site: WebResource;
 
     page: WebResource;
@@ -57,8 +65,7 @@ export class ReviewsPageStore {
         makeAutoObservable(this);
     }
 
-    // TODO: Refactoring of loading state on the initialization step - some UI elements checks the {some_resource} == null for detecting of loading process
-    // instead of loading store using
+    // TODO: Refactoring of loading state on the initialization step - some UI elements checks the {some_resource} == null for detecting of loading process instead of loading store using
     init = async (resourceType: ResourceType, currentUserId: string) => {
         this.logger.debug("Init store: resourceType=", resourceType, ", currentUserId=", currentUserId);
 
@@ -74,16 +81,69 @@ export class ReviewsPageStore {
 
         this.currentPageInfo = pageInfo.data;
 
-        if (this.reviewsResourceType === ResourceType.SITE) {
-            await this.initSite();
-        } else if (this.reviewsResourceType === ResourceType.PAGE) {
-            await this.initPage();
-        }
+        await this.initSite();
+        await this.initPage();
+
+        this.initCriteria();
 
         await this.loadCurrenUserReview();
         await this.loadReviews();
 
         this.logger.debug("Store initialisation finished");
+    }
+
+    @action
+    initCriteria = () => {
+        this.reviewsCriteria = new ReviewsRequestCriteria();
+        this.reviewsCriteria.sortingField = ReviewsCriteriaSortingField.CREATION_DATE;
+        this.reviewsCriteria.sortDirection = SortDirection.DESC;
+        this.reviewsCriteria.excludeUserId = this.currentUserId;
+        this.reviewsCriteria.minRating = 1;
+        this.reviewsCriteria.maxRating = 5;
+
+        if (this.reviewsResourceType === ResourceType.SITE) {
+            this.reviewsCriteria.resourceId = this.site.id;
+        } else if (this.reviewsResourceType === ResourceType.PAGE) {
+            this.reviewsCriteria.resourceId = this.page.id;
+        }
+    }
+
+    @action
+    setupEditableSortingCriteria = (editableSortingCriteria?: EditableSortingCriteria) => {
+        if (editableSortingCriteria !== undefined) {
+            this.editableSortingCriteria = editableSortingCriteria;
+            return;
+        }
+
+        this.editableSortingCriteria = new EditableSortingCriteria();
+        this.editableSortingCriteria.sortingField = this.reviewsCriteria.sortingField;
+        this.editableSortingCriteria.sortDirection = this.reviewsCriteria.sortDirection;
+    }
+
+    @action
+    setCriteriaSorting = (sortingWrapper: SortingWrapper) => {
+        this.editableSortingCriteria.sortDirection = sortingWrapper.sortDirection;
+        this.editableSortingCriteria.sortingField = sortingWrapper.sortingField;
+    }
+
+    @action
+    setupEditableFilterCriteria = (editableFilterCriteria?: EditableFilterCriteria) => {
+        if (editableFilterCriteria !== undefined) {
+            this.editableFilterCriteria = editableFilterCriteria;
+            return;
+        }
+
+        this.editableFilterCriteria = new EditableFilterCriteria();
+        this.editableFilterCriteria.maxRating = this.reviewsCriteria.maxRating;
+        this.editableFilterCriteria.minRating = this.reviewsCriteria.minRating;
+    }
+
+    @action
+    applyEditableCriteria = () => {
+        this.reviewsCriteria.sortingField = this.editableSortingCriteria?.sortingField || this.reviewsCriteria.sortingField;
+        this.reviewsCriteria.sortDirection = this.editableSortingCriteria?.sortDirection || this.reviewsCriteria.sortDirection;
+        this.reviewsCriteria.minRating = this.editableFilterCriteria?.minRating || this.reviewsCriteria.minRating;
+        this.reviewsCriteria.maxRating = this.editableFilterCriteria?.maxRating || this.reviewsCriteria.maxRating;
     }
 
     initSite = async () => {
@@ -147,7 +207,14 @@ export class ReviewsPageStore {
 
         this.logger.debug("Load current user review");
 
-        const criteria = this.getReviewsRequestCriteria(undefined, this.currentUserId);
+        const criteria = new ReviewsRequestCriteria();
+        criteria.forUserId = this.currentUserId;
+        if (this.reviewsResourceType === ResourceType.PAGE) {
+            criteria.resourceId = this.page.id;
+        } else if (this.reviewsResourceType === ResourceType.SITE) {
+            criteria.resourceId = this.site.id;
+        }
+
         this.loadingState.isReviewsLoading = true;
         const reviews = await this.reviewService.getReviews(criteria, Pagination.SINGLE_ELEMENT).finally(
             () => this.loadingState.isReviewsLoading = false
@@ -160,10 +227,10 @@ export class ReviewsPageStore {
         this.logger.debug("Load reviews");
 
         const pagination = new Pagination(this.currentPageNumber, PAGE_ELEMENTS_COUNT);
-        const criteria = this.getReviewsRequestCriteria(this.currentUserId);
+        // const criteria = this.getReviewsRequestCriteria(this.currentUserId);
 
         this.loadingState.isReviewsLoading = true;
-        const reviewsResponse = await this.reviewService.getReviews(criteria, pagination).finally(
+        const reviewsResponse = await this.reviewService.getReviews(this.reviewsCriteria, pagination).finally(
             () => this.loadingState.isReviewsLoading = false
         );
 
@@ -176,45 +243,20 @@ export class ReviewsPageStore {
 
         this.logger.debug("Load next reviews");
 
-        const criteria = this.getReviewsRequestCriteria(this.currentUserId);
+        // const criteria = this.getReviewsRequestCriteria(this.currentUserId);
         const pagination = new Pagination(
             this.currentPageNumber + 1,
             PAGE_ELEMENTS_COUNT
         );
 
         this.loadingState.isNextReviewsLoading = true;
-        const reviewsResponse = await this.reviewService.getReviews(criteria, pagination).finally(
+        const reviewsResponse = await this.reviewService.getReviews(this.reviewsCriteria, pagination).finally(
             () => this.loadingState.isNextReviewsLoading = false
         );
 
         this.reviews.push(...reviewsResponse.data);
         this.currentPageNumber += 1;
         this.hasNextReviews = !reviewsResponse.isLast;
-    }
-
-    getReviewsRequestCriteria = (excludeUserId?: string, forUserId?: string): ReviewsRequestCriteria => {
-        const criteria = new ReviewsRequestCriteria();
-
-        switch (this.reviewsResourceType) {
-            case ResourceType.PAGE:
-                criteria.resourceId = this.page.id;
-                break;
-            case ResourceType.SITE:
-                criteria.resourceId = this.site.id;
-                break
-            default:
-                throw new Error(`Bad reviews resource type ${this.reviewsResourceType}`);
-        }
-
-        if (!!excludeUserId) {
-            criteria.excludeUserId = excludeUserId;
-        }
-
-        if (!!forUserId) {
-            criteria.forUserId = forUserId;
-        }
-
-        return criteria;
     }
 
     removeUserReview = async (): Promise<void> => {
@@ -282,5 +324,39 @@ export class ReviewsPageStoreLoadingState {
 
     constructor() {
         makeAutoObservable(this);
+    }
+}
+
+export class EditableSortingCriteria {
+
+    sortingField: ReviewsCriteriaSortingField;
+
+    sortDirection: SortDirection;
+
+    constructor() {
+        makeAutoObservable(this);
+    }
+}
+
+export class EditableFilterCriteria {
+
+    maxRating: number;
+
+    minRating: number;
+
+    constructor() {
+        makeAutoObservable(this);
+    }
+}
+
+export class SortingWrapper {
+
+    sortingField: ReviewsCriteriaSortingField;
+
+    sortDirection: SortDirection;
+
+    constructor(sortingField: ReviewsCriteriaSortingField, sortDirection: SortDirection) {
+        this.sortingField = sortingField;
+        this.sortDirection = sortDirection;
     }
 }

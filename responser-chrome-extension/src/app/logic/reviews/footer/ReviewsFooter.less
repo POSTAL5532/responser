@@ -11,8 +11,130 @@
         display: flex;
         gap: 10px;
 
-        .logout {
+        .additional-controls {
+            display: flex;
             margin-left: auto;
+            gap: 2px;
+        }
+    }
+
+    .footer-submenu {
+        .sorting-submenu {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+
+            .sorting-menu-group {
+                display: flex;
+
+                .menu-group-header {
+                    margin: 0;
+                    .fontOutfitMedium(14px);
+                    color: @black-alpha-60;
+                    width: 90px;
+                }
+
+                .radio-group {
+                    .radio-button:not(:last-child) {
+                        margin-bottom: 12px;
+                    }
+                }
+            }
+
+            .button {
+                width: 100%;
+            }
+        }
+
+        .filter-submenu {
+            display: flex;
+
+            .menu-group-header {
+                margin: 0;
+                .fontOutfitMedium(14px);
+                color: @black-alpha-60;
+                width: 100px;
+            }
+
+            .range-container {
+                width: 230px;
+
+                .rating-range-labels-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 14px;
+
+                    .rating-label {
+                        display: flex;
+                        align-items: center;
+                        gap: 4px;
+                        color: @black-alpha-60;
+
+                        .prefix, .value {
+                            display: block;
+                        }
+
+                        .value {
+                            width: 10px;
+                        }
+                    }
+                }
+
+                .slider-container {
+                    padding-left: 7px;
+                    padding-right: 7px;
+                    margin-bottom: 24px;
+
+                    .noUi-target {
+                        height: 1px;
+                        border: none;
+                        border-radius: unset;
+                        box-shadow: none;
+                        background-color: @beige-dark-alpha-20;
+
+                        .noUi-base {
+                            .noUi-origin {
+                                transition: transform 0.15s;
+
+                                .noUi-handle {
+                                    width: 14px;
+                                    height: 14px;
+                                    top: -7px;
+                                    right: -7px;
+                                    border-radius: 50%;
+                                    background-color: @white;
+                                    border: solid 1px @beige-dark-alpha-20;
+
+                                    &, &.noUi-active {
+                                        box-shadow: none;
+                                    }
+
+                                    &::before, &::after {
+                                        display: none;
+                                    }
+                                }
+                            }
+                        }
+
+                        .noUi-pips {
+                            height: 3px;
+                            padding: 0;
+                            top: -3px;
+
+                            .noUi-marker {
+                                height: 4px;
+                                width: 1px;
+                                background-color: @beige-dark-alpha-20;
+                            }
+
+                            .noUi-value {
+                                display: none;
+                            }
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -32,7 +32,7 @@ const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
         isLoading,
         loadNextReviews,
         isNextReviewsLoading,
-        blur = false
+        blur = false,
     } = props;
     const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const className = classNames("reviews-list-container", {"blur": blur});
