@@ -28,7 +28,7 @@ const UserInfo: React.FC<UserInfoProps> = (props: UserInfoProps) => {
             <img alt="User avatar" className="user-avatar" src={getUserAvatarUrl(user)}/>
             <Button className="change-user-avatar" onClick={onChangeUserAvatarClick}><Icon type={IconType.EDIT}/></Button>
             <div className="user-info">
-                <h2 className="username">{user.userName}</h2>
+                <h2 className="username">{user.fullName}</h2>
                 <div className="rating-container">
                     <Tooltip position={TooltipPosition.BOTTOM} content="Ratings are generated based on evaluations from other users of your reviews.">
                         <Icon type={IconType.HELP_CIRCLE}/>
