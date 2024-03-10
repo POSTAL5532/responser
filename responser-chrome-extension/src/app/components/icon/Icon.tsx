@@ -15,6 +15,7 @@ import {ReactComponent as CircleArrow} from './circle_arrow.svg';
 import {ReactComponent as Settings} from './settings.svg';
 import {ReactComponent as Sorting} from './sorting.svg';
 import {ReactComponent as Close} from './close.svg';
+import {ReactComponent as Arrow} from './arrow.svg';
 import "./Icon.less";
 
 export enum IconType {
@@ -34,6 +35,7 @@ export enum IconType {
     SETTINGS = "settings",
     SORTING = "sorting",
     CLOSE = "close",
+    ARROW = "arrow",
 }
 
 type IconProps = {
@@ -78,6 +80,8 @@ export const Icon: React.FC<IconProps> = (props: IconProps) => {
             return <Sorting className={resultClassName}/>
         case IconType.CLOSE:
             return <Close className={resultClassName}/>
+        case IconType.ARROW:
+            return <Arrow className={resultClassName}/>
         default:
             return null;
     }

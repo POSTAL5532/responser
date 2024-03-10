@@ -1,33 +1,57 @@
 import React from "react";
 import {Button, ButtonType} from "../../../components/button/Button";
 import {Icon, IconType} from "../../../components/icon/Icon";
+import {AppFooter} from "../../../components/app-footer/AppFooter";
+import {ConditionShow} from "../../../components/ConditionShow";
 import "./EditReviewFooter.less";
-import {Spinner} from "../../../components/spinner/Spinner";
 
 type EditReviewFooterProps = {
     onSubmit: () => void;
     onCancel: () => void;
-    isNewReview: boolean;
+    onNext: () => void;
+
+    submitButtonLabel: string;
+    showSubmitButton: boolean;
+    showNextButton: boolean;
+    nextButtonDisabled: boolean;
     submitDisabled: boolean;
     isDataSubmitting: boolean;
 }
 
 export const EditReviewFooter: React.FC<EditReviewFooterProps> = (props: EditReviewFooterProps) => {
-    const {onSubmit, isNewReview, submitDisabled, isDataSubmitting, onCancel} = props;
+    const {
+        submitDisabled,
+        isDataSubmitting,
+        showSubmitButton,
+        showNextButton,
+        nextButtonDisabled,
+        submitButtonLabel,
+        onSubmit,
+        onNext,
+        onCancel
+    } = props;
 
     return (
-        <div className="footer">
-            <Button onClick={onSubmit} disabled={isDataSubmitting || submitDisabled}>
-                {
-                    isDataSubmitting
-                        ? <Spinner size={14} color="#555770"/>
-                        : <Icon type={isNewReview ? IconType.PLUS : IconType.CHECK}/>
-                }
-                {isNewReview ? "Add" : "Save"} review
-            </Button>
-            <Button onClick={onCancel} styleType={ButtonType.SECONDARY} disabled={isDataSubmitting}>
+        <AppFooter className="edit-review-footer">
+            <ConditionShow condition={showSubmitButton}>
+                <Button className="submit"
+                        onClick={onSubmit}
+                        disabled={isDataSubmitting || submitDisabled}
+                        loading={isDataSubmitting}
+                        styleType={ButtonType.PRIMARY}>
+                    <Icon type={IconType.PLUS}/>{submitButtonLabel}
+                </Button>
+            </ConditionShow>
+
+            <ConditionShow condition={showNextButton}>
+                <Button className="next" onClick={onNext} disabled={nextButtonDisabled} styleType={ButtonType.PRIMARY}>
+                    <Icon type={IconType.ARROW}/>Next
+                </Button>
+            </ConditionShow>
+
+            <Button className="cancel" onClick={onCancel} disabled={isDataSubmitting}>
                 <Icon type={IconType.CANCEL}/>Cancel
             </Button>
-        </div>
+        </AppFooter>
     );
 }

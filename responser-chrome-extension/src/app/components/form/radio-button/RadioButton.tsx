@@ -5,7 +5,7 @@ import "./RadioButton.less";
 type RadioButtonProps = {
     onClick?: () => void;
     checked?: boolean;
-    label?: string;
+    label?: React.ReactNode;
     className?: string;
     disabled?: boolean;
 }

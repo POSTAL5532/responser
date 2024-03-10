@@ -1,13 +1,10 @@
-import React, {ChangeEvent} from "react";
+import React from "react";
 import {observer} from "mobx-react";
-import Skeleton from "react-loading-skeleton";
 import {ReviewData} from "../../../model/ReviewData";
-import {Rating} from "../../../components/rating/Rating";
-import {Textarea} from "../../../components/form/textarea/Textarea";
 import {ResourceType} from "../../../model/ResourceType";
-import {RadioButtonGroup} from "../../../components/form/radio-button-group/RadioButtonGroup";
-import {ConditionShow} from "../../../components/ConditionShow";
-import {FieldLayout, FieldLayoutType} from "../../../components/form/field-layout/FieldLayout";
+import {Spinner} from "../../../components/spinner/Spinner";
+import {EditReviewResourceType} from "./EditReviewResourceType";
+import {EditReviewData} from "./EditReviewData";
 import "./EditReviewForm.less";
 
 type EditReviewFormProps = {
@@ -18,6 +15,7 @@ type EditReviewFormProps = {
     userLeftSiteReview: boolean;
     isLoading: boolean;
     isDataSubmitting: boolean;
+    showSecondEditingStep: boolean;
     isNewReview?: boolean;
 }
 
@@ -30,59 +28,37 @@ const EditReviewForm: React.FC<EditReviewFormProps> = (props: EditReviewFormProp
         isLoading,
         isDataSubmitting,
         onCurrentResourceTypeChange,
-        currentResourceType
+        currentResourceType,
+        showSecondEditingStep
     } = props;
 
-    if (isLoading) {
-        return (<Skeleton className="edit-form-skeleton"/>);
-    }
+    const className = "edit-review-form";
 
-    const {rating, text} = reviewData;
-    const textSize = 460;
+    if (isLoading) {
+        return <div className={className}><Spinner/></div>;
+    }
 
     const onRatingChange = (rating: number) => {
         reviewData.rating = rating;
     }
 
-    const onTextChange = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        if (event.target.value.length > textSize) return;
-        reviewData.text = event.target.value;
-    }
-
     return (
-        <div className="edit-review-form">
-            <ConditionShow condition={isNewReview}>
-                <FieldLayout label="Review type:" disabled={isDataSubmitting}>
-                    <RadioButtonGroup<ResourceType> options={[
-                        {
-                            value: ResourceType.SITE,
-                            label: "Site review",
-                            disabled: isDataSubmitting || userLeftSiteReview
-                        },
-                        {
-                            value: ResourceType.PAGE,
-                            label: "Page review",
-                            disabled: isDataSubmitting || userLeftPageReview
-                        }
-                    ]} currentValue={currentResourceType} onChange={onCurrentResourceTypeChange}/>
-                </FieldLayout>
-            </ConditionShow>
+        <div className={className}>
+            <EditReviewResourceType currentResourceType={currentResourceType}
+                                    onCurrentResourceTypeChange={onCurrentResourceTypeChange}
+                                    userLeftSiteReview={userLeftSiteReview}
+                                    userLeftPageReview={userLeftPageReview}
+                                    isDisplay={isNewReview && !showSecondEditingStep}/>
 
-            <FieldLayout label="Rating:" layoutType={FieldLayoutType.INLINE} disabled={isDataSubmitting || !currentResourceType}>
-                <Rating value={rating} onChange={onRatingChange} disabled={isDataSubmitting || !currentResourceType}/>
-            </FieldLayout>
-
-            <FieldLayout label="Review text:" disabled={isDataSubmitting || !currentResourceType}
-                         className="review-text">
-                <Textarea value={text}
-                          onChange={onTextChange}
-                          disabled={isDataSubmitting || !currentResourceType}
-                          placeholder={`Enter review`}/>
-            </FieldLayout>
-
-            <span className="characters-counter">{text?.length || 0} / {textSize}</span>
+            <EditReviewData rating={reviewData.rating}
+                            onRatingChange={onRatingChange}
+                            text={reviewData.text}
+                            onTextChange={value => reviewData.text = value}
+                            currentResourceType={currentResourceType}
+                            disabled={isDataSubmitting || !currentResourceType}
+                            isDisplay={!isNewReview || showSecondEditingStep}/>
         </div>
     )
 }
 
-export default observer(EditReviewForm)
+export default observer(EditReviewForm);

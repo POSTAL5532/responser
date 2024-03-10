@@ -1,37 +1,90 @@
 @import "globalsLess";
 
 .edit-review-form {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-  background-color: @system-color-light-100;
+    padding: 10px;
+    height: 370px;
 
-  .field-layout {
-    &:not(:last-child) {
-      margin-bottom: 18px;
+    .spinner {
+        transform: translate(-50%, -50%);
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        width: 30px !important;
     }
 
-    &.review-text {
-      flex: 1;
+    .resource-type-choice {
+        display: flex;
+        gap: 10px;
+
+        .radio-button {
+            height: 120px;
+            width: 186px;
+            padding: 10px;
+            flex-direction: row-reverse;
+            align-items: flex-start;
+            justify-content: space-between;
+            position: relative;
+            border: solid 1px @lime;
+            border-radius: 10px;
+            transition: background-color 0.15s;
+
+            &:hover {
+                background-color: @lime-very-light;
+            }
+
+            .border {
+                background-color: @white;
+            }
+
+            .label {
+                .choice-label, .choice-description {
+                    margin: 0;
+                }
+
+                .choice-label {
+                    .fontOutfitMedium(16px);
+                    color: @black-alpha-60
+                }
+
+                .choice-description {
+                    position: absolute;
+                    .fontOutfitRegular(14px);
+                    color: @black-alpha-25;
+                    bottom: 10px;
+                    left: 10px;
+                    right: 10px;
+                }
+            }
+
+            &.checked {
+                background-color: @lime;
+            }
+
+            &.disabled {
+                border-color: @beige-dark-alpha-20;
+
+                .border {
+                    opacity: 0;
+                }
+            }
+        }
     }
-  }
 
-  .characters-counter {
-    margin-top: -10px;
-    .fontInterRegular();
-    font-size: 12px;
-    color: @system-color-dark-300;
-  }
-}
+    .edit-review-controls {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
 
-span[aria-live="polite"] {
-  .edit-form-skeleton {
-    .stackShadow2();
-    border-radius: 8px;
-    margin: 12px;
-    flex: 1;
-    --base-color: @system-color-light-100;
-    --highlight-color: @system-color-light-300;
-  }
+        .edit-rating {
+            .star {
+                width: 20px;
+                height: 20px;
+                margin-right: 6px;
+            }
+        }
+
+        .edit-review-text {
+            height: 200px;
+        }
+    }
 }

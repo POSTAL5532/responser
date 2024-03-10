@@ -1,9 +1,21 @@
 @import "globalsLess";
 
-.footer {
-  padding: 10px 14px;
-  margin-top: auto;
-  background-color: @system-color-light-100;
-  display: flex;
-  gap: 10px;
+.edit-review-footer {
+    .app-footer {
+        display: flex;
+        justify-content: space-between;
+
+        .button {
+            width: 116px;
+
+            &.next {
+                .icon {
+                    path {
+                        transform: rotate(90deg);
+                        transform-origin: 50% 50%;
+                    }
+                }
+            }
+        }
+    }
 }

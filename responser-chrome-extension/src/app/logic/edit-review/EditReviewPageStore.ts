@@ -125,7 +125,7 @@ export class EditReviewPageStore {
 
     private initNewReview = () => {
         this.reviewData = new ReviewData();
-        this.reviewData.rating = 1;
+        this.reviewData.rating = 0;
         this.reviewData.text = "";
 
         if (this.userLeftSiteReview) {

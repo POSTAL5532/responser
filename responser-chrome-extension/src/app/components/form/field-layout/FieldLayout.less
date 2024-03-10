@@ -1,32 +1,27 @@
 @import "globalsLess";
 
 .field-layout {
-  display: flex;
+    display: flex;
 
-  &.inline {
-    flex-direction: row;
-    align-items: center;
+    &.inline {
+        flex-direction: row;
+        align-items: center;
+
+        .label {
+            margin-right: 12px;
+        }
+    }
+
+    &.column {
+        flex-direction: column;
+
+        .label {
+            margin-bottom: 10px;
+        }
+    }
 
     .label {
-      margin-right: 12px;
+        .fontOutfitRegular(14px);
+        color: @black-alpha-60;
     }
-  }
-
-  &.column {
-    flex-direction: column;
-
-    .label {
-      margin-bottom: 6px;
-    }
-  }
-
-  .label {
-    .fontInterRegular();
-    font-size: 14px;
-    color: @system-color-dark-300;
-  }
-
-  &.disabled .label {
-    color: @system-color-dark-100;
-  }
 }

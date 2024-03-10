@@ -1,25 +1,46 @@
 import React from "react";
 import classNames from "classnames";
-import "./Textarea.less";
+import {ConditionShow} from "../../ConditionShow";
+import "./TextArea.less";
 
-type TextareaProps = {
+export enum TextAreaStyleType {
+    SECONDARY = "secondary"
+}
+
+export type TextAreaProps = {
     invalid?: boolean;
-    resizable?: boolean;
-} & React.DetailedHTMLProps<React.TextareaHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>;
+    message?: string;
+    styleType?: TextAreaStyleType;
+} & React.DetailedHTMLProps<React.InputHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>;
 
-export const Textarea: React.FC<TextareaProps> = (props: TextareaProps) => {
-    const {className, invalid = false, resizable, disabled, ...otherProps} = props;
-    const resultClassName = classNames(
-        "textarea",
-        {
-            "invalid": invalid,
-            "resizable": resizable,
-            "disabled": disabled
-        },
+export const TextArea: React.FC<TextAreaProps> = (props: TextAreaProps) => {
+    const {
+        className,
+        invalid = false,
+        disabled,
+        message,
+        styleType,
+        ...otherProps
+    } = props;
+
+    const resultFieldContainerClassName = classNames(
+        "text-area-container",
+        {"invalid": invalid},
+        {"disabled": disabled},
+        {"with-message": !!message},
+        styleType,
         className
     );
 
     return (
-        <textarea {...otherProps} className={resultClassName} disabled={disabled}/>
+        <div className={resultFieldContainerClassName}>
+            <div className="text-area">
+                <textarea {...otherProps} disabled={disabled}/>
+            </div>
+
+            <ConditionShow condition={!!message}>
+                <span className="message">{message}</span>
+            </ConditionShow>
+        </div>
     );
 }

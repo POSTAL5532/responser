@@ -1,38 +1,79 @@
 @import "globalsLess";
 
-.textarea {
-  resize: none;
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
-  padding: 10px;
-  .fontInterRegular();
-  font-size: 14px;
-  color: @system-color-dark-400;
-  border: 1px solid @system-color-dark-100;
-  background-color: @system-color-light-100;
+.text-area-container {
+    width: 100%;
 
-  .placeholderColor(@system-color-dark-200);
+    .text-area {
+        display: flex;
+        align-items: center;
+        position: relative;
+        height: 100%;
+        width: 100%;
+        border: solid 1px transparent;
+        border-radius: 10px;
+        background-color: @white;
 
-  &:hover {
-    border-color: lighten(@primary-color-lighter, 20%);;
-  }
+        textarea {
+            width: 100%;
+            height: 100%;
+            border: none;
+            .fontOutfitRegular(14px);
+            color: @black-alpha-60;
+            padding: 10px;
+            background-color: transparent;
+            resize: none;
 
-  &:focus {
-    border-color: @primary-color-lighter;
-  }
+            &, &:focus, &:active {
+                border-color: transparent;
+                outline: none;
+            }
 
-  &.disabled {
-    pointer-events: none;
-    background-color: @system-color-light-200;
-    .placeholderColor(@system-color-light-500);
-  }
+            &::placeholder {
+                color: @black-alpha-25;
+            }
 
-  .resizable {
-    resize: both;
-  }
+            &:-webkit-autofill,
+            &:-webkit-autofill:hover,
+            &:-webkit-autofill:focus,
+            &:-webkit-autofill:active {
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: @brown-dark;
+                -webkit-box-shadow: 0 0 0 1000px transparent inset;
+                box-shadow: 0 0 0 1000px transparent inset;
+            }
+        }
 
-  &, &:focus, &:active {
-    outline: none;
-  }
+        .extra-component {
+            .button {
+                height: 40px;
+            }
+        }
+    }
+
+    &.secondary .text-area {
+        background-color: @beige-alpha-8;
+    }
+
+    &.with-message .text-area {
+        margin-bottom: 4px;
+    }
+
+    &.disabled .text-area {
+        pointer-events: none;
+    }
+
+    .message {
+        .fontOutfitMedium(12px);
+        color: @brown-dark;
+    }
+
+    &.invalid {
+        .text-area {
+            border-color: @red;
+        }
+
+        .message {
+            color: @red;
+        }
+    }
 }

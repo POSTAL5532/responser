@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {observer} from "mobx-react";
 import {useLocation} from "react-router";
 import {useEditReviewPageStore} from "./EditReviewPageStore";
@@ -9,6 +9,7 @@ import Page from "../../components/page/Page";
 import {ResourceType} from "../../model/ResourceType";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {EditReviewFooter} from "./footer/EditReviewFooter";
+import {ResourceTypeChoiceHeader} from "./edit-review-header/EditReviewHeader";
 import "./EditReviewPage.less";
 
 const EditReviewPage: React.FC = () => {
@@ -22,6 +23,7 @@ const EditReviewPage: React.FC = () => {
 
     const editReviewPageStore = useEditReviewPageStore();
     const {reviewData, isNewReview, loadingState} = editReviewPageStore;
+    const [showSecondEditingStep, setShowSecondEditingStep] = useState<boolean>(false);
 
     useEffect(() => {
         editReviewPageStore.init(currentUser.id, reviewId, pageId, domainId);
@@ -36,31 +38,13 @@ const EditReviewPage: React.FC = () => {
         navigateToReviewsPage({resourceType: editReviewPageStore.currentResourceType});
     }
 
-    const getHeaderText = () => {
-        if (!reviewData) return;
-
-        let text: string[] = [isNewReview ? "Create" : "Edit"];
-
-        if (editReviewPageStore.currentResourceType === ResourceType.SITE) {
-            text.push("site");
-        } else if (editReviewPageStore.currentResourceType === ResourceType.PAGE) {
-            text.push("page")
-        }
-
-        text.push("review");
-
-        return text.join(" ");
-    }
-
     const onCurrentResourceTypeChange = (resourceType: ResourceType) => {
         editReviewPageStore.currentResourceType = resourceType;
     }
 
     return (
         <Page className="edit-review-page">
-            <div className="header">
-                <span>{getHeaderText()}</span>
-            </div>
+            <ResourceTypeChoiceHeader resourceType={editReviewPageStore.currentResourceType} isNewReview={isNewReview}/>
 
             <EditReviewForm reviewData={reviewData}
                             isNewReview={isNewReview}
@@ -69,12 +53,18 @@ const EditReviewPage: React.FC = () => {
                             userLeftSiteReview={editReviewPageStore.userLeftSiteReview}
                             userLeftPageReview={editReviewPageStore.userLeftPageReview}
                             isLoading={!reviewData || loadingState.isDataInitialization}
-                            isDataSubmitting={loadingState.isDataSubmitting}/>
+                            isDataSubmitting={loadingState.isDataSubmitting}
+                            showSecondEditingStep={showSecondEditingStep}/>
 
             <EditReviewFooter onSubmit={onSubmit}
                               onCancel={onCancel}
-                              isNewReview={isNewReview}
-                              submitDisabled={!reviewData?.text || !editReviewPageStore.currentResourceType}
+                              onNext={() => setShowSecondEditingStep(true)}
+
+                              showSubmitButton={showSecondEditingStep || !isNewReview}
+                              showNextButton={!showSecondEditingStep && isNewReview}
+                              nextButtonDisabled={!editReviewPageStore.currentResourceType}
+                              submitButtonLabel={`${isNewReview ? "Add" : "Save"} review`}
+                              submitDisabled={!reviewData?.rating || !reviewData?.text}
                               isDataSubmitting={loadingState.isDataSubmitting}/>
         </Page>
     );

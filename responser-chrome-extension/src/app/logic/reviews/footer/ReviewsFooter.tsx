@@ -5,8 +5,8 @@ import {AppFooter} from "../../../components/app-footer/AppFooter";
 import {ConditionShow} from "../../../components/ConditionShow";
 import {SortingSubmenu} from "./SortingSubmenu";
 import {SortingWrapper} from "../ReviewsPageStore";
-import "./ReviewsFooter.less";
 import {FilterSubmenu} from "./FilterSubmenu";
+import "./ReviewsFooter.less";
 
 type ReviewsFooterProps = {
     userAuthorized: boolean;
@@ -77,26 +77,26 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
     return (
         <AppFooter className="reviews-footer" submenu={footerSubmenu()} showSubmenu={showSubmenu} onSubmenuCloseClick={onSubmenuCloseClick}>
             <>
-                <ConditionShow condition={!isLoading && userAuthorized && !hasUserReview && !!onAddReviewClick && !showSubmenu}>
-                    <Button className="add-review" onClick={onAddReviewClick} disabled={isReviewRemoving} styleType={ButtonType.PRIMARY}>
+                <ConditionShow condition={userAuthorized && !hasUserReview && !!onAddReviewClick && !showSubmenu}>
+                    <Button className="add-review" onClick={onAddReviewClick} disabled={isReviewRemoving || isLoading} styleType={ButtonType.PRIMARY}>
                         <Icon type={IconType.PLUS}/> Add review
                     </Button>
                 </ConditionShow>
 
-                <ConditionShow condition={!isLoading && userAuthorized && hasUserReview && !!onEditReviewClick && !showSubmenu}>
-                    <Button className="edit-review" onClick={onEditReviewClick} disabled={isReviewRemoving} styleType={ButtonType.PRIMARY}>
+                <ConditionShow condition={userAuthorized && hasUserReview && !!onEditReviewClick && !showSubmenu}>
+                    <Button className="edit-review" onClick={onEditReviewClick} disabled={isReviewRemoving || isLoading} styleType={ButtonType.PRIMARY}>
                         <Icon type={IconType.EDIT}/> Edit review
                     </Button>
                 </ConditionShow>
 
-                <ConditionShow condition={!isLoading && userAuthorized && hasUserReview && !!onDeleteReviewClick && !showSubmenu}>
-                    <Button className="delete-review" onClick={onDeleteReviewClick} disabled={isReviewRemoving} loading={isReviewRemoving}>
+                <ConditionShow condition={userAuthorized && hasUserReview && !!onDeleteReviewClick && !showSubmenu}>
+                    <Button className="delete-review" onClick={onDeleteReviewClick} disabled={isReviewRemoving || isLoading} loading={isReviewRemoving}>
                         <Icon type={IconType.REMOVE}/> Delete review
                     </Button>
                 </ConditionShow>
 
-                <ConditionShow condition={!isLoading && !userAuthorized && !!onLoginClick && !showSubmenu}>
-                    <Button className="login" onClick={onLoginClick} styleType={ButtonType.PRIMARY}>
+                <ConditionShow condition={!userAuthorized && !!onLoginClick && !showSubmenu}>
+                    <Button className="login" onClick={onLoginClick} styleType={ButtonType.PRIMARY} disabled={isLoading}>
                         <Icon type={IconType.LOGIN}/> Log in
                     </Button>
                 </ConditionShow>
@@ -105,10 +105,10 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
                     <Button className="login" onClick={onApplySortingFilter} styleType={ButtonType.PRIMARY}>Apply</Button>
                 </ConditionShow>
 
-                <ConditionShow condition={!isLoading && !showSubmenu}>
+                <ConditionShow condition={!showSubmenu}>
                     <div className="additional-controls">
-                        <Button onClick={onOpenFilterClick} styleType={ButtonType.LITE}><Icon type={IconType.SETTINGS}/></Button>
-                        <Button onClick={onOpenSortingClick} styleType={ButtonType.LITE}><Icon type={IconType.SORTING}/></Button>
+                        <Button onClick={onOpenFilterClick} styleType={ButtonType.LITE} disabled={isLoading}><Icon type={IconType.SETTINGS}/></Button>
+                        <Button onClick={onOpenSortingClick} styleType={ButtonType.LITE} disabled={isLoading}><Icon type={IconType.SORTING}/></Button>
 
                         <ConditionShow condition={userAuthorized && !!onLogOutClick}>
                             <Button className="logout" styleType={ButtonType.LITE} onClick={onLogOutClick}>

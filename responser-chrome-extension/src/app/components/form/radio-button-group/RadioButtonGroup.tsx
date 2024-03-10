@@ -5,7 +5,7 @@ import {RadioButton} from "../radio-button/RadioButton";
 
 export type RadioButtonGroupOption<T> = {
     value: T,
-    label: string;
+    label: React.ReactNode;
     disabled?: boolean;
 }
 
