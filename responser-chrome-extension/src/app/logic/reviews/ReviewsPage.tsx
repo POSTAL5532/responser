@@ -11,12 +11,15 @@ import {navigateTo} from "../../utils/NavigationUtils";
 import {ReviewsHeader} from "./header/ReviewsHeader";
 import {ReviewsFooter} from "./footer/ReviewsFooter";
 import {useExtensionService} from "../../service/extension/ExtensionService";
+import {Review} from "../../model/Review";
 import "./ReviewsPage.less";
 
 const ReviewsPage: React.FC = () => {
     const locationState = useLocation<NavigateStateProps>().state;
     const extensionService = useExtensionService();
     const {currentUser, userDataLoading} = useContext<GlobalAppStore>(GlobalAppStoreContext);
+    const reviewsPageStore = useReviewsPageStore();
+
     const {
         site,
         page,
@@ -37,7 +40,7 @@ const ReviewsPage: React.FC = () => {
         setupEditableFilterCriteria,
         applyEditableCriteria,
         loadingState
-    } = useReviewsPageStore();
+    } = reviewsPageStore;
 
     const {isSiteLoading, isPageLoading, isReviewRemoving, isReviewsLoading, isNextReviewsLoading} = loadingState;
     const currentSortingValue = new SortingWrapper(editableSortingCriteria?.sortingField, editableSortingCriteria?.sortDirection);
@@ -79,6 +82,7 @@ const ReviewsPage: React.FC = () => {
     const closeSubmenu = () => {
         setupEditableSortingCriteria(null);
         setupEditableFilterCriteria(null);
+        reviewsPageStore.reviewIdForShare = null;
     }
 
     const applySortingFilter = () => {
@@ -97,6 +101,20 @@ const ReviewsPage: React.FC = () => {
         (reviewsResourceType === ResourceType.SITE && !site) ||
         (!page && !site);
 
+    const isCardsBlured = !!editableSortingCriteria || !!editableFilterCriteria || !!reviewsPageStore.reviewIdForRemove || !!reviewsPageStore.reviewIdForShare;
+
+    const blurCardLogic = (review: Review) => {
+        if (!!editableSortingCriteria || !!editableFilterCriteria) {
+            return true;
+        }
+
+        if (!reviewsPageStore.reviewIdForRemove && !reviewsPageStore.reviewIdForShare) {
+            return false;
+        }
+
+        return reviewsPageStore.reviewIdForRemove !== review.id && reviewsPageStore.reviewIdForShare !== review.id
+    }
+
     return (
         <Page className="reviews-page">
             <ReviewsHeader
@@ -114,7 +132,9 @@ const ReviewsPage: React.FC = () => {
                 loadNextReviews={loadNextReviews}
                 isNextReviewsLoading={isNextReviewsLoading}
                 isLoading={(!page && !site) || isReviewsLoading || isSiteLoading || isPageLoading}
-                blur={!!editableSortingCriteria || !!editableFilterCriteria}/>
+                onShareReviewClick={review => reviewsPageStore.reviewIdForShare = review.id}
+                blur={blurCardLogic}
+                blurAll={isCardsBlured}/>
 
             <ReviewsFooter
                 userAuthorized={!!currentUser}
@@ -138,8 +158,12 @@ const ReviewsPage: React.FC = () => {
                 maxRating={editableFilterCriteria?.maxRating}
                 onRatingRangeChange={onRatingRangeChange}
 
-                onSubmenuCloseClick={closeSubmenu}
-                onApplySortingFilter={applySortingFilter}/>
+                onApplySortingFilter={applySortingFilter}
+
+                showShare={!!reviewsPageStore.reviewIdForShare}
+                shareReviewId={reviewsPageStore.reviewIdForShare}
+
+                onSubmenuCloseClick={closeSubmenu}/>
         </Page>
     );
 }

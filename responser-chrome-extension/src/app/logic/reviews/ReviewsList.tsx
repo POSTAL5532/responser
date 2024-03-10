@@ -18,7 +18,9 @@ type ReviewsListProps = {
     loadNextReviews: () => Promise<void>;
     isLoading: boolean;
     isNextReviewsLoading: boolean;
-    blur?: boolean;
+    onShareReviewClick: (review: Review) => void;
+    blurAll: boolean;
+    blur: (review: Review) => boolean;
 }
 
 const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
@@ -30,10 +32,13 @@ const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
         isLoading,
         loadNextReviews,
         isNextReviewsLoading,
-        blur = false,
+        onShareReviewClick,
+        blurAll,
+        blur
     } = props;
+
     const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
-    const className = classNames("reviews-list-container", {"blur": blur});
+    const className = classNames("reviews-list-container", {"blur": blurAll});
 
     if (isLoading) {
         return (
@@ -55,15 +60,15 @@ const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
 
     const mapReviewCard = (review: Review, index: number) => {
         return <ReviewCard
-            blur={blur}
+            blur={blur(review)}
             key={review.id}
             review={review}
             underlining={index < (reviews.length - 1)}
             currentUser={currentUser}
-            createLike={createLike}
-            updateLike={updateLike}
-            removeLike={removeLike}
-            onShareReviewClick={() => console.log("On share click")}/>;
+            onCreateLikeClick={createLike}
+            onUpdateLikeClick={updateLike}
+            onRemoveLikeClick={removeLike}
+            onShareReviewClick={onShareReviewClick}/>;
     }
 
     return (
@@ -82,7 +87,7 @@ const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
                 </ConditionShow>
             </div>
 
-            <BlurPanel active={blur} className="bottom-blur"/>
+            <BlurPanel active={blurAll} className="bottom-blur"/>
         </div>
     );
 }

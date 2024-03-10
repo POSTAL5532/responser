@@ -6,7 +6,9 @@ import {ConditionShow} from "../../../components/ConditionShow";
 import {SortingSubmenu} from "./SortingSubmenu";
 import {SortingWrapper} from "../ReviewsPageStore";
 import {FilterSubmenu} from "./FilterSubmenu";
+import {ShareReviewSubmenu} from "./ShareReviewSubmenu";
 import "./ReviewsFooter.less";
+import ApplicationProperties from "../../../service/ApplicationProperties";
 
 type ReviewsFooterProps = {
     userAuthorized: boolean;
@@ -31,6 +33,10 @@ type ReviewsFooterProps = {
     onRatingRangeChange: (values: number[]) => void;
 
     onApplySortingFilter: () => void;
+
+    showShare: boolean;
+    shareReviewId: string;
+
     onSubmenuCloseClick: () => void;
 }
 
@@ -55,8 +61,12 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
         maxRating,
         onRatingRangeChange,
 
-        onSubmenuCloseClick,
         onApplySortingFilter,
+
+        showShare,
+        shareReviewId,
+
+        onSubmenuCloseClick,
 
         isLoading,
         isReviewRemoving
@@ -70,9 +80,14 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
         if (showFilter) {
             return <FilterSubmenu minRating={minRating} maxRating={maxRating} onRatingRangeChange={onRatingRangeChange}/>
         }
+
+        if (showShare) {
+            return <ShareReviewSubmenu reviewId={shareReviewId}/>;
+        }
     };
 
-    const showSubmenu = showSorting || showFilter;
+    const showSubmenu = showSorting || showFilter || showShare;
+    const isClipboardAvailable = !!navigator && !!navigator.clipboard && !!navigator.clipboard.writeText
 
     return (
         <AppFooter className="reviews-footer" submenu={footerSubmenu()} showSubmenu={showSubmenu} onSubmenuCloseClick={onSubmenuCloseClick}>
@@ -101,8 +116,16 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
                     </Button>
                 </ConditionShow>
 
-                <ConditionShow condition={showSubmenu}>
-                    <Button className="login" onClick={onApplySortingFilter} styleType={ButtonType.PRIMARY}>Apply</Button>
+                <ConditionShow condition={showSorting || showFilter}>
+                    <Button className="apply-sorting-filter" onClick={onApplySortingFilter} styleType={ButtonType.PRIMARY}>Apply</Button>
+                </ConditionShow>
+
+                <ConditionShow condition={showShare && isClipboardAvailable}>
+                    <Button className="copy-review-link"
+                            onClick={() => navigator?.clipboard?.writeText?.(ApplicationProperties.reviewWebLinkUrl + "/" + shareReviewId)}
+                            styleType={ButtonType.PRIMARY}>
+                        <Icon type={IconType.CLIPBOARD}/> Copy link
+                    </Button>
                 </ConditionShow>
 
                 <ConditionShow condition={!showSubmenu}>

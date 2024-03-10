@@ -2,8 +2,12 @@ import {LogLevel} from "../utils/Logger";
 
 class ApplicationProperties {
 
-    get gatewayApiUrl(): string {
+    get apiUrl(): string {
         return process.env.API_URL;
+    }
+
+    get reviewWebLinkUrl(): string {
+        return process.env.REVIEW_WEB_LINK_URL;
     }
 
     get tokenApiUrl(): string {

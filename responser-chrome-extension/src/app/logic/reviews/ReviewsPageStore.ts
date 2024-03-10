@@ -61,6 +61,10 @@ export class ReviewsPageStore {
 
     currentUserId: string;
 
+    reviewIdForShare: string;
+
+    reviewIdForRemove: string;
+
     constructor() {
         makeAutoObservable(this);
     }

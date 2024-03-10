@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useRef, useState} from "react";
 import classNames from "classnames";
 import {observer} from "mobx-react";
 import {Review} from "../../../model/Review";
@@ -17,14 +17,13 @@ import "./ReviewCard.less";
 type ReviewCardProps = {
     review: Review;
     className?: string;
-    currentUser?: User;
-    disableReactions?: boolean;
-    underlining?: boolean;
-    blur?: boolean;
+    currentUser: User;
+    underlining: boolean;
+    blur: boolean;
 
-    createLike?: (review: Review, positive: boolean) => Promise<void>;
-    updateLike?: (reviewLike: ReviewLike, positive: boolean) => Promise<void>;
-    removeLike?: (reviewLike: ReviewLike) => Promise<void>;
+    onCreateLikeClick: (review: Review, positive: boolean) => Promise<void>;
+    onUpdateLikeClick: (reviewLike: ReviewLike, positive: boolean) => Promise<void>;
+    onRemoveLikeClick: (reviewLike: ReviewLike) => Promise<void>;
     onShareReviewClick: (review: Review) => void;
 }
 
@@ -33,13 +32,12 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
         review,
         className,
         currentUser,
-        disableReactions,
-        createLike,
-        updateLike,
-        removeLike,
+        onCreateLikeClick,
+        onUpdateLikeClick,
+        onRemoveLikeClick,
         onShareReviewClick,
-        underlining = true,
-        blur = false
+        underlining,
+        blur
     } = props;
 
     const {user, creationDate, rating, text, reviewLikes} = review;
@@ -49,7 +47,8 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
     const [wasOverflowed, setWasOverflowed] = useState<boolean>(false);
     const [likeInProcess, setLikeInProcess] = useState<boolean>(false);
 
-    const textRef = React.useRef<HTMLDivElement>();
+    const textRef = useRef<HTMLDivElement>();
+    const cardRef = useRef<HTMLDivElement>(null);
 
     useIsOverflow(textRef, (hasOverflow) => {
         if (hasOverflow) setWasOverflowed(true)
@@ -77,20 +76,27 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
         setLikeInProcess(true);
 
         if (!currentUserReviewLike) {
-            createLike?.(review, positive).finally(() => setLikeInProcess(false));
+            onCreateLikeClick?.(review, positive).finally(() => setLikeInProcess(false));
             return;
         }
 
         if (currentUserReviewLike.positive === positive) {
-            removeLike?.(currentUserReviewLike).finally(() => setLikeInProcess(false));
+            onRemoveLikeClick?.(currentUserReviewLike).finally(() => setLikeInProcess(false));
             return;
         }
 
-        updateLike?.(currentUserReviewLike, positive).finally(() => setLikeInProcess(false));
+        onUpdateLikeClick?.(currentUserReviewLike, positive).finally(() => setLikeInProcess(false));
+    }
+
+    const onShareReviewClickListener = () => {
+        onShareReviewClick(review);
+        if (!!cardRef) {
+            cardRef.current.scrollIntoView({block: "start", behavior: "smooth"});
+        }
     }
 
     return (
-        <div className={resultClassName}>
+        <div className={resultClassName} ref={cardRef}>
             <div className="card-header">
                 <div className="user-info-container">
                     <img className="user-avatar" src={getUserAvatarUrl(user)} alt={user.fullName}/>
@@ -116,15 +122,15 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
                     <Reaction count={positives.length}
                               positive={true}
                               currentUserReacted={currentUserReviewLike?.positive}
-                              disabled={disableReactions || likeInProcess || !currentUser}
+                              disabled={likeInProcess || !currentUser}
                               onClick={onReaction}/>
                     <Reaction count={negatives.length}
                               positive={false}
                               currentUserReacted={currentUserReviewLike && !currentUserReviewLike.positive}
-                              disabled={disableReactions || likeInProcess || !currentUser}
+                              disabled={likeInProcess || !currentUser}
                               onClick={onReaction}/>
 
-                    <Button className="share-button" onClick={() => onShareReviewClick(review)}><Icon type={IconType.SEND}/></Button>
+                    <Button className="share-button" onClick={onShareReviewClickListener}><Icon type={IconType.SEND}/></Button>
                 </div>
             </div>
 

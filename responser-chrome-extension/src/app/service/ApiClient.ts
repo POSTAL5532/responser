@@ -68,7 +68,7 @@ export class ApiClient {
         }
 
         return {
-            baseURL: ApplicationProperties.gatewayApiUrl,
+            baseURL: ApplicationProperties.apiUrl,
             headers: {
                 ...headers
             },

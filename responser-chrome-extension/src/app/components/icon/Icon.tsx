@@ -16,6 +16,13 @@ import {ReactComponent as Settings} from './settings.svg';
 import {ReactComponent as Sorting} from './sorting.svg';
 import {ReactComponent as Close} from './close.svg';
 import {ReactComponent as Arrow} from './arrow.svg';
+import {ReactComponent as FbLogo} from './fb_logo.svg';
+import {ReactComponent as TgLogo} from './tg_logo.svg';
+import {ReactComponent as XLogo} from './x_logo.svg';
+import {ReactComponent as LiLogo} from './li_logo.svg';
+import {ReactComponent as VkLogo} from './vk_logo.svg';
+import {ReactComponent as RedditLogo} from './reddit_logo.svg';
+import {ReactComponent as Clipboard} from './clipboard.svg';
 import "./Icon.less";
 
 export enum IconType {
@@ -36,6 +43,13 @@ export enum IconType {
     SORTING = "sorting",
     CLOSE = "close",
     ARROW = "arrow",
+    FB_LOGO = "fb-logo",
+    X_LOGO = "x-logo",
+    TG_LOGO = "tg-logo",
+    LI_LOGO = "li-logo",
+    VK_LOGO = "vk-logo",
+    REDDIT_LOGO = "reddit-logo",
+    CLIPBOARD = "clipboard",
 }
 
 type IconProps = {
@@ -82,6 +96,20 @@ export const Icon: React.FC<IconProps> = (props: IconProps) => {
             return <Close className={resultClassName}/>
         case IconType.ARROW:
             return <Arrow className={resultClassName}/>
+        case IconType.FB_LOGO:
+            return <FbLogo className={resultClassName}/>
+        case IconType.X_LOGO:
+            return <XLogo className={resultClassName}/>
+        case IconType.TG_LOGO:
+            return <TgLogo className={resultClassName}/>
+        case IconType.LI_LOGO:
+            return <LiLogo className={resultClassName}/>
+        case IconType.VK_LOGO:
+            return <VkLogo className={resultClassName}/>
+        case IconType.REDDIT_LOGO:
+            return <RedditLogo className={resultClassName}/>
+        case IconType.CLIPBOARD:
+            return <Clipboard className={resultClassName}/>
         default:
             return null;
     }
