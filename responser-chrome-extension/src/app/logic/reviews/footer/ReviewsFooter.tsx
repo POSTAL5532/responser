@@ -7,8 +7,8 @@ import {SortingSubmenu} from "./SortingSubmenu";
 import {SortingWrapper} from "../ReviewsPageStore";
 import {FilterSubmenu} from "./FilterSubmenu";
 import {ShareReviewSubmenu} from "./ShareReviewSubmenu";
-import "./ReviewsFooter.less";
 import ApplicationProperties from "../../../service/ApplicationProperties";
+import "./ReviewsFooter.less";
 
 type ReviewsFooterProps = {
     userAuthorized: boolean;
@@ -90,7 +90,7 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
     const isClipboardAvailable = !!navigator && !!navigator.clipboard && !!navigator.clipboard.writeText
 
     return (
-        <AppFooter className="reviews-footer" submenu={footerSubmenu()} showSubmenu={showSubmenu} onSubmenuCloseClick={onSubmenuCloseClick}>
+        <AppFooter className="reviews-footer" submenu={footerSubmenu()} showSubmenu={showSubmenu}>
             <>
                 <ConditionShow condition={userAuthorized && !hasUserReview && !!onAddReviewClick && !showSubmenu}>
                     <Button className="add-review" onClick={onAddReviewClick} disabled={isReviewRemoving || isLoading} styleType={ButtonType.PRIMARY}>
@@ -106,26 +106,32 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
 
                 <ConditionShow condition={userAuthorized && hasUserReview && !!onDeleteReviewClick && !showSubmenu}>
                     <Button className="delete-review" onClick={onDeleteReviewClick} disabled={isReviewRemoving || isLoading} loading={isReviewRemoving}>
-                        <Icon type={IconType.REMOVE}/> Delete review
+                        <Icon type={IconType.REMOVE}/>Delete review
                     </Button>
                 </ConditionShow>
 
                 <ConditionShow condition={!userAuthorized && !!onLoginClick && !showSubmenu}>
                     <Button className="login" onClick={onLoginClick} styleType={ButtonType.PRIMARY} disabled={isLoading}>
-                        <Icon type={IconType.LOGIN}/> Log in
+                        <Icon type={IconType.LOGIN}/>Log in
                     </Button>
                 </ConditionShow>
 
                 <ConditionShow condition={showSorting || showFilter}>
-                    <Button className="apply-sorting-filter" onClick={onApplySortingFilter} styleType={ButtonType.PRIMARY}>Apply</Button>
+                    <Button className="apply-sorting-filter" onClick={onApplySortingFilter} styleType={ButtonType.PRIMARY}>
+                        <Icon type={IconType.CHECK}/>Apply
+                    </Button>
                 </ConditionShow>
 
                 <ConditionShow condition={showShare && isClipboardAvailable}>
                     <Button className="copy-review-link"
                             onClick={() => navigator?.clipboard?.writeText?.(ApplicationProperties.reviewWebLinkUrl + "/" + shareReviewId)}
                             styleType={ButtonType.PRIMARY}>
-                        <Icon type={IconType.CLIPBOARD}/> Copy link
+                        <Icon type={IconType.CLIPBOARD}/>Copy link
                     </Button>
+                </ConditionShow>
+
+                <ConditionShow condition={showSubmenu}>
+                    <Button className="close-submenu" onClick={onSubmenuCloseClick}><Icon type={IconType.CLOSE}/>Close</Button>
                 </ConditionShow>
 
                 <ConditionShow condition={!showSubmenu}>

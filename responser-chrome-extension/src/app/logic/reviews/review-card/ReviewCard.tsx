@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, {useRef, useState} from "react";
 import classNames from "classnames";
 import {observer} from "mobx-react";
 import {Review} from "../../../model/Review";
