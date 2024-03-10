@@ -1,13 +1,13 @@
 @font-face {
-  font-family: "Inter-Regular";
-  src: url("chrome-extension://__MSG_@@extension_id__/fonts/Inter-Regular.ttf") format("truetype");
+  font-family: "Outfit-Regular";
+  src: url("chrome-extension://__MSG_@@extension_id__/fonts/Outfit-Regular.ttf") format("truetype");
   font-style: normal;
   font-weight: 400;
 }
 
 @font-face {
   font-family: "Inter-SemiBold";
-  src: url("chrome-extension://__MSG_@@extension_id__/fonts/Inter-SemiBold.ttf") format("truetype");
+  src: url("chrome-extension://__MSG_@@extension_id__/fonts/Outfit-Medium.ttf") format("truetype");
   font-style: normal;
   font-weight: 700;
 }
@@ -78,24 +78,24 @@
 }
 
 .reviewly-rating-popup .reviewly-rating-block .reviewly-rating-header {
-  font-family: "Inter-Regular";
+  font-family: "Outfit-Regular";
   font-size: 12px;
   color: #555770;
 }
 
 .reviewly-rating-popup .reviewly-rating-block .reviewly-rating {
-  font-family: "Inter-SemiBold";
+  font-family: "Outfit-Medium";
   font-size: 24px;
 }
 
 .reviewly-rating-popup .reviewly-rating-block .reviewly-reviews-count {
-  font-family: "Inter-Regular";
+  font-family: "Outfit-Regular";
   font-size: 12px;
   color: #555770;
 }
 
 .reviewly-rating-popup .reviewly-rating-block .reviewly-reviews-count .reviewly-reviews-count-value {
-  font-family: "Inter-SemiBold"
+  font-family: "Outfit-Medium"
 }
 
 .reviewly-rating-popup .reviewly-rating-block .reviewly-rating.good-rating {
