@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useLocation} from "react-router";
 import {observer} from "mobx-react";
 import {SortingWrapper, useReviewsPageStore} from "./ReviewsPageStore";
@@ -19,6 +19,7 @@ const ReviewsPage: React.FC = () => {
     const extensionService = useExtensionService();
     const {currentUser, userDataLoading} = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const reviewsPageStore = useReviewsPageStore();
+    const [removeUserReviewConfirmation, setRemoveUserReviewConfirmation] = useState<boolean>(false);
 
     const {
         site,
@@ -83,6 +84,7 @@ const ReviewsPage: React.FC = () => {
         setupEditableSortingCriteria(null);
         setupEditableFilterCriteria(null);
         reviewsPageStore.reviewIdForShare = null;
+        setRemoveUserReviewConfirmation(false);
     }
 
     const applySortingFilter = () => {
@@ -101,18 +103,26 @@ const ReviewsPage: React.FC = () => {
         (reviewsResourceType === ResourceType.SITE && !site) ||
         (!page && !site);
 
-    const isCardsBlured = !!editableSortingCriteria || !!editableFilterCriteria || !!reviewsPageStore.reviewIdForRemove || !!reviewsPageStore.reviewIdForShare;
+    const isCardsBlured = !!editableSortingCriteria || !!editableFilterCriteria || !!reviewsPageStore.reviewIdForShare || removeUserReviewConfirmation;
 
     const blurCardLogic = (review: Review) => {
         if (!!editableSortingCriteria || !!editableFilterCriteria) {
             return true;
         }
 
-        if (!reviewsPageStore.reviewIdForRemove && !reviewsPageStore.reviewIdForShare) {
-            return false;
+        if (reviewsPageStore.reviewIdForShare) {
+            return review.id !== reviewsPageStore.reviewIdForShare;
         }
 
-        return reviewsPageStore.reviewIdForRemove !== review.id && reviewsPageStore.reviewIdForShare !== review.id
+        if (removeUserReviewConfirmation) {
+            return review.id !== currentUserReview?.id;
+        }
+
+        return false;
+    }
+
+    const removeUserReviewAction = () => {
+        removeUserReview().finally(closeSubmenu);
     }
 
     return (
@@ -134,18 +144,22 @@ const ReviewsPage: React.FC = () => {
                 isLoading={(!page && !site) || isReviewsLoading || isSiteLoading || isPageLoading}
                 onShareReviewClick={review => reviewsPageStore.reviewIdForShare = review.id}
                 blur={blurCardLogic}
-                blurAll={isCardsBlured}/>
+                blurAll={isCardsBlured}
+                disableCardControls={isCardsBlured}
+                isRemoveReviewConfirmationOpen={removeUserReviewConfirmation}/>
 
             <ReviewsFooter
                 userAuthorized={!!currentUser}
                 hasUserReview={!!currentUserReview}
                 onEditReviewClick={onEditReviewClick}
                 onAddReviewClick={onAddReviewClick}
-                onDeleteReviewClick={removeUserReview}
+                onDeleteReviewClick={() => setRemoveUserReviewConfirmation(true)}
+                removeUserReview={removeUserReviewAction}
                 onLoginClick={extensionService.openLoginPage}
                 onLogOutClick={extensionService.openLogoutPage}
                 isLoading={(!page && !site) || isReviewsLoading || isSiteLoading || isPageLoading}
                 isReviewRemoving={isReviewRemoving}
+                currentResourceType={reviewsResourceType}
 
                 showSorting={!!editableSortingCriteria}
                 onOpenSortingClick={onOpenSortingClick}
@@ -162,6 +176,8 @@ const ReviewsPage: React.FC = () => {
 
                 showShare={!!reviewsPageStore.reviewIdForShare}
                 shareReviewId={reviewsPageStore.reviewIdForShare}
+
+                showConfirmReviewRemoving={removeUserReviewConfirmation}
 
                 onSubmenuCloseClick={closeSubmenu}/>
         </Page>

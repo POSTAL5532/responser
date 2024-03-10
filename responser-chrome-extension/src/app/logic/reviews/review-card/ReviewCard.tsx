@@ -18,6 +18,7 @@ type ReviewCardProps = {
     review: Review;
     className?: string;
     currentUser: User;
+    disableControls?: boolean;
     underlining: boolean;
     blur: boolean;
 
@@ -32,6 +33,7 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
         review,
         className,
         currentUser,
+        disableControls= false,
         onCreateLikeClick,
         onUpdateLikeClick,
         onRemoveLikeClick,
@@ -90,13 +92,17 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
 
     const onShareReviewClickListener = () => {
         onShareReviewClick(review);
+
         if (!!cardRef) {
-            cardRef.current.scrollIntoView({block: "start", behavior: "smooth"});
+            // setTimeout is workaround for unfocus after controls disabled (https://github.com/facebook/react/issues/20770#issuecomment-787031820)
+            setTimeout(() => {
+                cardRef.current.scrollIntoView({block: "start", behavior: "smooth"});
+            }, 0);
         }
     }
 
     return (
-        <div className={resultClassName} ref={cardRef}>
+        <div className={resultClassName} ref={cardRef} key={review.id}>
             <div className="card-header">
                 <div className="user-info-container">
                     <img className="user-avatar" src={getUserAvatarUrl(user)} alt={user.fullName}/>
@@ -122,15 +128,17 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
                     <Reaction count={positives.length}
                               positive={true}
                               currentUserReacted={currentUserReviewLike?.positive}
-                              disabled={likeInProcess || !currentUser}
+                              disabled={disableControls || likeInProcess || !currentUser}
                               onClick={onReaction}/>
                     <Reaction count={negatives.length}
                               positive={false}
                               currentUserReacted={currentUserReviewLike && !currentUserReviewLike.positive}
-                              disabled={likeInProcess || !currentUser}
+                              disabled={disableControls || likeInProcess || !currentUser}
                               onClick={onReaction}/>
 
-                    <Button className="share-button" onClick={onShareReviewClickListener}><Icon type={IconType.SEND}/></Button>
+                    <Button className="share-button" onClick={onShareReviewClickListener} disabled={disableControls}>
+                        <Icon type={IconType.SEND}/>
+                    </Button>
                 </div>
             </div>
 

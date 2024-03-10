@@ -1,4 +1,4 @@
-import React, {useContext, UIEvent} from "react";
+import React, {useContext, UIEvent, useRef, useEffect} from "react";
 import {observer} from "mobx-react";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import ReviewCard from "./review-card/ReviewCard";
@@ -21,6 +21,8 @@ type ReviewsListProps = {
     onShareReviewClick: (review: Review) => void;
     blurAll: boolean;
     blur: (review: Review) => boolean;
+    disableCardControls?: boolean;
+    isRemoveReviewConfirmationOpen?: boolean
 }
 
 const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
@@ -34,11 +36,21 @@ const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
         isNextReviewsLoading,
         onShareReviewClick,
         blurAll,
-        blur
+        blur,
+        disableCardControls = false,
+        isRemoveReviewConfirmationOpen = false,
     } = props;
 
     const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const className = classNames("reviews-list-container", {"blur": blurAll});
+
+    const reviewsListRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        if (isRemoveReviewConfirmationOpen && !!reviewsListRef) {
+            reviewsListRef.current.scrollTo({top: 0, behavior: "smooth"});
+        }
+    }, [isRemoveReviewConfirmationOpen]);
 
     if (isLoading) {
         return (
@@ -68,12 +80,13 @@ const ReviewsList: React.FC<ReviewsListProps> = (props: ReviewsListProps) => {
             onCreateLikeClick={createLike}
             onUpdateLikeClick={updateLike}
             onRemoveLikeClick={removeLike}
-            onShareReviewClick={onShareReviewClick}/>;
+            onShareReviewClick={onShareReviewClick}
+            disableControls={disableCardControls}/>;
     }
 
     return (
         <div className={className} onScroll={onScroll}>
-            <div className="reviews-list">
+            <div className="reviews-list" ref={reviewsListRef}>
                 {reviews.map(mapReviewCard)}
 
                 <ConditionShow condition={reviews.length < 1}>

@@ -8,6 +8,8 @@ import {SortingWrapper} from "../ReviewsPageStore";
 import {FilterSubmenu} from "./FilterSubmenu";
 import {ShareReviewSubmenu} from "./ShareReviewSubmenu";
 import ApplicationProperties from "../../../service/ApplicationProperties";
+import {ResourceType} from "../../../model/ResourceType";
+import {ConfirmReviewRemoving} from "./ConfirmReviewRemoving";
 import "./ReviewsFooter.less";
 
 type ReviewsFooterProps = {
@@ -20,6 +22,7 @@ type ReviewsFooterProps = {
     onLogOutClick: () => void;
     isLoading: boolean;
     isReviewRemoving: boolean;
+    currentResourceType: ResourceType;
 
     onOpenSortingClick: () => void;
     showSorting: boolean;
@@ -37,6 +40,9 @@ type ReviewsFooterProps = {
     showShare: boolean;
     shareReviewId: string;
 
+    showConfirmReviewRemoving: boolean;
+    removeUserReview: () => void;
+
     onSubmenuCloseClick: () => void;
 }
 
@@ -44,6 +50,7 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
     const {
         userAuthorized,
         hasUserReview,
+        currentResourceType,
         onEditReviewClick,
         onAddReviewClick,
         onDeleteReviewClick,
@@ -66,6 +73,9 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
         showShare,
         shareReviewId,
 
+        showConfirmReviewRemoving,
+        removeUserReview,
+
         onSubmenuCloseClick,
 
         isLoading,
@@ -84,69 +94,83 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
         if (showShare) {
             return <ShareReviewSubmenu reviewId={shareReviewId}/>;
         }
+
+        if (showConfirmReviewRemoving || isReviewRemoving) {
+            return <ConfirmReviewRemoving currentResourceType={currentResourceType}/>;
+        }
     };
 
-    const showSubmenu = showSorting || showFilter || showShare;
+    const showSubmenu = showSorting || showFilter || showShare || showConfirmReviewRemoving;
     const isClipboardAvailable = !!navigator && !!navigator.clipboard && !!navigator.clipboard.writeText
 
     return (
         <AppFooter className="reviews-footer" submenu={footerSubmenu()} showSubmenu={showSubmenu}>
-            <>
-                <ConditionShow condition={userAuthorized && !hasUserReview && !!onAddReviewClick && !showSubmenu}>
-                    <Button className="add-review" onClick={onAddReviewClick} disabled={isReviewRemoving || isLoading} styleType={ButtonType.PRIMARY}>
-                        <Icon type={IconType.PLUS}/> Add review
+            <ConditionShow condition={userAuthorized && !hasUserReview && !!onAddReviewClick && !showSubmenu}>
+                <Button className="add-review" onClick={onAddReviewClick} disabled={isLoading} styleType={ButtonType.PRIMARY}>
+                    <Icon type={IconType.PLUS}/> Add review
+                </Button>
+            </ConditionShow>
+
+            <ConditionShow condition={userAuthorized && hasUserReview && !!onEditReviewClick && !showSubmenu}>
+                <Button className="edit-review" onClick={onEditReviewClick} disabled={isLoading} styleType={ButtonType.PRIMARY}>
+                    <Icon type={IconType.EDIT}/> Edit review
+                </Button>
+            </ConditionShow>
+
+            <ConditionShow condition={userAuthorized && hasUserReview && !!onDeleteReviewClick && !showSubmenu}>
+                <Button className="delete-review" onClick={onDeleteReviewClick} disabled={isLoading}>
+                    <Icon type={IconType.REMOVE}/>Delete review
+                </Button>
+            </ConditionShow>
+
+            <ConditionShow condition={!userAuthorized && !!onLoginClick && !showSubmenu}>
+                <Button className="login" onClick={onLoginClick} styleType={ButtonType.PRIMARY} disabled={isLoading}>
+                    <Icon type={IconType.LOGIN}/>Log in
+                </Button>
+            </ConditionShow>
+
+            <ConditionShow condition={showSorting || showFilter}>
+                <Button className="apply-sorting-filter" onClick={onApplySortingFilter} styleType={ButtonType.PRIMARY}>
+                    <Icon type={IconType.CHECK}/>Apply
+                </Button>
+            </ConditionShow>
+
+            <ConditionShow condition={showShare && isClipboardAvailable}>
+                <Button className="copy-review-link"
+                        onClick={() => navigator?.clipboard?.writeText?.(ApplicationProperties.reviewWebLinkUrl + "/" + shareReviewId)}
+                        styleType={ButtonType.PRIMARY}>
+                    <Icon type={IconType.CLIPBOARD}/>Copy link
+                </Button>
+            </ConditionShow>
+
+            <ConditionShow condition={showConfirmReviewRemoving}>
+                <Button className="remove-review" onClick={removeUserReview} styleType={ButtonType.PRIMARY} disabled={isReviewRemoving} loading={isReviewRemoving}>
+                    <Icon type={IconType.CHECK}/>Remove
+                </Button>
+            </ConditionShow>
+
+            <ConditionShow condition={showSubmenu}>
+                <Button className="close-submenu" onClick={onSubmenuCloseClick} disabled={isReviewRemoving}><Icon type={IconType.CLOSE}/>
+                    {showConfirmReviewRemoving ? "Cancel" : "Close"}
+                </Button>
+            </ConditionShow>
+
+            <ConditionShow condition={!showSubmenu}>
+                <div className="additional-controls">
+                    <Button onClick={onOpenFilterClick} styleType={ButtonType.LITE} disabled={isLoading}>
+                        <Icon type={IconType.SETTINGS}/>
                     </Button>
-                </ConditionShow>
-
-                <ConditionShow condition={userAuthorized && hasUserReview && !!onEditReviewClick && !showSubmenu}>
-                    <Button className="edit-review" onClick={onEditReviewClick} disabled={isReviewRemoving || isLoading} styleType={ButtonType.PRIMARY}>
-                        <Icon type={IconType.EDIT}/> Edit review
+                    <Button onClick={onOpenSortingClick} styleType={ButtonType.LITE} disabled={isLoading}>
+                        <Icon type={IconType.SORTING}/>
                     </Button>
-                </ConditionShow>
 
-                <ConditionShow condition={userAuthorized && hasUserReview && !!onDeleteReviewClick && !showSubmenu}>
-                    <Button className="delete-review" onClick={onDeleteReviewClick} disabled={isReviewRemoving || isLoading} loading={isReviewRemoving}>
-                        <Icon type={IconType.REMOVE}/>Delete review
-                    </Button>
-                </ConditionShow>
-
-                <ConditionShow condition={!userAuthorized && !!onLoginClick && !showSubmenu}>
-                    <Button className="login" onClick={onLoginClick} styleType={ButtonType.PRIMARY} disabled={isLoading}>
-                        <Icon type={IconType.LOGIN}/>Log in
-                    </Button>
-                </ConditionShow>
-
-                <ConditionShow condition={showSorting || showFilter}>
-                    <Button className="apply-sorting-filter" onClick={onApplySortingFilter} styleType={ButtonType.PRIMARY}>
-                        <Icon type={IconType.CHECK}/>Apply
-                    </Button>
-                </ConditionShow>
-
-                <ConditionShow condition={showShare && isClipboardAvailable}>
-                    <Button className="copy-review-link"
-                            onClick={() => navigator?.clipboard?.writeText?.(ApplicationProperties.reviewWebLinkUrl + "/" + shareReviewId)}
-                            styleType={ButtonType.PRIMARY}>
-                        <Icon type={IconType.CLIPBOARD}/>Copy link
-                    </Button>
-                </ConditionShow>
-
-                <ConditionShow condition={showSubmenu}>
-                    <Button className="close-submenu" onClick={onSubmenuCloseClick}><Icon type={IconType.CLOSE}/>Close</Button>
-                </ConditionShow>
-
-                <ConditionShow condition={!showSubmenu}>
-                    <div className="additional-controls">
-                        <Button onClick={onOpenFilterClick} styleType={ButtonType.LITE} disabled={isLoading}><Icon type={IconType.SETTINGS}/></Button>
-                        <Button onClick={onOpenSortingClick} styleType={ButtonType.LITE} disabled={isLoading}><Icon type={IconType.SORTING}/></Button>
-
-                        <ConditionShow condition={userAuthorized && !!onLogOutClick}>
-                            <Button className="logout" styleType={ButtonType.LITE} onClick={onLogOutClick}>
-                                <Icon type={IconType.LOGOUT}/>
-                            </Button>
-                        </ConditionShow>
-                    </div>
-                </ConditionShow>
-            </>
+                    <ConditionShow condition={userAuthorized && !!onLogOutClick}>
+                        <Button className="logout" styleType={ButtonType.LITE} onClick={onLogOutClick}>
+                            <Icon type={IconType.LOGOUT}/>
+                        </Button>
+                    </ConditionShow>
+                </div>
+            </ConditionShow>
         </AppFooter>
     );
 }
