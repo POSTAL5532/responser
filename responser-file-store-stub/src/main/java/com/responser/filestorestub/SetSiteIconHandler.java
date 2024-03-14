@@ -8,18 +8,17 @@ import ratpack.core.handling.Context;
 import ratpack.core.handling.Handler;
 import ratpack.exec.Promise;
 
-public class SetUserAvatarHandler implements Handler {
+public class SetSiteIconHandler implements Handler {
 
     @Override
     public void handle(Context context) {
         Promise<Form> form = context.parse(Form.class);
 
         form.then(f -> {
-
-            UploadedFile newAvatar = f.file("newAvatar");
+            UploadedFile newAvatar = f.file("newSiteIcon");
             String fileName = newAvatar.getFileName();
 
-            File newFile = new File(String.format("%s\\%s", Main.APP_PROPERTIES.getUsersAvatarsPath(), fileName));
+            File newFile = new File(String.format("%s\\%s", Main.APP_PROPERTIES.getSitesIconsPath(), fileName));
             FileUtils.writeByteArrayToFile(newFile, newAvatar.getBytes());
 
             context.getResponse().status(200).send();

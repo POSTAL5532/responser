@@ -1,17 +1,17 @@
 package com.responser.backend.service.fileResource;
 
+import java.util.UUID;
+
 public enum FileResourceType {
 
-    USER_AVTAR("user_avatar"),
-    REVIEW_META_IMAGE("review_meta_image");
+    USER_AVATAR,
+    SITE_ICON;
 
-    private final String value;
-
-    FileResourceType(String value) {
-        this.value = value;
+    public static String generateUserAvatarFileName(String userId, String fileType) {
+        return USER_AVATAR.name().toLowerCase() + "_" + userId + "_" + UUID.randomUUID() + '.' + fileType;
     }
 
-    public String getValue() {
-        return value;
+    public static String generateSiteIconFileName(String fileType) {
+        return SITE_ICON.name().toLowerCase() + "_" + UUID.randomUUID() + '.' + fileType;
     }
 }

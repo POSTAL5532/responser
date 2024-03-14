@@ -10,12 +10,12 @@ import com.responser.backend.repository.UserRepository;
 import com.responser.backend.service.email.EmailService;
 import com.responser.backend.service.fileResource.FileResourceService;
 import com.responser.backend.service.fileResource.FileResourceType;
+import com.responser.backend.utils.TikaWrapper;
 import com.responser.backend.utils.ValidationUtils;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.UUID;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -165,15 +165,15 @@ public class UserService {
         User user = getUser(userId);
 
         String oldAvatarFileName = user.getAvatarFileName();
-        String newAvatarFileName = FileResourceType.USER_AVTAR.getValue() + "_" + user.getId() + "_" + UUID.randomUUID() + ".jpeg";
+        String newAvatarFileName = FileResourceType.generateUserAvatarFileName(user.getId(), new TikaWrapper().detect(avatar));
 
-        fileResourceService.uploadFile(avatar, newAvatarFileName);
+        fileResourceService.uploadUserAvatar(avatar, newAvatarFileName);
 
         user.setAvatarFileName(newAvatarFileName);
         updateUser(user);
 
         if (!applicationProperties.getDefaultUserAvatarFileName().equals(oldAvatarFileName)) {
-            fileResourceService.removeFile(oldAvatarFileName);
+            fileResourceService.removeUserAvatar(oldAvatarFileName);
         }
 
         return newAvatarFileName;
@@ -190,7 +190,7 @@ public class UserService {
         updateUser(user);
 
         if (!applicationProperties.getDefaultUserAvatarFileName().equals(oldAvatarFileName)) {
-            fileResourceService.removeFile(oldAvatarFileName);
+            fileResourceService.removeUserAvatar(oldAvatarFileName);
         }
 
         return newAvatarFileName;

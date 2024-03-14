@@ -7,7 +7,7 @@ import ratpack.core.handling.Handler;
 public class RemoveUserAvatarHandler implements Handler {
 
     @Override
-    public void handle(Context context) throws Exception {
+    public void handle(Context context) {
         String fileName = context.getPathTokens().get("fileName");
 
         if (fileName == null) {

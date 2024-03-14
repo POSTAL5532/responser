@@ -9,7 +9,7 @@ import ratpack.core.handling.Handler;
 public class GetSiteIconHandler implements Handler {
 
     @Override
-    public void handle(Context ctx) throws Exception {
+    public void handle(Context ctx) {
         String fileName = ctx.getPathTokens().get("fileName");
 
         if (fileName == null) {

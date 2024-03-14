@@ -16,11 +16,13 @@ public class Main {
         RatpackServer.start(server -> server
             .handlers(chain -> chain
                 .get(new HelloWorldHandler())
+
                 .get("user-avatar/:fileName", new GetUserAvatarHandler())
                 .post("user-avatar", new SetUserAvatarHandler())
                 .delete("delete-user-avatar/:fileName", new RemoveUserAvatarHandler())
 
                 .get("site-icon/:fileName", new GetSiteIconHandler())
+                .post("site-icon", new SetSiteIconHandler())
             )
         );
     }

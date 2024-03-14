@@ -63,8 +63,6 @@ export class ReviewsPageStore {
 
     reviewIdForShare: string;
 
-    reviewIdForRemove: string;
-
     constructor() {
         makeAutoObservable(this);
     }
@@ -150,6 +148,14 @@ export class ReviewsPageStore {
         this.reviewsCriteria.maxRating = this.editableFilterCriteria?.maxRating || this.reviewsCriteria.maxRating;
     }
 
+    fetchSiteFavicon = async (urlString: string): Promise<Blob> => {
+        const url = new URL(urlString);
+        const fetchUrl = `https://t2.gstatic.com/faviconV2?client=SOCIAL&type=FAVICON&fallback_opts=TYPE,SIZE,URL&url=${url.origin}&size=64`;
+        const response = await fetch(fetchUrl);
+
+        return await response.blob();
+    }
+
     initSite = async () => {
         const {url} = this.currentPageInfo;
 
@@ -164,7 +170,15 @@ export class ReviewsPageStore {
             if (error instanceof ApiError && error.errorType === ApiErrorType.ENTITY_NOT_FOUND) {
                 this.logger.debug("Init site error is 'ENTITY_NOT_FOUND' type - create new site.");
                 const newWebResource = new NewWebResource(url, ResourceType.SITE);
-                this.site = await this.webResourceService.create(newWebResource);
+
+                let siteIconBlob: Blob = null;
+                try {
+                    siteIconBlob = await this.fetchSiteFavicon(url);
+                } catch (e) {
+                    this.logger.warning("Can't to fetch icon for site " + url);
+                }
+
+                this.site = await this.webResourceService.create(newWebResource, siteIconBlob);
             } else {
                 this.logger.error("Init site error is unknown: ", error);
                 throw error;

@@ -22,8 +22,12 @@ export class WebResourceService {
         return WebResource.deserialize(data);
     }
 
-    public create = async (newWebResource: NewWebResource): Promise<WebResource> => {
-        const createdPage = await this.client.executePostRequest(BASE_WEB_RESOURCE_URL, newWebResource);
+    public create = async (newWebResource: NewWebResource, siteIcon: Blob = null): Promise<WebResource> => {
+        const formData = new FormData();
+        formData.append("newWebResource", new Blob([JSON.stringify(newWebResource)], {type: "application/json"}));
+        formData.append("siteIcon", siteIcon);
+
+        const createdPage = await this.client.executePostRequest(BASE_WEB_RESOURCE_URL, formData);
         return WebResource.deserialize(createdPage);
     }
 }

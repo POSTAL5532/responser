@@ -15,10 +15,15 @@ import org.springframework.web.client.RestTemplate;
 @Service
 public class StubFileResourceServiceImpl implements FileResourceService {
 
+    private static final String RESOURCE_SERVER_URL = "http://localhost:5050";
+
     private final RestTemplate restTemplate = new RestTemplate();
 
-    @Override
-    public void uploadFile(byte[] file, String fileName) {
+    private static String getFullUrl(String path) {
+        return RESOURCE_SERVER_URL + path;
+    }
+
+    public void uploadFile(String url, String parameterName, byte[] file, String fileName) {
         MultiValueMap<String, Object> data = new LinkedMultiValueMap<>();
         ByteArrayResource resource = new ByteArrayResource(file) {
             @Override
@@ -27,18 +32,31 @@ public class StubFileResourceServiceImpl implements FileResourceService {
             }
         };
 
-        data.add("newAvatar", resource);
+        data.add(parameterName, resource);
         HttpHeaders requestHeaders = new HttpHeaders();
         requestHeaders.setContentType(MediaType.MULTIPART_FORM_DATA);
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(data, requestHeaders);
-        restTemplate.exchange("http://localhost:5050/user-avatar", HttpMethod.POST, requestEntity, Void.class);
+        restTemplate.exchange(url, HttpMethod.POST, requestEntity, Void.class);
+    }
+
+    public void removeFile(String url, String fileName) {
+        Map<String, String> params = new HashMap<>();
+        params.put("fileName", fileName);
+        restTemplate.delete(url + "/{fileName}", params);
     }
 
     @Override
-    public boolean removeFile(String fileName) {
-        Map<String, String> params = new HashMap<>();
-        params.put("fileName", fileName);
-        restTemplate.delete("http://localhost:5050/delete-user-avatar/{fileName}", params);
-        return true;
+    public void uploadUserAvatar(byte[] file, String fileName) {
+        uploadFile(getFullUrl("/user-avatar"), "newAvatar", file, fileName);
+    }
+
+    @Override
+    public void removeUserAvatar(String fileName) {
+        removeFile(getFullUrl("/delete-user-avatar"), fileName);
+    }
+
+    @Override
+    public void uploadSiteIcon(byte[] file, String fileName) {
+        uploadFile(getFullUrl("/site-icon"), "newSiteIcon", file, fileName);
     }
 }
