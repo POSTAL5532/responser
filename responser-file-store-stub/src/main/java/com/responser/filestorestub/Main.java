@@ -13,6 +13,10 @@ public class Main {
     public static ApplicationProperties APP_PROPERTIES;
 
     public static void main(String[] args) throws Exception {
+        if (args.length == 0) {
+            throw new IllegalArgumentException("You must specify properties file path in arguments.");
+        }
+
         System.out.println("Run Reviewly STUB File storage with properties in: " + args[0] + "\n");
 
         APP_PROPERTIES = readProperties(args[0]);
