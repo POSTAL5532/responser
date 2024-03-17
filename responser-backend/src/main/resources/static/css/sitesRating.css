@@ -260,9 +260,6 @@
 .page.site-reviews .page-content .section .pagination .button:hover {
   background-color: rgba(159, 143, 135, 0.2);
 }
-.page.site-reviews .page-content .section .pagination .button.disabled {
-  pointer-events: none;
-}
 .page.site-reviews .page-content .section .pagination .button-container {
   display: flex;
   flex: 1;

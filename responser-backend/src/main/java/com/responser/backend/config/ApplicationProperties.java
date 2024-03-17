@@ -81,6 +81,9 @@ public class ApplicationProperties {
     @NotBlank
     private String defaultUserAvatarFileName;
 
+    @NotBlank
+    private String defaultSiteIconFileName;
+
     private List<String> allowedOrigins;
 
     public String getLoginUrl() throws URISyntaxException {

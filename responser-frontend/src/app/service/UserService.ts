@@ -57,8 +57,8 @@ export class UserService {
         return await this.client.executePostRequest(`${BASE_USER_REQUEST}/change-avatar`, formData)
     }
 
-    removeAvatar = async (): Promise<string> => {
+    removeAvatar = async (): Promise<void> => {
         this.logger.debug("Remove user avatar.");
-        return await this.client.executeDeleteRequest(`${BASE_USER_REQUEST}/remove-avatar`)
+        await this.client.executeDeleteRequest(`${BASE_USER_REQUEST}/remove-avatar`)
     }
 }

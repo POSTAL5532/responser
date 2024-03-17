@@ -1,7 +1,9 @@
 package com.responser.backend.service.fileResource;
 
+import com.responser.backend.config.ApplicationProperties;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.RequiredArgsConstructor;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -13,15 +15,12 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
 
 @Service
+@RequiredArgsConstructor
 public class StubFileResourceServiceImpl implements FileResourceService {
-
-    private static final String RESOURCE_SERVER_URL = "http://localhost:5050";
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    private static String getFullUrl(String path) {
-        return RESOURCE_SERVER_URL + path;
-    }
+    private final ApplicationProperties applicationProperties;
 
     public void uploadFile(String url, String parameterName, byte[] file, String fileName) {
         MultiValueMap<String, Object> data = new LinkedMultiValueMap<>();
@@ -47,16 +46,16 @@ public class StubFileResourceServiceImpl implements FileResourceService {
 
     @Override
     public void uploadUserAvatar(byte[] file, String fileName) {
-        uploadFile(getFullUrl("/user-avatar"), "newAvatar", file, fileName);
+        uploadFile(applicationProperties.getFileStorageUrlUsersAvatars(), "newAvatar", file, fileName);
     }
 
     @Override
     public void removeUserAvatar(String fileName) {
-        removeFile(getFullUrl("/delete-user-avatar"), fileName);
+        removeFile(applicationProperties.getFileStorageUrl() + "/delete-user-avatar", fileName);
     }
 
     @Override
     public void uploadSiteIcon(byte[] file, String fileName) {
-        uploadFile(getFullUrl("/site-icon"), "newSiteIcon", file, fileName);
+        uploadFile(applicationProperties.getFileStorageUrlSitesIcons(), "newSiteIcon", file, fileName);
     }
 }

@@ -62,6 +62,14 @@ class ApplicationProperties {
         return process.env.SITES_ICONS_URL;
     }
 
+    get defaultUserAvatarFileName(): string {
+        return process.env.DEFAULT_USER_AVATAR_FILE_NAME;
+    }
+
+    get defaultSiteIconFileName(): string {
+        return process.env.DEFAULT_SITE_ICON_FILE_NAME;
+    }
+
     get logLevel(): LogLevel {
         return LogLevel[process.env.LOG_LEVEL as keyof typeof LogLevel];
     }

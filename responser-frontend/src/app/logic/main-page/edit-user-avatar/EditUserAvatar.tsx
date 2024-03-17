@@ -13,8 +13,6 @@ import {getUserAvatarUrl} from "../../../utils/ResourcesUtils";
 import {Icon, IconType} from "../../../components/icon/Icon";
 import "./EditUserAvatar.less";
 
-const DEFAULT_USER_AVATAR_FILE_NAME = "default_avatar.png";
-
 type EditUserAvatarProps = {
     show: boolean;
     onClose: () => void;
@@ -38,9 +36,9 @@ const EditUserAvatar: React.FC<EditUserAvatarProps> = (props: EditUserAvatarProp
     const onAvatarSave = (dataUrl: string, blob: Blob) => {
         saveUserAvatar(dataUrl, blob)
         .then(() => {
-            refreshCurrentUser();
+            refreshCurrentUser().then(() => setShowUserAvatar(true));
             setUserRawAvatar(null);
-            setShowUserAvatar(true);
+
         });
     }
 
@@ -81,7 +79,7 @@ const EditUserAvatar: React.FC<EditUserAvatarProps> = (props: EditUserAvatarProp
                             </Button>
                             <Button
                                 loading={isDataSubmitting}
-                                disabled={isDataSubmitting || currentUser?.avatarFileName === DEFAULT_USER_AVATAR_FILE_NAME}
+                                disabled={isDataSubmitting || !currentUser?.avatarFileName}
                                 onClick={onRemoveAvatar}>
                                 <Icon type={IconType.REMOVE}/> Delete picture
                             </Button>

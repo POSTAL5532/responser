@@ -24,6 +24,10 @@
 .button:hover {
   background-color: rgba(159, 143, 135, 0.08);
 }
+.button.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
 .button .icon {
   width: 12px;
   height: 12px;

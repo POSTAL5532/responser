@@ -69,13 +69,17 @@ public class WebResourceService {
     }
 
     public WebResource createPageWebResource(WebResource newWebResource) {
-        WebResource parent = newWebResource.getParent();
+        String parentId = newWebResource.getParentId();
 
-        if (ObjectUtils.isEmpty(parent)) {
-            throw new IllegalArgumentException("Page can't be created without parent SITE.");
+        if (StringUtils.isBlank(parentId)) {
+            throw new IllegalArgumentException("Page can't be created without SITE parent.");
         }
 
-        WebResource parentSiteResource = getById(parent.getId());
+        if (newWebResource.getResourceType() != ResourceType.PAGE) {
+            throw new IllegalArgumentException("Page web resource must have a PAGE resource type.");
+        }
+
+        WebResource parentSiteResource = getById(parentId);
         if (parentSiteResource.getResourceType() != ResourceType.SITE) {
             throw new IllegalArgumentException("Parent must be a SITE type.");
         }

@@ -6,7 +6,7 @@
     <div class="web-resource-data" th:if="${needWebResourceDataBlock}">
         <div class="web-resource-name-container">
             <img class="resource-icon"
-                 th:src="${@applicationProperties.fileStorageUrlSitesIcons + '/' + (rootWebResource.iconFileName != null ? rootWebResource.iconFileName : 'default_site_icon.png')}"
+                 th:src="${@applicationProperties.fileStorageUrlSitesIcons + '/' + (rootWebResource.iconFileName != null ? rootWebResource.iconFileName : @applicationProperties.defaultSiteIconFileName)}"
                  th:alt="${T(com.responser.backend.utils.UrlUtils).getHost(rootWebResource.url)}">
 
             <h2 class="resource-name" th:text="${T(com.responser.backend.utils.UrlUtils).getHost(rootWebResource.url)}">! ERROR !</h2>
@@ -20,7 +20,7 @@
         <div class="card-header">
             <div class="user-info-container">
                 <img class="user-avatar"
-                     th:src="${@applicationProperties.fileStorageUrlUsersAvatars + '/' + (review.user.avatarFileName != null ? review.user.avatarFileName : 'default_avatar.png')}"
+                     th:src="${@applicationProperties.fileStorageUrlUsersAvatars + '/' + (review.user.avatarFileName != null ? review.user.avatarFileName : @applicationProperties.defaultUserAvatarFileName)}"
                      th:alt="${review.user.fullName}">
                 <div class="name-date">
                     <span class="user-name" th:text="${review.user.fullName}">! ERROR !</span>

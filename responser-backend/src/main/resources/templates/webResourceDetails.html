@@ -19,7 +19,7 @@
             <h1 class="section-header">
                 <div class="site-logo-container">
                     <img class="site-logo"
-                         th:src="${@applicationProperties.fileStorageUrlSitesIcons + '/' + (webResource.iconFileName != null ? webResource.iconFileName : 'default_site_icon.png')}"
+                         th:src="${@applicationProperties.fileStorageUrlSitesIcons + '/' + (webResource.iconFileName != null ? webResource.iconFileName : @applicationProperties.defaultSiteIconFileName)}"
                          th:alt="${T(com.responser.backend.utils.UrlUtils).getHost(webResource.url)}">
                 </div>
                 <span class="site-name" th:text="${resourceBasePath}">! ERROR !</span>

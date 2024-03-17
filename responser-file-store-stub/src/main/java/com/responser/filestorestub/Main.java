@@ -1,5 +1,8 @@
 package com.responser.filestorestub;
 
+import java.io.BufferedInputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -10,7 +13,9 @@ public class Main {
     public static ApplicationProperties APP_PROPERTIES;
 
     public static void main(String[] args) throws Exception {
-        APP_PROPERTIES = readProperties();
+        System.out.println("Run Reviewly STUB File storage with properties in: " + args[0] + "\n");
+
+        APP_PROPERTIES = readProperties(args[0]);
         printProperties(APP_PROPERTIES);
 
         RatpackServer.start(server -> server
@@ -31,19 +36,13 @@ public class Main {
         properties.forEach((key, value) -> System.out.println(key + "=" + value));
     }
 
-    private static ApplicationProperties readProperties() throws IOException {
-        InputStream inputStream = null;
+    private static ApplicationProperties readProperties(String propertiesFilePath) throws IOException {
         ApplicationProperties properties;
 
-        try {
+        try (FileInputStream fis = new FileInputStream(propertiesFilePath);
+            BufferedInputStream bis = new BufferedInputStream(fis)) {
             properties = new ApplicationProperties();
-            ClassLoader loader = Thread.currentThread().getContextClassLoader();
-            inputStream = loader.getResourceAsStream("responser-file-store-stub.properties");
-            properties.load(inputStream);
-        } finally {
-            if (inputStream != null) {
-                inputStream.close();
-            }
+            properties.load(bis);
         }
 
         return properties;

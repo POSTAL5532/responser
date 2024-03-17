@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -64,7 +65,6 @@ public class UserService {
 
         newUser.setEmailConfirmed(false);
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
-        newUser.setAvatarFileName("default_avatar.png");
 
         userRepository.save(newUser);
         EmailConfirmation emailConfirmation = emailConfirmationService.createEmailConfirmation(newUser.getId());
@@ -172,7 +172,7 @@ public class UserService {
         user.setAvatarFileName(newAvatarFileName);
         updateUser(user);
 
-        if (!applicationProperties.getDefaultUserAvatarFileName().equals(oldAvatarFileName)) {
+        if (StringUtils.isNotBlank(oldAvatarFileName) && !applicationProperties.getDefaultUserAvatarFileName().equals(oldAvatarFileName)) {
             fileResourceService.removeUserAvatar(oldAvatarFileName);
         }
 
@@ -186,10 +186,10 @@ public class UserService {
         String oldAvatarFileName = user.getAvatarFileName();
         String newAvatarFileName = applicationProperties.getDefaultUserAvatarFileName();
 
-        user.setAvatarFileName(newAvatarFileName);
+        user.setAvatarFileName(null);
         updateUser(user);
 
-        if (!applicationProperties.getDefaultUserAvatarFileName().equals(oldAvatarFileName)) {
+        if (StringUtils.isNotBlank(oldAvatarFileName) && !applicationProperties.getDefaultUserAvatarFileName().equals(oldAvatarFileName)) {
             fileResourceService.removeUserAvatar(oldAvatarFileName);
         }
 

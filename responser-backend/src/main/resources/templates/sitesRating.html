@@ -129,7 +129,7 @@
                                 </div>
 
                                 <img class="resource-icon"
-                                     th:src="${@applicationProperties.fileStorageUrlSitesIcons + '/' + (site.iconFileName != null ? site.iconFileName : 'default_site_icon.png')}"
+                                     th:src="${@applicationProperties.fileStorageUrlSitesIcons + '/' + (site.iconFileName != null ? site.iconFileName : @applicationProperties.defaultSiteIconFileName)}"
                                      th:alt="${T(com.responser.backend.utils.UrlUtils).getHost(site.url)}">
                                 <h2 class="resource-name" th:text="${T(com.responser.backend.utils.UrlUtils).getHost(site.url)}">! ERROR !</h2>
                             </div>

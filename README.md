@@ -22,7 +22,7 @@
 * Setup `<responser-file-store_module>/src/main/resources/responser-file-store-stub.properties` file 
   from `<responser-file-store_module>/src/main/resources/responser-file-store-stub.properties.template` 
   and specify paths to files from previous step
-* `./gradlew :responser-file-store:run` - run stub
+* `./gradlew :responser-file-store:run --args="{PATH_TO_PROPERTIES_FILE}"` - run stub
 
 ## Build extension
 * `npm run build:<mode>`
