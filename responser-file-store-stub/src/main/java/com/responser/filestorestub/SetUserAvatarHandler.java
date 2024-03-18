@@ -19,7 +19,7 @@ public class SetUserAvatarHandler implements Handler {
             UploadedFile newAvatar = f.file("newAvatar");
             String fileName = newAvatar.getFileName();
 
-            File newFile = new File(String.format("%s\\%s", Main.APP_PROPERTIES.getUsersAvatarsPath(), fileName));
+            File newFile = new File(String.format("%s/%s", Main.APP_PROPERTIES.getUsersAvatarsPath(), fileName));
             FileUtils.writeByteArrayToFile(newFile, newAvatar.getBytes());
 
             context.getResponse().status(200).send();

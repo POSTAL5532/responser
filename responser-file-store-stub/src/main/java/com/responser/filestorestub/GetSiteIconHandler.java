@@ -16,6 +16,6 @@ public class GetSiteIconHandler implements Handler {
             throw new NullPointerException("fileName parameter is empty!");
         }
 
-        ctx.getResponse().sendFile(Path.of(APP_PROPERTIES.getSitesIconsPath() + "\\" + fileName));
+        ctx.getResponse().sendFile(Path.of(APP_PROPERTIES.getSitesIconsPath() + "/" + fileName));
     }
 }

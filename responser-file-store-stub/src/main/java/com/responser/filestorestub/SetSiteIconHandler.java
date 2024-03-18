@@ -18,7 +18,7 @@ public class SetSiteIconHandler implements Handler {
             UploadedFile newAvatar = f.file("newSiteIcon");
             String fileName = newAvatar.getFileName();
 
-            File newFile = new File(String.format("%s\\%s", Main.APP_PROPERTIES.getSitesIconsPath(), fileName));
+            File newFile = new File(String.format("%s/%s", Main.APP_PROPERTIES.getSitesIconsPath(), fileName));
             FileUtils.writeByteArrayToFile(newFile, newAvatar.getBytes());
 
             context.getResponse().status(200).send();
