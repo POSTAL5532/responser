@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layouts/pageLayout(pageClass='review')}"
+      lang="en">
+<head>
+    <title>Reviewly - Review</title>
+
+    <link th:href="@{/css/reviewPage.css}" rel="stylesheet"/>
+
+    <meta property="og:url" th:content="${facebookMetaTags.url}"/>
+    <meta property="og:type" th:content="${facebookMetaTags.type}"/>
+    <meta property="og:title" th:content="${facebookMetaTags.title}"/>
+    <meta property="og:description" th:content="${facebookMetaTags.description}"/>
+    <meta property="og:image" th:content="${facebookMetaTags.imageUrl}"/>
+    <meta property="og:image:width" th:content="${facebookMetaTags.imageWidth}"/>
+    <meta property="og:image:height" th:content="${facebookMetaTags.imageHeight}"/>
+
+    <meta property="twitter:title" th:content="${twitterMetaTags.title}">
+    <meta property="twitter:description" th:content="${twitterMetaTags.description}">
+    <meta property="twitter:image" th:content="${twitterMetaTags.imageUrl}">
+    <meta name="twitter:card" th:content="${twitterMetaTags.card}">
+</head>
+
+<body>
+<div class="page-content" layout:fragment="page-content">
+    <section class="section" th:with="rootWebResource=${review.webResource.parent == null ? review.webResource : review.webResource.parent}">
+        <h1 class="section-header">
+            <div class="site-logo-container">
+                <img class="site-logo"
+                     th:src="${@applicationProperties.fileStorageUrlSitesIcons + '/' + (rootWebResource.iconFileName != null ? rootWebResource.iconFileName : @applicationProperties.defaultSiteIconFileName)}"
+                     th:alt="${T(space.reviewly.backend.utils.UrlUtils).getHost(rootWebResource.url)}">
+            </div>
+            <span class="site-name" th:text="${T(space.reviewly.backend.utils.UrlUtils).getHost(rootWebResource.url)}">Google.com</span>
+            <div class="site-rating-container">
+                <span class="site-rating" th:text="${#numbers.formatDecimal(resourceRating, 1, 1, 'POINT')}">! ERROR !</span>
+            </div>
+        </h1>
+
+        <div class="reviews-container">
+            <div class="cards-container">
+                <th:block th:replace="~{components/review-card::review-card(review=${review}, needWebResourceDataBlock=true)}"/>
+            </div>
+        </div>
+    </section>
+
+    <th:block th:include="components/share-modal"/>
+</div>
+</body>
+</html>

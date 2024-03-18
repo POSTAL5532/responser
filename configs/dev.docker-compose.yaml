@@ -1,8 +1,8 @@
 version: '3'
 
 services:
-  responser-db:
-    container_name: responser-db
+  reviewly-db:
+    container_name: reviewly-db
     build: ./database
     ports:
       - "5432:5432"
@@ -12,8 +12,8 @@ services:
       resources:
         limits:
           memory: 55M
-  responser-auth:
-    container_name: responser-auth
+  reviewly-auth:
+    container_name: reviewly-auth
     build: ./auth-server
     ports:
       - "8081:8081"
@@ -23,8 +23,8 @@ services:
       resources:
         limits:
           memory: 250M
-  responser-backend:
-    container_name: responser-backend
+  reviewly-backend:
+    container_name: reviewly-backend
     build: ./backend
     ports:
       - "8080:8080"

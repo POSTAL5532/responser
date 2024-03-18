@@ -1,5 +1,5 @@
 FROM postgres:14.1
-ENV POSTGRES_DB=responser
+ENV POSTGRES_DB=reviewly
 ENV POSTGRES_USER=postgres
 ENV POSTGRES_PASSWORD=root
 COPY . /docker-entrypoint-initdb.d/

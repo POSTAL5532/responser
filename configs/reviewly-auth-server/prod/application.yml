@@ -1,0 +1,47 @@
+server:
+  port: 8081
+  servlet:
+    context-path: /auth
+  error:
+    include-binding-errors: always
+    include-message: always
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+    enabled-by-default: 'true'
+spring:
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    database: POSTGRESQL
+    hibernate:
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+      ddl-auto: none
+    show-sql: 'true'
+    open-in-view: false
+  database:
+    driverClassName: org.postgresql.Driver
+  datasource:
+    url: jdbc:postgresql://localhost:5432/reviewly
+    username: postgres
+    password: root
+    testWhileIdle: 'true'
+    validationQuery: SELECT 1
+  sql:
+    init:
+      platform: postgres
+reviewly:
+  selfHost: http://reviewly.space
+  frontendAppUrl: ${reviewly.selfHost}/app
+  registrationPageUrl: ${reviewly.frontendAppUrl}/sign-up
+  forgotPasswordPageUrl: ${reviewly.frontendAppUrl}/forgot-password
+  clientCredentials:
+    -
+      clientId: reviewly-web-client
+      clientSecret: "{noop}reviewly-web-client-secret"
+      redirectUri: ${reviewly.frontendAppUrl}/auth-code
+  allowedOrigins:
+    - ${reviewly.selfHost}

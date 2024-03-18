@@ -7,7 +7,7 @@ build/
 out/
 
 manifest-*.json
-responser-file-store-stub.properties
+reviewly-file-store-stub.properties
 
 *.env
 *.yml

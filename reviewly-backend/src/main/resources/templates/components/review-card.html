@@ -1,0 +1,110 @@
+<div class="review-card"
+     th:fragment="review-card(review)"
+     th:classappend="${class != null ? class : ''}"
+     th:with="rootWebResource=${review.webResource.parent == null ? review.webResource : review.webResource.parent}, needWebResourceDataBlock=${showWebResourceData != null ? showWebResourceData : false}">
+
+    <div class="web-resource-data" th:if="${needWebResourceDataBlock}">
+        <div class="web-resource-name-container">
+            <img class="resource-icon"
+                 th:src="${@applicationProperties.fileStorageUrlSitesIcons + '/' + (rootWebResource.iconFileName != null ? rootWebResource.iconFileName : @applicationProperties.defaultSiteIconFileName)}"
+                 th:alt="${T(space.reviewly.backend.utils.UrlUtils).getHost(rootWebResource.url)}">
+
+            <h2 class="resource-name" th:text="${T(space.reviewly.backend.utils.UrlUtils).getHost(rootWebResource.url)}">! ERROR !</h2>
+        </div>
+        <a class="link site-rating-link" th:href="${'/web-resources/' + rootWebResource.id}">
+            All reviews
+        </a>
+    </div>
+
+    <div class="card-body-container">
+        <div class="card-header">
+            <div class="user-info-container">
+                <img class="user-avatar"
+                     th:src="${@applicationProperties.fileStorageUrlUsersAvatars + '/' + (review.user.avatarFileName != null ? review.user.avatarFileName : @applicationProperties.defaultUserAvatarFileName)}"
+                     th:alt="${review.user.fullName}">
+                <div class="name-date">
+                    <span class="user-name" th:text="${review.user.fullName}">! ERROR !</span>
+                    <span class="review-date" th:text="${#temporals.format(review.creationDate, 'd MMM yyyy')}">! ERROR !</span>
+                </div>
+            </div>
+            <div class="resource-type" th:classappend="${review.webResource.resourceType.name == 'PAGE' ? 'page-type' : 'site-type'}">
+                <span class="value" th:text="${review.webResource.resourceType.name == 'PAGE' ? 'Page review' : 'Site review'}">! ERROR !</span>
+            </div>
+            <div class="rating">
+                <th:block th:each="i: ${#numbers.sequence(0, review.rating - 1)}">
+                    <svg class="icon star active" xmlns="http://www.w3.org/2000/svg" width="19.59384" height="18.755888" viewBox="0 0 19.59384 18.755888" fill="none" version="1.1"
+                         id="svg4">
+                        <path
+                            d="m 8.8456959,0.69144479 c 0.29907,-0.9219271 1.6033701,-0.921926 1.9023701,10e-7 l 1.6263,5.01348401 c 0.1338,0.41226 0.5178,0.69144 0.9512,0.69144 h 5.2663 c 0.9684,0 1.3714,1.23878 0.5885,1.80856 l -4.2634,3.1026802 c -0.3499,0.2546 -0.4963,0.7054 -0.3628,1.1171 l 1.6278,5.0181 c 0.2989,0.9216 -0.7562,1.6872 -1.5396,1.1171 l -4.257,-3.098 c -0.3508,-0.2553 -0.8261001,-0.2553 -1.1769001,0 l -4.25698,3.098 c -0.78339,0.5701 -1.83858,-0.1955 -1.53963,-1.1171 l 1.62779,-5.0181 c 0.13353,-0.4117 -0.01288,-0.8625 -0.36279,-1.1171 L 0.41349587,8.2049298 c -0.78294,-0.56978 -0.379901,-1.80856 0.58842003,-1.80856 h 5.26629 c 0.43341,0 0.81748,-0.27918 0.95121,-0.69144 z"
+                            fill="#d6de73" id="path2"/>
+                    </svg>
+                </th:block>
+                <th:block th:if="${5 - review.rating > 0}" th:each="i: ${#numbers.sequence(0, 5 - review.rating - 1)}">
+                    <svg class="icon star" xmlns="http://www.w3.org/2000/svg" width="19.59384" height="18.755888" viewBox="0 0 19.59384 18.755888" fill="none" version="1.1"
+                         id="svg4">
+                        <path
+                            d="m 8.8456959,0.69144479 c 0.29907,-0.9219271 1.6033701,-0.921926 1.9023701,10e-7 l 1.6263,5.01348401 c 0.1338,0.41226 0.5178,0.69144 0.9512,0.69144 h 5.2663 c 0.9684,0 1.3714,1.23878 0.5885,1.80856 l -4.2634,3.1026802 c -0.3499,0.2546 -0.4963,0.7054 -0.3628,1.1171 l 1.6278,5.0181 c 0.2989,0.9216 -0.7562,1.6872 -1.5396,1.1171 l -4.257,-3.098 c -0.3508,-0.2553 -0.8261001,-0.2553 -1.1769001,0 l -4.25698,3.098 c -0.78339,0.5701 -1.83858,-0.1955 -1.53963,-1.1171 l 1.62779,-5.0181 c 0.13353,-0.4117 -0.01288,-0.8625 -0.36279,-1.1171 L 0.41349587,8.2049298 c -0.78294,-0.56978 -0.379901,-1.80856 0.58842003,-1.80856 h 5.26629 c 0.43341,0 0.81748,-0.27918 0.95121,-0.69144 z"
+                            fill="#d6de73" id="path2"/>
+                    </svg>
+                </th:block>
+            </div>
+        </div>
+
+        <a class="link page-link" th:if="${review.webResource.resourceType.name == 'PAGE'}" th:href="${review.webResource.url}" target="_blank" th:text="${review.webResource.url}">
+            ! ERROR !
+        </a>
+
+        <p class="review-text" th:text="${review.text}">! ERROR !</p>
+
+        <div class="card-footer">
+            <button class="button show-more">Show more</button>
+            <div class="actions-container">
+                <div class="reaction likes">
+                    <svg class="icon circle-arrow" xmlns="http://www.w3.org/2000/svg" width="17.692301" height="17.69228" viewBox="0 0 17.692301 17.69228"
+                         fill="none" version="1.1" id="svg8">
+                        <path
+                            d="m 8.8462,17.69228 c 4.8855,0 8.8461,-3.9605 8.8461,-8.8461 C 17.6923,3.96056 13.7317,0 8.8462,0 3.96055,0 0,3.96056 0,8.84618 c 0,4.8856 3.96055,8.8461 8.8462,8.8461 z"
+                            fill="#6e6e70" fill-opacity="0.1" id="path2"/>
+                        <path d="M 12.4373,8.52708 8.8476,4.93739 5.25781,8.52708" stroke="#6e6e70" stroke-width="1.53846" stroke-linecap="round"
+                              stroke-linejoin="round" id="path4"/>
+                        <path d="M 8.8457,12.43548 V 5.25599" stroke="#6e6e70" stroke-width="1.53846" stroke-linecap="round" stroke-linejoin="round"
+                              id="path6"/>
+                    </svg>
+                    <span class="reactions-count" th:text="${review.reviewLikes.?[positive == true].size}">! ERROR !</span>
+                </div>
+                <div class="reaction dislikes">
+                    <svg class="icon circle-arrow" xmlns="http://www.w3.org/2000/svg" width="17.692301" height="17.69228" viewBox="0 0 17.692301 17.69228"
+                         fill="none" version="1.1" id="svg8">
+                        <path
+                            d="m 8.8462,17.69228 c 4.8855,0 8.8461,-3.9605 8.8461,-8.8461 C 17.6923,3.96056 13.7317,0 8.8462,0 3.96055,0 0,3.96056 0,8.84618 c 0,4.8856 3.96055,8.8461 8.8462,8.8461 z"
+                            fill="#6e6e70" fill-opacity="0.1" id="path2"/>
+                        <path d="m 5.26367,8.84568 3.58973,3.8889 3.5898,-3.8889" stroke="#6e6e70" stroke-width="1.53846" stroke-linecap="round"
+                              stroke-linejoin="round" id="path4"/>
+                        <path d="m 8.8457,5.25605 v 7.17953" stroke="#6e6e70" stroke-width="1.53846" stroke-linecap="round" stroke-linejoin="round" id="path6"/>
+                    </svg>
+                    <span class="reactions-count" th:text="${review.reviewLikes.?[positive == false].size}">! ERROR !</span>
+                </div>
+                <button class="button share-button"
+                        th:data-review-link="${@applicationProperties.selfHost + '/reviews/' + review.id}"
+                        th:onClick="openShareModal(this.getAttribute('data-review-link'))">
+
+                    <svg class="icon share" xmlns="http://www.w3.org/2000/svg" width="14.783246" height="14.783257" viewBox="0 0 14.783246 14.783257"
+                         fill="none"
+                         version="1.1" id="svg13">
+                        <g clip-path="url(#clip0_1337_10602)" id="g6" transform="translate(-0.60715397,-0.60971998)">
+                            <path d="M 14.6654,1.33472 7.33203,8.66805" stroke="#6e6e70" stroke-width="1.45" stroke-linecap="round" stroke-linejoin="round"
+                                  id="path2"/>
+                            <path d="M 14.6654,1.33472 9.9987,14.6681 7.33203,8.66805 l -6,-2.66667 z" stroke="#6e6e70" stroke-width="1.45"
+                                  stroke-linecap="round"
+                                  stroke-linejoin="round" id="path4"/>
+                        </g>
+                        <clipPath id="clip0_1337_10602">
+                            <rect width="16" height="16" fill="#ffffff" transform="translate(0,0.00170898)" id="rect8" x="0" y="0"/>
+                        </clipPath>
+                    </svg>
+
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

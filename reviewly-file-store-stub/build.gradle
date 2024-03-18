@@ -1,0 +1,26 @@
+buildscript {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+    dependencies {
+        classpath "io.ratpack:ratpack-gradle:2.0.0-rc-1"
+        classpath 'gradle.plugin.com.github.johnrengelman:shadow:7.1.2'
+    }
+}
+
+apply plugin: "io.ratpack.ratpack-java"
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: "idea"
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation ratpack.dependency("dropwizard-metrics")
+    runtimeOnly "org.slf4j:slf4j-simple:1.7.36"
+    implementation 'commons-io:commons-io:2.13.0'
+}
+
+mainClassName = "space.reviewly.filestorestub.Main"
