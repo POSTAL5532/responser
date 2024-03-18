@@ -46,6 +46,14 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
+tasks.named("bootJar") {
+    launchScript{
+        enabled = true
+    }
+    enabled = true
+    archiveFileName = "${archiveBaseName.get()}.${archiveExtension.get()}"
+}
+
 tasks.named('test') {
     useJUnitPlatform()
 }
