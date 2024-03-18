@@ -81,6 +81,7 @@ public class UserService {
         emailConfirmationService.deleteConfirmation(confirmationId);
     }
 
+    @Transactional
     public void resendConfirmationEmailForUser(String userId) {
         User user = getUser(userId);
         Optional<EmailConfirmation> emailConfirmationOptional = emailConfirmationService.findByUserId(userId);

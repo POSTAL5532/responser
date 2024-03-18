@@ -34,3 +34,39 @@
         }
     }
 }
+
+.user-registerd-modal {
+    .modal {
+        width: 360px;
+        //height: 250px;
+
+        .modal-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            padding: 30px;
+
+            .result-header, .result-text {
+                width: 300px;
+            }
+
+            .result-header {
+                margin: 0;
+                text-align: center;
+                .fontOutfitRegular(24px);
+                color: @black-alpha-60;
+            }
+
+            .result-text {
+                color: @black-alpha-60;
+                text-align: center;
+            }
+
+            .button {
+                width: 100%;
+            }
+        }
+    }
+}

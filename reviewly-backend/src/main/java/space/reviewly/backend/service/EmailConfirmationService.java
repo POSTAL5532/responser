@@ -27,7 +27,7 @@ public class EmailConfirmationService {
         );
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+    @Transactional
     public EmailConfirmation createEmailConfirmation(String userId) {
         EmailConfirmation newConfirmation = new EmailConfirmation();
         newConfirmation.setUserId(userId);
