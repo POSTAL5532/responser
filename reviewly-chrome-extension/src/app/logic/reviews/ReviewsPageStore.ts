@@ -287,6 +287,7 @@ export class ReviewsPageStore {
             () => this.loadingState.isReviewRemoving = false
         );
 
+        this.extensionService.updateRatingBadge();
         this.currentUserReview = null;
     }
 

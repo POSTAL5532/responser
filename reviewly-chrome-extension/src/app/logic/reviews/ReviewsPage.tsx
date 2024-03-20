@@ -98,10 +98,7 @@ const ReviewsPage: React.FC = () => {
     }
 
     const reviewsList = currentUserReview ? [currentUserReview, ...reviews] : reviews;
-    const setHeaderInLoadingState = isSiteLoading || isPageLoading ||
-        (reviewsResourceType === ResourceType.PAGE && !page) ||
-        (reviewsResourceType === ResourceType.SITE && !site) ||
-        (!page && !site);
+    const setHeaderInLoadingState = isSiteLoading || isPageLoading || !page || !site;
 
     const isCardsBlured = !!editableSortingCriteria || !!editableFilterCriteria || !!reviewsPageStore.reviewIdForShare || removeUserReviewConfirmation;
 

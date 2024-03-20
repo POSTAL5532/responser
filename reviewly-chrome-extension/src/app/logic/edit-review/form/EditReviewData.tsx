@@ -24,7 +24,13 @@ export const EditReviewData: React.FC<EditReviewDataProps> = (props: EditReviewD
     }
 
     const onTextChangeListener = (event: ChangeEvent<HTMLTextAreaElement>) => {
-        onTextChange(event.target.value);
+        let resultValue = event.target.value;
+
+        if (resultValue.length > REVIEW_TEXT_MAX_LENGTH) {
+            resultValue = resultValue.substring(0, REVIEW_TEXT_MAX_LENGTH);
+        }
+
+        onTextChange(resultValue);
     }
 
     return (

@@ -71,6 +71,8 @@ export class EditReviewPageStore {
     public saveReview = async () => {
         this.loadingState.isDataSubmitting = true;
 
+        this.reviewData.text = this.reviewData.text.trim();
+
         if (!this.isNewReview) {
             this.logger.debug("Save edited review");
             await this.reviewService.updateReview(this.reviewId, this.reviewData)
