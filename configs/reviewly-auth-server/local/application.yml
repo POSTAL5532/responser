@@ -7,6 +7,8 @@ server:
     include-message: always
 logging:
   level:
+    root: INFO
+    org.springframework.jdbc: DEBUG
     org.springframework.security: trace
 management:
   endpoints:
@@ -37,7 +39,7 @@ spring:
     init:
       platform: postgres
 reviewly:
-  selfHost: http://reviewly-local-dev
+  selfHost: http://local-dev-reviewly.space
   frontendAppUrl: ${reviewly.selfHost}/app
   registrationPageUrl: ${reviewly.frontendAppUrl}/sign-up
   forgotPasswordPageUrl: ${reviewly.frontendAppUrl}/forgot-password
@@ -45,6 +47,6 @@ reviewly:
     -
       clientId: reviewly-web-client
       clientSecret: "{noop}reviewly-web-client-secret"
-      redirectUri: ${reviewly.frontendAppUrl}/auth-code
+      redirectUri: http://local-dev-reviewly.space/auth-code
   allowedOrigins:
     - ${reviewly.selfHost}

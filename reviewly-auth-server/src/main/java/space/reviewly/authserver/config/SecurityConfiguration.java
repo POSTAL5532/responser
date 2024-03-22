@@ -1,5 +1,9 @@
 package space.reviewly.authserver.config;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
+import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
+import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
 import space.reviewly.authserver.controller.CommonController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -18,8 +22,8 @@ import org.springframework.security.web.SecurityFilterChain;
  */
 @RequiredArgsConstructor
 @EnableWebSecurity
-@Configuration
-public class WebSecurityConfig {
+@Configuration(proxyBeanMethods = false)
+public class SecurityConfiguration {
 
     private final CORSCustomizer corsCustomizer;
 
@@ -27,9 +31,15 @@ public class WebSecurityConfig {
 
     @Bean
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-        corsCustomizer.corsCustomizer(http);
+        //corsCustomizer.corsCustomizer(http);
 
         return http
+            .authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
+            .formLogin(withDefaults())
+            .logout(LogoutConfigurer::permitAll)
+            .build();
+
+        /*return http
             .csrf().disable()
             .formLogin()
             .loginPage(CommonController.LOGIN_URL).failureUrl(CommonController.LOGIN_URL + "?error=true")
@@ -37,15 +47,10 @@ public class WebSecurityConfig {
             .and().authorizeHttpRequests()
             .requestMatchers("/", CommonController.LOGIN_URL, CommonController.LOGOUT_URL).permitAll()
             .anyRequest().authenticated()
-            .and().build();
+            .and().build();*/
     }
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }
-
-    @Bean
+    /*@Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
         return (web) -> web.ignoring().requestMatchers(
             "/images/**",
@@ -53,6 +58,6 @@ public class WebSecurityConfig {
             "/css/**",
             "/font/**"
         );
-    }
+    }*/
 
 }

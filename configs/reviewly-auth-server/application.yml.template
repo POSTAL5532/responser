@@ -37,7 +37,7 @@ spring:
     init:
       platform: postgres
 reviewly:
-  selfHost: http://reviewly-local-dev
+  selfHost: http://local-dev-reviewly.space
   frontendAppUrl: ${reviewly.selfHost}/app
   registrationPageUrl: ${reviewly.frontendAppUrl}/sign-up
   forgotPasswordPageUrl: ${reviewly.frontendAppUrl}/forgot-password

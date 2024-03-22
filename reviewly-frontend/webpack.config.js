@@ -44,8 +44,8 @@ module.exports = (env, args) => {
             port: 3000,
             compress: true,
             hot: true,
-            host: "reviewly-local-dev",
-            allowedHosts: ["reviewly-local-dev"],
+            host: "local-dev-reviewly.space",
+            allowedHosts: ["local-dev-reviewly.space"],
             historyApiFallback: {
                 index: BASE_PATH
             },

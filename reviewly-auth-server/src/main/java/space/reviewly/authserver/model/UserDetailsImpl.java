@@ -1,13 +1,15 @@
 package space.reviewly.authserver.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import java.util.ArrayList;
+import java.util.List;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Collections;
 
 /**
  * User details
@@ -22,22 +24,29 @@ public class UserDetailsImpl implements UserDetails {
 
     private String userName;
 
-    @JsonIgnore
     private String email;
+
+    private final Collection<? extends GrantedAuthority> authorities;
 
     @JsonIgnore
     private String password;
 
     public UserDetailsImpl(User user) {
         this.id = user.getId();
-        this.userName = user.getUserName();
         this.email = user.getEmail();
+        this.userName = user.getUserName();
         this.password = user.getPassword();
+
+        this.authorities = getTestAuthorities();
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return Collections.emptyList();
+        /*List<GrantedAuthority> list = new ArrayList<>();
+        list.add(new SimpleGrantedAuthority("ROLE_FIRST"));
+        list.add(new SimpleGrantedAuthority("ROLE_SECOND"));*/
+
+        return authorities;
     }
 
     @Override
@@ -47,7 +56,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.id;
+        return this.userName;
     }
 
     @Override
@@ -68,5 +77,13 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    private static Collection<? extends GrantedAuthority> getTestAuthorities() {
+        List<GrantedAuthority> list = new ArrayList<>();
+        list.add(new SimpleGrantedAuthority("ROLE_TEST_1"));
+        list.add(new SimpleGrantedAuthority("ROLE_TEST_2"));
+
+        return list;
     }
 }
