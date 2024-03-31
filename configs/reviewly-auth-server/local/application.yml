@@ -47,6 +47,6 @@ reviewly:
     -
       clientId: reviewly-web-client
       clientSecret: "{noop}reviewly-web-client-secret"
-      redirectUri: http://local-dev-reviewly.space/auth-code
+      redirectUri: ${reviewly.frontendAppUrl}/auth-code
   allowedOrigins:
     - ${reviewly.selfHost}

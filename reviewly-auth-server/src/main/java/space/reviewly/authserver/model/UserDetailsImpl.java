@@ -24,8 +24,6 @@ public class UserDetailsImpl implements UserDetails {
 
     private String userName;
 
-    private String email;
-
     private final Collection<? extends GrantedAuthority> authorities;
 
     @JsonIgnore
@@ -33,8 +31,7 @@ public class UserDetailsImpl implements UserDetails {
 
     public UserDetailsImpl(User user) {
         this.id = user.getId();
-        this.email = user.getEmail();
-        this.userName = user.getUserName();
+        this.userName = user.getEmail();
         this.password = user.getPassword();
 
         this.authorities = getTestAuthorities();

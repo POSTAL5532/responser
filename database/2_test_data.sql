@@ -1,25 +1,25 @@
-INSERT INTO users (id, user_name, email, password, full_name, avatar_file_name, email_confirmed, creation_date)
+INSERT INTO users (id, email, password, full_name, avatar_file_name, email_confirmed, creation_date)
 VALUES
-    ('00000000-0000-0000-user-000000000001', 'user1', 'user1@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Igor Shcherbachenya', 'user_avatar_00000000-0000-0000-user-000000000001_c6f8d918-c445-4b85-85c6-30652bc60445.jpeg', true, '2023-11-04 12:34:56'),
-    ('00000000-0000-0000-user-000000000002', 'user2', 'user2@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Jane Doe', NULL, true, '2023-11-04 12:45:00'),
-    ('00000000-0000-0000-user-000000000003', 'user3', 'user3@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Bob Smith', NULL, true, '2023-11-04 13:00:15'),
-    ('00000000-0000-0000-user-000000000004', 'user4', 'user4@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Mary Johnson', NULL, true, '2023-11-04 14:15:30'),
-    ('00000000-0000-0000-user-000000000005', 'user5', 'user5@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Chris Williams', NULL, true, '2023-11-04 14:30:45'),
-    ('00000000-0000-0000-user-000000000006', 'user6', 'user6@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Sarah Davis', NULL, true, '2023-11-04 14:45:00'),
-    ('00000000-0000-0000-user-000000000007', 'user7', 'user7@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Michael Brown', NULL, true, '2023-11-04 15:00:15'),
-    ('00000000-0000-0000-user-000000000008', 'user8', 'user8@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Jessica Lee', NULL, true, '2023-11-04 15:15:30'),
-    ('00000000-0000-0000-user-000000000009', 'user9', 'user9@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'David Taylor', NULL, true, '2023-11-04 15:30:45'),
-    ('00000000-0000-0000-user-000000000010', 'user10', 'user10@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Jennifer Smith', NULL, true, '2023-11-04 15:45:00'),
-    ('00000000-0000-0000-user-000000000011', 'user11', 'user11@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Brian Johnson', NULL, true, '2023-11-04 16:00:15'),
-    ('00000000-0000-0000-user-000000000012', 'user12', 'user12@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Laura Davis', NULL, true, '2023-11-04 16:15:30'),
-    ('00000000-0000-0000-user-000000000013', 'user13', 'user13@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Matthew Brown', NULL, true, '2023-11-04 16:30:45'),
-    ('00000000-0000-0000-user-000000000014', 'user14', 'user14@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Amanda Williams', NULL, true, '2023-11-04 16:45:00'),
-    ('00000000-0000-0000-user-000000000015', 'user15', 'user15@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Jason Lee', NULL, true, '2023-11-04 17:00:15'),
-    ('00000000-0000-0000-user-000000000016', 'user16', 'user16@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Emily Taylor', NULL, true, '2023-11-04 17:15:30'),
-    ('00000000-0000-0000-user-000000000017', 'user17', 'user17@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Daniel Smith', NULL, true, '2023-11-04 17:30:45'),
-    ('00000000-0000-0000-user-000000000018', 'user18', 'user18@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Olivia Davis', NULL, true, '2023-11-04 17:45:00'),
-    ('00000000-0000-0000-user-000000000019', 'user19', 'user19@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Ryan Johnson', NULL, true, '2023-11-04 18:00:15'),
-    ('00000000-0000-0000-user-000000000020', 'user20', 'user20@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Alex Johnson', NULL, false, '2023-11-04 16:30:45');
+    ('00000000-0000-0000-user-000000000001', 'user1@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Igor Shcherbachenya', 'user_avatar_00000000-0000-0000-user-000000000001_c6f8d918-c445-4b85-85c6-30652bc60445.jpeg', true, '2023-11-04 12:34:56'),
+    ('00000000-0000-0000-user-000000000002', 'user2@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Jane Doe', NULL, true, '2023-11-04 12:45:00'),
+    ('00000000-0000-0000-user-000000000003', 'user3@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Bob Smith', NULL, true, '2023-11-04 13:00:15'),
+    ('00000000-0000-0000-user-000000000004', 'user4@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Mary Johnson', NULL, true, '2023-11-04 14:15:30'),
+    ('00000000-0000-0000-user-000000000005', 'user5@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Chris Williams', NULL, true, '2023-11-04 14:30:45'),
+    ('00000000-0000-0000-user-000000000006', 'user6@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Sarah Davis', NULL, true, '2023-11-04 14:45:00'),
+    ('00000000-0000-0000-user-000000000007', 'user7@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Michael Brown', NULL, true, '2023-11-04 15:00:15'),
+    ('00000000-0000-0000-user-000000000008', 'user8@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Jessica Lee', NULL, true, '2023-11-04 15:15:30'),
+    ('00000000-0000-0000-user-000000000009', 'user9@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'David Taylor', NULL, true, '2023-11-04 15:30:45'),
+    ('00000000-0000-0000-user-000000000010', 'user10@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Jennifer Smith', NULL, true, '2023-11-04 15:45:00'),
+    ('00000000-0000-0000-user-000000000011', 'user11@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Brian Johnson', NULL, true, '2023-11-04 16:00:15'),
+    ('00000000-0000-0000-user-000000000012', 'user12@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Laura Davis', NULL, true, '2023-11-04 16:15:30'),
+    ('00000000-0000-0000-user-000000000013', 'user13@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Matthew Brown', NULL, true, '2023-11-04 16:30:45'),
+    ('00000000-0000-0000-user-000000000014', 'user14@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Amanda Williams', NULL, true, '2023-11-04 16:45:00'),
+    ('00000000-0000-0000-user-000000000015', 'user15@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Jason Lee', NULL, true, '2023-11-04 17:00:15'),
+    ('00000000-0000-0000-user-000000000016', 'user16@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Emily Taylor', NULL, true, '2023-11-04 17:15:30'),
+    ('00000000-0000-0000-user-000000000017', 'user17@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Daniel Smith', NULL, true, '2023-11-04 17:30:45'),
+    ('00000000-0000-0000-user-000000000018', 'user18@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Olivia Davis', NULL, true, '2023-11-04 17:45:00'),
+    ('00000000-0000-0000-user-000000000019', 'user19@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Ryan Johnson', NULL, true, '2023-11-04 18:00:15'),
+    ('00000000-0000-0000-user-000000000020', 'user20@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Alex Johnson', NULL, false, '2023-11-04 16:30:45');
 
 
 

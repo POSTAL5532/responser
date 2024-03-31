@@ -13,12 +13,9 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.OAuth2Token;
 import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
-import org.springframework.security.oauth2.server.authorization.authentication.OAuth2ClientAuthenticationToken;
 import org.springframework.security.oauth2.server.authorization.token.DelegatingOAuth2TokenGenerator;
 import org.springframework.security.oauth2.server.authorization.token.JwtEncodingContext;
 import org.springframework.security.oauth2.server.authorization.token.JwtGenerator;
@@ -26,7 +23,6 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Acce
 import org.springframework.security.oauth2.server.authorization.token.OAuth2RefreshTokenGenerator;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
-import org.springframework.util.StringUtils;
 import space.reviewly.authserver.model.UserDetailsImpl;
 
 @Configuration(proxyBeanMethods = false)
@@ -78,29 +74,16 @@ public class TokenConfiguration {
     @Bean
     public OAuth2TokenCustomizer<JwtEncodingContext> jwtTokenCustomizer() {
         return context -> {
-            UserDetailsImpl userDetails;
-
-            if (context.getPrincipal() instanceof OAuth2ClientAuthenticationToken) {
-                userDetails = (UserDetailsImpl) context.getPrincipal().getDetails();
-            } else if (context.getPrincipal() instanceof AbstractAuthenticationToken) {
-                userDetails = (UserDetailsImpl) context.getPrincipal().getPrincipal();
-            } else {
-                throw new IllegalStateException("Unexpected token type");
-            }
-
-            if (!StringUtils.hasText(userDetails.getUsername())) {
-                throw new IllegalStateException("Bad UserDetails, username is empty");
-            }
+            UserDetailsImpl principal = (UserDetailsImpl) context.getPrincipal().getPrincipal();
 
             context.getClaims()
                 .claim(
                     "authorities",
-                    userDetails.getAuthorities().stream()
+                    principal.getAuthorities().stream()
                         .map(GrantedAuthority::getAuthority)
                         .collect(Collectors.toSet())
                 )
-                .claim("username", userDetails.getUsername())
-                .claim("userId", userDetails.getId());
+                .claim("userId", principal.getId());
         };
     }
 }

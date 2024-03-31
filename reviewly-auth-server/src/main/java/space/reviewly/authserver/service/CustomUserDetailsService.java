@@ -25,25 +25,16 @@ public class CustomUserDetailsService implements UserDetailsService {
     /**
      * Load user by login or email.
      *
-     * @param username the username identifying the user whose data is required.
+     * @param email the email identifying the user whose data is required.
      * @return user details instance
      * @throws UsernameNotFoundException user not found exception
      */
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user;
-
-        if (username.contains("@")) {
-            user = userRepository.findByEmail(username)
-                    .orElseThrow(() -> new UsernameNotFoundException(MessageFormat.format(
-                            "User with email ''{0}'' doesn't exist", username
-                    )));
-        } else {
-            user = userRepository.findByUserName(username)
-                    .orElseThrow(() -> new UsernameNotFoundException(MessageFormat.format(
-                            "User with username ''{0}'' doesn't exist", username
-                    )));
-        }
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email)
+            .orElseThrow(() -> new UsernameNotFoundException(MessageFormat.format(
+                "User with email ''{0}'' doesn't exist", email
+            )));
 
         return new UserDetailsImpl(user);
     }

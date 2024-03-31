@@ -27,9 +27,6 @@ public class User {
     @Column(columnDefinition = "CHAR(36)")
     private String id;
 
-    @Column(name = "user_name")
-    private String userName;
-
     private String email;
 
     private String password;
