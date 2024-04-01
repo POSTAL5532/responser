@@ -3,6 +3,7 @@ package space.reviewly.authserver.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
@@ -34,15 +35,13 @@ public class UserDetailsImpl implements UserDetails {
         this.userName = user.getEmail();
         this.password = user.getPassword();
 
-        this.authorities = getTestAuthorities();
+        this.authorities = user.getRoles().stream()
+            .flatMap(role -> role.getAuthorities().stream().map(authority -> new SimpleGrantedAuthority(authority.getName())))
+            .collect(Collectors.toList());
     }
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        /*List<GrantedAuthority> list = new ArrayList<>();
-        list.add(new SimpleGrantedAuthority("ROLE_FIRST"));
-        list.add(new SimpleGrantedAuthority("ROLE_SECOND"));*/
-
         return authorities;
     }
 
@@ -74,13 +73,5 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
-    }
-
-    private static Collection<? extends GrantedAuthority> getTestAuthorities() {
-        List<GrantedAuthority> list = new ArrayList<>();
-        list.add(new SimpleGrantedAuthority("ROLE_TEST_1"));
-        list.add(new SimpleGrantedAuthority("ROLE_TEST_2"));
-
-        return list;
     }
 }
