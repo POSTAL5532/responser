@@ -1,8 +1,7 @@
-package space.reviewly.authserver.service;
+package space.reviewly.authserver.security;
 
-import space.reviewly.authserver.model.UserDetailsImpl;
+import java.util.Objects;
 import space.reviewly.authserver.model.User;
-import space.reviewly.authserver.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -10,6 +9,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.text.MessageFormat;
+import space.reviewly.authserver.service.UserService;
 
 /**
  * Custom user details service.
@@ -20,7 +20,7 @@ import java.text.MessageFormat;
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
 
-    private final UserRepository userRepository;
+    private final UserService userService;
 
     /**
      * Load user by login or email.
@@ -31,10 +31,11 @@ public class CustomUserDetailsService implements UserDetailsService {
      */
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email)
-            .orElseThrow(() -> new UsernameNotFoundException(MessageFormat.format(
-                "User with email ''{0}'' doesn't exist", email
-            )));
+        User user = userService.getByEmail(email);
+
+        if (Objects.isNull(user)) {
+            throw new UsernameNotFoundException(MessageFormat.format("User with email ''{0}'' doesn't exist", email));
+        }
 
         return new UserDetailsImpl(user);
     }

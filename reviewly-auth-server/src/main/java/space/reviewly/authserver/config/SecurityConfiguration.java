@@ -4,6 +4,7 @@ import static org.springframework.security.config.Customizer.withDefaults;
 
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.annotation.web.configurers.LogoutConfigurer;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import space.reviewly.authserver.controller.CommonController;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -14,6 +15,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import space.reviewly.authserver.security.socialLogin.SocialLoginAuthenticationSuccessHandler;
+import space.reviewly.authserver.security.socialLogin.UserServiceOAuth2UserHandler;
 
 /**
  * Auth server web security configuration. Install login form.
@@ -30,12 +33,13 @@ public class SecurityConfiguration {
     private final ApplicationProperties properties;
 
     @Bean
-    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
+    SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http, AuthenticationSuccessHandler authenticationSuccessHandler) throws Exception {
         //corsCustomizer.corsCustomizer(http);
 
         return http
             .authorizeHttpRequests(authorize -> authorize.anyRequest().authenticated())
             .formLogin(withDefaults())
+            .oauth2Login(oauth -> oauth.successHandler(authenticationSuccessHandler))
             .logout(LogoutConfigurer::permitAll)
             .build();
 
@@ -59,5 +63,13 @@ public class SecurityConfiguration {
             "/font/**"
         );
     }*/
+
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler(UserServiceOAuth2UserHandler handler) {
+        SocialLoginAuthenticationSuccessHandler authenticationSuccessHandler = new SocialLoginAuthenticationSuccessHandler();
+        authenticationSuccessHandler.setOidcUserHandler(handler);
+
+        return authenticationSuccessHandler;
+    }
 
 }

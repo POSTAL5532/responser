@@ -1,9 +1,11 @@
 package space.reviewly.authserver.config;
 
 import java.time.Duration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.ClientAuthenticationMethod;
+import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import lombok.RequiredArgsConstructor;
@@ -43,7 +45,9 @@ public class AuthorizationServerConfiguration {
                     exceptions.authenticationEntryPoint(
                         new LoginUrlAuthenticationEntryPoint("/login")
                     )
-            );
+            )
+            .getConfigurer(OAuth2AuthorizationServerConfigurer.class)
+            .oidc(Customizer.withDefaults());
 
         return http.build();
     }
@@ -60,20 +64,15 @@ public class AuthorizationServerConfiguration {
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                //.authorizationGrantType(AuthorizationGrantType.CLIENT_CREDENTIALS)
-                //.scope(OidcScopes.OPENID)
                 .tokenSettings(TokenSettings.builder()
                     // TODO: access_token expires like refresh_token instead access_token_lifetime
                     // TODO: use properties for lifetime configuration
                     .accessTokenTimeToLive(Duration.ofHours(6))
                     .refreshTokenTimeToLive(Duration.ofHours(7))
                     .authorizationCodeTimeToLive(Duration.ofMinutes(20))
+                    .reuseRefreshTokens(false)
                     .build())
                 .build();
-
-            System.out.println("Client ID: " + cc.getClientId());
-            System.out.println("Client SECRET: " + cc.getClientSecret());
-            System.out.println("Redirect URI: " + cc.getRedirectUri());
 
             clients.add(webClient);
         });

@@ -46,6 +46,9 @@ public class User {
     @Column(name = "full_name")
     private String fullName;
 
+    @Column(name = "avatar_file_name")
+    private String avatarFileName;
+
     @Column(name = "email_confirmed")
     private Boolean emailConfirmed;
 

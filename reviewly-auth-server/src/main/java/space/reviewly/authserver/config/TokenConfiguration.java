@@ -23,7 +23,7 @@ import org.springframework.security.oauth2.server.authorization.token.OAuth2Acce
 import org.springframework.security.oauth2.server.authorization.token.OAuth2RefreshTokenGenerator;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenCustomizer;
 import org.springframework.security.oauth2.server.authorization.token.OAuth2TokenGenerator;
-import space.reviewly.authserver.model.UserDetailsImpl;
+import space.reviewly.authserver.security.CustomUserDetails;
 
 @Configuration(proxyBeanMethods = false)
 public class TokenConfiguration {
@@ -74,7 +74,7 @@ public class TokenConfiguration {
     @Bean
     public OAuth2TokenCustomizer<JwtEncodingContext> jwtTokenCustomizer() {
         return context -> {
-            UserDetailsImpl principal = (UserDetailsImpl) context.getPrincipal().getPrincipal();
+            CustomUserDetails principal = (CustomUserDetails) context.getPrincipal().getPrincipal();
 
             context.getClaims()
                 .claim(

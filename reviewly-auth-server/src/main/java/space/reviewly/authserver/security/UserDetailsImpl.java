@@ -1,29 +1,23 @@
-package space.reviewly.authserver.model;
+package space.reviewly.authserver.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
-import lombok.Getter;
-import lombok.Setter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import space.reviewly.authserver.model.User;
 
 /**
  * User details
  *
  * @author Shcherbachenya Igor
  */
-@Getter
-@Setter
-public class UserDetailsImpl implements UserDetails {
+public class UserDetailsImpl implements CustomUserDetails {
 
     private String id;
 
-    private String userName;
+    private String username;
 
     private final Collection<? extends GrantedAuthority> authorities;
 
@@ -32,7 +26,7 @@ public class UserDetailsImpl implements UserDetails {
 
     public UserDetailsImpl(User user) {
         this.id = user.getId();
-        this.userName = user.getEmail();
+        this.username = user.getEmail();
         this.password = user.getPassword();
 
         this.authorities = user.getRoles().stream()
@@ -52,7 +46,7 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public String getUsername() {
-        return this.userName;
+        return this.username;
     }
 
     @Override
@@ -73,5 +67,25 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public boolean isEnabled() {
         return true;
+    }
+
+    @Override
+    public String getId() {
+        return this.id;
+    }
+
+    @Override
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    @Override
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    @Override
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
