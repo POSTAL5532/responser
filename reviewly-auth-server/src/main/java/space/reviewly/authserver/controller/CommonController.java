@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class CommonController {
 
-    public static final String LOGIN_URL = "/login";
+    public static final String LOGIN_URL = "/login-page";
     public static final String LOGOUT_URL = "/logout";
     private static final String SPRING_SECURITY_SAVED_REQUEST = "SPRING_SECURITY_SAVED_REQUEST";
     private static final String USER_FULL_NAME_COOKIE_PARAMETER = "userFullName";

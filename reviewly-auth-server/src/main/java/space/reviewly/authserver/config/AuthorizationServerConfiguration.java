@@ -22,6 +22,7 @@ import org.springframework.security.oauth2.server.authorization.config.annotatio
 import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.*;
+import space.reviewly.authserver.controller.CommonController;
 
 /**
  * Authorization server configuration.
@@ -41,10 +42,7 @@ public class AuthorizationServerConfiguration {
 
         http
             .exceptionHandling(
-                exceptions ->
-                    exceptions.authenticationEntryPoint(
-                        new LoginUrlAuthenticationEntryPoint("/login")
-                    )
+                exceptions -> exceptions.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint(CommonController.LOGIN_URL))
             )
             .getConfigurer(OAuth2AuthorizationServerConfigurer.class)
             .oidc(Customizer.withDefaults());

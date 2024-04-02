@@ -126,7 +126,7 @@
             <h2 class="login-header">Login</h2>
 
             <div class="login-form-container">
-                <form method="POST" th:action="@{/login}" class="login-form">
+                <form method="POST" th:action="@{/login-page}" class="login-form">
                     <div class="field-container user-name" th:classappend="${param.error != null ? 'error' : ''}">
                         <div class="input-container">
                             <input name="username" class="field-input" type="text" placeholder="Username or E-mail">
@@ -166,6 +166,10 @@
                         Log in now
                     </button>
                 </form>
+
+                <a class="link big create-new-account" th:href="@{/oauth2/authorization/google}">
+                    Login with Google
+                </a>
 
                 <span class="or">or</span>
 

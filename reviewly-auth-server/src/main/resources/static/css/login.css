@@ -1,15 +1,3 @@
-@font-face {
-  font-family: "Outfit-Medium";
-  src: url("/fonts/Outfit-Medium.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 500;
-}
-@font-face {
-  font-family: "Outfit-Regular";
-  src: url("/fonts/Outfit-Regular.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 400;
-}
 a {
   text-decoration: none;
 }
