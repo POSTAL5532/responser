@@ -123,7 +123,7 @@
     <div class="page-content">
         <section class="section">
             <h1 class="section-header">Start for free</h1>
-            <h2 class="login-header">Login</h2>
+            <h2 class="login-header">Log in</h2>
 
             <div class="login-form-container">
                 <form method="POST" th:action="@{/login-page}" class="login-form">
@@ -154,7 +154,14 @@
 
                     <span th:if="${param.error}" class="error-message">User credentials is invalid.</span>
 
-                    <button type="submit" class="button primary small submit" id="submit">
+                    <a class="button social-login login-with-google login-action" th:href="@{/oauth2/authorization/google}">
+                        <svg width="11" height="11" viewBox="0 0 11 11" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon login-with-google-icon">
+                            <path d="M5.56636 0.75C7.47741 0.75 8.50944 1.72159 8.82347 2.07247L7.47741 3.44899C7.22628 3.17011 6.49249 2.61236 5.56636 2.61236C3.49915 2.56918 2.69992 4.21938 2.69992 5.43897C2.69992 6.65857 3.43549 8.30686 5.56636 8.30686C7.13669 8.30686 8.0069 7.03841 8.15036 6.33672H5.56636V4.52852H10.1747C10.2285 4.79832 10.25 5.04302 10.25 5.68889C9.9539 8.76541 7.68602 10.25 5.56636 10.25C2.69992 10.25 0.749845 8.05694 0.75 5.43897C0.750148 2.95079 2.69992 0.75 5.56636 0.75Z" stroke="black" stroke-opacity="0.6" stroke-linejoin="round"/>
+                        </svg>
+                        Login with Google
+                    </a>
+
+                    <button type="submit" class="button primary small submit login-action" id="submit">
                         <svg width="18" height="19" viewBox="0 0 18 19" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon user">
                             <path
                                 d="M15.0034 16.25V14.75C15.0034 13.9544 14.6873 13.1913 14.1247 12.6287C13.5621 12.0661 12.7991 11.75 12.0034 11.75H6.00342C5.20777 11.75 4.44471 12.0661 3.8821 12.6287C3.31949 13.1913 3.00342 13.9544 3.00342 14.75V16.25"
@@ -167,14 +174,10 @@
                     </button>
                 </form>
 
-                <a class="link big create-new-account" th:href="@{/oauth2/authorization/google}">
-                    Login with Google
-                </a>
-
                 <span class="or">or</span>
 
-                <a class="link big create-new-account" th:href="${@applicationProperties.registrationPageUrl}">
-                    Create new account
+                <a class="link big create-new-account" th:href="${@applicationProperties.registrationPageUrl}" id="sign-up-link">
+                    Create new account with email
                     <svg class="icon link" width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect x="0.791016" y="0.344727" width="30" height="30" rx="8" fill="#605C55"/>
                         <path d="M13.541 19.8447L18.041 15.3447L13.541 10.8447" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>

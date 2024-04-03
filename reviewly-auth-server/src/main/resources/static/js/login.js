@@ -1,14 +1,13 @@
 window.addEventListener('load', (event) => {
-    $("#submit").click(function blockForm(event) {
-        const submit = $("#submit");
+    $(".login-action").click(function blockForm(event) {
         const disabledClass = "disabled";
 
         $("#username").addClass(disabledClass);
         $("#password").addClass(disabledClass);
         $("#sign-up-link").addClass(disabledClass);
+        $(".login-action").addClass(disabledClass);
 
-        submit.addClass(disabledClass);
-        submit.text("Wait ...")
+        $("#submit").text("Wait ...")
     });
 
     $("#switch-password").click(function () {

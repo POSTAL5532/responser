@@ -10,6 +10,11 @@
     transition: color 0.15s;
     color: @black-alpha-60;
 
+    &.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+    }
+
     .icon {
         width: 24px;
         height: 24px;

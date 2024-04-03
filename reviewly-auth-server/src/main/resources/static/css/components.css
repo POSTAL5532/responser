@@ -31,6 +31,10 @@
 .button .icon path {
   transition: stroke 0.15s;
 }
+.button.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
 .button.primary {
   height: 44px;
   line-height: 44px;
@@ -92,6 +96,10 @@
   font-weight: 400;
   transition: color 0.15s;
   color: rgba(0, 0, 0, 0.6);
+}
+.link.disabled {
+  pointer-events: none;
+  opacity: 0.5;
 }
 .link .icon {
   width: 24px;
