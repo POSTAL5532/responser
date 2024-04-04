@@ -6,9 +6,8 @@ import {UserAccountDataPayload} from "app/model/UserAccountDataPayload";
 import {Button, ButtonType} from "app/components/button/Button";
 import {PASSWORD_VALIDATION_SCHEMA, PasswordField} from "app/components/form/PasswordField";
 import {FormikHelpers} from "formik/dist/types";
-import {EMAIL_VALIDATION_SCHEMA, FULL_NAME_VALIDATION_SCHEMA, USERNAME_VALIDATION_SCHEMA} from "../../../utils/ValidationUtils";
+import {EMAIL_VALIDATION_SCHEMA, FULL_NAME_VALIDATION_SCHEMA} from "../../../utils/ValidationUtils";
 import {EmailField} from "../../../components/form/EmailField";
-import {UsernameField} from "../../../components/form/UsernameField";
 import {FullNameField} from "../../../components/form/FullNameField";
 import {InputFieldStyleType} from "../../../components/form/input-field/InputField";
 import {Tooltip} from "../../../components/tooltip/Tooltip";
@@ -21,7 +20,6 @@ type SignUpFormProps = {
 }
 
 const SIGNUP_FORM_VALIDATION_SCHEMA = Yup.object().shape({
-    ...USERNAME_VALIDATION_SCHEMA,
     ...EMAIL_VALIDATION_SCHEMA,
     ...FULL_NAME_VALIDATION_SCHEMA,
     password: PASSWORD_VALIDATION_SCHEMA.password,
@@ -52,10 +50,6 @@ const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) => {
                     <EmailField onChange={({target}) => signUpPayload.email = target.value}
                                 disabled={disabled}
                                 styleType={InputFieldStyleType.SECONDARY}/>
-
-                    <UsernameField onChange={({target}) => signUpPayload.userName = target.value}
-                                   disabled={disabled}
-                                   styleType={InputFieldStyleType.SECONDARY}/>
 
                     <FullNameField onChange={({target}) => signUpPayload.fullName = target.value}
                                    disabled={disabled}

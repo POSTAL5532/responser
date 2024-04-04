@@ -2,6 +2,7 @@ package space.reviewly.backend.controller.reviewlike;
 
 import static space.reviewly.backend.config.ApplicationProperties.API_ROOT_PATH;
 
+import space.reviewly.backend.config.CustomOAuth2AuthenticatedPrincipal;
 import space.reviewly.backend.controller.RestApiController;
 import space.reviewly.backend.controller.reviewlike.payload.ReviewLikeInfoDTO;
 import space.reviewly.backend.controller.reviewlike.payload.ReviewLikeDTO;
@@ -17,8 +18,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-
-import java.security.Principal;
 
 /**
  * Review likes controller for operations with ReviewLike entities.
@@ -43,9 +42,9 @@ public class ReviewLikeRestController extends RestApiController {
      */
     @PreAuthorize("isAuthenticated()")
     @PostMapping
-    public ResponseEntity<ReviewLikeDTO> createLike(@Valid @NotNull @RequestBody ReviewLikeInfoDTO likeInfoDTO, Principal principal) {
-        log.info("Create like {} by user {}.", likeInfoDTO, principal.getName());
-        ReviewLike newLike = reviewLikeConverter.toReviewLike(likeInfoDTO, principal.getName());
+    public ResponseEntity<ReviewLikeDTO> createLike(@Valid @NotNull @RequestBody ReviewLikeInfoDTO likeInfoDTO, CustomOAuth2AuthenticatedPrincipal principal) {
+        log.info("Create like {} by user {}.", likeInfoDTO, principal.getUserId());
+        ReviewLike newLike = reviewLikeConverter.toReviewLike(likeInfoDTO, principal.getUserId());
         ReviewLike createdLike = reviewLikeService.createLike(newLike);
         return ResponseEntity.ok(reviewLikeConverter.toReviewLikePayload(createdLike));
     }
@@ -62,10 +61,10 @@ public class ReviewLikeRestController extends RestApiController {
     public ResponseEntity<ReviewLikeDTO> updateLike(
         @Valid @NotBlank @PathVariable String likeId,
         @Valid @NotNull @RequestBody ReviewLikeInfoDTO likeInfoDTO,
-        Principal principal
+        CustomOAuth2AuthenticatedPrincipal principal
     ) {
-        log.info("Update like {} with data {} by user {}.", likeId, likeInfoDTO, principal.getName());
-        ReviewLike reviewLike = reviewLikeConverter.toReviewLike(likeId, likeInfoDTO, principal.getName());
+        log.info("Update like {} with data {} by user {}.", likeId, likeInfoDTO, principal.getUserId());
+        ReviewLike reviewLike = reviewLikeConverter.toReviewLike(likeId, likeInfoDTO, principal.getUserId());
         ReviewLike updatedLike = reviewLikeService.updateLike(reviewLike);
         return ResponseEntity.ok(reviewLikeConverter.toReviewLikePayload(updatedLike));
     }
@@ -77,9 +76,9 @@ public class ReviewLikeRestController extends RestApiController {
      */
     @DeleteMapping("/{likeId}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Void> removeLike(@Valid @NotEmpty @PathVariable String likeId, Principal principal) {
-        log.info("Remove like {} by user {}.", likeId, principal.getName());
-        reviewLikeService.removeLike(likeId, principal.getName());
+    public ResponseEntity<Void> removeLike(@Valid @NotEmpty @PathVariable String likeId, CustomOAuth2AuthenticatedPrincipal principal) {
+        log.info("Remove like {} by user {}.", likeId, principal.getUserId());
+        reviewLikeService.removeLike(likeId, principal.getUserId());
         return ResponseEntity.ok().build();
     }
 }

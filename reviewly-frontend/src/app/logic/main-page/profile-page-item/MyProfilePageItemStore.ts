@@ -50,7 +50,6 @@ export class MyProfilePageItemStore {
         this.currentUser = currentUser;
 
         this.updateUserPayload = new UpdateUserPayload();
-        this.updateUserPayload.userName = currentUser.userName;
         this.updateUserPayload.email = currentUser.email;
         this.updateUserPayload.fullName = currentUser.fullName;
     }
@@ -62,7 +61,6 @@ export class MyProfilePageItemStore {
         }
 
         return this.currentUser.email !== this.updateUserPayload.email ||
-            this.currentUser.userName !== this.updateUserPayload.userName ||
             this.currentUser.fullName !== this.updateUserPayload.fullName;
     }
 

@@ -20,6 +20,12 @@
         <div class="card-header">
             <div class="user-info-container">
                 <img class="user-avatar"
+                     th:if="${review.user.avatarFileName != null && (#strings.startsWith(review.user.avatarFileName, 'http://') || #strings.startsWith(review.user.avatarFileName, 'https://'))}"
+                     th:src="${review.user.avatarFileName}"
+                     th:alt="${review.user.fullName}">
+
+                <img class="user-avatar"
+                     th:if="${review.user.avatarFileName == null || (!#strings.startsWith(review.user.avatarFileName, 'http://') && !#strings.startsWith(review.user.avatarFileName, 'https://'))}"
                      th:src="${@applicationProperties.fileStorageUrlUsersAvatars + '/' + (review.user.avatarFileName != null ? review.user.avatarFileName : @applicationProperties.defaultUserAvatarFileName)}"
                      th:alt="${review.user.fullName}">
                 <div class="name-date">

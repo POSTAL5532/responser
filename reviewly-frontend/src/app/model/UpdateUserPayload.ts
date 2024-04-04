@@ -6,8 +6,6 @@ export class UpdateUserPayload {
         makeAutoObservable(this);
     }
 
-    userName: string;
-
     email: string;
 
     fullName: string;

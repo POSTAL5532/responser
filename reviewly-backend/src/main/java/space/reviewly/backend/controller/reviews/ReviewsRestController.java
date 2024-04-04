@@ -2,6 +2,7 @@ package space.reviewly.backend.controller.reviews;
 
 import static space.reviewly.backend.config.ApplicationProperties.API_ROOT_PATH;
 
+import space.reviewly.backend.config.CustomOAuth2AuthenticatedPrincipal;
 import space.reviewly.backend.controller.RestApiController;
 import space.reviewly.backend.controller.payload.PageableResponse;
 import space.reviewly.backend.controller.payload.Pagination;
@@ -27,7 +28,6 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.Objects;
 
@@ -57,13 +57,13 @@ public class ReviewsRestController extends RestApiController {
     public ResponseEntity<PageableResponse<ReviewDTO>> getReviews(
         @Valid @NotNull ReviewsRequestCriteria criteria,
         @Valid @NotNull Pagination pagination,
-        Principal principal
+        CustomOAuth2AuthenticatedPrincipal principal
     ) {
 
         log.info("Get all reviews. Reviews request criteria {}.", criteria);
 
         if (StringUtils.isNotEmpty(criteria.getForUserId())) {
-            if (Objects.isNull(principal) || !principal.getName().equals(criteria.getForUserId())) {
+            if (Objects.isNull(principal) || !principal.getUserId().equals(criteria.getForUserId())) {
                 log.error("Reviews request criteria with parameter 'forUserId' without authorization.");
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
             }
@@ -98,9 +98,9 @@ public class ReviewsRestController extends RestApiController {
      */
     @PostMapping
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<ReviewDTO> createReview(@Valid @NotNull @RequestBody ReviewInfoDTO reviewInfoDTO, Principal principal) {
+    public ResponseEntity<ReviewDTO> createReview(@Valid @NotNull @RequestBody ReviewInfoDTO reviewInfoDTO, CustomOAuth2AuthenticatedPrincipal principal) {
         log.info("Create review {}.", reviewInfoDTO);
-        Review newReview = reviewConverter.toReview(reviewInfoDTO, principal.getName());
+        Review newReview = reviewConverter.toReview(reviewInfoDTO, principal.getUserId());
         ReviewDTO newReviewDTO = reviewConverter.toReviewPayload(reviewService.createReview(newReview));
 
         return ResponseEntity.ok(newReviewDTO);
@@ -118,10 +118,10 @@ public class ReviewsRestController extends RestApiController {
     public ResponseEntity<ReviewDTO> updateReview(
         @Valid @NotNull @PathVariable String reviewId,
         @Valid @NotNull @RequestBody ReviewInfoDTO reviewInfoDTO,
-        Principal principal
+        CustomOAuth2AuthenticatedPrincipal principal
     ) {
         log.info("Update review {} with data {}.", reviewId, reviewInfoDTO);
-        Review review = reviewConverter.toReview(reviewId, reviewInfoDTO, principal.getName());
+        Review review = reviewConverter.toReview(reviewId, reviewInfoDTO, principal.getUserId());
         ReviewDTO updatedReviewDTO = reviewConverter.toReviewPayload(reviewService.updateReview(review));
 
         return ResponseEntity.ok(updatedReviewDTO);
@@ -134,9 +134,9 @@ public class ReviewsRestController extends RestApiController {
      */
     @DeleteMapping("/{reviewId}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Void> removeReview(@Valid @NotNull @PathVariable String reviewId, Principal principal) {
-        log.info("Remove review {} by user {}.", reviewId, principal.getName());
-        reviewService.removeReview(reviewId, principal.getName());
+    public ResponseEntity<Void> removeReview(@Valid @NotNull @PathVariable String reviewId, CustomOAuth2AuthenticatedPrincipal principal) {
+        log.info("Remove review {} by user {}.", reviewId, principal.getUserId());
+        reviewService.removeReview(reviewId, principal.getUserId());
         return ResponseEntity.ok().build();
     }
 }

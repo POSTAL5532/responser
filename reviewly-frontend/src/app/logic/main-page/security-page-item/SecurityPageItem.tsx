@@ -7,8 +7,7 @@ import {useSecurityPageItemStore} from "./SecurityPageItemStore";
 import Modal from "../../../components/modal/Modal";
 import {Button, ButtonType} from "../../../components/button/Button";
 import LocalTokenStorageService from "../../../service/authorization/LocalTokenStorageService";
-import {nativeNavigateTo} from "../../../utils/NavigationUtils";
-import ApplicationProperties from "../../../service/ApplicationProperties";
+import {nativeNavigateToAuthLogoutPageUrl} from "../../../utils/NavigationUtils";
 import {useExtensionService} from "../../../service/extension/ExtensionService";
 import {useLogger} from "../../../utils/Logger";
 import "./SecurityPageItem.less";
@@ -30,7 +29,7 @@ const SecurityPageItem: React.FC<SecurityPageItemProps> = (props: SecurityPageIt
         .catch(reason => logger.error(reason))
         .finally(() => {
             logger.debug("Redirect to auth server logout page");
-            nativeNavigateTo(ApplicationProperties.authLogoutPageUrl);
+            nativeNavigateToAuthLogoutPageUrl();
         });
     }
 

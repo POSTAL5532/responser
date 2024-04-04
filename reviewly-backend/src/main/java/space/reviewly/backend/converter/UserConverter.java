@@ -16,7 +16,6 @@ public class UserConverter {
 
     public User toUser(CreateUserProfilePayload newUserPayload) {
         User user = new User();
-        user.setUserName(newUserPayload.getUserName());
         user.setEmail(newUserPayload.getEmail());
         user.setPassword(newUserPayload.getPassword());
         user.setFullName(newUserPayload.getFullName());
@@ -26,7 +25,6 @@ public class UserConverter {
 
     public User toUser(UpdateUserPayload updateUser) {
         User user = new User();
-        user.setUserName(updateUser.getUserName());
         user.setEmail(updateUser.getEmail());
         user.setFullName(updateUser.getFullName());
 
@@ -45,7 +43,6 @@ public class UserConverter {
     public UserInfoPayload toFullUserInfoPayload(User user) {
         UserInfoPayload userPayload = toUserInfoPayload(user);
 
-        userPayload.setUserName(user.getUserName());
         userPayload.setEmail(user.getEmail());
         userPayload.setEmailConfirmed(user.getEmailConfirmed());
         userPayload.setCreationDate(user.getCreationDate());

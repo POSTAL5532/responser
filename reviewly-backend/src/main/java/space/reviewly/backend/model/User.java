@@ -1,8 +1,15 @@
 package space.reviewly.backend.model;
 
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.*;
 
 /**
@@ -17,9 +24,6 @@ import lombok.*;
 @Table(name = "users")
 public class User extends AbstractEntity {
 
-    @Column(name = "user_name")
-    private String userName;
-
     private String email;
 
     private String password;
@@ -32,4 +36,10 @@ public class User extends AbstractEntity {
 
     @Column(name = "email_confirmed")
     private Boolean emailConfirmed;
+
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 }

@@ -61,7 +61,7 @@ public class UserService {
 
     @Transactional
     public void registerUser(User newUser) {
-        log.info("Register new not confirmed user: {}", newUser.getUserName());
+        log.info("Register new not confirmed user: {}", newUser.getEmail());
 
         newUser.setEmailConfirmed(false);
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
@@ -95,10 +95,6 @@ public class UserService {
         User user = getUser(userId);
 
         validateUpdateUserData(user, userUpdates);
-
-        if (!user.getUserName().equals(userUpdates.getUserName())) {
-            user.setUserName(userUpdates.getUserName());
-        }
 
         if (!user.getEmail().equals(userUpdates.getEmail())) {
             user.setEmail(userUpdates.getEmail());
@@ -173,7 +169,10 @@ public class UserService {
         user.setAvatarFileName(newAvatarFileName);
         updateUser(user);
 
-        if (StringUtils.isNotBlank(oldAvatarFileName) && !applicationProperties.getDefaultUserAvatarFileName().equals(oldAvatarFileName)) {
+        if (StringUtils.isNotBlank(oldAvatarFileName) &&
+            !applicationProperties.getDefaultUserAvatarFileName().equals(oldAvatarFileName) &&
+            !StringUtils.startsWithAny(oldAvatarFileName, "http://", "https://")) {
+
             fileResourceService.removeUserAvatar(oldAvatarFileName);
         }
 
@@ -201,16 +200,8 @@ public class UserService {
         return userRepository.existsByEmail(email);
     }
 
-    public boolean existByUserName(String username) {
-        return userRepository.existsByUserName(username);
-    }
-
     public void validateUpdateUserData(User existingUser, User userUpdates) {
         Map<String, List<String>> fieldsErrors = new HashMap<>();
-
-        if (!existingUser.getUserName().equals(userUpdates.getUserName()) && existByUserName(userUpdates.getUserName())) {
-            fieldsErrors.put(User_.USER_NAME, List.of("User with this username already exist."));
-        }
 
         if (!existingUser.getEmail().equals(userUpdates.getEmail()) && existByEmail(userUpdates.getEmail())) {
             fieldsErrors.put(User_.EMAIL, List.of("User with this email already exist."));
