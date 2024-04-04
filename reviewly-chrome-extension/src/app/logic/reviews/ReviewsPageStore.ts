@@ -17,6 +17,7 @@ import {WebResourceService} from "../../service/WebResourceService";
 import {NewWebResource} from "../../model/NewWebResource";
 import {ReviewsCriteriaSortingField} from "../../model/ReviewsCriteriaSortingField";
 import {SortDirection} from "../../model/SortDirection";
+import {compareSiteIconBlobWithGoogleTemplate} from "../../utils/ResourcesUtils";
 
 const PAGE_ELEMENTS_COUNT = 10;
 
@@ -156,6 +157,25 @@ export class ReviewsPageStore {
         return await response.blob();
     }
 
+    getSiteIcon = async (siteUrl: string): Promise<Blob> => {
+        this.logger.debug("Fetch site icon - start");
+
+        let siteIconBlob: Blob = null;
+        try {
+            siteIconBlob = await this.fetchSiteFavicon(siteUrl);
+
+            if (!!siteIconBlob) {
+                siteIconBlob = (await compareSiteIconBlobWithGoogleTemplate(siteIconBlob)) ? null : siteIconBlob;
+            }
+        } catch (e) {
+            this.logger.warning("Can't to fetch icon for site " + siteUrl);
+        }
+
+        this.logger.debug("Fetch site icon - finish:", !!siteIconBlob ? "has icon" : "no icon");
+
+        return siteIconBlob;
+    }
+
     initSite = async () => {
         const {url} = this.currentPageInfo;
 
@@ -170,14 +190,7 @@ export class ReviewsPageStore {
             if (error instanceof ApiError && error.errorType === ApiErrorType.ENTITY_NOT_FOUND) {
                 this.logger.debug("Init site error is 'ENTITY_NOT_FOUND' type - create new site.");
                 const newWebResource = new NewWebResource(url, ResourceType.SITE);
-
-                let siteIconBlob: Blob = null;
-                try {
-                    siteIconBlob = await this.fetchSiteFavicon(url);
-                } catch (e) {
-                    this.logger.warning("Can't to fetch icon for site " + url);
-                }
-
+                const siteIconBlob: Blob = await this.getSiteIcon(url);
                 this.site = await this.webResourceService.create(newWebResource, siteIconBlob);
             } else {
                 this.logger.error("Init site error is unknown: ", error);
