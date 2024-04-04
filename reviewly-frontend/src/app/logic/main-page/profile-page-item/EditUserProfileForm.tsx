@@ -5,9 +5,8 @@ import * as Yup from "yup";
 import {observer} from "mobx-react";
 import classNames from "classnames";
 import {UpdateUserPayload} from "../../../model/UpdateUserPayload";
-import {EMAIL_VALIDATION_SCHEMA, FULL_NAME_VALIDATION_SCHEMA, USERNAME_VALIDATION_SCHEMA} from "../../../utils/ValidationUtils";
+import {EMAIL_VALIDATION_SCHEMA, FULL_NAME_VALIDATION_SCHEMA} from "../../../utils/ValidationUtils";
 import {EmailField} from "../../../components/form/EmailField";
-import {UsernameField} from "../../../components/form/UsernameField";
 import {FullNameField} from "../../../components/form/FullNameField";
 import {Button, ButtonSize, ButtonType} from "../../../components/button/Button";
 import {Spinner} from "../../../components/spinner/Spinner";
@@ -27,7 +26,6 @@ type EditUserProfileFormProps = {
 }
 
 const EDIT_USER_FORM_VALIDATION_SCHEMA = Yup.object().shape({
-    ...USERNAME_VALIDATION_SCHEMA,
     ...EMAIL_VALIDATION_SCHEMA,
     ...FULL_NAME_VALIDATION_SCHEMA
 });
@@ -93,7 +91,6 @@ const EditUserProfileForm: React.FC<EditUserProfileFormProps> = (props: EditUser
             validationSchema={EDIT_USER_FORM_VALIDATION_SCHEMA}>
 
             <Form className="edit-user-form">
-                <UsernameField label="Username" onChange={event => updateUserPayload.userName = event.target.value} disabled={loading}/>
                 <FullNameField label="Full name" onChange={event => updateUserPayload.fullName = event.target.value} disabled={loading}/>
 
                 <Tooltip className="email-tooltip" position={TooltipPosition.RIGHT} content={getEmailTooltipContent()} show={emailTooltipActivation()}>

@@ -7,6 +7,8 @@ server:
     include-message: always
 logging:
   level:
+    root: INFO
+    org.springframework.jdbc: DEBUG
     org.springframework.security: trace
 management:
   endpoints:
@@ -36,8 +38,22 @@ spring:
   sql:
     init:
       platform: postgres
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            provider: google
+            client-id: 479322711977-7ji5k3hfrgflsftq2v9nenhpnrln23g4.apps.googleusercontent.com
+            client-secret: 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
+        provider:
+          google:
+            authorization-uri: https://accounts.google.com/o/oauth2/auth
+            token-uri: https://oauth2.googleapis.com/token
+            user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+
 reviewly:
-  selfHost: http://reviewly-local-dev
+  selfHost: http://local-dev-reviewly.space
   frontendAppUrl: ${reviewly.selfHost}/app
   registrationPageUrl: ${reviewly.frontendAppUrl}/sign-up
   forgotPasswordPageUrl: ${reviewly.frontendAppUrl}/forgot-password

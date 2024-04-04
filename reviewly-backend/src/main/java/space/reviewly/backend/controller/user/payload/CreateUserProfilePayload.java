@@ -1,7 +1,6 @@
 package space.reviewly.backend.controller.user.payload;
 
 import space.reviewly.backend.controller.user.validation.EmailUniqueness;
-import space.reviewly.backend.controller.user.validation.UsernameUniqueness;
 import space.reviewly.backend.utils.ValidationUtils;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -19,11 +18,6 @@ import jakarta.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 public class CreateUserProfilePayload {
-
-    @NotBlank(message = "Username must be specified")
-    @Size(min = 2, max = 255, message = "Username must be from 2 to 255 characters")
-    @UsernameUniqueness(message = "User with this username is already registered")
-    private String userName;
 
     @NotBlank(message = "Email must be specified")
     @Email(message = "Email is incorrect")

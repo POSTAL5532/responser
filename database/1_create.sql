@@ -1,10 +1,6 @@
-CREATE
-EXTENSION IF NOT EXISTS "uuid-ossp";
-
 CREATE TABLE users
 (
     id               VARCHAR(36)  NOT NULL UNIQUE,
-    user_name        VARCHAR(255) NOT NULL UNIQUE,
     email            VARCHAR(255) NOT NULL UNIQUE,
     password         VARCHAR(255) NOT NULL,
     full_name        VARCHAR(255) NOT NULL,
@@ -13,6 +9,32 @@ CREATE TABLE users
     creation_date    TIMESTAMP    NOT NULL,
     update_date      TIMESTAMP,
     PRIMARY KEY (id)
+);
+
+CREATE TABLE role
+(
+    id   VARCHAR(36) NOT NULL,
+    name VARCHAR(64) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE user_role
+(
+    user_id VARCHAR(36) REFERENCES users (id) NOT NULL,
+    role_id VARCHAR(36) REFERENCES role (id)      NOT NULL
+);
+
+CREATE TABLE authority
+(
+    id   VARCHAR(36) NOT NULL,
+    name VARCHAR(32) NOT NULL,
+    PRIMARY KEY (id)
+);
+
+CREATE TABLE role_authority
+(
+    role_id      VARCHAR(36) REFERENCES role (id)      NOT NULL,
+    authority_id VARCHAR(36) REFERENCES authority (id) NOT NULL
 );
 
 CREATE TABLE email_confirmations

@@ -1,15 +1,25 @@
 package space.reviewly.authserver.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
+import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
+import java.util.HashSet;
+import java.util.Set;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
+import org.hibernate.annotations.GenericGenerator;
 
 /**
  * User
@@ -24,11 +34,10 @@ import java.time.LocalDateTime;
 public class User {
 
     @Id
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name = "uuid", strategy = "uuid")
     @Column(columnDefinition = "CHAR(36)")
     private String id;
-
-    @Column(name = "user_name")
-    private String userName;
 
     private String email;
 
@@ -36,6 +45,9 @@ public class User {
 
     @Column(name = "full_name")
     private String fullName;
+
+    @Column(name = "avatar_file_name")
+    private String avatarFileName;
 
     @Column(name = "email_confirmed")
     private Boolean emailConfirmed;
@@ -47,4 +59,11 @@ public class User {
     @Column(name = "update_date")
     @CreationTimestamp
     private LocalDateTime updateDate;
+
+    @JsonIgnore
+    @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
+    @JoinTable(name = "user_role",
+        joinColumns = @JoinColumn(name = "user_id"),
+        inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
 }

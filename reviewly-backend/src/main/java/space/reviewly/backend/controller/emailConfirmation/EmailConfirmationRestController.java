@@ -2,9 +2,9 @@ package space.reviewly.backend.controller.emailConfirmation;
 
 import static space.reviewly.backend.config.ApplicationProperties.API_ROOT_PATH;
 
+import space.reviewly.backend.config.CustomOAuth2AuthenticatedPrincipal;
 import space.reviewly.backend.controller.RestApiController;
 import space.reviewly.backend.service.UserService;
-import java.security.Principal;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -23,8 +23,8 @@ public class EmailConfirmationRestController extends RestApiController {
 
     @PostMapping("/resend")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<Void> resendConfirmationLink(Principal principal) {
-        userService.resendConfirmationEmailForUser(principal.getName());
+    public ResponseEntity<Void> resendConfirmationLink(CustomOAuth2AuthenticatedPrincipal principal) {
+        userService.resendConfirmationEmailForUser(principal.getUserId());
         return ResponseEntity.ok().build();
     }
 }

@@ -2,6 +2,7 @@ package space.reviewly.backend.controller.user;
 
 import static space.reviewly.backend.config.ApplicationProperties.API_ROOT_PATH;
 
+import space.reviewly.backend.config.CustomOAuth2AuthenticatedPrincipal;
 import space.reviewly.backend.controller.RestApiController;
 import space.reviewly.backend.controller.user.payload.CreateUserProfilePayload;
 import space.reviewly.backend.controller.user.payload.ForgotPasswordPayload;
@@ -22,7 +23,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -51,16 +51,16 @@ public class UserRestController extends RestApiController {
 
     @PreAuthorize("isAuthenticated()")
     @PutMapping
-    public ResponseEntity<Void> updateUser(Principal principal, @Valid @RequestBody UpdateUserPayload user) {
-        log.info("Update current {} user.", principal.getName());
-        userService.updateUser(principal.getName(), userConverter.toUser(user));
+    public ResponseEntity<Void> updateUser(CustomOAuth2AuthenticatedPrincipal principal, @Valid @RequestBody UpdateUserPayload user) {
+        log.info("Update current {} user.", principal.getUserId());
+        userService.updateUser(principal.getUserId(), userConverter.toUser(user));
         return ResponseEntity.ok().build();
     }
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/current")
-    public ResponseEntity<UserInfoPayload> getCurrentUser(Principal principal) {
-        String userId = principal.getName();
+    public ResponseEntity<UserInfoPayload> getCurrentUser(CustomOAuth2AuthenticatedPrincipal principal) {
+        String userId = principal.getUserId();
 
         log.info("Get current {} user.", userId);
 
@@ -73,11 +73,11 @@ public class UserRestController extends RestApiController {
 
     @PreAuthorize("isAuthenticated()")
     @PutMapping("/update-password")
-    public ResponseEntity<Void> updatePassword(Principal principal, @Valid @NotNull @RequestBody UpdateUserPasswordPayload updateUserPasswordPayload) {
-        log.info("Update current {} user password.", principal.getName());
+    public ResponseEntity<Void> updatePassword(CustomOAuth2AuthenticatedPrincipal principal, @Valid @NotNull @RequestBody UpdateUserPasswordPayload updateUserPasswordPayload) {
+        log.info("Update current {} user password.", principal.getUserId());
 
         userService.updateUserPassword(
-            principal.getName(),
+            principal.getUserId(),
             updateUserPasswordPayload.getOldPassword(),
             updateUserPasswordPayload.getNewPassword()
         );
@@ -102,17 +102,17 @@ public class UserRestController extends RestApiController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/change-avatar")
-    public ResponseEntity<String> changeAvatar(@RequestParam(value = "avatar") MultipartFile avatar, Principal principal) throws IOException {
-        log.info("Change user avatar for user: {}", principal.getName());
-        String avatarFileName = userService.changeAvatar(avatar.getBytes(), principal.getName());
+    public ResponseEntity<String> changeAvatar(@RequestParam(value = "avatar") MultipartFile avatar, CustomOAuth2AuthenticatedPrincipal principal) throws IOException {
+        log.info("Change user avatar for user: {}", principal.getUserId());
+        String avatarFileName = userService.changeAvatar(avatar.getBytes(), principal.getUserId());
         return ResponseEntity.ok(avatarFileName);
     }
 
     @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/remove-avatar")
-    public ResponseEntity<Void> removeAvatar(Principal principal) {
-        log.info("Remove user avatar for user {}", principal.getName());
-        userService.removeAvatar(principal.getName());
+    public ResponseEntity<Void> removeAvatar(CustomOAuth2AuthenticatedPrincipal principal) {
+        log.info("Remove user avatar for user {}", principal.getUserId());
+        userService.removeAvatar(principal.getUserId());
         return ResponseEntity.ok().build();
     }
 }

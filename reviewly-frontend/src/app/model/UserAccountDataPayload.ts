@@ -1,7 +1,5 @@
 export class UserAccountDataPayload {
 
-    userName: string = "";
-
     email: string = "";
 
     fullName: string = "";

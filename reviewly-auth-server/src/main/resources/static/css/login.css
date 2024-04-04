@@ -1,15 +1,3 @@
-@font-face {
-  font-family: "Outfit-Medium";
-  src: url("/fonts/Outfit-Medium.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 500;
-}
-@font-face {
-  font-family: "Outfit-Regular";
-  src: url("/fonts/Outfit-Regular.ttf") format("truetype");
-  font-style: normal;
-  font-weight: 400;
-}
 a {
   text-decoration: none;
 }
@@ -606,8 +594,20 @@ html body {
   font-size: 16px;
   font-weight: 400;
 }
-.page.login .page-content .section .login-form-container .login-form .submit {
+.page.login .page-content .section .login-form-container .login-form .submit,
+.page.login .page-content .section .login-form-container .login-form .social-login {
   width: 100%;
+  font-size: 14px;
+}
+
+.page.login .page-content .section .login-form-container .login-form .submit .icon,
+.page.login .page-content .section .login-form-container .login-form .social-login .icon {
+  width: 14px;
+  height: 14px;
+}
+
+.page.login .page-content .section .login-form-container .login-form .social-login {
+  margin-bottom: 10px;
 }
 .page.login .page-content .section .login-form-container .or {
   display: block;

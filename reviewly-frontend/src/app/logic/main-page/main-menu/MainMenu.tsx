@@ -5,10 +5,9 @@ import {User} from "../../../model/User";
 import UserInfo from "./UserInfo";
 import {Button} from "../../../components/button/Button";
 import {MainPageNavigation} from "../MainPageStore";
-import ApplicationProperties from "../../../service/ApplicationProperties";
 import {useLogger} from "../../../utils/Logger";
 import LocalTokenStorageService from "../../../service/authorization/LocalTokenStorageService";
-import {nativeNavigateTo} from "../../../utils/NavigationUtils";
+import {nativeNavigateToAuthLogoutPageUrl} from "../../../utils/NavigationUtils";
 import {useExtensionService} from "../../../service/extension/ExtensionService";
 import {Icon, IconType} from "../../../components/icon/Icon";
 import "./MainMenu.less";
@@ -35,7 +34,7 @@ const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
         .catch(reason => logger.error(reason))
         .finally(() => {
             logger.debug("Redirect to auth server logout page");
-            nativeNavigateTo(ApplicationProperties.authLogoutPageUrl);
+            nativeNavigateToAuthLogoutPageUrl();
         });
     }
 

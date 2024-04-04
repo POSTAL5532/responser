@@ -52,7 +52,7 @@ spring:
     oauth2:
       resourceserver:
         jwt:
-          issuer-uri: http://reviewly-local-dev/auth
+          issuer-uri: http://local-dev-reviewly.space/auth
   mail:
     host: smtp.office365.com
     port: 587
@@ -65,7 +65,7 @@ spring:
         enable: true
 reviewly:
   runMode: LOCAL
-  selfHost: http://reviewly-local-dev
+  selfHost: http://local-dev-reviewly.space
   feApplicationUrl: ${reviewly.selfHost}/app
   authApplicationUrl: ${reviewly.selfHost}/auth
   authLoginPageUrl: ${reviewly.authApplicationUrl}/oauth2/authorize

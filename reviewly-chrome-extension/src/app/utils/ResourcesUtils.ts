@@ -11,6 +11,10 @@ export const getUserAvatarUrl = (user: User): string => {
         return ApplicationProperties.userAvatarsStorageUrl + "/" + ApplicationProperties.defaultUserAvatarFileName;
     }
 
+    if (user.avatarFileName.startsWith("http://") || user.avatarFileName.startsWith("https://")) {
+        return user.avatarFileName;
+    }
+
     return ApplicationProperties.userAvatarsStorageUrl + "/" + user.avatarFileName;
 }
 
