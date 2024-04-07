@@ -1397,14 +1397,14 @@
   font-size: 60px;
   font-weight: 400;
   width: 600px;
-  margin: 0 0 30px;
+  margin: 0 0 50px;
   text-align: center;
   color: #404038;
   line-height: 100%;
 }
 @media only screen and (min-width: 1920px) {
   .page.index .page-content .section.contact-us .contact-us-header-container .contact-us-header {
-    font-size: 70px;
+    font-size: 60px;
     width: 700px;
   }
 }
@@ -1416,6 +1416,13 @@
   margin: 0;
   text-align: center;
   color: rgba(0, 0, 0, 0.6);
+}
+.page.index .page-content .section.contact-us .contact-us-header-container .email-link {
+  font-size: 50px;
+}
+.page.index .page-content .section.contact-us .contact-us-header-container .email-link .icon {
+  height: 44px;
+  width: 44px;
 }
 .page.index .page-content .section.contact-us .contact-us-form {
   display: flex;
@@ -1431,9 +1438,12 @@
 .page.index .page-content .section.contact-us .contact-us-form .user-info-container .field-container {
   flex: 1;
 }
-.page.index .page-content .section.contact-us .contact-us-form .field-container.text {
+.page.index .page-content .section.contact-us .contact-us-form .text-area-container.text {
   width: 650px;
   margin-bottom: 40px;
+}
+.page.index .page-content .section.contact-us .contact-us-form .text-area-container.text .text-area {
+  height: 150px;
 }
 .page.index .page-content .section.contact-us .contact-us-form .submit-form {
   width: 200px;

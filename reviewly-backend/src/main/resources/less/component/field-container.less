@@ -49,6 +49,16 @@
         .fontOutfitMedium(12px);
     }
 
+    &.disabled {
+        .input-container {
+            opacity: 0.5;
+
+            .field-input {
+                pointer-events: none;
+            }
+        }
+    }
+
     &.error {
         .input-container {
             border: solid 1px @red;

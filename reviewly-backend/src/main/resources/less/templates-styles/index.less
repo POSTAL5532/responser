@@ -1399,13 +1399,13 @@
                     .contact-us-header {
                         .fontOutfitRegular(60px);
                         width: 600px;
-                        margin: 0 0 30px;
+                        margin: 0 0 50px;
                         text-align: center;
                         color: @brown-dark;
                         line-height: 100%;
 
                         .adaptationDesktop({
-                            font-size: 70px;
+                            font-size: 60px;
                             width: 700px;
                         });
                     }
@@ -1416,6 +1416,15 @@
                         margin: 0;
                         text-align: center;
                         color: @black-alpha-60;
+                    }
+
+                    .email-link {
+                        font-size: 50px;
+
+                        .icon {
+                            height: 44px;
+                            width: 44px;
+                        }
                     }
                 }
 
@@ -1435,9 +1444,13 @@
                         }
                     }
 
-                    .field-container.text {
+                    .text-area-container.text {
                         width: 650px;
                         margin-bottom: 40px;
+
+                        .text-area {
+                            height: 150px;
+                        }
                     }
 
                     .submit-form {

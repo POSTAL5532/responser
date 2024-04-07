@@ -1441,37 +1441,54 @@
                 <h2 class="contact-us-header">
                     Do you have questions or suggestions? Contact us
                 </h2>
-                <p class="contact-us-text">
+
+                <!--<p class="contact-us-text">
                     Create your own unique contact groups, with the ability of editing the group
-                </p>
+                </p>-->
+
+                <a class="link email-link" href="mailto:info@reviewly.space">
+                    info@reviewly.space
+                    <svg class="icon link" width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <rect x="0.791016" y="0.344727" width="30" height="30" rx="8" fill="#605C55"/>
+                        <path d="M13.541 19.8447L18.041 15.3447L13.541 10.8447" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </a>
             </div>
-            <div class="contact-us-form">
+            <!--<div class="contact-us-form">
                 <div class="user-info-container">
                     <div class="field-container user-name">
                         <div class="input-container">
-                            <input class="field-input" type="text" placeholder="Name">
+                            <input id="contact-form-name" class="field-input" type="text" name="text" placeholder="Name">
                         </div>
+                        <span class="field-message"></span>
                     </div>
                     <div class="field-container user-email">
                         <div class="input-container">
-                            <input class="field-input" type="email" placeholder="E-mail">
+                            <input id="contact-form-email" class="field-input" type="email" name="email" placeholder="E-mail">
                         </div>
+                        <span class="field-message"></span>
                     </div>
                 </div>
-                <div class="field-container text">
-                    <div class="input-container">
-                        <input class="field-input" type="text" placeholder="Text">
+                <div class="text-area-container text">
+                    <div class="text-area">
+                        <textarea id="contact-form-text" name="text" placeholder="Text"></textarea>
                     </div>
+                    <span class="field-message"></span>
                 </div>
 
-                <button class="button primary submit-form">
-                    <svg class="icon checked" width="15" height="10" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M13.5029 1L5.25293 9.25L1.50293 5.5" stroke="black" stroke-opacity="0.6" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                    </svg>
+                <button class="button primary submit-form" id="submit-contact-form">
                     Submit
                 </button>
-            </div>
+            </div>-->
         </section>
+
+        <!--<div id="submit-contact-form-result-modal" class="modal-container submit-contact-form-result-modal">
+            <div class="modal">
+                <div class="modal-body">
+                    <button id="close-submit-contact-form-result-modal" class="button primary">Ok</button>
+                </div>
+            </div>
+        </div>-->
 
         <section class="section" style="display: none">
             <div style="padding: 40px; border: dashed 1px black">

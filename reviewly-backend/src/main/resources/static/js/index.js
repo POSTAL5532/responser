@@ -239,4 +239,111 @@ window.addEventListener('load', (event) => {
     $(function () {
         $(".question").click(toggleQuestionItem);
     });
+
+    $(function () {
+        const disabledClass = "disabled";
+        const fieldMessageClass = ".field-message";
+        const errorClass = "error";
+
+        const submitContactFormBtn = $("#submit-contact-form");
+
+        const nameField = $("#contact-form-name");
+        const nameFieldParent = nameField.closest(".field-container");
+        nameField.change(function () {
+            nameFieldParent.removeClass(errorClass);
+            nameFieldParent.children(fieldMessageClass).text("");
+        });
+
+        const emailField = $("#contact-form-email");
+        const emailFieldParent = emailField.closest(".field-container");
+        emailField.change(function () {
+            emailFieldParent.removeClass(errorClass);
+            emailFieldParent.children(fieldMessageClass).text("");
+        });
+
+        const textField = $("#contact-form-text");
+        const textFieldParent = textField.closest(".text-area-container");
+        textField.change(function () {
+            textFieldParent.removeClass(errorClass);
+            textFieldParent.children(fieldMessageClass).text("");
+        });
+
+        const submitContactFormResultModal = $("#submit-contact-form-result-modal");
+
+        const validate = (values) => {
+            let result = true;
+
+            if (!values.name) {
+                nameFieldParent.addClass(errorClass);
+                nameFieldParent.children(fieldMessageClass).text("Name can't be empty.");
+                result = false;
+            }
+            if (!values.email) {
+                emailFieldParent.addClass(errorClass);
+                emailFieldParent.children(fieldMessageClass).text("Email can't be empty.");
+                result = false;
+            }
+            if (!values.text) {
+                textFieldParent.addClass(errorClass);
+                textFieldParent.children(fieldMessageClass).text("Text can't be empty.");
+                result = false;
+            }
+
+            return result;
+        }
+
+        const toggleFieldsEnabled = (enabled = true) => {
+            if (!enabled) {
+                submitContactFormBtn.addClass(disabledClass);
+                submitContactFormBtn.text("Wait...");
+
+                nameFieldParent.addClass(disabledClass);
+                emailFieldParent.addClass(disabledClass);
+                textFieldParent.addClass(disabledClass);
+            } else {
+                nameFieldParent.removeClass(disabledClass);
+                emailFieldParent.removeClass(disabledClass);
+                textFieldParent.removeClass(disabledClass);
+
+                submitContactFormBtn.removeClass(disabledClass);
+                submitContactFormBtn.text("Submit");
+            }
+        }
+
+        submitContactFormBtn.click(function () {
+            const values = {
+                name: nameField.val(),
+                email: emailField.val(),
+                text: textField.val()
+            }
+
+            const validationResult = validate(values);
+
+            if (!validationResult) {
+                return;
+            }
+
+            toggleFieldsEnabled(false);
+
+            $.ajax({
+                method: "POST",
+                url: "/api/email-confirmation/contact-form",
+                data: JSON.stringify(values),
+                contentType: "application/json",
+                success: () => {
+                    submitContactFormResultModal.css("display", "flex");
+
+                    nameField.val("");
+                    emailField.val("");
+                    textField.val("");
+
+                    toggleFieldsEnabled(true);
+                }
+            });
+        });
+
+        $("#close-submit-contact-form-result-modal").click(function () {
+            submitContactFormResultModal.css("display", "none");
+        });
+    });
 });
