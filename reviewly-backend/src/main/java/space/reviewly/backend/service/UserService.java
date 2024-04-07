@@ -1,9 +1,11 @@
 package space.reviewly.backend.service;
 
+import java.util.Set;
 import space.reviewly.backend.config.ApplicationProperties;
 import space.reviewly.backend.exceptions.DataNotValidException;
 import space.reviewly.backend.model.EmailConfirmation;
 import space.reviewly.backend.model.PasswordRestore;
+import space.reviewly.backend.model.Role;
 import space.reviewly.backend.model.User;
 import space.reviewly.backend.model.User_;
 import space.reviewly.backend.repository.UserRepository;
@@ -52,6 +54,8 @@ public class UserService {
 
     private final ApplicationProperties applicationProperties;
 
+    private final RoleService roleService;
+
     public User getUser(String userId) {
         return userRepository.findById(userId).orElseThrow(() -> {
             log.error("User with id {} doesn't exist", userId);
@@ -65,6 +69,12 @@ public class UserService {
 
         newUser.setEmailConfirmed(false);
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+
+        Role defaultRole = roleService.getDefaultRole();
+
+        if (defaultRole != null) {
+            newUser.setRoles(Set.of(defaultRole));
+        }
 
         userRepository.save(newUser);
         EmailConfirmation emailConfirmation = emailConfirmationService.createEmailConfirmation(newUser.getId());
@@ -169,38 +179,36 @@ public class UserService {
         user.setAvatarFileName(newAvatarFileName);
         updateUser(user);
 
-        if (StringUtils.isNotBlank(oldAvatarFileName) &&
-            !applicationProperties.getDefaultUserAvatarFileName().equals(oldAvatarFileName) &&
-            !StringUtils.startsWithAny(oldAvatarFileName, "http://", "https://")) {
-
-            fileResourceService.removeUserAvatar(oldAvatarFileName);
-        }
+        removeAvatarFromFileStore(oldAvatarFileName);
 
         return newAvatarFileName;
     }
 
     @Transactional
-    public String removeAvatar(String userId) {
+    public void removeAvatar(String userId) {
         User user = getUser(userId);
 
         String oldAvatarFileName = user.getAvatarFileName();
-        String newAvatarFileName = applicationProperties.getDefaultUserAvatarFileName();
 
         user.setAvatarFileName(null);
         updateUser(user);
-
-        if (StringUtils.isNotBlank(oldAvatarFileName) && !applicationProperties.getDefaultUserAvatarFileName().equals(oldAvatarFileName)) {
-            fileResourceService.removeUserAvatar(oldAvatarFileName);
-        }
-
-        return newAvatarFileName;
+        removeAvatarFromFileStore(oldAvatarFileName);
     }
 
     public boolean existByEmail(String email) {
         return userRepository.existsByEmail(email);
     }
 
-    public void validateUpdateUserData(User existingUser, User userUpdates) {
+    private void removeAvatarFromFileStore(String filename) {
+        if (StringUtils.isNotBlank(filename) &&
+            !applicationProperties.getDefaultUserAvatarFileName().equals(filename) &&
+            !StringUtils.startsWithAny(filename, "http://", "https://")) {
+
+            fileResourceService.removeUserAvatar(filename);
+        }
+    }
+
+    private void validateUpdateUserData(User existingUser, User userUpdates) {
         Map<String, List<String>> fieldsErrors = new HashMap<>();
 
         if (!existingUser.getEmail().equals(userUpdates.getEmail()) && existByEmail(userUpdates.getEmail())) {

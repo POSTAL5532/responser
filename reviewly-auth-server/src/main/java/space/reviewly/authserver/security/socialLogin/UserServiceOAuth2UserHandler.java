@@ -20,6 +20,7 @@ import space.reviewly.authserver.service.UserService;
 public class UserServiceOAuth2UserHandler implements Consumer<OidcUser> {
 
     private final UserService userService;
+
     private final RoleService roleService;
 
     @Override
