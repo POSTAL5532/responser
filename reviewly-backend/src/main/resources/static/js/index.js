@@ -1,6 +1,4 @@
 window.addEventListener('load', (event) => {
-    console.log('The page has fully loaded');
-
     gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
     const initParallax = (parallaxItem, parallaxStartTrigger, start) => {
@@ -15,9 +13,9 @@ window.addEventListener('load', (event) => {
         });
     }
 
-// ====================================
-// === HOW IT WORKS CARDS SCROLLING ===
-// ====================================
+    // ====================================
+    // === HOW IT WORKS CARDS SCROLLING ===
+    // ====================================
     const howItWorksTimeLine = gsap.timeline();
     howItWorksTimeLine
     .to(".card-2", {top: 0}, "card-2")
@@ -34,7 +32,7 @@ window.addEventListener('load', (event) => {
         scrub: 1.5
     });
 
-// click scroll - doesn't work
+    // click scroll - doesn't work
     /*gsap.utils.toArray(".how-it-works .card .card-header").forEach(function(a) {
         a.addEventListener("click", function(e) {
             const percent = howItWorksTimeLine.labels[e.target.getAttribute("data-jump")] / howItWorksTimeLine.totalDuration();
@@ -43,9 +41,9 @@ window.addEventListener('load', (event) => {
         });
     });*/
 
-// =================================
-// === EXTENSION DEMO SCROLL PIN ===
-// =================================
+    // =================================
+    // === EXTENSION DEMO SCROLL PIN ===
+    // =================================
     const extensionDemoContentClass = ".extension-demo-content";
     const extensionDemoScreenClass = ".extension-demo-screen";
     const screenScale = 1.15;
@@ -87,9 +85,9 @@ window.addEventListener('load', (event) => {
         }
     });
 
-// =================================================
-// === EXTENSION HEADER DEMO DECORATOR ANIMATION ===
-// =================================================
+    // =================================================
+    // === EXTENSION HEADER DEMO DECORATOR ANIMATION ===
+    // =================================================
     const extensionDemoDecoratorAnimation = new Vivus('extension-demo-header-decorator', {start: "manual", duration: 150});
     ScrollTrigger.create({
         trigger: ".extension-demo",
@@ -102,30 +100,30 @@ window.addEventListener('load', (event) => {
         markers: false,
     });
 
-// ======================================
-// === HONEST REVIEWS IMAGES PARALLAX ===
-// ======================================
+    // ======================================
+    // === HONEST REVIEWS IMAGES PARALLAX ===
+    // ======================================
     initParallax(".jacob-container", ".honest-reviews", "center center");
     initParallax(".noah-container", ".honest-reviews", "center center");
     initParallax(".backy-container", ".honest-reviews", "center center");
 
-// ====================================
-// === QUICK ACCESS IMAGES PARALLAX ===
-// ====================================
+    // ====================================
+    // === QUICK ACCESS IMAGES PARALLAX ===
+    // ====================================
     initParallax(".extension-bg", ".quick-access", "center center");
     initParallax(".google-rating-container", ".quick-access", "center center");
     initParallax(".amazon-rating-container", ".quick-access", "center center");
 
-// ====================================
-// === QUICK ACCESS IMAGES PARALLAX ===
-// ====================================
+    // ====================================
+    // === QUICK ACCESS IMAGES PARALLAX ===
+    // ====================================
     initParallax(".product-container", ".ease-of-use", "center center");
     initParallax(".piers-card", ".ease-of-use", "center center");
     initParallax(".ellis-card", ".ease-of-use", "center center");
 
-// =============================================
-// === ADVENTURES BACKGROUND COLOR ANIMATION ===
-// =============================================
+    // =============================================
+    // === ADVENTURES BACKGROUND COLOR ANIMATION ===
+    // =============================================
     ScrollTrigger.create({
         trigger: ".honest-reviews",
         start: '-=400 top',
@@ -137,9 +135,9 @@ window.addEventListener('load', (event) => {
         markers: false
     });
 
-// ======================================
-// === HONEST REVIEWS ICONS ANIMATION ===
-// ======================================
+    // ======================================
+    // === HONEST REVIEWS ICONS ANIMATION ===
+    // ======================================
     const honestReviewsTimeLine = gsap.timeline({
         scrollTrigger: {
             trigger: ".honest-reviews",
@@ -155,9 +153,9 @@ window.addEventListener('load', (event) => {
     .to(".send-icon", 0.2, {scale: 1})
     .to(".rating-icon", 0.2, {scale: 1});
 
-// ======================================
-// ==== QUICK ACCESS ICONS ANIMATION ====
-// ======================================
+    // ======================================
+    // ==== QUICK ACCESS ICONS ANIMATION ====
+    // ======================================
     const quickAccessTimeLine = gsap.timeline({
         scrollTrigger: {
             trigger: ".quick-access",
@@ -170,9 +168,9 @@ window.addEventListener('load', (event) => {
     .to(".google-rating", 0.5, {scale: 1, opacity: 1, ease: "back.out(4)"})
     .to(".amazon-rating", 0.5, {scale: 1, opacity: 1, ease: "back.out(4)"});
 
-// =====================================
-// ==== EASE OF USE ICONS ANIMATION ====
-// =====================================
+    // =====================================
+    // ==== EASE OF USE ICONS ANIMATION ====
+    // =====================================
     const easeOfUseTimeLine = gsap.timeline({
         scrollTrigger: {
             trigger: ".ease-of-use",
@@ -185,25 +183,9 @@ window.addEventListener('load', (event) => {
     .to(".piers-card", 0.5, {scale: 1})
     .to(".ellis-card", 0.5, {scale: 1});
 
-// ============================================
-// === FEEDBACKS HEADER DECORATOR ANIMATION ===
-// ============================================
-    const feedbacksHeaderDecoratorAnimation = new Vivus('feedbacks-header-decorator', {start: "manual", duration: 150});
-    ScrollTrigger.create({
-        trigger: ".feedbacks",
-        start: 'center 60%',
-        end: 'center center',
-        onEnter: () => {
-            console.log("ON ENTER")
-            feedbacksHeaderDecoratorAnimation.stop().reset().play()
-        },
-        once: true,
-        markers: false,
-    });
-
-// ===============================
-// ====== FEEDBACKS GALLERY ======
-// ===============================
+    // ===============================
+    // ====== FEEDBACKS GALLERY ======
+    // ===============================
     let slider = tns({
         loop: true,
         container: '.feedbacks-gallery',
@@ -221,7 +203,25 @@ window.addEventListener('load', (event) => {
         swipeAngle: false,
         center: true,
         mouseDrag: true,
-        preventScrollOnTouch: "force"
+        preventScrollOnTouch: "force",
+        onInit: () => {
+            ScrollTrigger.refresh();
+        }
+    });
+
+    // ============================================
+    // === FEEDBACKS HEADER DECORATOR ANIMATION ===
+    // ============================================
+    const feedbacksHeaderDecoratorAnimation = new Vivus('feedbacks-header-decorator', {start: "manual", duration: 150});
+    ScrollTrigger.create({
+        trigger: ".feedbacks",
+        start: 'center 60%',
+        end: 'center center',
+        onEnter: () => {
+            feedbacksHeaderDecoratorAnimation.stop().reset().play()
+        },
+        once: true,
+        markers: false
     });
 
     function toggleQuestionItem() {
@@ -240,7 +240,10 @@ window.addEventListener('load', (event) => {
         $(".question").click(toggleQuestionItem);
     });
 
-    $(function () {
+// ===============================
+// ======= CONTACT US FORM =======
+// ===============================
+    /*$(function () {
         const disabledClass = "disabled";
         const fieldMessageClass = ".field-message";
         const errorClass = "error";
@@ -345,5 +348,5 @@ window.addEventListener('load', (event) => {
         $("#close-submit-contact-form-result-modal").click(function () {
             submitContactFormResultModal.css("display", "none");
         });
-    });
+    });*/
 });
