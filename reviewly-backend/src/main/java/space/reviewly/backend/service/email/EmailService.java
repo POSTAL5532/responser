@@ -100,27 +100,6 @@ public class EmailService {
         }
     }
 
-    public void sendContactFormDataEmail(String name, String email, String text) {
-        Map<String, Object> templateProperties = new HashMap<>();
-        templateProperties.put("submitterName", name);
-        templateProperties.put("submitterEmail", email);
-        templateProperties.put("text", text);
-
-        EmailContext emailContext = buildEmailContext(
-            "Reviewly: Contact form submitted by user",
-            applicationProperties.getReviewlyInfoEmail(),
-            EmailTemplate.CONTACT_FORM_SUBMISSION_TEMPLATE,
-            templateProperties
-        );
-
-        try {
-            sendEmailMessage(emailContext);
-        } catch (MessagingException e) {
-            log.error("Send email with restore password link fail", e);
-            throw new RuntimeException(e);
-        }
-    }
-
     public EmailContext buildEmailContext(String subject, String to, EmailTemplate template, Map<String, Object> templateProperties) {
         EmailContext emailContext = new EmailContext();
         emailContext.setFrom("Reviewly team <" + applicationProperties.getReviewlyInfoEmail() + ">");

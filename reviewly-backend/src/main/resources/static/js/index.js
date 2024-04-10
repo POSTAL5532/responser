@@ -243,7 +243,7 @@ window.addEventListener('load', (event) => {
 // ===============================
 // ======= CONTACT US FORM =======
 // ===============================
-    /*$(function () {
+    $(function () {
         const disabledClass = "disabled";
         const fieldMessageClass = ".field-message";
         const errorClass = "error";
@@ -276,19 +276,26 @@ window.addEventListener('load', (event) => {
         const validate = (values) => {
             let result = true;
 
-            if (!values.name) {
+            if (!values.username || values.username.length < 2 || values.username.length > 225) {
                 nameFieldParent.addClass(errorClass);
-                nameFieldParent.children(fieldMessageClass).text("Name can't be empty.");
+                nameFieldParent.children(fieldMessageClass).text("Name can't be empty and must be between 2 and 255 characters.");
                 result = false;
             }
+
+            const emailRegexp = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
             if (!values.email) {
                 emailFieldParent.addClass(errorClass);
                 emailFieldParent.children(fieldMessageClass).text("Email can't be empty.");
                 result = false;
+            } else if (!values.email.match(emailRegexp)) {
+                emailFieldParent.addClass(errorClass);
+                emailFieldParent.children(fieldMessageClass).text("Email must be an email string (example youremail@domain.com).");
+                result = false;
             }
-            if (!values.text) {
+
+            if (!values.text || values.text.length < 2 || values.text.length > 1000) {
                 textFieldParent.addClass(errorClass);
-                textFieldParent.children(fieldMessageClass).text("Text can't be empty.");
+                textFieldParent.children(fieldMessageClass).text("Text can't be empty and must be between 2 and 1000 characters.");
                 result = false;
             }
 
@@ -315,7 +322,7 @@ window.addEventListener('load', (event) => {
 
         submitContactFormBtn.click(function () {
             const values = {
-                name: nameField.val(),
+                username: nameField.val(),
                 email: emailField.val(),
                 text: textField.val()
             }
@@ -330,7 +337,7 @@ window.addEventListener('load', (event) => {
 
             $.ajax({
                 method: "POST",
-                url: "/api/email-confirmation/contact-form",
+                url: "/api/contact-form",
                 data: JSON.stringify(values),
                 contentType: "application/json",
                 success: () => {
@@ -348,5 +355,5 @@ window.addEventListener('load', (event) => {
         $("#close-submit-contact-form-result-modal").click(function () {
             submitContactFormResultModal.css("display", "none");
         });
-    });*/
+    });
 });

@@ -21,7 +21,7 @@ CREATE TABLE role
 CREATE TABLE user_role
 (
     user_id VARCHAR(36) REFERENCES users (id) NOT NULL,
-    role_id VARCHAR(36) REFERENCES role (id)      NOT NULL
+    role_id VARCHAR(36) REFERENCES role (id)  NOT NULL
 );
 
 CREATE TABLE authority
@@ -91,12 +91,13 @@ CREATE TABLE reviews_likes
     PRIMARY KEY (id)
 );
 
-CREATE TABLE review_meta_image
+CREATE TABLE contact_form
 (
-    id            VARCHAR(36) NOT NULL UNIQUE,
-    review_id     VARCHAR(36) NOT NULL UNIQUE REFERENCES reviews (id) ON DELETE CASCADE,
-    image         BYTEA       NOT NULL,
-    creation_date TIMESTAMP   NOT NULL,
+    id            VARCHAR(36)  NOT NULL UNIQUE,
+    username      VARCHAR(255) NOT NULL,
+    email         VARCHAR(255) NOT NULL,
+    text          TEXT NOT NULL,
+    creation_date TIMESTAMP    NOT NULL,
     update_date   TIMESTAMP,
     PRIMARY KEY (id)
 );

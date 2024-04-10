@@ -458,3 +458,15 @@ VALUES
     ('00000000-0000-0000-like-000000000109', '00000000-0000-0000-user-000000000008', '00000000-0000-0000-0019-000000review', false, '2023-11-04 13:00:15'),
     ('00000000-0000-0000-like-000000000110', '00000000-0000-0000-user-000000000009', '00000000-0000-0000-0019-000000review', true, '2023-11-04 14:15:30'),
     ('00000000-0000-0000-like-000000000111', '00000000-0000-0000-user-000000000010', '00000000-0000-0000-0019-000000review', false, '2023-11-04 14:30:45');
+
+INSERT INTO contact_form (id, username, email, text, creation_date)
+VALUES ('00000000-0000-cont-form-000000000001',
+        'Igor Shcherbachenya',
+        'user1@rmail.com',
+        '111 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        '2023-11-04 12:34:56'),
+       ('00000000-0000-cont-form-000000000002',
+        'Jane Doe',
+        'user2@rmail.com',
+        '222 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        '2023-11-05 12:34:56');

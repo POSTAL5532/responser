@@ -6,8 +6,7 @@ import lombok.Getter;
 public enum EmailTemplate {
     EMAIL_CONFIRMATION_TEMPLATE("emailConfirmationEmailTemplate"),
     RESTORE_PASSWORD_TEMPLATE("restorePasswordEmailTemplate"),
-    PASSWORD_CHANGED_NOTIFICATION_TEMPLATE("passwordChangedNotificationEmailTemplate"),
-    CONTACT_FORM_SUBMISSION_TEMPLATE("contactFormEmailTemplate");
+    PASSWORD_CHANGED_NOTIFICATION_TEMPLATE("passwordChangedNotificationEmailTemplate");
 
     private final String templateName;
 
