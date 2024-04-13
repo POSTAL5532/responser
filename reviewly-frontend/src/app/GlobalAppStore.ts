@@ -17,8 +17,6 @@ export class GlobalAppStore {
 
     isLoading: boolean = false;
 
-    hideHeader: boolean = false;
-
     errorsStore = new ErrorsStore();
 
     appPageClassName: string = null;

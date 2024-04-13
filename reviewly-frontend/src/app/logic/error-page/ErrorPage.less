@@ -1,0 +1,48 @@
+@import "globalsLess";
+
+.page-content.error-content {
+    display: flex;
+    width: 100%;
+    max-width: 1860px;
+    flex: 1;
+
+    background-color: rgba(159, 143, 135, 0.08);
+    border-radius: 20px;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+
+    .adaptationComplex(
+    {
+        margin-top: 98px;
+    },
+    {
+        margin-top: 90px;
+    },
+    {
+        margin-top: 90px;
+    },
+    {
+        margin-top: 70px;
+    }
+    );
+
+    .error-page-header {
+        margin: 0 0 30px;
+        .fontOutfitRegular(60px);
+        color: @black-alpha-60;
+    }
+
+    .error-page-description, .or {
+        .fontOutfitRegular(24px);
+        color: @black-alpha-60;
+        margin: 0 0 20px;
+    }
+
+    .go-back-link {
+        .icon {
+            transform: rotate(180deg);
+        }
+    }
+}
