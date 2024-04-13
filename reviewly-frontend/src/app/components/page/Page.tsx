@@ -24,7 +24,6 @@ const Page: React.FC<PropsWithChildren<PageProps>> = (props: PropsWithChildren<P
 
     useEffect(() => {
         if (globalAppStore.errorsStore.hasErrors) {
-            console.log(globalAppStore.errorsStore.errors);
             throw new Error("Application has errors");
         }
     }, [globalAppStore.errorsStore.hasErrors]);

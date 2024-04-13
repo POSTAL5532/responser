@@ -11,7 +11,7 @@ type AppHeaderProps = {
 
 export const AppHeader: React.FC<AppHeaderProps> = (props: AppHeaderProps) => {
     const {headerLabel = "Reviewly", className, children} = props;
-    const resultClassName = classNames("header", className);
+    const resultClassName = classNames("header", {"with-additional-content": !!children}, className);
 
     return (
         <header className={resultClassName}>

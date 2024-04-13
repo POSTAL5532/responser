@@ -4,7 +4,7 @@ import ReviewsPage, {REVIEWS_PAGE_URL} from "./logic/reviews/ReviewsPage";
 import {AuthorizedRoute, PermitAllRoute} from "./components/CustomRoute";
 import {GlobalAppStore, GlobalAppStoreContext} from "./GlobalAppStore";
 import EditReviewPage, {EDIT_REVIEW_PAGE_URL} from "./logic/edit-review/EditReviewPage";
-import ErrorPage from "./logic/ErrorPage";
+import ErrorPage from "./logic/error-page/ErrorPage";
 import {ErrorBoundary} from "react-error-boundary";
 import "app/App.less";
 import 'react-loading-skeleton/dist/skeleton.css'
