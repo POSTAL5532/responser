@@ -25,8 +25,8 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
 });
 
 const reviewlyLogo = `<div class="reviewly-logo">
-<svg width="228" height="228" viewBox="0 0 228 228" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path fill-rule="evenodd" clip-rule="evenodd" d="M0 13.9996C0 6.26782 6.26782 0 13.9996 0H91.2581C100.95 0 107.71 9.6113 104.433 18.7328L79.778 87.3624C76.5011 96.4838 83.2609 106.095 92.9531 106.095L213.309 106.096C221.041 106.096 227.308 112.364 227.308 120.096V214C227.308 221.732 221.04 227.999 213.309 227.999L206.02 227.999C202.73 227.999 199.545 226.84 197.024 224.726L84.3875 130.255C76.9245 123.995 65.5091 127.081 62.2159 136.248L32.5828 218.734C30.5857 224.293 25.3145 228 19.4077 228H13.9996C6.26782 228 0 221.732 0 214V13.9996ZM151.264 48.2095C147.953 57.3378 154.715 66.982 164.425 66.982L214 66.982C221.732 66.982 228 60.7142 228 52.9824V13.9997C228 6.26792 221.732 9.9378e-05 214 9.88327e-05L178.562 9.63335e-05C172.671 9.5918e-05 167.41 3.68836 165.402 9.2267L151.264 48.2095Z" fill="#516DFF"/>
+<svg width="27.88575" height="30.033432" viewBox="0 0 27.88575 30.033432" fill="none" version="1.1" id="svg4" xmlns="http://www.w3.org/2000/svg">
+<path fill-rule="evenodd" clip-rule="evenodd" d="M 0,1.853912 C 0,0.834262 0.775402,0 1.72312,0 h 9.53453 c 1.1775,0 2.0103,1.266842 1.6083,2.471892 l -3.01547,9.02234 c -0.40206,1.2051 0.43077,2.4719 1.60827,2.4719 h 14.7039 c 0.9477,0 1.7231,0.8343 1.7231,1.854 v 12.3594 c 0,1.0196 -0.7754,1.8539 -1.7231,1.8539 h -0.8903 c -0.402,0 -0.8041,-0.1545 -1.0913,-0.4326 l -13.7849,-12.4212 c -0.91901,-0.8343 -2.29751,-0.4326 -2.69957,0.8034 l -3.61854,10.8454 c -0.25847,0.7415 -0.89028,1.205 -1.60824,1.205 H 1.72312 C 0.775402,30.033432 0,29.199132 0,28.179532 Z m 18.49475,4.5112 c -0.402,1.20504 0.4308,2.47189 1.6083,2.47189 h 6.0596 c 0.9477,0 1.7231,-0.83427 1.7231,-1.85392 V 1.853912 C 27.88575,0.834262 27.11035,0 26.16265,0 h -4.3365 c -0.718,0 -1.3498,0.494382 -1.6083,1.205042 l -1.7231,5.12917 z" fill="#404038" id="path2" />
 </svg>
 </div>`
 
@@ -72,14 +72,20 @@ const showRatingPopup = (data) => {
 
     document.body.appendChild(container);
 
-    setTimeout(() => {
-       document.getElementById(REVIEWLY_POPUP_BLOCK_ID).classList.remove("show");
-       document.getElementById(REVIEWLY_POPUP_BLOCK_ID).classList.add("hide");
+    const createdPopup = document.getElementById(REVIEWLY_POPUP_BLOCK_ID);
+
+    const hideCreatedPopup = () => {
+        createdPopup.classList.remove("show");
+        createdPopup.classList.add("hide");
 
         setTimeout(() => {
-            document.getElementById(REVIEWLY_POPUP_BLOCK_ID).remove();
+            createdPopup.remove();
         }, 500);
-    }, 3000);
+    }
+
+    document.getElementById(REVIEWLY_POPUP_BLOCK_ID).onmouseover = hideCreatedPopup
+
+    setTimeout(hideCreatedPopup, 3000);
 }
 
 const getRatingClass = (ratingValue) => {
