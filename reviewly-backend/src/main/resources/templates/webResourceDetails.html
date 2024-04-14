@@ -182,7 +182,7 @@
                     </div>
 
                     <th:block th:each="review, loopState: ${reviews.data}">
-                        <th:block th:replace="~{components/review-card::review-card(review=${review}, needWebResourceDataBlock=true)}"/>
+                        <th:block th:replace="~{components/review-card::review-card(review=${review})}"/>
                     </th:block>
                 </div>
 

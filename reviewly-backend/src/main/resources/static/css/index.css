@@ -919,6 +919,14 @@
   height: 38px;
   width: 46px;
   background-color: #605C55;
+  padding: 0;
+}
+.page.index .page-content .section.feedbacks .feedbacks-header-container .feedbacks-gallery-controls .button .icon {
+  width: 10px;
+  height: 10px;
+}
+.page.index .page-content .section.feedbacks .feedbacks-header-container .feedbacks-gallery-controls .button .icon path {
+  stroke: #FFFFFF;
 }
 .page.index .page-content .section.feedbacks .feedbacks-header-container .feedbacks-gallery-controls .button:hover {
   background-color: rgba(0, 0, 0, 0.25);
@@ -927,12 +935,15 @@
   border-bottom-right-radius: 0;
   border-top-right-radius: 0;
 }
+.page.index .page-content .section.feedbacks .feedbacks-header-container .feedbacks-gallery-controls .button.prev-button .icon {
+  transform: rotate(-90deg);
+}
 .page.index .page-content .section.feedbacks .feedbacks-header-container .feedbacks-gallery-controls .button.next-button {
   border-bottom-left-radius: 0;
   border-top-left-radius: 0;
 }
 .page.index .page-content .section.feedbacks .feedbacks-header-container .feedbacks-gallery-controls .button.next-button .icon {
-  transform: rotate(180deg);
+  transform: rotate(90deg);
 }
 .page.index .page-content .section.feedbacks .feedbacks-gallery-container {
   width: 100%;

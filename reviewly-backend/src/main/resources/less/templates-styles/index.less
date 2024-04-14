@@ -890,6 +890,16 @@
                             height: 38px;
                             width: 46px;
                             background-color: @brown-soft;
+                            padding: 0;
+
+                            .icon {
+                                width: 10px;
+                                height: 10px;
+
+                                path {
+                                    stroke: @white;
+                                }
+                            }
 
                             &:hover {
                                 background-color: @black-alpha-25;
@@ -898,6 +908,10 @@
                             &.prev-button {
                                 border-bottom-right-radius: 0;
                                 border-top-right-radius: 0;
+
+                                .icon {
+                                    transform: rotate(-90deg);
+                                }
                             }
 
                             &.next-button {
@@ -905,7 +919,7 @@
                                 border-top-left-radius: 0;
 
                                 .icon {
-                                    transform: rotate(180deg);
+                                    transform: rotate(90deg);
                                 }
                             }
                         }
