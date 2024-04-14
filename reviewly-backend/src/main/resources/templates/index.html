@@ -34,7 +34,17 @@
     <div class="page-content" layout:fragment="page-content">
         <section class="section intro">
             <h1 class="intro-head">Unlock Honest Feedback for Every Website</h1>
-            <form method="GET" id="criteria-form" th:action="${T(space.reviewly.backend.controller.reviews.ReviewsController).REVIEWS_URL + T(space.reviewly.backend.controller.reviews.ReviewsController).SEE_REVIEWS_URL}">
+
+            <a th:href="${@applicationProperties.downloadExtensionChrome}" class="button primary download-extension-button">
+                <div class="download-extension-button-block">
+                    <th:block th:replace="~{components/svgs::icon-chrome}"/>
+                    <p class="download-extension-text">
+                        Download extension and see reviews for any website which you visit
+                    </p>
+                </div>
+            </a>
+
+            <!--<form method="GET" id="criteria-form" th:action="${T(space.reviewly.backend.controller.reviews.ReviewsController).REVIEWS_URL + T(space.reviewly.backend.controller.reviews.ReviewsController).SEE_REVIEWS_URL}">
                 <div class="field-container">
                     <div class="input-container">
                         <input class="field-input" type="text" placeholder="Enter the site that interests you" name="searchUrl">
@@ -44,13 +54,16 @@
                         </button>
                     </div>
                 </div>
-            </form>
+            </form>-->
 
             <th:block th:replace="~{components/index-svgs::intro-image-extension}"/>
-            <th:block th:replace="~{components/index-svgs::intro-image-reviews}"/>
 
-            <img th:src="@{/img/index/intro-women.png}" class="intro-image women" alt="">
-            <img th:src="@{/img/index/intro-man.png}" class="intro-image man" alt="">
+            <div class="intro-image reviews">
+                <th:block th:replace="~{components/index-svgs::intro-image-reviews}"/>
+            </div>
+
+            <img th:src="@{/img/index/intro-women.jpg}" class="intro-image women" alt="">
+            <img th:src="@{/img/index/intro-man.jpg}" class="intro-image man" alt="">
         </section>
 
         <section class="section how-it-works">
@@ -169,8 +182,7 @@
                     Integrated into the browser and allows you to read reviews and leave your opinion about any site without leaving it.
                 </p>
 
-                <a href="/" class="button primary download">
-                    <!-- chrome.svg -->
+                <a th:href="${@applicationProperties.downloadExtensionChrome}" class="button primary download">
                     <th:block th:replace="~{components/svgs::icon-chrome}"/>
                     Download for chrome
                 </a>

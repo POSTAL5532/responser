@@ -30,17 +30,17 @@ const AppHeader: React.FC = () => {
                     </a>
                 </div>
                 <div className="right-control-container">
-                    <Button onClick={() => nativeNavigateTo("https://www.google.com")}>
+                    <Button styleType={ButtonType.PRIMARY} onClick={() => nativeNavigateTo(ApplicationProperties.downloadExtensionChrome, true)}>
                         <Icon type={IconType.CHROME_LOGO}/>
                         Download for chrome
                     </Button>
 
                     {
                         !!currentUser
-                            ? <Button styleType={ButtonType.PRIMARY} onClick={() => navigateTo(MAIN_PAGE_URL)}>
+                            ? <Button onClick={() => navigateTo(MAIN_PAGE_URL)}>
                                 <Icon type={IconType.USER}/>
                             </Button>
-                            : <Button styleType={ButtonType.PRIMARY} onClick={AuthorizationService.requestLoginPage}>
+                            : <Button onClick={AuthorizationService.requestLoginPage}>
                                 <Icon type={IconType.LOGIN}/> Login
                             </Button>
                     }

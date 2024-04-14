@@ -48,7 +48,7 @@
                 {
                     height: 708px;
                     margin-top: 58px;
-                    padding-top: 126px;
+                    padding-top: 76px;
                 },
                 {
                     height: 606px;
@@ -58,7 +58,7 @@
                 {
                     height: 764px;
                     margin-top: 0;
-                    padding-top: 264px;
+                    padding-top: 274px;
                 },
                 {
                     height: 816px;
@@ -93,6 +93,32 @@
                     );
                 }
 
+                .download-extension-button {
+                    height: auto;
+                    border-radius: 14px;
+
+                    .download-extension-button-block {
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 20px;
+                        padding: 12px 10px;
+
+                        .icon {
+                            height: 30px;
+                            width: 30px;
+                        }
+
+                        .download-extension-text {
+                            font-size: 18px;
+                            margin: 0;
+                            width: 326px;
+                            line-height: 22px;
+                            text-align: center;
+                        }
+                    }
+                }
+
                 .input-container {
                     .adaptationComplex(
                     {
@@ -112,32 +138,52 @@
 
                 .intro-image {
                     position: absolute;
+                    border-radius: 12px;
 
                     &.reviews {
+                        background-color: @lime-alpha-40;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+
                         .adaptationComplex(
                         {
                             top: 0;
                             right:0;
-                            width: 444px;
                             height: 392px;
+                            width: 440px;
+
+                            svg {
+                                transform: scale(1);
+                            }
                         },
                         {
                             top: 0;
                             right:0;
-                            width: 370px;
                             height: 326px;
+                            width: 344px;
+
+                            svg {
+                                transform: scale(0.9);
+                            }
                         },
                         {
                             top: 0;
                             right:0;
-                            width: 278px;
                             height: 244px;
+
+                            svg {
+                                transform: scale(0.9);
+                            }
                         },
                         {
                             top: 0;
-                            right:0;
-                            width: 278px;
-                            height: 244px;
+                            right: 0;
+                            height: 218px;
+
+                            svg {
+                                transform: scale(0.8);
+                            }
                         }
                         );
                     }
@@ -147,25 +193,21 @@
                         {
                             top: 70px;
                             left: -48px;
-                            width: 504px;
                             height: 390px;
                         },
                         {
-                            top: 100px;
-                            left: -134px;
-                            width: 420px;
+                            top: 60px;
+                            left: -24px;
                             height: 326px;
                         },
                         {
-                            top: 510px;
-                            left: -78px;
-                            width: 316px;
+                            top: 544px;
+                            left: -20px;
                             height: 244px;
                         },
                         {
                             top: 510px;
-                            left: -78px;
-                            width: 316px;
+                            left: 14px;
                             height: 244px;
                         }
                         );
@@ -174,27 +216,23 @@
                     &.extension {
                         .adaptationComplex(
                         {
-                            top: 426px;
-                            left: 296px;
-                            width: 396px;
+                            top: 410px;
+                            left: 300px;
                             height: 282px;
                         },
                         {
-                            top: 372px;
+                            top: 364px;
                             left: 222px;
-                            width: 330px;
                             height: 236px;
                         },
                         {
-                            top: 540px;
-                            left: 690px;
-                            width: 248px;
-                            height: 176px;
+                            top: 556px;
+                            right: 0;
+                            height: 204px;
                         },
                         {
-                            top: 637px;
-                            left: 482px;
-                            width: 248px;
+                            top: 540px;
+                            right: 80px;
                             height: 176px;
                         }
                         );
@@ -205,28 +243,478 @@
                         {
                             top: 372px;
                             right: 63px;
-                            width: 366px;
                             height: 276px;
                         },
                         {
-                            top: 302px;
-                            right: -4px;
-                            width: 306px;
+                            top: 346px;
+                            right: 80px;
                             height: 230px;
                         },
                         {
                             top: 26px;
-                            left: 50px;
-                            width: 228px;
-                            height: 172px;
+                            left: 22px;
+                            height: 194px;
                         },
                         {
                             top: 26px;
                             left: -6px;
-                            width: 228px;
-                            height: 172px;
+                            height: 194px;
                         }
                         );
+                    }
+                }
+            }
+
+            &.how-it-works {
+                height: 783px;
+                width: 100%;
+                border-radius: 70px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                position: relative;
+
+                .adaptationMobile({
+                    height: 880px;
+                    border-radius: 50px;
+                });
+
+                .card {
+                    position: absolute;
+                    width: 100%;
+                    display: flex;
+                    flex-direction: row;
+
+                    .adaptationMobile({
+                        flex-direction: column-reverse;
+                        justify-content: flex-end;
+                    });
+
+                    .pseudo-border {
+                        position: absolute;
+                        width: 70px;
+                        height: 70px;
+                        top: -69px;
+
+                        &.left {
+                            left: 0;
+                        }
+
+                        &.right {
+                            right: 0;
+                        }
+
+                        .adaptationMobile({
+                            width: 50px;
+                            height: 50px;
+                            top: -49px;
+                        });
+                    }
+
+                    .card-part {
+                        flex: 1;
+
+                        .adaptationMobile({
+                            flex: unset;
+                            padding-left: 30px;
+                        });
+
+                        &.left {
+                            padding-top: 100px;
+                            padding-left: 60px;
+
+                            .adaptationMobile({
+                                padding-top: 60px;
+                                padding-left: 30px;
+                            });
+
+                            .section-header {
+                                margin: 0;
+                                color: @black-alpha-60;
+
+                                .adaptationComplex(
+                                {
+                                    .fontOutfitRegular(70px);
+                                },
+                                {
+                                    .fontOutfitRegular(70px);
+                                },
+                                {
+                                    .fontOutfitRegular(60px);
+                                },
+                                {
+                                    .fontOutfitRegular(60px);
+                                }
+                                );
+                            }
+
+                            .image-background {
+                                position: relative;
+                                background-color: @beige-dark-alpha-20;
+                                border-radius: 44px;
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+
+                                .adaptationComplex(
+                                {
+                                    width: 780px;
+                                    height: 322px;
+                                },
+                                {
+                                    width: 600px;
+                                    height: 320px;
+                                },
+                                {
+                                    width: 422px;
+                                    height: 310px;
+                                },
+                                {
+                                    width: 668px;
+                                    height: 300px;
+                                    border-radius: 34px;
+                                }
+                                );
+
+                                .how-it-works-image {
+                                    position: absolute;
+                                }
+
+                                .user-avatar {
+                                    position: absolute;
+                                }
+                            }
+                        }
+
+                        &.right {
+                            .card-header {
+                                margin: 32px 0 0 0;
+                                .fontOutfitRegular(30px);
+                                color: @black-alpha-60;
+
+                                .adaptationMobile({
+                                    .fontOutfitRegular(26px);
+                                });
+
+                                .number {
+                                    display: inline-block;
+                                    color: @black-alpha-25;
+                                    margin-right: 20px;
+                                }
+                            }
+
+                            .card-text {
+                                margin: 40px 0 0 0;
+                                .fontOutfitRegular(20px);
+                                color: @black-alpha-60;
+                                width: 308px;
+
+                                .adaptationMobile({
+                                    margin: 32px 0 0 0;
+                                });
+                            }
+                        }
+                    }
+
+                    &.card-1 {
+                        background-color: @white;
+                        top: 0;
+                        bottom: 0;
+
+                        .adaptationMobile({
+                            flex-direction: column;
+                            justify-content: flex-start;
+                        });
+
+                        .card-part {
+                            &.left, &.right {
+                                padding-top: 60px;
+                            }
+
+                            &.right {
+                                .text {
+                                    margin: 0;
+                                    .fontOutfitRegular(30px);
+                                    color: @black-alpha-60;
+                                    width: 574px;
+                                }
+                            }
+                        }
+
+                        .pseudo-border {
+                            display: none;
+                        }
+                    }
+
+                    &.card-2 {
+                        background-color: @lime-very-light;
+                        top: 383px;
+                        bottom: 300px;
+
+                        .adaptationMobile({
+                            top: 520px;
+                            bottom: 270px;
+                        });
+
+                        .pseudo-border path {
+                            fill: @lime-very-light;
+                        }
+
+                        .card-part.left {
+                            .image-background {
+                                .how-it-works-image {
+                                    top: 66px;
+
+                                    .adaptationComplex(
+                                    {
+                                        left: 0;
+                                    },
+                                    {
+                                        left: -190px;
+                                    },
+                                    {
+                                        transform: scale(0.8);
+                                        left: -248px;
+                                    },
+                                    {
+                                        transform: scale(0.8);
+                                        left: -158px;
+                                        top: 26px;
+                                    }
+                                    );
+                                }
+                            }
+                        }
+                    }
+
+                    &.card-3 {
+                        background-color: @lime-light;
+                        top: 483px;
+                        bottom: 200px;
+
+                        .adaptationMobile({
+                            top: 610px;
+                            bottom: 180px;
+                        });
+
+                        .pseudo-border path {
+                            fill: @lime-light;
+                        }
+
+                        .card-part.left {
+                            .image-background {
+                                .how-it-works-image {
+                                    top: 66px;
+
+                                    .adaptationComplex(
+                                    {
+                                        right: 0;
+                                    },
+                                    {
+                                        right: -184px;
+                                    },
+                                    {
+                                        transform: scale(0.7);
+                                        right: -236px;
+                                    },
+                                    {
+                                        transform: scale(0.8);
+                                        right: -78px;
+                                        top: 38px;
+                                    }
+                                    );
+                                }
+                            }
+                        }
+                    }
+
+                    &.card-4 {
+                        background-color: @lime-medium;
+                        top: 583px;
+                        bottom: 100px;
+
+                        .adaptationMobile({
+                            top: 700px;
+                            bottom: 90px;
+                        });
+
+                        .pseudo-border path {
+                            fill: @lime-medium;
+                        }
+
+                        .card-part.left {
+                            .image-background {
+                                height: 363px;
+
+                                .check-feedbacks {
+                                    .adaptationComplex(
+                                    {
+                                        transform: scale(1.0);
+                                    },
+                                    {
+                                        transform: scale(0.9);
+                                    },
+                                    {
+                                        transform: scale(0.9);
+                                    },
+                                    {
+                                        transform: scale(0.8);
+                                    }
+                                    );
+
+                                    &.part-1 {
+                                        .adaptationComplex(
+                                        {
+                                            top: 66px;
+                                            left: 0;
+                                        },
+                                        {
+                                            top: 66px;
+                                            left: -152px;
+                                        },
+                                        {
+                                            top: 66px;
+                                            left: -342px;
+                                        },
+                                        {
+                                            top: 56px;
+                                            left: -168px;
+                                        }
+                                        );
+                                    }
+
+                                    &.part-2 {
+                                        .adaptationComplex(
+                                        {
+                                            top: 208px;
+                                            left: 378px;
+                                        },
+                                        {
+                                            top: 194px;
+                                            left: 240px;
+                                        },
+                                        {
+                                            top: 208px;
+                                            left: 44px;
+                                        },
+                                        {
+                                            top: 206px;
+                                            left: 318px;
+                                            transform: scale(0.9);
+                                        }
+                                        );
+                                    }
+                                }
+
+                                .url-address {
+                                    position: absolute;
+                                    .fontOutfitRegular(34px);
+                                    color: @black-alpha-60;
+                                    left: 40px;
+                                    top: 102px;
+
+                                    .adaptationTablet({
+                                        display: none;
+                                    });
+
+                                    .adaptationMobile({
+                                        .fontOutfitRegular(28px);
+                                        left: 30px;
+                                        top: 94px;
+                                    });
+                                }
+
+                                .backy-avatar {
+                                    .adaptationComplex(
+                                    {
+                                        right: 264px;
+                                        bottom: 88px;
+                                    },
+                                    {
+                                        right: 212px;
+                                        bottom: 90px;
+                                    },
+                                    {
+                                        right: 230px;
+                                        bottom: 80px;
+                                    },
+                                    {
+                                        right: 202px;
+                                        bottom: 80px;
+                                    }
+                                    );
+                                }
+
+                                .jacob-avatar {
+                                    .adaptationComplex(
+                                    {
+                                        right: 264px;
+                                        bottom: 18px;
+                                    },
+                                    {
+                                        right: 212px;
+                                        bottom: 28px;
+                                    },
+                                    {
+                                        right: 230px;
+                                        bottom: 14px;
+                                    },
+                                    {
+                                        right: 202px;
+                                        bottom: 16px;
+                                    }
+                                    );
+                                }
+                            }
+                        }
+                    }
+
+                    &.card-5 {
+                        background-color: @lime;
+                        top: 683px;
+                        bottom: 0;
+
+                        .adaptationMobile({
+                            top: 790px;
+                        });
+
+                        .pseudo-border path {
+                            fill: @lime;
+                        }
+
+                        .card-part.left {
+                            .image-background {
+                                height: 363px;
+
+                                .how-it-works-image {
+                                    top: 44px;
+                                    right: 0;
+
+                                    .adaptationTablet({
+                                        right: -40px;
+                                    });
+                                }
+
+                                .user-avatar {
+                                    opacity: 0.4;
+                                    right: 272px;
+
+                                    .adaptationTablet({
+                                        right: 232px;
+                                    });
+
+                                    &.backy-avatar {
+                                        top: 82px;
+                                    }
+
+                                    &.jacob-avatar {
+                                        top: 150px;
+                                    }
+
+                                    &.noah-avatar {
+                                        top: 218px;
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -1470,531 +1958,6 @@
                     .submit-form {
                         width: 200px;
                     }
-                }
-            }
-
-            &.how-it-works {
-                height: 783px;
-                width: 100%;
-                border-radius: 70px;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                position: relative;
-
-                .adaptationMobile({
-                    height: 880px;
-                    border-radius: 50px;
-                });
-
-                .card {
-                    position: absolute;
-                    width: 100%;
-                    display: flex;
-                    flex-direction: row;
-
-                    .adaptationMobile({
-                        flex-direction: column-reverse;
-                        justify-content: flex-end;
-                    });
-
-                    .pseudo-border {
-                        position: absolute;
-                        width: 70px;
-                        height: 70px;
-                        top: -69px;
-
-                        &.left {
-                            left: 0;
-                        }
-
-                        &.right {
-                            right: 0;
-                        }
-
-                        .adaptationMobile({
-                            width: 50px;
-                            height: 50px;
-                            top: -49px;
-                        });
-                    }
-
-                    .card-part {
-                        flex: 1;
-
-                        .adaptationMobile({
-                            flex: unset;
-                            padding-left: 30px;
-                        });
-
-                        &.left {
-                            padding-top: 100px;
-                            padding-left: 60px;
-
-                            .adaptationMobile({
-                                padding-top: 60px;
-                                padding-left: 30px;
-                            });
-
-                            .section-header {
-                                margin: 0;
-                                .fontOutfitRegular(70px);
-                                color: @black-alpha-60;
-                            }
-
-                            .image-background {
-                                position: relative;
-                                background-color: @beige-dark-alpha-20;
-                                border-radius: 44px;
-                                overflow: hidden;
-                                text-overflow: ellipsis;
-
-                                .adaptationComplex(
-                                {
-                                    width: 780px;
-                                    height: 322px;
-                                },
-                                {
-                                    width: 600px;
-                                    height: 320px;
-                                },
-                                {
-                                    width: 422px;
-                                    height: 310px;
-                                },
-                                {
-                                    width: 668px;
-                                    height: 300px;
-                                    border-radius: 34px;
-                                }
-                                );
-
-                                .how-it-works-image {
-                                    position: absolute;
-                                }
-
-                                .user-avatar {
-                                    position: absolute;
-                                }
-                            }
-                        }
-
-                        &.right {
-                            .card-header {
-                                margin: 32px 0 0 0;
-                                .fontOutfitRegular(30px);
-                                color: @black-alpha-60;
-
-                                .adaptationMobile({
-                                    .fontOutfitRegular(26px);
-                                });
-
-                                .number {
-                                    display: inline-block;
-                                    color: @black-alpha-25;
-                                    margin-right: 20px;
-                                }
-                            }
-
-                            .card-text {
-                                margin: 40px 0 0 0;
-                                .fontOutfitRegular(20px);
-                                color: @black-alpha-60;
-                                width: 308px;
-
-                                .adaptationMobile({
-                                    margin: 32px 0 0 0;
-                                });
-                            }
-                        }
-                    }
-
-                    &.card-1 {
-                        background-color: @white;
-                        top: 0;
-                        bottom: 0;
-
-                        .adaptationMobile({
-                            flex-direction: column;
-                            justify-content: flex-start;
-                        });
-
-                        .card-part {
-                            &.left, &.right {
-                                padding-top: 60px;
-                            }
-
-                            &.right {
-                                .text {
-                                    margin: 0;
-                                    .fontOutfitRegular(30px);
-                                    color: @black-alpha-60;
-                                    width: 574px;
-                                }
-                            }
-                        }
-
-                        .pseudo-border {
-                            display: none;
-                        }
-                    }
-
-                    &.card-2 {
-                        background-color: @lime-very-light;
-                        top: 383px;
-                        bottom: 300px;
-
-                        .adaptationMobile({
-                            top: 520px;
-                            bottom: 270px;
-                        });
-
-                        .pseudo-border path {
-                            fill: @lime-very-light;
-                        }
-
-                        .card-part.left {
-                            .image-background {
-                                .how-it-works-image {
-                                    top: 66px;
-
-                                    .adaptationComplex(
-                                    {
-                                        left: 0;
-                                    },
-                                    {
-                                        left: -190px;
-                                    },
-                                    {
-                                        transform: scale(0.8);
-                                        left: -248px;
-                                    },
-                                    {
-                                        transform: scale(0.8);
-                                        left: -158px;
-                                        top: 26px;
-                                    }
-                                    );
-                                }
-                            }
-                        }
-                    }
-
-                    &.card-3 {
-                        background-color: @lime-light;
-                        top: 483px;
-                        bottom: 200px;
-
-                        .adaptationMobile({
-                            top: 610px;
-                            bottom: 180px;
-                        });
-
-                        .pseudo-border path {
-                            fill: @lime-light;
-                        }
-
-                        .card-part.left {
-                            .image-background {
-                                .how-it-works-image {
-                                    top: 66px;
-
-                                    .adaptationComplex(
-                                    {
-                                        right: 0;
-                                    },
-                                    {
-                                        right: -184px;
-                                    },
-                                    {
-                                        transform: scale(0.7);
-                                        right: -236px;
-                                    },
-                                    {
-                                        transform: scale(0.8);
-                                        right: -78px;
-                                        top: 38px;
-                                    }
-                                    );
-                                }
-                            }
-                        }
-                    }
-
-                    &.card-4 {
-                        background-color: @lime-medium;
-                        top: 583px;
-                        bottom: 100px;
-
-                        .adaptationMobile({
-                            top: 700px;
-                            bottom: 90px;
-                        });
-
-                        .pseudo-border path {
-                            fill: @lime-medium;
-                        }
-
-                        .card-part.left {
-                            .image-background {
-                                height: 363px;
-
-                                .check-feedbacks {
-                                    .adaptationComplex(
-                                    {
-                                        transform: scale(1.0);
-                                    },
-                                    {
-                                        transform: scale(0.9);
-                                    },
-                                    {
-                                        transform: scale(0.9);
-                                    },
-                                    {
-                                        transform: scale(0.8);
-                                    }
-                                    );
-
-                                    &.part-1 {
-                                        .adaptationComplex(
-                                        {
-                                            top: 66px;
-                                            left: 0;
-                                        },
-                                        {
-                                            top: 66px;
-                                            left: -152px;
-                                        },
-                                        {
-                                            top: 66px;
-                                            left: -342px;
-                                        },
-                                        {
-                                            top: 56px;
-                                            left: -168px;
-                                        }
-                                        );
-                                    }
-
-                                    &.part-2 {
-                                        .adaptationComplex(
-                                        {
-                                            top: 208px;
-                                            left: 378px;
-                                        },
-                                        {
-                                            top: 194px;
-                                            left: 240px;
-                                        },
-                                        {
-                                            top: 208px;
-                                            left: 44px;
-                                        },
-                                        {
-                                            top: 206px;
-                                            left: 318px;
-                                            transform: scale(0.9);
-                                        }
-                                        );
-                                    }
-                                }
-
-                                .url-address {
-                                    position: absolute;
-                                    .fontOutfitRegular(34px);
-                                    color: @black-alpha-60;
-                                    left: 40px;
-                                    top: 102px;
-
-                                    .adaptationTablet({
-                                        display: none;
-                                    });
-
-                                    .adaptationMobile({
-                                        .fontOutfitRegular(28px);
-                                        left: 30px;
-                                        top: 94px;
-                                    });
-                                }
-
-                                .backy-avatar {
-                                    .adaptationComplex(
-                                    {
-                                        right: 264px;
-                                        bottom: 88px;
-                                    },
-                                    {
-                                        right: 212px;
-                                        bottom: 90px;
-                                    },
-                                    {
-                                        right: 230px;
-                                        bottom: 80px;
-                                    },
-                                    {
-                                        right: 202px;
-                                        bottom: 80px;
-                                    }
-                                    );
-                                }
-
-                                .jacob-avatar {
-                                    .adaptationComplex(
-                                    {
-                                        right: 264px;
-                                        bottom: 18px;
-                                    },
-                                    {
-                                        right: 212px;
-                                        bottom: 28px;
-                                    },
-                                    {
-                                        right: 230px;
-                                        bottom: 14px;
-                                    },
-                                    {
-                                        right: 202px;
-                                        bottom: 16px;
-                                    }
-                                    );
-                                }
-                            }
-                        }
-                    }
-
-                    &.card-5 {
-                        background-color: @lime;
-                        top: 683px;
-                        bottom: 0;
-
-                        .adaptationMobile({
-                            top: 790px;
-                        });
-
-                        .pseudo-border path {
-                            fill: @lime;
-                        }
-
-                        .card-part.left {
-                            .image-background {
-                                height: 363px;
-
-                                .how-it-works-image {
-                                    top: 44px;
-                                    right: 0;
-
-                                    .adaptationTablet({
-                                        right: -40px;
-                                    });
-                                }
-
-                                .user-avatar {
-                                    opacity: 0.4;
-                                    right: 272px;
-
-                                    .adaptationTablet({
-                                        right: 232px;
-                                    });
-
-                                    &.backy-avatar {
-                                        top: 82px;
-                                    }
-
-                                    &.jacob-avatar {
-                                        top: 150px;
-                                    }
-
-                                    &.noah-avatar {
-                                        top: 218px;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        .footer {
-            border-radius: 20px 20px 0 0;
-            background-color: @brown-soft;
-            color: @ivory;
-            height: 236px;
-            display: flex;
-            padding: 30px;
-
-            .footer-section {
-                flex: 1;
-
-                &.first {
-                    .logo-container {
-                        display: flex;
-                        align-items: center;
-                        gap: 14px;
-
-                        .logo {
-                            path {
-                                fill: @ivory;
-                            }
-                        }
-
-                        .logo-text {
-                            display: block;
-                            .fontOutfitRegular(42px);
-                        }
-                    }
-                }
-
-                &.second {
-                    display: flex;
-                    justify-content: center;
-
-                    .contacts-header {
-                        .fontOutfitRegular(14px);
-                    }
-
-                    .contact {
-                        margin: 0;
-                        .fontOutfitRegular(14px);
-                    }
-                }
-
-                &.third {
-                    display: flex;
-                    justify-content: end;
-
-                    .submit-form {
-                        width: 180px;
-                    }
-                }
-            }
-        }
-
-        .terms {
-            height: 28px;
-            margin-top: 10px;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-
-            .terms-section {
-                flex: 1;
-                display: flex;
-
-                &.first, &.third {
-                    .fontOutfitRegular(12px);
-                    color: @black-alpha-60;
-                }
-
-                &.first {
-                    justify-content: start;
-                }
-
-                &.second {
-                    justify-content: center;
-                }
-
-                &.third {
-                    justify-content: end;
                 }
             }
         }

@@ -6,6 +6,90 @@
 }
 .page.index .page-content {
   max-width: 1800px;
+  /*.footer {
+            border-radius: 20px 20px 0 0;
+            background-color: @brown-soft;
+            color: @ivory;
+            height: 236px;
+            display: flex;
+            padding: 30px;
+
+            .footer-section {
+                flex: 1;
+
+                &.first {
+                    .logo-container {
+                        display: flex;
+                        align-items: center;
+                        gap: 14px;
+
+                        .logo {
+                            path {
+                                fill: @ivory;
+                            }
+                        }
+
+                        .logo-text {
+                            display: block;
+                            .fontOutfitRegular(42px);
+                        }
+                    }
+                }
+
+                &.second {
+                    display: flex;
+                    justify-content: center;
+
+                    .contacts-header {
+                        .fontOutfitRegular(14px);
+                    }
+
+                    .contact {
+                        margin: 0;
+                        .fontOutfitRegular(14px);
+                    }
+                }
+
+                &.third {
+                    display: flex;
+                    justify-content: end;
+
+                    .submit-form {
+                        width: 180px;
+                    }
+                }
+            }
+        }
+
+        .terms {
+            height: 28px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+
+            .terms-section {
+                flex: 1;
+                display: flex;
+
+                &.first, &.third {
+                    .fontOutfitRegular(12px);
+                    color: @black-alpha-60;
+                }
+
+                &.first {
+                    justify-content: start;
+                }
+
+                &.second {
+                    justify-content: center;
+                }
+
+                &.third {
+                    justify-content: end;
+                }
+            }
+        }*/
 }
 .page.index .page-content .section {
   background-color: #F2F0EE;
@@ -47,7 +131,7 @@
   .page.index .page-content .section.intro {
     height: 708px;
     margin-top: 58px;
-    padding-top: 126px;
+    padding-top: 76px;
   }
 }
 @media only screen and (min-width: 1440px) and (max-width: 1919px) {
@@ -61,7 +145,7 @@
   .page.index .page-content .section.intro {
     height: 764px;
     margin-top: 0;
-    padding-top: 264px;
+    padding-top: 274px;
   }
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
@@ -103,6 +187,28 @@
     width: 560px;
   }
 }
+.page.index .page-content .section.intro .download-extension-button {
+  height: auto;
+  border-radius: 14px;
+}
+.page.index .page-content .section.intro .download-extension-button .download-extension-button-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 12px 10px;
+}
+.page.index .page-content .section.intro .download-extension-button .download-extension-button-block .icon {
+  height: 30px;
+  width: 30px;
+}
+.page.index .page-content .section.intro .download-extension-button .download-extension-button-block .download-extension-text {
+  font-size: 18px;
+  margin: 0;
+  width: 326px;
+  line-height: 22px;
+  text-align: center;
+}
 @media only screen and (min-width: 1920px) {
   .page.index .page-content .section.intro .input-container {
     width: 794px;
@@ -125,100 +231,109 @@
 }
 .page.index .page-content .section.intro .intro-image {
   position: absolute;
+  border-radius: 12px;
+}
+.page.index .page-content .section.intro .intro-image.reviews {
+  background-color: rgba(214, 222, 115, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 @media only screen and (min-width: 1920px) {
   .page.index .page-content .section.intro .intro-image.reviews {
     top: 0;
     right: 0;
-    width: 444px;
     height: 392px;
+    width: 440px;
+  }
+  .page.index .page-content .section.intro .intro-image.reviews svg {
+    transform: scale(1);
   }
 }
 @media only screen and (min-width: 1440px) and (max-width: 1919px) {
   .page.index .page-content .section.intro .intro-image.reviews {
     top: 0;
     right: 0;
-    width: 370px;
     height: 326px;
+    width: 344px;
+  }
+  .page.index .page-content .section.intro .intro-image.reviews svg {
+    transform: scale(0.9);
   }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
   .page.index .page-content .section.intro .intro-image.reviews {
     top: 0;
     right: 0;
-    width: 278px;
     height: 244px;
+  }
+  .page.index .page-content .section.intro .intro-image.reviews svg {
+    transform: scale(0.9);
   }
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
   .page.index .page-content .section.intro .intro-image.reviews {
     top: 0;
     right: 0;
-    width: 278px;
-    height: 244px;
+    height: 218px;
+  }
+  .page.index .page-content .section.intro .intro-image.reviews svg {
+    transform: scale(0.8);
   }
 }
 @media only screen and (min-width: 1920px) {
   .page.index .page-content .section.intro .intro-image.women {
     top: 70px;
     left: -48px;
-    width: 504px;
     height: 390px;
   }
 }
 @media only screen and (min-width: 1440px) and (max-width: 1919px) {
   .page.index .page-content .section.intro .intro-image.women {
-    top: 100px;
-    left: -134px;
-    width: 420px;
+    top: 60px;
+    left: -24px;
     height: 326px;
   }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
   .page.index .page-content .section.intro .intro-image.women {
-    top: 510px;
-    left: -78px;
-    width: 316px;
+    top: 544px;
+    left: -20px;
     height: 244px;
   }
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
   .page.index .page-content .section.intro .intro-image.women {
     top: 510px;
-    left: -78px;
-    width: 316px;
+    left: 14px;
     height: 244px;
   }
 }
 @media only screen and (min-width: 1920px) {
   .page.index .page-content .section.intro .intro-image.extension {
-    top: 426px;
-    left: 296px;
-    width: 396px;
+    top: 410px;
+    left: 300px;
     height: 282px;
   }
 }
 @media only screen and (min-width: 1440px) and (max-width: 1919px) {
   .page.index .page-content .section.intro .intro-image.extension {
-    top: 372px;
+    top: 364px;
     left: 222px;
-    width: 330px;
     height: 236px;
   }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
   .page.index .page-content .section.intro .intro-image.extension {
-    top: 540px;
-    left: 690px;
-    width: 248px;
-    height: 176px;
+    top: 556px;
+    right: 0;
+    height: 204px;
   }
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
   .page.index .page-content .section.intro .intro-image.extension {
-    top: 637px;
-    left: 482px;
-    width: 248px;
+    top: 540px;
+    right: 80px;
     height: 176px;
   }
 }
@@ -226,33 +341,501 @@
   .page.index .page-content .section.intro .intro-image.man {
     top: 372px;
     right: 63px;
-    width: 366px;
     height: 276px;
   }
 }
 @media only screen and (min-width: 1440px) and (max-width: 1919px) {
   .page.index .page-content .section.intro .intro-image.man {
-    top: 302px;
-    right: -4px;
-    width: 306px;
+    top: 346px;
+    right: 80px;
     height: 230px;
   }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
   .page.index .page-content .section.intro .intro-image.man {
     top: 26px;
-    left: 50px;
-    width: 228px;
-    height: 172px;
+    left: 22px;
+    height: 194px;
   }
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
   .page.index .page-content .section.intro .intro-image.man {
     top: 26px;
     left: -6px;
-    width: 228px;
-    height: 172px;
+    height: 194px;
   }
+}
+.page.index .page-content .section.how-it-works {
+  height: 783px;
+  width: 100%;
+  border-radius: 70px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  position: relative;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works {
+    height: 880px;
+    border-radius: 50px;
+  }
+}
+.page.index .page-content .section.how-it-works .card {
+  position: absolute;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card {
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+  }
+}
+.page.index .page-content .section.how-it-works .card .pseudo-border {
+  position: absolute;
+  width: 70px;
+  height: 70px;
+  top: -69px;
+}
+.page.index .page-content .section.how-it-works .card .pseudo-border.left {
+  left: 0;
+}
+.page.index .page-content .section.how-it-works .card .pseudo-border.right {
+  right: 0;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card .pseudo-border {
+    width: 50px;
+    height: 50px;
+    top: -49px;
+  }
+}
+.page.index .page-content .section.how-it-works .card .card-part {
+  flex: 1;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card .card-part {
+    flex: unset;
+    padding-left: 30px;
+  }
+}
+.page.index .page-content .section.how-it-works .card .card-part.left {
+  padding-top: 100px;
+  padding-left: 60px;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card .card-part.left {
+    padding-top: 60px;
+    padding-left: 30px;
+  }
+}
+.page.index .page-content .section.how-it-works .card .card-part.left .section-header {
+  margin: 0;
+  color: rgba(0, 0, 0, 0.6);
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.how-it-works .card .card-part.left .section-header {
+    font-family: "Outfit-Regular", sans-serif;
+    font-size: 70px;
+    font-weight: 400;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.how-it-works .card .card-part.left .section-header {
+    font-family: "Outfit-Regular", sans-serif;
+    font-size: 70px;
+    font-weight: 400;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card .card-part.left .section-header {
+    font-family: "Outfit-Regular", sans-serif;
+    font-size: 60px;
+    font-weight: 400;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card .card-part.left .section-header {
+    font-family: "Outfit-Regular", sans-serif;
+    font-size: 60px;
+    font-weight: 400;
+  }
+}
+.page.index .page-content .section.how-it-works .card .card-part.left .image-background {
+  position: relative;
+  background-color: rgba(159, 143, 135, 0.2);
+  border-radius: 44px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.how-it-works .card .card-part.left .image-background {
+    width: 780px;
+    height: 322px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.how-it-works .card .card-part.left .image-background {
+    width: 600px;
+    height: 320px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card .card-part.left .image-background {
+    width: 422px;
+    height: 310px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card .card-part.left .image-background {
+    width: 668px;
+    height: 300px;
+    border-radius: 34px;
+  }
+}
+.page.index .page-content .section.how-it-works .card .card-part.left .image-background .how-it-works-image {
+  position: absolute;
+}
+.page.index .page-content .section.how-it-works .card .card-part.left .image-background .user-avatar {
+  position: absolute;
+}
+.page.index .page-content .section.how-it-works .card .card-part.right .card-header {
+  margin: 32px 0 0 0;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card .card-part.right .card-header {
+    font-family: "Outfit-Regular", sans-serif;
+    font-size: 26px;
+    font-weight: 400;
+  }
+}
+.page.index .page-content .section.how-it-works .card .card-part.right .card-header .number {
+  display: inline-block;
+  color: rgba(0, 0, 0, 0.25);
+  margin-right: 20px;
+}
+.page.index .page-content .section.how-it-works .card .card-part.right .card-text {
+  margin: 40px 0 0 0;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  width: 308px;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card .card-part.right .card-text {
+    margin: 32px 0 0 0;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-1 {
+  background-color: #FFFFFF;
+  top: 0;
+  bottom: 0;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-1 {
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-1 .card-part.left,
+.page.index .page-content .section.how-it-works .card.card-1 .card-part.right {
+  padding-top: 60px;
+}
+.page.index .page-content .section.how-it-works .card.card-1 .card-part.right .text {
+  margin: 0;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 30px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  width: 574px;
+}
+.page.index .page-content .section.how-it-works .card.card-1 .pseudo-border {
+  display: none;
+}
+.page.index .page-content .section.how-it-works .card.card-2 {
+  background-color: #FBFBEF;
+  top: 383px;
+  bottom: 300px;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-2 {
+    top: 520px;
+    bottom: 270px;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-2 .pseudo-border path {
+  fill: #FBFBEF;
+}
+.page.index .page-content .section.how-it-works .card.card-2 .card-part.left .image-background .how-it-works-image {
+  top: 66px;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.how-it-works .card.card-2 .card-part.left .image-background .how-it-works-image {
+    left: 0;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.how-it-works .card.card-2 .card-part.left .image-background .how-it-works-image {
+    left: -190px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card.card-2 .card-part.left .image-background .how-it-works-image {
+    transform: scale(0.8);
+    left: -248px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-2 .card-part.left .image-background .how-it-works-image {
+    transform: scale(0.8);
+    left: -158px;
+    top: 26px;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-3 {
+  background-color: #F2F4D0;
+  top: 483px;
+  bottom: 200px;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-3 {
+    top: 610px;
+    bottom: 180px;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-3 .pseudo-border path {
+  fill: #F2F4D0;
+}
+.page.index .page-content .section.how-it-works .card.card-3 .card-part.left .image-background .how-it-works-image {
+  top: 66px;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.how-it-works .card.card-3 .card-part.left .image-background .how-it-works-image {
+    right: 0;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.how-it-works .card.card-3 .card-part.left .image-background .how-it-works-image {
+    right: -184px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card.card-3 .card-part.left .image-background .how-it-works-image {
+    transform: scale(0.7);
+    right: -236px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-3 .card-part.left .image-background .how-it-works-image {
+    transform: scale(0.8);
+    right: -78px;
+    top: 38px;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-4 {
+  background-color: #E9EDB1;
+  top: 583px;
+  bottom: 100px;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-4 {
+    top: 700px;
+    bottom: 90px;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-4 .pseudo-border path {
+  fill: #E9EDB1;
+}
+.page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background {
+  height: 363px;
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks {
+    transform: scale(1);
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks {
+    transform: scale(0.9);
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks {
+    transform: scale(0.9);
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks {
+    transform: scale(0.8);
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-1 {
+    top: 66px;
+    left: 0;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-1 {
+    top: 66px;
+    left: -152px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-1 {
+    top: 66px;
+    left: -342px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-1 {
+    top: 56px;
+    left: -168px;
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-2 {
+    top: 208px;
+    left: 378px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-2 {
+    top: 194px;
+    left: 240px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-2 {
+    top: 208px;
+    left: 44px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-2 {
+    top: 206px;
+    left: 318px;
+    transform: scale(0.9);
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .url-address {
+  position: absolute;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 34px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.6);
+  left: 40px;
+  top: 102px;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .url-address {
+    display: none;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .url-address {
+    font-family: "Outfit-Regular", sans-serif;
+    font-size: 28px;
+    font-weight: 400;
+    left: 30px;
+    top: 94px;
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .backy-avatar {
+    right: 264px;
+    bottom: 88px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .backy-avatar {
+    right: 212px;
+    bottom: 90px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .backy-avatar {
+    right: 230px;
+    bottom: 80px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .backy-avatar {
+    right: 202px;
+    bottom: 80px;
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .jacob-avatar {
+    right: 264px;
+    bottom: 18px;
+  }
+}
+@media only screen and (min-width: 1440px) and (max-width: 1919px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .jacob-avatar {
+    right: 212px;
+    bottom: 28px;
+  }
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .jacob-avatar {
+    right: 230px;
+    bottom: 14px;
+  }
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .jacob-avatar {
+    right: 202px;
+    bottom: 16px;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-5 {
+  background-color: #D6DE73;
+  top: 683px;
+  bottom: 0;
+}
+@media only screen and (min-width: 1px) and (max-width: 1023px) {
+  .page.index .page-content .section.how-it-works .card.card-5 {
+    top: 790px;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-5 .pseudo-border path {
+  fill: #D6DE73;
+}
+.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background {
+  height: 363px;
+}
+.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .how-it-works-image {
+  top: 44px;
+  right: 0;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .how-it-works-image {
+    right: -40px;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .user-avatar {
+  opacity: 0.4;
+  right: 272px;
+}
+@media only screen and (min-width: 1024px) and (max-width: 1439px) {
+  .page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .user-avatar {
+    right: 232px;
+  }
+}
+.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .user-avatar.backy-avatar {
+  top: 82px;
+}
+.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .user-avatar.jacob-avatar {
+  top: 150px;
+}
+.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .user-avatar.noah-avatar {
+  top: 218px;
 }
 .page.index .page-content .section.extension-demo {
   position: relative;
@@ -1458,525 +2041,4 @@
 }
 .page.index .page-content .section.contact-us .contact-us-form .submit-form {
   width: 200px;
-}
-.page.index .page-content .section.how-it-works {
-  height: 783px;
-  width: 100%;
-  border-radius: 70px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  position: relative;
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works {
-    height: 880px;
-    border-radius: 50px;
-  }
-}
-.page.index .page-content .section.how-it-works .card {
-  position: absolute;
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card {
-    flex-direction: column-reverse;
-    justify-content: flex-end;
-  }
-}
-.page.index .page-content .section.how-it-works .card .pseudo-border {
-  position: absolute;
-  width: 70px;
-  height: 70px;
-  top: -69px;
-}
-.page.index .page-content .section.how-it-works .card .pseudo-border.left {
-  left: 0;
-}
-.page.index .page-content .section.how-it-works .card .pseudo-border.right {
-  right: 0;
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card .pseudo-border {
-    width: 50px;
-    height: 50px;
-    top: -49px;
-  }
-}
-.page.index .page-content .section.how-it-works .card .card-part {
-  flex: 1;
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card .card-part {
-    flex: unset;
-    padding-left: 30px;
-  }
-}
-.page.index .page-content .section.how-it-works .card .card-part.left {
-  padding-top: 100px;
-  padding-left: 60px;
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card .card-part.left {
-    padding-top: 60px;
-    padding-left: 30px;
-  }
-}
-.page.index .page-content .section.how-it-works .card .card-part.left .section-header {
-  margin: 0;
-  font-family: "Outfit-Regular", sans-serif;
-  font-size: 70px;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.6);
-}
-.page.index .page-content .section.how-it-works .card .card-part.left .image-background {
-  position: relative;
-  background-color: rgba(159, 143, 135, 0.2);
-  border-radius: 44px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-@media only screen and (min-width: 1920px) {
-  .page.index .page-content .section.how-it-works .card .card-part.left .image-background {
-    width: 780px;
-    height: 322px;
-  }
-}
-@media only screen and (min-width: 1440px) and (max-width: 1919px) {
-  .page.index .page-content .section.how-it-works .card .card-part.left .image-background {
-    width: 600px;
-    height: 320px;
-  }
-}
-@media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card .card-part.left .image-background {
-    width: 422px;
-    height: 310px;
-  }
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card .card-part.left .image-background {
-    width: 668px;
-    height: 300px;
-    border-radius: 34px;
-  }
-}
-.page.index .page-content .section.how-it-works .card .card-part.left .image-background .how-it-works-image {
-  position: absolute;
-}
-.page.index .page-content .section.how-it-works .card .card-part.left .image-background .user-avatar {
-  position: absolute;
-}
-.page.index .page-content .section.how-it-works .card .card-part.right .card-header {
-  margin: 32px 0 0 0;
-  font-family: "Outfit-Regular", sans-serif;
-  font-size: 30px;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.6);
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card .card-part.right .card-header {
-    font-family: "Outfit-Regular", sans-serif;
-    font-size: 26px;
-    font-weight: 400;
-  }
-}
-.page.index .page-content .section.how-it-works .card .card-part.right .card-header .number {
-  display: inline-block;
-  color: rgba(0, 0, 0, 0.25);
-  margin-right: 20px;
-}
-.page.index .page-content .section.how-it-works .card .card-part.right .card-text {
-  margin: 40px 0 0 0;
-  font-family: "Outfit-Regular", sans-serif;
-  font-size: 20px;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.6);
-  width: 308px;
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card .card-part.right .card-text {
-    margin: 32px 0 0 0;
-  }
-}
-.page.index .page-content .section.how-it-works .card.card-1 {
-  background-color: #FFFFFF;
-  top: 0;
-  bottom: 0;
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-1 {
-    flex-direction: column;
-    justify-content: flex-start;
-  }
-}
-.page.index .page-content .section.how-it-works .card.card-1 .card-part.left,
-.page.index .page-content .section.how-it-works .card.card-1 .card-part.right {
-  padding-top: 60px;
-}
-.page.index .page-content .section.how-it-works .card.card-1 .card-part.right .text {
-  margin: 0;
-  font-family: "Outfit-Regular", sans-serif;
-  font-size: 30px;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.6);
-  width: 574px;
-}
-.page.index .page-content .section.how-it-works .card.card-1 .pseudo-border {
-  display: none;
-}
-.page.index .page-content .section.how-it-works .card.card-2 {
-  background-color: #FBFBEF;
-  top: 383px;
-  bottom: 300px;
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-2 {
-    top: 520px;
-    bottom: 270px;
-  }
-}
-.page.index .page-content .section.how-it-works .card.card-2 .pseudo-border path {
-  fill: #FBFBEF;
-}
-.page.index .page-content .section.how-it-works .card.card-2 .card-part.left .image-background .how-it-works-image {
-  top: 66px;
-}
-@media only screen and (min-width: 1920px) {
-  .page.index .page-content .section.how-it-works .card.card-2 .card-part.left .image-background .how-it-works-image {
-    left: 0;
-  }
-}
-@media only screen and (min-width: 1440px) and (max-width: 1919px) {
-  .page.index .page-content .section.how-it-works .card.card-2 .card-part.left .image-background .how-it-works-image {
-    left: -190px;
-  }
-}
-@media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card.card-2 .card-part.left .image-background .how-it-works-image {
-    transform: scale(0.8);
-    left: -248px;
-  }
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-2 .card-part.left .image-background .how-it-works-image {
-    transform: scale(0.8);
-    left: -158px;
-    top: 26px;
-  }
-}
-.page.index .page-content .section.how-it-works .card.card-3 {
-  background-color: #F2F4D0;
-  top: 483px;
-  bottom: 200px;
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-3 {
-    top: 610px;
-    bottom: 180px;
-  }
-}
-.page.index .page-content .section.how-it-works .card.card-3 .pseudo-border path {
-  fill: #F2F4D0;
-}
-.page.index .page-content .section.how-it-works .card.card-3 .card-part.left .image-background .how-it-works-image {
-  top: 66px;
-}
-@media only screen and (min-width: 1920px) {
-  .page.index .page-content .section.how-it-works .card.card-3 .card-part.left .image-background .how-it-works-image {
-    right: 0;
-  }
-}
-@media only screen and (min-width: 1440px) and (max-width: 1919px) {
-  .page.index .page-content .section.how-it-works .card.card-3 .card-part.left .image-background .how-it-works-image {
-    right: -184px;
-  }
-}
-@media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card.card-3 .card-part.left .image-background .how-it-works-image {
-    transform: scale(0.7);
-    right: -236px;
-  }
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-3 .card-part.left .image-background .how-it-works-image {
-    transform: scale(0.8);
-    right: -78px;
-    top: 38px;
-  }
-}
-.page.index .page-content .section.how-it-works .card.card-4 {
-  background-color: #E9EDB1;
-  top: 583px;
-  bottom: 100px;
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-4 {
-    top: 700px;
-    bottom: 90px;
-  }
-}
-.page.index .page-content .section.how-it-works .card.card-4 .pseudo-border path {
-  fill: #E9EDB1;
-}
-.page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background {
-  height: 363px;
-}
-@media only screen and (min-width: 1920px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks {
-    transform: scale(1);
-  }
-}
-@media only screen and (min-width: 1440px) and (max-width: 1919px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks {
-    transform: scale(0.9);
-  }
-}
-@media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks {
-    transform: scale(0.9);
-  }
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks {
-    transform: scale(0.8);
-  }
-}
-@media only screen and (min-width: 1920px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-1 {
-    top: 66px;
-    left: 0;
-  }
-}
-@media only screen and (min-width: 1440px) and (max-width: 1919px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-1 {
-    top: 66px;
-    left: -152px;
-  }
-}
-@media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-1 {
-    top: 66px;
-    left: -342px;
-  }
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-1 {
-    top: 56px;
-    left: -168px;
-  }
-}
-@media only screen and (min-width: 1920px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-2 {
-    top: 208px;
-    left: 378px;
-  }
-}
-@media only screen and (min-width: 1440px) and (max-width: 1919px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-2 {
-    top: 194px;
-    left: 240px;
-  }
-}
-@media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-2 {
-    top: 208px;
-    left: 44px;
-  }
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-2 {
-    top: 206px;
-    left: 318px;
-    transform: scale(0.9);
-  }
-}
-.page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .url-address {
-  position: absolute;
-  font-family: "Outfit-Regular", sans-serif;
-  font-size: 34px;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.6);
-  left: 40px;
-  top: 102px;
-}
-@media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .url-address {
-    display: none;
-  }
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .url-address {
-    font-family: "Outfit-Regular", sans-serif;
-    font-size: 28px;
-    font-weight: 400;
-    left: 30px;
-    top: 94px;
-  }
-}
-@media only screen and (min-width: 1920px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .backy-avatar {
-    right: 264px;
-    bottom: 88px;
-  }
-}
-@media only screen and (min-width: 1440px) and (max-width: 1919px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .backy-avatar {
-    right: 212px;
-    bottom: 90px;
-  }
-}
-@media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .backy-avatar {
-    right: 230px;
-    bottom: 80px;
-  }
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .backy-avatar {
-    right: 202px;
-    bottom: 80px;
-  }
-}
-@media only screen and (min-width: 1920px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .jacob-avatar {
-    right: 264px;
-    bottom: 18px;
-  }
-}
-@media only screen and (min-width: 1440px) and (max-width: 1919px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .jacob-avatar {
-    right: 212px;
-    bottom: 28px;
-  }
-}
-@media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .jacob-avatar {
-    right: 230px;
-    bottom: 14px;
-  }
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .jacob-avatar {
-    right: 202px;
-    bottom: 16px;
-  }
-}
-.page.index .page-content .section.how-it-works .card.card-5 {
-  background-color: #D6DE73;
-  top: 683px;
-  bottom: 0;
-}
-@media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-5 {
-    top: 790px;
-  }
-}
-.page.index .page-content .section.how-it-works .card.card-5 .pseudo-border path {
-  fill: #D6DE73;
-}
-.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background {
-  height: 363px;
-}
-.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .how-it-works-image {
-  top: 44px;
-  right: 0;
-}
-@media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .how-it-works-image {
-    right: -40px;
-  }
-}
-.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .user-avatar {
-  opacity: 0.4;
-  right: 272px;
-}
-@media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .user-avatar {
-    right: 232px;
-  }
-}
-.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .user-avatar.backy-avatar {
-  top: 82px;
-}
-.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .user-avatar.jacob-avatar {
-  top: 150px;
-}
-.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .user-avatar.noah-avatar {
-  top: 218px;
-}
-.page.index .page-content .footer {
-  border-radius: 20px 20px 0 0;
-  background-color: #605C55;
-  color: #F9F8F6;
-  height: 236px;
-  display: flex;
-  padding: 30px;
-}
-.page.index .page-content .footer .footer-section {
-  flex: 1;
-}
-.page.index .page-content .footer .footer-section.first .logo-container {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-}
-.page.index .page-content .footer .footer-section.first .logo-container .logo path {
-  fill: #F9F8F6;
-}
-.page.index .page-content .footer .footer-section.first .logo-container .logo-text {
-  display: block;
-  font-family: "Outfit-Regular", sans-serif;
-  font-size: 42px;
-  font-weight: 400;
-}
-.page.index .page-content .footer .footer-section.second {
-  display: flex;
-  justify-content: center;
-}
-.page.index .page-content .footer .footer-section.second .contacts-header {
-  font-family: "Outfit-Regular", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-}
-.page.index .page-content .footer .footer-section.second .contact {
-  margin: 0;
-  font-family: "Outfit-Regular", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
-}
-.page.index .page-content .footer .footer-section.third {
-  display: flex;
-  justify-content: end;
-}
-.page.index .page-content .footer .footer-section.third .submit-form {
-  width: 180px;
-}
-.page.index .page-content .terms {
-  height: 28px;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-}
-.page.index .page-content .terms .terms-section {
-  flex: 1;
-  display: flex;
-}
-.page.index .page-content .terms .terms-section.first,
-.page.index .page-content .terms .terms-section.third {
-  font-family: "Outfit-Regular", sans-serif;
-  font-size: 12px;
-  font-weight: 400;
-  color: rgba(0, 0, 0, 0.6);
-}
-.page.index .page-content .terms .terms-section.first {
-  justify-content: start;
-}
-.page.index .page-content .terms .terms-section.second {
-  justify-content: center;
-}
-.page.index .page-content .terms .terms-section.third {
-  justify-content: end;
 }

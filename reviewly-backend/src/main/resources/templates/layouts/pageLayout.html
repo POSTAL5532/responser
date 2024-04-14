@@ -71,7 +71,7 @@
                     </a>
                 </div>
                 <div class="right-control-container">
-                    <a href="/" class="button primary">
+                    <a th:href="${@applicationProperties.downloadExtensionChrome}" target="_blank" class="button primary">
                         <th:block th:replace="~{components/svgs::icon-chrome}"/>
                         Download for chrome
                     </a>
@@ -106,10 +106,10 @@
                 </div>
             </div>
             <div class="footer-section third">
-                <button class="button primary submit-form">
+                <a th:href="${@applicationProperties.signUpPageUrl}" class="button primary submit-form" th:if="${userFullName != null}">
                     <th:block th:replace="~{components/svgs::icon-play}"/>
                     Start for free
-                </button>
+                </a>
             </div>
         </footer>
 
