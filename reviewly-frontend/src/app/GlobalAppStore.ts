@@ -6,6 +6,7 @@ import {UserService} from "app/service/UserService";
 import {reloadPage} from "./utils/NavigationUtils";
 import {Logger} from "./utils/Logger";
 import {setCookie} from "./utils/CookieUtils";
+import {GlobalNotificationsHolder} from "./model/notifications/GlobalNotificationsHolder";
 
 export class GlobalAppStore {
 
@@ -21,12 +22,14 @@ export class GlobalAppStore {
 
     appPageClassName: string = null;
 
+    globalNotificationsHolder: GlobalNotificationsHolder = new GlobalNotificationsHolder();
+
     constructor() {
         makeAutoObservable(this);
         this.init();
     }
 
-    init = () => {
+    init = async () => {
         this.logger.debug("Init global app store");
 
         window.addEventListener("error", errorEvent => {
@@ -39,8 +42,10 @@ export class GlobalAppStore {
 
         if (LocalTokenStorageService.isAccessTokenExist && LocalTokenStorageService.isRefreshTokenExist) {
             this.isLoading = true;
-            this.refreshCurrentUser().finally(() => this.isLoading = false);
+            await this.refreshCurrentUser().finally(() => this.isLoading = false);
         }
+
+        this.globalNotificationsHolder.initNotifications();
     }
 
     refreshCurrentUser = async () => {

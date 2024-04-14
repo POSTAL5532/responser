@@ -17,6 +17,7 @@ import ForgotPasswordPage, {FORGOT_PASSWORD_PAGE_URL} from "./logic/forgot-passw
 import RestorePasswordPage, {RESTORE_PASSWORD_PAGE_URL} from "./logic/restore-password/RestorePasswordPage";
 import ErrorPage from "./logic/error-page/ErrorPage";
 import {AppFooter} from "./logic/app-footer/AppFooter";
+import GlobalNotifications from "./logic/global-notifications/GlobalNotifications";
 
 @observer
 export class App extends Component {
@@ -44,6 +45,8 @@ export class App extends Component {
 
                                 <Redirect from="*" to={MAIN_PAGE_URL}/>
                             </Switch>
+
+                            <GlobalNotifications/>
                         </ErrorBoundary>
 
                         <AppFooter/>

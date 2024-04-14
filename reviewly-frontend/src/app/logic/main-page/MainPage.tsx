@@ -1,11 +1,9 @@
-import React, {useContext, useEffect, useState} from "react";
+import React, {useContext, useState} from "react";
 import {observer} from "mobx-react";
 import classNames from "classnames";
 import {nativeNavigateTo, navigateTo} from "../../utils/NavigationUtils";
 import Page from "../../components/page/Page";
-import {useExtensionService} from "../../service/extension/ExtensionService";
-import {Button, ButtonSize} from "../../components/button/Button";
-import applicationProperties from "../../service/ApplicationProperties";
+import {Button} from "../../components/button/Button";
 import {MainPageNavigation, useMainPageStoreNew} from "./MainPageStore";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import MainMenu from "./main-menu/MainMenu";
@@ -31,20 +29,10 @@ const MainPage: React.FC = () => {
     const query = useQuery();
     const pageItem: MainPageNavigation = MainPageNavigation[query.get("item") as keyof typeof MainPageNavigation];
 
-    const {currentUser, refreshCurrentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
+    const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const {navigation, navigateTo} = useMainPageStoreNew(pageItem);
     const [menuHidden, setMenuHidden] = useState(true);
     const [editUserAvatar, setEditUserAvatar] = useState(false);
-
-    const {checkExtension} = useExtensionService();
-    const [extensionChecking, changeExtensionChecking] = useState(true);
-    const [extensionExist, changeExtensionExist] = useState(true);
-
-    useEffect(() => {
-        checkExtension()
-        .catch(() => changeExtensionExist(false))
-        .finally(() => changeExtensionChecking(false));
-    }, []);
 
     const onNavigate = (menuItem: MainPageNavigation) => {
         setMenuHidden(true);
@@ -74,36 +62,7 @@ const MainPage: React.FC = () => {
                     <Icon type={IconType.CLOSE}/>
                 </Button>
             </section>
-
-
-            {/*<div className="result">
-                <Icon type={IconType.CIRCLE_CHECK}/>
-
-                {!extensionChecking ? <ExtensionExistCheck exist={extensionExist}/> : null}
-
-            </div>*/}
         </Page>
-    );
-}
-
-type ExtensionExistCheckProps = {
-    exist: boolean
-}
-
-const ExtensionExistCheck: React.FC<ExtensionExistCheckProps> = ({exist}) => {
-    if (exist) {
-        return null;
-    }
-
-    const onInstallExtensionClick = () => {
-        window.open(applicationProperties.downloadExtensionChrome, "_blank");
-    }
-
-    return (
-        <div>
-            Looks like you didn't install the browser extension for reviews.
-            <Button size={ButtonSize.SMALL} onClick={onInstallExtensionClick}>Install extension</Button>
-        </div>
     );
 }
 
