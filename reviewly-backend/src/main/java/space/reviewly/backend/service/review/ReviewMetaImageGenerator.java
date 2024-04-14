@@ -5,7 +5,6 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Graphics2D;
-import java.awt.GraphicsEnvironment;
 import java.awt.RenderingHints;
 import java.awt.font.FontRenderContext;
 import java.awt.font.LineBreakMeasurer;
@@ -35,36 +34,12 @@ public class ReviewMetaImageGenerator {
     public static final Color MAIN_COLOR = new Color(0,0,0,0.6f);
 
     public ByteArrayOutputStream generate(Review review) {
-        String message = review.getText();
-
-        GraphicsEnvironment.getLocalGraphicsEnvironment().registerFont(getFont());
-
         BufferedImage image = new BufferedImage(IMAGE_WIDTH, IMAGE_HEIGHT, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = prepareGraphics(image);
 
         drawLogo(graphics);
         drawRating(graphics, review.getRating());
-
-        AttributedCharacterIterator messageIterator = getAttributedCharacterIterator(message, getFontSize(message));
-        FontRenderContext frc = graphics.getFontRenderContext();
-        LineBreakMeasurer messageLBM = new LineBreakMeasurer(messageIterator, frc);
-
-        float wrappingWidth = IMAGE_WIDTH - PADDING_X - PADDING_X;
-        float y = TEXT_PADDING_Y;
-
-        while (messageLBM.getPosition() < messageIterator.getEndIndex()) {
-            TextLayout textLayout = messageLBM.nextLayout(wrappingWidth);
-            y += textLayout.getAscent();
-
-            if (y >= 490) {
-                graphics.drawString(getAttributedCharacterIterator("...", getFontSize(message)), PADDING_X, 490);
-                break;
-            } else {
-                textLayout.draw(graphics, (float) PADDING_X, y);
-            }
-
-            y += textLayout.getDescent() + textLayout.getLeading();
-        }
+        drawText(review.getText(), graphics);
 
         ByteArrayOutputStream pngContent = new ByteArrayOutputStream();
 
@@ -138,21 +113,44 @@ public class ReviewMetaImageGenerator {
         graphics.drawImage(logo, PADDING_X, PADDING_Y, null);
     }
 
-    private AttributedCharacterIterator getAttributedCharacterIterator(String text, int fontSize) {
+    private void drawText(String message, Graphics2D graphics) {
+        AttributedCharacterIterator messageIterator = getAttributedCharacterIterator(message, getFontSize(message));
+        FontRenderContext frc = graphics.getFontRenderContext();
+        LineBreakMeasurer messageLBM = new LineBreakMeasurer(messageIterator, frc);
+
+        float wrappingWidth = IMAGE_WIDTH - PADDING_X - PADDING_X;
+        float y = TEXT_PADDING_Y;
+
+        while (messageLBM.getPosition() < messageIterator.getEndIndex()) {
+            TextLayout textLayout = messageLBM.nextLayout(wrappingWidth);
+            y += textLayout.getAscent();
+
+            if (y >= 490) {
+                graphics.drawString(getAttributedCharacterIterator("...", getFontSize(message)), PADDING_X, 490);
+                break;
+            } else {
+                textLayout.draw(graphics, (float) PADDING_X, y);
+            }
+
+            y += textLayout.getDescent() + textLayout.getLeading();
+        }
+    }
+
+    private AttributedCharacterIterator getAttributedCharacterIterator(String text, float fontSize) {
         return getAttributedCharacterIterator(text, fontSize, TextAttribute.WEIGHT_MEDIUM);
     }
 
-    private AttributedCharacterIterator getAttributedCharacterIterator(String text, int fontSize, Float wight) {
+    private AttributedCharacterIterator getAttributedCharacterIterator(String text, float fontSize, Float wight) {
         AttributedString attributedString = new AttributedString(text);
-        attributedString.addAttribute(TextAttribute.SIZE, fontSize);
+        attributedString.addAttribute(TextAttribute.FONT, getFont().deriveFont(fontSize));
         attributedString.addAttribute(TextAttribute.WEIGHT, wight);
         attributedString.addAttribute(TextAttribute.FOREGROUND, MAIN_COLOR);
 
         return attributedString.getIterator();
     }
 
-    private int getFontSize(String text) {
-        int fontSize;
+    private float getFontSize(String text) {
+        float fontSize;
 
         if (text.length() > 240) {
             fontSize = 30;
