@@ -146,7 +146,7 @@ const ReviewsPage: React.FC = () => {
                 isRemoveReviewConfirmationOpen={removeUserReviewConfirmation}/>
 
             <ReviewsFooter
-                userAuthorized={!!currentUser}
+                currentUser={currentUser}
                 hasUserReview={!!currentUserReview}
                 onEditReviewClick={onEditReviewClick}
                 onAddReviewClick={onAddReviewClick}

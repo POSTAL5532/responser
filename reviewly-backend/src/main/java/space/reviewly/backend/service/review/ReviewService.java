@@ -76,8 +76,14 @@ public class ReviewService {
         String resourceId = newReview.getResourceId();
         String userId = newReview.getUserId();
 
+        User user = userService.getUser(userId);
+
+        if (!user.getEmailConfirmed()) {
+            throw new IllegalArgumentException(format("User {0} didn't confirm email.", userId));
+        }
+
         if (!isResourceExists(resourceId)) {
-            throw new NoSuchElementException(format("Resource ''{0}'' ({1}) doesn't exist.", resourceId));
+            throw new NoSuchElementException(format("Resource ''{0}'' doesn't exist.", resourceId));
         }
 
         if (existsByResourceIdAndUserId(resourceId, userId)) {
@@ -94,6 +100,12 @@ public class ReviewService {
 
     @Transactional
     public Review updateReview(Review review) {
+        User user = userService.getUser(review.getUserId());
+
+        if (!user.getEmailConfirmed()) {
+            throw new IllegalArgumentException(format("User {0} didn't confirm email.", review.getUserId()));
+        }
+
         Review oldReview = this.getReviewByIdAndUser(review.getId(), review.getUserId());
         oldReview.setText(review.getText());
         oldReview.setRating(review.getRating());

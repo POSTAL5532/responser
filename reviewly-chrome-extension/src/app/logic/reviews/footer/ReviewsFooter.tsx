@@ -10,10 +10,12 @@ import {ShareReviewSubmenu} from "./ShareReviewSubmenu";
 import ApplicationProperties from "../../../service/ApplicationProperties";
 import {ResourceType} from "../../../model/ResourceType";
 import {ConfirmReviewRemoving} from "./ConfirmReviewRemoving";
+import {User} from "../../../model/User";
+import {Tooltip, TooltipPosition} from "../../../components/tooltip/Tooltip";
 import "./ReviewsFooter.less";
 
 type ReviewsFooterProps = {
-    userAuthorized: boolean;
+    currentUser: User;
     hasUserReview: boolean;
     onEditReviewClick: () => void;
     onAddReviewClick: () => void;
@@ -48,7 +50,7 @@ type ReviewsFooterProps = {
 
 export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooterProps) => {
     const {
-        userAuthorized,
+        currentUser,
         hasUserReview,
         currentResourceType,
         onEditReviewClick,
@@ -82,6 +84,9 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
         isReviewRemoving
     } = props;
 
+    const userAuthorized = !!currentUser;
+    const userEmailConfirmed = userAuthorized && currentUser.emailConfirmed;
+
     const footerSubmenu = (): JSX.Element => {
         if (showSorting) {
             return <SortingSubmenu currentSortingValue={currentSortingValue} setCriteriaSorting={setCriteriaSorting}/>
@@ -106,15 +111,25 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
     return (
         <AppFooter className="reviews-footer" submenu={footerSubmenu()} showSubmenu={showSubmenu}>
             <ConditionShow condition={userAuthorized && !hasUserReview && !!onAddReviewClick && !showSubmenu}>
-                <Button className="add-review" onClick={onAddReviewClick} disabled={isLoading} styleType={ButtonType.PRIMARY}>
-                    <Icon type={IconType.PLUS}/> Add review
-                </Button>
+                <Tooltip content="Users with not conformed emails can't add reviews. Please confirm your email in profile page."
+                         show={userEmailConfirmed ? false : undefined}
+                         position={TooltipPosition.TOP}
+                         className="email-not-confirmed-tooltip">
+                    <Button className="add-review" onClick={onAddReviewClick} disabled={isLoading || !userEmailConfirmed} styleType={ButtonType.PRIMARY}>
+                        <Icon type={IconType.PLUS}/> Add review
+                    </Button>
+                </Tooltip>
             </ConditionShow>
 
             <ConditionShow condition={userAuthorized && hasUserReview && !!onEditReviewClick && !showSubmenu}>
-                <Button className="edit-review" onClick={onEditReviewClick} disabled={isLoading} styleType={ButtonType.PRIMARY}>
-                    <Icon type={IconType.EDIT}/> Edit review
-                </Button>
+                <Tooltip content="Users with not conformed emails can't edit reviews. Please confirm your email in profile page."
+                         show={userEmailConfirmed ? false : undefined}
+                         position={TooltipPosition.TOP}
+                         className="email-not-confirmed-tooltip">
+                    <Button className="edit-review" onClick={onEditReviewClick} disabled={isLoading || !userEmailConfirmed} styleType={ButtonType.PRIMARY}>
+                        <Icon type={IconType.EDIT}/> Edit review
+                    </Button>
+                </Tooltip>
             </ConditionShow>
 
             <ConditionShow condition={userAuthorized && hasUserReview && !!onDeleteReviewClick && !showSubmenu}>
@@ -157,12 +172,16 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
 
             <ConditionShow condition={!showSubmenu}>
                 <div className="additional-controls">
-                    <Button onClick={onOpenFilterClick} styleType={ButtonType.LITE} disabled={isLoading}>
-                        <Icon type={IconType.SETTINGS}/>
-                    </Button>
-                    <Button onClick={onOpenSortingClick} styleType={ButtonType.LITE} disabled={isLoading}>
-                        <Icon type={IconType.SORTING}/>
-                    </Button>
+                    <Tooltip content="Filter" position={TooltipPosition.TOP} className="filter-sorting-tooltip">
+                        <Button onClick={onOpenFilterClick} styleType={ButtonType.LITE} disabled={isLoading}>
+                            <Icon type={IconType.SETTINGS}/>
+                        </Button>
+                    </Tooltip>
+                    <Tooltip content="Sorting" position={TooltipPosition.TOP} className="filter-sorting-tooltip">
+                        <Button onClick={onOpenSortingClick} styleType={ButtonType.LITE} disabled={isLoading}>
+                            <Icon type={IconType.SORTING}/>
+                        </Button>
+                    </Tooltip>
 
                     <ConditionShow condition={userAuthorized && !!onLogOutClick}>
                         <Button className="logout" styleType={ButtonType.LITE} onClick={onLogOutClick}>

@@ -14,6 +14,7 @@ import {User} from "../../model/User";
 import {Icon, IconType} from "../icon/Icon";
 import {observer} from "mobx-react";
 import {getWebResourceIconUrl} from "../../utils/ResourcesUtils";
+import {Tooltip, TooltipPosition} from "../tooltip/Tooltip";
 import "./ReviewCard.less";
 
 type ReviewCardProps = {
@@ -94,6 +95,8 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
         updateLike?.(currentUserReviewLike, positive).finally(() => setLikeInProcess(false));
     }
 
+    const currentUserConfirmedEmail = !!currentUser && currentUser.emailConfirmed;
+
     return (
         <div className={resultClassName}>
             <div className="card-header">
@@ -129,7 +132,13 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
                     </ConditionShow>
 
                     <ConditionShow condition={!!onEditReviewClick}>
-                        <Button className="edit-review" onClick={() => onEditReviewClick(id)}><Icon type={IconType.EDIT}/> Edit</Button>
+                        <Tooltip show={!currentUserConfirmedEmail ? undefined : false}
+                                 position={TooltipPosition.TOP}
+                                 content="Users with not conformed emails can't edit reviews. Please confirm your email in profile page.">
+                            <Button className="edit-review" onClick={() => onEditReviewClick(id)} disabled={!currentUserConfirmedEmail}>
+                                <Icon type={IconType.EDIT}/> Edit
+                            </Button>
+                        </Tooltip>
                     </ConditionShow>
 
                     <Reaction count={positives.length}
