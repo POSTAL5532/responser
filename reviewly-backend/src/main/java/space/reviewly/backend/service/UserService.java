@@ -108,12 +108,13 @@ public class UserService {
 
         if (!user.getEmail().equals(userUpdates.getEmail())) {
             user.setEmail(userUpdates.getEmail());
+            user.setEmailConfirmed(false);
 
             EmailConfirmation emailConfirmation = emailConfirmationService
                 .findByUserId(userId)
                 .orElseGet(() -> emailConfirmationService.createEmailConfirmation(userId));
 
-            emailService.sendEmailConfirmationMessage(user, emailConfirmation);
+            emailService.sendChangedEmailConfirmationMessage(user, emailConfirmation);
         }
 
         if (!user.getFullName().equals(userUpdates.getFullName())) {

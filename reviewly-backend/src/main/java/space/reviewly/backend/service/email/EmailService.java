@@ -58,6 +58,29 @@ public class EmailService {
         }
     }
 
+    public void sendChangedEmailConfirmationMessage(User user, EmailConfirmation emailConfirmation) {
+        Map<String, Object> templateProperties = new HashMap<>();
+        templateProperties.put("user", user);
+        templateProperties.put(
+            "confirmationLink",
+            applicationProperties.getSelfHost() + EMAIL_CONFIRMATION_URL + "/" + emailConfirmation.getId()
+        );
+
+        EmailContext emailContext = buildEmailContext(
+            "Reviewly: Email changed",
+            user.getEmail(),
+            EmailTemplate.CHANGED_EMAIL_CONFIRMATION_TEMPLATE,
+            templateProperties
+        );
+
+        try {
+            sendEmailMessage(emailContext);
+        } catch (MessagingException e) {
+            log.error("Send email confirmation fail", e);
+            throw new RuntimeException(e);
+        }
+    }
+
     public void sendPasswordRestoringLink(User user, PasswordRestore passwordRestore) {
         Map<String, Object> templateProperties = new HashMap<>();
         templateProperties.put("user", user);
@@ -106,6 +129,8 @@ public class EmailService {
         emailContext.setSubject(subject);
         emailContext.setTo(to);
         emailContext.setTemplate(template);
+
+        templateProperties.put("applicationProperties", applicationProperties);
         emailContext.setProperties(templateProperties);
 
         return emailContext;
