@@ -1,7 +1,7 @@
 import React, {ChangeEvent} from "react";
 import {FieldLayout} from "../../../components/form/field-layout/FieldLayout";
 import {Rating} from "../../../components/rating/Rating";
-import {TextArea, TextAreaStyleType} from "../../../components/form/textarea/Textarea";
+import {TextArea, TextAreaStyleType} from "../../../components/form/textarea/TextArea";
 import {ResourceType} from "../../../model/ResourceType";
 
 const REVIEW_TEXT_MAX_LENGTH = 460;
