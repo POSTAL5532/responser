@@ -1,7 +1,7 @@
-import {TokenInfo} from "app/model/TokenInfo";
 import {ExtensionService} from "../extension/ExtensionService";
 import ApplicationProperties from "../ApplicationProperties";
 import {Logger} from "../../utils/Logger";
+import {TokenInfo} from "../../model/TokenInfo";
 
 /**
  * Token sore. Contains read/write/delete methods.

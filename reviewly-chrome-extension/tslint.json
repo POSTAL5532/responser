@@ -1,7 +1,7 @@
 {
   "rulesDirectory": ["node_modules/tslint-microsoft-contrib"],
   "rules": {
-    "no-relative-imports": true
+    "no-relative-imports": false
   },
   "defaultSeverity": "error"
 }

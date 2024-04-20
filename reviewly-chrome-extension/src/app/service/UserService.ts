@@ -1,5 +1,5 @@
-import {ApiClient} from "app/service/ApiClient";
-import {User} from "app/model/User";
+import {ApiClient} from "./ApiClient";
+import {User} from "../model/User";
 import {Logger} from "../utils/Logger";
 
 const BASE_USER_REQUEST = "/users"

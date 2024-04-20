@@ -1,6 +1,6 @@
 import React from "react";
 import {Redirect, Route, RouteProps} from "react-router";
-import TokenStore from "app/service/authorization/LocalTokenStorageService";
+import TokenStore from "../service/authorization/LocalTokenStorageService";
 import {REVIEWS_PAGE_URL} from "../logic/reviews/ReviewsPage";
 
 /**

@@ -1,4 +1,4 @@
-import {TokenInfo} from "app/model/TokenInfo";
+import {TokenInfo} from "../model/TokenInfo";
 import axios, {AxiosRequestConfig} from 'axios';
 import LocalTokenStorageService from "./authorization/LocalTokenStorageService";
 import AuthorizationService from "./authorization/AuthorizationService";

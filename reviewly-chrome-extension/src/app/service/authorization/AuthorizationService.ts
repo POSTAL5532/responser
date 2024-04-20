@@ -1,8 +1,8 @@
 import axios, {AxiosRequestConfig} from "axios";
-import ApplicationProperties from "app/service/ApplicationProperties";
-import {TokenInfo} from "app/model/TokenInfo";
-import TokenStore from "app/service/authorization/LocalTokenStorageService";
+import ApplicationProperties from "../ApplicationProperties";
+import TokenStore from "../../service/authorization/LocalTokenStorageService";
 import {Logger} from "../../utils/Logger";
+import {TokenInfo} from "../../model/TokenInfo";
 
 /**
  * Authorization service.
