@@ -73,9 +73,10 @@ compileJava	{
     options.annotationProcessorGeneratedSourcesDirectory = file(generatedMainJava)
 }
 
-tasks.named("build") {
+// gradle npm plugin unable to run less tasks (O_o), so for the CI/CD this operation must be called manually
+/*tasks.named("build") {
     dependsOn("compileLess")
-}
+}*/
 
 task compileLess() {
     description 'Tasks which shows a welcome message'
