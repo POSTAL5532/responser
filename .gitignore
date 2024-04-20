@@ -6,13 +6,6 @@ node_modules/
 build/
 out/
 
-manifest-*.json
 reviewly-file-store-stub.properties
 
-*.env
-*.yml
 *.log*
-
-!configs/**/*.yml
-!configs/**/*.env
-!configs/**/manifest-*.json
