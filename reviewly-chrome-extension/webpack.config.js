@@ -69,7 +69,7 @@ module.exports = (env, args) => {
         module: {
             rules: [
                 {
-                    test: /\.(ts)x?$/,
+                    test: /\.(tsx|ts)$/,
                     exclude: /node_modules|test/,
                     use: "babel-loader"
                 },
