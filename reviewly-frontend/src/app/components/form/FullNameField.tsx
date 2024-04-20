@@ -1,6 +1,6 @@
 import React, {ChangeEvent} from "react";
 import {Field, FieldProps} from "formik";
-import {InputField, InputFieldProps} from "app/components/form/input-field/InputField";
+import {InputField, InputFieldProps} from "./input-field/InputField";
 
 export const FullNameField: React.FC<InputFieldProps> = (props: InputFieldProps) => {
 

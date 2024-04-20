@@ -1,7 +1,7 @@
-import {TokenInfo} from "app/model/TokenInfo";
-import ApplicationProperties from "app/service/ApplicationProperties";
 import {Logger} from "../../utils/Logger";
 import {removeCookie} from "../../utils/CookieUtils";
+import {TokenInfo} from "../../model/TokenInfo";
+import ApplicationProperties from "../ApplicationProperties";
 
 const ACCESS_TOKEN_KEY = "access_token";
 const REFRESH_TOKEN_KEY = "refresh_token";

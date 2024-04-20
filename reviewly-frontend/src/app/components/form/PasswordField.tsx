@@ -1,11 +1,11 @@
 import React, {ChangeEvent, useState} from "react";
 import {Field, FieldProps, FieldValidator} from "formik";
 import * as Yup from 'yup';
-import {InputField, InputFieldProps} from "app/components/form/input-field/InputField";
 import {Button} from "../button/Button";
 import {Icon, IconType} from "../icon/Icon";
 import classNames from "classnames";
 import "./PasswordField.less";
+import {InputField, InputFieldProps} from "./input-field/InputField";
 
 type PasswordFieldProps = {
     validator?: FieldValidator;

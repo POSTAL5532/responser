@@ -26,11 +26,7 @@
             {
                 "root": [
                     "./src"
-                ],
-                "alias": {
-                    "test": "./src/test",
-                    "app": "./src/app"
-                }
+                ]
             }
         ],
         "@babel/proposal-object-rest-spread",

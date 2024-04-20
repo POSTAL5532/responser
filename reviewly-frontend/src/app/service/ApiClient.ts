@@ -1,11 +1,11 @@
-import {TokenInfo} from "app/model/TokenInfo";
 import axios, {AxiosRequestConfig} from 'axios';
-import ApplicationPropertiesService from "app/service/ApplicationProperties";
-import LocalTokenStorageService from "app/service/authorization/LocalTokenStorageService";
-import AuthorizationService from "app/service/authorization/AuthorizationService";
 import {ApiError} from "../model/ApiError";
 import {nativeNavigateToAuthLogoutPageUrl} from "../utils/NavigationUtils";
 import {Logger} from "../utils/Logger";
+import {TokenInfo} from "../model/TokenInfo";
+import AuthorizationService from "./authorization/AuthorizationService";
+import LocalTokenStorageService from "./authorization/LocalTokenStorageService";
+import ApplicationProperties from "./ApplicationProperties";
 
 const apiClientLogger: Logger = new Logger("ApiClient");
 
@@ -67,7 +67,7 @@ export class ApiClient {
         }
 
         return {
-            baseURL: ApplicationPropertiesService.apiUrl,
+            baseURL: ApplicationProperties.apiUrl,
             headers: {
                 ...headers
             },

@@ -1,12 +1,12 @@
 import React from "react";
-import {User} from "app/model/User";
+import {User} from "./model/User";
 import {action, computed, makeAutoObservable, runInAction} from "mobx";
-import LocalTokenStorageService from "app/service/authorization/LocalTokenStorageService";
-import {UserService} from "app/service/UserService";
 import {reloadPage} from "./utils/NavigationUtils";
 import {Logger} from "./utils/Logger";
 import {setCookie} from "./utils/CookieUtils";
 import {GlobalNotificationsHolder} from "./model/notifications/GlobalNotificationsHolder";
+import LocalTokenStorageService from "./service/authorization/LocalTokenStorageService";
+import {UserService} from "./service/UserService";
 
 export class GlobalAppStore {
 

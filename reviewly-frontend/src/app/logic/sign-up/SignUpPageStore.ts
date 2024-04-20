@@ -1,9 +1,9 @@
+import {useState} from "react";
 import {makeAutoObservable} from "mobx";
-import {UserAccountDataPayload} from "app/model/UserAccountDataPayload";
-import {UserService} from "app/service/UserService";
 import {Logger} from "../../utils/Logger";
 import {isValidationError, setErrorsToFields} from "../../utils/ErrorUtils";
-import {useState} from "react";
+import {UserAccountDataPayload} from "../../model/UserAccountDataPayload";
+import {UserService} from "../../service/UserService";
 
 /**
  * Sign up page store.

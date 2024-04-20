@@ -1,12 +1,12 @@
 import React, {useContext} from "react";
 import {observer} from "mobx-react";
-import {Button, ButtonType} from "app/components/button/Button";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {nativeNavigateTo, navigateTo} from "../../utils/NavigationUtils";
 import ApplicationProperties from "../../service/ApplicationProperties";
 import AuthorizationService from "../../service/authorization/AuthorizationService";
 import {Icon, IconType} from "../../components/icon/Icon";
 import {MAIN_PAGE_URL} from "../main-page/MainPage";
+import {Button, ButtonType} from "../../components/button/Button";
 import "./AppHeader.less";
 
 const AppHeader: React.FC = () => {

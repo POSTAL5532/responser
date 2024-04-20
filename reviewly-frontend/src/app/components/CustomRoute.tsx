@@ -1,10 +1,9 @@
 import React from "react";
 import {Redirect, Route, RouteProps} from "react-router";
-import {MAIN_PAGE_URL} from "app/logic/main-page/MainPage";
-import TokenStore from "app/service/authorization/LocalTokenStorageService";
 import {nativeNavigateTo} from "../utils/NavigationUtils";
 import ApplicationProperties from "../service/ApplicationProperties";
 import LocalTokenStorageService from "../service/authorization/LocalTokenStorageService";
+import {MAIN_PAGE_URL} from "../logic/main-page/MainPage";
 
 type CustomRouteComponentProps = {
     redirectLogic?: () => void;
@@ -51,7 +50,7 @@ const CustomRoute = (canActivate?: () => boolean, redirectPath?: string, isNativ
  * Route for authorized scope only.
  */
 export const AuthorizedRoute = CustomRoute(
-    () => TokenStore.isAccessTokenExist,
+    () => LocalTokenStorageService.isAccessTokenExist,
     ApplicationProperties.unauthorizedPageUrl,
     true
 );
@@ -59,7 +58,7 @@ export const AuthorizedRoute = CustomRoute(
 /**
  * Route for unauthorized scope only.
  */
-export const UnauthorizedRoute = CustomRoute(() => !TokenStore.isAccessTokenExist, MAIN_PAGE_URL);
+export const UnauthorizedRoute = CustomRoute(() => !LocalTokenStorageService.isAccessTokenExist, MAIN_PAGE_URL);
 
 /**
  * Route for unauthorized scope only.

@@ -56,7 +56,7 @@ spring:
   mail:
     host: smtp.office365.com
     port: 587
-    username: info@reviewly.space
+    username: ishcherbachenya@reviewly.space
     password: 5#OFpkKn9YXa69Dl6Ts5&q6Z
     protocol: smtp
     properties.mail.smtp:
@@ -78,7 +78,7 @@ reviewly:
   clientSecret: reviewly-web-client-secret
   downloadExtensionChrome: https://www.google.com
   chromeExtensionId: bcgepbhdoibfdnpmemhdjifmjdmfacml
-  reviewlyInfoEmail: info@reviewly.space
+  reviewlyInfoEmail: ishcherbachenya@reviewly.space
   fileStorageUrl: ${reviewly.selfHost}/cdn
   fileStorageUrlSitesIcons: ${reviewly.fileStorageUrl}/site-icon
   fileStorageUrlUsersAvatars: ${reviewly.fileStorageUrl}/user-avatar

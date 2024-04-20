@@ -1,11 +1,11 @@
-import {ApiClient} from "app/service/ApiClient";
-import {UserAccountDataPayload} from "app/model/UserAccountDataPayload";
-import {User} from "app/model/User";
 import {Logger} from "../utils/Logger";
 import {UpdateUserPayload} from "../model/UpdateUserPayload";
 import {UpdateUserPasswordPayload} from "../model/UpdateUserPasswordPayload";
 import {ForgotPasswordPayload} from "../model/ForgotPasswordPayload";
 import {RestorePasswordPayload} from "../model/RestorePasswordPayload";
+import {ApiClient} from "./ApiClient";
+import {UserAccountDataPayload} from "../model/UserAccountDataPayload";
+import {User} from "../model/User";
 
 const BASE_USER_REQUEST = "/users"
 

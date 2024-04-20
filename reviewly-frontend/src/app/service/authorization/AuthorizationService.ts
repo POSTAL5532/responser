@@ -1,9 +1,9 @@
 import axios, {AxiosRequestConfig} from "axios";
-import ApplicationProperties from "app/service/ApplicationProperties";
-import {TokenInfo} from "app/model/TokenInfo";
-import TokenStore from "app/service/authorization/LocalTokenStorageService";
 import {nativeNavigateTo} from "../../utils/NavigationUtils";
 import {Logger} from "../../utils/Logger";
+import {TokenInfo} from "../../model/TokenInfo";
+import ApplicationProperties from "../ApplicationProperties";
+import LocalTokenStorageService from "./LocalTokenStorageService";
 
 /**
  * Authorization service.
@@ -67,7 +67,7 @@ class AuthorizationService {
     }
 
     private refreshAccessTokenRequest = async (): Promise<TokenInfo> => {
-        const payload = `refresh_token=${TokenStore.refreshToken}&grant_type=refresh_token`;
+        const payload = `refresh_token=${LocalTokenStorageService.refreshToken}&grant_type=refresh_token`;
         const data = await this.executePostRequest(ApplicationProperties.authTokenUrl, payload);
         return TokenInfo.deserialize(data);
     }
@@ -76,7 +76,7 @@ class AuthorizationService {
         const options: AxiosRequestConfig = {
             headers: {
                 "Content-type": "application/x-www-form-urlencoded",
-                ...TokenStore.basicAuthorizationHeader
+                ...LocalTokenStorageService.basicAuthorizationHeader
             }
         };
 
