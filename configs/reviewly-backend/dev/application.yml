@@ -10,7 +10,7 @@ logging:
     sql: warn
     web: info
   file:
-    name: /application/logs/reviewly-logs.log
+    name: /opt/reviewly/backend/logs/reviewly-logs.log
   logback:
     rollingpolicy:
       max-file-size: 10MB
