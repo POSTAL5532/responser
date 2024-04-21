@@ -51,6 +51,7 @@ jobs:
           echo -e "> Copying new auth-server"
           scp -i ${ssh_key_file} -r ./reviewly-auth-server/build/libs/${auth_server_jar_name} ${remote_user}@${remote_host}:${remote_auth_server_dir}
           scp -i ${ssh_key_file} -r ${configs_dir}/reviewly-auth-server/dev/application.yml ${remote_user}@${remote_host}:${remote_auth_server_dir}/application.yml
+          echo -e "> Done"
           echo -e "> Restart auth-server:"
           echo -e "  - stop"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl stop reviewly-auth-server"
@@ -77,4 +78,4 @@ jobs:
           echo -e "> Copying new frontend app"
           scp -i ${ssh_key_file} -r ./reviewly-frontend/build/* ${remote_user}@${remote_host}:${remote_frontend_app_dir}
           echo -e "> Done"
-          echo -e "> Start back appication"
+          echo -e "> Deployment finish"
