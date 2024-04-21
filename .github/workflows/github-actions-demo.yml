@@ -30,9 +30,6 @@ jobs:
       - name: Execute Gradle build
         run: ./gradlew clean build -DbuildMode=${{github.event.inputs.environment}}
 
-      - name: List files in the backend target directory
-        run: ls ${{ github.workspace }}/reviewly-backend/build/libs
-
       - name: Step 4 - Deploy app.
         env:
           CI: false
