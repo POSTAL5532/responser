@@ -1,5 +1,5 @@
-name: GitHub Actions Demo
-run-name: ${{ github.actor }} is testing out GitHub Actions 🚀
+name: Reviewly CI_CD
+run-name: ${{ github.actor }} is running action 🚀
 on:
   workflow_dispatch:
     inputs:
@@ -12,8 +12,8 @@ on:
           - dev
           - prod
 jobs:
-  Gradle-buid-project:
-    runs-on: ubuntu-latest
+  Build-project:
+    runs-on: ubuntu-22.04
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
@@ -33,4 +33,49 @@ jobs:
       - name: List files in the backend target directory
         run: |
           ls ${{ github.workspace }}/reviewly-backend/build/libs
+
+      - name: Step 4 - Deploy app.
+        env:
+          CI: false
+          remote_host: ${{ secrets.DEV_REMOTE_HOST }}
+          remote_user: ${{ secrets.DEV_REMOTE_USER }}
+          remote_key: ${{ secrets.DEV_DEPLOY_KEY }}
+          ssh_key_file: id_rsa
+
+          configs_dir: ./configs
+
+          remote_dir: /opt/reviewly/test_dir
+          remote_backend_dir: ${{ remote_dir }}/backend
+          backend_jar_name: reviewly-backend.jar
+          remote_auth_server_dir: ${{ remote_dir }}/auth-server
+          auth_server_jar_name: reviewly-auth-server.jar
+          remote_frontend_app_dir: ${{ remote_dir }}/frontend-app
+        run: |
+          echo -e "========= Prepare server access ========="
+          mkdir -p ~/.ssh/
+          touch ~/.ssh/known_hosts
+          echo "$remote_key" > ${ssh_key_file}
+          chmod 600 ${ssh_key_file}
+          echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >~/.ssh/config
+          echo -e "========= Stop back appication ========="
+#          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "pm2 stop perfomante-back -f --silent"
+          echo -e "========= Clear old backend ========="
+          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_backend_dir}/${backend_jar_name}"
+          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_backend_dir}/application.yml"
+          echo -e "========= Clear old auth-server ========="
+          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_auth_server_dir}/${auth_server_jar_name}"
+          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_auth_server_dir}/application.yml"
+          echo -e "========= Clear old frontend app ========="
+          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_frontend_app_dir}/*"
+          echo -e "========= Copying new backend ========="
+          scp -i ${ssh_key_file} -r ./reviewly-backend/build/libs/${backend_jar_name} ${remote_user}@${remote_host}:${remote_backend_dir}/${backend_jar_name}
+          scp -i ${ssh_key_file} -r ${configs_dir}/reviewly-backend/dev/application.yml ${remote_user}@${remote_host}:${remote_backend_dir}/application.yml
+          echo -e "========= Copying new auth-server ========="
+          scp -i ${ssh_key_file} -r ./reviewly-auth-server/build/libs/${auth_server_jar_name} ${remote_user}@${remote_host}:${remote_auth_server_dir}/${auth_server_jar_name}
+          scp -i ${ssh_key_file} -r ${configs_dir}/reviewly-auth-server/dev/application.yml ${remote_user}@${remote_host}:${remote_auth_server_dir}/application.yml
+          echo -e "========= Copying new frontend app ========="
+          scp -i ${ssh_key_file} -r ./reviewly-frontend/build/* ${remote_user}@${remote_host}:${remote_frontend_app_dir}
+          echo -e "========= Start back appication ========="
+#          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "pm2 start perfomante-back"
+
       - run: echo "🍏 This job's status is ${{ job.status }}."
