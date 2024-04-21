@@ -86,4 +86,4 @@ reviewly:
   defaultSiteIconFileName: default_site_icon.png
   allowedOrigins:
     - ${reviewly.selfHost}
-    - chrome-extension://bcgepbhdoibfdnpmemhdjifmjdmfacml
+    - chrome-extension://${reviewly.chromeExtensionId}

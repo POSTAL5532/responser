@@ -9,20 +9,33 @@ node {
     npmWorkDir = file("${rootProject.projectDir}/.gradle/npm")
 }
 
-task install(type: NpmTask) {
+tasks.register('install', NpmTask) {
     // TODO: GRADLE build error workaround. NPM processes log warning-level logs that gradle defines like error-level logs.
     args = ['install', '--loglevel', 'error']
 }
 
-task clean(type: NpmTask) {
+tasks.register('clean', NpmTask) {
     println "Clean build directory."
     args = ['run', 'clean']
 }
 
-task build(type: NpmTask) {
+tasks.register('build', NpmTask) {
     def buildMode = System.getProperty("buildMode");
     println "Build frontend with build mode='" + buildMode + "'"
 
     dependsOn install
     args = ['run', "build:${buildMode}"]
 }
+
+tasks.register('zip', Zip) {
+    def outputFileName = 'reviewly-frontend.zip'
+
+    from("$buildDir") {
+        exclude "$outputFileName"
+    }
+
+    archiveName "$outputFileName"
+    destinationDir(file("$buildDir"))
+}
+
+tasks.build.finalizedBy(zip)
