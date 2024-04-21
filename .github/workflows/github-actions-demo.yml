@@ -31,21 +31,6 @@ jobs:
         run: ./gradlew clean build -DbuildMode=${{github.event.inputs.environment}}
 
       - name: Step 4 - Deploy app.
-        env:
-          CI: false
-          remote_host: ${{ secrets.DEV_REMOTE_HOST }}
-          remote_user: ${{ secrets.DEV_REMOTE_USER }}
-          remote_key: ${{ secrets.DEV_DEPLOY_KEY }}
-          ssh_key_file: id_rsa
-
-          configs_dir: ./configs
-
-          remote_dir: /opt/reviewly/test_dir
-          remote_backend_dir: ${{ remote_dir }}/backend
-          backend_jar_name: reviewly-backend.jar
-          remote_auth_server_dir: ${{ remote_dir }}/auth-server
-          auth_server_jar_name: reviewly-auth-server.jar
-          remote_frontend_app_dir: ${{ remote_dir }}/frontend-app
         run: |
           echo -e "========= Prepare server access ========="
           mkdir -p ~/.ssh/
@@ -73,5 +58,20 @@ jobs:
           scp -i ${ssh_key_file} -r ./reviewly-frontend/build/* ${remote_user}@${remote_host}:${remote_frontend_app_dir}
           echo -e "========= Start back appication ========="
 #          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "pm2 start perfomante-back"
+      env:
+        CI: false
+        remote_host: ${{ secrets.DEV_REMOTE_HOST }}
+        remote_user: ${{ secrets.DEV_REMOTE_USER }}
+        remote_key: ${{ secrets.DEV_DEPLOY_KEY }}
+        ssh_key_file: id_rsa
+
+        configs_dir: ./configs
+
+        remote_dir: /opt/reviewly/test_dir
+        remote_backend_dir: ${{ remote_dir }}/backend
+        backend_jar_name: reviewly-backend.jar
+        remote_auth_server_dir: ${{ remote_dir }}/auth-server
+        auth_server_jar_name: reviewly-auth-server.jar
+        remote_frontend_app_dir: ${{ remote_dir }}/frontend-app
 
       - run: echo "🍏 This job's status is ${{ job.status }}."
