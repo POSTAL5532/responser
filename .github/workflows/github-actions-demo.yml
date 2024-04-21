@@ -2,15 +2,6 @@ name: Reviewly CI_CD
 run-name: ${{ github.actor }} is running action 🚀
 on:
   workflow_dispatch:
-    inputs:
-      environment:
-        type: choice
-        description: Environment build for dev/prod
-        required: true
-        default: dev
-        options:
-          - dev
-          - prod
 jobs:
   Build-project:
     runs-on: ubuntu-22.04
@@ -28,7 +19,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Execute Gradle build
-        run: ./gradlew clean build -DbuildMode=${{github.event.inputs.environment}}
+        run: ./gradlew clean build -DbuildMode=dev
 
       - name: Deploy applications
         env:
@@ -40,11 +31,11 @@ jobs:
 
           configs_dir: ./configs
 
-          remote_backend_dir: /opt/reviewly/test_dir/backend
+          remote_backend_dir: /opt/reviewly/backend
           backend_jar_name: reviewly-backend.jar
-          remote_auth_server_dir: /opt/reviewly/test_dir/auth-server
+          remote_auth_server_dir: /opt/reviewly/auth-server
           auth_server_jar_name: reviewly-auth-server.jar
-          remote_frontend_app_dir: /opt/reviewly/test_dir/frontend-app
+          remote_frontend_app_dir: /opt/reviewly/frontend-app
         run: |
           echo -e "> Prepare server access"
           mkdir -p ~/.ssh/
@@ -67,12 +58,12 @@ jobs:
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_backend_dir}/${backend_jar_name}"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_backend_dir}/application.yml"
           echo -e "> Done"
-          echo -e "> Restart backend"
-          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl restart reviewly-backend"
-          echo -e "> Done"
           echo -e "> Copying new backend"
           scp -i ${ssh_key_file} -r ./reviewly-backend/build/libs/${backend_jar_name} ${remote_user}@${remote_host}:${remote_backend_dir}
           scp -i ${ssh_key_file} -r ${configs_dir}/reviewly-backend/dev/application.yml ${remote_user}@${remote_host}:${remote_backend_dir}/application.yml
+          echo -e "> Done"
+          echo -e "> Restart backend"
+          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl restart reviewly-backend"
           echo -e "> Done"
           echo -e "> Clear old frontend app"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_frontend_app_dir}/*"
