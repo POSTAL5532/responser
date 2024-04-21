@@ -41,11 +41,11 @@ jobs:
           configs_dir: ./configs
 
           remote_dir: /opt/reviewly/test_dir
-          remote_backend_dir: ${remote_dir}/backend
+          remote_backend_dir: ${{ env.remote_dir }}/backend
           backend_jar_name: reviewly-backend.jar
-          remote_auth_server_dir: ${remote_dir}/auth-server
+          remote_auth_server_dir: ${{ env.remote_dir }}/auth-server
           auth_server_jar_name: reviewly-auth-server.jar
-          remote_frontend_app_dir: ${remote_dir}/frontend-app
+          remote_frontend_app_dir: ${{ env.remote_dir }}/frontend-app
         run: |
           echo -e "========= Prepare server access ========="
           mkdir -p ~/.ssh/
