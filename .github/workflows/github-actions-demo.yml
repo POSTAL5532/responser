@@ -50,6 +50,12 @@ jobs:
           echo -e "> Migrate database"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "liquibase --defaultsFile=/opt/reviewly/database/liquibase.properties update"
           echo -e "> Done"
+          echo -e "> Stop services"
+          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl stop reviewly-auth-server"
+          echo -e "  - stop auth-server: done"
+          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl stop reviewly-backend"
+          echo -e "  - stop backend: done"
+          echo -e "> Done"
           echo -e "> Clear old auth-server"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_auth_server_dir}/${auth_server_jar_name}"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_auth_server_dir}/application.yml"
@@ -58,10 +64,7 @@ jobs:
           scp -i ${ssh_key_file} -r ./reviewly-auth-server/build/libs/${auth_server_jar_name} ${remote_user}@${remote_host}:${remote_auth_server_dir}
           scp -i ${ssh_key_file} -r ${configs_dir}/reviewly-auth-server/dev/application.yml ${remote_user}@${remote_host}:${remote_auth_server_dir}/application.yml
           echo -e "> Done"
-          echo -e "> Restart auth-server:"
-          echo -e "  - stop"
-          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl stop reviewly-auth-server"
-          echo -e "  - start"
+          echo -e "> Start auth-server:"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl start reviewly-auth-server"
           echo -e "> Done"
           echo -e "> Clear old backend"
@@ -72,10 +75,7 @@ jobs:
           scp -i ${ssh_key_file} -r ./reviewly-backend/build/libs/${backend_jar_name} ${remote_user}@${remote_host}:${remote_backend_dir}
           scp -i ${ssh_key_file} -r ${configs_dir}/reviewly-backend/dev/application.yml ${remote_user}@${remote_host}:${remote_backend_dir}/application.yml
           echo -e "> Done"
-          echo -e "> Restart backend:"
-          echo -e "  - stop"
-          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl stop reviewly-backend"
-          echo -e "  - start"
+          echo -e "> Start backend:"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl start reviewly-backend"
           echo -e "> Done"
           echo -e "> Clear old frontend app"
