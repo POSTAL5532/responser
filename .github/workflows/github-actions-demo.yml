@@ -36,6 +36,7 @@ jobs:
           remote_auth_server_dir: /opt/reviewly/auth-server
           auth_server_jar_name: reviewly-auth-server.jar
           remote_frontend_app_dir: /opt/reviewly/frontend-app
+          migrations_dir: /opt/reviewly/database/migrations
         run: |
           echo -e "> Prepare server access"
           mkdir -p ~/.ssh/
@@ -44,44 +45,60 @@ jobs:
           chmod 600 ${ssh_key_file}
           echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >~/.ssh/config
           echo -e "> Done"
-          echo -e "> Copying migrations"
-          scp -i ${ssh_key_file} -r ./database/migrations/* ${remote_user}@${remote_host}:/opt/reviewly/database/migrations
+          
+          echo -e "> Clear old migrations"
+          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${migrations_dir}/*"
           echo -e "> Done"
+          
+          echo -e "> Copying migrations"
+          scp -i ${ssh_key_file} -r ./database/migrations/* ${remote_user}@${remote_host}:${migrations_dir}
+          echo -e "> Done"
+          
           echo -e "> Migrate database"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "liquibase --defaultsFile=/opt/reviewly/database/liquibase.properties update"
           echo -e "> Done"
+          
           echo -e "> Stop services"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl stop reviewly-auth-server"
           echo -e "  - stop auth-server: done"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl stop reviewly-backend"
           echo -e "  - stop backend: done"
           echo -e "> Done"
+          
           echo -e "> Clear old auth-server"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_auth_server_dir}/${auth_server_jar_name}"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_auth_server_dir}/application.yml"
           echo -e "> Done"
+          
           echo -e "> Copying new auth-server"
           scp -i ${ssh_key_file} -r ./reviewly-auth-server/build/libs/${auth_server_jar_name} ${remote_user}@${remote_host}:${remote_auth_server_dir}
           scp -i ${ssh_key_file} -r ${configs_dir}/reviewly-auth-server/dev/application.yml ${remote_user}@${remote_host}:${remote_auth_server_dir}/application.yml
           echo -e "> Done"
+          
           echo -e "> Start auth-server:"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl start reviewly-auth-server"
           echo -e "> Done"
+          
           echo -e "> Clear old backend"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_backend_dir}/${backend_jar_name}"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_backend_dir}/application.yml"
           echo -e "> Done"
+          
           echo -e "> Copying new backend"
           scp -i ${ssh_key_file} -r ./reviewly-backend/build/libs/${backend_jar_name} ${remote_user}@${remote_host}:${remote_backend_dir}
           scp -i ${ssh_key_file} -r ${configs_dir}/reviewly-backend/dev/application.yml ${remote_user}@${remote_host}:${remote_backend_dir}/application.yml
           echo -e "> Done"
+          
           echo -e "> Start backend:"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl start reviewly-backend"
           echo -e "> Done"
+          
           echo -e "> Clear old frontend app"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_frontend_app_dir}/*"
           echo -e "> Done"
+          
           echo -e "> Copying new frontend app"
           scp -i ${ssh_key_file} -r ./reviewly-frontend/build/* ${remote_user}@${remote_host}:${remote_frontend_app_dir}
           echo -e "> Done"
+          
           echo -e "> Deployment finish"
