@@ -44,6 +44,12 @@ jobs:
           chmod 600 ${ssh_key_file}
           echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >~/.ssh/config
           echo -e "> Done"
+          echo -e "> Copying migrations"
+          scp -i ${ssh_key_file} -r ./database/migrations/* ${remote_user}@${remote_host}:/opt/reviewly/database/migrations
+          echo -e "> Done"
+          echo -e "> Migrate database"
+          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "liquibase --defaultsFile=/opt/reviewly/database/liquibase.properties update"
+          echo -e "> Done"
           echo -e "> Clear old auth-server"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_auth_server_dir}/${auth_server_jar_name}"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_auth_server_dir}/application.yml"

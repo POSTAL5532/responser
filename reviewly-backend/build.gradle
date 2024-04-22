@@ -69,7 +69,7 @@ sourceSets {
 }
 
 compileJava	{
-    options.compilerArgs += ['-AaddGenerationDate=false']
+    options.compilerArgs += ['-AaddGenerationDate=true']
     options.annotationProcessorGeneratedSourcesDirectory = file(generatedMainJava)
 }
 

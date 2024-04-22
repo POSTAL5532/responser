@@ -1,3 +1,37 @@
+plugins {
+    id 'org.liquibase.gradle' version '2.2.0'
+}
+
 group 'space.reviewly'
 version '1.0-SNAPSHOT'
 
+configurations {
+    liquibaseRuntime.extendsFrom runtime
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    liquibaseRuntime 'org.liquibase:liquibase-core:4.24.0'
+    liquibaseRuntime 'org.liquibase:liquibase-groovy-dsl:2.1.1'
+    liquibaseRuntime 'info.picocli:picocli:4.7.5'
+    liquibaseRuntime 'org.yaml:snakeyaml:1.33'
+    liquibaseRuntime 'org.postgresql:postgresql:42.7.3'
+    liquibaseRuntime 'jakarta.xml.bind:jakarta.xml.bind-api:4.0.2'
+}
+
+tasks.register('migrateDB') {
+    doFirst {
+        liquibase {
+            activities {
+                main {
+                    defaultsFile "./configs/liquibase/local/liquibase.properties"
+                }
+            }
+        }
+    }
+
+    finalizedBy(update)
+}

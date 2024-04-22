@@ -1,36 +1,10 @@
 version: '3'
 
 services:
-  reviewly-db:
-    container_name: reviewly-db
+  reviewly_db:
+    container_name: reviewly_db
     build: ./database
     ports:
       - "5432:5432"
     volumes:
-      - ./database/volume:/var/lib/postgresql/data
-    deploy:
-      resources:
-        limits:
-          memory: 55M
-  reviewly-auth:
-    container_name: reviewly-auth
-    build: ./auth-server
-    ports:
-      - "8081:8081"
-    volumes:
-      - ./auth-server/application:/application
-    deploy:
-      resources:
-        limits:
-          memory: 250M
-  reviewly-backend:
-    container_name: reviewly-backend
-    build: ./backend
-    ports:
-      - "8080:8080"
-    volumes:
-      - ./backend/application:/application
-    deploy:
-      resources:
-        limits:
-          memory: 300M
+      - .local/reviewly_db/:/var/lib/postgresql/data
