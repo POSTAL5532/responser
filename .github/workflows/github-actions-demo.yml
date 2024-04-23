@@ -5,6 +5,11 @@ on:
 jobs:
   Build-project:
     runs-on: ubuntu-22.04
+    env:
+      remote_host: ${{ secrets.DEV_REMOTE_HOST }}
+      remote_user: ${{ secrets.DEV_REMOTE_USER }}
+      remote_key: ${{ secrets.DEV_DEPLOY_KEY }}
+      ssh_key_file: id_rsa
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
@@ -21,31 +26,19 @@ jobs:
       - name: Execute Gradle build
         run: ./gradlew clean build -DbuildMode=dev
 
-      - name: Deploy applications
-        env:
-          CI: false
-          remote_host: ${{ secrets.DEV_REMOTE_HOST }}
-          remote_user: ${{ secrets.DEV_REMOTE_USER }}
-          remote_key: ${{ secrets.DEV_DEPLOY_KEY }}
-          ssh_key_file: id_rsa
-
-          configs_dir: ./configs
-
-          remote_backend_dir: /opt/reviewly/backend
-          backend_jar_name: reviewly-backend.jar
-          remote_auth_server_dir: /opt/reviewly/auth-server
-          auth_server_jar_name: reviewly-auth-server.jar
-          remote_frontend_app_dir: /opt/reviewly/frontend-app
-          migrations_dir: /opt/reviewly/database/migrations
+      - name: Prepare server access
         run: |
-          echo -e "> Prepare server access"
           mkdir -p ~/.ssh/
           touch ~/.ssh/known_hosts
           echo "$remote_key" > ${ssh_key_file}
           chmod 600 ${ssh_key_file}
           echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >~/.ssh/config
           echo -e "> Done"
-          
+
+      - name: Database migration
+        env:
+          migrations_dir: /opt/reviewly/database/migrations
+        run: |
           echo -e "> Clear old migrations"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${migrations_dir}/*"
           echo -e "> Done"
@@ -57,14 +50,20 @@ jobs:
           echo -e "> Migrate database"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "liquibase --defaultsFile=/opt/reviewly/database/liquibase.properties update"
           echo -e "> Done"
-          
-          echo -e "> Stop services"
+
+      - name: Stop applications
+        run: |
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl stop reviewly-auth-server"
           echo -e "  - stop auth-server: done"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl stop reviewly-backend"
           echo -e "  - stop backend: done"
-          echo -e "> Done"
-          
+
+      - name: Deploy auth server
+        env:
+          configs_dir: ./configs
+          remote_auth_server_dir: /opt/reviewly/auth-server
+          auth_server_jar_name: reviewly-auth-server.jar
+        run: |
           echo -e "> Clear old auth-server"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_auth_server_dir}/${auth_server_jar_name}"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_auth_server_dir}/application.yml"
@@ -78,7 +77,13 @@ jobs:
           echo -e "> Start auth-server:"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl start reviewly-auth-server"
           echo -e "> Done"
-          
+
+      - name: Deploy backend
+        env:
+          configs_dir: ./configs
+          remote_backend_dir: /opt/reviewly/backend
+          backend_jar_name: reviewly-backend.jar
+        run: |
           echo -e "> Clear old backend"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_backend_dir}/${backend_jar_name}"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_backend_dir}/application.yml"
@@ -92,7 +97,11 @@ jobs:
           echo -e "> Start backend:"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl start reviewly-backend"
           echo -e "> Done"
-          
+
+      - name: Deploy frontend
+        env:
+          remote_frontend_app_dir: /opt/reviewly/frontend-app
+        run: |
           echo -e "> Clear old frontend app"
           ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_frontend_app_dir}/*"
           echo -e "> Done"
@@ -100,5 +109,3 @@ jobs:
           echo -e "> Copying new frontend app"
           scp -i ${ssh_key_file} -r ./reviewly-frontend/build/* ${remote_user}@${remote_host}:${remote_frontend_app_dir}
           echo -e "> Done"
-          
-          echo -e "> Deployment finish"
