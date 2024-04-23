@@ -1,4 +1,4 @@
-name: Reviewly CI_CD
+name: Reviewly DEV CI/CD
 run-name: ${{ github.actor }} is running action 🚀
 on:
   workflow_dispatch:
