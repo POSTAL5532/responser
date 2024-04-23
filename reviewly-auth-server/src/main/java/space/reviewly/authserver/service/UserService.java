@@ -13,12 +13,15 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    private final EmailService emailService;
+
     public User getByEmail(String email) {
         return userRepository.findByEmail(email).orElse(null);
     }
 
     @Transactional
     public void registerUser(User newUser) {
-        userRepository.save(newUser);
+        User savedUser = userRepository.save(newUser);
+        emailService.sendRegistrationConfirmationMessage(savedUser);
     }
 }

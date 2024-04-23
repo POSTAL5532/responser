@@ -101,7 +101,7 @@
             <div class="footer-section second">
                 <div class="contacts-container">
                     <h3 class="contacts-header">Contacts</h3>
-                    <p class="contact">M. info@reviewly.space</p>
+                    <p class="contact" th:text="${'M. ' + @applicationProperties.contactEmail}">! ERROR !</p>
                     <p class="contact">W. reviewly.space</p>
                 </div>
             </div>

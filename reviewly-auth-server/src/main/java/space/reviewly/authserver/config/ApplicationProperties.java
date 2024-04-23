@@ -1,5 +1,6 @@
 package space.reviewly.authserver.config;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,6 +27,12 @@ public class ApplicationProperties {
 
     @NotEmpty
     private String selfHost;
+
+    @NotBlank
+    private String noReplyEmail;
+
+    @NotBlank
+    private String contactEmail;
 
     @NotEmpty
     private String frontendAppUrl;

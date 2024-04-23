@@ -51,6 +51,16 @@ spring:
             authorization-uri: https://accounts.google.com/o/oauth2/auth
             token-uri: https://oauth2.googleapis.com/token
             user-info-uri: https://www.googleapis.com/oauth2/v3/userinfo
+  mail:
+    host: smtp.office365.com
+    port: 587
+    username: ishcherbachenya@reviewly.space
+    password: 5#OFpkKn9YXa69Dl6Ts5&q6Z
+    protocol: smtp
+    properties.mail.smtp:
+      auth: true
+      starttls:
+        enable: true
 
 reviewly:
   selfHost: http://dev.reviewly.space

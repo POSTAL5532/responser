@@ -9,7 +9,6 @@ import space.reviewly.backend.model.Role;
 import space.reviewly.backend.model.User;
 import space.reviewly.backend.model.User_;
 import space.reviewly.backend.repository.UserRepository;
-import space.reviewly.backend.service.email.EmailService;
 import space.reviewly.backend.service.fileResource.FileResourceService;
 import space.reviewly.backend.service.fileResource.FileResourceType;
 import space.reviewly.backend.utils.TikaWrapper;
@@ -142,6 +141,8 @@ public class UserService {
 
         user.setPassword(passwordEncoder.encode(newPassword));
         updateUser(user);
+
+        emailService.sendPasswordChangedNotification(user);
     }
 
     @Transactional

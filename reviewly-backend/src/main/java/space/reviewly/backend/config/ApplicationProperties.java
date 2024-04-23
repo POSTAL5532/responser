@@ -70,6 +70,12 @@ public class ApplicationProperties {
     private String reviewlyInfoEmail;
 
     @NotBlank
+    private String noReplyEmail;
+
+    @NotBlank
+    private String contactEmail;
+
+    @NotBlank
     private String fileStorageUrl;
 
     @NotBlank

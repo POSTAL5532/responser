@@ -1,13 +1,5 @@
-package space.reviewly.backend.service.email;
+package space.reviewly.authserver.service;
 
-import static space.reviewly.backend.controller.emailConfirmation.EmailConfirmationController.EMAIL_CONFIRMATION_URL;
-
-import space.reviewly.backend.config.ApplicationProperties;
-import space.reviewly.backend.model.EmailConfirmation;
-import space.reviewly.backend.model.PasswordRestore;
-import space.reviewly.backend.model.email.EmailContext;
-import space.reviewly.backend.model.User;
-import space.reviewly.backend.model.email.EmailTemplate;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 import java.nio.charset.StandardCharsets;
@@ -21,6 +13,10 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
+import space.reviewly.authserver.config.ApplicationProperties;
+import space.reviewly.authserver.model.User;
+import space.reviewly.authserver.model.email.EmailContext;
+import space.reviewly.authserver.model.email.EmailTemplate;
 
 @Slf4j
 @RequiredArgsConstructor
@@ -35,19 +31,16 @@ public class EmailService {
 
     private final SpringTemplateEngine templateEngine;
 
-    public void sendEmailConfirmationMessage(User user, EmailConfirmation emailConfirmation) {
+    public void sendRegistrationConfirmationMessage(User user) {
         Map<String, Object> templateProperties = new HashMap<>();
         templateProperties.put("user", user);
-        templateProperties.put(
-            "confirmationLink",
-            applicationProperties.getSelfHost() + EMAIL_CONFIRMATION_URL + "/" + emailConfirmation.getId()
-        );
 
         EmailContext emailContext = buildEmailContext(
-            "Reviewly: Registration email confirmation",
+            "Registration email confirmation",
             user.getEmail(),
-            EmailTemplate.EMAIL_CONFIRMATION_TEMPLATE,
-            templateProperties
+            EmailTemplate.REGISTRATION_CONFIRMATION_TEMPLATE,
+            templateProperties,
+            applicationProperties.getNoReplyEmail()
         );
 
         try {
@@ -58,74 +51,9 @@ public class EmailService {
         }
     }
 
-    public void sendChangedEmailConfirmationMessage(User user, EmailConfirmation emailConfirmation) {
-        Map<String, Object> templateProperties = new HashMap<>();
-        templateProperties.put("user", user);
-        templateProperties.put(
-            "confirmationLink",
-            applicationProperties.getSelfHost() + EMAIL_CONFIRMATION_URL + "/" + emailConfirmation.getId()
-        );
-
-        EmailContext emailContext = buildEmailContext(
-            "Reviewly: Email changed",
-            user.getEmail(),
-            EmailTemplate.CHANGED_EMAIL_CONFIRMATION_TEMPLATE,
-            templateProperties
-        );
-
-        try {
-            sendEmailMessage(emailContext);
-        } catch (MessagingException e) {
-            log.error("Send email confirmation fail", e);
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void sendPasswordRestoringLink(User user, PasswordRestore passwordRestore) {
-        Map<String, Object> templateProperties = new HashMap<>();
-        templateProperties.put("user", user);
-        templateProperties.put(
-            "restorePasswordLink",
-            applicationProperties.getRestorePasswordPageUrl() + "/" + passwordRestore.getId()
-        );
-
-        EmailContext emailContext = buildEmailContext(
-            "Reviewly: Restore password",
-            user.getEmail(),
-            EmailTemplate.RESTORE_PASSWORD_TEMPLATE,
-            templateProperties
-        );
-
-        try {
-            sendEmailMessage(emailContext);
-        } catch (MessagingException e) {
-            log.error("Send email with restore password link fail", e);
-            throw new RuntimeException(e);
-        }
-    }
-
-    public void sendPasswordChangedNotification(User user) {
-        Map<String, Object> templateProperties = new HashMap<>();
-        templateProperties.put("user", user);
-
-        EmailContext emailContext = buildEmailContext(
-            "Reviewly: Password changed",
-            user.getEmail(),
-            EmailTemplate.RESTORE_PASSWORD_TEMPLATE,
-            templateProperties
-        );
-
-        try {
-            sendEmailMessage(emailContext);
-        } catch (MessagingException e) {
-            log.error("Send email with restore password link fail", e);
-            throw new RuntimeException(e);
-        }
-    }
-
-    public EmailContext buildEmailContext(String subject, String to, EmailTemplate template, Map<String, Object> templateProperties) {
+    public EmailContext buildEmailContext(String subject, String to, EmailTemplate template, Map<String, Object> templateProperties, String fromEmail) {
         EmailContext emailContext = new EmailContext();
-        emailContext.setFrom("Reviewly team <" + applicationProperties.getReviewlyInfoEmail() + ">");
+        emailContext.setFrom("Reviewly team <" + fromEmail + ">");
         emailContext.setSubject(subject);
         emailContext.setTo(to);
         emailContext.setTemplate(template);

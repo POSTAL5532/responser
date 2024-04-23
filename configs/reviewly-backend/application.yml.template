@@ -78,7 +78,8 @@ reviewly:
   clientSecret: reviewly-web-client-secret
   downloadExtensionChrome: https://www.google.com
   chromeExtensionId: bcgepbhdoibfdnpmemhdjifmjdmfacml
-  reviewlyInfoEmail: ishcherbachenya@reviewly.space
+  noReplyEmail: no-reply@reviewly.space
+  contactEmail: contact@reviewly.space
   fileStorageUrl: ${reviewly.selfHost}/cdn
   fileStorageUrlSitesIcons: ${reviewly.fileStorageUrl}/site-icon
   fileStorageUrlUsersAvatars: ${reviewly.fileStorageUrl}/user-avatar
@@ -86,4 +87,4 @@ reviewly:
   defaultSiteIconFileName: default_site_icon.png
   allowedOrigins:
     - ${reviewly.selfHost}
-    - chrome-extension://bcgepbhdoibfdnpmemhdjifmjdmfacml
+    - chrome-extension://${reviewly.chromeExtensionId}
