@@ -95,3 +95,29 @@ tasks.register('migrateDatabase') {
 
     finalizedBy(update)
 }
+
+tasks.register('deleteStubFiles', Delete) {
+    def props = new Properties()
+    file("$projectDir/configs/stub-file-storage/reviewly-file-store-stub.properties").withInputStream { props.load(it) }
+    def sitesIconsPath = props.getProperty("sitesIconsPath")
+    def usersAvatarsPath = props.getProperty("usersAvatarsPath")
+
+    delete sitesIconsPath, usersAvatarsPath
+}
+
+tasks.register('addStubFiles', Copy) {
+    def props = new Properties()
+    file("$projectDir/configs/stub-file-storage/reviewly-file-store-stub.properties").withInputStream { props.load(it) }
+    def sitesIconsPath = props.getProperty("sitesIconsPath")
+    def usersAvatarsPath = props.getProperty("usersAvatarsPath")
+
+    copy {
+        from "$projectDir/reviewly-file-store-stub/files_storage/sites-icons"
+        into sitesIconsPath
+    }
+
+    copy {
+        from "$projectDir/reviewly-file-store-stub/files_storage/users-avatars"
+        into usersAvatarsPath
+    }
+}

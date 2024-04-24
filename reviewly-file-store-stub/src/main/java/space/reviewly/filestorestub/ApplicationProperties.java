@@ -8,10 +8,6 @@ public class ApplicationProperties extends Properties {
         super();
     }
 
-    public String getFilesBasePath() {
-        return this.getProperty("filesPath");
-    }
-
     public String getSitesIconsPath() {
         return this.getProperty("sitesIconsPath");
     }
