@@ -3,6 +3,7 @@ version: '3'
 services:
   reviewly_db:
     container_name: reviewly_db
+    image: reviewly_db
     build: ./database
     ports:
       - "5432:5432"
