@@ -1,7 +1,7 @@
 package space.reviewly.authserver.security;
 
 import java.util.Objects;
-import space.reviewly.authserver.model.User;
+import space.reviewly.authserver.model.user.User;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

@@ -3,7 +3,7 @@ package space.reviewly.backend.converter;
 import space.reviewly.backend.controller.user.payload.CreateUserProfilePayload;
 import space.reviewly.backend.controller.user.payload.UpdateUserPayload;
 import space.reviewly.backend.controller.user.payload.UserInfoPayload;
-import space.reviewly.backend.model.User;
+import space.reviewly.backend.model.user.User;
 import org.springframework.stereotype.Service;
 
 /**
@@ -45,6 +45,7 @@ public class UserConverter {
 
         userPayload.setEmail(user.getEmail());
         userPayload.setEmailConfirmed(user.getEmailConfirmed());
+        userPayload.setRegisteredBy(user.getRegisteredBy());
         userPayload.setCreationDate(user.getCreationDate());
         userPayload.setUpdateDate(user.getUpdateDate());
 

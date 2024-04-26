@@ -1,4 +1,4 @@
-package space.reviewly.authserver.model;
+package space.reviewly.authserver.model.user;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

@@ -3,7 +3,7 @@ package space.reviewly.authserver.service;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import space.reviewly.authserver.model.User;
+import space.reviewly.authserver.model.user.User;
 import space.reviewly.authserver.repository.UserRepository;
 
 @RequiredArgsConstructor

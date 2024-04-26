@@ -10,8 +10,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
-import space.reviewly.authserver.model.Role;
-import space.reviewly.authserver.model.User;
+import space.reviewly.authserver.model.user.RegisteredBy;
+import space.reviewly.authserver.model.user.Role;
+import space.reviewly.authserver.model.user.User;
 import space.reviewly.authserver.service.RoleService;
 import space.reviewly.authserver.service.UserService;
 
@@ -30,7 +31,7 @@ public class UserServiceOAuth2UserHandler implements Consumer<OidcUser> {
 
         if (oidcUser.getId() == null && this.userService.getByEmail(user.getEmail()) == null) {
             Collection<GrantedAuthority> grantedAuthorities = (Collection<GrantedAuthority>) oidcUser.getAuthorities();
-            User localUser = oidcUser.toInstantUser();
+            User localUser = toUser(oidcUser);
             Role defaultRole = roleService.getDefaultRole();
 
             if (defaultRole != null) {
@@ -51,5 +52,19 @@ public class UserServiceOAuth2UserHandler implements Consumer<OidcUser> {
 
             oidcUser.setId(localUser.getId());
         }
+    }
+
+    public User toUser(CustomOidcUser oidcUser) {
+        User user = new User();
+
+        user.setId(oidcUser.getId());
+        user.setEmail(oidcUser.getEmail());
+        user.setFullName(oidcUser.getFullName());
+        user.setEmailConfirmed(true);
+        user.setRegisteredBy(RegisteredBy.GOOGLE);
+        user.setAvatarFileName(oidcUser.getPicture());
+        user.setPassword("PASSWORD_STUB");
+
+        return user;
     }
 }

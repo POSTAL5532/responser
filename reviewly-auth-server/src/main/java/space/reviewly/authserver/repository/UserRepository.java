@@ -1,6 +1,6 @@
 package space.reviewly.authserver.repository;
 
-import space.reviewly.authserver.model.User;
+import space.reviewly.authserver.model.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 import org.thymeleaf.context.Context;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import space.reviewly.authserver.config.ApplicationProperties;
-import space.reviewly.authserver.model.User;
+import space.reviewly.authserver.model.user.User;
 import space.reviewly.authserver.model.email.EmailContext;
 import space.reviewly.authserver.model.email.EmailTemplate;
 

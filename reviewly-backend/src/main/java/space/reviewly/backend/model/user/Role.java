@@ -1,4 +1,4 @@
-package space.reviewly.backend.model;
+package space.reviewly.backend.model.user;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;

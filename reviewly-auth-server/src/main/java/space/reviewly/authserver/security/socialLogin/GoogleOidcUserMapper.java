@@ -11,7 +11,7 @@ import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.core.oidc.StandardClaimNames;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Component;
-import space.reviewly.authserver.model.User;
+import space.reviewly.authserver.model.user.User;
 
 @Component("google")
 public class GoogleOidcUserMapper implements OidcUserMapper {

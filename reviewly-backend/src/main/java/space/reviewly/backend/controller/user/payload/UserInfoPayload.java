@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import space.reviewly.backend.model.user.RegisteredBy;
 
 /**
  * UserInfoPayload
@@ -25,6 +26,8 @@ public class UserInfoPayload {
     private String avatarFileName;
 
     private Boolean emailConfirmed;
+
+    private RegisteredBy registeredBy;
 
     private Double reviewsCommonRating;
 

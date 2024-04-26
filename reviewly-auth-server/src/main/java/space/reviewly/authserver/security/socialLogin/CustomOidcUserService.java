@@ -8,7 +8,7 @@ import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
-import space.reviewly.authserver.model.User;
+import space.reviewly.authserver.model.user.User;
 import space.reviewly.authserver.service.UserService;
 
 @Service

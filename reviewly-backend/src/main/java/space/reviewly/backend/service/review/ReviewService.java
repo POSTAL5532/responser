@@ -3,7 +3,7 @@ package space.reviewly.backend.service.review;
 import space.reviewly.backend.exceptions.EntityAlreadyExistException;
 import space.reviewly.backend.model.ReviewsCriteria;
 import space.reviewly.backend.model.Review;
-import space.reviewly.backend.model.User;
+import space.reviewly.backend.model.user.User;
 import space.reviewly.backend.repository.ReviewRepository;
 import space.reviewly.backend.service.UserService;
 import space.reviewly.backend.service.webResource.WebResourceService;

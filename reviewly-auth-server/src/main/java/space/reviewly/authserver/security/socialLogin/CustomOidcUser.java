@@ -8,7 +8,6 @@ import org.springframework.security.oauth2.core.oidc.IdTokenClaimNames;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
 import org.springframework.security.oauth2.core.oidc.OidcUserInfo;
 import org.springframework.security.oauth2.core.oidc.user.DefaultOidcUser;
-import space.reviewly.authserver.model.User;
 import space.reviewly.authserver.security.CustomUserDetails;
 
 public class CustomOidcUser extends DefaultOidcUser implements CustomUserDetails {
@@ -97,18 +96,5 @@ public class CustomOidcUser extends DefaultOidcUser implements CustomUserDetails
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return this.authorities;
-    }
-
-    public User toInstantUser() {
-        User user = new User();
-
-        user.setId(getId());
-        user.setEmail(getEmail());
-        user.setFullName(getFullName());
-        user.setEmailConfirmed(true);
-        user.setAvatarFileName(getPicture());
-        user.setPassword("PASSWORD_STUB");
-
-        return user;
     }
 }

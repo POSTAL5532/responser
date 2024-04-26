@@ -26,25 +26,38 @@ dependencies {
 
 tasks.register('startDatabase', Exec) {
     commandLine 'docker', 'compose', 'up', 'reviewly_db', '-d'
+    group = "database"
+    description = "Start the database docker container"
 }
 
 tasks.register('stopDatabase', Exec) {
     commandLine 'docker', 'container', 'stop', 'reviewly_db'
+    group = "database"
+    description = "Stops the database docker container"
 }
 
 tasks.register('deleteDatabaseContainer', Exec) {
     commandLine 'docker', 'container', 'rm', 'reviewly_db'
+    group = "database"
+    description = "Deletes the database docker container"
 }
 
 tasks.register('deleteDatabaseImage', Exec) {
     commandLine 'docker', 'image', 'rm', 'reviewly_db'
+    group = "database"
+    description = "Deletes the database docker image"
 }
 
 tasks.register('deleteDatabaseVolume', Delete) {
     delete "$projectDir/.local/reviewly_db"
+    group = "database"
+    description = "Deletes the database docker volume"
 }
 
 tasks.register('addTestData') {
+    group = "database"
+    description = "Add test data to database"
+
     configurations {
         jdbc
     }
@@ -83,6 +96,9 @@ tasks.register('addTestData') {
 }
 
 tasks.register('migrateDatabase') {
+    group = "database"
+    description = "Migrate database by liquibase"
+
     doFirst {
         liquibase {
             activities {
@@ -97,6 +113,9 @@ tasks.register('migrateDatabase') {
 }
 
 tasks.register('deleteStubFiles', Delete) {
+    group = "stubFileStorage"
+    description = "Clean all local files for stub file storage"
+
     def props = new Properties()
     file("$projectDir/configs/stub-file-storage/reviewly-file-store-stub.properties").withInputStream { props.load(it) }
     def sitesIconsPath = props.getProperty("sitesIconsPath")
@@ -106,6 +125,9 @@ tasks.register('deleteStubFiles', Delete) {
 }
 
 tasks.register('addStubFiles', Copy) {
+    group = "stubFileStorage"
+    description = "Copy fresh files for stub file storage"
+
     def props = new Properties()
     file("$projectDir/configs/stub-file-storage/reviewly-file-store-stub.properties").withInputStream { props.load(it) }
     def sitesIconsPath = props.getProperty("sitesIconsPath")

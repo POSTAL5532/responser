@@ -6,7 +6,7 @@ import space.reviewly.backend.config.ApplicationProperties;
 import space.reviewly.backend.model.EmailConfirmation;
 import space.reviewly.backend.model.PasswordRestore;
 import space.reviewly.backend.model.email.EmailContext;
-import space.reviewly.backend.model.User;
+import space.reviewly.backend.model.user.User;
 import space.reviewly.backend.model.email.EmailTemplate;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;

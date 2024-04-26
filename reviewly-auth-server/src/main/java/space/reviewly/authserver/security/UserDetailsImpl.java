@@ -6,7 +6,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.util.Collection;
-import space.reviewly.authserver.model.User;
+import space.reviewly.authserver.model.user.User;
 
 /**
  * User details

@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.StringUtils;
-import space.reviewly.backend.model.Role;
+import space.reviewly.backend.model.user.Role;
 import space.reviewly.backend.repository.RoleRepository;
 
 @RequiredArgsConstructor

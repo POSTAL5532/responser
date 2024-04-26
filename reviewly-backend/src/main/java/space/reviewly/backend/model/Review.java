@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Set;
+import space.reviewly.backend.model.user.User;
 
 /**
  * Review

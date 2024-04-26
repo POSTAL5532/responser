@@ -11,7 +11,7 @@ import space.reviewly.backend.controller.user.payload.UpdateUserPasswordPayload;
 import space.reviewly.backend.controller.user.payload.UpdateUserPayload;
 import space.reviewly.backend.controller.user.payload.UserInfoPayload;
 import space.reviewly.backend.converter.UserConverter;
-import space.reviewly.backend.model.User;
+import space.reviewly.backend.model.user.User;
 import space.reviewly.backend.service.RatingService;
 import space.reviewly.backend.service.UserService;
 import jakarta.validation.Valid;
