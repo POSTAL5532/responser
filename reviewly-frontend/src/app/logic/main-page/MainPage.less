@@ -38,6 +38,10 @@
                     position: absolute;
                     right: 60px;
                     top: 84px;
+
+                    path {
+                        stroke: @brown-soft;
+                    }
                 }
 
                 &.show-menu {
@@ -61,6 +65,7 @@
                 .adaptationTabletAndMobile({
                     &.hidden {
                         opacity: 0;
+                        pointer-events: none;
                     }
                 });
 

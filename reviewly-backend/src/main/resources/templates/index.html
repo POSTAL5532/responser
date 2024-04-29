@@ -203,7 +203,7 @@
                         Opinions of <span class="decorated">real users</span> on an independent platform
                     </p>
 
-                    <a class="link" href="https://google.com">
+                    <a class="link" href="/web-resources/sites-rating">
                         View Sites rating
                         <th:block th:replace="~{components/svgs::icon-link}"/>
                     </a>
@@ -241,7 +241,7 @@
                         You <span class="decorated">no longer need to surf</span> the Internet for a long time in search of reviews on different sites
                     </p>
 
-                    <a class="link" href="https://google.com">
+                    <a class="link" href="/reviews/see-reviews">
                         View all Reviews
                         <th:block th:replace="~{components/svgs::icon-link}"/>
                     </a>
@@ -275,7 +275,7 @@
                         Install the extension once to read and leave <span class="decorated">reviews on any site</span>, even if it is not provided by the developers
                     </p>
 
-                    <a class="link" href="https://google.com">
+                    <a class="link" th:href="${@applicationProperties.downloadExtensionChrome}">
                         Download for Chrome
                         <th:block th:replace="~{components/svgs::icon-link}"/>
                     </a>
@@ -578,7 +578,7 @@
         <section class="section coming-soon">
             <div class="header-container">
                 <h2 class="coming-soon-header">Coming soon...</h2>
-                <a class="link" href="https://google.com">
+                <a class="link" th:href="${userFullName != null ? @applicationProperties.profilePageUrl : loginUrl}">
                     Don't wait and start using right now for free
                     <th:block th:replace="~{components/svgs::icon-link}"/>
                 </a>

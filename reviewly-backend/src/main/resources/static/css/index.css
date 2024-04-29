@@ -208,7 +208,7 @@
   .page.index .page-content .section.intro .intro-image.women {
     top: 60px;
     left: -24px;
-    height: 326px;
+    height: 288px;
   }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
@@ -1513,9 +1513,6 @@
   font-weight: 400;
   color: rgba(0, 0, 0, 0.6);
   transition: transform 0.15s;
-}
-.page.index .page-content .section.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container:hover .feedback-text {
-  transform: scale(1.05);
 }
 .page.index .page-content .section.faq {
   display: flex;
