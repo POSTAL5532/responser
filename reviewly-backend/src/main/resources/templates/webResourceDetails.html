@@ -17,6 +17,11 @@
     <div class="page-content" layout:fragment="page-content">
         <section class="section" th:with="resourceBasePath=${T(space.reviewly.backend.utils.UrlUtils).getHost(webResource.url)}">
             <h1 class="section-header">
+                <a class="link prefix-link-icon back-action" href="/web-resources/sites-rating">
+                    <th:block th:replace="~{components/svgs::icon-link}"/>
+                    Sites rating
+                </a>
+
                 <div class="site-logo-container">
                     <img class="site-logo"
                          th:src="${@applicationProperties.fileStorageUrlSitesIcons + '/' + (webResource.iconFileName != null ? webResource.iconFileName : @applicationProperties.defaultSiteIconFileName)}"

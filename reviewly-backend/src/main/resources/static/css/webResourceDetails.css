@@ -42,6 +42,14 @@
   display: flex;
   align-items: center;
   gap: 18px;
+  width: 800px;
+  justify-content: center;
+  position: relative;
+}
+.page.web-resource-details .page-content .section .section-header .back-action {
+  position: absolute;
+  left: 0;
+  top: -30px;
 }
 .page.web-resource-details .page-content .section .section-header .site-logo-container {
   display: flex;

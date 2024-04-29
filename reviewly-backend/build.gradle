@@ -82,7 +82,7 @@ tasks.register('compileLess') {
     description 'Tasks which shows a welcome message'
     def baseLessPath = 'src/main/resources/less'
     def baseCssPath = 'src/main/resources/static/css'
-    def lesscCommand = 'npx lessc'
+    def lesscCommand = 'lessc'
 
     doLast {
         exec {

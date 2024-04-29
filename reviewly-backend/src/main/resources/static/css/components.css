@@ -126,6 +126,9 @@
   width: 18px;
   height: 18px;
 }
+.link.prefix-link-icon .icon {
+  transform: rotate(180deg);
+}
 .link:hover {
   color: #78AC65;
 }
