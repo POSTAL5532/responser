@@ -30,9 +30,9 @@
 
     &.left {
         .tooltip {
-            transform-origin: top left;
+            transform-origin: top right;
             top: 50%;
-            right: calc(-100% - @tooltip-margin);
+            right: calc(100% + @tooltip-margin);
 
             border-top-left-radius: @tooltip-border-radius;
             border-bottom-left-radius: @tooltip-border-radius;
@@ -42,7 +42,7 @@
 
     &.right {
         .tooltip {
-            transform-origin: top right;
+            transform-origin: top left;
             top: 50%;
             left: calc(100% + @tooltip-margin);
 

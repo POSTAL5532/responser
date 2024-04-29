@@ -7,7 +7,6 @@ import space.reviewly.backend.model.Review_;
 import space.reviewly.backend.model.ReviewsCriteria;
 import space.reviewly.backend.model.ReviewsCriteriaResourceType;
 import space.reviewly.backend.model.ReviewsCriteriaSortingField;
-import space.reviewly.backend.model.User_;
 import space.reviewly.backend.model.WebResource_;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
@@ -24,6 +23,7 @@ import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.lang.NonNull;
+import space.reviewly.backend.model.user.User_;
 
 @RequiredArgsConstructor
 public class ReviewSpecification implements Specification<Review> {

@@ -12,6 +12,7 @@ import {Button, ButtonSize, ButtonType} from "../../../components/button/Button"
 import {Spinner} from "../../../components/spinner/Spinner";
 import {Tooltip, TooltipPosition} from "../../../components/tooltip/Tooltip";
 import {Icon, IconType} from "../../../components/icon/Icon";
+import {RegisteredBy} from "../../../model/RegisteredBy";
 import "./EditUserProfileForm.less";
 
 type EditUserProfileFormProps = {
@@ -19,6 +20,7 @@ type EditUserProfileFormProps = {
     onFinish: (setFieldError?: (field: string, message: string) => void) => void;
     userWasChanged: boolean;
     isEmailConfirmed: boolean;
+    userRegisteredBy: RegisteredBy;
     resendConfirmationEmail: () => void;
     isEmailConfirmationProcess: boolean;
     isConfirmationResent: boolean;
@@ -36,6 +38,7 @@ const EditUserProfileForm: React.FC<EditUserProfileFormProps> = (props: EditUser
         onFinish,
         loading,
         isEmailConfirmed,
+        userRegisteredBy,
         resendConfirmationEmail,
         isEmailConfirmationProcess,
         isConfirmationResent,
@@ -51,6 +54,10 @@ const EditUserProfileForm: React.FC<EditUserProfileFormProps> = (props: EditUser
     }
 
     const getEmailTooltipContent = () => {
+        if(userRegisteredBy !== RegisteredBy.NATIVE) {
+            return <span>You was registered by {userRegisteredBy}, in this case you can't change email address.</span>;
+        }
+
         if (isConfirmationResent) {
             return <span>Email confirmation link was sent to you. Check your email and confirm.</span>;
         }
@@ -73,6 +80,10 @@ const EditUserProfileForm: React.FC<EditUserProfileFormProps> = (props: EditUser
     const emailTooltipActivation = (): boolean => {
         if (isEmailConfirmationProcess) {
             return true;
+        }
+
+        if (userRegisteredBy !== RegisteredBy.NATIVE) {
+            return undefined;
         }
 
         if (isEmailConfirmed) {
@@ -98,7 +109,7 @@ const EditUserProfileForm: React.FC<EditUserProfileFormProps> = (props: EditUser
                         className={emailFieldClassName}
                         label="Email"
                         onChange={event => updateUserPayload.email = event.target.value}
-                        disabled={loading}
+                        disabled={loading || userRegisteredBy !== RegisteredBy.NATIVE}
                         rightExtraComponent={<Icon type={isEmailConfirmed ? IconType.CHECK : IconType.CIRCLE_ALERT}/>}/>
                 </Tooltip>
 

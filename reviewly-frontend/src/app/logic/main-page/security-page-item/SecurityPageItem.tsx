@@ -1,8 +1,8 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
+import {observer} from "mobx-react";
 import {PageName} from "../../../components/page-name/PageName";
 import {PageItem} from "../PageItem";
 import EditPasswordForm from "./EditPasswordForm";
-import {observer} from "mobx-react";
 import {useSecurityPageItemStore} from "./SecurityPageItemStore";
 import Modal from "../../../components/modal/Modal";
 import {Button, ButtonType} from "../../../components/button/Button";
@@ -10,6 +10,7 @@ import LocalTokenStorageService from "../../../service/authorization/LocalTokenS
 import {nativeNavigateToAuthLogoutPageUrl} from "../../../utils/NavigationUtils";
 import {useExtensionService} from "../../../service/extension/ExtensionService";
 import {useLogger} from "../../../utils/Logger";
+import {GlobalAppStore, GlobalAppStoreContext} from "../../../GlobalAppStore";
 import "./SecurityPageItem.less";
 
 type SecurityPageItemProps = {
@@ -18,6 +19,7 @@ type SecurityPageItemProps = {
 
 const SecurityPageItem: React.FC<SecurityPageItemProps> = (props: SecurityPageItemProps) => {
     const [isPasswordUpdated, setIsPasswordUpdated] = useState(false);
+    const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
 
     const logger = useLogger("SecurityPageItem");
     const extensionService = useExtensionService();
@@ -38,7 +40,7 @@ const SecurityPageItem: React.FC<SecurityPageItemProps> = (props: SecurityPageIt
         passwordsFilled,
         loadingState,
         updatePassword
-    } = useSecurityPageItemStore();
+    } = useSecurityPageItemStore(currentUser.isUsePasswordStub);
 
     const onEditPasswordFinish = async (setFieldError?: (field: string, message: string) => void) => {
         await updatePassword(setFieldError).then(result => setIsPasswordUpdated(result));
@@ -50,6 +52,7 @@ const SecurityPageItem: React.FC<SecurityPageItemProps> = (props: SecurityPageIt
 
             <div className="change-password-form-container">
                 <EditPasswordForm
+                    userUsesStubPassword={currentUser.isUsePasswordStub}
                     updateUserPasswordPayload={updateUserPasswordPayload}
                     onFinish={onEditPasswordFinish}
                     isLoading={loadingState.isPasswordUpdating}

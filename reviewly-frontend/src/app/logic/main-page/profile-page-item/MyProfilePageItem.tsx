@@ -60,6 +60,7 @@ const MyProfilePageItem: React.FC<MyProfilePageItemProps> = (props: MyProfilePag
                     loading={loadingState.isDataSubmitting}
                     userWasChanged={userWasChanged}
                     isEmailConfirmed={currentUser?.emailConfirmed}
+                    userRegisteredBy={currentUser?.registeredBy}
                     isEmailConfirmationProcess={loadingState.resendConfirmationProcess}
                     isConfirmationResent={isConfirmationResent}
                     resendConfirmationEmail={onEmailConfirmationResend}/>

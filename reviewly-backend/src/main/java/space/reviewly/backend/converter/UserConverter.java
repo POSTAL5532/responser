@@ -3,8 +3,10 @@ package space.reviewly.backend.converter;
 import space.reviewly.backend.controller.user.payload.CreateUserProfilePayload;
 import space.reviewly.backend.controller.user.payload.UpdateUserPayload;
 import space.reviewly.backend.controller.user.payload.UserInfoPayload;
+import space.reviewly.backend.model.user.RegisteredBy;
 import space.reviewly.backend.model.user.User;
 import org.springframework.stereotype.Service;
+import space.reviewly.backend.service.UserService;
 
 /**
  * UserConverter
@@ -46,6 +48,9 @@ public class UserConverter {
         userPayload.setEmail(user.getEmail());
         userPayload.setEmailConfirmed(user.getEmailConfirmed());
         userPayload.setRegisteredBy(user.getRegisteredBy());
+        userPayload.setIsUsePasswordStub(
+            user.getPassword().equals(UserService.SOCIAL_SIGNUP_USER_PASSWORD_STUB) && user.getRegisteredBy() != RegisteredBy.NATIVE
+        );
         userPayload.setCreationDate(user.getCreationDate());
         userPayload.setUpdateDate(user.getUpdateDate());
 

@@ -5,9 +5,10 @@ import space.reviewly.backend.config.ApplicationProperties;
 import space.reviewly.backend.exceptions.DataNotValidException;
 import space.reviewly.backend.model.EmailConfirmation;
 import space.reviewly.backend.model.PasswordRestore;
+import space.reviewly.backend.model.user.RegisteredBy;
 import space.reviewly.backend.model.user.Role;
 import space.reviewly.backend.model.user.User;
-import space.reviewly.backend.model.User_;
+import space.reviewly.backend.model.user.User_;
 import space.reviewly.backend.repository.UserRepository;
 import space.reviewly.backend.service.fileResource.FileResourceService;
 import space.reviewly.backend.service.fileResource.FileResourceType;
@@ -38,6 +39,8 @@ import java.util.NoSuchElementException;
 @Service
 @Transactional(readOnly = true)
 public class UserService {
+
+    public static final String SOCIAL_SIGNUP_USER_PASSWORD_STUB = "PASSWORD_STUB";
 
     private final UserRepository userRepository;
 
@@ -133,10 +136,18 @@ public class UserService {
     public void updateUserPassword(String userId, String oldPassword, String newPassword) {
         User user = getUser(userId);
 
-        if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+        if (user.getRegisteredBy() == RegisteredBy.NATIVE || !user.getPassword().equals(SOCIAL_SIGNUP_USER_PASSWORD_STUB)) {
             Map<String, List<String>> fieldsErrors = new HashMap<>();
-            fieldsErrors.put("oldPassword", List.of("Old password is not valid."));
-            throw new DataNotValidException("Update user password fail", fieldsErrors);
+
+            if (StringUtils.isBlank(oldPassword)) {
+                fieldsErrors.put("oldPassword", List.of("Old password must be specified"));
+                throw new DataNotValidException("Update user password fail", fieldsErrors);
+            }
+
+            if (!passwordEncoder.matches(oldPassword, user.getPassword())) {
+                fieldsErrors.put("oldPassword", List.of("Old password is not valid."));
+                throw new DataNotValidException("Update user password fail", fieldsErrors);
+            }
         }
 
         user.setPassword(passwordEncoder.encode(newPassword));

@@ -73,7 +73,11 @@ public class UserRestController extends RestApiController {
 
     @PreAuthorize("isAuthenticated()")
     @PutMapping("/update-password")
-    public ResponseEntity<Void> updatePassword(CustomOAuth2AuthenticatedPrincipal principal, @Valid @NotNull @RequestBody UpdateUserPasswordPayload updateUserPasswordPayload) {
+    public ResponseEntity<Void> updatePassword(
+        CustomOAuth2AuthenticatedPrincipal principal,
+        @Valid @NotNull @RequestBody UpdateUserPasswordPayload updateUserPasswordPayload
+    ) {
+
         log.info("Update current {} user password.", principal.getUserId());
 
         userService.updateUserPassword(

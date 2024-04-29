@@ -1,5 +1,6 @@
 import moment, {Moment} from "moment";
 import {makeAutoObservable} from "mobx";
+import {RegisteredBy} from "./RegisteredBy";
 
 export class User {
 
@@ -16,6 +17,10 @@ export class User {
     avatarFileName: string;
 
     emailConfirmed: boolean;
+
+    registeredBy: RegisteredBy;
+
+    isUsePasswordStub: boolean;
 
     reviewsCommonRating: number;
 

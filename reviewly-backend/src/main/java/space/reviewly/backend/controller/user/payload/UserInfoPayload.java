@@ -29,6 +29,8 @@ public class UserInfoPayload {
 
     private RegisteredBy registeredBy;
 
+    private Boolean isUsePasswordStub;
+
     private Double reviewsCommonRating;
 
     private LocalDateTime creationDate;

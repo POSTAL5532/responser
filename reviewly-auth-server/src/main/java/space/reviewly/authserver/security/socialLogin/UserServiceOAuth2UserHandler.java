@@ -63,7 +63,7 @@ public class UserServiceOAuth2UserHandler implements Consumer<OidcUser> {
         user.setEmailConfirmed(true);
         user.setRegisteredBy(RegisteredBy.GOOGLE);
         user.setAvatarFileName(oidcUser.getPicture());
-        user.setPassword("PASSWORD_STUB");
+        user.setPassword(UserService.SOCIAL_SIGNUP_USER_PASSWORD_STUB);
 
         return user;
     }

@@ -6,23 +6,25 @@ import {observer} from "mobx-react";
 import {Button, ButtonType} from "../../../components/button/Button";
 import {PASSWORD_VALIDATION_SCHEMA, PasswordField} from "../../../components/form/PasswordField";
 import {UpdateUserPasswordPayload} from "../../../model/UpdateUserPasswordPayload";
+import {Tooltip} from "../../../components/tooltip/Tooltip";
 import "./EditPasswordForm.less";
 
 type EditPasswordFormProps = {
     updateUserPasswordPayload: UpdateUserPasswordPayload;
+    userUsesStubPassword: boolean,
     onFinish: (setFieldError?: (field: string, message: string) => void) => void;
     passwordsFilled: boolean;
     isLoading?: boolean;
 }
 
-const EDIT_PASSWORD_FORM_VALIDATION_SCHEMA = Yup.object().shape({
-    oldPassword: Yup.string().required("Old is required"),
-    newPassword: PASSWORD_VALIDATION_SCHEMA.password,
-    confirmNewPassword: PASSWORD_VALIDATION_SCHEMA.password
-});
-
 const EditPasswordForm: React.FC<EditPasswordFormProps> = (props: EditPasswordFormProps) => {
-    const {updateUserPasswordPayload, onFinish, isLoading, passwordsFilled} = props;
+    const {
+        updateUserPasswordPayload,
+        userUsesStubPassword,
+        onFinish,
+        isLoading,
+        passwordsFilled
+    } = props;
 
     const passwordEqualsValidator: FieldValidator = (value) => {
         return value === updateUserPasswordPayload.newPassword ? undefined : "Passwords isn't same";
@@ -32,17 +34,25 @@ const EditPasswordForm: React.FC<EditPasswordFormProps> = (props: EditPasswordFo
         onFinish(setFieldError);
     }
 
+    const EDIT_PASSWORD_FORM_VALIDATION_SCHEMA = Yup.object().shape({
+        oldPassword: userUsesStubPassword ? Yup.string().notRequired() : Yup.string().required("Old is required"),
+        newPassword: PASSWORD_VALIDATION_SCHEMA.password,
+        confirmNewPassword: PASSWORD_VALIDATION_SCHEMA.password
+    });
+
     return (
         <Formik initialValues={updateUserPasswordPayload}
                 onSubmit={onSubmit}
                 validationSchema={EDIT_PASSWORD_FORM_VALIDATION_SCHEMA}>
             <Form className="edit-password-form">
-                <PasswordField
-                    label="Old password"
-                    name="oldPassword"
-                    placeholder="Old password"
-                    onChange={event => updateUserPasswordPayload.oldPassword = event.target.value}
-                    disabled={isLoading}/>
+                <Tooltip show={userUsesStubPassword ? undefined : false} content="Just specify new password and confirm it.">
+                    <PasswordField
+                        label="Old password"
+                        name="oldPassword"
+                        placeholder="Old password"
+                        onChange={event => updateUserPasswordPayload.oldPassword = event.target.value}
+                        disabled={userUsesStubPassword || isLoading}/>
+                </Tooltip>
 
                 <PasswordField
                     label="New password"

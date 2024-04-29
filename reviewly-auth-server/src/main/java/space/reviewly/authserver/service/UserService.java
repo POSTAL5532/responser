@@ -11,6 +11,8 @@ import space.reviewly.authserver.repository.UserRepository;
 @Transactional(readOnly = true)
 public class UserService {
 
+    public static final String SOCIAL_SIGNUP_USER_PASSWORD_STUB = "PASSWORD_STUB";
+
     private final UserRepository userRepository;
 
     private final EmailService emailService;

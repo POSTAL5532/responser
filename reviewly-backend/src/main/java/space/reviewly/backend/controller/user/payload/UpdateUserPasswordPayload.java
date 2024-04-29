@@ -10,7 +10,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UpdateUserPasswordPayload {
 
-    @NotBlank(message = "Old password must be specified")
     private String oldPassword;
 
     @NotBlank(message = "New password must be specified")

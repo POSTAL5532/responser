@@ -15,8 +15,11 @@ export class SecurityPageItemStore {
 
     loadingState: SecurityPageItemStoreLoadingState = new SecurityPageItemStoreLoadingState();
 
-    constructor() {
+    currentUserUsesStubPassword: boolean;
+
+    constructor(currentUserUsesStubPassword: boolean) {
         makeAutoObservable(this);
+        this.currentUserUsesStubPassword = currentUserUsesStubPassword;
     }
 
     @computed
@@ -25,7 +28,7 @@ export class SecurityPageItemStore {
             return false;
         }
 
-        return !!this.updateUserPasswordPayload.oldPassword &&
+        return (!!this.updateUserPasswordPayload.oldPassword || this.currentUserUsesStubPassword) &&
             !!this.updateUserPasswordPayload.newPassword &&
             !!this.updateUserPasswordPayload.confirmNewPassword;
     }
@@ -53,8 +56,8 @@ export class SecurityPageItemStore {
     }
 }
 
-export const useSecurityPageItemStore = (): SecurityPageItemStore => {
-    const [securityPageItemStore] = useState<SecurityPageItemStore>(new SecurityPageItemStore());
+export const useSecurityPageItemStore = (currentUserUsesStubPassword: boolean): SecurityPageItemStore => {
+    const [securityPageItemStore] = useState<SecurityPageItemStore>(new SecurityPageItemStore(currentUserUsesStubPassword));
     return securityPageItemStore;
 }
 
