@@ -1493,19 +1493,18 @@
   align-items: center;
   gap: 14px;
 }
-.page.index .page-content .section.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .flex-wrapper .feedback .user-container .user-info .user-info-element {
+.page.index .page-content .section.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .flex-wrapper .feedback .user-container .user-avatar {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}
+.page.index .page-content .section.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .flex-wrapper .feedback .user-container .user-info .user-name {
   display: block;
   font-family: "Outfit-Regular", sans-serif;
   font-size: 16px;
   font-weight: 400;
-}
-.page.index .page-content .section.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .flex-wrapper .feedback .user-container .user-info .user-info-element.user-name {
   color: rgba(0, 0, 0, 0.6);
   font-size: 20px;
-}
-.page.index .page-content .section.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .flex-wrapper .feedback .user-container .user-info .user-info-element.extra-info {
-  color: rgba(0, 0, 0, 0.25);
-  font-size: 14px;
 }
 .page.index .page-content .section.feedbacks .feedbacks-gallery-container .feedbacks-gallery .feedback-container .flex-wrapper .feedback .feedback-text {
   font-family: "Outfit-Regular", sans-serif;

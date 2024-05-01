@@ -45,8 +45,6 @@ window.addEventListener('load', (event) => {
     // === EXTENSION DEMO SCROLL PIN ===
     // =================================
     const extensionDemoContentClass = ".extension-demo-content";
-    const extensionDemoScreenClass = ".extension-demo-screen";
-    const screenScale = 1.15;
 
     const scrollTriggerTimeline = {
         scrollTrigger: {
@@ -63,25 +61,21 @@ window.addEventListener('load', (event) => {
             const extensionDemoTimeLine = gsap.timeline(scrollTriggerTimeline);
             extensionDemoTimeLine
             .to(extensionDemoContentClass, {y: -374})
-            .to(extensionDemoScreenClass, {scale: screenScale})
         },
         "(min-width: 1440px) and (max-width: 1919px)": () => {
             const extensionDemoTimeLine = gsap.timeline(scrollTriggerTimeline);
             extensionDemoTimeLine
             .to(extensionDemoContentClass, {y: -352})
-            .to(extensionDemoScreenClass, {scale: screenScale})
         },
         "(min-width: 1024px) and (max-width: 1439px)": () => {
             const extensionDemoTimeLine = gsap.timeline(scrollTriggerTimeline);
             extensionDemoTimeLine
             .to(extensionDemoContentClass, {y: -344})
-            .to(extensionDemoScreenClass, {scale: screenScale})
         },
         "(min-width: 1px) and (max-width: 1023px)": () => {
             const extensionDemoTimeLine = gsap.timeline(scrollTriggerTimeline);
             extensionDemoTimeLine
             .to(extensionDemoContentClass, {y: -336})
-            .to(extensionDemoScreenClass, {scale: screenScale})
         }
     });
 

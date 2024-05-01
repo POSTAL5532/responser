@@ -149,7 +149,7 @@
                         .adaptationComplex(
                         {
                             top: 0;
-                            right:0;
+                            right: 0;
                             height: 392px;
                             width: 440px;
 
@@ -159,7 +159,7 @@
                         },
                         {
                             top: 0;
-                            right:0;
+                            right: 0;
                             height: 326px;
                             width: 344px;
 
@@ -169,7 +169,7 @@
                         },
                         {
                             top: 0;
-                            right:0;
+                            right: 0;
                             height: 244px;
 
                             svg {
@@ -1466,20 +1466,18 @@
                                         align-items: center;
                                         gap: 14px;
 
+                                        .user-avatar {
+                                            width: 70px;
+                                            height: 70px;
+                                            border-radius: 50%;
+                                        }
+
                                         .user-info {
-                                            .user-info-element {
+                                            .user-name {
                                                 display: block;
                                                 .fontOutfitRegular();
-
-                                                &.user-name {
-                                                    color: @black-alpha-60;
-                                                    font-size: 20px;
-                                                }
-
-                                                &.extra-info {
-                                                    color: @black-alpha-25;
-                                                    font-size: 14px;
-                                                }
+                                                color: @black-alpha-60;
+                                                font-size: 20px;
                                             }
                                         }
                                     }

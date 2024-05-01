@@ -44,18 +44,6 @@
                 </div>
             </a>
 
-            <!--<form method="GET" id="criteria-form" th:action="${T(space.reviewly.backend.controller.reviews.ReviewsController).REVIEWS_URL + T(space.reviewly.backend.controller.reviews.ReviewsController).SEE_REVIEWS_URL}">
-                <div class="field-container">
-                    <div class="input-container">
-                        <input class="field-input" type="text" placeholder="Enter the site that interests you" name="searchUrl">
-                        <button class="button primary" type="submit">
-                            <th:block th:replace="~{components/svgs::icon-checked}"/>
-                            Explore reviews
-                        </button>
-                    </div>
-                </div>
-            </form>-->
-
             <th:block th:replace="~{components/index-svgs::intro-image-extension}"/>
 
             <div class="intro-image reviews">
@@ -324,10 +312,9 @@
                         <div class="flex-wrapper">
                             <div class="feedback">
                                 <div class="user-container">
-                                    <img th:src="@{/img/index/feedbacks-block/feedback-user-1.png}" alt="feedback-user-1" class="user-avatar">
+                                    <img th:src="@{/img/index/feedbacks-block/alice-johnson.jpg}" alt="feedback-user-1" class="user-avatar">
                                     <div class="user-info">
-                                        <span class="user-info-element user-name">Alice Johnson</span>
-                                        <span class="user-info-element extra-info">Lead designer, Trello.com</span>
+                                        <span class="user-name">Alice Johnson</span>
                                     </div>
                                 </div>
                                 <p class="feedback-text">
@@ -340,10 +327,9 @@
                         <div class="flex-wrapper">
                             <div class="feedback">
                                 <div class="user-container">
-                                    <img th:src="@{/img/index/feedbacks-block/feedback-user-2.png}" alt="feedback-user-2" class="user-avatar">
+                                    <img th:src="@{/img/index/feedbacks-block/michael-davis.jpg}" alt="feedback-user-2" class="user-avatar">
                                     <div class="user-info">
-                                        <span class="user-info-element user-name">Michael Davis</span>
-                                        <span class="user-info-element extra-info">Lead designer, Trello.com</span>
+                                        <span class="user-name">Michael Davis</span>
                                     </div>
                                 </div>
                                 <p class="feedback-text">
@@ -356,10 +342,9 @@
                         <div class="flex-wrapper">
                             <div class="feedback">
                                 <div class="user-container">
-                                    <img th:src="@{/img/index/feedbacks-block/feedback-user-3.png}" alt="feedback-user-3" class="user-avatar">
+                                    <img th:src="@{/img/index/feedbacks-block/elena-petrova.jpg}" alt="feedback-user-3" class="user-avatar">
                                     <div class="user-info">
-                                        <span class="user-info-element user-name">Elena Petrova</span>
-                                        <span class="user-info-element extra-info">Lead designer, Trello.com</span>
+                                        <span class="user-name">Elena Petrova</span>
                                     </div>
                                 </div>
                                 <p class="feedback-text">
@@ -372,10 +357,9 @@
                         <div class="flex-wrapper">
                             <div class="feedback">
                                 <div class="user-container">
-                                    <img th:src="@{/img/index/feedbacks-block/feedback-user-4.png}" alt="feedback-user-4" class="user-avatar">
+                                    <img th:src="@{/img/index/feedbacks-block/kevin-thompson.jpg}" alt="feedback-user-4" class="user-avatar">
                                     <div class="user-info">
-                                        <span class="user-info-element user-name">Kevin Thompson</span>
-                                        <span class="user-info-element extra-info">Lead designer, Trello.com</span>
+                                        <span class="user-name">Kevin Thompson</span>
                                     </div>
                                 </div>
                                 <p class="feedback-text">
@@ -388,10 +372,9 @@
                         <div class="flex-wrapper">
                             <div class="feedback">
                                 <div class="user-container">
-                                    <img th:src="@{/img/index/feedbacks-block/feedback-user-1.png}" alt="feedback-user-5" class="user-avatar">
+                                    <img th:src="@{/img/index/feedbacks-block/julia-rodriguez.jpg}" alt="feedback-user-5" class="user-avatar">
                                     <div class="user-info">
-                                        <span class="user-info-element user-name">Julia Rodriguez</span>
-                                        <span class="user-info-element extra-info">Lead designer, Trello.com</span>
+                                        <span class="user-name">Julia Rodriguez</span>
                                     </div>
                                 </div>
                                 <p class="feedback-text">
@@ -404,10 +387,9 @@
                         <div class="flex-wrapper">
                             <div class="feedback">
                                 <div class="user-container">
-                                    <img th:src="@{/img/index/feedbacks-block/feedback-user-2.png}" alt="feedback-user-6" class="user-avatar">
+                                    <img th:src="@{/img/index/feedbacks-block/alexander-smith.jpg}" alt="feedback-user-6" class="user-avatar">
                                     <div class="user-info">
-                                        <span class="user-info-element user-name">Alexander Smith</span>
-                                        <span class="user-info-element extra-info">Lead designer, Trello.com</span>
+                                        <span class="user-name">Alexander Smith</span>
                                     </div>
                                 </div>
                                 <p class="feedback-text">
@@ -420,10 +402,9 @@
                         <div class="flex-wrapper">
                             <div class="feedback">
                                 <div class="user-container">
-                                    <img th:src="@{/img/index/feedbacks-block/feedback-user-3.png}" alt="feedback-user-7" class="user-avatar">
+                                    <img th:src="@{/img/index/feedbacks-block/olivia-brown.jpg}" alt="feedback-user-7" class="user-avatar">
                                     <div class="user-info">
-                                        <span class="user-info-element user-name">Olivia Brown</span>
-                                        <span class="user-info-element extra-info">Lead designer, Trello.com</span>
+                                        <span class="user-name">Olivia Brown</span>
                                     </div>
                                 </div>
                                 <p class="feedback-text">
@@ -436,10 +417,9 @@
                         <div class="flex-wrapper">
                             <div class="feedback">
                                 <div class="user-container">
-                                    <img th:src="@{/img/index/feedbacks-block/feedback-user-4.png}" alt="feedback-user-8" class="user-avatar">
+                                    <img th:src="@{/img/index/feedbacks-block/daniel-martinez.jpg}" alt="feedback-user-8" class="user-avatar">
                                     <div class="user-info">
-                                        <span class="user-info-element user-name">Daniel Martinez</span>
-                                        <span class="user-info-element extra-info">Lead designer, Trello.com</span>
+                                        <span class="user-name">Daniel Martinez</span>
                                     </div>
                                 </div>
                                 <p class="feedback-text">
@@ -452,10 +432,9 @@
                         <div class="flex-wrapper">
                             <div class="feedback">
                                 <div class="user-container">
-                                    <img th:src="@{/img/index/feedbacks-block/feedback-user-1.png}" alt="feedback-user-9" class="user-avatar">
+                                    <img th:src="@{/img/index/feedbacks-block/sophia-lee.jpg}" alt="feedback-user-9" class="user-avatar">
                                     <div class="user-info">
-                                        <span class="user-info-element user-name">Sophia Lee</span>
-                                        <span class="user-info-element extra-info">Lead designer, Trello.com</span>
+                                        <span class="user-name">Sophia Lee</span>
                                     </div>
                                 </div>
                                 <p class="feedback-text">
@@ -468,10 +447,9 @@
                         <div class="flex-wrapper">
                             <div class="feedback">
                                 <div class="user-container">
-                                    <img th:src="@{/img/index/feedbacks-block/feedback-user-2.png}" alt="feedback-user-10" class="user-avatar">
+                                    <img th:src="@{/img/index/feedbacks-block/william-taylor.jpg}" alt="feedback-user-10" class="user-avatar">
                                     <div class="user-info">
-                                        <span class="user-info-element user-name">William Taylor</span>
-                                        <span class="user-info-element extra-info">Lead designer, Trello.com</span>
+                                        <span class="user-name">William Taylor</span>
                                     </div>
                                 </div>
                                 <p class="feedback-text">
