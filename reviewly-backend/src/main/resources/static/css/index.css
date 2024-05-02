@@ -1954,3 +1954,22 @@
 .page.index .page-content .section.contact-us .contact-us-form .submit-form {
   width: 200px;
 }
+.page.index .page-content .submit-contact-form-result-modal .modal {
+  width: 360px;
+  height: 200px;
+}
+.page.index .page-content .submit-contact-form-result-modal .modal .modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 30px;
+}
+.page.index .page-content .submit-contact-form-result-modal .modal .modal-body .submit-contact-form-result-modal-text {
+  text-align: center;
+  margin: 0;
+  width: 200px;
+}
+.page.index .page-content .submit-contact-form-result-modal .modal .modal-body .button {
+  width: 100%;
+}
