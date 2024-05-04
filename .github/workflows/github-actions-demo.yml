@@ -24,7 +24,7 @@ jobs:
         run: chmod +x ./gradlew
 
       - name: Execute Gradle build
-        run: ./gradlew clean build -DbuildMode=dev
+        run: ./gradlew clean build -DbuildMode=dev --parallel
 
       - name: Prepare server access
         run: |
