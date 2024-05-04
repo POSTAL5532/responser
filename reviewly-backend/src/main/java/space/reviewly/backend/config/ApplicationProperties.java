@@ -79,6 +79,15 @@ public class ApplicationProperties {
     private String fileStorageUrl;
 
     @NotBlank
+    private String fileStorageBucket;
+
+    @NotBlank
+    private String fileStorageBucketSitesIcons;
+
+    @NotBlank
+    private String fileStorageBucketUsersAvatars;
+
+    @NotBlank
     private String fileStorageUrlSitesIcons;
 
     @NotBlank

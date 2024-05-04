@@ -106,9 +106,13 @@ public class UserRestController extends RestApiController {
 
     @PreAuthorize("isAuthenticated()")
     @PostMapping("/change-avatar")
-    public ResponseEntity<String> changeAvatar(@RequestParam(value = "avatar") MultipartFile avatar, CustomOAuth2AuthenticatedPrincipal principal) throws IOException {
+    public ResponseEntity<String> changeAvatar(
+        @RequestParam(value = "avatar") MultipartFile avatar,
+        CustomOAuth2AuthenticatedPrincipal principal
+    ) throws IOException {
+
         log.info("Change user avatar for user: {}", principal.getUserId());
-        String avatarFileName = userService.changeAvatar(avatar.getBytes(), principal.getUserId());
+        String avatarFileName = userService.changeAvatar(avatar, principal.getUserId());
         return ResponseEntity.ok(avatarFileName);
     }
 

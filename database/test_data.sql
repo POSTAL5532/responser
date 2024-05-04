@@ -1,6 +1,6 @@
 INSERT INTO users (id, email, password, full_name, avatar_file_name, email_confirmed, creation_date, registered_by)
 VALUES
-    ('00000000-0000-0000-user-000000000001', 'user1@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Igor Shcherbachenya', 'user_avatar_00000000-0000-0000-user-000000000001_c6f8d918-c445-4b85-85c6-30652bc60445.jpeg', true, '2023-11-04 12:34:56', 'NATIVE'),
+    ('00000000-0000-0000-user-000000000001', 'user1@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Igor Shcherbachenya', 'user_1_avatar.jpeg', true, '2023-11-04 12:34:56', 'NATIVE'),
     ('00000000-0000-0000-user-000000000002', 'user2@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Jane Doe', NULL, true, '2023-11-04 12:45:00', 'NATIVE'),
     ('00000000-0000-0000-user-000000000003', 'user3@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Bob Smith', NULL, true, '2023-11-04 13:00:15', 'NATIVE'),
     ('00000000-0000-0000-user-000000000004', 'user4@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Mary Johnson', NULL, true, '2023-11-04 14:15:30', 'NATIVE'),

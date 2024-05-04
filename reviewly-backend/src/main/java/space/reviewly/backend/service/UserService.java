@@ -1,6 +1,8 @@
 package space.reviewly.backend.service;
 
+import java.io.IOException;
 import java.util.Set;
+import org.springframework.web.multipart.MultipartFile;
 import space.reviewly.backend.config.ApplicationProperties;
 import space.reviewly.backend.exceptions.DataNotValidException;
 import space.reviewly.backend.model.EmailConfirmation;
@@ -10,8 +12,8 @@ import space.reviewly.backend.model.user.Role;
 import space.reviewly.backend.model.user.User;
 import space.reviewly.backend.model.user.User_;
 import space.reviewly.backend.repository.UserRepository;
-import space.reviewly.backend.service.fileResource.FileResourceService;
 import space.reviewly.backend.service.fileResource.FileResourceType;
+import space.reviewly.backend.service.fileResource.S3FileResourceService;
 import space.reviewly.backend.utils.TikaWrapper;
 import space.reviewly.backend.utils.ValidationUtils;
 import java.util.HashMap;
@@ -52,7 +54,7 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-    private final FileResourceService fileResourceService;
+    private final S3FileResourceService s3FileResourceService;
 
     private final ApplicationProperties applicationProperties;
 
@@ -181,13 +183,13 @@ public class UserService {
     }
 
     @Transactional
-    public String changeAvatar(byte[] avatar, String userId) {
+    public String changeAvatar(MultipartFile avatar, String userId) throws IOException {
         User user = getUser(userId);
 
         String oldAvatarFileName = user.getAvatarFileName();
-        String newAvatarFileName = FileResourceType.generateUserAvatarFileName(user.getId(), new TikaWrapper().detect(avatar));
+        String newAvatarFileName = FileResourceType.generateUserAvatarFileName(user.getId(), new TikaWrapper().detect(avatar.getBytes()));
 
-        fileResourceService.uploadUserAvatar(avatar, newAvatarFileName);
+        s3FileResourceService.uploadUserAvatar(avatar, newAvatarFileName);
 
         user.setAvatarFileName(newAvatarFileName);
         updateUser(user);
@@ -217,7 +219,7 @@ public class UserService {
             !applicationProperties.getDefaultUserAvatarFileName().equals(filename) &&
             !StringUtils.startsWithAny(filename, "http://", "https://")) {
 
-            fileResourceService.removeUserAvatar(filename);
+            s3FileResourceService.removeUserAvatar(filename);
         }
     }
 

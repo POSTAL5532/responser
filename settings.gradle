@@ -3,5 +3,4 @@ include 'reviewly-frontend'
 include 'reviewly-chrome-extension'
 include 'reviewly-backend'
 include 'reviewly-auth-server'
-include 'reviewly-file-store-stub'
 

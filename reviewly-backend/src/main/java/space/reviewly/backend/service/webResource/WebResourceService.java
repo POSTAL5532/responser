@@ -2,12 +2,13 @@ package space.reviewly.backend.service.webResource;
 
 import static java.text.MessageFormat.format;
 
+import org.springframework.web.multipart.MultipartFile;
 import space.reviewly.backend.model.ResourceType;
 import space.reviewly.backend.model.WebResource;
 import space.reviewly.backend.model.WebResourceCriteria;
 import space.reviewly.backend.repository.WebResourceRepository;
-import space.reviewly.backend.service.fileResource.FileResourceService;
 import space.reviewly.backend.service.fileResource.FileResourceType;
+import space.reviewly.backend.service.fileResource.S3FileResourceService;
 import space.reviewly.backend.utils.TikaWrapper;
 import space.reviewly.backend.utils.UrlUtils;
 import java.util.NoSuchElementException;
@@ -28,7 +29,7 @@ public class WebResourceService {
 
     private final WebResourceRepository webResourceRepository;
 
-    private final FileResourceService fileResourceService;
+    private final S3FileResourceService s3FileResourceService;
 
     public Page<WebResource> getWebResources(WebResourceCriteria criteria, Pageable pageable) {
         return webResourceRepository.findAll(new WebResourceSpecification(criteria), pageable);
@@ -53,7 +54,7 @@ public class WebResourceService {
     }
 
     @Transactional
-    public WebResource createWebResource(WebResource newWebResource, byte[] siteIcon) {
+    public WebResource createWebResource(WebResource newWebResource, MultipartFile siteIcon) {
         ResourceType resourceType = newWebResource.getResourceType();
 
         if (existByUrl(newWebResource.getUrl(), resourceType)) {
@@ -87,7 +88,7 @@ public class WebResourceService {
         return webResourceRepository.save(newWebResource);
     }
 
-    public WebResource createSiteWebResource(WebResource newWebResource, byte[] siteIcon) {
+    public WebResource createSiteWebResource(WebResource newWebResource, MultipartFile siteIcon) {
         ResourceType resourceType = newWebResource.getResourceType();
         WebResource parent = newWebResource.getParent();
 
@@ -99,9 +100,9 @@ public class WebResourceService {
 
         if (ObjectUtils.isNotEmpty(siteIcon)) {
             try {
-                String iconType = new TikaWrapper().detect(siteIcon);
+                String iconType = new TikaWrapper().detect(siteIcon.getBytes());
                 String iconFileName = FileResourceType.generateSiteIconFileName(iconType);
-                fileResourceService.uploadSiteIcon(siteIcon, iconFileName);
+                s3FileResourceService.uploadSiteIcon(siteIcon, iconFileName);
                 newWebResource.setIconFileName(iconFileName);
             } catch (Exception e) {
                 log.warn("Can't add site icon for new site: {}.", newWebResource.getUrl());

@@ -53,6 +53,16 @@ spring:
       resourceserver:
         jwt:
           issuer-uri: http://dev.reviewly.space/auth
+  cloud:
+    aws:
+      region:
+        static: us-east-1
+      endpoint: http://localhost:9000
+      s3:
+        path-style-access-enabled: true
+      credentials:
+        access-key: FrPqcWlNllvJlTzXEMQ3
+        secret-key: tOozn6g9E1Zsa650q7XrwUowOgAopNSjlU2EBU14
   mail:
     host: smtp.office365.com
     port: 587
@@ -81,8 +91,11 @@ reviewly:
   noReplyEmail: no-reply@reviewly.space
   contactEmail: contact@reviewly.space
   fileStorageUrl: ${reviewly.selfHost}/cdn
-  fileStorageUrlSitesIcons: ${reviewly.fileStorageUrl}/site-icon
-  fileStorageUrlUsersAvatars: ${reviewly.fileStorageUrl}/user-avatar
+  fileStorageBucket: reviewly-dev
+  fileStorageBucketSitesIcons: sites-icons
+  fileStorageBucketUsersAvatars: users-avatars
+  fileStorageUrlSitesIcons: ${reviewly.fileStorageUrl}/${reviewly.fileStorageBucketSitesIcons}
+  fileStorageUrlUsersAvatars: ${reviewly.fileStorageUrl}/${reviewly.fileStorageBucketUsersAvatars}
   defaultUserAvatarFileName: default_avatar.png
   defaultSiteIconFileName: default_site_icon.png
   allowedOrigins:

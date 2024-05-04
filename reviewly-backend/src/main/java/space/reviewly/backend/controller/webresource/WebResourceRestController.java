@@ -14,10 +14,8 @@ import space.reviewly.backend.service.webResource.WebResourceService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.ObjectUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,14 +53,9 @@ public class WebResourceRestController extends RestApiController {
     public ResponseEntity<WebResourceDTO> createWebResource(
         @RequestPart("newWebResource") @Valid @NotNull NewWebResourceDTO newWebResourceDTO,
         @RequestPart(value = "siteIcon", required = false) MultipartFile siteIcon
-    ) throws IOException {
+    ) {
         log.info("Create web resource {}.", newWebResourceDTO);
-
-        WebResource newWebResource = webResourceService.createWebResource(
-            webResourceConverter.toEntity(newWebResourceDTO),
-            ObjectUtils.isNotEmpty(siteIcon) ? siteIcon.getBytes() : null
-        );
-
+        WebResource newWebResource = webResourceService.createWebResource(webResourceConverter.toEntity(newWebResourceDTO), siteIcon);
         return ResponseEntity.ok(webResourceConverter.toDTO(newWebResource));
     }
 }
