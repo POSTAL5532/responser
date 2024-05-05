@@ -10,6 +10,15 @@ jobs:
       remote_user: ${{ secrets.DEV_REMOTE_USER }}
       remote_key: ${{ secrets.DEV_DEPLOY_KEY }}
       ssh_key_file: id_rsa
+      auth_server_config_dir: ./configs/reviewly-auth-server/dev
+      auth_server_config: ${{ secrets.DEV_AUTH_CONFIG }}
+      backend_config_dir: ./configs/reviewly-backend/dev
+      backend_config: ${{ secrets.DEV_BACKEND_CONFIG }}
+      chrome_extension_config_dir: ./configs/reviewly-chrome-extension/dev
+      chrome_extension_config: ${{ secrets.DEV_EXTENSION_ENV }}
+      chrome_extension_manifest: ${{ secrets.DEV_EXTENSION_MANIFEST }}
+      frontend_config_dir: ./configs/reviewly-frontend/dev
+      frontend_config: ${{ secrets.DEV_FRONTEND_ENV }}
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-java@v3
@@ -22,6 +31,36 @@ jobs:
 
       - name: Make gradlew executable
         run: chmod +x ./gradlew
+
+      - name: Prepare configs
+        run: |
+          echo -e "> Prepare auth server configs"
+          mkdir -p ${auth_server_config_dir}
+          touch ${auth_server_config_dir}/application.yml
+          echo "$auth_server_config" > ${auth_server_config_dir}/application.yml
+          echo -e "> Done"
+          
+          echo -e "> Prepare backend configs"
+          mkdir -p ${backend_config_dir}
+          touch ${backend_config_dir}/application.yml
+          echo "$backend_config" > ${backend_config_dir}/application.yml
+          echo -e "> Done"
+          
+          echo -e "> Prepare extension configs"
+          mkdir -p ${chrome_extension_config_dir}
+          touch ${chrome_extension_config_dir}/.env
+          echo "$chrome_extension_config" > ${chrome_extension_config_dir}/.env
+          echo -e "- env: done"
+          touch ${chrome_extension_config_dir}/manifest.json
+          echo "$chrome_extension_manifest" > ${chrome_extension_config_dir}/manifest.json
+          echo -e "- manifest: done"
+          echo -e "> Done"
+          
+          echo -e "> Prepare extension configs"
+          mkdir -p ${frontend_config_dir}
+          touch ${frontend_config_dir}/.env
+          echo "$frontend_config" > ${frontend_config_dir}/.env
+          echo -e "> Done"
 
       - name: Execute Gradle build
         run: ./gradlew clean build -DbuildMode=dev --parallel
@@ -60,7 +99,6 @@ jobs:
 
       - name: Deploy auth server
         env:
-          configs_dir: ./configs
           remote_auth_server_dir: /opt/reviewly/auth-server
           auth_server_jar_name: reviewly-auth-server.jar
         run: |
@@ -71,7 +109,7 @@ jobs:
           
           echo -e "> Copying new auth-server"
           scp -i ${ssh_key_file} -r ./reviewly-auth-server/build/libs/${auth_server_jar_name} ${remote_user}@${remote_host}:${remote_auth_server_dir}
-          scp -i ${ssh_key_file} -r ${configs_dir}/reviewly-auth-server/dev/application.yml ${remote_user}@${remote_host}:${remote_auth_server_dir}/application.yml
+          scp -i ${ssh_key_file} -r ${auth_server_config_dir}/application.yml ${remote_user}@${remote_host}:${remote_auth_server_dir}/application.yml
           echo -e "> Done"
           
           echo -e "> Start auth-server:"
@@ -80,7 +118,6 @@ jobs:
 
       - name: Deploy backend
         env:
-          configs_dir: ./configs
           remote_backend_dir: /opt/reviewly/backend
           backend_jar_name: reviewly-backend.jar
         run: |
@@ -91,7 +128,7 @@ jobs:
           
           echo -e "> Copying new backend"
           scp -i ${ssh_key_file} -r ./reviewly-backend/build/libs/${backend_jar_name} ${remote_user}@${remote_host}:${remote_backend_dir}
-          scp -i ${ssh_key_file} -r ${configs_dir}/reviewly-backend/dev/application.yml ${remote_user}@${remote_host}:${remote_backend_dir}/application.yml
+          scp -i ${ssh_key_file} -r ${backend_config_dir}/application.yml ${remote_user}@${remote_host}:${remote_backend_dir}/application.yml
           echo -e "> Done"
           
           echo -e "> Start backend:"

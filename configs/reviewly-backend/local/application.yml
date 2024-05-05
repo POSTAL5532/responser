@@ -67,7 +67,7 @@ spring:
     host: smtp.office365.com
     port: 587
     username: ishcherbachenya@reviewly.space
-    password: 5#OFpkKn9YXa69Dl6Ts5&q6Z
+    password: 4N_Q1yhH2.I:qjHg4ZK?wzv7\b0!kawn
     protocol: smtp
     properties.mail.smtp:
       auth: true
