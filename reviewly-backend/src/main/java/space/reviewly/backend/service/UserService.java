@@ -72,6 +72,7 @@ public class UserService {
         log.info("Register new not confirmed user: {}", newUser.getEmail());
 
         newUser.setEmailConfirmed(false);
+        newUser.setRegisteredBy(RegisteredBy.NATIVE);
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
 
         Role defaultRole = roleService.getDefaultRole();
