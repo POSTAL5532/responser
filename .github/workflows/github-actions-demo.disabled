@@ -1,0 +1,148 @@
+#name: Reviewly DEV CI/CD
+#run-name: ${{ github.actor }} is running action 🚀
+#on:
+#  workflow_dispatch:
+#jobs:
+#  Build-project:
+#    runs-on: ubuntu-22.04
+#    env:
+#      remote_host: ${{ secrets.DEV_REMOTE_HOST }}
+#      remote_user: ${{ secrets.DEV_REMOTE_USER }}
+#      remote_key: ${{ secrets.DEV_DEPLOY_KEY }}
+#      ssh_key_file: id_rsa
+#      auth_server_config_dir: ./configs/reviewly-auth-server/dev
+#      auth_server_config: ${{ secrets.DEV_AUTH_CONFIG }}
+#      backend_config_dir: ./configs/reviewly-backend/dev
+#      backend_config: ${{ secrets.DEV_BACKEND_CONFIG }}
+#      chrome_extension_config_dir: ./configs/reviewly-chrome-extension/dev
+#      chrome_extension_config: ${{ secrets.DEV_EXTENSION_ENV }}
+#      chrome_extension_manifest: ${{ secrets.DEV_EXTENSION_MANIFEST }}
+#      frontend_config_dir: ./configs/reviewly-frontend/dev
+#      frontend_config: ${{ secrets.DEV_FRONTEND_ENV }}
+#    steps:
+#      - uses: actions/checkout@v3
+#      - uses: actions/setup-java@v3
+#        with:
+#          distribution: temurin
+#          java-version: 17
+#
+#      - name: Setup Gradle
+#        uses: gradle/gradle-build-action@v2
+#
+#      - name: Make gradlew executable
+#        run: chmod +x ./gradlew
+#
+#      - name: Prepare configs
+#        run: |
+#          echo "> Prepare auth server configs"
+#          mkdir -p ${auth_server_config_dir}
+#          touch ${auth_server_config_dir}/application.yml
+#          echo "$auth_server_config" > ${auth_server_config_dir}/application.yml
+#          echo "> Done"
+#
+#          echo "> Prepare backend configs"
+#          mkdir -p ${backend_config_dir}
+#          touch ${backend_config_dir}/application.yml
+#          echo "$backend_config" > ${backend_config_dir}/application.yml
+#          echo "> Done"
+#
+#          echo "> Prepare extension configs"
+#          mkdir -p ${chrome_extension_config_dir}
+#          touch ${chrome_extension_config_dir}/.env
+#          echo "$chrome_extension_config" > ${chrome_extension_config_dir}/.env
+#          echo "- env: done"
+#          touch ${chrome_extension_config_dir}/manifest.json
+#          echo "$chrome_extension_manifest" > ${chrome_extension_config_dir}/manifest.json
+#          echo "- manifest: done"
+#          echo "> Done"
+#
+#          echo "> Prepare extension configs"
+#          mkdir -p ${frontend_config_dir}
+#          touch ${frontend_config_dir}/.env
+#          echo "$frontend_config" > ${frontend_config_dir}/.env
+#          echo "> Done"
+#
+#      - name: Execute Gradle build
+#        run: ./gradlew clean build -DbuildMode=dev --parallel
+#
+#      - name: Prepare server access
+#        run: |
+#          mkdir -p ~/.ssh/
+#          touch ~/.ssh/known_hosts
+#          echo "$remote_key" > ${ssh_key_file}
+#          chmod 600 ${ssh_key_file}
+#          echo -e "Host *\n\tStrictHostKeyChecking no\n\n" >~/.ssh/config
+#          echo "> Done"
+#
+#      - name: Database migration
+#        env:
+#          migrations_dir: /opt/reviewly/database/migrations
+#        run: |
+#          echo "> Clear old migrations"
+#          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${migrations_dir}/*"
+#          echo "> Done"
+#
+#          echo "> Copying migrations"
+#          scp -i ${ssh_key_file} -r ./database/migrations/* ${remote_user}@${remote_host}:${migrations_dir}
+#          echo "> Done"
+#
+#          echo "> Migrate database"
+#          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "liquibase --defaultsFile=/opt/reviewly/database/liquibase.properties update"
+#          echo "> Done"
+#
+#      - name: Stop applications
+#        run: |
+#          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl stop reviewly-auth-server"
+#          echo " - stop auth-server: done"
+#          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl stop reviewly-backend"
+#          echo " - stop backend: done"
+#
+#      - name: Deploy auth server
+#        env:
+#          remote_auth_server_dir: /opt/reviewly/auth-server
+#          auth_server_jar_name: reviewly-auth-server.jar
+#        run: |
+#          echo "> Clear old auth-server"
+#          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_auth_server_dir}/${auth_server_jar_name}"
+#          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_auth_server_dir}/application.yml"
+#          echo "> Done"
+#
+#          echo "> Copying new auth-server"
+#          scp -i ${ssh_key_file} -r ./reviewly-auth-server/build/libs/${auth_server_jar_name} ${remote_user}@${remote_host}:${remote_auth_server_dir}
+#          scp -i ${ssh_key_file} -r ${auth_server_config_dir}/application.yml ${remote_user}@${remote_host}:${remote_auth_server_dir}/application.yml
+#          echo "> Done"
+#
+#          echo "> Start auth-server:"
+#          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl start reviewly-auth-server"
+#          echo "> Done"
+#
+#      - name: Deploy backend
+#        env:
+#          remote_backend_dir: /opt/reviewly/backend
+#          backend_jar_name: reviewly-backend.jar
+#        run: |
+#          echo "> Clear old backend"
+#          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_backend_dir}/${backend_jar_name}"
+#          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_backend_dir}/application.yml"
+#          echo "> Done"
+#
+#          echo "> Copying new backend"
+#          scp -i ${ssh_key_file} -r ./reviewly-backend/build/libs/${backend_jar_name} ${remote_user}@${remote_host}:${remote_backend_dir}
+#          scp -i ${ssh_key_file} -r ${backend_config_dir}/application.yml ${remote_user}@${remote_host}:${remote_backend_dir}/application.yml
+#          echo "> Done"
+#
+#          echo "> Start backend:"
+#          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "sudo systemctl start reviewly-backend"
+#          echo "> Done"
+#
+#      - name: Deploy frontend
+#        env:
+#          remote_frontend_app_dir: /opt/reviewly/frontend-app
+#        run: |
+#          echo "> Clear old frontend app"
+#          ssh -i ${ssh_key_file} ${remote_user}@${remote_host} "rm -r -f ${remote_frontend_app_dir}/*"
+#          echo "> Done"
+#
+#          echo "> Copying new frontend app"
+#          scp -i ${ssh_key_file} -r ./reviewly-frontend/build/* ${remote_user}@${remote_host}:${remote_frontend_app_dir}
+#          echo "> Done"
