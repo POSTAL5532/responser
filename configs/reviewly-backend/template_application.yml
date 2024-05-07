@@ -61,13 +61,13 @@ spring:
       s3:
         path-style-access-enabled: true
       credentials:
-        access-key: FrPqcWlNllvJlTzXEMQ3
-        secret-key: tOozn6g9E1Zsa650q7XrwUowOgAopNSjlU2EBU14
+        access-key: some-access-key
+        secret-key: some-secret-key
   mail:
     host: smtp.office365.com
     port: 587
-    username: ishcherbachenya@reviewly.space
-    password: 5#OFpkKn9YXa69Dl6Ts5&q6Z
+    username: some@user.name
+    password: "PAAAASWORD"
     protocol: smtp
     properties.mail.smtp:
       auth: true

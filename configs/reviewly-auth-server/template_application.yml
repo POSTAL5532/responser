@@ -44,8 +44,8 @@ spring:
         registration:
           google:
             provider: google
-            client-id: 479322711977-7ji5k3hfrgflsftq2v9nenhpnrln23g4.apps.googleusercontent.com
-            client-secret: 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
+            client-id: some-google-id
+            client-secret: some-google-secret
         provider:
           google:
             authorization-uri: https://accounts.google.com/o/oauth2/auth
@@ -54,8 +54,8 @@ spring:
   mail:
     host: smtp.office365.com
     port: 587
-    username: ishcherbachenya@reviewly.space
-    password: 5#OFpkKn9YXa69Dl6Ts5&q6Z
+    username: some@user.name
+    password: "PAAAASWORD"
     protocol: smtp
     properties.mail.smtp:
       auth: true

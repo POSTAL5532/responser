@@ -6,6 +6,8 @@ node_modules/
 build/
 out/
 
-reviewly-file-store-stub.properties
+application.yml
+.env
+manifest.json
 
 *.log*
