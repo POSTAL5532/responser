@@ -6,6 +6,7 @@ import java.io.IOException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
 import space.reviewly.backend.config.ApplicationProperties;
 
 @RequiredArgsConstructor
@@ -32,11 +33,18 @@ public class S3FileResourceService {
     }
 
     public void uploadFile(MultipartFile file, String bucketName, String fileName) throws IOException {
+        uploadFile(file, bucketName, fileName, ObjectCannedACL.PUBLIC_READ);
+    }
+
+    public void uploadFile(MultipartFile file, String bucketName, String fileName, ObjectCannedACL acl) throws IOException {
         s3Operations.upload(
             applicationProperties.getFileStorageBucket(),
             bucketName + "/" + fileName,
             file.getInputStream(),
-            ObjectMetadata.builder().contentType(file.getContentType()).build()
+            ObjectMetadata.builder()
+                .acl(acl)
+                .contentType(file.getContentType())
+                .build()
         );
     }
 }
