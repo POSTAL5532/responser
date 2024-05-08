@@ -40,7 +40,7 @@ public class WebResourceRestController extends RestApiController {
         @Valid @NotBlank @RequestParam String url,
         @Valid @NotBlank @RequestParam ResourceType resourceType
     ) {
-        log.info("Get web resource: url {}, type {}.", url, resourceType);
+        log.debug("Get web resource: url {}, type {}.", url, resourceType);
 
         WebResource webResource = webResourceService.getByUrl(url, resourceType);
         ResourceRating resourceRating = ratingService.getResourceFullRatingById(webResource.getId());
@@ -54,7 +54,7 @@ public class WebResourceRestController extends RestApiController {
         @RequestPart("newWebResource") @Valid @NotNull NewWebResourceDTO newWebResourceDTO,
         @RequestPart(value = "siteIcon", required = false) MultipartFile siteIcon
     ) {
-        log.info("Create web resource {}.", newWebResourceDTO);
+        log.debug("Create web resource {}.", newWebResourceDTO);
         WebResource newWebResource = webResourceService.createWebResource(webResourceConverter.toEntity(newWebResourceDTO), siteIcon);
         return ResponseEntity.ok(webResourceConverter.toDTO(newWebResource));
     }

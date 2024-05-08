@@ -24,6 +24,7 @@ public class EmailConfirmationRestController extends RestApiController {
     @PostMapping("/resend")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> resendConfirmationLink(CustomOAuth2AuthenticatedPrincipal principal) {
+        log.debug("Resend email confirmation link for user {}.", principal.getUserId());
         userService.resendConfirmationEmailForUser(principal.getUserId());
         return ResponseEntity.ok().build();
     }

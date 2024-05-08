@@ -43,7 +43,7 @@ public class ReviewLikeRestController extends RestApiController {
     @PreAuthorize("isAuthenticated()")
     @PostMapping
     public ResponseEntity<ReviewLikeDTO> createLike(@Valid @NotNull @RequestBody ReviewLikeInfoDTO likeInfoDTO, CustomOAuth2AuthenticatedPrincipal principal) {
-        log.info("Create like {} by user {}.", likeInfoDTO, principal.getUserId());
+        log.debug("Create like {} by user {}.", likeInfoDTO, principal.getUserId());
         ReviewLike newLike = reviewLikeConverter.toReviewLike(likeInfoDTO, principal.getUserId());
         ReviewLike createdLike = reviewLikeService.createLike(newLike);
         return ResponseEntity.ok(reviewLikeConverter.toReviewLikePayload(createdLike));
@@ -63,7 +63,7 @@ public class ReviewLikeRestController extends RestApiController {
         @Valid @NotNull @RequestBody ReviewLikeInfoDTO likeInfoDTO,
         CustomOAuth2AuthenticatedPrincipal principal
     ) {
-        log.info("Update like {} with data {} by user {}.", likeId, likeInfoDTO, principal.getUserId());
+        log.debug("Update like {} with data {} by user {}.", likeId, likeInfoDTO, principal.getUserId());
         ReviewLike reviewLike = reviewLikeConverter.toReviewLike(likeId, likeInfoDTO, principal.getUserId());
         ReviewLike updatedLike = reviewLikeService.updateLike(reviewLike);
         return ResponseEntity.ok(reviewLikeConverter.toReviewLikePayload(updatedLike));
@@ -77,7 +77,7 @@ public class ReviewLikeRestController extends RestApiController {
     @DeleteMapping("/{likeId}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> removeLike(@Valid @NotEmpty @PathVariable String likeId, CustomOAuth2AuthenticatedPrincipal principal) {
-        log.info("Remove like {} by user {}.", likeId, principal.getUserId());
+        log.debug("Remove like {} by user {}.", likeId, principal.getUserId());
         reviewLikeService.removeLike(likeId, principal.getUserId());
         return ResponseEntity.ok().build();
     }

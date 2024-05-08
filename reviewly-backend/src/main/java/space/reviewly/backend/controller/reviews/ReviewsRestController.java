@@ -60,7 +60,7 @@ public class ReviewsRestController extends RestApiController {
         CustomOAuth2AuthenticatedPrincipal principal
     ) {
 
-        log.info("Get all reviews. Reviews request criteria {}.", criteria);
+        log.debug("Get all reviews. Reviews request criteria {}.", criteria);
 
         if (StringUtils.isNotEmpty(criteria.getForUserId())) {
             if (Objects.isNull(principal) || !principal.getUserId().equals(criteria.getForUserId())) {
@@ -85,7 +85,7 @@ public class ReviewsRestController extends RestApiController {
      */
     @GetMapping("/{reviewId}")
     public ResponseEntity<ReviewDTO> getReview(@Valid @NotBlank @PathVariable String reviewId) {
-        log.info("Get review {}.", reviewId);
+        log.debug("Get review {}.", reviewId);
         Review review = reviewService.getReview(reviewId);
         return ResponseEntity.ok(reviewConverter.toReviewPayload(review));
     }
@@ -99,7 +99,7 @@ public class ReviewsRestController extends RestApiController {
     @PostMapping
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<ReviewDTO> createReview(@Valid @NotNull @RequestBody ReviewInfoDTO reviewInfoDTO, CustomOAuth2AuthenticatedPrincipal principal) {
-        log.info("Create review {}.", reviewInfoDTO);
+        log.debug("Create review {}.", reviewInfoDTO);
         Review newReview = reviewConverter.toReview(reviewInfoDTO, principal.getUserId());
         ReviewDTO newReviewDTO = reviewConverter.toReviewPayload(reviewService.createReview(newReview));
 
@@ -120,7 +120,7 @@ public class ReviewsRestController extends RestApiController {
         @Valid @NotNull @RequestBody ReviewInfoDTO reviewInfoDTO,
         CustomOAuth2AuthenticatedPrincipal principal
     ) {
-        log.info("Update review {} with data {}.", reviewId, reviewInfoDTO);
+        log.debug("Update review {} with data {}.", reviewId, reviewInfoDTO);
         Review review = reviewConverter.toReview(reviewId, reviewInfoDTO, principal.getUserId());
         ReviewDTO updatedReviewDTO = reviewConverter.toReviewPayload(reviewService.updateReview(review));
 
@@ -135,7 +135,7 @@ public class ReviewsRestController extends RestApiController {
     @DeleteMapping("/{reviewId}")
     @PreAuthorize("isAuthenticated()")
     public ResponseEntity<Void> removeReview(@Valid @NotNull @PathVariable String reviewId, CustomOAuth2AuthenticatedPrincipal principal) {
-        log.info("Remove review {} by user {}.", reviewId, principal.getUserId());
+        log.debug("Remove review {} by user {}.", reviewId, principal.getUserId());
         reviewService.removeReview(reviewId, principal.getUserId());
         return ResponseEntity.ok().build();
     }

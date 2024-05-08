@@ -44,7 +44,7 @@ public class UserRestController extends RestApiController {
 
     @PostMapping
     public ResponseEntity<Void> registerUser(@Valid @RequestBody CreateUserProfilePayload newUser) {
-        log.info("Register new user.");
+        log.debug("Register new user.");
         userService.registerUser(userConverter.toUser(newUser));
         return ResponseEntity.ok().build();
     }
@@ -62,7 +62,7 @@ public class UserRestController extends RestApiController {
     public ResponseEntity<UserInfoPayload> getCurrentUser(CustomOAuth2AuthenticatedPrincipal principal) {
         String userId = principal.getUserId();
 
-        log.info("Get current {} user.", userId);
+        log.debug("Get current {} user.", userId);
 
         User user = userService.getUser(userId);
         UserInfoPayload userPayload = userConverter.toFullUserInfoPayload(user);
@@ -78,7 +78,7 @@ public class UserRestController extends RestApiController {
         @Valid @NotNull @RequestBody UpdateUserPasswordPayload updateUserPasswordPayload
     ) {
 
-        log.info("Update current {} user password.", principal.getUserId());
+        log.debug("Update current {} user password.", principal.getUserId());
 
         userService.updateUserPassword(
             principal.getUserId(),
@@ -91,7 +91,7 @@ public class UserRestController extends RestApiController {
 
     @PostMapping("/send-restore-password-link")
     public ResponseEntity<Void> sendRestorePasswordLink(@Valid @NotNull @RequestBody ForgotPasswordPayload forgotPasswordPayload) {
-        log.info("Send restoring link for user password with email {}.", forgotPasswordPayload.getEmail());
+        log.debug("Send restoring link for user password with email {}.", forgotPasswordPayload.getEmail());
         userService.requestPasswordRestoring(forgotPasswordPayload.getEmail());
 
         return ResponseEntity.ok().build();
@@ -99,7 +99,7 @@ public class UserRestController extends RestApiController {
 
     @PostMapping("/restore-password")
     public ResponseEntity<Void> restorePassword(@Valid @NotNull @RequestBody RestorePasswordPayload restorePasswordPayload) {
-        log.info("Restore password by password restore: {}.", restorePasswordPayload);
+        log.debug("Restore password by password restore: {}.", restorePasswordPayload);
         userService.restorePassword(restorePasswordPayload.getRestorePasswordId(), restorePasswordPayload.getNewPassword());
         return ResponseEntity.ok().build();
     }
@@ -111,7 +111,7 @@ public class UserRestController extends RestApiController {
         CustomOAuth2AuthenticatedPrincipal principal
     ) throws IOException {
 
-        log.info("Change user avatar for user: {}", principal.getUserId());
+        log.debug("Change user avatar for user: {}", principal.getUserId());
         String avatarFileName = userService.changeAvatar(avatar, principal.getUserId());
         return ResponseEntity.ok(avatarFileName);
     }
@@ -119,7 +119,7 @@ public class UserRestController extends RestApiController {
     @PreAuthorize("isAuthenticated()")
     @DeleteMapping("/remove-avatar")
     public ResponseEntity<Void> removeAvatar(CustomOAuth2AuthenticatedPrincipal principal) {
-        log.info("Remove user avatar for user {}", principal.getUserId());
+        log.debug("Remove user avatar for user {}", principal.getUserId());
         userService.removeAvatar(principal.getUserId());
         return ResponseEntity.ok().build();
     }
