@@ -32,6 +32,7 @@ import {ReactComponent as RedditLogo} from './reddit_logo.svg';
 import {ReactComponent as Refresh} from './refresh.svg';
 import {ReactComponent as Upload} from './upload.svg';
 import {ReactComponent as FullArrow} from './full-arrow.svg';
+import {ReactComponent as Clipboard} from './clipboard.svg';
 import "./Icon.less";
 
 export enum IconType {
@@ -67,6 +68,7 @@ export enum IconType {
     REFRESH = "refresh",
     UPLOAD = "upload",
     FULL_ARROW = "full-arrow",
+    CLIPBOARD = "clipboard",
 }
 
 type IconProps = {
@@ -143,6 +145,8 @@ export const Icon: React.FC<IconProps> = (props: IconProps) => {
             return <Upload className={resultClassName}/>
         case IconType.FULL_ARROW:
             return <FullArrow className={resultClassName}/>
+        case IconType.CLIPBOARD:
+            return <Clipboard className={resultClassName}/>
         default:
             return null;
     }

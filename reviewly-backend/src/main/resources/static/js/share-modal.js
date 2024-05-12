@@ -38,3 +38,8 @@ const shareReddit = () => {
     // 'https://www.reddit.com/submit?url=' + encodeURIComponent(urlToShare) + '&title=' + encodeURIComponent(textToShare)
     window.open('https://www.reddit.com/submit?url=' + encodeURIComponent(getUrlToShare()), '_blank', 'width=550,height=400');
 }
+
+const copyToClipboard = () => {
+    navigator?.clipboard?.writeText?.(getUrlToShare());
+    $('.copied').removeClass('hidden');
+}

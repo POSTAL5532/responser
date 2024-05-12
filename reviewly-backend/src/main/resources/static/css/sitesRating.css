@@ -216,9 +216,9 @@
   background-color: rgba(0, 0, 0, 0.25);
 }
 .page.site-reviews .page-content .section .ratings-container .site-ratings-container .site-rating .resource-container .resource-icon {
-  width: 16px;
-  height: 16px;
-  margin-right: 4px;
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
 }
 .page.site-reviews .page-content .section .ratings-container .site-ratings-container .site-rating .resource-container .resource-name {
   margin: 0;

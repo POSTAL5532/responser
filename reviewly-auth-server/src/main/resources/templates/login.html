@@ -82,9 +82,9 @@
     <header class="header">
         <div class="header-content">
             <nav class="navigation">
-                <a class="button light active" href="/">Home</a>
-                <a class="button light" href="/">Sites rating</a>
-                <a class="button light" href="/">Reviews</a>
+                <a class="button light" th:href="${@applicationProperties.selfHost}">Home</a>
+                <a class="button light" th:href="${@applicationProperties.selfHost + '/web-resources/sites-rating'}">Sites rating</a>
+                <a class="button light" th:href="${@applicationProperties.selfHost + '/reviews/see-reviews'}">Reviews</a>
             </nav>
             <div class="logo-container">
                 <a class="logo-link" href="/">

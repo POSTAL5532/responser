@@ -3,15 +3,16 @@
 .share-review-modal {
     .modal {
         width: 360px;
-        height: 250px;
+        height: 290px;
 
         .modal-body {
             display: flex;
             flex-direction: column;
             align-items: center;
-            justify-content: center;
+            justify-content: end;
             gap: 30px;
             border-radius: 20px;
+            padding: 20px;
 
             .share-buttons {
                 display: flex;
@@ -33,6 +34,38 @@
 
                             path {
                                 fill: @black-alpha-60;
+                            }
+                        }
+                    }
+
+                    &.third-row {
+                        padding-top: 10px;
+                        flex-direction: column;
+
+                        .share-button {
+                            width: 100%;
+                            height: 40px;
+
+                            .icon {
+                                width: 18px;
+                                height: 18px;
+
+                                path {
+                                    fill: none;
+                                }
+                            }
+                        }
+
+                        .copied {
+                            color: @black-alpha-60;
+                            display: flex;
+                            align-items: center;
+                            gap: 10px;
+                            justify-content: center;
+                            padding-top: 10px;
+
+                            &.hidden {
+                                visibility: hidden;
                             }
                         }
                     }
