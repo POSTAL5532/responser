@@ -38,24 +38,28 @@
     <path d="M1 5.25L5.5 0.75L10 5.25" stroke="black" stroke-opacity="1.0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 
-<svg th:fragment="icon-link" class="icon link" width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg th:fragment="icon-link" th:classappend="${class != null ? class : ''}" class="icon link" width="31" height="31" viewBox="0 0 31 31" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect x="0.791016" y="0.344727" width="30" height="30" rx="8" fill="#605C55"/>
     <path d="M13.541 19.8447L18.041 15.3447L13.541 10.8447" stroke="white" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 
-<svg th:fragment="icon-upload" class="icon upload" width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg th:fragment="icon-upload" th:classappend="${class != null ? class : ''}" class="icon upload" width="22" height="21" viewBox="0 0 22 21" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M18.5375 13.1274V16.4608C18.5375 16.9028 18.3611 17.3267 18.0471 17.6393C17.7331 17.9518 17.3072 18.1274 16.8631 18.1274H5.14219C4.69811 18.1274 4.27221 17.9518 3.9582 17.6393C3.64418 17.3267 3.46777 16.9028 3.46777 16.4608V13.1274" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M15.1914 7.29411L11.0054 3.12744L6.81934 7.29411" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M11.0068 3.12744V13.1274" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 
-<svg th:fragment="icon-external-link" class="icon external-link" width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg th:fragment="icon-external-link" th:classappend="${class != null ? class : ''}" class="icon external-link" width="21" height="21" viewBox="0 0 21 21" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M15.5387 11.4608V16.4608C15.5387 16.9028 15.3606 17.3267 15.0437 17.6393C14.7268 17.9518 14.2969 18.1274 13.8488 18.1274H4.55418C4.10598 18.1274 3.67615 17.9518 3.35922 17.6393C3.0423 17.3267 2.86426 16.9028 2.86426 16.4608V7.29411C2.86426 6.85208 3.0423 6.42816 3.35922 6.1156C3.67615 5.80304 4.10598 5.62744 4.55418 5.62744H9.62395" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M13.0049 3.12744H18.0746V8.12744" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M8.78613 12.2941L18.0807 3.12744" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
 
-<svg th:fragment="icon-check-square" class="icon check-square" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg th:fragment="icon-check-square" th:classappend="${class != null ? class : ''}" class="icon check-square" width="21" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M7.53125 9.16683L10.0429 11.6668L18.415 3.3335" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
     <path d="M17.5776 10V15.8333C17.5776 16.2754 17.4012 16.6993 17.0872 17.0118C16.7731 17.3244 16.3472 17.5 15.9032 17.5H4.18223C3.73815 17.5 3.31225 17.3244 2.99824 17.0118C2.68422 16.6993 2.50781 16.2754 2.50781 15.8333V4.16667C2.50781 3.72464 2.68422 3.30072 2.99824 2.98816C3.31225 2.67559 3.73815 2.5 4.18223 2.5H13.3915" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
+
+<svg th:fragment="icon-close" th:classappend="${class != null ? class : ''}" width="1em" height="1em" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon close">
+    <path d="m7.5.5-7 7M.5.5l7 7" stroke="#000" stroke-opacity="0.6" stroke-linecap="round" stroke-linejoin="round"></path>
 </svg>

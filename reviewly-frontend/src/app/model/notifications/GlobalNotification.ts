@@ -1,11 +1,12 @@
 import {IconType} from "../../components/icon/Icon";
 import {ButtonType} from "../../components/button/Button";
+import {ReactNode} from "react";
 
 export class GlobalNotification {
 
     name: string;
 
-    text: string;
+    text: ReactNode;
 
     actions: GlobalNotificationAction[] = [];
 

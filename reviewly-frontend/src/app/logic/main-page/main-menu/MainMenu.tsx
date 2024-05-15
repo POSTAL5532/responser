@@ -56,7 +56,7 @@ const MainMenu: React.FC<MainMenuProps> = (props: MainMenuProps) => {
 
             <div className="account-control-container">
                 <Button onClick={onLogOut}><Icon type={IconType.LOGOUT}/></Button>
-                <Button onClick={() => console.log("Remove button click")}><Icon type={IconType.REMOVE}/></Button>
+                {/*<Button onClick={() => console.log("Remove button click")}><Icon type={IconType.REMOVE}/></Button>*/}
             </div>
         </div>
     );

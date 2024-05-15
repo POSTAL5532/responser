@@ -60,3 +60,42 @@ $(function () {
     });
 });
 
+const hideNotificationsBlockIfEmpty = () => {
+    const block = $(".global-notifications");
+
+    if (block.children('.notification-block.active').length <= 0) {
+        block.removeClass('active');
+    } else {
+        block.addClass('active');
+    }
+
+    console.log("CHEEEEEEECK", block.children('.notification-block.active').length <= 0)
+}
+
+const initNotification = (options) => {
+    if (!options.show?.()) {
+        hideNotificationsBlockIfEmpty();
+        return;
+    }
+
+    const activeClass = "active";
+    const block = $(options.id);
+
+    block.addClass(activeClass);
+
+    const closeButton = block.find('.close-notification').first();
+    closeButton.click(function () {
+        options.onClose?.();
+        block.removeClass(activeClass);
+        hideNotificationsBlockIfEmpty();
+    });
+
+    const mainAction = block.find('.main-action').first();
+    mainAction.click(function () {
+        options.onAction?.();
+        block.removeClass(activeClass);
+        hideNotificationsBlockIfEmpty();
+    });
+
+    hideNotificationsBlockIfEmpty();
+}

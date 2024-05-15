@@ -5,6 +5,9 @@ import {ButtonType} from "../../components/button/Button";
 import {ExtensionService} from "../../service/extension/ExtensionService";
 import {Logger} from "../../utils/Logger";
 import applicationProperties from "../../service/ApplicationProperties";
+import React from "react";
+import {Link} from "../../components/link/Link";
+import ApplicationProperties from "../../service/ApplicationProperties";
 
 const DONE_NOTIFICATION = "done";
 
@@ -36,7 +39,9 @@ export class GlobalNotificationsHolder {
 
         const cookieNotification = new GlobalNotification();
         cookieNotification.name = cookieNotificationName;
-        cookieNotification.text = "This website uses cookies to improve user experience. By using our website you consent to all cookies in accordance with our Cookie Policy.";
+        cookieNotification.text = <>
+            This service uses cookies. By using Reviewly, you agree to our <Link href={ApplicationProperties.selfHost + "/privacy-policy"} target="_blank">Privacy Policy</Link> and <Link href={ApplicationProperties.selfHost + "/cookie-policy"} target="_blank">Cookie Policy</Link>
+        </>;
 
         const cookieNotificationOnAction = () => {
             localStorage.setItem(cookieNotificationName, DONE_NOTIFICATION);

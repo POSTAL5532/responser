@@ -4,9 +4,7 @@
             <input id="share-link-value" type="text" hidden="hidden">
 
             <button id="close-share-review-modal" class="close-modal" th:onclick="closeShareModal()">
-                <svg width="1em" height="1em" viewBox="0 0 8 8" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon close">
-                    <path d="m7.5.5-7 7M.5.5l7 7" stroke="#000" stroke-opacity="0.6" stroke-linecap="round" stroke-linejoin="round"></path>
-                </svg>
+                <th:block th:replace="~{components/svgs::icon-close}"/>
             </button>
 
             <div class="share-buttons">

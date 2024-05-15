@@ -924,3 +924,76 @@ a.button {
 .text-area-container.error .field-message {
   color: #EB5757;
 }
+.global-notifications {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 350px;
+  padding: 20px;
+  background-color: #404038;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+}
+.global-notifications:not(.active) {
+  display: none;
+}
+.global-notifications .notification-block {
+  width: 100%;
+  height: 100%;
+  position: relative;
+}
+.global-notifications .notification-block:not(.active) {
+  display: none;
+}
+.global-notifications .notification-block:not(:last-child) {
+  margin-bottom: 40px;
+}
+.global-notifications .notification-block .close-notification {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  border: none;
+  background-color: transparent;
+  padding: unset;
+  cursor: pointer;
+  z-index: 1;
+}
+.global-notifications .notification-block .close-notification,
+.global-notifications .notification-block .close-notification:focus,
+.global-notifications .notification-block .close-notification:active,
+.global-notifications .notification-block .close-notification:hover {
+  outline: none;
+}
+.global-notifications .notification-block .close-notification .icon {
+  width: 10px;
+  height: 10px;
+}
+.global-notifications .notification-block .close-notification .icon path {
+  stroke: #FFFFFF;
+  transition: stroke 0.15s;
+}
+.global-notifications .notification-block .close-notification:hover .icon path {
+  stroke: #E3DEDB;
+}
+.global-notifications .notification-block .notification-text {
+  margin: 0 0 20px;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: white;
+}
+.global-notifications .notification-block .notification-text .link {
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+.global-notifications .notification-block .notification-text .link:not(:hover) {
+  color: white;
+}
+.global-notifications .notification-block .notification-actions {
+  display: flex;
+}
+.global-notifications .notification-block .notification-actions .button {
+  width: 100%;
+  height: 30px;
+}

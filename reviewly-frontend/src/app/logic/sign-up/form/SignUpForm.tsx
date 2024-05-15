@@ -12,6 +12,8 @@ import {UserAccountDataPayload} from "../../../model/UserAccountDataPayload";
 import {Button, ButtonType} from "../../../components/button/Button";
 import {PASSWORD_VALIDATION_SCHEMA, PasswordField} from "../../../components/form/PasswordField";
 import "./SignUpForm.less";
+import {Link} from "../../../components/link/Link";
+import ApplicationProperties from "../../../service/ApplicationProperties";
 
 type SignUpFormProps = {
     signUpPayload: UserAccountDataPayload,
@@ -72,6 +74,10 @@ const SignUpForm: React.FC<SignUpFormProps> = (props: SignUpFormProps) => {
                                        disabled={disabled}
                                        styleType={InputFieldStyleType.SECONDARY}/>
                     </Tooltip>
+
+                    <p className="cookie-privacy-policies">
+                        This service uses cookies. By using Reviewly, you agree to our <Link href={ApplicationProperties.selfHost + "/privacy-policy"} target="_blank">Privacy Policy</Link> and <Link href={ApplicationProperties.selfHost + "/cookie-policy"} target="_blank">Cookie Policy</Link>
+                    </p>
 
                     <Button type="submit" className="submit" styleType={ButtonType.PRIMARY} disabled={disabled} loading={disabled}>Sign Up</Button>
                 </Form>
