@@ -106,7 +106,13 @@
                 </div>
             </div>
             <div class="footer-section third">
-                <a th:href="${@applicationProperties.signUpPageUrl}" class="button primary submit-form" th:if="${userFullName != null}">
+                <div class="policies-container">
+                    <a class="link" href="/privacy-policy">Privacy Policy</a>
+                    <a class="link" href="/cookie-policy">Cookie Policy</a>
+                </div>
+            </div>
+            <div class="footer-section fourth">
+                <a th:href="${@applicationProperties.signUpPageUrl}" class="button primary submit-form" th:if="${userFullName == null}">
                     <th:block th:replace="~{components/svgs::icon-play}"/>
                     Start for free
                 </a>

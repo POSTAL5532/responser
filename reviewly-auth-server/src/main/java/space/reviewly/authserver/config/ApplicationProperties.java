@@ -43,6 +43,9 @@ public class ApplicationProperties {
     @NotEmpty
     private String forgotPasswordPageUrl;
 
+    @NotEmpty
+    private String downloadExtensionChrome;
+
     @Getter
     @Setter
     @ToString

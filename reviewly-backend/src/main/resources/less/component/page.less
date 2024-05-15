@@ -185,6 +185,26 @@
 
             &.third {
                 display: flex;
+                justify-content: center;
+
+                .policies-container {
+                    display: flex;
+                    flex-direction: column;
+                    align-items: start;
+                    gap: 6px;
+
+                    .link {
+                        .fontOutfitRegular(14px);
+
+                        &:not(:hover) {
+                            color: @white;
+                        }
+                    }
+                }
+            }
+
+            &.fourth {
+                display: flex;
                 justify-content: end;
             }
         }

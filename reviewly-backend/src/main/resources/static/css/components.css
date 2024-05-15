@@ -395,6 +395,24 @@ a.button {
 }
 .page .footer .footer-section.third {
   display: flex;
+  justify-content: center;
+}
+.page .footer .footer-section.third .policies-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 6px;
+}
+.page .footer .footer-section.third .policies-container .link {
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+.page .footer .footer-section.third .policies-container .link:not(:hover) {
+  color: #FFFFFF;
+}
+.page .footer .footer-section.fourth {
+  display: flex;
   justify-content: end;
 }
 .page .terms {

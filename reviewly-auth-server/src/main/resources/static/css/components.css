@@ -24,16 +24,16 @@
 .button:hover {
   background-color: rgba(159, 143, 135, 0.08);
 }
+.button.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}
 .button .icon {
   width: 12px;
   height: 12px;
 }
 .button .icon path {
   transition: stroke 0.15s;
-}
-.button.disabled {
-  pointer-events: none;
-  opacity: 0.5;
 }
 .button.primary {
   height: 44px;
@@ -126,6 +126,9 @@
   width: 18px;
   height: 18px;
 }
+.link.prefix-link-icon .icon {
+  transform: rotate(180deg);
+}
 .link:hover {
   color: #78AC65;
 }
@@ -186,6 +189,12 @@ a.button {
   font-size: 12px;
   font-weight: 500;
 }
+.field-container.disabled .input-container {
+  opacity: 0.5;
+}
+.field-container.disabled .input-container .field-input {
+  pointer-events: none;
+}
 .field-container.error .input-container {
   border: solid 1px #EB5757;
 }
@@ -228,7 +237,7 @@ a.button {
   display: flex;
   justify-content: center;
   position: fixed;
-  z-index: 9999;
+  z-index: 3;
 }
 @media only screen and (min-width: 1920px) {
   .page .header {
@@ -386,6 +395,24 @@ a.button {
 }
 .page .footer .footer-section.third {
   display: flex;
+  justify-content: center;
+}
+.page .footer .footer-section.third .policies-container {
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  gap: 6px;
+}
+.page .footer .footer-section.third .policies-container .link {
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+.page .footer .footer-section.third .policies-container .link:not(:hover) {
+  color: #FFFFFF;
+}
+.page .footer .footer-section.fourth {
+  display: flex;
   justify-content: end;
 }
 .page .terms {
@@ -526,8 +553,8 @@ a.button {
   align-items: center;
 }
 .review-card .web-resource-data .web-resource-name-container .resource-icon {
-  width: 20px;
-  height: 20px;
+  width: 24px;
+  height: 24px;
   border-radius: 4px;
 }
 .review-card .web-resource-data .web-resource-name-container .resource-name {
@@ -722,4 +749,178 @@ a.button {
 }
 .review-card .card-body-container .card-footer .actions-container .share-button:hover .share path {
   stroke: #404038;
+}
+.modal-container {
+  display: none;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  z-index: 4;
+  inset: 0;
+  background-color: rgba(84, 84, 84, 0.75);
+  backdrop-filter: blur(2.5px);
+}
+.modal-container .modal {
+  width: 400px;
+}
+.modal-container .modal .modal-body {
+  background-color: #fefefe;
+  padding: 20px;
+  border-radius: 20px;
+  position: relative;
+  height: 100%;
+}
+.modal-container .modal .modal-body .close-modal {
+  position: absolute;
+  top: 26px;
+  right: 26px;
+  border: none;
+  background-color: transparent;
+  padding: unset;
+  cursor: pointer;
+  z-index: 1;
+}
+.modal-container .modal .modal-body .close-modal,
+.modal-container .modal .modal-body .close-modal:focus,
+.modal-container .modal .modal-body .close-modal:active,
+.modal-container .modal .modal-body .close-modal:hover {
+  outline: none;
+}
+.modal-container .modal .modal-body .close-modal .icon {
+  width: 12px;
+  height: 12px;
+}
+.modal-container .modal .modal-body .close-modal .icon path {
+  stroke: rgba(0, 0, 0, 0.4);
+  transition: stroke 0.15s;
+}
+.modal-container .modal .modal-body .close-modal:hover .icon path {
+  stroke: rgba(0, 0, 0, 0.6);
+}
+.share-modal .modal {
+  width: 360px;
+  height: 290px;
+}
+.share-modal .modal .modal-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: end;
+  gap: 30px;
+  border-radius: 20px;
+}
+.share-modal .modal .modal-body .share-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.share-modal .modal .modal-body .share-buttons .share-row {
+  display: flex;
+  gap: 4px;
+}
+.share-modal .modal .modal-body .share-buttons .share-row .share-button {
+  padding: 0;
+  height: 62px;
+  width: 90px;
+}
+.share-modal .modal .modal-body .share-buttons .share-row .share-button .icon {
+  width: 18px;
+  height: 18px;
+}
+.share-modal .modal .modal-body .share-buttons .share-row .share-button .icon path {
+  fill: rgba(0, 0, 0, 0.6);
+}
+.share-modal .modal .modal-body .share-buttons .share-row.third-row {
+  padding-top: 10px;
+  flex-direction: column;
+}
+.share-modal .modal .modal-body .share-buttons .share-row.third-row .share-button {
+  width: 100%;
+  height: 40px;
+}
+.share-modal .modal .modal-body .share-buttons .share-row.third-row .share-button .icon {
+  width: 18px;
+  height: 18px;
+}
+.share-modal .modal .modal-body .share-buttons .share-row.third-row .share-button .icon path {
+  fill: none;
+}
+.share-modal .modal .modal-body .share-buttons .share-row.third-row .copied {
+  color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  padding-top: 10px;
+}
+.share-modal .modal .modal-body .share-buttons .share-row.third-row .copied.hidden {
+  visibility: hidden;
+}
+.text-area-container {
+  width: 100%;
+}
+.text-area-container .text-area {
+  display: flex;
+  align-items: center;
+  position: relative;
+  height: 100px;
+  width: 100%;
+  border: solid 1px transparent;
+  border-radius: 6px;
+  background-color: #FFFFFF;
+}
+.text-area-container .text-area textarea {
+  width: 100%;
+  height: 100%;
+  border: none;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 18px;
+  font-weight: 400;
+  color: #404038;
+  padding: 20px;
+  background-color: transparent;
+  resize: none;
+}
+.text-area-container .text-area textarea,
+.text-area-container .text-area textarea:focus,
+.text-area-container .text-area textarea:active {
+  border-color: transparent;
+  outline: none;
+}
+.text-area-container .text-area textarea::placeholder {
+  color: rgba(0, 0, 0, 0.25);
+}
+.text-area-container .text-area textarea:-webkit-autofill,
+.text-area-container .text-area textarea:-webkit-autofill:hover,
+.text-area-container .text-area textarea:-webkit-autofill:focus,
+.text-area-container .text-area textarea:-webkit-autofill:active {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #404038;
+  -webkit-box-shadow: 0 0 0 1000px transparent inset;
+  box-shadow: 0 0 0 1000px transparent inset;
+}
+.text-area-container .text-area .extra-component .button {
+  height: 40px;
+}
+.text-area-container.secondary .text-area {
+  background-color: rgba(159, 143, 135, 0.08);
+}
+.text-area-container.with-message .text-area {
+  margin-bottom: 4px;
+}
+.text-area-container.disabled .text-area {
+  opacity: 0.5;
+  pointer-events: none;
+}
+.text-area-container .field-message {
+  font-family: "Outfit-Medium", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+  color: #404038;
+}
+.text-area-container.error .text-area {
+  border-color: #EB5757;
+}
+.text-area-container.error .field-message {
+  color: #EB5757;
 }

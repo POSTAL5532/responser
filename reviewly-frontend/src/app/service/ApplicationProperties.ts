@@ -34,8 +34,8 @@ class ApplicationProperties {
         return process.env.AUTH_REDIRECT_URI;
     }
 
-    get unauthorizedPageUrl(): string {
-        return process.env.UNAUTHORIZED_PAGE_URL;
+    get selfHost(): string {
+        return process.env.SELF_HOST;
     }
 
     get clientId(): string {
@@ -68,6 +68,10 @@ class ApplicationProperties {
 
     get defaultSiteIconFileName(): string {
         return process.env.DEFAULT_SITE_ICON_FILE_NAME;
+    }
+
+    get contactEmail(): string {
+        return process.env.CONTACT_EMAIL;
     }
 
     get logLevel(): LogLevel {

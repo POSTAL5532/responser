@@ -49,13 +49,13 @@ const ForgotPasswordPage: React.FC = () => {
                 </div>
             </section>
 
-            <Modal isOpen={passwordRestoreLinkSent} onClose={() => nativeNavigateTo(ApplicationProperties.unauthorizedPageUrl)} className="restore-sent-modal">
+            <Modal isOpen={passwordRestoreLinkSent} onClose={() => nativeNavigateTo(ApplicationProperties.selfHost)} className="restore-sent-modal">
                 <Modal.Body>
                     <p className="text">
                         We sent password restore link to your email. Restore password by link and retry the login.
                     </p>
 
-                    <Button styleType={ButtonType.PRIMARY} onClick={() => nativeNavigateTo(ApplicationProperties.unauthorizedPageUrl)}>Ok</Button>
+                    <Button styleType={ButtonType.PRIMARY} onClick={() => nativeNavigateTo(ApplicationProperties.selfHost)}>Ok</Button>
                 </Modal.Body>
             </Modal>
         </Page>

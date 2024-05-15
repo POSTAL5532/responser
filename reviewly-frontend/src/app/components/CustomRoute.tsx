@@ -51,7 +51,7 @@ const CustomRoute = (canActivate?: () => boolean, redirectPath?: string, isNativ
  */
 export const AuthorizedRoute = CustomRoute(
     () => LocalTokenStorageService.isAccessTokenExist,
-    ApplicationProperties.unauthorizedPageUrl,
+    ApplicationProperties.selfHost,
     true
 );
 
