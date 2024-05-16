@@ -22,7 +22,7 @@ public abstract class SocialMetaTags {
     protected final Review review;
     protected final ApplicationProperties applicationProperties;
 
-    protected final String description = "Reviewly | Make and rating review for everything in internet";
+    protected final String description = "Find reviews faster and make choices easier with Reviewly. Reviewly Integrated into the browser and allows you to read reviews and leave your opinion about any site without leaving it";
     protected String title;
     protected String imageUrl;
 

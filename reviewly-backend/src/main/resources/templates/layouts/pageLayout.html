@@ -55,6 +55,21 @@
     <script type="text/javascript" th:src="@{/js/components.js}"></script>
     <script type="text/javascript" th:src="@{/js/share-modal.js}"></script>
     <script type="text/javascript" th:src="@{/js/common.js}"></script>
+
+    <th:block th:if="${customSocialMeta != true}">
+        <meta property="og:url" th:content="${@applicationProperties.selfHost}"/>
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Unlock Honest Feedback for Every Website"/>
+        <meta property="og:description" content="Find reviews faster and make choices easier with Reviewly. Reviewly Integrated into the browser and allows you to read reviews and leave your opinion about any site without leaving it"/>
+        <meta property="og:image" th:content="${@applicationProperties.selfHost + '/img/reviewly-meta-preview-00.png'}"/>
+        <meta property="og:image:width" content="1080"/>
+        <meta property="og:image:height" content="540"/>
+
+        <meta property="twitter:title" content="Reviewly - Unlock Honest Feedback for Every Website">
+        <meta property="twitter:description" content="Find reviews faster and make choices easier with Reviewly. Reviewly Integrated into the browser and allows you to read reviews and leave your opinion about any site without leaving it">
+        <meta property="twitter:image" th:content="${@applicationProperties.selfHost + '/img/reviewly-meta-preview-00.png'}">
+        <meta name="twitter:card" content="summary_large_image">
+    </th:block>
 </head>
 
 <body>

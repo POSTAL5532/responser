@@ -5,17 +5,7 @@ const webpack = require("webpack");
 const dotenv = require("dotenv");
 const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 
-let ENV_FILE_PROPERTIES;
-let CONFIGS_PATH;
-
 const BASE_PATH = "/app"
-
-/**
- * Init ENV_FILE_PROPERTIES
- */
-const initEnvFileProperties = () => {
-    ENV_FILE_PROPERTIES = dotenv.config({path: path.resolve(`${CONFIGS_PATH}/.env`)}).parsed;
-}
 
 const convertTpProcessEnvProperties = (object) => {
     if (!object) {
@@ -32,8 +22,9 @@ module.exports = (env, args) => {
     console.log("ENV:", env);
     console.log("ARGS:", args);
 
-    CONFIGS_PATH = `../configs/reviewly-frontend/${env.buildMode}`;
-    initEnvFileProperties();
+    const envFileProperties = dotenv.config({path: path.resolve(`../configs/reviewly-frontend/${env.buildMode}/.env`)}).parsed;
+    const configObject = convertTpProcessEnvProperties(envFileProperties);
+    console.log("configObject:", configObject);
 
     return {
         mode: "none",
@@ -71,7 +62,7 @@ module.exports = (env, args) => {
                         "less-loader"
                     ]
                 },
-                {test: /\.html$/, loader: "html-loader"},
+                {test: /\.ejs$/, loader: "html-loader"},
                 {test: /\.svg$/, use: [{loader: '@svgr/webpack', options: {icon: true}}],},
                 {
                     test: /\.(png|jpg|svg|gif|webp)$/,
@@ -116,8 +107,9 @@ module.exports = (env, args) => {
             new HtmlWebPackPlugin({
                 template: "./public/index.html",
                 filename: "./index.html",
+                selfHost: envFileProperties.SELF_HOST
             }),
-            new webpack.DefinePlugin(convertTpProcessEnvProperties(ENV_FILE_PROPERTIES)),
+            new webpack.DefinePlugin(configObject),
             new FaviconsWebpackPlugin({
                 mode: "webapp",
                 devMode: "webapp",
