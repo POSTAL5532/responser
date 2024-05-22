@@ -314,7 +314,7 @@ window.addEventListener('load', (event) => {
             }
         }
 
-        submitContactFormBtn.click(function () {
+        submitContactFormBtn.click(async function () {
             const values = {
                 username: nameField.val(),
                 email: emailField.val(),
@@ -329,9 +329,13 @@ window.addEventListener('load', (event) => {
 
             toggleFieldsEnabled(false);
 
+            const requestPath = `${window.location.origin}/api/contact-form`;
+            const headers = await prepareRequestHeaders(requestPath);
+
             $.ajax({
                 method: "POST",
-                url: "/api/contact-form",
+                url: requestPath,
+                headers: headers,
                 data: JSON.stringify(values),
                 contentType: "application/json",
                 success: () => {

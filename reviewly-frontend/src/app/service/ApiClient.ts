@@ -59,8 +59,14 @@ axios.interceptors.response.use(undefined, errorInterceptor);
  */
 export class ApiClient {
 
-    getRequestConfig = (requestOptions: AxiosRequestConfig = {}): AxiosRequestConfig => {
-        let headers: any = {"Content-type": "application/json"}
+    getRequestConfig = (url: string, requestOptions: AxiosRequestConfig = {}): AxiosRequestConfig => {
+        const [token, date, salt] = AuthorizationService.getSimpleAuthHeader(url);
+        let headers: any = {
+            "Content-type": "application/json",
+            "X-Request-Id": token,
+            "X-Request-Current-Local-Date": date,
+            "X-Request-Config": salt
+        };
 
         if (LocalTokenStorageService.isAccessTokenExist) {
             headers = {...headers, ...LocalTokenStorageService.authorizationHeader}
@@ -75,41 +81,23 @@ export class ApiClient {
         }
     }
 
-    /*getRequestConfig = (requestOptions: AxiosRequestConfig = {}): AxiosRequestConfig => {
-        const hasCustomContentType: boolean = !!requestOptions.headers?.["Content-type"]
-
-        let headers: any = hasCustomContentType ? requestOptions.headers : {"Content-type": "application/json"}
-
-        if (LocalTokenStorageService.isAccessTokenExist) {
-            headers = {...headers, ...LocalTokenStorageService.authorizationHeader}
-        }
-
-        return {
-            baseURL: ApplicationPropertiesService.gatewayApiUrl,
-            headers: {
-                ...headers
-            },
-            ...requestOptions
-        }
-    }*/
-
     executeGetRequest = async <T = any>(url: string, requestOptions?: AxiosRequestConfig): Promise<T> => {
-        const response = await axios.get<T>(url, this.getRequestConfig(requestOptions));
+        const response = await axios.get<T>(url, this.getRequestConfig(url, requestOptions));
         return response.data;
     }
 
     executePostRequest = async <T = any, B = any>(url: string, body?: B, requestOptions?: AxiosRequestConfig): Promise<T> => {
-        const response = await axios.post<T>(url, body, this.getRequestConfig(requestOptions));
+        const response = await axios.post<T>(url, body, this.getRequestConfig(url, requestOptions));
         return response.data;
     }
 
     executePutRequest = async <T = any, B = any>(url: string, body: B, requestOptions?: AxiosRequestConfig): Promise<T> => {
-        const response = await axios.put<T>(url, body, this.getRequestConfig(requestOptions));
+        const response = await axios.put<T>(url, body, this.getRequestConfig(url, requestOptions));
         return response.data;
     }
 
     executeDeleteRequest = async <T = any>(url: string, requestOptions?: AxiosRequestConfig): Promise<T> => {
-        const response = await axios.delete<T>(url, this.getRequestConfig(requestOptions));
+        const response = await axios.delete<T>(url, this.getRequestConfig(url, requestOptions));
         return response.data;
     }
 }

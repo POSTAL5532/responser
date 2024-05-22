@@ -1,3 +1,30 @@
+const generateSalt = () => {
+    const array = new Uint8Array(16);
+    crypto.getRandomValues(array);
+    return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+}
+
+const createHash = async (message) => {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(message);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+}
+
+const prepareRequestHeaders = async (url) => {
+    const currentLocalDate = (new Date()).toISOString();
+    const salt = generateSalt();
+    const message = `${url}${currentLocalDate}${salt}`;
+    const hash = await createHash(message);
+
+    return {
+        "X-Request-Id": hash,
+        "X-Request-Current-Local-Date": currentLocalDate,
+        "X-Request-Config": salt
+    }
+}
+
 //======================================
 //============== DROPDOWN ==============
 //======================================
@@ -68,8 +95,6 @@ const hideNotificationsBlockIfEmpty = () => {
     } else {
         block.addClass('active');
     }
-
-    console.log("CHEEEEEEECK", block.children('.notification-block.active').length <= 0)
 }
 
 const initNotification = (options) => {

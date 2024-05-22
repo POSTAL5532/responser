@@ -7,8 +7,10 @@ server:
 logging:
   level:
     root: info
-    sql: warn
+    sql: info
     web: info
+    space:
+      reviewly: debug
   file:
     name: .local/logs/backend/reviewly-logs.log
   logback:
@@ -98,6 +100,7 @@ reviewly:
   fileStorageUrlUsersAvatars: ${reviewly.fileStorageUrl}/${reviewly.fileStorageBucketUsersAvatars}
   defaultUserAvatarFileName: default_avatar.png
   defaultSiteIconFileName: default_site_icon.png
+  apiRequestsSigningEnabled: true
   allowedOrigins:
     - ${reviewly.selfHost}
     - chrome-extension://${reviewly.chromeExtensionId}

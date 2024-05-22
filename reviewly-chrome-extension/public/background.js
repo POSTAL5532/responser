@@ -175,6 +175,20 @@ const setSiteRatingBadgeIfNeed = async (tabId, tabUrl, tabStatus, isTabActive) =
     await setSiteRatingBadge(tabId, rating.siteRating);
 };
 
+const generateSalt = () => {
+    const array = new Uint8Array(16);
+    crypto.getRandomValues(array);
+    return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
+}
+
+const createHash = async (message) => {
+    const encoder = new TextEncoder();
+    const data = encoder.encode(message);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
+}
+
 /**
  * Fetch rating from backend application.
  *
@@ -184,11 +198,28 @@ const setSiteRatingBadgeIfNeed = async (tabId, tabUrl, tabStatus, isTabActive) =
 const getRating = async (pageUrl) => {
     log("Get site and page rating:", pageUrl);
 
-    const getDomainUrl = new URL("{{API_URL}}/rating");
+    const getDomainPath = "{{API_URL}}/rating";
+    const getDomainUrl = new URL(getDomainPath);
     getDomainUrl.search = new URLSearchParams({url: pageUrl}).toString();
 
-    const rawResponse = await fetch(getDomainUrl);
-    const response = rawResponse.ok ? await rawResponse.json() : null;
+    // Basic API security
+    const currentLocalDate = (new Date()).toISOString();
+    const salt = generateSalt();
+    const message = `${getDomainPath}${currentLocalDate}${salt}`;
+    const hash = await createHash(message);
+
+    const rawResponse = await fetch(getDomainUrl, {
+        headers: {
+            "Content-type": "application/json",
+            "X-Request-Id": hash,
+            "X-Request-Current-Local-Date": currentLocalDate,
+            "X-Request-Config": salt
+        }
+    });
+
+    const result = rawResponse.ok;
+
+    const response = result ? await rawResponse.json() : null;
 
     if (!response) {
         return null;

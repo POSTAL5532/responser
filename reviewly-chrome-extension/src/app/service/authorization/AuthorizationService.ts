@@ -1,4 +1,5 @@
 import axios, {AxiosRequestConfig} from "axios";
+import CryptoJS from 'crypto-js';
 import ApplicationProperties from "../ApplicationProperties";
 import TokenStore from "../../service/authorization/LocalTokenStorageService";
 import {Logger} from "../../utils/Logger";
@@ -46,6 +47,19 @@ class AuthorizationService {
 
         const response = await axios.post(url, body, options);
         return response.data;
+    }
+
+    public getSimpleAuthHeader = (url: string): string[] => {
+        const currentLocalDate = (new Date()).toISOString();
+        const salt = this.generateSalt();
+        const message = `${ApplicationProperties.apiUrl}${url}${currentLocalDate}${salt}`;
+        const hash = CryptoJS.SHA256(message).toString();
+
+        return [hash, currentLocalDate, salt]
+    }
+
+    private generateSalt(): string {
+        return CryptoJS.lib.WordArray.random(128/8).toString(CryptoJS.enc.Hex);
     }
 }
 
