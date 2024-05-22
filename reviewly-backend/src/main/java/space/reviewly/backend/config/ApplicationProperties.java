@@ -99,9 +99,6 @@ public class ApplicationProperties {
     @NotBlank
     private String defaultSiteIconFileName;
 
-    @NotNull
-    private Boolean apiRequestsSigningEnabled;
-
     private List<String> allowedOrigins;
 
     public String getLoginUrl() throws URISyntaxException {

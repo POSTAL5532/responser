@@ -234,9 +234,9 @@ window.addEventListener('load', (event) => {
         $(".question").click(toggleQuestionItem);
     });
 
-// ===============================
-// ======= CONTACT US FORM =======
-// ===============================
+    // ===============================
+    // ======= CONTACT US FORM =======
+    // ===============================
     $(function () {
         const disabledClass = "disabled";
         const fieldMessageClass = ".field-message";
@@ -264,8 +264,6 @@ window.addEventListener('load', (event) => {
             textFieldParent.removeClass(errorClass);
             textFieldParent.children(fieldMessageClass).text("");
         });
-
-        const submitContactFormResultModal = $("#submit-contact-form-result-modal");
 
         const validate = (values) => {
             let result = true;
@@ -314,6 +312,8 @@ window.addEventListener('load', (event) => {
             }
         }
 
+        const submitContactFormResultModal = $("#submit-contact-form-result-modal");
+
         submitContactFormBtn.click(async function () {
             const values = {
                 username: nameField.val(),
@@ -330,7 +330,7 @@ window.addEventListener('load', (event) => {
             toggleFieldsEnabled(false);
 
             const requestPath = `${window.location.origin}/api/contact-form`;
-            const headers = await prepareRequestHeaders(requestPath);
+            const headers = prepareRequestHeaders(requestPath);
 
             $.ajax({
                 method: "POST",
@@ -339,12 +339,18 @@ window.addEventListener('load', (event) => {
                 data: JSON.stringify(values),
                 contentType: "application/json",
                 success: () => {
+                    submitContactFormResultModal.removeClass("error");
                     submitContactFormResultModal.css("display", "flex");
 
                     nameField.val("");
                     emailField.val("");
                     textField.val("");
 
+                    toggleFieldsEnabled(true);
+                },
+                error: () => {
+                    submitContactFormResultModal.addClass("error");
+                    submitContactFormResultModal.css("display", "flex");
                     toggleFieldsEnabled(true);
                 }
             });

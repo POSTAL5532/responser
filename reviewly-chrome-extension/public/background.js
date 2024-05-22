@@ -190,6 +190,23 @@ const createHash = async (message) => {
 }
 
 /**
+ * Basic API security
+ */
+const getRequestSignHeader = async (url) => {
+    const currentLocalDate = (new Date()).toISOString();
+    const salt = generateSalt();
+    const message = `${url}${currentLocalDate}${salt}`;
+    const hash = await createHash(message);
+
+    return {
+        "Content-type": "application/json",
+        "X-Request-Id": hash,
+        "X-Request-Current-Local-Date": currentLocalDate,
+        "X-Request-Config": salt
+    }
+}
+
+/**
  * Fetch rating from backend application.
  *
  * @param pageUrl
@@ -202,18 +219,12 @@ const getRating = async (pageUrl) => {
     const getDomainUrl = new URL(getDomainPath);
     getDomainUrl.search = new URLSearchParams({url: pageUrl}).toString();
 
-    // Basic API security
-    const currentLocalDate = (new Date()).toISOString();
-    const salt = generateSalt();
-    const message = `${getDomainPath}${currentLocalDate}${salt}`;
-    const hash = await createHash(message);
+    const signHeaders = await getRequestSignHeader(getDomainPath);
 
     const rawResponse = await fetch(getDomainUrl, {
         headers: {
             "Content-type": "application/json",
-            "X-Request-Id": hash,
-            "X-Request-Current-Local-Date": currentLocalDate,
-            "X-Request-Config": salt
+            ...signHeaders
         }
     });
 

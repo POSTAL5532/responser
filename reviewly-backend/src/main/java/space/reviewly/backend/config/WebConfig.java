@@ -39,7 +39,7 @@ public class WebConfig {
     public FilterRegistrationBean<HashValidationFilter> apiCallHashSignFilter(){
         FilterRegistrationBean<HashValidationFilter> registrationBean = new FilterRegistrationBean<>();
 
-        registrationBean.setFilter(new HashValidationFilter(applicationProperties.getApiRequestsSigningEnabled()));
+        registrationBean.setFilter(new HashValidationFilter());
         registrationBean.addUrlPatterns(ApplicationProperties.API_ROOT_PATH + "/*");
 
         return registrationBean;

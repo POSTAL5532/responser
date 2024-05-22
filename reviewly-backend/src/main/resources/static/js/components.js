@@ -1,22 +1,8 @@
-const generateSalt = () => {
-    const array = new Uint8Array(16);
-    crypto.getRandomValues(array);
-    return Array.from(array, byte => byte.toString(16).padStart(2, '0')).join('');
-}
-
-const createHash = async (message) => {
-    const encoder = new TextEncoder();
-    const data = encoder.encode(message);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(byte => byte.toString(16).padStart(2, '0')).join('');
-}
-
-const prepareRequestHeaders = async (url) => {
+const prepareRequestHeaders = (url) => {
+    const salt = CryptoJS.lib.WordArray.random(128/8).toString(CryptoJS.enc.Hex);
     const currentLocalDate = (new Date()).toISOString();
-    const salt = generateSalt();
     const message = `${url}${currentLocalDate}${salt}`;
-    const hash = await createHash(message);
+    const hash = CryptoJS.SHA256(message).toString();
 
     return {
         "X-Request-Id": hash,

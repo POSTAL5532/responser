@@ -1965,11 +1965,23 @@
   justify-content: center;
   gap: 30px;
 }
-.page.index .page-content .submit-contact-form-result-modal .modal .modal-body .submit-contact-form-result-modal-text {
+.page.index .page-content .submit-contact-form-result-modal .modal .modal-body .modal-text {
   text-align: center;
   margin: 0;
   width: 200px;
 }
+.page.index .page-content .submit-contact-form-result-modal .modal .modal-body .submit-contact-form-result-modal-text {
+  display: block;
+}
+.page.index .page-content .submit-contact-form-result-modal .modal .modal-body .submit-contact-form-result-modal-error-message {
+  display: none;
+}
 .page.index .page-content .submit-contact-form-result-modal .modal .modal-body .button {
   width: 100%;
+}
+.page.index .page-content .submit-contact-form-result-modal.error .modal .modal-body .submit-contact-form-result-modal-text {
+  display: none;
+}
+.page.index .page-content .submit-contact-form-result-modal.error .modal .modal-body .submit-contact-form-result-modal-error-message {
+  display: block;
 }

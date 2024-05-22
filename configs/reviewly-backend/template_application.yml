@@ -100,7 +100,6 @@ reviewly:
   fileStorageUrlUsersAvatars: ${reviewly.fileStorageUrl}/${reviewly.fileStorageBucketUsersAvatars}
   defaultUserAvatarFileName: default_avatar.png
   defaultSiteIconFileName: default_site_icon.png
-  apiRequestsSigningEnabled: true
   allowedOrigins:
     - ${reviewly.selfHost}
     - chrome-extension://${reviewly.chromeExtensionId}

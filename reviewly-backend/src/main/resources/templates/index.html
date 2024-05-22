@@ -15,19 +15,6 @@
     <script type="text/javascript" th:src="@{/js/tiny-slider.js}"></script>
     <script type="text/javascript" th:src="@{/js/vivus.min.js}"></script>
     <script type="text/javascript" th:src="@{/js/index.js}"></script>
-
-    <!--<meta property="og:url" th:content="${facebookMetaTags.url}"/>
-    <meta property="og:type" th:content="${facebookMetaTags.type}"/>
-    <meta property="og:title" th:content="${facebookMetaTags.title}"/>
-    <meta property="og:description" th:content="${facebookMetaTags.description}"/>
-    <meta property="og:image" th:content="${facebookMetaTags.imageUrl}"/>
-    <meta property="og:image:width" th:content="${facebookMetaTags.imageWidth}"/>
-    <meta property="og:image:height" th:content="${facebookMetaTags.imageHeight}"/>
-
-    <meta property="twitter:title" th:content="${twitterMetaTags.title}">
-    <meta property="twitter:description" th:content="${twitterMetaTags.description}">
-    <meta property="twitter:image" th:content="${twitterMetaTags.imageUrl}">
-    <meta name="twitter:card" th:content="${twitterMetaTags.card}">-->
 </head>
 <body>
 
@@ -641,8 +628,11 @@
         <div id="submit-contact-form-result-modal" class="modal-container submit-contact-form-result-modal">
             <div class="modal">
                 <div class="modal-body">
-                    <p class="submit-contact-form-result-modal-text">
+                    <p class="modal-text submit-contact-form-result-modal-text">
                         Thanks for your message! We will answer to you ASAP!
+                    </p>
+                    <p class="modal-text submit-contact-form-result-modal-error-message">
+                        Something goes wrong =( Try to send message later.
                     </p>
                     <button id="close-submit-contact-form-result-modal" class="button primary">Ok</button>
                 </div>

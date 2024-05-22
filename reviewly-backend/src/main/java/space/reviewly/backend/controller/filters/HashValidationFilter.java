@@ -4,7 +4,6 @@ import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.validation.constraints.NotNull;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -21,19 +20,8 @@ public class HashValidationFilter extends OncePerRequestFilter {
     private static final String REQUEST_DATE_HEADER_NAME = "X-Request-Current-Local-Date";
     private static final String REQUEST_SALT_HEADER_NAME = "X-Request-Config";
 
-    private final Boolean enabled;
-
-    public HashValidationFilter(@NotNull Boolean enabled) {
-        this.enabled = enabled;
-    }
-
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        if (!enabled) {
-            filterChain.doFilter(request, response);
-            return;
-        }
-
         String hash = request.getHeader(REQUEST_TOKEN_HEADER_NAME);
         String date = request.getHeader(REQUEST_DATE_HEADER_NAME);
         String salt = request.getHeader(REQUEST_SALT_HEADER_NAME);
