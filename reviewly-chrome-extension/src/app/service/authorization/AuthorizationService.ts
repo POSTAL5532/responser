@@ -55,6 +55,8 @@ class AuthorizationService {
         const message = `${ApplicationProperties.apiUrl}${url}${currentLocalDate}${salt}`;
         const hash = CryptoJS.SHA256(message).toString();
 
+        this.logger.debug("Generate request sign: currentLocalDate =", currentLocalDate, ", salt =", salt, "message =", message, ", hash =", hash);
+
         return [hash, currentLocalDate, salt]
     }
 }
