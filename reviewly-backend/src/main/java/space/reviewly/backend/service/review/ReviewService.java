@@ -5,7 +5,8 @@ import space.reviewly.backend.model.ReviewsCriteria;
 import space.reviewly.backend.model.Review;
 import space.reviewly.backend.model.user.User;
 import space.reviewly.backend.repository.ReviewRepository;
-import space.reviewly.backend.service.UserService;
+import space.reviewly.backend.service.user.UserService;
+import space.reviewly.backend.service.user.UserSpamIndicatorService;
 import space.reviewly.backend.service.webResource.WebResourceService;
 import lombok.AllArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import static java.text.MessageFormat.*;
 
 import java.util.NoSuchElementException;
+import space.reviewly.backend.utils.UrlUtils;
 
 /**
  * Review service
@@ -32,6 +34,8 @@ public class ReviewService {
     private final UserService userService;
 
     private final WebResourceService webResourceService;
+
+    private final UserSpamIndicatorService userSpamIndicatorService;
 
     public Review getReviewByIdAndUser(String reviewId, String userId) {
         return reviewRepository.findByIdAndUserId(reviewId, userId).orElseThrow(() ->
@@ -92,23 +96,31 @@ public class ReviewService {
             ));
         }
 
-        User referenceUser = userService.getUser(userId);
-        newReview.setUser(referenceUser);
+        if (isContainsURL(newReview.getText())) {
+            userSpamIndicatorService.incrementOrCreateAndIncrementIndicator(user.getId());
+        }
+
+        newReview.setUser(user);
 
         return reviewRepository.save(newReview);
     }
 
     @Transactional
-    public Review updateReview(Review review) {
-        User user = userService.getUser(review.getUserId());
+    public Review updateReview(Review updateReview) {
+        User user = userService.getUser(updateReview.getUserId());
 
         if (!user.getEmailConfirmed()) {
-            throw new IllegalArgumentException(format("User {0} didn't confirm email.", review.getUserId()));
+            throw new IllegalArgumentException(format("User {0} didn't confirm email.", updateReview.getUserId()));
         }
 
-        Review oldReview = this.getReviewByIdAndUser(review.getId(), review.getUserId());
-        oldReview.setText(review.getText());
-        oldReview.setRating(review.getRating());
+        Review oldReview = this.getReviewByIdAndUser(updateReview.getId(), updateReview.getUserId());
+
+        if (isContainsURL(updateReview.getText())) {
+            userSpamIndicatorService.incrementOrCreateAndIncrementIndicator(user.getId());
+        }
+
+        oldReview.setText(updateReview.getText());
+        oldReview.setRating(updateReview.getRating());
 
         return reviewRepository.save(oldReview);
     }
@@ -128,5 +140,9 @@ public class ReviewService {
             );
 
         reviewRepository.delete(review);
+    }
+
+    public static boolean isContainsURL(String text) {
+        return UrlUtils.WEB_URL_PATTERN.matcher(text).find();
     }
 }

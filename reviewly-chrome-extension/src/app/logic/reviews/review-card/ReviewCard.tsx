@@ -12,6 +12,7 @@ import {User} from "../../../model/User";
 import {Icon, IconType} from "../../../components/icon/Icon";
 import {getUserAvatarUrl} from "../../../utils/ResourcesUtils";
 import {BlurPanel} from "../../../components/blur-panel/BlurPanel";
+import {UrlUtils} from "../../../utils/UrlUtils";
 import "./ReviewCard.less";
 
 type ReviewCardProps = {
@@ -21,6 +22,7 @@ type ReviewCardProps = {
     disableControls?: boolean;
     underlining: boolean;
     blur: boolean;
+    hideWebLinksInText?: boolean;
 
     onCreateLikeClick: (review: Review, positive: boolean) => Promise<void>;
     onUpdateLikeClick: (reviewLike: ReviewLike, positive: boolean) => Promise<void>;
@@ -39,7 +41,8 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
         onRemoveLikeClick,
         onShareReviewClick,
         underlining,
-        blur
+        blur,
+        hideWebLinksInText = true
     } = props;
 
     const {user, creationDate, rating, text, reviewLikes} = review;
@@ -115,7 +118,9 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
                 <Rating value={rating} readonly={true}/>
             </div>
 
-            <div className={classNames("review-text", {"expanded": expanded})} ref={textRef}>{text}</div>
+            <div className={classNames("review-text", {"expanded": expanded})} ref={textRef}>{
+                hideWebLinksInText ? UrlUtils.replaceLinks(text) : text
+            }</div>
 
             <div className="card-footer">
                 <ConditionShow condition={wasOverflowed}>

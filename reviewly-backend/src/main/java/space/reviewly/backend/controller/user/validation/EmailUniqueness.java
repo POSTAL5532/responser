@@ -1,6 +1,6 @@
 package space.reviewly.backend.controller.user.validation;
 
-import space.reviewly.backend.service.UserService;
+import space.reviewly.backend.service.user.UserService;
 import jakarta.validation.Constraint;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

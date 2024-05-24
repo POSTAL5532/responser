@@ -23,6 +23,7 @@ type ReviewCardProps = {
     currentUser?: User;
     disableReactions?: boolean;
     underlining?: boolean;
+    hideWebLinksInText?: boolean;
 
     createLike?: (review: Review, positive: boolean) => Promise<void>;
     updateLike?: (reviewLike: ReviewLike, positive: boolean) => Promise<void>;
@@ -45,7 +46,8 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
         onEditReviewClick,
         onRemoveReviewClick,
         onShareReviewClick,
-        underlining = true
+        underlining = true,
+        hideWebLinksInText = true
     } = props;
 
     const {id, webResource, creationDate, rating, text, reviewLikes} = review;
@@ -117,7 +119,9 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
 
             <Link className="resource-link" href={webResource.url} target="_blank">{webResource.url}</Link>
 
-            <div className={classNames("review-text", {"expanded": expanded})} ref={textRef}>{text}</div>
+            <div className={classNames("review-text", {"expanded": expanded})} ref={textRef}>{
+                hideWebLinksInText ? UrlUtils.replaceLinks(text) : text
+            }</div>
 
             <div className="card-footer">
                 <ConditionShow condition={wasOverflowed}>

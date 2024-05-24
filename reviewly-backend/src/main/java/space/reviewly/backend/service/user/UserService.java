@@ -1,4 +1,4 @@
-package space.reviewly.backend.service;
+package space.reviewly.backend.service.user;
 
 import java.io.IOException;
 import java.util.Set;
@@ -12,6 +12,10 @@ import space.reviewly.backend.model.user.Role;
 import space.reviewly.backend.model.user.User;
 import space.reviewly.backend.model.user.User_;
 import space.reviewly.backend.repository.UserRepository;
+import space.reviewly.backend.service.EmailConfirmationService;
+import space.reviewly.backend.service.EmailService;
+import space.reviewly.backend.service.PasswordRestoreService;
+import space.reviewly.backend.service.RoleService;
 import space.reviewly.backend.service.fileResource.FileResourceType;
 import space.reviewly.backend.service.fileResource.S3FileResourceService;
 import space.reviewly.backend.utils.TikaWrapper;

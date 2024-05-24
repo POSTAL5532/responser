@@ -60,7 +60,7 @@
             ! ERROR !
         </a>
 
-        <p class="review-text" th:text="${review.text}">! ERROR !</p>
+        <p class="review-text" th:text="${T(space.reviewly.backend.utils.UrlUtils).replaceAllWebLinks(review.text)}">! ERROR !</p>
 
         <div class="card-footer">
             <button class="button show-more">Show more</button>

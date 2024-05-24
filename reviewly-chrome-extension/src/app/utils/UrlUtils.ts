@@ -18,4 +18,9 @@ export class UrlUtils {
         formattedUrl = formattedUrl.split("#")[0].replace(/\/$/, "");
         return formattedUrl;
     }
+
+    public static replaceLinks = (text: string): string => {
+        const urlPattern = /(http[s]?:\/\/)?(www\.)?\S+\.\S+/gi;
+        return text.replace(urlPattern, "***");
+    }
 }

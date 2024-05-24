@@ -1,5 +1,7 @@
 package space.reviewly.backend.utils;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import space.reviewly.backend.exceptions.DataNotValidException;
 import space.reviewly.backend.model.ResourceType;
 import java.net.URI;
@@ -19,6 +21,8 @@ import java.net.URL;
 public class UrlUtils {
 
     public static final String HTTP_SEPARATOR = "/";
+
+    public final static Pattern WEB_URL_PATTERN = Pattern.compile("(http[s]?://)?(www\\.)?\\S+\\.\\S+", Pattern.CASE_INSENSITIVE);
 
     public static boolean isValidUrl(String rawUrl) {
         try {
@@ -77,5 +81,10 @@ public class UrlUtils {
         }
 
         return url.getHost();
+    }
+
+    public static String replaceAllWebLinks(String text) {
+        Matcher matcher = WEB_URL_PATTERN.matcher(text);
+        return matcher.replaceAll("***");
     }
 }

@@ -6,7 +6,7 @@ import space.reviewly.backend.controller.user.payload.UserInfoPayload;
 import space.reviewly.backend.model.user.RegisteredBy;
 import space.reviewly.backend.model.user.User;
 import org.springframework.stereotype.Service;
-import space.reviewly.backend.service.UserService;
+import space.reviewly.backend.service.user.UserService;
 
 /**
  * UserConverter

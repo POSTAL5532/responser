@@ -20,4 +20,9 @@ export class UrlUtils {
         const rootWebResource = !review.webResource.parent ? review.webResource : review.webResource.parent;
         return UrlUtils.getHostFromWebResource(rootWebResource);
     }
+
+    public static replaceLinks = (text: string): string => {
+        const urlPattern = /(http[s]?:\/\/)?(www\.)?\S+\.\S+/gi;
+        return text.replace(urlPattern, "***");
+    }
 }

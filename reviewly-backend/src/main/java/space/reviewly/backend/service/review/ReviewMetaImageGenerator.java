@@ -19,6 +19,7 @@ import java.text.AttributedString;
 import javax.imageio.ImageIO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import space.reviewly.backend.utils.UrlUtils;
 
 @Slf4j
 @Service
@@ -34,12 +35,19 @@ public class ReviewMetaImageGenerator {
     public static final Color MAIN_COLOR = new Color(0,0,0,0.6f);
 
     public ByteArrayOutputStream generate(Review review) {
+        return generate(review, true);
+    }
+
+    public ByteArrayOutputStream generate(Review review, boolean hideWebLinks) {
         BufferedImage image = new BufferedImage(IMAGE_WIDTH, IMAGE_HEIGHT, BufferedImage.TYPE_INT_RGB);
         Graphics2D graphics = prepareGraphics(image);
 
         drawLogo(graphics);
         drawRating(graphics, review.getRating());
-        drawText(review.getText(), graphics);
+        drawText(
+            hideWebLinks ? UrlUtils.replaceAllWebLinks(review.getText()) : review.getText(),
+            graphics
+        );
 
         ByteArrayOutputStream pngContent = new ByteArrayOutputStream();
 

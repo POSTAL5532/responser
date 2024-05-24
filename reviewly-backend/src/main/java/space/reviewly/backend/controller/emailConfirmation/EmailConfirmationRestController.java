@@ -4,7 +4,7 @@ import static space.reviewly.backend.config.ApplicationProperties.API_ROOT_PATH;
 
 import space.reviewly.backend.config.CustomOAuth2AuthenticatedPrincipal;
 import space.reviewly.backend.controller.RestApiController;
-import space.reviewly.backend.service.UserService;
+import space.reviewly.backend.service.user.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

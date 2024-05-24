@@ -1,7 +1,7 @@
 package space.reviewly.backend.controller.emailConfirmation;
 
 import space.reviewly.backend.config.ApplicationProperties;
-import space.reviewly.backend.service.UserService;
+import space.reviewly.backend.service.user.UserService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import lombok.RequiredArgsConstructor;
