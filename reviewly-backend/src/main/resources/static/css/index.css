@@ -282,7 +282,7 @@
   }
 }
 .page.index .page-content .section.how-it-works {
-  height: 783px;
+  height: 800px;
   width: 100%;
   border-radius: 70px;
   overflow: hidden;
@@ -291,93 +291,94 @@
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
   .page.index .page-content .section.how-it-works {
-    height: 880px;
+    height: 910px;
     border-radius: 50px;
   }
 }
-.page.index .page-content .section.how-it-works .card {
+.page.index .page-content .section.how-it-works .how-it-works-card {
   position: absolute;
   width: 100%;
   display: flex;
   flex-direction: row;
+  transition: top 0.15s;
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card {
+  .page.index .page-content .section.how-it-works .how-it-works-card {
     flex-direction: column-reverse;
     justify-content: flex-end;
   }
 }
-.page.index .page-content .section.how-it-works .card .pseudo-border {
+.page.index .page-content .section.how-it-works .how-it-works-card .pseudo-border {
   position: absolute;
   width: 70px;
   height: 70px;
   top: -69px;
 }
-.page.index .page-content .section.how-it-works .card .pseudo-border.left {
+.page.index .page-content .section.how-it-works .how-it-works-card .pseudo-border.left {
   left: 0;
 }
-.page.index .page-content .section.how-it-works .card .pseudo-border.right {
+.page.index .page-content .section.how-it-works .how-it-works-card .pseudo-border.right {
   right: 0;
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card .pseudo-border {
+  .page.index .page-content .section.how-it-works .how-it-works-card .pseudo-border {
     width: 50px;
     height: 50px;
     top: -49px;
   }
 }
-.page.index .page-content .section.how-it-works .card .card-part {
+.page.index .page-content .section.how-it-works .how-it-works-card .card-part {
   flex: 1;
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card .card-part {
+  .page.index .page-content .section.how-it-works .how-it-works-card .card-part {
     flex: unset;
     padding-left: 30px;
   }
 }
-.page.index .page-content .section.how-it-works .card .card-part.left {
+.page.index .page-content .section.how-it-works .how-it-works-card .card-part.left {
   padding-top: 100px;
   padding-left: 60px;
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card .card-part.left {
+  .page.index .page-content .section.how-it-works .how-it-works-card .card-part.left {
     padding-top: 60px;
     padding-left: 30px;
   }
 }
-.page.index .page-content .section.how-it-works .card .card-part.left .section-header {
+.page.index .page-content .section.how-it-works .how-it-works-card .card-part.left .section-header {
   margin: 0;
   color: rgba(0, 0, 0, 0.6);
 }
 @media only screen and (min-width: 1920px) {
-  .page.index .page-content .section.how-it-works .card .card-part.left .section-header {
+  .page.index .page-content .section.how-it-works .how-it-works-card .card-part.left .section-header {
     font-family: "Outfit-Regular", sans-serif;
     font-size: 70px;
     font-weight: 400;
   }
 }
 @media only screen and (min-width: 1440px) and (max-width: 1919px) {
-  .page.index .page-content .section.how-it-works .card .card-part.left .section-header {
+  .page.index .page-content .section.how-it-works .how-it-works-card .card-part.left .section-header {
     font-family: "Outfit-Regular", sans-serif;
     font-size: 70px;
     font-weight: 400;
   }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card .card-part.left .section-header {
+  .page.index .page-content .section.how-it-works .how-it-works-card .card-part.left .section-header {
     font-family: "Outfit-Regular", sans-serif;
     font-size: 60px;
     font-weight: 400;
   }
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card .card-part.left .section-header {
+  .page.index .page-content .section.how-it-works .how-it-works-card .card-part.left .section-header {
     font-family: "Outfit-Regular", sans-serif;
     font-size: 60px;
     font-weight: 400;
   }
 }
-.page.index .page-content .section.how-it-works .card .card-part.left .image-background {
+.page.index .page-content .section.how-it-works .how-it-works-card .card-part.left .image-background {
   position: relative;
   background-color: rgba(159, 143, 135, 0.2);
   border-radius: 44px;
@@ -385,37 +386,37 @@
   text-overflow: ellipsis;
 }
 @media only screen and (min-width: 1920px) {
-  .page.index .page-content .section.how-it-works .card .card-part.left .image-background {
+  .page.index .page-content .section.how-it-works .how-it-works-card .card-part.left .image-background {
     width: 780px;
     height: 322px;
   }
 }
 @media only screen and (min-width: 1440px) and (max-width: 1919px) {
-  .page.index .page-content .section.how-it-works .card .card-part.left .image-background {
+  .page.index .page-content .section.how-it-works .how-it-works-card .card-part.left .image-background {
     width: 600px;
     height: 320px;
   }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card .card-part.left .image-background {
+  .page.index .page-content .section.how-it-works .how-it-works-card .card-part.left .image-background {
     width: 422px;
     height: 310px;
   }
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card .card-part.left .image-background {
+  .page.index .page-content .section.how-it-works .how-it-works-card .card-part.left .image-background {
     width: 668px;
     height: 300px;
     border-radius: 34px;
   }
 }
-.page.index .page-content .section.how-it-works .card .card-part.left .image-background .how-it-works-image {
+.page.index .page-content .section.how-it-works .how-it-works-card .card-part.left .image-background .how-it-works-image {
   position: absolute;
 }
-.page.index .page-content .section.how-it-works .card .card-part.left .image-background .user-avatar {
+.page.index .page-content .section.how-it-works .how-it-works-card .card-part.left .image-background .user-avatar {
   position: absolute;
 }
-.page.index .page-content .section.how-it-works .card .card-part.right .card-header {
+.page.index .page-content .section.how-it-works .how-it-works-card .card-part.right .card-header {
   margin: 32px 0 0 0;
   font-family: "Outfit-Regular", sans-serif;
   font-size: 30px;
@@ -423,18 +424,18 @@
   color: rgba(0, 0, 0, 0.6);
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card .card-part.right .card-header {
+  .page.index .page-content .section.how-it-works .how-it-works-card .card-part.right .card-header {
     font-family: "Outfit-Regular", sans-serif;
     font-size: 26px;
     font-weight: 400;
   }
 }
-.page.index .page-content .section.how-it-works .card .card-part.right .card-header .number {
+.page.index .page-content .section.how-it-works .how-it-works-card .card-part.right .card-header .number {
   display: inline-block;
   color: rgba(0, 0, 0, 0.25);
   margin-right: 20px;
 }
-.page.index .page-content .section.how-it-works .card .card-part.right .card-text {
+.page.index .page-content .section.how-it-works .how-it-works-card .card-part.right .card-text {
   margin: 40px 0 0 0;
   font-family: "Outfit-Regular", sans-serif;
   font-size: 20px;
@@ -443,26 +444,27 @@
   width: 308px;
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card .card-part.right .card-text {
+  .page.index .page-content .section.how-it-works .how-it-works-card .card-part.right .card-text {
     margin: 32px 0 0 0;
+    width: auto;
   }
 }
-.page.index .page-content .section.how-it-works .card.card-1 {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-1 {
   background-color: #FFFFFF;
   top: 0;
   bottom: 0;
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-1 {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-1 {
     flex-direction: column;
     justify-content: flex-start;
   }
 }
-.page.index .page-content .section.how-it-works .card.card-1 .card-part.left,
-.page.index .page-content .section.how-it-works .card.card-1 .card-part.right {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-1 .card-part.left,
+.page.index .page-content .section.how-it-works .how-it-works-card.card-1 .card-part.right {
   padding-top: 60px;
 }
-.page.index .page-content .section.how-it-works .card.card-1 .card-part.right .text {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-1 .card-part.right .text {
   margin: 0;
   font-family: "Outfit-Regular", sans-serif;
   font-size: 30px;
@@ -470,176 +472,185 @@
   color: rgba(0, 0, 0, 0.6);
   width: 574px;
 }
-.page.index .page-content .section.how-it-works .card.card-1 .pseudo-border {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-1 .pseudo-border {
   display: none;
 }
-.page.index .page-content .section.how-it-works .card.card-2 {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-2 {
   background-color: #FBFBEF;
-  top: 383px;
+  top: 400px;
   bottom: 300px;
 }
+.page.index .page-content .section.how-it-works .how-it-works-card.card-2.active {
+  top: 0;
+}
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-2 {
-    top: 520px;
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-2 {
+    top: 550px;
     bottom: 270px;
   }
 }
-.page.index .page-content .section.how-it-works .card.card-2 .pseudo-border path {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-2 .pseudo-border path {
   fill: #FBFBEF;
 }
-.page.index .page-content .section.how-it-works .card.card-2 .card-part.left .image-background .how-it-works-image {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-2 .card-part.left .image-background .how-it-works-image {
   top: 66px;
 }
 @media only screen and (min-width: 1920px) {
-  .page.index .page-content .section.how-it-works .card.card-2 .card-part.left .image-background .how-it-works-image {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-2 .card-part.left .image-background .how-it-works-image {
     left: 0;
   }
 }
 @media only screen and (min-width: 1440px) and (max-width: 1919px) {
-  .page.index .page-content .section.how-it-works .card.card-2 .card-part.left .image-background .how-it-works-image {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-2 .card-part.left .image-background .how-it-works-image {
     left: -190px;
   }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card.card-2 .card-part.left .image-background .how-it-works-image {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-2 .card-part.left .image-background .how-it-works-image {
     transform: scale(0.8);
     left: -248px;
   }
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-2 .card-part.left .image-background .how-it-works-image {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-2 .card-part.left .image-background .how-it-works-image {
     transform: scale(0.8);
     left: -158px;
     top: 26px;
   }
 }
-.page.index .page-content .section.how-it-works .card.card-3 {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-3 {
   background-color: #F2F4D0;
-  top: 483px;
+  top: 500px;
   bottom: 200px;
 }
+.page.index .page-content .section.how-it-works .how-it-works-card.card-3.active {
+  top: 100px;
+}
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-3 {
-    top: 610px;
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-3 {
+    top: 640px;
     bottom: 180px;
   }
 }
-.page.index .page-content .section.how-it-works .card.card-3 .pseudo-border path {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-3 .pseudo-border path {
   fill: #F2F4D0;
 }
-.page.index .page-content .section.how-it-works .card.card-3 .card-part.left .image-background .how-it-works-image {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-3 .card-part.left .image-background .how-it-works-image {
   top: 66px;
 }
 @media only screen and (min-width: 1920px) {
-  .page.index .page-content .section.how-it-works .card.card-3 .card-part.left .image-background .how-it-works-image {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-3 .card-part.left .image-background .how-it-works-image {
     right: 0;
   }
 }
 @media only screen and (min-width: 1440px) and (max-width: 1919px) {
-  .page.index .page-content .section.how-it-works .card.card-3 .card-part.left .image-background .how-it-works-image {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-3 .card-part.left .image-background .how-it-works-image {
     right: -184px;
   }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card.card-3 .card-part.left .image-background .how-it-works-image {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-3 .card-part.left .image-background .how-it-works-image {
     transform: scale(0.7);
     right: -236px;
   }
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-3 .card-part.left .image-background .how-it-works-image {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-3 .card-part.left .image-background .how-it-works-image {
     transform: scale(0.8);
     right: -78px;
     top: 38px;
   }
 }
-.page.index .page-content .section.how-it-works .card.card-4 {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-4 {
   background-color: #E9EDB1;
-  top: 583px;
+  top: 600px;
   bottom: 100px;
 }
+.page.index .page-content .section.how-it-works .how-it-works-card.card-4.active {
+  top: 200px;
+}
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-4 {
-    top: 700px;
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 {
+    top: 730px;
     bottom: 90px;
   }
 }
-.page.index .page-content .section.how-it-works .card.card-4 .pseudo-border path {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-4 .pseudo-border path {
   fill: #E9EDB1;
 }
-.page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background {
   height: 363px;
 }
 @media only screen and (min-width: 1920px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .check-feedbacks {
     transform: scale(1);
   }
 }
 @media only screen and (min-width: 1440px) and (max-width: 1919px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .check-feedbacks {
     transform: scale(0.9);
   }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .check-feedbacks {
     transform: scale(0.9);
   }
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .check-feedbacks {
     transform: scale(0.8);
   }
 }
 @media only screen and (min-width: 1920px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-1 {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .check-feedbacks.part-1 {
     top: 66px;
     left: 0;
   }
 }
 @media only screen and (min-width: 1440px) and (max-width: 1919px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-1 {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .check-feedbacks.part-1 {
     top: 66px;
     left: -152px;
   }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-1 {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .check-feedbacks.part-1 {
     top: 66px;
     left: -342px;
   }
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-1 {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .check-feedbacks.part-1 {
     top: 56px;
     left: -168px;
   }
 }
 @media only screen and (min-width: 1920px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-2 {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .check-feedbacks.part-2 {
     top: 208px;
     left: 378px;
   }
 }
 @media only screen and (min-width: 1440px) and (max-width: 1919px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-2 {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .check-feedbacks.part-2 {
     top: 194px;
     left: 240px;
   }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-2 {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .check-feedbacks.part-2 {
     top: 208px;
     left: 44px;
   }
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .check-feedbacks.part-2 {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .check-feedbacks.part-2 {
     top: 206px;
     left: 318px;
     transform: scale(0.9);
   }
 }
-.page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .url-address {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .url-address {
   position: absolute;
   font-family: "Outfit-Regular", sans-serif;
   font-size: 34px;
@@ -649,12 +660,12 @@
   top: 102px;
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .url-address {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .url-address {
     display: none;
   }
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .url-address {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .url-address {
     font-family: "Outfit-Regular", sans-serif;
     font-size: 28px;
     font-weight: 400;
@@ -663,101 +674,102 @@
   }
 }
 @media only screen and (min-width: 1920px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .backy-avatar {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .backy-avatar {
     right: 264px;
     bottom: 88px;
   }
 }
 @media only screen and (min-width: 1440px) and (max-width: 1919px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .backy-avatar {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .backy-avatar {
     right: 212px;
     bottom: 90px;
   }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .backy-avatar {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .backy-avatar {
     right: 230px;
     bottom: 80px;
   }
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .backy-avatar {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .backy-avatar {
     right: 202px;
     bottom: 80px;
   }
 }
 @media only screen and (min-width: 1920px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .jacob-avatar {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .jacob-avatar {
     right: 264px;
     bottom: 18px;
   }
 }
 @media only screen and (min-width: 1440px) and (max-width: 1919px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .jacob-avatar {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .jacob-avatar {
     right: 212px;
     bottom: 28px;
   }
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .jacob-avatar {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .jacob-avatar {
     right: 230px;
     bottom: 14px;
   }
 }
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-4 .card-part.left .image-background .jacob-avatar {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-4 .card-part.left .image-background .jacob-avatar {
     right: 202px;
     bottom: 16px;
   }
 }
-.page.index .page-content .section.how-it-works .card.card-5 {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-5 {
   background-color: #D6DE73;
-  top: 683px;
+  top: 700px;
   bottom: 0;
 }
+.page.index .page-content .section.how-it-works .how-it-works-card.card-5.active {
+  top: 300px;
+}
 @media only screen and (min-width: 1px) and (max-width: 1023px) {
-  .page.index .page-content .section.how-it-works .card.card-5 {
-    top: 790px;
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-5 {
+    top: 820px;
   }
 }
-.page.index .page-content .section.how-it-works .card.card-5 .pseudo-border path {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-5 .pseudo-border path {
   fill: #D6DE73;
 }
-.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-5 .card-part.left .image-background {
   height: 363px;
 }
-.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .how-it-works-image {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-5 .card-part.left .image-background .how-it-works-image {
   top: 44px;
   right: 0;
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .how-it-works-image {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-5 .card-part.left .image-background .how-it-works-image {
     right: -40px;
   }
 }
-.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .user-avatar {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-5 .card-part.left .image-background .user-avatar {
   opacity: 0.4;
   right: 272px;
 }
 @media only screen and (min-width: 1024px) and (max-width: 1439px) {
-  .page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .user-avatar {
+  .page.index .page-content .section.how-it-works .how-it-works-card.card-5 .card-part.left .image-background .user-avatar {
     right: 232px;
   }
 }
-.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .user-avatar.backy-avatar {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-5 .card-part.left .image-background .user-avatar.backy-avatar {
   top: 82px;
 }
-.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .user-avatar.jacob-avatar {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-5 .card-part.left .image-background .user-avatar.jacob-avatar {
   top: 150px;
 }
-.page.index .page-content .section.how-it-works .card.card-5 .card-part.left .image-background .user-avatar.noah-avatar {
+.page.index .page-content .section.how-it-works .how-it-works-card.card-5 .card-part.left .image-background .user-avatar.noah-avatar {
   top: 218px;
 }
 .page.index .page-content .section.extension-demo {
   position: relative;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  height: 860px;
+  padding-bottom: 40px;
 }
 .page.index .page-content .section.extension-demo .extension-demo-content {
   display: flex;

@@ -13,70 +13,25 @@ window.addEventListener('load', (event) => {
         });
     }
 
-    // ====================================
-    // === HOW IT WORKS CARDS SCROLLING ===
-    // ====================================
-    const howItWorksTimeLine = gsap.timeline();
-    howItWorksTimeLine
-    .to(".card-2", {top: 0}, "card-2")
-    .to(".card-3", {top: 0}, "card-3")
-    .to(".card-4", {top: 0}, "card-4")
-    .to(".card-5", {top: 0}, "card-5");
+    $(function () {
+        const cardClass = ".how-it-works-card"
 
-    const howItWorksCardsST = ScrollTrigger.create({
-        animation: howItWorksTimeLine,
-        id: "st",
-        trigger: ".how-it-works",
-        start: "center center",
-        pin: true,
-        scrub: 1.5
-    });
+        $(cardClass).click(function () {
+            const dataIndexName = "data-index";
+            const activeClass = "active";
+            const cardNumber = $(this).attr(dataIndexName);
 
-    // click scroll - doesn't work
-    /*gsap.utils.toArray(".how-it-works .card .card-header").forEach(function(a) {
-        a.addEventListener("click", function(e) {
-            const percent = howItWorksTimeLine.labels[e.target.getAttribute("data-jump")] / howItWorksTimeLine.totalDuration();
-            const scrollPos = howItWorksCardsST.start + (howItWorksCardsST.end) * percent;
-            gsap.to(window, {scrollTo: scrollPos});
-        });
-    });*/
+            $(cardClass).each(function(index, element) {
+                const cardElement = $(element);
+                const cardIndex = parseInt(cardElement.attr(dataIndexName));
 
-    // =================================
-    // === EXTENSION DEMO SCROLL PIN ===
-    // =================================
-    const extensionDemoContentClass = ".extension-demo-content";
+                cardElement.removeClass(activeClass);
 
-    const scrollTriggerTimeline = {
-        scrollTrigger: {
-            trigger: ".extension-demo",
-            start: "center center",
-            pin: true,
-            scrub: 1,
-            markers: false
-        }
-    };
-
-    ScrollTrigger.matchMedia({
-        "(min-width: 1920px)": () => {
-            const extensionDemoTimeLine = gsap.timeline(scrollTriggerTimeline);
-            extensionDemoTimeLine
-            .to(extensionDemoContentClass, {y: -374})
-        },
-        "(min-width: 1440px) and (max-width: 1919px)": () => {
-            const extensionDemoTimeLine = gsap.timeline(scrollTriggerTimeline);
-            extensionDemoTimeLine
-            .to(extensionDemoContentClass, {y: -352})
-        },
-        "(min-width: 1024px) and (max-width: 1439px)": () => {
-            const extensionDemoTimeLine = gsap.timeline(scrollTriggerTimeline);
-            extensionDemoTimeLine
-            .to(extensionDemoContentClass, {y: -344})
-        },
-        "(min-width: 1px) and (max-width: 1023px)": () => {
-            const extensionDemoTimeLine = gsap.timeline(scrollTriggerTimeline);
-            extensionDemoTimeLine
-            .to(extensionDemoContentClass, {y: -336})
-        }
+                if (cardIndex <= cardNumber) {
+                    cardElement.addClass(activeClass);
+                }
+            });
+        })
     });
 
     // =================================================

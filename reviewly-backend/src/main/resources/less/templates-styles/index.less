@@ -266,7 +266,7 @@
             }
 
             &.how-it-works {
-                height: 783px;
+                height: 800px;
                 width: 100%;
                 border-radius: 70px;
                 overflow: hidden;
@@ -274,15 +274,16 @@
                 position: relative;
 
                 .adaptationMobile({
-                    height: 880px;
+                    height: 910px;
                     border-radius: 50px;
                 });
 
-                .card {
+                .how-it-works-card {
                     position: absolute;
                     width: 100%;
                     display: flex;
                     flex-direction: row;
+                    transition: top 0.15s;
 
                     .adaptationMobile({
                         flex-direction: column-reverse;
@@ -409,6 +410,7 @@
 
                                 .adaptationMobile({
                                     margin: 32px 0 0 0;
+                                    width: auto;
                                 });
                             }
                         }
@@ -446,11 +448,15 @@
 
                     &.card-2 {
                         background-color: @lime-very-light;
-                        top: 383px;
+                        top: 400px;
                         bottom: 300px;
 
+                        &.active {
+                            top: 0;
+                        }
+
                         .adaptationMobile({
-                            top: 520px;
+                            top: 550px;
                             bottom: 270px;
                         });
 
@@ -487,11 +493,15 @@
 
                     &.card-3 {
                         background-color: @lime-light;
-                        top: 483px;
+                        top: 500px;
                         bottom: 200px;
 
+                        &.active {
+                            top: 100px;
+                        }
+
                         .adaptationMobile({
-                            top: 610px;
+                            top: 640px;
                             bottom: 180px;
                         });
 
@@ -528,11 +538,15 @@
 
                     &.card-4 {
                         background-color: @lime-medium;
-                        top: 583px;
+                        top: 600px;
                         bottom: 100px;
 
+                        &.active {
+                            top: 200px;
+                        }
+
                         .adaptationMobile({
-                            top: 700px;
+                            top: 730px;
                             bottom: 90px;
                         });
 
@@ -669,11 +683,15 @@
 
                     &.card-5 {
                         background-color: @lime;
-                        top: 683px;
+                        top: 700px;
                         bottom: 0;
 
+                        &.active {
+                            top: 300px;
+                        }
+
                         .adaptationMobile({
-                            top: 790px;
+                            top: 820px;
                         });
 
                         .pseudo-border path {
@@ -721,9 +739,7 @@
 
             &.extension-demo {
                 position: relative;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                height: 860px;
+                padding-bottom: 40px;
 
                 .extension-demo-content {
                     display: flex;
