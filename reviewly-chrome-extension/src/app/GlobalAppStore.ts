@@ -21,6 +21,8 @@ export class GlobalAppStore {
 
     errorsStore = new ErrorsStore();
 
+    notificationsEnabled: boolean = false;
+
     constructor() {
         makeAutoObservable(this);
         this.init();
@@ -43,6 +45,8 @@ export class GlobalAppStore {
         if (LocalTokenStorageService.isAccessTokenExist && LocalTokenStorageService.isRefreshTokenExist) {
             await this.updateCurrentUser();
         }
+
+        this.notificationsEnabled = await this.extensionService.isNotificationsEnabled();
 
         this.userDataLoading = false;
     }
@@ -67,6 +71,12 @@ export class GlobalAppStore {
     @action
     clearCurrentUser = () => {
         this.currentUser = null;
+    }
+
+    @action
+    toggleNotifications = async () => {
+        await this.extensionService.toggleNotifications(!this.notificationsEnabled);
+        this.notificationsEnabled = !this.notificationsEnabled;
     }
 }
 

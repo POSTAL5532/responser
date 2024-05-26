@@ -88,6 +88,16 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
             .then(() => sendResponse({success: true}))
             .catch(cause => sendResponse({success: false, message: cause}))
             break;
+        case "GET_NOTIFICATIONS_PARAMETER":
+            getNotificationsParameter()
+            .then(notificationsParameter => sendResponse({success: true, data: notificationsParameter}))
+            .catch(cause => sendResponse({success: false, message: cause}))
+            break;
+        case "TOGGLE_NOTIFICATIONS":
+            toggleNotifications(request.data)
+            .then(() => sendResponse({success: true}))
+            .catch(cause => sendResponse({success: false, message: cause}))
+            break;
         default:
             sendResponse({success: false, message: "Invalid action type"});
             log(`Internal listener: invalid action`);
@@ -154,7 +164,12 @@ const setRatingBadgeAndShowRatingPopupIfReady = async (tabId, tabUrl, tabStatus,
     const rating = await getRating(tabUrl);
 
     setSiteRatingBadge(tabId, rating.siteRating);
-    sendMessageToContent({type: "SHOW_RATING_POPUP", data: rating});
+
+    const notificationsIsEnabled = await getNotificationsParameter();
+
+    if (notificationsIsEnabled) {
+        sendMessageToContent({type: "SHOW_RATING_POPUP", data: rating});
+    }
 }
 
 /**
@@ -347,8 +362,6 @@ const setTokens = async (tokenData) => {
 
 /**
  * Remove tokens from local storage.
- *
- * @returns {Promise<void>}
  */
 const removeTokens = async () => {
     await chrome.storage.local.remove([
@@ -357,6 +370,28 @@ const removeTokens = async () => {
         "refreshToken",
         "refreshTokenExpiredIn"
     ]);
+}
+
+/**
+ * Turn on or Turn off resource rating notification.
+ *
+ * @param toggle boolean
+ */
+const toggleNotifications = async (toggle) => {
+    await chrome.storage.local.set({
+        notifications: toggle
+    });
+}
+
+/**
+ * Return notifications parameter (on or off).
+ */
+const getNotificationsParameter = async () => {
+    const data = await chrome.storage.local.get({
+        notifications: true
+    });
+
+    return data.notifications;
 }
 
 /**

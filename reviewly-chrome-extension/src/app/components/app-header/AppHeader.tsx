@@ -6,11 +6,12 @@ import "./AppHeader.less";
 
 type AppHeaderProps = {
     headerLabel?: ReactNode;
+    controls?: ReactNode;
     className?: string;
 } & PropsWithChildren;
 
 export const AppHeader: React.FC<AppHeaderProps> = (props: AppHeaderProps) => {
-    const {headerLabel = "Reviewly", className, children} = props;
+    const {headerLabel = "Reviewly", className, children, controls} = props;
     const resultClassName = classNames("header", {"with-additional-content": !!children}, className);
 
     return (
@@ -23,7 +24,7 @@ export const AppHeader: React.FC<AppHeaderProps> = (props: AppHeaderProps) => {
                 {!!headerLabel && <div className="header-label">{headerLabel}</div>}
 
                 <div className="controls">
-
+                    {!!controls && controls}
                 </div>
             </div>
 

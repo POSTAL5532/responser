@@ -5,6 +5,7 @@ import {Spinner} from "../../../components/spinner/Spinner";
 import {WebResource} from "../../../model/WebResource";
 import {AppHeader} from "../../../components/app-header/AppHeader";
 import {Icon, IconType} from "../../../components/icon/Icon";
+import {Toggler} from "../../../components/toggler/Toggler";
 import "./ReviewsHeader.less";
 
 type ReviewsHeaderProps = {
@@ -13,6 +14,8 @@ type ReviewsHeaderProps = {
     resource: WebResource;
     isLoading: boolean;
     isReviewsLoading: boolean;
+    notificationsEnabled: boolean;
+    toggleNotifications: (toggle: boolean) => void;
 }
 
 export const ReviewsHeader: React.FC<ReviewsHeaderProps> = (props: ReviewsHeaderProps) => {
@@ -21,7 +24,9 @@ export const ReviewsHeader: React.FC<ReviewsHeaderProps> = (props: ReviewsHeader
         resource,
         isLoading,
         isReviewsLoading,
-        onResourceTypeChange
+        onResourceTypeChange,
+        notificationsEnabled,
+        toggleNotifications
     } = props;
 
     const resourceTypeOptions: TabOption<ResourceType>[] = [
@@ -52,8 +57,12 @@ export const ReviewsHeader: React.FC<ReviewsHeaderProps> = (props: ReviewsHeader
         );
     }
 
+    const getNotificationsControl = () => (
+        <Toggler checked={notificationsEnabled} onChange={toggleNotifications} label="Notifications"/>
+    );
+
     return (
-        <AppHeader headerLabel={getHeaderLabel()} className="reviews-header">
+        <AppHeader headerLabel={getHeaderLabel()} className="reviews-header" controls={getNotificationsControl()}>
             <Tabs<ResourceType>
                 onChange={onResourceTypeChange}
                 options={resourceTypeOptions}

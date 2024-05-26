@@ -67,6 +67,20 @@ export class ExtensionService {
         return this.sendMessage(message);
     }
 
+    isNotificationsEnabled = async (): Promise<boolean> => {
+        this.logger.debug("Get notifications parameter - start");
+        const message = new ExtensionMessage(ExtensionMessageType.GET_NOTIFICATIONS_PARAMETER);
+        this.logger.debug("Get notifications parameter - finish");
+        return (await this.sendMessage<any, boolean>(message)).data;
+    }
+
+    toggleNotifications = (enable: boolean): Promise<ExtensionResponse> => {
+        this.logger.debug("Toggle notifications parameter - start");
+        const message = new ExtensionMessage(ExtensionMessageType.TOGGLE_NOTIFICATIONS, enable);
+        this.logger.debug("Toggle notifications parameter - finish");
+        return this.sendMessage<any, boolean>(message);
+    }
+
     sendMessage = <M = any, R = any>(message: ExtensionMessage<M>) => {
         this.logger.debug("Send message to background:", message);
         return new Promise<ExtensionResponse>((resolve, reject) => {
@@ -78,7 +92,15 @@ export class ExtensionService {
 
             chrome.runtime.sendMessage<ExtensionMessage<M>, ExtensionResponse<R>>(
                 message,
-                response => response.success ? resolve(response) : reject(response.message)
+                response => {
+                    if(response.success) {
+                        this.logger.debug("Message result - success. Response is:", response);
+                        resolve(response);
+                    } else {
+                        this.logger.error("Message result - fault. Response is:", response);
+                        reject(response.message);
+                    }
+                }
             );
         });
     }

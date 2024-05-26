@@ -17,7 +17,7 @@ import "./ReviewsPage.less";
 const ReviewsPage: React.FC = () => {
     const locationState = useLocation<NavigateStateProps>().state;
     const extensionService = useExtensionService();
-    const {currentUser, userDataLoading} = useContext<GlobalAppStore>(GlobalAppStoreContext);
+    const {currentUser, userDataLoading, notificationsEnabled, toggleNotifications} = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const reviewsPageStore = useReviewsPageStore();
     const [removeUserReviewConfirmation, setRemoveUserReviewConfirmation] = useState<boolean>(false);
 
@@ -129,7 +129,9 @@ const ReviewsPage: React.FC = () => {
                 resource={reviewsResourceType === ResourceType.PAGE ? page : site}
                 isLoading={setHeaderInLoadingState}
                 isReviewsLoading={(!page && !site) || isSiteLoading || isPageLoading || isReviewsLoading}
-                onResourceTypeChange={changeResourceType}/>
+                onResourceTypeChange={changeResourceType}
+                notificationsEnabled={notificationsEnabled}
+                toggleNotifications={toggleNotifications}/>
 
             <ReviewsList
                 reviews={reviewsList}

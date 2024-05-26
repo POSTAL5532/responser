@@ -4,7 +4,7 @@ import {Logger} from "../../utils/Logger";
 import {TokenInfo} from "../../model/TokenInfo";
 
 /**
- * Token sore. Contains read/write/delete methods.
+ * Token store. Contains read/write/delete methods.
  */
 class LocalTokenStorageService {
 
