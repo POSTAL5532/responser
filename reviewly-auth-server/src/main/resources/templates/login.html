@@ -76,6 +76,31 @@
           th:href="@{/images/apple-touch-startup-image-2048x2732.png}">
     <link rel="apple-touch-startup-image" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)"
           th:href="@{/images/apple-touch-startup-image-2732x2048.png}">
+
+    <meta property="og:url" th:content="${@applicationProperties.selfHost}"/>
+    <meta property="og:type" content="article"/>
+    <meta property="og:title" content="Unlock Honest Feedback for Every Website"/>
+    <meta property="og:description" content="Find reviews faster and make choices easier with Reviewly. Reviewly Integrated into the browser and allows you to read reviews and leave your opinion about any site without leaving it"/>
+
+    <meta property="twitter:title" content="Reviewly - Unlock Honest Feedback for Every Website">
+    <meta property="twitter:description" content="Find reviews faster and make choices easier with Reviewly. Reviewly Integrated into the browser and allows you to read reviews and leave your opinion about any site without leaving it">
+    <meta name="twitter:card" content="summary_large_image">
+
+    <meta property="og:image" th:content="${@applicationProperties.selfHost + '/img/metaimage_1200_628_00.png'}"/>
+    <meta property="og:image:width" content="1200"/>
+    <meta property="og:image:height" content="628"/>
+
+    <meta property="fb:image" th:content="${@applicationProperties.selfHost + '/img/metaimage_1200_628_00.png'}"/>
+    <meta property="fb:image:width" content="1200"/>
+    <meta property="fb:image:height" content="628"/>
+
+    <meta property="twitter:image" th:content="${@applicationProperties.selfHost + '/img/metaimage_1024_512_00.png'}">
+    <meta property="twitter:image:width" content="1024"/>
+    <meta property="twitter:image:height" content="512"/>
+
+    <meta property="vk:image" th:content="${@applicationProperties.selfHost + '/img/metaimage_1024_512_00.png'}">
+    <meta property="vk:image:width" content="1024"/>
+    <meta property="vk:image:height" content="512"/>
 </head>
 <body>
 <div class="page login">
