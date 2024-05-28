@@ -94,6 +94,9 @@ public class ApplicationProperties {
     private String fileStorageUrlUsersAvatars;
 
     @NotBlank
+    private String fileStorageUrlCommon;
+
+    @NotBlank
     private String defaultUserAvatarFileName;
 
     @NotBlank

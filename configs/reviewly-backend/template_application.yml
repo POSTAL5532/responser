@@ -4,6 +4,7 @@ server:
     whitelabel:
       enabled: false
     path: /error
+  forward-headers-strategy: native
 logging:
   level:
     root: info
@@ -98,6 +99,7 @@ reviewly:
   fileStorageBucketUsersAvatars: users-avatars
   fileStorageUrlSitesIcons: ${reviewly.fileStorageUrl}/${reviewly.fileStorageBucketSitesIcons}
   fileStorageUrlUsersAvatars: ${reviewly.fileStorageUrl}/${reviewly.fileStorageBucketUsersAvatars}
+  fileStorageUrlCommon: ${reviewly.fileStorageUrl}/${reviewly.fileStorageBucket}/common
   defaultUserAvatarFileName: default_avatar.png
   defaultSiteIconFileName: default_site_icon.png
   allowedOrigins:

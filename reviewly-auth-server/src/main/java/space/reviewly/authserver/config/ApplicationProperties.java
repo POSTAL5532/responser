@@ -46,6 +46,15 @@ public class ApplicationProperties {
     @NotEmpty
     private String downloadExtensionChrome;
 
+    @NotBlank
+    private String fileStorageUrl;
+
+    @NotBlank
+    private String fileStorageBucket;
+
+    @NotBlank
+    private String fileStorageUrlCommon;
+
     @Getter
     @Setter
     @ToString

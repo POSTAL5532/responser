@@ -5,6 +5,7 @@ server:
   error:
     include-binding-errors: always
     include-message: always
+  forward-headers-strategy: native
 logging:
   level:
     root: INFO
@@ -70,6 +71,9 @@ reviewly:
   noReplyEmail: no-reply@reviewly.space
   contactEmail: contact@reviewly.space
   downloadExtensionChrome: https://www.google.com
+  fileStorageUrl: ${reviewly.selfHost}/cdn
+  fileStorageBucket: local_files
+  fileStorageUrlCommon: ${reviewly.fileStorageUrl}/${reviewly.fileStorageBucket}/common
   clientCredentials:
     -
       clientId: reviewly-web-client
