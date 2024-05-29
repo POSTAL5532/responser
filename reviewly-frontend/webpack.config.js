@@ -7,9 +7,9 @@ const FaviconsWebpackPlugin = require("favicons-webpack-plugin");
 
 const BASE_PATH = "/app"
 
-const convertTpProcessEnvProperties = (object) => {
+const convertToProcessEnvProperties = (object) => {
     if (!object) {
-        return {};
+        throw Error("Empty config object");
     }
 
     return Object.keys(object).reduce((prev, next) => {
@@ -23,14 +23,14 @@ module.exports = (env, args) => {
     console.log("ARGS:", args);
 
     const envFileProperties = dotenv.config({path: path.resolve(`../configs/reviewly-frontend/${env.buildMode}/.env`)}).parsed;
-    const configObject = convertTpProcessEnvProperties(envFileProperties);
+    const configObject = convertToProcessEnvProperties(envFileProperties);
     console.log("configObject:", configObject);
 
     return {
-        mode: "none",
+        mode: (env.buildMode === "prod") ? "production" : "development",
         entry: {app: path.join(__dirname, "src", "index.tsx")},
         target: "web",
-        devtool: "source-map",
+        devtool: env.buildMode === "prod" ? undefined : "source-map",
         devServer: {
             port: 3000,
             compress: true,

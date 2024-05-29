@@ -9,16 +9,9 @@ const dotenv = require('dotenv');
 let ENV_FILE_PROPERTIES;
 let CONFIGS_PATH;
 
-/**
- * Init ENV_FILE_PROPERTIES
- */
-const initEnvFileProperties = () => {
-    ENV_FILE_PROPERTIES = dotenv.config({path: path.resolve(`${CONFIGS_PATH}/.env`)}).parsed;
-}
-
 const convertToProcessEnvProperties = (object) => {
     if (!object) {
-        return {};
+        throw Error("Empty config object");
     }
 
     return Object.keys(object).reduce((prev, next) => {
@@ -50,10 +43,13 @@ module.exports = (env, args) => {
     console.log("ARGS:", args);
 
     CONFIGS_PATH = `../configs/reviewly-chrome-extension/${env.buildMode}`;
-    initEnvFileProperties();
+    ENV_FILE_PROPERTIES = dotenv.config({path: path.resolve(`${CONFIGS_PATH}/.env`)}).parsed;
+    const configObject = convertToProcessEnvProperties(ENV_FILE_PROPERTIES);
+    console.log("configObject:", configObject);
 
     return {
-        mode: "none",
+        // mode: (env.buildMode === "prod") ? "production" : "development",
+        mode: "production",
         entry: {app: path.join(__dirname, "src", "index.tsx")},
         target: "web",
         devtool: env.buildMode === "prod" ? undefined : "source-map",
@@ -132,7 +128,7 @@ module.exports = (env, args) => {
                 filename: "./index.html",
                 minify: false
             }),
-            new webpack.DefinePlugin(convertToProcessEnvProperties(ENV_FILE_PROPERTIES)),
+            new webpack.DefinePlugin(configObject),
             new CopyPlugin({
                 patterns: [
                     {

@@ -12,7 +12,7 @@ export class Logger {
 
     name: string;
 
-    constructor(name: string) {
+    constructor(name: string = "ROOT LOGGER") {
         this.name = name;
     }
 
