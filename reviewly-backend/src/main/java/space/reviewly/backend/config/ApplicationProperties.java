@@ -24,6 +24,8 @@ public class ApplicationProperties {
 
     public static final String API_ROOT_PATH = "/api";
 
+    public static final String RATING_API_ROOT_PATH = "/rating-api";
+
     @NotNull
     private RunMode runMode;
 

@@ -230,7 +230,7 @@ const getRequestSignHeader = async (url) => {
 const getRating = async (pageUrl) => {
     log("Get site and page rating:", pageUrl);
 
-    const getDomainPath = "{{API_URL}}/rating";
+    const getDomainPath = "{{RATING_API_URL}}/rating";
     const getDomainUrl = new URL(getDomainPath);
     getDomainUrl.search = new URLSearchParams({url: pageUrl}).toString();
 

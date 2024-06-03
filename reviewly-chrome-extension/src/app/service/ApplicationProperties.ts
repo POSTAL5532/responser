@@ -6,6 +6,10 @@ class ApplicationProperties {
         return process.env.API_URL;
     }
 
+    get ratingApiUrl(): string {
+        return process.env.RATING_API_URL;
+    }
+
     get reviewWebLinkUrl(): string {
         return process.env.REVIEW_WEB_LINK_URL;
     }

@@ -1,6 +1,6 @@
 package space.reviewly.backend.controller.rating;
 
-import static space.reviewly.backend.config.ApplicationProperties.API_ROOT_PATH;
+import static space.reviewly.backend.config.ApplicationProperties.RATING_API_ROOT_PATH;
 
 import lombok.extern.slf4j.Slf4j;
 import space.reviewly.backend.controller.RestApiController;
@@ -16,10 +16,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * TODO: Has separated root path for separation on the future - this endpoint can by most loaded from all endpoints.
+ */
 @Slf4j
 @RequiredArgsConstructor
 @RestController
-@RequestMapping(API_ROOT_PATH + "/rating")
+@RequestMapping(RATING_API_ROOT_PATH + "/rating")
 public class RatingRestController extends RestApiController {
 
     private final RatingService ratingService;
