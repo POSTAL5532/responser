@@ -47,7 +47,7 @@ export const AppFooter: React.FC = () => {
                     </Button>
                 </div>
                 <div className="terms-section third">
-                    Website by Third Dimension Studio
+                    <Link href="https://third-dimension.agency" target="_blank">Website by Third Dimension Studio</Link>
                 </div>
             </div>
         </>

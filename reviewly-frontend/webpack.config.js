@@ -107,7 +107,8 @@ module.exports = (env, args) => {
             new HtmlWebPackPlugin({
                 template: "./public/index.html",
                 filename: "./index.html",
-                selfHost: envFileProperties.SELF_HOST
+                selfHost: envFileProperties.SELF_HOST,
+                runMode: envFileProperties.RUN_MODE
             }),
             new webpack.DefinePlugin(configObject),
             new FaviconsWebpackPlugin({

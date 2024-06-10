@@ -10,6 +10,10 @@ class ApplicationProperties {
         return process.env.API_URL;
     }
 
+    get runMode(): string {
+        return process.env.RUN_MODE;
+    }
+
     get landingPageUrl(): string {
         return process.env.LANDING_URL;
     }

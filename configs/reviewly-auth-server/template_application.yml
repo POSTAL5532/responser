@@ -64,6 +64,7 @@ spring:
         enable: true
 
 reviewly:
+  runMode: LOCAL
   selfHost: http://local-dev-reviewly.space
   frontendAppUrl: ${reviewly.selfHost}/app
   registrationPageUrl: ${reviewly.frontendAppUrl}/sign-up

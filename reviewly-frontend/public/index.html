@@ -28,10 +28,23 @@
     <meta property="vk:image" content="<%= htmlWebpackPlugin.options.selfHost %>/img/metaimage_1024_512_00.png">
     <meta property="vk:image:width" content="1024"/>
     <meta property="vk:image:height" content="512"/>
+
+    <% if(htmlWebpackPlugin.options.runMode == 'PROD') { %>
+      <!-- Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-E03HG0FX99"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'G-E03HG0FX99');
+      </script>
+    <% } %>
   </head>
 
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+
     <div id="root"></div>
   </body>
 </html>

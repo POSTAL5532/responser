@@ -443,6 +443,11 @@ a.button {
 .page .terms .terms-section.third {
   justify-content: end;
 }
+.page .terms .terms-section.third .link {
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
 .slider.noUi-target {
   height: 1px;
   border: none;

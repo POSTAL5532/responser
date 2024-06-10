@@ -83,6 +83,18 @@
         <meta property="vk:image:width" content="1024"/>
         <meta property="vk:image:height" content="512"/>
     </th:block>
+
+    <th:block th:if="${@applicationProperties.runMode == T(space.reviewly.backend.config.RunMode).PROD}">
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-E03HG0FX99"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-E03HG0FX99');
+        </script>
+    </th:block>
 </head>
 
 <body>
@@ -159,7 +171,7 @@
                 </button>
             </div>
             <div class="terms-section third">
-                Website by Third Dimension Studio
+                <a href="https://third-dimension.agency" class="link" target="_blank">Website by Third Dimension Studio</a>
             </div>
         </div>
 
