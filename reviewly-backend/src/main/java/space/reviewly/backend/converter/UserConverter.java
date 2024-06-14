@@ -1,9 +1,11 @@
 package space.reviewly.backend.converter;
 
+import java.util.Optional;
 import space.reviewly.backend.controller.user.payload.CreateUserProfilePayload;
 import space.reviewly.backend.controller.user.payload.UpdateUserPayload;
 import space.reviewly.backend.controller.user.payload.UserInfoPayload;
 import space.reviewly.backend.model.user.RegisteredBy;
+import space.reviewly.backend.model.user.Role;
 import space.reviewly.backend.model.user.User;
 import org.springframework.stereotype.Service;
 import space.reviewly.backend.service.user.UserService;
@@ -51,6 +53,14 @@ public class UserConverter {
         userPayload.setIsUsePasswordStub(
             user.getPassword().equals(UserService.SOCIAL_SIGNUP_USER_PASSWORD_STUB) && user.getRegisteredBy() != RegisteredBy.NATIVE
         );
+
+        Optional<Role> roleOptional = user.getRoles().stream().findFirst();
+
+        if (roleOptional.isPresent()) {
+            Role role = roleOptional.get();
+            userPayload.setIsBlocked(role.getName().equals("USER_BLOCKED"));
+        }
+
         userPayload.setCreationDate(user.getCreationDate());
         userPayload.setUpdateDate(user.getUpdateDate());
 

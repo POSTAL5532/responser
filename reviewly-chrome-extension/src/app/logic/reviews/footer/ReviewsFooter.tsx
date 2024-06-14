@@ -86,6 +86,7 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
 
     const userAuthorized = !!currentUser;
     const userEmailConfirmed = userAuthorized && currentUser.emailConfirmed;
+    const isBlocked = !!currentUser && currentUser.isBlocked;
 
     const footerSubmenu = (): JSX.Element => {
         if (showSorting) {
@@ -115,7 +116,7 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
                          show={userEmailConfirmed ? false : undefined}
                          position={TooltipPosition.TOP}
                          className="email-not-confirmed-tooltip">
-                    <Button className="add-review" onClick={onAddReviewClick} disabled={isLoading || !userEmailConfirmed} styleType={ButtonType.PRIMARY}>
+                    <Button className="add-review" onClick={onAddReviewClick} disabled={isLoading || !userEmailConfirmed || isBlocked} styleType={ButtonType.PRIMARY}>
                         <Icon type={IconType.PLUS}/> Add review
                     </Button>
                 </Tooltip>
@@ -126,14 +127,14 @@ export const ReviewsFooter: React.FC<ReviewsFooterProps> = (props: ReviewsFooter
                          show={userEmailConfirmed ? false : undefined}
                          position={TooltipPosition.TOP}
                          className="email-not-confirmed-tooltip">
-                    <Button className="edit-review" onClick={onEditReviewClick} disabled={isLoading || !userEmailConfirmed} styleType={ButtonType.PRIMARY}>
+                    <Button className="edit-review" onClick={onEditReviewClick} disabled={isLoading || !userEmailConfirmed || isBlocked} styleType={ButtonType.PRIMARY}>
                         <Icon type={IconType.EDIT}/> Edit review
                     </Button>
                 </Tooltip>
             </ConditionShow>
 
             <ConditionShow condition={userAuthorized && hasUserReview && !!onDeleteReviewClick && !showSubmenu}>
-                <Button className="delete-review" onClick={onDeleteReviewClick} disabled={isLoading}>
+                <Button className="delete-review" onClick={onDeleteReviewClick} disabled={isLoading || isBlocked}>
                     <Icon type={IconType.REMOVE}/>Delete review
                 </Button>
             </ConditionShow>

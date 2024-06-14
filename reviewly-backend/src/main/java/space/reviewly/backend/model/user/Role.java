@@ -30,11 +30,11 @@ public class Role {
     @Column(columnDefinition = "CHAR(36)")
     private String id;
 
+    private String name;
+
     @ManyToMany(cascade = CascadeType.MERGE, fetch = FetchType.EAGER)
     @JoinTable(name = "role_authority",
         joinColumns = @JoinColumn(name = "role_id"),
         inverseJoinColumns = @JoinColumn(name = "authority_id"))
     private Set<Authority> authorities = new HashSet<>();
-
-    private String name;
 }

@@ -56,6 +56,7 @@ const MyProfilePageItem: React.FC<MyProfilePageItemProps> = (props: MyProfilePag
             <div className="edit-user-form-container">
                 <EditUserForm
                     updateUserPayload={updateUserPayload}
+                    isUserBlocked={currentUser?.isBlocked}
                     onFinish={onEditUserFinish}
                     loading={loadingState.isDataSubmitting}
                     userWasChanged={userWasChanged}

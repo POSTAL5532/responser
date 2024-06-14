@@ -104,6 +104,8 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
         }
     }
 
+    const isBlocked = !!currentUser && currentUser.isBlocked;
+
     return (
         <div className={resultClassName} ref={cardRef} key={review.id}>
             <div className="card-header">
@@ -133,15 +135,15 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
                     <Reaction count={positives.length}
                               positive={true}
                               currentUserReacted={currentUserReviewLike?.positive}
-                              disabled={disableControls || likeInProcess || !currentUser}
+                              disabled={disableControls || likeInProcess || !currentUser || isBlocked}
                               onClick={onReaction}/>
                     <Reaction count={negatives.length}
                               positive={false}
                               currentUserReacted={currentUserReviewLike && !currentUserReviewLike.positive}
-                              disabled={disableControls || likeInProcess || !currentUser}
+                              disabled={disableControls || likeInProcess || !currentUser || isBlocked}
                               onClick={onReaction}/>
 
-                    <Button className="share-button" onClick={onShareReviewClickListener} disabled={disableControls}>
+                    <Button className="share-button" onClick={onShareReviewClickListener} disabled={disableControls || isBlocked}>
                         <Icon type={IconType.SEND}/>
                     </Button>
                 </div>

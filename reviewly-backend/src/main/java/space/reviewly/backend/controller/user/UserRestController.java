@@ -64,7 +64,7 @@ public class UserRestController extends RestApiController {
 
         log.debug("Get current {} user.", userId);
 
-        User user = userService.getUser(userId);
+        User user = userService.getFullUser(userId);
         UserInfoPayload userPayload = userConverter.toFullUserInfoPayload(user);
         userPayload.setReviewsCommonRating(ratingService.getUserReviewsRating(userId));
 

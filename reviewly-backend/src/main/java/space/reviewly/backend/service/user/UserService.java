@@ -2,6 +2,7 @@ package space.reviewly.backend.service.user;
 
 import java.io.IOException;
 import java.util.Set;
+import org.hibernate.Hibernate;
 import org.springframework.web.multipart.MultipartFile;
 import space.reviewly.backend.config.ApplicationProperties;
 import space.reviewly.backend.exceptions.DataNotValidException;
@@ -69,6 +70,12 @@ public class UserService {
             log.error("User with id {} doesn't exist", userId);
             return new NoSuchElementException(format("User with id ''{0}'' doesn't exist", userId));
         });
+    }
+
+    public User getFullUser(String userId) {
+        User user = getUser(userId);
+        Hibernate.initialize(user.getRoles());
+        return user;
     }
 
     @Transactional
@@ -183,7 +190,7 @@ public class UserService {
         PasswordRestore passwordRestore = passwordRestoreService.getById(passwordRestoreId);
         User user = getUser(passwordRestore.getUserId());
         user.setPassword(passwordEncoder.encode(newPassword));
-        userRepository.save(user);
+        updateUser(user);
         emailService.sendPasswordChangedNotification(user);
     }
 

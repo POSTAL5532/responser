@@ -11,6 +11,7 @@ import "./EditPasswordForm.less";
 
 type EditPasswordFormProps = {
     updateUserPasswordPayload: UpdateUserPasswordPayload;
+    isUserBlocked?: boolean;
     userUsesStubPassword: boolean,
     onFinish: (setFieldError?: (field: string, message: string) => void) => void;
     passwordsFilled: boolean;
@@ -20,6 +21,7 @@ type EditPasswordFormProps = {
 const EditPasswordForm: React.FC<EditPasswordFormProps> = (props: EditPasswordFormProps) => {
     const {
         updateUserPasswordPayload,
+        isUserBlocked = false,
         userUsesStubPassword,
         onFinish,
         isLoading,
@@ -51,7 +53,7 @@ const EditPasswordForm: React.FC<EditPasswordFormProps> = (props: EditPasswordFo
                         name="oldPassword"
                         placeholder="Old password"
                         onChange={event => updateUserPasswordPayload.oldPassword = event.target.value}
-                        disabled={userUsesStubPassword || isLoading}/>
+                        disabled={userUsesStubPassword || isLoading || isUserBlocked}/>
                 </Tooltip>
 
                 <PasswordField
@@ -59,7 +61,7 @@ const EditPasswordForm: React.FC<EditPasswordFormProps> = (props: EditPasswordFo
                     name="newPassword"
                     placeholder="New password"
                     onChange={event => updateUserPasswordPayload.newPassword = event.target.value}
-                    disabled={isLoading}/>
+                    disabled={isLoading || isUserBlocked}/>
 
                 <PasswordField
                     label="Confirm password"
@@ -67,14 +69,14 @@ const EditPasswordForm: React.FC<EditPasswordFormProps> = (props: EditPasswordFo
                     placeholder="Confirm new password"
                     onChange={event => updateUserPasswordPayload.confirmNewPassword = event.target.value}
                     validator={passwordEqualsValidator}
-                    disabled={isLoading}/>
+                    disabled={isLoading || isUserBlocked}/>
 
                 <Button
                     type="submit"
                     className="update-password-submit"
                     styleType={ButtonType.PRIMARY}
                     loading={isLoading}
-                    disabled={isLoading || !passwordsFilled}>
+                    disabled={isLoading || !passwordsFilled || isUserBlocked}>
                     Update password
                 </Button>
             </Form>

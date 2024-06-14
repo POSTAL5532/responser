@@ -69,5 +69,9 @@ public class ApplicationProperties {
         private String clientSecret;
 
         private String redirectUri;
+
+        private long accessTokenTimeLifeMinutes;
+
+        private long refreshTokenTimeLifeHours;
     }
 }

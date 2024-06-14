@@ -20,6 +20,8 @@ export class User {
 
     registeredBy: RegisteredBy;
 
+    isBlocked: boolean;
+
     isUsePasswordStub: boolean;
 
     reviewsCommonRating: number;

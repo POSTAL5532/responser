@@ -80,5 +80,7 @@ reviewly:
       clientId: reviewly-web-client
       clientSecret: "{noop}reviewly-web-client-secret"
       redirectUri: ${reviewly.frontendAppUrl}/auth-code
+      accessTokenTimeLifeMinutes: 10
+      refreshTokenTimeLifeHours: 120
   allowedOrigins:
     - ${reviewly.selfHost}

@@ -17,6 +17,7 @@ import "./EditUserProfileForm.less";
 
 type EditUserProfileFormProps = {
     updateUserPayload: UpdateUserPayload;
+    isUserBlocked?: boolean;
     onFinish: (setFieldError?: (field: string, message: string) => void) => void;
     userWasChanged: boolean;
     isEmailConfirmed: boolean;
@@ -35,6 +36,7 @@ const EDIT_USER_FORM_VALIDATION_SCHEMA = Yup.object().shape({
 const EditUserProfileForm: React.FC<EditUserProfileFormProps> = (props: EditUserProfileFormProps) => {
     const {
         updateUserPayload,
+        isUserBlocked = false,
         onFinish,
         loading,
         isEmailConfirmed,
@@ -102,14 +104,16 @@ const EditUserProfileForm: React.FC<EditUserProfileFormProps> = (props: EditUser
             validationSchema={EDIT_USER_FORM_VALIDATION_SCHEMA}>
 
             <Form className="edit-user-form">
-                <FullNameField label="Full name" onChange={event => updateUserPayload.fullName = event.target.value} disabled={loading}/>
+                <FullNameField label="Full name"
+                               onChange={event => updateUserPayload.fullName = event.target.value}
+                               disabled={loading || isUserBlocked}/>
 
                 <Tooltip className="email-tooltip" position={TooltipPosition.RIGHT} content={getEmailTooltipContent()} show={emailTooltipActivation()}>
                     <EmailField
                         className={emailFieldClassName}
                         label="Email"
                         onChange={event => updateUserPayload.email = event.target.value}
-                        disabled={loading || userRegisteredBy !== RegisteredBy.NATIVE}
+                        disabled={loading || userRegisteredBy !== RegisteredBy.NATIVE || isUserBlocked}
                         rightExtraComponent={<Icon type={isEmailConfirmed ? IconType.CHECK : IconType.CIRCLE_ALERT}/>}/>
                 </Tooltip>
 
@@ -117,7 +121,7 @@ const EditUserProfileForm: React.FC<EditUserProfileFormProps> = (props: EditUser
                         className="update-user"
                         loading={loading || isEmailConfirmationProcess}
                         styleType={ButtonType.PRIMARY}
-                        disabled={loading || isEmailConfirmationProcess || !userWasChanged}>
+                        disabled={loading || isEmailConfirmationProcess || !userWasChanged || isUserBlocked}>
                     Save
                 </Button>
             </Form>

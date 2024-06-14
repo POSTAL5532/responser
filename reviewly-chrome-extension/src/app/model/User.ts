@@ -17,6 +17,8 @@ export class User {
 
     avatarFileName: string;
 
+    isBlocked: boolean;
+
     createdTimestamp: Moment;
 
     updateDate: Moment;

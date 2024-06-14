@@ -98,6 +98,7 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
     }
 
     const currentUserConfirmedEmail = !!currentUser && currentUser.emailConfirmed;
+    const currentUserBlocked = !!currentUser && currentUser.isBlocked;
 
     return (
         <div className={resultClassName}>
@@ -132,14 +133,16 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
 
                 <div className="actions-container">
                     <ConditionShow condition={!!onRemoveReviewClick}>
-                        <Button className="remove-review" onClick={() => onRemoveReviewClick(review)}><Icon type={IconType.REMOVE}/> Remove</Button>
+                        <Button className="remove-review" onClick={() => onRemoveReviewClick(review)} disabled={currentUserBlocked}>
+                            <Icon type={IconType.REMOVE}/> Remove
+                        </Button>
                     </ConditionShow>
 
                     <ConditionShow condition={!!onEditReviewClick}>
-                        <Tooltip show={!currentUserConfirmedEmail ? undefined : false}
+                        <Tooltip show={!currentUserConfirmedEmail || currentUserBlocked ? undefined : false}
                                  position={TooltipPosition.TOP}
                                  content="Users with not conformed emails can't edit reviews. Please confirm your email in profile page.">
-                            <Button className="edit-review" onClick={() => onEditReviewClick(id)} disabled={!currentUserConfirmedEmail}>
+                            <Button className="edit-review" onClick={() => onEditReviewClick(id)} disabled={!currentUserConfirmedEmail || currentUserBlocked}>
                                 <Icon type={IconType.EDIT}/> Edit
                             </Button>
                         </Tooltip>
@@ -148,15 +151,17 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
                     <Reaction count={positives.length}
                               positive={true}
                               currentUserReacted={currentUserReviewLike?.positive}
-                              disabled={disableReactions || likeInProcess || !currentUser}
+                              disabled={disableReactions || likeInProcess || !currentUserConfirmedEmail || currentUserBlocked}
                               onClick={onReaction}/>
                     <Reaction count={negatives.length}
                               positive={false}
                               currentUserReacted={currentUserReviewLike && !currentUserReviewLike.positive}
-                              disabled={disableReactions || likeInProcess || !currentUser}
+                              disabled={disableReactions || likeInProcess || !currentUserConfirmedEmail || currentUserBlocked}
                               onClick={onReaction}/>
 
-                    <Button className="share-button" onClick={() => onShareReviewClick(review)}><Icon type={IconType.SEND}/></Button>
+                    <Button className="share-button" onClick={() => onShareReviewClick(review)} disabled={currentUserBlocked}>
+                        <Icon type={IconType.SEND}/>
+                    </Button>
                 </div>
             </div>
         </div>

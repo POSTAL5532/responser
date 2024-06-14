@@ -52,7 +52,8 @@ const SecurityPageItem: React.FC<SecurityPageItemProps> = (props: SecurityPageIt
 
             <div className="change-password-form-container">
                 <EditPasswordForm
-                    userUsesStubPassword={currentUser.isUsePasswordStub}
+                    userUsesStubPassword={currentUser?.isUsePasswordStub}
+                    isUserBlocked={currentUser?.isBlocked}
                     updateUserPasswordPayload={updateUserPasswordPayload}
                     onFinish={onEditPasswordFinish}
                     isLoading={loadingState.isPasswordUpdating}

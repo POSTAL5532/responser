@@ -31,6 +31,8 @@ public class UserInfoPayload {
 
     private Boolean isUsePasswordStub;
 
+    private Boolean isBlocked;
+
     private Double reviewsCommonRating;
 
     private LocalDateTime creationDate;

@@ -63,10 +63,8 @@ public class AuthorizationServerConfiguration {
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
                 .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
                 .tokenSettings(TokenSettings.builder()
-                    // TODO: access_token expires like refresh_token instead access_token_lifetime
-                    // TODO: use properties for lifetime configuration
-                    .accessTokenTimeToLive(Duration.ofHours(6))
-                    .refreshTokenTimeToLive(Duration.ofHours(7))
+                    .accessTokenTimeToLive(Duration.ofMinutes(cc.getAccessTokenTimeLifeMinutes()))
+                    .refreshTokenTimeToLive(Duration.ofHours(cc.getRefreshTokenTimeLifeHours()))
                     .authorizationCodeTimeToLive(Duration.ofMinutes(20))
                     .reuseRefreshTokens(false)
                     .build())
