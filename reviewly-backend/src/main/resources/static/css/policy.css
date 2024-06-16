@@ -39,3 +39,35 @@
   background-color: rgba(159, 143, 135, 0.08);
   margin-bottom: 30px;
 }
+.page.policy .page-content .section .main-points-container {
+  display: flex;
+  gap: 40px;
+  margin: 50px 0;
+}
+.page.policy .page-content .section .main-points-container .main-point {
+  padding: 30px;
+  border-radius: 12px;
+  background-color: #FFFFFF;
+  flex: 1;
+  min-height: 400px;
+}
+.page.policy .page-content .section .main-points-container .main-point .main-point-header-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin-bottom: 30px;
+}
+.page.policy .page-content .section .main-points-container .main-point .main-point-header-container .icon {
+  width: 46px;
+  height: 46px;
+}
+.page.policy .page-content .section .main-points-container .main-point .main-point-header-container .icon path {
+  stroke: #4F75C5;
+  stroke-opacity: 1;
+}
+.page.policy .page-content .section .main-points-container .main-point .main-point-header-container .main-point-header {
+  font-family: "Outfit-Medium", sans-serif;
+  font-size: 26px;
+  font-weight: 500;
+  margin: 0;
+}

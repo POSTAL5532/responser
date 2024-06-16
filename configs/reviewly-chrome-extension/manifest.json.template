@@ -1,9 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "Reviewly LOCAL DEV",
+  "name": "Reviewly LOCAL",
   "version": "1.0",
-  "description": "Chrome extensions which helps to leve the rating and reviews about the web site experience.",
+  "description": "Chrome extensions which helps to leave the rating and reviews about the web site experience.",
   "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0o9/s6UEA6jOzhS+V8ed2IbWkq7LsLJJQuItpTdV7JNH15Qcohfvp4YjOg7cTaPMKYJQuHdxNK2PTwPkF5lsLf3I2wHxRHQ4XSIHCyPweIAN3zYvBDaba/N2bzNhk1i3hauf6AI4jiYW/y5BF2suSmEXa13Apz7WT9C/th04cAcpsROaY/ENfMOWRfw0zstvajKsTFyHNmKy5O+rCmqqAcr/FwhWIiutjrMjUP2DpKO4Q/ldd/TywHYtZaAkIgJgXzgrl1tG0gxDN7gqHcvV/BaUeKtVfe+DmtNQd6Jn8dxbdJOX+X5u0dR5PnlUxqKNvwwQJu0T3ppXFlH7wU0TPQIDAQAB",
+  "homepage_url": "http://local-dev-reviewly.space",
   "permissions": [
     "tabs",
     "activeTab",
@@ -12,7 +13,7 @@
   ],
   "action": {
     "default_popup": "index.html",
-    "default_title": "Reviewly LOCAL DEV",
+    "default_title": "Click for see or leave opinions about this web resource.",
     "default_icon": {
       "16": "logo_16.png",
       "32": "logo_32.png",
