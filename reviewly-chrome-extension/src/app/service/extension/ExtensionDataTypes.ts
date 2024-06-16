@@ -24,5 +24,6 @@ export class ExtensionMessage<T = any> {
 export type ExtensionResponse<T = any> = {
     success: boolean;
     message?: string;
+    cause?: any;
     data: T
 }

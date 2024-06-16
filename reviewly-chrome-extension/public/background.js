@@ -31,17 +31,17 @@ chrome.runtime.onMessageExternal.addListener(
             case "SET_TOKEN":
                 setTokens(request.data)
                 .then(() => sendResponse({success: true, message: "Tokens successfully stored"}))
-                .catch(cause => sendResponse({success: false, message: cause}));
+                .catch(cause => sendResponse({success: false, message: cause?.message, cause: cause}));
                 break;
             case "REMOVE_TOKEN":
                 removeTokens()
                 .then(() => sendResponse({success: true, message: "Tokens successfully removed"}))
-                .catch(cause => sendResponse({success: false, message: cause}));
+                .catch(cause => sendResponse({success: false, message: cause?.message, cause: cause}));
                 break;
             case "GET_TOKEN":
                 getTokens()
                 .then(tokenData => sendResponse({success: true, data: tokenData}))
-                .catch(cause => sendResponse({success: false, message: cause}));
+                .catch(cause => sendResponse({success: false, message: cause?.message, cause: cause}));
                 break;
             default:
                 sendResponse({success: false, message: "Invalid action type"});
@@ -61,42 +61,42 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
         case "SET_TOKEN":
             setTokens(request.data)
             .then(() => sendResponse({success: true, message: "Tokens successfully stored"}))
-            .catch(cause => sendResponse({success: false, message: cause}));
+            .catch(cause => sendResponse({success: false, message: cause?.message, cause: cause}));
             break;
         case "GET_TOKEN":
             getTokens()
             .then(tokenData => sendResponse({success: true, data: tokenData}))
-            .catch(cause => sendResponse({success: false, message: cause}));
+            .catch(cause => sendResponse({success: false, message: cause?.message, cause: cause}));
             break;
         case "REMOVE_TOKEN":
             removeTokens()
             .then(() => sendResponse({success: true, message: "Tokens successfully removed"}))
-            .catch(cause => sendResponse({success: false, message: cause}));
+            .catch(cause => sendResponse({success: false, message: cause?.message, cause: cause}));
             break;
         case "OPEN_EXTERNAL_PAGE":
             openExternalPage(request.data)
             .then(() => sendResponse({success: true}))
-            .catch(cause => sendResponse({success: false, message: cause}));
+            .catch(cause => sendResponse({success: false, message: cause?.message, cause: cause}));
             break;
         case "GET_CURRENT_PAGE_INFO":
             getCurrentPageInfo()
             .then(pageInfo => sendResponse({success: true, data: pageInfo}))
-            .catch(cause => sendResponse({success: false, message: cause}))
+            .catch(cause => sendResponse({success: false, message: cause?.message, cause: cause}))
             break;
         case "UPDATE_RATING_BADGE":
             updateRatingBadge()
             .then(() => sendResponse({success: true}))
-            .catch(cause => sendResponse({success: false, message: cause}))
+            .catch(cause => sendResponse({success: false, message: cause?.message, cause: cause}))
             break;
         case "GET_NOTIFICATIONS_PARAMETER":
             getNotificationsParameter()
             .then(notificationsParameter => sendResponse({success: true, data: notificationsParameter}))
-            .catch(cause => sendResponse({success: false, message: cause}))
+            .catch(cause => sendResponse({success: false, message: cause?.message, cause: cause}))
             break;
         case "TOGGLE_NOTIFICATIONS":
             toggleNotifications(request.data)
             .then(() => sendResponse({success: true}))
-            .catch(cause => sendResponse({success: false, message: cause}))
+            .catch(cause => sendResponse({success: false, message: cause?.message, cause: cause}))
             break;
         default:
             sendResponse({success: false, message: "Invalid action type"});
@@ -123,9 +123,6 @@ chrome.tabs.onActivated.addListener(async ({tabId}) => {
     setSiteRatingBadgeIfNeed(tabId, tab.url, tab.status, tab.active);
 });
 
-// *************************************
-// ************** UTILS ****************
-// *************************************
 const isHttpUrl = (url) => {
     return url.startsWith("http");
 }
@@ -133,10 +130,6 @@ const isHttpUrl = (url) => {
 const isTabReadyForActions = (tabId, tabUrl, tabStatus, isTabActive) => {
     return tabUrl && isHttpUrl(tabUrl) && tabStatus === "complete" && isTabActive;
 }
-
-// *************************************
-// *************** LOGIC ***************
-// *************************************
 
 /**
  * Check url and if it not is "http or https" - disable extension action icon.

@@ -94,10 +94,10 @@ export class ExtensionService {
                 message,
                 response => {
                     if(response.success) {
-                        this.logger.debug("Message result - success. Response is:", response);
+                        this.logger.debug("Message result - success. Response is:", response.message, response.cause);
                         resolve(response);
                     } else {
-                        this.logger.error("Message result - fault. Response is:", response);
+                        this.logger.error("Message result - fault. Response is:", response.message, response.cause);
                         reject(response.message);
                     }
                 }
