@@ -90,7 +90,7 @@ reviewly:
   clientId: reviewly-web-client
   clientSecret: reviewly-web-client-secret
   downloadExtensionChrome: https://www.google.com
-  chromeExtensionId: bcgepbhdoibfdnpmemhdjifmjdmfacml
+  chromeExtensionId: npjojpeicanobigdoanpedlldbepdkgn
   noReplyEmail: no-reply@reviewly.space
   contactEmail: contact@reviewly.space
   fileStorageUrl: ${reviewly.selfHost}/cdn

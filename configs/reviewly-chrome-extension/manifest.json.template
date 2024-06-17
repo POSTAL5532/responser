@@ -3,7 +3,7 @@
   "name": "Reviewly LOCAL",
   "version": "1.0",
   "description": "Chrome extensions that assist in exploring and leaving ratings and reviews about website experiences.",
-  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0o9/s6UEA6jOzhS+V8ed2IbWkq7LsLJJQuItpTdV7JNH15Qcohfvp4YjOg7cTaPMKYJQuHdxNK2PTwPkF5lsLf3I2wHxRHQ4XSIHCyPweIAN3zYvBDaba/N2bzNhk1i3hauf6AI4jiYW/y5BF2suSmEXa13Apz7WT9C/th04cAcpsROaY/ENfMOWRfw0zstvajKsTFyHNmKy5O+rCmqqAcr/FwhWIiutjrMjUP2DpKO4Q/ldd/TywHYtZaAkIgJgXzgrl1tG0gxDN7gqHcvV/BaUeKtVfe+DmtNQd6Jn8dxbdJOX+X5u0dR5PnlUxqKNvwwQJu0T3ppXFlH7wU0TPQIDAQAB",
+  "key": "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA5cd9M5fviPt37GS3HKKwEDOK/PzUbNbfiw2B7sbPnSwETZY1U/uYWfMYU9l6PLQkg1kU8fXa/yfZVCovm9tMbtpTP25G6+kg1XzXiAiaTJnKlLgcTOaV2bD3vGaJyne7oqzKxrYOrhs1asF3UM8snqX29F9Bf+NRCzq9jCb8Zab5xulEYYQNlkOPFLw8ivGcAzmPalHQlGeVjIG6GUyZH8Jnc1S6oMWh25T+spa4KFupznkoQx2PbqbK4xfzmA1m3aIQjt6eL+bvwrhrYwzhERgIMTzITPhc1ov98vFbcQV+j3SyjnCKUq/NbIaauQVHHBm15MWEkPkFsapp3Th4EQIDAQAB",
   "homepage_url": "http://local-dev-reviewly.space",
   "permissions": [
     "tabs",
