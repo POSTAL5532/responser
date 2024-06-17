@@ -81,21 +81,25 @@
   font-family: "Outfit-Regular";
   font-size: 10px;
   color: #605c55;
+  line-height: initial;
 }
 
 .reviewly-rating-popup .reviewly-rating-block .reviewly-rating {
   font-family: "Outfit-Medium";
   font-size: 20px;
+  line-height: initial;
 }
 
 .reviewly-rating-popup .reviewly-rating-block .reviewly-reviews-count {
   font-family: "Outfit-Regular";
   font-size: 10px;
+  line-height: initial;
   color: #605c55;
 }
 
 .reviewly-rating-popup .reviewly-rating-block .reviewly-reviews-count .reviewly-reviews-count-value {
-  font-family: "Outfit-Medium"
+  font-family: "Outfit-Medium";
+  line-height: initial;
 }
 
 .reviewly-rating-popup .reviewly-rating-block .reviewly-rating.good-rating {

@@ -48,8 +48,8 @@ module.exports = (env, args) => {
     console.log("configObject:", configObject);
 
     return {
-        // mode: (env.buildMode === "prod") ? "production" : "development",
-        mode: "production",
+        mode: (env.buildMode === "prod") ? "production" : "development",
+        // mode: "production",
         entry: {app: path.join(__dirname, "src", "index.tsx")},
         target: "web",
         devtool: env.buildMode === "prod" ? undefined : "source-map",
