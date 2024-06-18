@@ -1,6 +1,6 @@
 {
   "name": "reviewly-chrome-extension",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "browserslist": {
     "production": [
       ">0.2%",
