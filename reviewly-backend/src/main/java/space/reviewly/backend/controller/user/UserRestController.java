@@ -4,12 +4,12 @@ import static space.reviewly.backend.config.ApplicationProperties.API_ROOT_PATH;
 
 import space.reviewly.backend.config.CustomOAuth2AuthenticatedPrincipal;
 import space.reviewly.backend.controller.RestApiController;
-import space.reviewly.backend.controller.user.payload.CreateUserProfilePayload;
-import space.reviewly.backend.controller.user.payload.ForgotPasswordPayload;
-import space.reviewly.backend.controller.user.payload.RestorePasswordPayload;
-import space.reviewly.backend.controller.user.payload.UpdateUserPasswordPayload;
-import space.reviewly.backend.controller.user.payload.UpdateUserPayload;
-import space.reviewly.backend.controller.user.payload.UserInfoPayload;
+import space.reviewly.backend.controller.user.dto.CreateUserProfileDTO;
+import space.reviewly.backend.controller.user.dto.ForgotPasswordDTO;
+import space.reviewly.backend.controller.user.dto.RestorePasswordDTO;
+import space.reviewly.backend.controller.user.dto.UpdateUserPasswordDTO;
+import space.reviewly.backend.controller.user.dto.UpdateUserDTO;
+import space.reviewly.backend.controller.user.dto.UserDTO;
 import space.reviewly.backend.converter.UserConverter;
 import space.reviewly.backend.model.user.User;
 import space.reviewly.backend.service.RatingService;
@@ -43,7 +43,7 @@ public class UserRestController extends RestApiController {
     private final RatingService ratingService;
 
     @PostMapping
-    public ResponseEntity<Void> registerUser(@Valid @RequestBody CreateUserProfilePayload newUser) {
+    public ResponseEntity<Void> registerUser(@Valid @RequestBody CreateUserProfileDTO newUser) {
         log.debug("Register new user.");
         userService.registerUser(userConverter.toUser(newUser));
         return ResponseEntity.ok().build();
@@ -51,7 +51,7 @@ public class UserRestController extends RestApiController {
 
     @PreAuthorize("isAuthenticated()")
     @PutMapping
-    public ResponseEntity<Void> updateUser(CustomOAuth2AuthenticatedPrincipal principal, @Valid @RequestBody UpdateUserPayload user) {
+    public ResponseEntity<Void> updateUser(CustomOAuth2AuthenticatedPrincipal principal, @Valid @RequestBody UpdateUserDTO user) {
         log.info("Update current {} user.", principal.getUserId());
         userService.updateUser(principal.getUserId(), userConverter.toUser(user));
         return ResponseEntity.ok().build();
@@ -59,13 +59,13 @@ public class UserRestController extends RestApiController {
 
     @PreAuthorize("isAuthenticated()")
     @GetMapping("/current")
-    public ResponseEntity<UserInfoPayload> getCurrentUser(CustomOAuth2AuthenticatedPrincipal principal) {
+    public ResponseEntity<UserDTO> getCurrentUser(CustomOAuth2AuthenticatedPrincipal principal) {
         String userId = principal.getUserId();
 
         log.debug("Get current {} user.", userId);
 
         User user = userService.getFullUser(userId);
-        UserInfoPayload userPayload = userConverter.toFullUserInfoPayload(user);
+        UserDTO userPayload = userConverter.toUserDTO(user);
         userPayload.setReviewsCommonRating(ratingService.getUserReviewsRating(userId));
 
         return ResponseEntity.ok(userPayload);
@@ -75,32 +75,32 @@ public class UserRestController extends RestApiController {
     @PutMapping("/update-password")
     public ResponseEntity<Void> updatePassword(
         CustomOAuth2AuthenticatedPrincipal principal,
-        @Valid @NotNull @RequestBody UpdateUserPasswordPayload updateUserPasswordPayload
+        @Valid @NotNull @RequestBody UpdateUserPasswordDTO updateUserPasswordDTO
     ) {
 
         log.debug("Update current {} user password.", principal.getUserId());
 
         userService.updateUserPassword(
             principal.getUserId(),
-            updateUserPasswordPayload.getOldPassword(),
-            updateUserPasswordPayload.getNewPassword()
+            updateUserPasswordDTO.getOldPassword(),
+            updateUserPasswordDTO.getNewPassword()
         );
 
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/send-restore-password-link")
-    public ResponseEntity<Void> sendRestorePasswordLink(@Valid @NotNull @RequestBody ForgotPasswordPayload forgotPasswordPayload) {
-        log.debug("Send restoring link for user password with email {}.", forgotPasswordPayload.getEmail());
-        userService.requestPasswordRestoring(forgotPasswordPayload.getEmail());
+    public ResponseEntity<Void> sendRestorePasswordLink(@Valid @NotNull @RequestBody ForgotPasswordDTO forgotPasswordDTO) {
+        log.debug("Send restoring link for user password with email {}.", forgotPasswordDTO.getEmail());
+        userService.requestPasswordRestoring(forgotPasswordDTO.getEmail());
 
         return ResponseEntity.ok().build();
     }
 
     @PostMapping("/restore-password")
-    public ResponseEntity<Void> restorePassword(@Valid @NotNull @RequestBody RestorePasswordPayload restorePasswordPayload) {
-        log.debug("Restore password by password restore: {}.", restorePasswordPayload);
-        userService.restorePassword(restorePasswordPayload.getRestorePasswordId(), restorePasswordPayload.getNewPassword());
+    public ResponseEntity<Void> restorePassword(@Valid @NotNull @RequestBody RestorePasswordDTO restorePasswordDTO) {
+        log.debug("Restore password by password restore: {}.", restorePasswordDTO);
+        userService.restorePassword(restorePasswordDTO.getRestorePasswordId(), restorePasswordDTO.getNewPassword());
         return ResponseEntity.ok().build();
     }
 

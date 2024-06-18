@@ -1,7 +1,7 @@
 package space.reviewly.backend.controller.reviews.payload;
 
 import space.reviewly.backend.controller.reviewlike.payload.ReviewLikeDTO;
-import space.reviewly.backend.controller.user.payload.UserInfoPayload;
+import space.reviewly.backend.controller.user.dto.UserBasicDTO;
 import space.reviewly.backend.controller.webresource.payload.WebResourceDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -24,7 +24,7 @@ public class ReviewDTO {
 
     private String id;
 
-    private UserInfoPayload user;
+    private UserBasicDTO user;
 
     private String resourceId;
 

@@ -1,9 +1,10 @@
 package space.reviewly.backend.converter;
 
 import java.util.Optional;
-import space.reviewly.backend.controller.user.payload.CreateUserProfilePayload;
-import space.reviewly.backend.controller.user.payload.UpdateUserPayload;
-import space.reviewly.backend.controller.user.payload.UserInfoPayload;
+import space.reviewly.backend.controller.user.dto.CreateUserProfileDTO;
+import space.reviewly.backend.controller.user.dto.UpdateUserDTO;
+import space.reviewly.backend.controller.user.dto.UserBasicDTO;
+import space.reviewly.backend.controller.user.dto.UserDTO;
 import space.reviewly.backend.model.user.RegisteredBy;
 import space.reviewly.backend.model.user.Role;
 import space.reviewly.backend.model.user.User;
@@ -18,7 +19,7 @@ import space.reviewly.backend.service.user.UserService;
 @Service
 public class UserConverter {
 
-    public User toUser(CreateUserProfilePayload newUserPayload) {
+    public User toUser(CreateUserProfileDTO newUserPayload) {
         User user = new User();
         user.setEmail(newUserPayload.getEmail());
         user.setPassword(newUserPayload.getPassword());
@@ -27,7 +28,7 @@ public class UserConverter {
         return user;
     }
 
-    public User toUser(UpdateUserPayload updateUser) {
+    public User toUser(UpdateUserDTO updateUser) {
         User user = new User();
         user.setEmail(updateUser.getEmail());
         user.setFullName(updateUser.getFullName());
@@ -35,35 +36,36 @@ public class UserConverter {
         return user;
     }
 
-    public UserInfoPayload toUserInfoPayload(User user) {
-        UserInfoPayload userPayload = new UserInfoPayload();
-        userPayload.setId(user.getId());
-        userPayload.setFullName(user.getFullName());
-        userPayload.setAvatarFileName(user.getAvatarFileName());
-
-        return userPayload;
+    public UserBasicDTO toUserBasicDTO(User user) {
+        return UserBasicDTO.builder()
+            .id(user.getId())
+            .fullName(user.getFullName())
+            .avatarFileName(user.getAvatarFileName())
+            .build();
     }
 
-    public UserInfoPayload toFullUserInfoPayload(User user) {
-        UserInfoPayload userPayload = toUserInfoPayload(user);
+    public UserDTO toUserDTO(User user) {
 
-        userPayload.setEmail(user.getEmail());
-        userPayload.setEmailConfirmed(user.getEmailConfirmed());
-        userPayload.setRegisteredBy(user.getRegisteredBy());
-        userPayload.setIsUsePasswordStub(
-            user.getPassword().equals(UserService.SOCIAL_SIGNUP_USER_PASSWORD_STUB) && user.getRegisteredBy() != RegisteredBy.NATIVE
-        );
+        UserDTO.UserDTOBuilder userDTOBuilder = UserDTO.builder()
+            .id(user.getId())
+            .fullName(user.getFullName())
+            .avatarFileName(user.getAvatarFileName())
+            .email(user.getEmail())
+            .emailConfirmed(user.getEmailConfirmed())
+            .registeredBy(user.getRegisteredBy())
+            .isUsePasswordStub(
+                user.getPassword().equals(UserService.SOCIAL_SIGNUP_USER_PASSWORD_STUB) && user.getRegisteredBy() != RegisteredBy.NATIVE
+            )
+            .creationDate(user.getCreationDate())
+            .updateDate(user.getUpdateDate());
 
         Optional<Role> roleOptional = user.getRoles().stream().findFirst();
 
         if (roleOptional.isPresent()) {
             Role role = roleOptional.get();
-            userPayload.setIsBlocked(role.getName().equals("USER_BLOCKED"));
+            userDTOBuilder.isBlocked(role.getName().equals("USER_BLOCKED"));
         }
 
-        userPayload.setCreationDate(user.getCreationDate());
-        userPayload.setUpdateDate(user.getUpdateDate());
-
-        return userPayload;
+        return userDTOBuilder.build();
     }
 }

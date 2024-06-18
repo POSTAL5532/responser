@@ -1,4 +1,4 @@
-package space.reviewly.backend.controller.user.payload;
+package space.reviewly.backend.controller.user.dto;
 
 import space.reviewly.backend.utils.ValidationUtils;
 import jakarta.validation.constraints.NotBlank;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class RestorePasswordPayload {
+public class RestorePasswordDTO {
 
     @NotBlank(message = "Restore password ID doesn't specified.")
     private String restorePasswordId;

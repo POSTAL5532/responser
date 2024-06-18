@@ -1,4 +1,4 @@
-package space.reviewly.backend.controller.user.payload;
+package space.reviewly.backend.controller.user.dto;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,7 @@ import jakarta.validation.constraints.Size;
  */
 @Data
 @NoArgsConstructor
-public class UpdateUserPayload {
+public class UpdateUserDTO {
 
     @NotBlank(message = "Email must be specified")
     @Email(message = "Email is incorrect")

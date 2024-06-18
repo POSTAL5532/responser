@@ -1,4 +1,4 @@
-package space.reviewly.backend.controller.user.payload;
+package space.reviewly.backend.controller.user.dto;
 
 import space.reviewly.backend.controller.user.validation.EmailUniqueness;
 import space.reviewly.backend.utils.ValidationUtils;
@@ -17,7 +17,7 @@ import jakarta.validation.constraints.Size;
  */
 @Data
 @NoArgsConstructor
-public class CreateUserProfilePayload {
+public class CreateUserProfileDTO {
 
     @NotBlank(message = "Email must be specified")
     @Email(message = "Email is incorrect")

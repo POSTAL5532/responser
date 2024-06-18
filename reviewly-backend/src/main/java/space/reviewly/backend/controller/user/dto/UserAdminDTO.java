@@ -1,21 +1,19 @@
-package space.reviewly.backend.controller.user.payload;
-
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+package space.reviewly.backend.controller.user.dto;
 
 import java.time.LocalDateTime;
+import java.util.Set;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import space.reviewly.backend.model.user.RegisteredBy;
+import space.reviewly.backend.model.user.Role;
 
-/**
- * UserInfoPayload
- *
- * @author Shcherbachenya Igor
- */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserInfoPayload {
+@Builder
+public class UserAdminDTO {
 
     private String id;
 
@@ -31,7 +29,7 @@ public class UserInfoPayload {
 
     private Boolean isUsePasswordStub;
 
-    private Boolean isBlocked;
+    private Set<Role> roles;
 
     private Double reviewsCommonRating;
 

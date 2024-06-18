@@ -50,7 +50,7 @@ public class ReviewConverter {
         return ReviewDTO.builder()
             .id(review.getId())
             .resourceId(review.getResourceId())
-            .user(userConverter.toUserInfoPayload(review.getUser()))
+            .user(userConverter.toUserBasicDTO(review.getUser()))
             .rating(review.getRating())
             .text(review.getText())
             .reviewLikes(reviewLikes)
