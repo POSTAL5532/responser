@@ -38,6 +38,7 @@ dependencies {
     implementation 'org.apache.httpcomponents.client5:httpclient5:5.2.1'
     implementation 'commons-io:commons-io:2.13.0'
     implementation 'org.apache.tika:tika-core:2.9.1'
+    implementation 'dnsjava:dnsjava:3.5.3'
 
     annotationProcessor 'org.projectlombok:lombok'
     annotationProcessor 'org.hibernate.orm:hibernate-jpamodelgen:6.1.5.Final'
