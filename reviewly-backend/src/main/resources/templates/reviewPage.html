@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/pageLayout(pageClass='review', customSocialMeta=true)}"
+      layout:decorate="~{layouts/pageLayout(pageClass='review', customSocialMeta=true, customSEODescription=true)}"
       lang="en">
 <head>
     <title>Reviewly - Review</title>
+
+    <meta name="description" th:content="${facebookMetaTags.title}">
 
     <link th:href="@{/css/reviewPage.css}" rel="stylesheet"/>
 
@@ -37,7 +39,7 @@
                      th:alt="${T(space.reviewly.backend.utils.UrlUtils).getHost(rootWebResource.url)}">
             </div>
             <span class="site-name" th:text="${T(space.reviewly.backend.utils.UrlUtils).getHost(rootWebResource.url)}">Google.com</span>
-            <div class="site-rating-container">
+            <div class="site-rating-container" th:if="${resourceRating != null && resourceRating > 0}">
                 <span class="site-rating" th:text="${#numbers.formatDecimal(resourceRating, 1, 1, 'POINT')}">! ERROR !</span>
             </div>
         </h1>

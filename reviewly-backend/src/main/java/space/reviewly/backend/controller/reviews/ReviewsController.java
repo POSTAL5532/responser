@@ -1,5 +1,6 @@
 package space.reviewly.backend.controller.reviews;
 
+import java.util.Optional;
 import space.reviewly.backend.config.ApplicationProperties;
 import space.reviewly.backend.controller.reviews.payload.ReviewsRequestCriteria;
 import space.reviewly.backend.converter.ReviewConverter;
@@ -81,16 +82,18 @@ public class ReviewsController {
     @GetMapping("/{reviewId}")
     public ModelAndView getReview(ModelAndView modelAndView, @Valid @NotNull @PathVariable String reviewId) {
         Review review = reviewService.getReview(reviewId);
-        ResourceRating resourceRating = ratingService.getResourceFullRatingById(
-            review.getWebResource().getParent() == null
-                ? review.getWebResource().getId()
-                : review.getWebResource().getParent().getId()
+        Optional<ResourceRating> resourceRating = Optional.ofNullable(
+            ratingService.getResourceFullRatingById(
+                review.getWebResource().getParent() == null
+                    ? review.getWebResource().getId()
+                    : review.getWebResource().getParent().getId()
+            )
         );
 
         modelAndView.setViewName("reviewPage");
 
         modelAndView.addObject("review", reviewConverter.toReviewPayload(review));
-        modelAndView.addObject("resourceRating", resourceRating.getRating());
+        modelAndView.addObject("resourceRating", resourceRating.map(ResourceRating::getRating).orElse(null));
         modelAndView.addObject("positiveReactions", review.getLikes().stream().filter(ReviewLike::getPositive).count());
         modelAndView.addObject("negativeReactions", review.getLikes().stream().filter(r -> !r.getPositive()).count());
         modelAndView.addObject("facebookMetaTags", new FacebookMetaTags(review, applicationProperties));

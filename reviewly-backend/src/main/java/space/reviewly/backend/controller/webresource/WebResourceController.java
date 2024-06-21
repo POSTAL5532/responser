@@ -1,5 +1,7 @@
 package space.reviewly.backend.controller.webresource;
 
+import java.util.Objects;
+import java.util.Optional;
 import space.reviewly.backend.controller.reviews.payload.ReviewsRequestCriteria;
 import space.reviewly.backend.controller.webresource.payload.WebResourceDTO;
 import space.reviewly.backend.controller.webresource.payload.WebResourceRequestCriteria;
@@ -114,7 +116,7 @@ public class WebResourceController {
         }
 
         WebResource webResource = webResourceService.getById(resourceId);
-        ResourceRating resourceRating = ratingService.getResourceFullRatingById(webResource.getId());
+        Optional<ResourceRating> resourceRating = Optional.ofNullable(ratingService.getResourceFullRatingById(webResource.getId()));
 
         Page<Review> reviews = reviewService.getReviews(
             reviewsCriteriaConverter.toReviewsCriteria(reviewsCriteria),
@@ -122,8 +124,8 @@ public class WebResourceController {
         );
 
         WebResourceDTO webResourceDTO = webResourceConverter.toDTO(webResource);
-        webResourceDTO.setRating(resourceRating.getRating());
-        webResourceDTO.setReviewsCount(resourceRating.getReviewsCount());
+        webResourceDTO.setRating(resourceRating.map(ResourceRating::getRating).orElse(null));
+        webResourceDTO.setReviewsCount(resourceRating.map(ResourceRating::getReviewsCount).orElse(null));
 
         model.addAttribute("reviewsCriteria", reviewsCriteria);
         model.addAttribute("webResource", webResourceDTO);

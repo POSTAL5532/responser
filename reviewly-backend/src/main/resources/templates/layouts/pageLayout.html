@@ -84,6 +84,12 @@
         <meta property="vk:image:height" content="512"/>
     </th:block>
 
+    <th:block th:if="${customSEODescription != true}">
+        <meta name="description" content="Find reviews faster and make choices easier with Reviewly. Reviewly Integrated into the browser and allows you to read reviews and leave your opinion about any site without leaving it">
+    </th:block>
+
+    <meta name="keywords" content="site rating, site reviews, website, discussion, opinion, communication, evaluation">
+
     <th:block th:if="${@applicationProperties.runMode == T(space.reviewly.backend.config.RunMode).PROD}">
         <!-- Google tag (gtag.js) -->
         <script async src="https://www.googletagmanager.com/gtag/js?id=G-E03HG0FX99"></script>

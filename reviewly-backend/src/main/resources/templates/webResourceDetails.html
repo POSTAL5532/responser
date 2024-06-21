@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorate="~{layouts/pageLayout(pageClass='web-resource-details', activeNavigation='sitesRating')}"
+      layout:decorate="~{layouts/pageLayout(pageClass='web-resource-details', activeNavigation='sitesRating', customSEODescription=true)}"
       lang="en">
 <head>
     <title>Reviewly - Site details</title>
+
+    <meta name="description" th:content="${'Review and rating for website ' + T(space.reviewly.backend.utils.UrlUtils).getHost(webResource.url)}">
 
     <link th:href="@{/css/webResourceDetails.css}" rel="stylesheet"/>
     <link th:href="@{/css/nouislider.min.css}" rel="stylesheet"/>
@@ -28,7 +30,7 @@
                          th:alt="${T(space.reviewly.backend.utils.UrlUtils).getHost(webResource.url)}">
                 </div>
                 <span class="site-name" th:text="${resourceBasePath}">! ERROR !</span>
-                <div class="site-rating-container">
+                <div class="site-rating-container" th:if="${webResource.rating != null && webResource.rating > 0}">
                     <span class="site-rating" th:text="${#numbers.formatDecimal(webResource.rating, 1, 1, 'POINT')}">! ERROR !</span>
                 </div>
             </h1>
