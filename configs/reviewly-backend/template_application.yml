@@ -89,8 +89,8 @@ reviewly:
   restorePasswordPageUrl: ${reviewly.feApplicationUrl}/restore-password
   clientId: reviewly-web-client
   clientSecret: reviewly-web-client-secret
-  downloadExtensionChrome: https://www.google.com
-  chromeExtensionId: npjojpeicanobigdoanpedlldbepdkgn
+  downloadExtensionChrome: https://chromewebstore.google.com/detail/reviewly/npjojpeicanobigdoanpedlldbepdkgn
+  chromeExtensionId: bcgepbhdoibfdnpmemhdjifmjdmfacml
   noReplyEmail: no-reply@reviewly.space
   contactEmail: contact@reviewly.space
   fileStorageUrl: ${reviewly.selfHost}/cdn

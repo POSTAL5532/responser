@@ -66,7 +66,7 @@ public class AuthorizationServerConfiguration {
                     .accessTokenTimeToLive(Duration.ofMinutes(cc.getAccessTokenTimeLifeMinutes()))
                     .refreshTokenTimeToLive(Duration.ofHours(cc.getRefreshTokenTimeLifeHours()))
                     .authorizationCodeTimeToLive(Duration.ofMinutes(20))
-                    .reuseRefreshTokens(false)
+                    .reuseRefreshTokens(true)
                     .build())
                 .build();
 

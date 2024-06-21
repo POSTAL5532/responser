@@ -71,7 +71,7 @@ reviewly:
   forgotPasswordPageUrl: ${reviewly.frontendAppUrl}/forgot-password
   noReplyEmail: no-reply@reviewly.space
   contactEmail: contact@reviewly.space
-  downloadExtensionChrome: https://www.google.com
+  downloadExtensionChrome: https://chromewebstore.google.com/detail/reviewly/npjojpeicanobigdoanpedlldbepdkgn
   fileStorageUrl: ${reviewly.selfHost}/cdn
   fileStorageBucket: local_files
   fileStorageUrlCommon: ${reviewly.fileStorageUrl}/${reviewly.fileStorageBucket}/common
