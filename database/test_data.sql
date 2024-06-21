@@ -19,7 +19,8 @@ VALUES
     ('00000000-0000-0000-user-000000000017', 'user17@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Daniel Smith', NULL, true, '2023-11-04 17:30:45', 'NATIVE'),
     ('00000000-0000-0000-user-000000000018', 'user18@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Email Unconfirmed', NULL, false, '2023-11-04 17:45:00', 'NATIVE'),
     ('00000000-0000-0000-user-000000000019', 'user19@social.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Ryan Johnson', NULL, true, '2023-11-04 18:00:15', 'GOOGLE'),
-    ('00000000-0000-0000-user-000000000020', 'user20@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Blocked User', NULL, true, '2023-11-04 16:30:45', 'NATIVE');
+    ('00000000-0000-0000-user-000000000020', 'user20@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Blocked User', NULL, true, '2023-11-04 16:30:45', 'NATIVE'),
+    ('00000000-0000-0000-user-000000000021', 'user21@rmail.com', '{bcrypt}$2a$10$bbE3qCErjDczpwbvOqNTQ.Uvm4/07shdE7zZodaddDX6dbmfD6uSS', 'Admin Man', NULL, true, '2023-11-04 16:30:45', 'NATIVE');
 
 
 INSERT INTO user_role (user_id, role_id)
@@ -43,7 +44,8 @@ VALUES
     ('00000000-0000-0000-user-000000000017', '9399186f-b4d6-48da-9862-24582a4f3bc1'),
     ('00000000-0000-0000-user-000000000018', '9399186f-b4d6-48da-9862-24582a4f3bc1'),
     ('00000000-0000-0000-user-000000000019', '9399186f-b4d6-48da-9862-24582a4f3bc1'),
-    ('00000000-0000-0000-user-000000000020', '3d304773-e90f-44ff-85ff-ab749eb26e69');
+    ('00000000-0000-0000-user-000000000020', '3d304773-e90f-44ff-85ff-ab749eb26e69'),
+    ('00000000-0000-0000-user-000000000021', 'd3b3461b-6903-4174-abea-903856e913b3');
 
 
 INSERT INTO web_resource (id, parent_id, url, icon_file_name, resource_type, creation_date, update_date)
@@ -431,14 +433,16 @@ VALUES
     ('00000000-0000-0000-like-000000000110', '00000000-0000-0000-user-000000000009', '00000000-0000-0000-0019-000000review', true, '2023-11-04 14:15:30'),
     ('00000000-0000-0000-like-000000000111', '00000000-0000-0000-user-000000000010', '00000000-0000-0000-0019-000000review', false, '2023-11-04 14:30:45');
 
-INSERT INTO contact_form (id, username, email, text, creation_date)
+INSERT INTO contact_form (id, username, email, text, creation_date, read)
 VALUES ('00000000-0000-cont-form-000000000001',
         'Igor Shcherbachenya',
         'user1@rmail.com',
         '111 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        '2023-11-04 12:34:56'),
+        '2023-11-04 12:34:56',
+       false),
        ('00000000-0000-cont-form-000000000002',
         'Jane Doe',
         'user2@rmail.com',
         '222 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
-        '2023-11-05 12:34:56');
+        '2023-11-05 12:34:56',
+        true);
