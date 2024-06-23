@@ -1,0 +1,56 @@
+import {Layout, Menu} from "antd";
+import {CloseOutlined, HomeOutlined, QuestionCircleOutlined} from "@ant-design/icons";
+import {WELCOME_PAGE_URL} from "../../logic/welcome-page/WelcomePage";
+import React, {useContext, useState} from "react";
+import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
+import {ConditionShow} from "../ConditionShow";
+import {observer} from "mobx-react";
+import {USERS_CONTACT_FORMS} from "../../logic/user-contact-froms-page/UsersContactFormsPage";
+import {Icon, IconType} from "../icon/Icon";
+import LocalTokenStorageService from "../../service/authorization/LocalTokenStorageService";
+import {nativeNavigateToAuthLogoutPageUrl, navigateTo} from "../../utils/NavigationUtils";
+import "./ConsoleSider.less";
+
+const ConsoleSider: React.FC = props => {
+    const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
+    const [collapsed, setCollapsed] = useState(true);
+
+    return (
+        <Layout.Sider collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)} style={{minHeight: '100vh'}} className="console-sider">
+            <div className="reviewly-logo">
+                <Icon type={IconType.REVIEWLY}/>
+            </div>
+            <ConditionShow condition={!!currentUser}>
+                <Menu theme="dark" defaultSelectedKeys={['1']} mode="inline" items={[
+                    {
+                        key: 1,
+                        label: "Home",
+                        icon: <HomeOutlined/>,
+                        onClick: () => {
+                            navigateTo(WELCOME_PAGE_URL);
+                        }
+                    },
+                    {
+                        key: 2,
+                        label: "Users contact forms",
+                        icon: <QuestionCircleOutlined/>,
+                        onClick: () => {
+                            navigateTo(USERS_CONTACT_FORMS);
+                        }
+                    },
+                    {
+                        key: 99,
+                        label: "Logout",
+                        icon: <CloseOutlined />,
+                        onClick: () => {
+                            LocalTokenStorageService.removeAllTokens();
+                            nativeNavigateToAuthLogoutPageUrl();
+                        }
+                    }
+                ]}/>
+            </ConditionShow>
+        </Layout.Sider>
+    )
+}
+
+export default observer(ConsoleSider);

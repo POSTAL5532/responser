@@ -48,7 +48,7 @@ public class ReviewsRestController extends RestApiController {
     private final ReviewsCriteriaConverter reviewsCriteriaConverter;
 
     /**
-     * Returns {@link List< ReviewDTO >} by {@link ReviewsCriteria}. If request criteria contains forUserId parameter - check and compare authorized user.
+     * Returns {@link List<ReviewDTO>} by {@link ReviewsCriteria}. If request criteria contains forUserId parameter - check and compare authorized user.
      *
      * @param criteria reviews request criteria
      * @return {@link List<ReviewDTO>}
