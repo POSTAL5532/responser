@@ -1,6 +1,8 @@
 import moment, {Moment} from "moment";
 import {makeAutoObservable} from "mobx";
 import {RegisteredBy} from "./RegisteredBy";
+import {Role} from "./Role";
+import {UserSpamIndicator} from "./UserSpamIndicator";
 
 export class User {
 
@@ -20,11 +22,11 @@ export class User {
 
     registeredBy: RegisteredBy;
 
-    isBlocked: boolean;
-
     isUsePasswordStub: boolean;
 
-    reviewsCommonRating: number;
+    roles: Role[];
+
+    userSpamIndicator: UserSpamIndicator;
 
     creationDate: Moment;
 

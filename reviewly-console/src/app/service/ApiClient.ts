@@ -73,7 +73,7 @@ export class ApiClient {
         }
 
         return {
-            baseURL: ApplicationProperties.apiUrl,
+            baseURL: ApplicationProperties.adminApiUrl,
             headers: {
                 ...headers
             },

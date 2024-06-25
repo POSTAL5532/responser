@@ -88,7 +88,7 @@ class AuthorizationService {
     public getSimpleAuthHeader = (url: string): string[] => {
         const currentLocalDate = (new Date()).toISOString();
         const salt = CryptoJS.lib.WordArray.random(128/8).toString(CryptoJS.enc.Hex);
-        const message = `${ApplicationProperties.apiUrl}${url}${currentLocalDate}${salt}`;
+        const message = `${ApplicationProperties.adminApiUrl}${url}${currentLocalDate}${salt}`;
         const hash = CryptoJS.SHA256(message).toString();
 
         this.logger.debug("Generate request sign: currentLocalDate =", currentLocalDate, ", salt =", salt, "message =", message, ", hash =", hash);

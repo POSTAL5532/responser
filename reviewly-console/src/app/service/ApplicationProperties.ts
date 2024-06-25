@@ -6,16 +6,12 @@ class ApplicationProperties {
         return "/console";
     }
 
-    get apiUrl(): string {
-        return process.env.API_URL;
+    get adminApiUrl(): string {
+        return process.env.ADMIN_API_URL;
     }
 
     get runMode(): string {
         return process.env.RUN_MODE;
-    }
-
-    get landingPageUrl(): string {
-        return process.env.LANDING_URL;
     }
 
     get reviewWebLinkUrl(): string {
@@ -48,14 +44,6 @@ class ApplicationProperties {
 
     get clientSecret(): string {
         return process.env.CLIENT_SECRET;
-    }
-
-    get downloadExtensionChrome(): string {
-        return process.env.DOWNLOAD_EXTENSION_CHROME;
-    }
-
-    get chromeExtensionId(): string {
-        return process.env.CHROME_EXTENSION_ID;
     }
 
     get userAvatarsStorageUrl(): string {

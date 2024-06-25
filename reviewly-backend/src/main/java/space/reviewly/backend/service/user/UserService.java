@@ -3,6 +3,8 @@ package space.reviewly.backend.service.user;
 import java.io.IOException;
 import java.util.Set;
 import org.hibernate.Hibernate;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 import space.reviewly.backend.config.ApplicationProperties;
 import space.reviewly.backend.exceptions.DataNotValidException;
@@ -76,6 +78,12 @@ public class UserService {
         User user = getUser(userId);
         Hibernate.initialize(user.getRoles());
         return user;
+    }
+
+    public Page<User> getFullUsers(Pageable pageable) {
+        Page<User> usersPage = userRepository.findAll(pageable);
+        usersPage.get().forEach(u -> Hibernate.initialize(u.getRoles()));
+        return usersPage;
     }
 
     @Transactional

@@ -5,31 +5,31 @@ import java.util.stream.Collectors;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import space.reviewly.backend.controller.payload.PageableResponse;
-import space.reviewly.backend.controller.userService.payload.ContactFormDTO;
-import space.reviewly.backend.controller.userService.payload.CreateContactFormPayload;
-import space.reviewly.backend.controller.userService.payload.UpdateContactFormPayload;
+import space.reviewly.backend.controller.userService.dto.ContactFormDTO;
+import space.reviewly.backend.controller.userService.dto.CreateContactFormDTO;
+import space.reviewly.backend.controller.userService.dto.UpdateContactFormDTO;
 import space.reviewly.backend.model.ContactForm;
 
 @Service
 public class ContactFormConverter {
 
-    public ContactForm toEntity(CreateContactFormPayload createContactFormPayload) {
+    public ContactForm toEntity(CreateContactFormDTO createContactFormDTO) {
         ContactForm contactForm = new ContactForm();
-        contactForm.setEmail(createContactFormPayload.getEmail());
-        contactForm.setUsername(createContactFormPayload.getUsername());
-        contactForm.setText(createContactFormPayload.getText());
+        contactForm.setEmail(createContactFormDTO.getEmail());
+        contactForm.setUsername(createContactFormDTO.getUsername());
+        contactForm.setText(createContactFormDTO.getText());
 
         return contactForm;
     }
 
-    public ContactForm toEntity(String id, UpdateContactFormPayload updateContactFormPayload) {
+    public ContactForm toEntity(String id, UpdateContactFormDTO updateContactFormDTO) {
         ContactForm contactForm = new ContactForm();
 
-        contactForm.setEmail(updateContactFormPayload.getEmail());
-        contactForm.setUsername(updateContactFormPayload.getUsername());
-        contactForm.setText(updateContactFormPayload.getText());
+        contactForm.setEmail(updateContactFormDTO.getEmail());
+        contactForm.setUsername(updateContactFormDTO.getUsername());
+        contactForm.setText(updateContactFormDTO.getText());
         contactForm.setId(id);
-        contactForm.setRead(updateContactFormPayload.getRead());
+        contactForm.setRead(updateContactFormDTO.getRead());
 
         return contactForm;
     }
@@ -47,7 +47,7 @@ public class ContactFormConverter {
     }
 
     public PageableResponse<ContactFormDTO> toPageablePayloadList(Page<ContactForm> contactFormPage) {
-        List<ContactFormDTO> reviewList = contactFormPage.get().map(this::toPayload).collect(Collectors.toList());
+        List<ContactFormDTO> contactFormDTOList = contactFormPage.get().map(this::toPayload).toList();
         return new PageableResponse<>(
             contactFormPage.getTotalElements(),
             contactFormPage.getTotalPages(),
@@ -57,7 +57,7 @@ public class ContactFormConverter {
             contactFormPage.isFirst(),
             contactFormPage.hasPrevious(),
             contactFormPage.hasNext(),
-            reviewList
+            contactFormDTOList
         );
     }
 }

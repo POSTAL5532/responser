@@ -1,4 +1,4 @@
-package space.reviewly.backend.controller.userService.payload;
+package space.reviewly.backend.controller.userService.dto;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-public class CreateContactFormPayload {
+public class CreateContactFormDTO {
 
     @NotBlank(message = "User name must be specified")
     @Size(min = 2, max = 255, message = "User name must be from 2 to 255 characters")

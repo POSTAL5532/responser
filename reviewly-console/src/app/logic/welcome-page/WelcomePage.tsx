@@ -2,6 +2,10 @@ import React, {useContext} from "react";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import AuthorizationService from "../../service/authorization/AuthorizationService";
 import {observer} from "mobx-react";
+import Title from "antd/lib/typography/Title";
+import {Button, Card} from "antd";
+import {nativeNavigateTo} from "../../utils/NavigationUtils";
+import Meta from "antd/lib/card/Meta";
 
 
 export const WELCOME_PAGE_URL = "/";
@@ -9,16 +13,23 @@ export const WELCOME_PAGE_URL = "/";
 const WelcomePage: React.FC = () => {
     const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
 
+    if (!currentUser) {
+        return (
+            <div>
+                <Title level={4}>Welcome to Reviewly admin console!</Title>
+                <Button type="primary" onClick={() => nativeNavigateTo(AuthorizationService.getLoginPagePreparedUrl())}>
+                    Please login
+                </Button>
+            </div>
+        );
+    }
+
     return (
-        <div>
-            Welcome page!
-            <br/>
-            {
-                !!currentUser
-                    ? `Current user email is ${currentUser.email}`
-                    : <a href={AuthorizationService.getLoginPagePreparedUrl()}>Login</a>
-            }
-        </div>
+        <Card>
+            <Meta
+                title={currentUser.fullName}
+                description={currentUser.email}/>
+        </Card>
     );
 }
 
