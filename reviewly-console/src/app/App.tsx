@@ -10,8 +10,9 @@ import WelcomePage, {WELCOME_PAGE_URL} from "./logic/welcome-page/WelcomePage";
 import {Layout, Spin} from "antd";
 import ConsoleSider from "./components/console-sider/ConsoleSider";
 import {AppHeader} from "./AppHeader";
-import UsersContactFormsPage, {USERS_CONTACT_FORMS} from "./logic/user-contact-froms-page/UsersContactFormsPage";
-import UsersPage, {USERS} from "./logic/users-page/UsersPage";
+import UsersContactFormsPage, {USERS_CONTACT_FORMS_URL} from "./logic/user-contact-froms-page/UsersContactFormsPage";
+import UsersPage, {USERS_URL} from "./logic/users-page/UsersPage";
+import UserDetailsPage from "./logic/user-details-page/UserDetailsPage";
 
 @observer
 export class App extends Component {
@@ -35,8 +36,9 @@ export class App extends Component {
                                         <UnauthorizedRoute path={AUTH_CODE_PAGE_URL} exact component={AuthCodePage}/>
                                         <PermitAllRoute path={WELCOME_PAGE_URL} exact component={WelcomePage}/>
 
-                                        <AuthorizedRoute path={USERS_CONTACT_FORMS} exact component={UsersContactFormsPage}/>
-                                        <AuthorizedRoute path={USERS} exact component={UsersPage}/>
+                                        <AuthorizedRoute path={USERS_CONTACT_FORMS_URL} exact component={UsersContactFormsPage}/>
+                                        <AuthorizedRoute path={USERS_URL} exact component={UsersPage}/>
+                                        <AuthorizedRoute path={`${USERS_URL}/:userId`} exact component={UserDetailsPage}/>
 
                                         <Redirect from="*" to={WELCOME_PAGE_URL}/>
                                     </Switch>

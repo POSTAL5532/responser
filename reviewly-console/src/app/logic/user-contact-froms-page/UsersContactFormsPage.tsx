@@ -7,7 +7,7 @@ import Title from "antd/lib/typography/Title";
 import {CheckCircleOutlined, ExclamationCircleOutlined} from "@ant-design/icons";
 import {toJS} from "mobx";
 
-export const USERS_CONTACT_FORMS = "/users-contact-forms";
+export const USERS_CONTACT_FORMS_URL = "/users-contact-forms";
 
 const getTableProps = (markContactForm: (contactForm: ContactForm, read: boolean) => Promise<void>): TableProps<ContactForm>['columns'] => {
     return [

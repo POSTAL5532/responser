@@ -1,5 +1,6 @@
 package space.reviewly.backend.controller.user.dto;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -10,9 +11,8 @@ import space.reviewly.backend.model.user.RoleName;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RoleDTO {
+public class SetRoleDTO {
 
-    private String id;
-
-    private RoleName name;
+    @NotNull
+    private RoleName roleName;
 }

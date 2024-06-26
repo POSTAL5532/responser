@@ -5,11 +5,11 @@ import React, {useContext, useState} from "react";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
 import {ConditionShow} from "../ConditionShow";
 import {observer} from "mobx-react";
-import {USERS_CONTACT_FORMS} from "../../logic/user-contact-froms-page/UsersContactFormsPage";
+import {USERS_CONTACT_FORMS_URL} from "../../logic/user-contact-froms-page/UsersContactFormsPage";
 import {Icon, IconType} from "../icon/Icon";
 import LocalTokenStorageService from "../../service/authorization/LocalTokenStorageService";
 import {nativeNavigateToAuthLogoutPageUrl, navigateTo} from "../../utils/NavigationUtils";
-import {USERS} from "../../logic/users-page/UsersPage";
+import {USERS_URL} from "../../logic/users-page/UsersPage";
 import "./ConsoleSider.less";
 
 const ConsoleSider: React.FC = props => {
@@ -41,7 +41,7 @@ const ConsoleSider: React.FC = props => {
                         label: "Users contact forms",
                         icon: <QuestionCircleOutlined/>,
                         onClick: () => {
-                            navigateTo(USERS_CONTACT_FORMS);
+                            navigateTo(USERS_CONTACT_FORMS_URL);
                         }
                     },
                     {
@@ -49,7 +49,7 @@ const ConsoleSider: React.FC = props => {
                         label: "Users",
                         icon: <TeamOutlined/>,
                         onClick: () => {
-                            navigateTo(USERS);
+                            navigateTo(USERS_URL);
                         }
                     },
                     {

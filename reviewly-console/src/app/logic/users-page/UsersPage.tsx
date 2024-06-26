@@ -9,7 +9,7 @@ import {useUsersPageStoreStore} from "./UsersPageStore";
 import Title from "antd/lib/typography/Title";
 import {toJS} from "mobx";
 
-export const USERS = "/users";
+export const USERS_URL = "/users";
 
 const getTableProps = (): TableProps<User>['columns'] => {
     return [
@@ -54,7 +54,7 @@ const getTableProps = (): TableProps<User>['columns'] => {
             title: '',
             key: 'action',
             render: (_, record) => (
-                <Button type="primary" icon={<ControlOutlined/>} onClick={() => navigateTo("/")}>Details</Button>
+                <Button type="primary" icon={<ControlOutlined/>} onClick={() => navigateTo(`${USERS_URL}/${record.id}`)}>Details</Button>
             ),
         }
     ]

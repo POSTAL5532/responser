@@ -13,6 +13,7 @@ import space.reviewly.backend.controller.user.dto.UserBasicDTO;
 import space.reviewly.backend.controller.user.dto.UserDTO;
 import space.reviewly.backend.model.user.RegisteredBy;
 import space.reviewly.backend.model.user.Role;
+import space.reviewly.backend.model.user.RoleName;
 import space.reviewly.backend.model.user.User;
 import org.springframework.stereotype.Service;
 import space.reviewly.backend.service.user.UserService;
@@ -68,7 +69,7 @@ public class UserConverter {
 
         if (roleOptional.isPresent()) {
             Role role = roleOptional.get();
-            userDTOBuilder.isBlocked(role.getName().equals("USER_BLOCKED"));
+            userDTOBuilder.isBlocked(role.getName() == RoleName.USER_BLOCKED);
         }
 
         return userDTOBuilder.build();
