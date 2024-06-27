@@ -19,13 +19,13 @@ tasks.register('clean', NpmTask) {
     args = ['run', 'clean']
 }
 
-/*tasks.register('build', NpmTask) {
+tasks.register('build', NpmTask) {
     def buildMode = System.getProperty("buildMode");
     println "Build frontend with build mode='" + buildMode + "'"
 
     dependsOn install
     args = ['run', "build:${buildMode}"]
-}*/
+}
 
 tasks.register('zip', Zip) {
     def outputFileName = 'reviewly-console.zip'
@@ -38,4 +38,4 @@ tasks.register('zip', Zip) {
     destinationDir(file("$buildDir"))
 }
 
-//tasks.build.finalizedBy(zip)
+tasks.build.finalizedBy(zip)
