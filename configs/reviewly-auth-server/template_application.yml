@@ -66,6 +66,7 @@ spring:
 reviewly:
   runMode: LOCAL
   selfHost: http://local-dev-reviewly.space
+  consoleAppUrl: ${reviewly.selfHost}/console
   frontendAppUrl: ${reviewly.selfHost}/app
   registrationPageUrl: ${reviewly.frontendAppUrl}/sign-up
   forgotPasswordPageUrl: ${reviewly.frontendAppUrl}/forgot-password
@@ -82,5 +83,11 @@ reviewly:
       redirectUri: ${reviewly.frontendAppUrl}/auth-code
       accessTokenTimeLifeMinutes: 10
       refreshTokenTimeLifeHours: 120
+    -
+      clientId: reviewly-console-client
+      clientSecret: "{noop}reviewly-console-client-secret"
+      redirectUri: ${reviewly.consoleAppUrl}/auth-code
+      accessTokenTimeLifeMinutes: 10
+      refreshTokenTimeLifeHours: 12
   allowedOrigins:
     - ${reviewly.selfHost}
