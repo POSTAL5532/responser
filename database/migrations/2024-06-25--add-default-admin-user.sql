@@ -7,7 +7,7 @@
 INSERT INTO users (id, email, password, full_name, avatar_file_name, email_confirmed, creation_date, registered_by)
 VALUES ('00000000-0000-0000-user-admin0000000',
         'admin@admin.com',
-        '$2a$10$byRTFL.VFzvyWqczc8zCaOgOPFoNQcrZV9drK4si9n.jRxzSXJOpe',
+        '{bcrypt}$2a$10$byRTFL.VFzvyWqczc8zCaOgOPFoNQcrZV9drK4si9n.jRxzSXJOpe',
         'Admin Man',
         NULL,
         true,
