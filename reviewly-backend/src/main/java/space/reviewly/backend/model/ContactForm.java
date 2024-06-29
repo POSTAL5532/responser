@@ -18,4 +18,6 @@ public class ContactForm extends AbstractEntity {
     private String email;
 
     private String text;
+
+    private boolean read;
 }

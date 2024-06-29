@@ -9,5 +9,7 @@
     <include file="2024-06-11--add-authorities-and-roles.sql" relativeToChangelogFile="true"/>
     <include file="2024-06-20--add-admin-authorities.sql" relativeToChangelogFile="true"/>
     <include file="2024-06-21--add-user-contact-form-read-flag.sql" relativeToChangelogFile="true"/>
+    <include file="2024-06-23--add-contact-forms-admin-authorities.sql" relativeToChangelogFile="true"/>
+    <include file="2024-06-25--add-default-admin-user.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

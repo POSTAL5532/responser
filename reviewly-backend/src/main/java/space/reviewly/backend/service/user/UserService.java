@@ -1,8 +1,12 @@
 package space.reviewly.backend.service.user;
 
+import jakarta.validation.constraints.NotNull;
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 import org.hibernate.Hibernate;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.multipart.MultipartFile;
 import space.reviewly.backend.config.ApplicationProperties;
 import space.reviewly.backend.exceptions.DataNotValidException;
@@ -10,6 +14,7 @@ import space.reviewly.backend.model.EmailConfirmation;
 import space.reviewly.backend.model.PasswordRestore;
 import space.reviewly.backend.model.user.RegisteredBy;
 import space.reviewly.backend.model.user.Role;
+import space.reviewly.backend.model.user.RoleName;
 import space.reviewly.backend.model.user.User;
 import space.reviewly.backend.model.user.User_;
 import space.reviewly.backend.repository.UserRepository;
@@ -78,6 +83,12 @@ public class UserService {
         return user;
     }
 
+    public Page<User> getFullUsers(Pageable pageable) {
+        Page<User> usersPage = userRepository.findAll(pageable);
+        usersPage.get().forEach(u -> Hibernate.initialize(u.getRoles()));
+        return usersPage;
+    }
+
     @Transactional
     public void registerUser(User newUser) {
         log.info("Register new not confirmed user: {}", newUser.getEmail());
@@ -137,6 +148,16 @@ public class UserService {
             user.setFullName(userUpdates.getFullName());
         }
 
+        updateUser(user);
+    }
+
+    @Transactional
+    public void setRole(String userId, RoleName roleName) {
+        User user = getUser(userId);
+        Set<Role> newRoles = new HashSet<>();
+        newRoles.add(roleService.getByName(roleName));
+
+        user.setRoles(newRoles);
         updateUser(user);
     }
 

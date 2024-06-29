@@ -7,7 +7,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import space.reviewly.backend.model.user.RegisteredBy;
-import space.reviewly.backend.model.user.Role;
+import space.reviewly.backend.model.user.UserSpamIndicator;
 
 @Data
 @NoArgsConstructor
@@ -29,7 +29,9 @@ public class UserAdminDTO {
 
     private Boolean isUsePasswordStub;
 
-    private Set<Role> roles;
+    private Set<RoleDTO> roles;
+
+    private UserSpamIndicator userSpamIndicator;
 
     private Double reviewsCommonRating;
 
