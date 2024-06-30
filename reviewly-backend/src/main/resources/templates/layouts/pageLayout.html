@@ -100,7 +100,11 @@
 
             gtag('config', 'G-E03HG0FX99');
         </script>
+    </th:block>
+</head>
 
+<body>
+    <th:block th:if="${@applicationProperties.runMode == T(space.reviewly.backend.config.RunMode).PROD}">
         <!-- Yandex.Metrika counter -->
         <script type="text/javascript" >
             (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
@@ -119,9 +123,7 @@
         <noscript><div><img src="https://mc.yandex.ru/watch/97710094" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
         <!-- /Yandex.Metrika counter -->
     </th:block>
-</head>
 
-<body>
     <div class="page" th:classappend="${pageClass}">
         <header class="header">
             <div class="header-content">
