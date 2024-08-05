@@ -1,6 +1,5 @@
 package space.reviewly.backend.controller.webresource;
 
-import java.util.Objects;
 import java.util.Optional;
 import space.reviewly.backend.controller.reviews.payload.ReviewsRequestCriteria;
 import space.reviewly.backend.controller.webresource.payload.WebResourceDTO;
@@ -10,13 +9,13 @@ import space.reviewly.backend.converter.ReviewsCriteriaConverter;
 import space.reviewly.backend.converter.WebResourceConverter;
 import space.reviewly.backend.converter.WebResourceCriteriaConverter;
 import space.reviewly.backend.model.AbstractEntity;
-import space.reviewly.backend.model.ResourceRating;
-import space.reviewly.backend.model.ResourceType;
-import space.reviewly.backend.model.Review;
-import space.reviewly.backend.model.ReviewsCriteriaResourceType;
-import space.reviewly.backend.model.ReviewsCriteriaSortingField;
-import space.reviewly.backend.model.WebResource;
-import space.reviewly.backend.model.WebResourceCriteriaSortingField;
+import space.reviewly.backend.model.webresource.ResourceRating;
+import space.reviewly.backend.model.webresource.ResourceType;
+import space.reviewly.backend.model.review.Review;
+import space.reviewly.backend.model.review.ReviewsCriteriaResourceType;
+import space.reviewly.backend.model.review.ReviewsCriteriaSortingField;
+import space.reviewly.backend.model.webresource.WebResource;
+import space.reviewly.backend.model.webresource.WebResourceCriteriaSortingField;
 import space.reviewly.backend.service.RatingService;
 import space.reviewly.backend.service.webResource.WebResourceService;
 import space.reviewly.backend.service.review.ReviewService;

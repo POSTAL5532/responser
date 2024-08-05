@@ -1,4 +1,4 @@
-package space.reviewly.backend.model;
+package space.reviewly.backend.model.review;
 
 public enum ReviewsCriteriaSortingField {
 

@@ -7,7 +7,7 @@ import space.reviewly.backend.controller.RestApiController;
 import space.reviewly.backend.controller.reviewlike.payload.ReviewLikeInfoDTO;
 import space.reviewly.backend.controller.reviewlike.payload.ReviewLikeDTO;
 import space.reviewly.backend.converter.ReviewLikeConverter;
-import space.reviewly.backend.model.ReviewLike;
+import space.reviewly.backend.model.review.ReviewLike;
 import space.reviewly.backend.service.ReviewLikeService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;

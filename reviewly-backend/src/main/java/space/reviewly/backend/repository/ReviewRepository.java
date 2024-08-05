@@ -1,6 +1,6 @@
 package space.reviewly.backend.repository;
 
-import space.reviewly.backend.model.Review;
+import space.reviewly.backend.model.review.Review;
 import jakarta.annotation.Nonnull;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -3,7 +3,7 @@ package space.reviewly.backend.model.metatags;
 import static space.reviewly.backend.controller.reviews.ReviewsController.REVIEWS_URL;
 
 import space.reviewly.backend.config.ApplicationProperties;
-import space.reviewly.backend.model.Review;
+import space.reviewly.backend.model.review.Review;
 import space.reviewly.backend.service.review.ReviewMetaImageGenerator;
 import lombok.Getter;
 import lombok.Setter;

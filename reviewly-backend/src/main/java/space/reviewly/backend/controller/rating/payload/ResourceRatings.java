@@ -1,6 +1,6 @@
 package space.reviewly.backend.controller.rating.payload;
 
-import space.reviewly.backend.model.ResourceRating;
+import space.reviewly.backend.model.webresource.ResourceRating;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -5,7 +5,7 @@ import {ControlOutlined, GoogleOutlined, IdcardOutlined} from "@ant-design/icons
 import {User} from "../../model/User";
 import {RegisteredBy} from "../../model/RegisteredBy";
 import {navigateTo} from "../../utils/NavigationUtils";
-import {useUsersPageStoreStore} from "./UsersPageStore";
+import {useUsersPageStore} from "./UsersPageStore";
 import Title from "antd/lib/typography/Title";
 import {toJS} from "mobx";
 
@@ -31,11 +31,18 @@ const getTableProps = (): TableProps<User>['columns'] => {
         {
             title: "Registered By",
             dataIndex: "registeredBy",
-            render: (_, record) => (
-                record.registeredBy === RegisteredBy.GOOGLE
-                    ? <><GoogleOutlined/> Google</>
-                    : <><IdcardOutlined/> Native</>
-            )
+            render: (_, record) => {
+                switch (record.registeredBy) {
+                    case RegisteredBy.GOOGLE:
+                        return <><GoogleOutlined/> Google</>;
+                    case RegisteredBy.NATIVE:
+                        return <><IdcardOutlined/> Native</>;
+                    case RegisteredBy.FAKE:
+                        return <>FAKE</>
+                    default:
+                        return null;
+                }
+            }
         },
         {
             title: "Spam count",
@@ -61,7 +68,7 @@ const getTableProps = (): TableProps<User>['columns'] => {
 }
 
 const UsersPage: React.FC = () => {
-    const {isLoading, users, totalUsersCount, init, loadUsers} = useUsersPageStoreStore();
+    const {isLoading, users, totalUsersCount, init, loadUsers} = useUsersPageStore();
 
     useEffect(() => {
         init();
@@ -72,7 +79,7 @@ const UsersPage: React.FC = () => {
     };
 
     return (
-        <div className="users-contact-form-container">
+        <div className="users-list-container">
             <Title level={3} style={{marginTop: 0, marginBottom: 10}}>Users</Title>
             <Table columns={getTableProps()}
                    dataSource={toJS(users)}

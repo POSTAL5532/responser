@@ -2,9 +2,10 @@ package space.reviewly.backend.converter;
 
 import space.reviewly.backend.controller.payload.PageableResponse;
 import space.reviewly.backend.controller.reviewlike.payload.ReviewLikeDTO;
+import space.reviewly.backend.controller.reviews.payload.ReviewInfoAdminDTO;
 import space.reviewly.backend.controller.reviews.payload.ReviewInfoDTO;
 import space.reviewly.backend.controller.reviews.payload.ReviewDTO;
-import space.reviewly.backend.model.Review;
+import space.reviewly.backend.model.review.Review;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
@@ -40,6 +41,16 @@ public class ReviewConverter {
 
     public Review toReview(ReviewInfoDTO reviewInfoDTO, String userId) {
         return toReview(null, reviewInfoDTO, userId);
+    }
+
+    public Review toReview(ReviewInfoAdminDTO reviewInfoAdminDTO) {
+        ReviewInfoDTO reviewInfoDTO = ReviewInfoDTO.builder()
+            .resourceId(reviewInfoAdminDTO.getResourceId())
+            .rating(reviewInfoAdminDTO.getRating())
+            .text(reviewInfoAdminDTO.getText())
+            .build();
+
+        return toReview(reviewInfoDTO, reviewInfoAdminDTO.getUserId());
     }
 
     public ReviewDTO toReviewPayload(Review review) {

@@ -1,8 +1,8 @@
 package space.reviewly.backend.service.review;
 
 import space.reviewly.backend.exceptions.EntityAlreadyExistException;
-import space.reviewly.backend.model.ReviewsCriteria;
-import space.reviewly.backend.model.Review;
+import space.reviewly.backend.model.review.ReviewsCriteria;
+import space.reviewly.backend.model.review.Review;
 import space.reviewly.backend.model.user.User;
 import space.reviewly.backend.repository.ReviewRepository;
 import space.reviewly.backend.service.user.UserService;

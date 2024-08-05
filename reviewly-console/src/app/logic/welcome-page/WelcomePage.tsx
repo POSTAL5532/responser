@@ -4,7 +4,6 @@ import AuthorizationService from "../../service/authorization/AuthorizationServi
 import {observer} from "mobx-react";
 import Title from "antd/lib/typography/Title";
 import {Button, Card} from "antd";
-import {nativeNavigateTo} from "../../utils/NavigationUtils";
 import Meta from "antd/lib/card/Meta";
 
 
@@ -17,7 +16,7 @@ const WelcomePage: React.FC = () => {
         return (
             <div>
                 <Title level={4}>Welcome to Reviewly admin console!</Title>
-                <Button type="primary" onClick={() => nativeNavigateTo(AuthorizationService.getLoginPagePreparedUrl())}>
+                <Button type="primary" onClick={AuthorizationService.requestLoginPage}>
                     Please login
                 </Button>
             </div>

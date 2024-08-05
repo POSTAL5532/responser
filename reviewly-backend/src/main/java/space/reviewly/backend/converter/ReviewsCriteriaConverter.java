@@ -1,7 +1,7 @@
 package space.reviewly.backend.converter;
 
 import space.reviewly.backend.controller.reviews.payload.ReviewsRequestCriteria;
-import space.reviewly.backend.model.ReviewsCriteria;
+import space.reviewly.backend.model.review.ReviewsCriteria;
 import org.springframework.stereotype.Service;
 
 /**

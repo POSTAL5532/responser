@@ -33,14 +33,14 @@ public class HashValidationFilter extends OncePerRequestFilter {
 
         if (hash == null || salt == null || date == null) {
             log.warn("API simple securing: Hash or salt is missing.");
-            response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE, "Reviewly: Bad request IP");
+            response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE, "bad request IP");
             return;
         }
 
 
         if (!isHashValid(message, hash)) {
             log.warn("API simple securing: Hash is invalid.");
-            response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE, "Reviewly: Bad request IP");
+            response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE, "bad request IP");
             return;
         }
 

@@ -1,7 +1,7 @@
 package space.reviewly.backend.converter;
 
 import space.reviewly.backend.controller.webresource.payload.WebResourceRequestCriteria;
-import space.reviewly.backend.model.WebResourceCriteria;
+import space.reviewly.backend.model.webresource.WebResourceCriteria;
 import org.springframework.stereotype.Service;
 
 @Service

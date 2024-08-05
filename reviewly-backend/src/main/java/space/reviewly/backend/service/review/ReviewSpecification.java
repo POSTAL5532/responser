@@ -1,13 +1,12 @@
 package space.reviewly.backend.service.review;
 
-import space.reviewly.backend.model.Review;
-import space.reviewly.backend.model.ReviewLike;
-import space.reviewly.backend.model.ReviewLike_;
-import space.reviewly.backend.model.Review_;
-import space.reviewly.backend.model.ReviewsCriteria;
-import space.reviewly.backend.model.ReviewsCriteriaResourceType;
-import space.reviewly.backend.model.ReviewsCriteriaSortingField;
-import space.reviewly.backend.model.WebResource_;
+import space.reviewly.backend.model.review.Review;
+import space.reviewly.backend.model.review.ReviewLike;
+import space.reviewly.backend.model.review.ReviewLike_;
+import space.reviewly.backend.model.review.Review_;
+import space.reviewly.backend.model.review.ReviewsCriteria;
+import space.reviewly.backend.model.review.ReviewsCriteriaResourceType;
+import space.reviewly.backend.model.review.ReviewsCriteriaSortingField;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Expression;
@@ -24,6 +23,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.lang.NonNull;
 import space.reviewly.backend.model.user.User_;
+import space.reviewly.backend.model.webresource.WebResource_;
 
 @RequiredArgsConstructor
 public class ReviewSpecification implements Specification<Review> {

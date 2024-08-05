@@ -4,9 +4,8 @@ import org.apache.tika.Tika;
 
 public class TikaWrapper extends Tika {
 
-    @Override
-    public String detect(byte[] prefix) {
-        String detectedMimeType = super.detect(prefix);
+    public String detectExtension(byte[] prefix) {
+        String detectedMimeType = this.detect(prefix);
         String[] splitType = detectedMimeType.split("/");
 
         if (splitType.length < 2) {

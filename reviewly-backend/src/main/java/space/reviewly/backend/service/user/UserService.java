@@ -1,7 +1,7 @@
 package space.reviewly.backend.service.user;
 
-import jakarta.validation.constraints.NotNull;
 import java.io.IOException;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 import org.hibernate.Hibernate;
@@ -16,6 +16,7 @@ import space.reviewly.backend.model.user.RegisteredBy;
 import space.reviewly.backend.model.user.Role;
 import space.reviewly.backend.model.user.RoleName;
 import space.reviewly.backend.model.user.User;
+import space.reviewly.backend.model.user.UserCriteria;
 import space.reviewly.backend.model.user.User_;
 import space.reviewly.backend.repository.UserRepository;
 import space.reviewly.backend.service.EmailConfirmationService;
@@ -83,8 +84,8 @@ public class UserService {
         return user;
     }
 
-    public Page<User> getFullUsers(Pageable pageable) {
-        Page<User> usersPage = userRepository.findAll(pageable);
+    public Page<User> getFullUsers(UserCriteria criteria, Pageable pageable) {
+        Page<User> usersPage = userRepository.findAll(new UserSpecification(criteria), pageable);
         usersPage.get().forEach(u -> Hibernate.initialize(u.getRoles()));
         return usersPage;
     }
@@ -106,6 +107,24 @@ public class UserService {
         userRepository.save(newUser);
         EmailConfirmation emailConfirmation = emailConfirmationService.createEmailConfirmation(newUser.getId());
         emailService.sendEmailConfirmationMessage(newUser, emailConfirmation);
+    }
+
+    @Transactional
+    public void registerFakeUser(User newUser) {
+        log.info("Register new fake user: {}", newUser.getFullName());
+
+        newUser.setEmailConfirmed(true);
+        newUser.setEmail("fake-" + (new Date().getTime()) + "@rmail.com");
+        newUser.setRegisteredBy(RegisteredBy.FAKE);
+        newUser.setPassword(passwordEncoder.encode("qwerty123"));
+
+        Role defaultRole = roleService.getDefaultRole();
+
+        if (defaultRole != null) {
+            newUser.setRoles(Set.of(defaultRole));
+        }
+
+        userRepository.save(newUser);
     }
 
     @Transactional
@@ -220,7 +239,7 @@ public class UserService {
         User user = getUser(userId);
 
         String oldAvatarFileName = user.getAvatarFileName();
-        String newAvatarFileName = FileResourceType.generateUserAvatarFileName(user.getId(), new TikaWrapper().detect(avatar.getBytes()));
+        String newAvatarFileName = FileResourceType.generateUserAvatarFileName(user.getId(), new TikaWrapper().detectExtension(avatar.getBytes()));
 
         s3FileResourceService.uploadUserAvatar(avatar, newAvatarFileName);
 

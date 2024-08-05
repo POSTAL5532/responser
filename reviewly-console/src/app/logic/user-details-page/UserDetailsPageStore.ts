@@ -5,6 +5,8 @@ import {makeAutoObservable, runInAction} from "mobx";
 import {UserService} from "../../service/UserService";
 import {SetRoleDTO} from "../../model/SetRoleDTO";
 import {RoleName} from "../../model/RoleName";
+import {UserCriteria} from "../../model/UserCriteria";
+import {Pagination} from "../../model/Pagination";
 
 export class UserDetailsPageStore {
 
@@ -22,9 +24,15 @@ export class UserDetailsPageStore {
 
     init = async (userId: string) => {
         this.isLoading = true;
-        this.user = await this.userService.getUser(userId).finally(
+
+        const userCriteria = new UserCriteria();
+        userCriteria.id = userId;
+
+        const users = await this.userService.getUsers(userCriteria, Pagination.SINGLE_ELEMENT).finally(
             () => runInAction(() => this.isLoading = false)
         );
+
+        this.user = users.getFirst();
     }
 
     blockUser = async () => {

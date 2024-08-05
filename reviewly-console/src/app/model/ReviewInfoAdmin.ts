@@ -1,8 +1,10 @@
 import {makeAutoObservable} from "mobx";
 
-export class ReviewData {
+export class ReviewInfoAdmin {
 
     resourceId: string;
+
+    userId: string;
 
     rating: number;
 

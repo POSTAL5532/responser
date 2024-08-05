@@ -1,9 +1,11 @@
-package space.reviewly.backend.model;
+package space.reviewly.backend.model.review;
 
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Set;
+import space.reviewly.backend.model.AbstractEntity;
+import space.reviewly.backend.model.webresource.WebResource;
 import space.reviewly.backend.model.user.User;
 
 /**

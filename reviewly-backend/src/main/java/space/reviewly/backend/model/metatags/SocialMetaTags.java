@@ -4,8 +4,8 @@ import static space.reviewly.backend.controller.reviews.ReviewsController.REVIEW
 import static space.reviewly.backend.controller.reviews.ReviewsController.REVIEW_META_IMAGE_URL;
 
 import space.reviewly.backend.config.ApplicationProperties;
-import space.reviewly.backend.model.ResourceType;
-import space.reviewly.backend.model.Review;
+import space.reviewly.backend.model.webresource.ResourceType;
+import space.reviewly.backend.model.review.Review;
 import space.reviewly.backend.utils.UrlUtils;
 import java.time.LocalDateTime;
 import java.time.ZoneId;

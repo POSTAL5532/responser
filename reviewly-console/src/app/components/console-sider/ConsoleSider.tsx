@@ -1,5 +1,5 @@
 import {Layout, Menu} from "antd";
-import {HomeOutlined, LogoutOutlined, QuestionCircleOutlined, TeamOutlined} from "@ant-design/icons";
+import {CommentOutlined, HomeOutlined, LogoutOutlined, QuestionCircleOutlined, TeamOutlined} from "@ant-design/icons";
 import {WELCOME_PAGE_URL} from "../../logic/welcome-page/WelcomePage";
 import React, {useContext, useState} from "react";
 import {GlobalAppStore, GlobalAppStoreContext} from "../../GlobalAppStore";
@@ -10,9 +10,10 @@ import {Icon, IconType} from "../icon/Icon";
 import LocalTokenStorageService from "../../service/authorization/LocalTokenStorageService";
 import {nativeNavigateToAuthLogoutPageUrl, navigateTo} from "../../utils/NavigationUtils";
 import {USERS_URL} from "../../logic/users-page/UsersPage";
+import {REVIEWS_PAGE_URL} from "../../logic/reviews/reviews-list-page/ReviewsPage";
 import "./ConsoleSider.less";
 
-const ConsoleSider: React.FC = props => {
+const ConsoleSider: React.FC = () => {
     const {currentUser} = useContext<GlobalAppStore>(GlobalAppStoreContext);
     const [collapsed, setCollapsed] = useState(false);
 
@@ -50,6 +51,14 @@ const ConsoleSider: React.FC = props => {
                         icon: <TeamOutlined/>,
                         onClick: () => {
                             navigateTo(USERS_URL);
+                        }
+                    },
+                    {
+                        key: 4,
+                        label: "Reviews",
+                        icon: <CommentOutlined/>,
+                        onClick: () => {
+                            navigateTo(REVIEWS_PAGE_URL);
                         }
                     },
                     {

@@ -11,5 +11,6 @@
     <include file="2024-06-21--add-user-contact-form-read-flag.sql" relativeToChangelogFile="true"/>
     <include file="2024-06-23--add-contact-forms-admin-authorities.sql" relativeToChangelogFile="true"/>
     <include file="2024-06-25--add-default-admin-user.sql" relativeToChangelogFile="true"/>
+    <include file="2024-08-03--add-create-fake-reviews_select-any-web-resources-authorities.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

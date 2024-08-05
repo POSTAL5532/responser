@@ -5,6 +5,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import org.springframework.data.domain.Page;
 import space.reviewly.backend.controller.payload.PageableResponse;
+import space.reviewly.backend.controller.user.dto.CreateFakeUserProfileDTO;
 import space.reviewly.backend.controller.user.dto.CreateUserProfileDTO;
 import space.reviewly.backend.controller.user.dto.RoleDTO;
 import space.reviewly.backend.controller.user.dto.UpdateUserDTO;
@@ -30,6 +31,13 @@ public class UserConverter {
         User user = new User();
         user.setEmail(newUserPayload.getEmail());
         user.setPassword(newUserPayload.getPassword());
+        user.setFullName(newUserPayload.getFullName());
+
+        return user;
+    }
+
+    public User toUser(CreateFakeUserProfileDTO newUserPayload) {
+        User user = new User();
         user.setFullName(newUserPayload.getFullName());
 
         return user;

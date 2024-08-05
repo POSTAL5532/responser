@@ -59,8 +59,8 @@ axios.interceptors.response.use(undefined, errorInterceptor);
  */
 export class ApiClient {
 
-    getRequestConfig = (url: string, requestOptions: AxiosRequestConfig = {}): AxiosRequestConfig => {
-        const [token, date, salt] = AuthorizationService.getSimpleAuthHeader(url);
+    getRequestConfig = (url: string, requestOptions: AxiosRequestConfig = {}, noneAdminApi: boolean): AxiosRequestConfig => {
+        const [token, date, salt] = AuthorizationService.getSimpleAuthHeader(url, noneAdminApi);
         let headers: any = {
             "Content-type": "application/json",
             "X-Request-Id": token,
@@ -73,7 +73,7 @@ export class ApiClient {
         }
 
         return {
-            baseURL: ApplicationProperties.adminApiUrl,
+            baseURL: noneAdminApi ? ApplicationProperties.apiUrl : ApplicationProperties.adminApiUrl,
             headers: {
                 ...headers
             },
@@ -81,23 +81,23 @@ export class ApiClient {
         }
     }
 
-    executeGetRequest = async <T = any>(url: string, requestOptions?: AxiosRequestConfig): Promise<T> => {
-        const response = await axios.get<T>(url, this.getRequestConfig(url, requestOptions));
+    executeGetRequest = async <T = any>(url: string, requestOptions?: AxiosRequestConfig, noneAdminApi: boolean = false): Promise<T> => {
+        const response = await axios.get<T>(url, this.getRequestConfig(url, requestOptions, noneAdminApi));
         return response.data;
     }
 
-    executePostRequest = async <T = any, B = any>(url: string, body?: B, requestOptions?: AxiosRequestConfig): Promise<T> => {
-        const response = await axios.post<T>(url, body, this.getRequestConfig(url, requestOptions));
+    executePostRequest = async <T = any, B = any>(url: string, body?: B, requestOptions?: AxiosRequestConfig, noneAdminApi: boolean = false): Promise<T> => {
+        const response = await axios.post<T>(url, body, this.getRequestConfig(url, requestOptions, noneAdminApi));
         return response.data;
     }
 
-    executePutRequest = async <T = any, B = any>(url: string, body: B, requestOptions?: AxiosRequestConfig): Promise<T> => {
-        const response = await axios.put<T>(url, body, this.getRequestConfig(url, requestOptions));
+    executePutRequest = async <T = any, B = any>(url: string, body: B, requestOptions?: AxiosRequestConfig, noneAdminApi: boolean = false): Promise<T> => {
+        const response = await axios.put<T>(url, body, this.getRequestConfig(url, requestOptions, noneAdminApi));
         return response.data;
     }
 
-    executeDeleteRequest = async <T = any>(url: string, requestOptions?: AxiosRequestConfig): Promise<T> => {
-        const response = await axios.delete<T>(url, this.getRequestConfig(url, requestOptions));
+    executeDeleteRequest = async <T = any>(url: string, requestOptions?: AxiosRequestConfig, noneAdminApi: boolean = false): Promise<T> => {
+        const response = await axios.delete<T>(url, this.getRequestConfig(url, requestOptions, noneAdminApi));
         return response.data;
     }
 }

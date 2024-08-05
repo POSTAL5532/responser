@@ -63,13 +63,13 @@
                             <p class="menu-group-header">Rating</p>
                             <div class="field-group">
                                 <label class="field radio-button">
-                                    <input type="radio" name="sortingField" th:value="${T(space.reviewly.backend.model.ReviewsCriteriaSortingField).RATING.name}" data-sort-direction="DESC"
-                                           th:checked="${reviewsCriteria.sortingField == T(space.reviewly.backend.model.ReviewsCriteriaSortingField).RATING && reviewsCriteria.sortDirection.name == 'DESC'}"/>
+                                    <input type="radio" name="sortingField" th:value="${T(space.reviewly.backend.model.review.ReviewsCriteriaSortingField).RATING.name}" data-sort-direction="DESC"
+                                           th:checked="${reviewsCriteria.sortingField == T(space.reviewly.backend.model.review.ReviewsCriteriaSortingField).RATING && reviewsCriteria.sortDirection.name == 'DESC'}"/>
                                     <span>High rating first</span>
                                 </label>
                                 <label class="field radio-button">
-                                    <input type="radio" name="sortingField" th:value="${T(space.reviewly.backend.model.ReviewsCriteriaSortingField).RATING.name}" data-sort-direction="ASC"
-                                           th:checked="${reviewsCriteria.sortingField == T(space.reviewly.backend.model.ReviewsCriteriaSortingField).RATING && reviewsCriteria.sortDirection.name == 'ASC'}"/>
+                                    <input type="radio" name="sortingField" th:value="${T(space.reviewly.backend.model.review.ReviewsCriteriaSortingField).RATING.name}" data-sort-direction="ASC"
+                                           th:checked="${reviewsCriteria.sortingField == T(space.reviewly.backend.model.review.ReviewsCriteriaSortingField).RATING && reviewsCriteria.sortDirection.name == 'ASC'}"/>
                                     <span>Low rating first</span>
                                 </label>
                             </div>
@@ -77,13 +77,13 @@
                             <p class="menu-group-header">Date</p>
                             <div class="field-group">
                                 <label class="field radio-button">
-                                    <input type="radio" name="sortingField" th:value="${T(space.reviewly.backend.model.ReviewsCriteriaSortingField).CREATION_DATE.name}" data-sort-direction="DESC"
-                                           th:checked="${reviewsCriteria.sortingField == T(space.reviewly.backend.model.ReviewsCriteriaSortingField).CREATION_DATE && reviewsCriteria.sortDirection.name == 'DESC'}"/>
+                                    <input type="radio" name="sortingField" th:value="${T(space.reviewly.backend.model.review.ReviewsCriteriaSortingField).CREATION_DATE.name}" data-sort-direction="DESC"
+                                           th:checked="${reviewsCriteria.sortingField == T(space.reviewly.backend.model.review.ReviewsCriteriaSortingField).CREATION_DATE && reviewsCriteria.sortDirection.name == 'DESC'}"/>
                                     <span>New first</span>
                                 </label>
                                 <label class="field radio-button">
-                                    <input type="radio" name="sortingField" th:value="${T(space.reviewly.backend.model.ReviewsCriteriaSortingField).CREATION_DATE.name}" data-sort-direction="ASC"
-                                           th:checked="${reviewsCriteria.sortingField == T(space.reviewly.backend.model.ReviewsCriteriaSortingField).CREATION_DATE && reviewsCriteria.sortDirection.name == 'ASC'}"/>
+                                    <input type="radio" name="sortingField" th:value="${T(space.reviewly.backend.model.review.ReviewsCriteriaSortingField).CREATION_DATE.name}" data-sort-direction="ASC"
+                                           th:checked="${reviewsCriteria.sortingField == T(space.reviewly.backend.model.review.ReviewsCriteriaSortingField).CREATION_DATE && reviewsCriteria.sortDirection.name == 'ASC'}"/>
                                     <span>Old first</span>
                                 </label>
                             </div>
@@ -91,13 +91,13 @@
                             <p class="menu-group-header">Popularity</p>
                             <div class="field-group">
                                 <label class="field radio-button">
-                                    <input type="radio" name="sortingField" th:value="${T(space.reviewly.backend.model.ReviewsCriteriaSortingField).POPULARITY.name}" data-sort-direction="DESC"
-                                           th:checked="${reviewsCriteria.sortingField == T(space.reviewly.backend.model.ReviewsCriteriaSortingField).POPULARITY && reviewsCriteria.sortDirection.name == 'DESC'}"/>
+                                    <input type="radio" name="sortingField" th:value="${T(space.reviewly.backend.model.review.ReviewsCriteriaSortingField).POPULARITY.name}" data-sort-direction="DESC"
+                                           th:checked="${reviewsCriteria.sortingField == T(space.reviewly.backend.model.review.ReviewsCriteriaSortingField).POPULARITY && reviewsCriteria.sortDirection.name == 'DESC'}"/>
                                     <span>Popular first</span>
                                 </label>
                                 <label class="field radio-button">
-                                    <input type="radio" name="sortingField" th:value="${T(space.reviewly.backend.model.ReviewsCriteriaSortingField).POPULARITY.name}" data-sort-direction="ASC"
-                                           th:checked="${reviewsCriteria.sortingField == T(space.reviewly.backend.model.ReviewsCriteriaSortingField).POPULARITY && reviewsCriteria.sortDirection.name == 'ASC'}"/>
+                                    <input type="radio" name="sortingField" th:value="${T(space.reviewly.backend.model.review.ReviewsCriteriaSortingField).POPULARITY.name}" data-sort-direction="ASC"
+                                           th:checked="${reviewsCriteria.sortingField == T(space.reviewly.backend.model.review.ReviewsCriteriaSortingField).POPULARITY && reviewsCriteria.sortDirection.name == 'ASC'}"/>
                                     <span>Unpopular first</span>
                                 </label>
 
@@ -130,18 +130,18 @@
                             <p class="menu-group-header">Review type</p>
                             <div class="field-group">
                                 <label class="field radio-button">
-                                    <input type="radio" name="resourceType" th:value="${T(space.reviewly.backend.model.ReviewsCriteriaResourceType).SITE.name}"
-                                           th:checked="${reviewsCriteria.resourceType == T(space.reviewly.backend.model.ReviewsCriteriaResourceType).SITE}"/>
+                                    <input type="radio" name="resourceType" th:value="${T(space.reviewly.backend.model.review.ReviewsCriteriaResourceType).SITE.name}"
+                                           th:checked="${reviewsCriteria.resourceType == T(space.reviewly.backend.model.review.ReviewsCriteriaResourceType).SITE}"/>
                                     <span>Site</span>
                                 </label>
                                 <label class="field radio-button">
-                                    <input type="radio" name="resourceType" th:value="${T(space.reviewly.backend.model.ReviewsCriteriaResourceType).PAGE.name}"
-                                           th:checked="${reviewsCriteria.resourceType == T(space.reviewly.backend.model.ReviewsCriteriaResourceType).PAGE}"/>
+                                    <input type="radio" name="resourceType" th:value="${T(space.reviewly.backend.model.review.ReviewsCriteriaResourceType).PAGE.name}"
+                                           th:checked="${reviewsCriteria.resourceType == T(space.reviewly.backend.model.review.ReviewsCriteriaResourceType).PAGE}"/>
                                     <span>Page</span>
                                 </label>
                                 <label class="field radio-button">
-                                    <input type="radio" name="resourceType" th:value="${T(space.reviewly.backend.model.ReviewsCriteriaResourceType).ALL.name}"
-                                           th:checked="${reviewsCriteria.resourceType == T(space.reviewly.backend.model.ReviewsCriteriaResourceType).ALL}"/>
+                                    <input type="radio" name="resourceType" th:value="${T(space.reviewly.backend.model.review.ReviewsCriteriaResourceType).ALL.name}"
+                                           th:checked="${reviewsCriteria.resourceType == T(space.reviewly.backend.model.review.ReviewsCriteriaResourceType).ALL}"/>
                                     <span>All</span>
                                 </label>
                             </div>

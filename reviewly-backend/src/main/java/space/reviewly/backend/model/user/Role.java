@@ -40,4 +40,7 @@ public class Role {
         joinColumns = @JoinColumn(name = "role_id"),
         inverseJoinColumns = @JoinColumn(name = "authority_id"))
     private Set<Authority> authorities = new HashSet<>();
+
+    @ManyToMany(mappedBy = "roles", fetch = FetchType.LAZY)
+    private Set<User> users;
 }

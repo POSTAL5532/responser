@@ -2,8 +2,8 @@ package space.reviewly.backend.converter;
 
 import space.reviewly.backend.controller.reviewlike.payload.ReviewLikeInfoDTO;
 import space.reviewly.backend.controller.reviewlike.payload.ReviewLikeDTO;
-import space.reviewly.backend.model.Review;
-import space.reviewly.backend.model.ReviewLike;
+import space.reviewly.backend.model.review.Review;
+import space.reviewly.backend.model.review.ReviewLike;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 

@@ -2,9 +2,9 @@ package space.reviewly.backend.converter;
 
 import space.reviewly.backend.controller.webresource.payload.NewWebResourceDTO;
 import space.reviewly.backend.controller.webresource.payload.WebResourceDTO;
-import space.reviewly.backend.model.ResourceRating;
-import space.reviewly.backend.model.ResourceType;
-import space.reviewly.backend.model.WebResource;
+import space.reviewly.backend.model.webresource.ResourceRating;
+import space.reviewly.backend.model.webresource.ResourceType;
+import space.reviewly.backend.model.webresource.WebResource;
 import space.reviewly.backend.utils.UrlUtils;
 import java.util.Objects;
 import org.springframework.stereotype.Service;

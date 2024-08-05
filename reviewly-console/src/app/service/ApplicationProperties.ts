@@ -10,6 +10,10 @@ class ApplicationProperties {
         return process.env.ADMIN_API_URL;
     }
 
+    get apiUrl(): string {
+        return process.env.API_URL;
+    }
+
     get runMode(): string {
         return process.env.RUN_MODE;
     }

@@ -1,7 +1,8 @@
-package space.reviewly.backend.model;
+package space.reviewly.backend.model.review;
 
 import jakarta.persistence.*;
 import lombok.*;
+import space.reviewly.backend.model.AbstractEntity;
 
 /**
  * Response like

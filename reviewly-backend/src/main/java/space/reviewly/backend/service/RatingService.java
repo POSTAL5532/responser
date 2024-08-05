@@ -1,7 +1,7 @@
 package space.reviewly.backend.service;
 
-import space.reviewly.backend.model.ResourceRating;
-import space.reviewly.backend.model.ResourceType;
+import space.reviewly.backend.model.webresource.ResourceRating;
+import space.reviewly.backend.model.webresource.ResourceType;
 import space.reviewly.backend.utils.UrlUtils;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
@@ -18,7 +18,7 @@ public class RatingService {
 
     public ResourceRating getResourceFullRatingById(String resourceId) {
         TypedQuery<ResourceRating> ratingQuery = entityManager.createQuery(
-            "select new space.reviewly.backend.model.ResourceRating(r.resourceId, avg(r.rating), count(*)) from Review r where r.resourceId=:resourceId group by r.resourceId",
+            "select new space.reviewly.backend.model.webresource.ResourceRating(r.resourceId, avg(r.rating), count(*)) from Review r where r.resourceId=:resourceId group by r.resourceId",
             ResourceRating.class
         ).setParameter("resourceId", resourceId);
 
@@ -41,7 +41,7 @@ public class RatingService {
 
     public ResourceRating getFullRatingByUrl(String url, ResourceType resourceType) {
         TypedQuery<ResourceRating> ratingQuery = entityManager.createQuery(
-                "select new space.reviewly.backend.model.ResourceRating(wr.id, avg(r.rating), count(*)) from Review r join WebResource wr on wr.url=:url and r.resourceId=wr.id and wr.resourceType=:resourceType group by wr.id",
+                "select new space.reviewly.backend.model.webresource.ResourceRating(wr.id, avg(r.rating), count(*)) from Review r join WebResource wr on wr.url=:url and r.resourceId=wr.id and wr.resourceType=:resourceType group by wr.id",
                 ResourceRating.class
             ).setParameter("url", url)
             .setParameter("resourceType", resourceType);
@@ -55,7 +55,7 @@ public class RatingService {
 
     public List<ResourceRating> getWebResourcesRatings(List<String> resourcesIdList) {
         TypedQuery<ResourceRating> ratingQuery = entityManager.createQuery(
-            "select new space.reviewly.backend.model.ResourceRating(r.resourceId, avg(r.rating), count(*)) from Review r where r.resourceId in :resourcesIdList group by r.resourceId",
+            "select new space.reviewly.backend.model.webresource.ResourceRating(r.resourceId, avg(r.rating), count(*)) from Review r where r.resourceId in :resourcesIdList group by r.resourceId",
             ResourceRating.class
         ).setParameter("resourcesIdList", resourcesIdList);
 

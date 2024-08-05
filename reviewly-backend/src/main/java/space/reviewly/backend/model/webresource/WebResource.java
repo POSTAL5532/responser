@@ -1,4 +1,4 @@
-package space.reviewly.backend.model;
+package space.reviewly.backend.model.webresource;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,6 +13,8 @@ import java.util.Set;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import space.reviewly.backend.model.AbstractEntity;
+import space.reviewly.backend.model.review.Review;
 
 @Getter
 @Setter

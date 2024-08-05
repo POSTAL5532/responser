@@ -1,12 +1,10 @@
 import {makeAutoObservable} from "mobx";
 
-export class UpdateUserPayload {
+export class CreateFakeUserProfile {
+
+    fullName: string;
 
     constructor() {
         makeAutoObservable(this);
     }
-
-    email: string;
-
-    fullName: string;
 }

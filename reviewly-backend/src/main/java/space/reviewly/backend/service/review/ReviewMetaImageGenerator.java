@@ -1,6 +1,6 @@
 package space.reviewly.backend.service.review;
 
-import space.reviewly.backend.model.Review;
+import space.reviewly.backend.model.review.Review;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.FontFormatException;

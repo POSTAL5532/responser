@@ -1,11 +1,9 @@
 package space.reviewly.backend.service.webResource;
 
-import space.reviewly.backend.model.Review;
-import space.reviewly.backend.model.Review_;
-import space.reviewly.backend.model.WebResource;
-import space.reviewly.backend.model.WebResourceCriteria;
-import space.reviewly.backend.model.WebResourceCriteriaSortingField;
-import space.reviewly.backend.model.WebResource_;
+import space.reviewly.backend.model.review.Review;
+import space.reviewly.backend.model.webresource.WebResource;
+import space.reviewly.backend.model.webresource.WebResourceCriteria;
+import space.reviewly.backend.model.webresource.WebResourceCriteriaSortingField;
 import jakarta.persistence.criteria.CriteriaBuilder;
 import jakarta.persistence.criteria.CriteriaQuery;
 import jakarta.persistence.criteria.Expression;
@@ -19,6 +17,8 @@ import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.lang.NonNull;
+import space.reviewly.backend.model.review.Review_;
+import space.reviewly.backend.model.webresource.WebResource_;
 
 @RequiredArgsConstructor
 public class WebResourceSpecification implements Specification<WebResource> {

@@ -13,6 +13,8 @@ import {AppHeader} from "./AppHeader";
 import UsersContactFormsPage, {USERS_CONTACT_FORMS_URL} from "./logic/user-contact-froms-page/UsersContactFormsPage";
 import UsersPage, {USERS_URL} from "./logic/users-page/UsersPage";
 import UserDetailsPage from "./logic/user-details-page/UserDetailsPage";
+import ReviewsPage, {REVIEWS_PAGE_URL} from "./logic/reviews/reviews-list-page/ReviewsPage";
+import CreateFakeReviewPage, {CREATE_FAKE_REVIEW_PAGE_URL} from "./logic/reviews/create-fake-review-page/CreateFakeReviewPage";
 
 @observer
 export class App extends Component {
@@ -39,6 +41,8 @@ export class App extends Component {
                                         <AuthorizedRoute path={USERS_CONTACT_FORMS_URL} exact component={UsersContactFormsPage}/>
                                         <AuthorizedRoute path={USERS_URL} exact component={UsersPage}/>
                                         <AuthorizedRoute path={`${USERS_URL}/:userId`} exact component={UserDetailsPage}/>
+                                        <AuthorizedRoute path={REVIEWS_PAGE_URL} exact component={ReviewsPage}/>
+                                        <AuthorizedRoute path={CREATE_FAKE_REVIEW_PAGE_URL} exact component={CreateFakeReviewPage}/>
 
                                         <Redirect from="*" to={WELCOME_PAGE_URL}/>
                                     </Switch>

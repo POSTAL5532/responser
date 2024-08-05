@@ -1,7 +1,7 @@
 package space.reviewly.backend.repository;
 
-import space.reviewly.backend.model.ResourceType;
-import space.reviewly.backend.model.WebResource;
+import space.reviewly.backend.model.webresource.ResourceType;
+import space.reviewly.backend.model.webresource.WebResource;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;

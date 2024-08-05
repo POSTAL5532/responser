@@ -1,7 +1,7 @@
 package space.reviewly.backend.controller.webresource.payload;
 
-import space.reviewly.backend.model.ResourceType;
-import space.reviewly.backend.model.WebResourceCriteriaSortingField;
+import space.reviewly.backend.model.webresource.ResourceType;
+import space.reviewly.backend.model.webresource.WebResourceCriteriaSortingField;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import java.util.Objects;

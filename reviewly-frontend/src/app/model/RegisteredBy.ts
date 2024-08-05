@@ -1,4 +1,5 @@
 export enum RegisteredBy {
     NATIVE = "NATIVE",
-    GOOGLE = "GOOGLE"
+    GOOGLE = "GOOGLE",
+    FAKE = "FAKE",
 }

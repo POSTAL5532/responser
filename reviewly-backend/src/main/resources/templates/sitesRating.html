@@ -44,17 +44,17 @@
                             <div class="field-group">
                                 <label class="field radio-button">
                                     <input type="radio" name="sortingField" value="RATING" data-sort-direction="DESC"
-                                           th:checked="${criteria.sortingField == T(space.reviewly.backend.model.WebResourceCriteriaSortingField).RATING && criteria.sortDirection.name == 'DESC'}"/>
+                                           th:checked="${criteria.sortingField == T(space.reviewly.backend.model.webresource.WebResourceCriteriaSortingField).RATING && criteria.sortDirection.name == 'DESC'}"/>
                                     <span>High rating first</span>
                                 </label>
                                 <label class="field radio-button">
                                     <input type="radio" name="sortingField" value="RATING" data-sort-direction="ASC"
-                                           th:checked="${criteria.sortingField == T(space.reviewly.backend.model.WebResourceCriteriaSortingField).RATING && criteria.sortDirection.name == 'ASC'}"/>
+                                           th:checked="${criteria.sortingField == T(space.reviewly.backend.model.webresource.WebResourceCriteriaSortingField).RATING && criteria.sortDirection.name == 'ASC'}"/>
                                     <span>Low rating first</span>
                                 </label>
                                 <label class="field radio-button">
                                     <input type="radio" name="sortingField" value="CREATION_DATE" data-sort-direction="DESC"
-                                           th:checked="${criteria.sortingField == T(space.reviewly.backend.model.WebResourceCriteriaSortingField).CREATION_DATE && criteria.sortDirection.name == 'DESC'}"/>
+                                           th:checked="${criteria.sortingField == T(space.reviewly.backend.model.webresource.WebResourceCriteriaSortingField).CREATION_DATE && criteria.sortDirection.name == 'DESC'}"/>
                                     <span>No sorting</span>
                                 </label>
 

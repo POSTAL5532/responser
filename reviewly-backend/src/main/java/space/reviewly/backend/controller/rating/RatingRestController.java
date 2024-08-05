@@ -5,7 +5,7 @@ import static space.reviewly.backend.config.ApplicationProperties.RATING_API_ROO
 import lombok.extern.slf4j.Slf4j;
 import space.reviewly.backend.controller.RestApiController;
 import space.reviewly.backend.controller.rating.payload.ResourceRatings;
-import space.reviewly.backend.model.ResourceRating;
+import space.reviewly.backend.model.webresource.ResourceRating;
 import space.reviewly.backend.service.RatingService;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;

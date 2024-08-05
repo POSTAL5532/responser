@@ -3,7 +3,7 @@ package space.reviewly.backend.utils;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import space.reviewly.backend.exceptions.DataNotValidException;
-import space.reviewly.backend.model.ResourceType;
+import space.reviewly.backend.model.webresource.ResourceType;
 import java.net.URI;
 import java.net.URISyntaxException;
 import lombok.extern.slf4j.Slf4j;

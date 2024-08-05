@@ -1,6 +1,8 @@
 package space.reviewly.backend.controller.reviews.payload;
 
-import space.reviewly.backend.model.Review;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import space.reviewly.backend.model.review.Review;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,8 +13,10 @@ import jakarta.validation.constraints.*;
  *
  * @author Shcherbachenya Igor
  */
+@Builder
 @Data
 @NoArgsConstructor
+@AllArgsConstructor
 public class ReviewInfoDTO {
 
     @NotBlank(message = "resourceId must be specified")

@@ -1,6 +1,6 @@
 package space.reviewly.backend.controller.webresource.payload;
 
-import space.reviewly.backend.model.ResourceType;
+import space.reviewly.backend.model.webresource.ResourceType;
 import java.time.LocalDateTime;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

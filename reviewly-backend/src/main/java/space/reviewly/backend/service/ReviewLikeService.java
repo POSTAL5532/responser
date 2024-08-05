@@ -1,7 +1,7 @@
 package space.reviewly.backend.service;
 
 import space.reviewly.backend.exceptions.EntityAlreadyExistException;
-import space.reviewly.backend.model.ReviewLike;
+import space.reviewly.backend.model.review.ReviewLike;
 import space.reviewly.backend.repository.ReviewLikeRepository;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

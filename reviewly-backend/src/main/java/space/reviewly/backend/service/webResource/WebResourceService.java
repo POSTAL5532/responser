@@ -3,12 +3,13 @@ package space.reviewly.backend.service.webResource;
 import static java.text.MessageFormat.format;
 
 import org.springframework.web.multipart.MultipartFile;
-import space.reviewly.backend.model.ResourceType;
-import space.reviewly.backend.model.WebResource;
-import space.reviewly.backend.model.WebResourceCriteria;
+import space.reviewly.backend.model.webresource.ResourceType;
+import space.reviewly.backend.model.webresource.WebResource;
+import space.reviewly.backend.model.webresource.WebResourceCriteria;
 import space.reviewly.backend.repository.WebResourceRepository;
 import space.reviewly.backend.service.fileResource.FileResourceType;
 import space.reviewly.backend.service.fileResource.S3FileResourceService;
+import space.reviewly.backend.utils.SiteIconUtil;
 import space.reviewly.backend.utils.TikaWrapper;
 import space.reviewly.backend.utils.UrlUtils;
 import java.util.NoSuchElementException;
@@ -98,16 +99,21 @@ public class WebResourceService {
             throw new IllegalArgumentException("Site can't have a parent.");
         }
 
-        if (ObjectUtils.isNotEmpty(siteIcon)) {
-            try {
-                String iconType = new TikaWrapper().detect(siteIcon.getBytes());
+        try {
+            byte[] iconBytes = ObjectUtils.isNotEmpty(siteIcon)
+                ? siteIcon.getBytes()
+                : SiteIconUtil.downloadSiteIcon(newWebResource.getUrl());
+
+            if (ObjectUtils.isNotEmpty(iconBytes)) {
+                String iconType = new TikaWrapper().detectExtension(iconBytes);
                 String iconFileName = FileResourceType.generateSiteIconFileName(iconType);
-                s3FileResourceService.uploadSiteIcon(siteIcon, iconFileName);
+                s3FileResourceService.uploadSiteIcon(iconBytes, iconFileName);
                 newWebResource.setIconFileName(iconFileName);
-            } catch (Exception e) {
-                log.warn("Can't add site icon for new site: {}.", newWebResource.getUrl());
-                log.warn(StringUtils.EMPTY, e);
+
             }
+        } catch (Exception e) {
+            log.warn("Can't add site icon for new site: {}.", newWebResource.getUrl(), e);
+            log.warn(StringUtils.EMPTY, e);
         }
 
         return webResourceRepository.save(newWebResource);
