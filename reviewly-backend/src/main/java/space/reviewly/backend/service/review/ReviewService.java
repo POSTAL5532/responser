@@ -1,5 +1,6 @@
 package space.reviewly.backend.service.review;
 
+import java.time.LocalDateTime;
 import space.reviewly.backend.exceptions.EntityAlreadyExistException;
 import space.reviewly.backend.model.review.ReviewSource;
 import space.reviewly.backend.model.review.ReviewsCriteria;
@@ -128,6 +129,13 @@ public class ReviewService {
         oldReview.setRating(updateReview.getRating());
 
         return reviewRepository.save(oldReview);
+    }
+
+    @Transactional
+    public Review updateReviewCreationDate(String id, LocalDateTime newDate) {
+        Review review = getReview(id);
+        review.setCreationDate(newDate);
+        return reviewRepository.save(review);
     }
 
     /**

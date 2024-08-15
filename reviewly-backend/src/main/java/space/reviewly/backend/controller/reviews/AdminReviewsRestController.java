@@ -34,7 +34,14 @@ public class AdminReviewsRestController extends RestApiController {
         log.debug("Create review {}.", reviewInfoDTO);
 
         Review newReview = reviewConverter.toReview(reviewInfoDTO);
-        ReviewDTO newReviewDTO = reviewConverter.toReviewPayload(reviewService.createReview(newReview));
+        newReview = reviewService.createReview(newReview);
+
+        if (reviewInfoDTO.getCreationDate() != null) {
+            // setup real creation date
+            newReview = reviewService.updateReviewCreationDate(newReview.getId(), reviewInfoDTO.getCreationDate());
+        }
+
+        ReviewDTO newReviewDTO = reviewConverter.toReviewPayload(newReview);
 
         return ResponseEntity.ok(newReviewDTO);
     }
