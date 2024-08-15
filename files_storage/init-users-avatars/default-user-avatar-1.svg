@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 100 100"
+   fill="none"
+   shape-rendering="auto"
+   version="1.1"
+   id="svg27"
+   width="100"
+   height="100"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:dcterms="http://purl.org/dc/terms/">
+  <defs
+     id="defs31">
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask283">
+      <g
+         id="g287">
+        <rect
+           width="100"
+           height="100"
+           rx="0"
+           ry="0"
+           x="0"
+           y="0"
+           fill="#ffffff"
+           id="rect285" />
+      </g>
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask310">
+      <g
+         id="g316"
+         transform="rotate(-1,-119.38298,357.97163)">
+        <g
+           id="g314">
+          <rect
+             width="100"
+             height="100"
+             rx="0"
+             ry="0"
+             x="0"
+             y="0"
+             fill="#ffffff"
+             id="rect312" />
+        </g>
+      </g>
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask442">
+      <g
+         id="g454"
+         transform="rotate(-6,-199.96987,370.25805)">
+        <g
+           id="g452">
+          <g
+             id="g450">
+            <g
+               id="g448">
+              <g
+                 id="g446">
+                <rect
+                   width="100"
+                   height="100"
+                   rx="0"
+                   ry="0"
+                   x="0"
+                   y="0"
+                   fill="#ffffff"
+                   id="rect444" />
+              </g>
+            </g>
+          </g>
+        </g>
+      </g>
+    </mask>
+    <mask
+       maskUnits="userSpaceOnUse"
+       id="mask4653">
+      <path
+         d="m 55.435302,58.991962 c -5.042226,-0.529959 -8.70237,-6.173464 -7.709521,-6.722692 0.992849,-0.549228 3.206365,2.498845 8.099412,3.013125 4.893048,0.51428 7.700285,-2.086531 8.548885,-1.263319 0.848599,0.823213 -3.89655,5.502845 -8.938776,4.972886 z"
+         fill="#ffffff"
+         id="path4655" />
+    </mask>
+  </defs>
+  <metadata
+     id="metadata2">
+    <rdf:RDF>
+      <rdf:Description>
+        <dc:title>Thumbs</dc:title>
+        <dc:creator>DiceBear</dc:creator>
+        <dc:source
+           xsi:type="dcterms:URI">https://www.dicebear.com</dc:source>
+        <dcterms:license
+           xsi:type="dcterms:URI">https://creativecommons.org/publicdomain/zero/1.0/</dcterms:license>
+        <dc:rights>„Thumbs” (https://www.dicebear.com) by „DiceBear”, licensed under „CC0 1.0” (https://creativecommons.org/publicdomain/zero/1.0/)</dc:rights>
+      </rdf:Description>
+    </rdf:RDF>
+  </metadata>
+  <rect
+     fill="#0a5b83"
+     width="100"
+     height="100"
+     x="0"
+     y="0"
+     id="rect7"
+     mask="url(#mask283)"
+     style="fill:#78ac65;fill-opacity:1" />
+  <path
+     d="M 95,53.33 C 95,29.4 74.85,10 50,10 25.15,10 5,29.4 5,53.33 V 140 h 90 z"
+     fill="#1c799f"
+     id="path9"
+     transform="rotate(1,-119.38298,357.97163)"
+     mask="url(#mask310)"
+     style="fill:#4f75c5;fill-opacity:1" />
+  <path
+     d="M 9.86,7.5 C 9.86,6.08 5.72,4.65 5.04,2.52 4.34,0.4 14,5.37 14,7.5 14,9.63 4.35,14.61 5.04,12.48 5.72,10.35 9.86,8.92 9.86,7.5 Z m 22.28,0 c 0,-1.42 4.14,-2.85 4.82,-4.98 C 37.66,0.4 28,5.37 28,7.5 c 0,2.13 9.65,7.11 8.96,4.98 C 36.28,10.35 32.14,8.92 32.14,7.5 Z"
+     fill="#ffffff"
+     id="path11"
+     transform="rotate(6,-199.96987,370.25805)"
+     mask="url(#mask442)"
+     style="fill:#404038;fill-opacity:1" />
+  <g
+     id="g4650"
+     mask="url(#mask4653)"
+     style="fill:#404038;fill-opacity:1">
+    <g
+       id="g365"
+       style="fill:#404038;fill-opacity:1">
+      <g
+         id="g363"
+         style="fill:#404038;fill-opacity:1">
+        <g
+           id="g361"
+           style="fill:#404038;fill-opacity:1">
+          <g
+             id="g359"
+             style="fill:#404038;fill-opacity:1">
+            <rect
+               width="100"
+               height="100"
+               rx="0"
+               ry="0"
+               x="0"
+               y="0"
+               fill="#ffffff"
+               id="rect357"
+               style="fill:#404038;fill-opacity:1" />
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

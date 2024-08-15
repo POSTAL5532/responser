@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ThreadLocalRandom;
 import org.hibernate.Hibernate;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -53,6 +54,8 @@ import java.util.NoSuchElementException;
 @Transactional(readOnly = true)
 public class UserService {
 
+    private static final String DEFAULT_USER_AVATAR_TEMPLATE = "default-user-avatar-%s.svg";
+
     public static final String SOCIAL_SIGNUP_USER_PASSWORD_STUB = "PASSWORD_STUB";
 
     private final UserRepository userRepository;
@@ -97,6 +100,7 @@ public class UserService {
         newUser.setEmailConfirmed(false);
         newUser.setRegisteredBy(RegisteredBy.NATIVE);
         newUser.setPassword(passwordEncoder.encode(newUser.getPassword()));
+        newUser.setAvatarFileName(generateRandomUserAvatarFileName());
 
         Role defaultRole = roleService.getDefaultRole();
 
@@ -117,6 +121,7 @@ public class UserService {
         newUser.setEmail("fake-" + (new Date().getTime()) + "@rmail.com");
         newUser.setRegisteredBy(RegisteredBy.FAKE);
         newUser.setPassword(passwordEncoder.encode("qwerty123"));
+        newUser.setAvatarFileName(generateRandomUserAvatarFileName());
 
         Role defaultRole = roleService.getDefaultRole();
 
@@ -257,7 +262,7 @@ public class UserService {
 
         String oldAvatarFileName = user.getAvatarFileName();
 
-        user.setAvatarFileName(null);
+        user.setAvatarFileName(generateRandomUserAvatarFileName());
         updateUser(user);
         removeAvatarFromFileStore(oldAvatarFileName);
     }
@@ -268,7 +273,7 @@ public class UserService {
 
     private void removeAvatarFromFileStore(String filename) {
         if (StringUtils.isNotBlank(filename) &&
-            !applicationProperties.getDefaultUserAvatarFileName().equals(filename) &&
+            !isEqualWithAnyDefaultAvatarsFiles(filename) &&
             !StringUtils.startsWithAny(filename, "http://", "https://")) {
 
             s3FileResourceService.removeUserAvatar(filename);
@@ -285,5 +290,20 @@ public class UserService {
         if (!fieldsErrors.isEmpty()) {
             throw new DataNotValidException("Update user data is not valid", fieldsErrors);
         }
+    }
+
+    private String generateRandomUserAvatarFileName() {
+        int randomNumber = ThreadLocalRandom.current().nextInt(1, 9);
+        return String.format(DEFAULT_USER_AVATAR_TEMPLATE, randomNumber);
+    }
+
+    private boolean isEqualWithAnyDefaultAvatarsFiles(String filename) {
+        for (int i = 1; i <=8 ; i++) {
+            if (String.format(DEFAULT_USER_AVATAR_TEMPLATE, i).equals(filename)) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

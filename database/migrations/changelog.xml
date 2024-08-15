@@ -13,5 +13,6 @@
     <include file="2024-06-25--add-default-admin-user.sql" relativeToChangelogFile="true"/>
     <include file="2024-08-03--add-create-fake-reviews_select-any-web-resources-authorities.sql" relativeToChangelogFile="true"/>
     <include file="2024-08-11--add-review-source.sql" relativeToChangelogFile="true"/>
+    <include file="2024-08-15--added-new-default-users-avatars.sql" relativeToChangelogFile="true"/>
 
 </databaseChangeLog>

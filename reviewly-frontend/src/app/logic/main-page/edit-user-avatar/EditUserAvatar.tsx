@@ -13,6 +13,20 @@ import {getUserAvatarUrl} from "../../../utils/ResourcesUtils";
 import {Icon, IconType} from "../../../components/icon/Icon";
 import "./EditUserAvatar.less";
 
+const isAvatarDefault = (filename: string) => {
+    if (!filename) {
+        return false;
+    }
+
+    for (let i = 1; i <= 8; i++) {
+        if (`default-user-avatar-${i}.svg` === filename) {
+            return true;
+        }
+    }
+
+    return false;
+}
+
 type EditUserAvatarProps = {
     show: boolean;
     onClose: () => void;
@@ -79,7 +93,7 @@ const EditUserAvatar: React.FC<EditUserAvatarProps> = (props: EditUserAvatarProp
                             </Button>
                             <Button
                                 loading={isDataSubmitting}
-                                disabled={isDataSubmitting || !currentUser?.avatarFileName}
+                                disabled={isDataSubmitting || isAvatarDefault(currentUser?.avatarFileName)}
                                 onClick={onRemoveAvatar}>
                                 <Icon type={IconType.REMOVE}/> Delete picture
                             </Button>

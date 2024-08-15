@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   viewBox="0 0 100 100"
+   fill="none"
+   shape-rendering="auto"
+   version="1.1"
+   id="svg27"
+   width="100"
+   height="100"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xmlns:dcterms="http://purl.org/dc/terms/">
+  <defs
+     id="defs31" />
+  <metadata
+     id="metadata2">
+    <rdf:RDF>
+      <rdf:Description>
+        <dc:title>Thumbs</dc:title>
+        <dc:creator>DiceBear</dc:creator>
+        <dc:source
+           xsi:type="dcterms:URI">https://www.dicebear.com</dc:source>
+        <dcterms:license
+           xsi:type="dcterms:URI">https://creativecommons.org/publicdomain/zero/1.0/</dcterms:license>
+        <dc:rights>„Thumbs” (https://www.dicebear.com) by „DiceBear”, licensed under „CC0 1.0” (https://creativecommons.org/publicdomain/zero/1.0/)</dc:rights>
+      </rdf:Description>
+    </rdf:RDF>
+  </metadata>
+  <mask
+     id="viewboxMask">
+    <rect
+       width="100"
+       height="100"
+       rx="0"
+       ry="0"
+       x="0"
+       y="0"
+       fill="#ffffff"
+       id="rect4" />
+  </mask>
+  <g
+     mask="url(#viewboxMask)"
+     id="g25">
+    <rect
+       fill="#69d2e7"
+       width="100"
+       height="100"
+       x="0"
+       y="0"
+       id="rect7"
+       style="fill:#d6de73;fill-opacity:1" />
+    <g
+       transform="rotate(-5,93.307531,129.25941)"
+       id="g23">
+      <path
+         d="M 94.843038,53.316268 C 94.7997,29.382476 74.197456,9.9429098 48.833055,9.8979056 23.468655,9.8529013 2.9366792,29.219483 2.9800173,53.153274 L 3.1369797,139.83701 95,140 Z"
+         fill="#f1f4dc"
+         id="path9"
+         style="stroke-width:1.01038" />
+      <g
+         transform="translate(29,33)"
+         id="g21">
+        <g
+           transform="rotate(18,37.970627,66.853136)"
+           id="g19">
+          <g
+             transform="translate(0,5)"
+             id="g13">
+            <path
+               d="m 14,8 c 0,3.31 -1.34,6 -3,6 C 9.34,14 8,11.31 8,8 8,4.69 9.34,2 11,2 c 1.66,0 3,2.69 3,6 z m 20,0 c 0,3.31 -1.34,6 -3,6 -1.66,0 -3,-2.69 -3,-6 0,-3.31 1.34,-6 3,-6 1.66,0 3,2.69 3,6 z"
+               fill="#000000"
+               id="path11" />
+          </g>
+          <g
+             transform="translate(6,23)"
+             id="g17">
+            <path
+               d="M 15.5,10 C 10.43,10 6.2,4.77 7.13,4.12 8.06,3.47 10.58,6.27 15.5,6.27 20.42,6.27 22.94,3.39 23.87,4.12 24.8,4.85 20.57,10 15.5,10 Z"
+               fill="#000000"
+               id="path15" />
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
