@@ -1,6 +1,7 @@
 package space.reviewly.backend.service.review;
 
 import space.reviewly.backend.exceptions.EntityAlreadyExistException;
+import space.reviewly.backend.model.review.ReviewSource;
 import space.reviewly.backend.model.review.ReviewsCriteria;
 import space.reviewly.backend.model.review.Review;
 import space.reviewly.backend.model.user.User;
@@ -101,6 +102,10 @@ public class ReviewService {
         }
 
         newReview.setUser(user);
+
+        if (newReview.getSource() == null) {
+            newReview.setSource(ReviewSource.REVIEWLY);
+        }
 
         return reviewRepository.save(newReview);
     }

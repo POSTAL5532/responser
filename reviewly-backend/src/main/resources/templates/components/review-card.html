@@ -17,6 +17,8 @@
     </div>
 
     <div class="card-body-container">
+        <p class="side-source" th:if="${review.source.name != 'REVIEWLY'}" th:text="${'By ' + review.source.name.toLowerCase()}">! ERROR !</p>
+
         <div class="card-header">
             <div class="user-info-container">
                 <img class="user-avatar"

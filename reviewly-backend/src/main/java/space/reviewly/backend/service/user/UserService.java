@@ -110,7 +110,7 @@ public class UserService {
     }
 
     @Transactional
-    public void registerFakeUser(User newUser) {
+    public User registerFakeUser(User newUser) {
         log.info("Register new fake user: {}", newUser.getFullName());
 
         newUser.setEmailConfirmed(true);
@@ -124,7 +124,7 @@ public class UserService {
             newUser.setRoles(Set.of(defaultRole));
         }
 
-        userRepository.save(newUser);
+        return userRepository.save(newUser);
     }
 
     @Transactional

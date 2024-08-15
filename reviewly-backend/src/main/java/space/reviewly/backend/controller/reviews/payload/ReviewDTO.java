@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.Collection;
+import space.reviewly.backend.model.review.ReviewSource;
 
 /**
  * Review like DTO payload.
@@ -33,6 +34,8 @@ public class ReviewDTO {
     private Byte rating;
 
     private String text;
+
+    private ReviewSource source;
 
     private Collection<ReviewLikeDTO> reviewLikes;
 

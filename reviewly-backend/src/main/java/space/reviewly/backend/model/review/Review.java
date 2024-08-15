@@ -33,6 +33,9 @@ public class Review extends AbstractEntity {
 
     private String text;
 
+    @Enumerated(EnumType.STRING)
+    private ReviewSource source;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "resource_id", nullable = false, insertable = false, updatable = false)
     private WebResource webResource;

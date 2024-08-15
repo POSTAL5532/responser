@@ -590,6 +590,21 @@ a.button {
 .review-card .card-body-container {
   padding: 30px;
   background-color: #FFFFFF;
+  position: relative;
+}
+.review-card .card-body-container .side-source {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  margin: 0;
+  text-transform: capitalize;
+  font-family: "Outfit-Regular", sans-serif;
+  font-size: 10px;
+  font-weight: 400;
+  color: rgba(0, 0, 0, 0.4);
+}
+.review-card .card-body-container .side-source:first-letter {
+  text-transform: uppercase;
 }
 .review-card .card-body-container .card-header {
   display: flex;
@@ -653,7 +668,7 @@ a.button {
   margin-left: auto;
 }
 .review-card .card-body-container .card-header .rating .star path {
-  fill: rgba(214, 222, 115, 0.4);
+  fill: rgba(110, 110, 112, 0.1);
 }
 .review-card .card-body-container .card-header .rating .star.active path {
   fill: #D6DE73;

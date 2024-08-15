@@ -13,6 +13,7 @@ import {Icon, IconType} from "../../../components/icon/Icon";
 import {getUserAvatarUrl} from "../../../utils/ResourcesUtils";
 import {BlurPanel} from "../../../components/blur-panel/BlurPanel";
 import {UrlUtils} from "../../../utils/UrlUtils";
+import {ReviewSource} from "../../../model/ReviewSource";
 import "./ReviewCard.less";
 
 type ReviewCardProps = {
@@ -108,6 +109,10 @@ const ReviewCard: React.FC<ReviewCardProps> = (props: ReviewCardProps) => {
 
     return (
         <div className={resultClassName} ref={cardRef} key={review.id}>
+            <ConditionShow condition={review.source !== ReviewSource.REVIEWLY}>
+                <p className="side-source">By {review.source.toLowerCase()}</p>
+            </ConditionShow>
+
             <div className="card-header">
                 <div className="user-info-container">
                     <img className="user-avatar" src={getUserAvatarUrl(user)} alt={user.fullName}/>

@@ -89,10 +89,10 @@ public class AdminUserRestController extends RestApiController {
 
     @PreAuthorize("hasAuthority('CREATE_FAKE_USERS')")
     @PostMapping("/create-fake")
-    public ResponseEntity<Void> createFakeUser(@Valid @RequestBody CreateFakeUserProfileDTO newUser) {
+    public ResponseEntity<String> createFakeUser(@Valid @RequestBody CreateFakeUserProfileDTO newUser) {
         log.debug("Register new user.");
-        userService.registerFakeUser(userConverter.toUser(newUser));
-        return ResponseEntity.ok().build();
+        User registeredUser = userService.registerFakeUser(userConverter.toUser(newUser));
+        return ResponseEntity.ok(registeredUser.getId());
     }
 
     private UserAdminDTO getUserAdminDTO(String userId) {

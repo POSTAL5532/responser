@@ -8,6 +8,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import space.reviewly.backend.model.review.Review;
+import space.reviewly.backend.model.review.ReviewSource;
 
 /**
  * Review like info DTO. Uses for creation and updating {@link Review} by API
@@ -32,4 +33,6 @@ public class ReviewInfoAdminDTO {
     @NotBlank(message = "text must be specified")
     @Size(min = 1, max = 460, message = "text must be in range between 1 and 460")
     private String text;
+
+    private ReviewSource source;
 }

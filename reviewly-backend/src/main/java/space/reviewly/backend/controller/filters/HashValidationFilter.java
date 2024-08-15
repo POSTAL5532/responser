@@ -10,6 +10,8 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.hc.client5.http.utils.Hex;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 @Slf4j
@@ -40,6 +42,7 @@ public class HashValidationFilter extends OncePerRequestFilter {
 
         if (!isHashValid(message, hash)) {
             log.warn("API simple securing: Hash is invalid.");
+            response.setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE);
             response.sendError(HttpServletResponse.SC_NOT_ACCEPTABLE, "bad request IP");
             return;
         }
@@ -51,7 +54,7 @@ public class HashValidationFilter extends OncePerRequestFilter {
         try {
             MessageDigest digest = MessageDigest.getInstance(ALGORITHM);
             byte[] hashBytes = digest.digest(message.getBytes(StandardCharsets.UTF_8));
-            String calculatedHash = bytesToHex(hashBytes);
+            String calculatedHash = Hex.encodeHexString(hashBytes);
 
             log.debug("Calculated hash = {}", calculatedHash);
 
@@ -59,9 +62,5 @@ public class HashValidationFilter extends OncePerRequestFilter {
         } catch (NoSuchAlgorithmException e) {
             throw new RuntimeException("Failed to validate hash", e);
         }
-    }
-
-    private String bytesToHex(byte[] bytes) {
-        return Hex.encodeHexString(bytes);
     }
 }

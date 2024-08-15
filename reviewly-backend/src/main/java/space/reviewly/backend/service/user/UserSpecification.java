@@ -27,9 +27,8 @@ public class UserSpecification implements Specification<User> {
         }
 
         if (criteria.hasFullName()) {
-            predicates.add(criteriaBuilder.like(
-                criteriaBuilder.lower(userRoot.get(User_.FULL_NAME)),
-                "%" + criteria.getFullName().toLowerCase() + "%"
+            predicates.add(criteriaBuilder.equal(
+                criteriaBuilder.lower(userRoot.get(User_.FULL_NAME)), criteria.getFullName().toLowerCase()
             ));
         }
 

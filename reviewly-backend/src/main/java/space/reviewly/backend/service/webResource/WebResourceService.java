@@ -109,7 +109,6 @@ public class WebResourceService {
                 String iconFileName = FileResourceType.generateSiteIconFileName(iconType);
                 s3FileResourceService.uploadSiteIcon(iconBytes, iconFileName);
                 newWebResource.setIconFileName(iconFileName);
-
             }
         } catch (Exception e) {
             log.warn("Can't add site icon for new site: {}.", newWebResource.getUrl(), e);

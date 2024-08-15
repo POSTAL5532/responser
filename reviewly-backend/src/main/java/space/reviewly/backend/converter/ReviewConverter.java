@@ -50,7 +50,10 @@ public class ReviewConverter {
             .text(reviewInfoAdminDTO.getText())
             .build();
 
-        return toReview(reviewInfoDTO, reviewInfoAdminDTO.getUserId());
+        Review review = toReview(reviewInfoDTO, reviewInfoAdminDTO.getUserId());
+        review.setSource(reviewInfoAdminDTO.getSource());
+
+        return review;
     }
 
     public ReviewDTO toReviewPayload(Review review) {
@@ -64,6 +67,7 @@ public class ReviewConverter {
             .user(userConverter.toUserBasicDTO(review.getUser()))
             .rating(review.getRating())
             .text(review.getText())
+            .source(review.getSource())
             .reviewLikes(reviewLikes)
             .webResource(webResourceConverter.toDTO(review.getWebResource()))
             .creationDate(review.getCreationDate())

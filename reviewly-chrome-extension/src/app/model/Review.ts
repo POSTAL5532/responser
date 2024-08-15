@@ -1,8 +1,8 @@
 import {User} from "./User";
 import moment, {Moment} from "moment";
 import {ReviewLike} from "./ReviewLike";
-import {ResourceType} from "./ResourceType";
 import {WebResource} from "./WebResource";
+import {ReviewSource} from "./ReviewSource";
 
 export class Review {
 
@@ -17,6 +17,8 @@ export class Review {
     text: string;
 
     user: User;
+
+    source: ReviewSource;
 
     reviewLikes: ReviewLike[];
 
