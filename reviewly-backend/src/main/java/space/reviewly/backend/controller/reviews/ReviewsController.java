@@ -1,6 +1,7 @@
 package space.reviewly.backend.controller.reviews;
 
 import java.util.Optional;
+import space.reviewly.backend.PaginationUtils;
 import space.reviewly.backend.config.ApplicationProperties;
 import space.reviewly.backend.controller.reviews.payload.ReviewsRequestCriteria;
 import space.reviewly.backend.converter.ReviewConverter;
@@ -75,6 +76,8 @@ public class ReviewsController {
 
         model.addAttribute("criteria", criteria);
         model.addAttribute("reviews", reviewConverter.toPageableReviewPayloadList(reviews));
+        model.addAttribute("previousPageUrl", reviews.hasPrevious() ? PaginationUtils.createReviewsListPageLink(criteria, page - 1) : null);
+        model.addAttribute("nextPageUrl", reviews.hasNext() ?  PaginationUtils.createReviewsListPageLink(criteria, page + 1) : null);
 
         return "seeReviewsPage";
     }

@@ -1,6 +1,7 @@
 package space.reviewly.backend.controller.webresource;
 
 import java.util.Optional;
+import space.reviewly.backend.PaginationUtils;
 import space.reviewly.backend.controller.reviews.payload.ReviewsRequestCriteria;
 import space.reviewly.backend.controller.webresource.payload.WebResourceDTO;
 import space.reviewly.backend.controller.webresource.payload.WebResourceRequestCriteria;
@@ -88,10 +89,8 @@ public class WebResourceController {
 
         model.addAttribute("criteria", criteria);
         model.addAttribute("sites", webResourceDTOS);
-
-        // TODO: Refactor to Page<>, without redundant attributes
-        model.addAttribute("previousPageNumber", webResourcesPage.hasPrevious() ? webResourcesPage.getNumber() - 1 : null);
-        model.addAttribute("nextPageNumber", webResourcesPage.hasNext() ? webResourcesPage.getNumber() + 1 : null);
+        model.addAttribute("previousPageUrl", webResourcesPage.hasPrevious() ? PaginationUtils.createWebResourcesListPageLink(criteria, page - 1) : null);
+        model.addAttribute("nextPageUrl", webResourcesPage.hasNext() ? PaginationUtils.createWebResourcesListPageLink(criteria, page + 1) : null);
 
         return "sitesRating";
     }
@@ -129,10 +128,8 @@ public class WebResourceController {
         model.addAttribute("reviewsCriteria", reviewsCriteria);
         model.addAttribute("webResource", webResourceDTO);
         model.addAttribute("reviews", reviewConverter.toPageableReviewPayloadList(reviews));
-
-        // TODO: Refactor to Page<>, without redundant attributes
-        model.addAttribute("previousPageNumber", reviews.hasPrevious() ? reviews.getNumber() - 1 : null);
-        model.addAttribute("nextPageNumber", reviews.hasNext() ? reviews.getNumber() + 1 : null);
+        model.addAttribute("previousPageUrl", reviews.hasPrevious() ? PaginationUtils.createReviewsListPageLink(reviewsCriteria, page - 1) : null);
+        model.addAttribute("nextPageUrl", reviews.hasNext() ? PaginationUtils.createReviewsListPageLink(reviewsCriteria, page + 1) : null);
 
         return "webResourceDetails";
     }
