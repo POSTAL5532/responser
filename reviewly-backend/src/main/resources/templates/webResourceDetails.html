@@ -18,8 +18,8 @@
 <body>
     <div class="page-content" layout:fragment="page-content">
         <section class="section" th:with="resourceBasePath=${T(space.reviewly.backend.utils.UrlUtils).getHost(webResource.url)}">
-            <h1 class="section-header">
-                <a class="link prefix-link-icon back-action" href="/web-resources/sites-rating">
+            <div class="section-header">
+                <a class="link prefix-link-icon back-action" th:href="${@applicationProperties.selfHost + '/web-resources/sites-rating'}">
                     <th:block th:replace="~{components/svgs::icon-link}"/>
                     Sites rating
                 </a>
@@ -29,11 +29,15 @@
                          th:src="${@applicationProperties.fileStorageUrlSitesIcons + '/' + (webResource.iconFileName != null ? webResource.iconFileName : @applicationProperties.defaultSiteIconFileName)}"
                          th:alt="${T(space.reviewly.backend.utils.UrlUtils).getHost(webResource.url)}">
                 </div>
-                <span class="site-name" th:text="${resourceBasePath}">! ERROR !</span>
+
+                <a class="link" th:href="${webResource.url + '?utm_source=reviewly_space'}" target="_blank">
+                    <h1 class="site-name" th:text="${resourceBasePath}">! ERROR !</h1>
+                </a>
+
                 <div class="site-rating-container" th:if="${webResource.rating != null && webResource.rating > 0}">
                     <span class="site-rating" th:text="${#numbers.formatDecimal(webResource.rating, 1, 1, 'POINT')}">! ERROR !</span>
                 </div>
-            </h1>
+            </div>
 
             <form method="GET" id="criteria-form" th:action="${T(space.reviewly.backend.controller.webresource.WebResourceController).WEB_RESOURCES_URL + '/' + webResource.id}">
                 <div class="field-container">

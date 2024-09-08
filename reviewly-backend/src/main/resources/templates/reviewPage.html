@@ -27,8 +27,8 @@
 <body>
 <div class="page-content" layout:fragment="page-content">
     <section class="section" th:with="rootWebResource=${review.webResource.parent == null ? review.webResource : review.webResource.parent}">
-        <h1 class="section-header">
-            <a class="link prefix-link-icon back-action" href="/reviews/see-reviews">
+        <div class="section-header">
+            <a class="link prefix-link-icon back-action" th:href="${@applicationProperties.selfHost + '/reviews/see-reviews'}">
                 <th:block th:replace="~{components/svgs::icon-link}"/>
                 All reviews
             </a>
@@ -38,11 +38,15 @@
                      th:src="${@applicationProperties.fileStorageUrlSitesIcons + '/' + (rootWebResource.iconFileName != null ? rootWebResource.iconFileName : @applicationProperties.defaultSiteIconFileName)}"
                      th:alt="${T(space.reviewly.backend.utils.UrlUtils).getHost(rootWebResource.url)}">
             </div>
-            <span class="site-name" th:text="${T(space.reviewly.backend.utils.UrlUtils).getHost(rootWebResource.url)}">Google.com</span>
+
+            <a class="link" th:href="${@applicationProperties.selfHost + '/web-resources/' + rootWebResource.id}">
+                <h1 class="site-name" th:text="${T(space.reviewly.backend.utils.UrlUtils).getHost(rootWebResource.url)}">! ERROR !</h1>
+            </a>
+
             <div class="site-rating-container" th:if="${resourceRating != null && resourceRating > 0}">
                 <span class="site-rating" th:text="${#numbers.formatDecimal(resourceRating, 1, 1, 'POINT')}">! ERROR !</span>
             </div>
-        </h1>
+        </div>
 
         <div class="reviews-container">
             <div class="cards-container">

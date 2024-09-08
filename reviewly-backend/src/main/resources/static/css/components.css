@@ -550,33 +550,25 @@ a.button {
   padding-right: 30px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-}
-.review-card .web-resource-data .web-resource-name-container {
-  display: flex;
   gap: 6px;
-  align-items: center;
 }
-.review-card .web-resource-data .web-resource-name-container .resource-icon {
+.review-card .web-resource-data .resource-icon {
   width: 24px;
   height: 24px;
   border-radius: 4px;
 }
-.review-card .web-resource-data .web-resource-name-container .resource-name {
+.review-card .web-resource-data .resource-name {
   margin: 0;
-  width: 600px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
   font-family: "Outfit-Medium", sans-serif;
   font-size: 18px;
   font-weight: 500;
-  color: rgba(0, 0, 0, 0.6);
 }
-.review-card .web-resource-data .site-rating-link {
-  font-family: "Outfit-Regular", sans-serif;
-  font-size: 14px;
-  font-weight: 400;
+.review-card .web-resource-data .link .icon {
+  width: 18px;
+  height: 18px;
 }
 .review-card:not(:last-child):after {
   content: "";
@@ -660,7 +652,6 @@ a.button {
   font-family: "Outfit-Regular", sans-serif;
   font-size: 16px;
   font-weight: 400;
-  color: rgba(0, 0, 0, 0.6);
 }
 .review-card .card-body-container .card-header .rating {
   gap: 6px;

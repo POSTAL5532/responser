@@ -17,32 +17,27 @@
         padding-right: 30px;
         display: flex;
         align-items: center;
-        justify-content: space-between;
+        gap: 6px;
 
-        .web-resource-name-container {
-            display: flex;
-            gap: 6px;
-            align-items: center;
-
-            .resource-icon {
-                width: 24px;
-                height: 24px;
-                border-radius: 4px;
-            }
-
-            .resource-name {
-                margin: 0;
-                width: 600px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                .fontOutfitMedium(18px);
-                color: @black-alpha-60;
-            }
+        .resource-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
         }
 
-        .site-rating-link {
-            .fontOutfitRegular(14px);
+        .resource-name {
+            margin: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            .fontOutfitMedium(18px);
+        }
+
+        .link {
+            .icon {
+                width: 18px;
+                height: 18px;
+            }
         }
     }
 
@@ -133,7 +128,6 @@
                 .value {
                     display: block;
                     .fontOutfitRegular(16px);
-                    color: @black-alpha-60;
                 }
             }
 
